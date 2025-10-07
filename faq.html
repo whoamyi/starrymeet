@@ -3,10 +3,11 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
     <title>FAQ - StarryMeet</title>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --purple: #6B46C1; --purple-dark: #553C9A; --purple-light: #8B5CF6; --gold: #D4AF37; --white: #FFFFFF; --gray-50: #F9FAFB; --gray-100: #F3F4F6; --gray-200: #E5E7EB; --gray-600: #4B5563; --gray-700: #374151; --gray-800: #1F2937; --gray-900: #111827; }
+        /* Page-specific styles for faq.html */
         body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); line-height: 1.6; }
         nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.05); z-index: 1000; }
         .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
@@ -39,8 +40,8 @@
         .faq-answer p { color: var(--gray-700); line-height: 1.8; }
         .cta-box { background: linear-gradient(135deg, var(--purple), var(--purple-light)); color: white; text-align: center; padding: 4rem 2rem; border-radius: 20px; margin-top: 4rem; }
         .cta-box h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
-        .btn { display: inline-block; padding: 1rem 2.5rem; background: white; color: var(--purple); text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
+        .btn-cta { display: inline-block; padding: 1rem 2.5rem; background: white; color: var(--purple); text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s; }
+        .btn-cta:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
         footer { background: var(--gray-900); color: white; padding: 3rem 2rem 2rem; }
         .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
         .footer-section h3 { margin-bottom: 1rem; font-size: 1.2rem; }
@@ -55,6 +56,7 @@
     <nav>
         <div class="nav-container">
             <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
             <ul class="nav-links">
                 <li><a href="browse.html">Browse</a></li>
                 <li><a href="how-it-works.html">How It Works</a></li>
@@ -62,10 +64,31 @@
                 <li><a href="for-celebrities.html">For Celebrities</a></li>
                 <li><a href="faq.html">FAQ</a></li>
                 <li><a href="contact.html">Contact</a></li>
-                <li><a href="#" class="btn-signin">Sign In</a></li>
+                <li><a href="dashboard.html" class="btn-signin">Dashboard</a></li>
             </ul>
         </div>
     </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
 
     <div class="breadcrumb"><a href="index.html">Home</a> > FAQ</div>
 
@@ -164,7 +187,7 @@
         <div class="cta-box">
             <h2>Still Have Questions?</h2>
             <p style="font-size: 1.2rem; margin-bottom: 2rem;">Our support team is here to help 24/7</p>
-            <a href="contact.html" class="btn">Contact Support</a>
+            <a href="contact.html" class="btn-cta">Contact Support</a>
         </div>
     </div>
 
@@ -172,22 +195,44 @@
         <div class="footer-container">
             <div class="footer-section">
                 <h3>StarryMeet</h3>
-                <ul><li><a href="about.html">About Us</a></li><li><a href="how-it-works.html">How It Works</a></li><li><a href="for-celebrities.html">For Celebrities</a></li><li><a href="contact.html">Contact</a></li></ul>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Support</h3>
-                <ul><li><a href="faq.html">FAQ</a></li><li><a href="#">Help Center</a></li><li><a href="#">Terms of Service</a></li><li><a href="#">Privacy Policy</a></li></ul>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Discover</h3>
-                <ul><li><a href="browse.html">Browse Celebrities</a></li><li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li><li><a href="browse.html?category=Musicians">Musicians</a></li><li><a href="browse.html?category=Athletes">Athletes</a></li></ul>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
             </div>
             <div class="footer-section">
                 <h3>Connect</h3>
-                <ul><li><a href="#">Instagram</a></li><li><a href="#">Twitter</a></li><li><a href="#">Facebook</a></li><li><a href="#">LinkedIn</a></li></ul>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank">LinkedIn</a></li>
+                </ul>
             </div>
         </div>
-        <div class="footer-bottom"><p>&copy; 2025 StarryMeet. All rights reserved.</p></div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
     </footer>
 
     <script>

@@ -967,32 +967,41 @@
     </style>
 </head>
 <body>
-    <!-- Mobile Overlay -->
-    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
-
     <!-- Navigation -->
-    <nav id="navbar">
+    <nav>
         <div class="nav-container">
-            <div class="logo" onclick="scrollToTop()">✨ StarryMeet</div>
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
             <ul class="nav-links">
                 <li><a href="browse.html">Browse</a></li>
-                <li><a href="#how-it-works">How It Works</a></li>
-                <li><a href="#" class="btn-signin">Sign In</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn-signin">Dashboard</a></li>
             </ul>
-            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
-                <span></span>
-                <span></span>
-                <span></span>
-            </div>
         </div>
     </nav>
 
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
-        <ul>
-            <li><a href="browse.html" onclick="toggleMobileMenu()">Browse</a></li>
-            <li><a href="#how-it-works" onclick="toggleMobileMenu()">How It Works</a></li>
-            <li><a href="#" onclick="toggleMobileMenu()">Sign In</a></li>
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
         </ul>
     </div>
 
@@ -1172,47 +1181,46 @@
 
     <!-- Footer -->
     <footer>
-        <div class="footer-content">
+        <div class="footer-container">
             <div class="footer-section">
                 <h3>StarryMeet</h3>
-                <p>Making celebrity meetups accessible, safe, and unforgettable.</p>
-                <div class="social-links">
-                    <a href="#" class="social-link">📘</a>
-                    <a href="#" class="social-link">📷</a>
-                    <a href="#" class="social-link">🐦</a>
-                    <a href="#" class="social-link">💼</a>
-                </div>
-            </div>
-            <div class="footer-section">
-                <h3>For Fans</h3>
                 <ul>
-                    <li><a href="#celebrities">Browse Celebrities</a></li>
-                    <li><a href="#how-it-works">How It Works</a></li>
-                    <li><a href="#">Pricing</a></li>
-                    <li><a href="#">Gift Cards</a></li>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>For Celebrities</h3>
+                <h3>Support</h3>
                 <ul>
-                    <li><a href="#">Join StarryMeet</a></li>
-                    <li><a href="#">Dashboard</a></li>
-                    <li><a href="#">Success Stories</a></li>
-                    <li><a href="#">Resources</a></li>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="#">Terms of Service</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
                 </ul>
             </div>
             <div class="footer-section">
-                <h3>Company</h3>
+                <h3>Discover</h3>
                 <ul>
-                    <li><a href="#">About Us</a></li>
-                    <li><a href="#">Careers</a></li>
-                    <li><a href="#">Press</a></li>
-                    <li><a href="#">Contact</a></li>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank">LinkedIn</a></li>
                 </ul>
             </div>
         </div>
         <div class="footer-bottom">
-            <p>&copy; 2025 StarryMeet. All rights reserved. | <a href="#">Privacy Policy</a> | <a href="#">Terms of Service</a></p>
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
         </div>
     </footer>
 
