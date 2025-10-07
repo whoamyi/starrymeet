@@ -67,6 +67,7 @@
             -webkit-text-fill-color: transparent;
             background-clip: text;
             letter-spacing: -0.5px;
+            cursor: pointer;
         }
 
         .nav-links {
@@ -101,6 +102,92 @@
             background: var(--purple-dark);
             transform: translateY(-2px);
             box-shadow: 0 8px 20px rgba(107, 70, 193, 0.3);
+        }
+
+        /* Hamburger Menu */
+        .hamburger {
+            display: none;
+            flex-direction: column;
+            gap: 5px;
+            cursor: pointer;
+            z-index: 1001;
+        }
+
+        .hamburger span {
+            width: 25px;
+            height: 3px;
+            background: var(--purple);
+            border-radius: 3px;
+            transition: all 0.3s;
+        }
+
+        .hamburger.active span:nth-child(1) {
+            transform: rotate(45deg) translate(8px, 8px);
+        }
+
+        .hamburger.active span:nth-child(2) {
+            opacity: 0;
+        }
+
+        .hamburger.active span:nth-child(3) {
+            transform: rotate(-45deg) translate(7px, -7px);
+        }
+
+        .mobile-menu {
+            position: fixed;
+            top: 0;
+            right: -100%;
+            width: 80%;
+            max-width: 300px;
+            height: 100vh;
+            background: white;
+            box-shadow: -5px 0 15px rgba(0, 0, 0, 0.1);
+            transition: right 0.3s ease;
+            z-index: 999;
+            padding: 5rem 2rem 2rem;
+        }
+
+        .mobile-menu.active {
+            right: 0;
+        }
+
+        .mobile-menu ul {
+            list-style: none;
+        }
+
+        .mobile-menu ul li {
+            margin-bottom: 2rem;
+        }
+
+        .mobile-menu ul li a {
+            color: var(--gray-800);
+            text-decoration: none;
+            font-size: 1.2rem;
+            font-weight: 600;
+            transition: color 0.3s;
+            display: block;
+        }
+
+        .mobile-menu ul li a:hover {
+            color: var(--purple);
+        }
+
+        .mobile-overlay {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            opacity: 0;
+            visibility: hidden;
+            transition: all 0.3s;
+            z-index: 998;
+        }
+
+        .mobile-overlay.active {
+            opacity: 1;
+            visibility: visible;
         }
 
         /* Hero Section */
@@ -206,6 +293,38 @@
             box-shadow: 0 10px 30px rgba(107, 70, 193, 0.4);
         }
 
+        .filter-info {
+            display: none;
+            margin-top: 1rem;
+            padding: 0.8rem 1.5rem;
+            background: white;
+            border-radius: 50px;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.1);
+            display: inline-flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .filter-info.active {
+            display: inline-flex;
+        }
+
+        .clear-filters {
+            background: var(--purple);
+            color: white;
+            border: none;
+            padding: 0.5rem 1.2rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .clear-filters:hover {
+            background: var(--purple-dark);
+        }
+
         /* Featured Celebrities */
         .section {
             padding: 6rem 2rem;
@@ -230,6 +349,64 @@
             color: var(--gray-600);
         }
 
+        /* Filter Controls */
+        .filter-controls {
+            margin-bottom: 3rem;
+        }
+
+        .filter-row {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            flex-wrap: wrap;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .category-filters {
+            display: flex;
+            gap: 0.8rem;
+            flex-wrap: wrap;
+        }
+
+        .filter-pill {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--gray-200);
+            background: white;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .filter-pill:hover {
+            border-color: var(--purple-light);
+            color: var(--purple);
+        }
+
+        .filter-pill.active {
+            background: var(--purple);
+            color: white;
+            border-color: var(--purple);
+        }
+
+        .sort-dropdown {
+            padding: 0.7rem 1.5rem;
+            border-radius: 50px;
+            border: 2px solid var(--gray-200);
+            background: white;
+            cursor: pointer;
+            font-weight: 600;
+            font-size: 0.9rem;
+            outline: none;
+            transition: all 0.3s;
+        }
+
+        .sort-dropdown:hover, .sort-dropdown:focus {
+            border-color: var(--purple-light);
+        }
+
         .celebrities-grid {
             display: grid;
             grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
@@ -244,19 +421,30 @@
             box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
             transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
             cursor: pointer;
+            position: relative;
         }
 
         .celebrity-card:hover {
-            transform: translateY(-10px);
-            box-shadow: 0 20px 40px rgba(0, 0, 0, 0.15);
+            transform: translateY(-10px) scale(1.02);
+            box-shadow: 0 25px 50px rgba(0, 0, 0, 0.2);
         }
 
         .celebrity-image {
             width: 100%;
             height: 320px;
-            background: linear-gradient(135deg, var(--purple-light), var(--gold));
             position: relative;
             overflow: hidden;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .celebrity-initials {
+            font-size: 4rem;
+            font-weight: 900;
+            color: white;
+            z-index: 1;
+            text-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
         .celebrity-image::after {
@@ -272,7 +460,7 @@
         .verified-badge {
             position: absolute;
             top: 15px;
-            right: 15px;
+            left: 15px;
             background: var(--gold);
             color: white;
             padding: 0.5rem 1rem;
@@ -282,7 +470,36 @@
             display: flex;
             align-items: center;
             gap: 0.3rem;
-            z-index: 1;
+            z-index: 2;
+        }
+
+        .watchlist-btn {
+            position: absolute;
+            top: 15px;
+            right: 15px;
+            width: 40px;
+            height: 40px;
+            background: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            border: none;
+            font-size: 1.2rem;
+            transition: all 0.3s;
+            z-index: 2;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .watchlist-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .watchlist-btn.active {
+            background: var(--purple);
+            color: white;
         }
 
         .celebrity-info {
@@ -340,6 +557,19 @@
 
         .book-btn:hover {
             background: var(--purple-dark);
+            transform: scale(1.05);
+        }
+
+        .no-results {
+            text-align: center;
+            padding: 4rem 2rem;
+            color: var(--gray-600);
+        }
+
+        .no-results h3 {
+            font-size: 2rem;
+            margin-bottom: 1rem;
+            color: var(--gray-900);
         }
 
         /* How It Works */
@@ -433,8 +663,8 @@
         }
 
         .category-card:hover {
-            transform: translateY(-5px);
-            box-shadow: 0 20px 40px rgba(107, 70, 193, 0.3);
+            transform: translateY(-5px) scale(1.02);
+            box-shadow: 0 20px 40px rgba(107, 70, 193, 0.4);
         }
 
         .category-icon {
@@ -631,11 +861,11 @@
         /* Responsive Design */
         @media (max-width: 768px) {
             .nav-links {
-                gap: 1rem;
+                display: none;
             }
 
-            .nav-links a {
-                font-size: 0.85rem;
+            .hamburger {
+                display: flex;
             }
 
             .hero h1 {
@@ -653,6 +883,19 @@
 
             .section-header h2 {
                 font-size: 2rem;
+            }
+
+            .filter-row {
+                flex-direction: column;
+                align-items: stretch;
+            }
+
+            .category-filters {
+                justify-content: center;
+            }
+
+            .sort-dropdown {
+                width: 100%;
             }
 
             .celebrities-grid {
@@ -681,16 +924,17 @@
                 font-size: 1.4rem;
             }
 
-            .nav-links {
-                display: none;
-            }
-
             .hero {
                 padding: 4rem 1rem 5rem;
             }
 
             .section {
                 padding: 4rem 1rem;
+            }
+
+            .filter-pill {
+                font-size: 0.8rem;
+                padding: 0.6rem 1.2rem;
             }
         }
 
@@ -723,17 +967,34 @@
     </style>
 </head>
 <body>
+    <!-- Mobile Overlay -->
+    <div class="mobile-overlay" id="mobileOverlay" onclick="toggleMobileMenu()"></div>
+
     <!-- Navigation -->
     <nav id="navbar">
         <div class="nav-container">
-            <div class="logo">✨ StarryMeet</div>
+            <div class="logo" onclick="scrollToTop()">✨ StarryMeet</div>
             <ul class="nav-links">
-                <li><a href="#celebrities">Browse</a></li>
+                <li><a href="browse.html">Browse</a></li>
                 <li><a href="#how-it-works">How It Works</a></li>
                 <li><a href="#" class="btn-signin">Sign In</a></li>
             </ul>
+            <div class="hamburger" id="hamburger" onclick="toggleMobileMenu()">
+                <span></span>
+                <span></span>
+                <span></span>
+            </div>
         </div>
     </nav>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <ul>
+            <li><a href="browse.html" onclick="toggleMobileMenu()">Browse</a></li>
+            <li><a href="#how-it-works" onclick="toggleMobileMenu()">How It Works</a></li>
+            <li><a href="#" onclick="toggleMobileMenu()">Sign In</a></li>
+        </ul>
+    </div>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -741,19 +1002,25 @@
             <h1>Meet Your Icons In Person</h1>
             <p>Book exclusive face-to-face meetings with world-class celebrities when they're in your city</p>
             <div class="search-container">
-                <select class="search-input">
-                    <option>Select Your City</option>
-                    <option>New York</option>
-                    <option>Los Angeles</option>
-                    <option>London</option>
-                    <option>Tokyo</option>
-                    <option>Paris</option>
-                    <option>Seoul</option>
-                    <option>Dubai</option>
-                    <option>Mumbai</option>
+                <select class="search-input" id="cityFilter" onchange="applySearch()">
+                    <option value="">Select Your City</option>
+                    <option value="New York">New York</option>
+                    <option value="Los Angeles">Los Angeles</option>
+                    <option value="London">London</option>
+                    <option value="Tokyo">Tokyo</option>
+                    <option value="Paris">Paris</option>
+                    <option value="Seoul">Seoul</option>
+                    <option value="Dubai">Dubai</option>
+                    <option value="Mumbai">Mumbai</option>
+                    <option value="Sydney">Sydney</option>
+                    <option value="Toronto">Toronto</option>
                 </select>
-                <input type="date" class="date-input" placeholder="Select Date">
-                <button class="btn-primary">Explore Celebrities</button>
+                <input type="date" class="date-input" id="dateFilter" onchange="applySearch()">
+                <button class="btn-primary" onclick="window.location.href='browse.html'">Explore Celebrities</button>
+            </div>
+            <div class="filter-info" id="filterInfo">
+                <span id="filterText"></span>
+                <button class="clear-filters" onclick="clearSearchFilters()">Clear Filters</button>
             </div>
         </div>
     </section>
@@ -764,11 +1031,36 @@
             <h2>Featured Celebrities</h2>
             <p>Meet the stars available for exclusive meetups</p>
         </div>
+
+        <!-- Filter Controls -->
+        <div class="filter-controls">
+            <div class="filter-row">
+                <div class="category-filters">
+                    <button class="filter-pill active" data-category="All" onclick="filterByCategory(this)">All</button>
+                    <button class="filter-pill" data-category="Hollywood" onclick="filterByCategory(this)">Hollywood</button>
+                    <button class="filter-pill" data-category="K-Drama" onclick="filterByCategory(this)">K-Drama</button>
+                    <button class="filter-pill" data-category="Business" onclick="filterByCategory(this)">Business</button>
+                    <button class="filter-pill" data-category="Athletes" onclick="filterByCategory(this)">Athletes</button>
+                    <button class="filter-pill" data-category="Musicians" onclick="filterByCategory(this)">Musicians</button>
+                </div>
+                <select class="sort-dropdown" id="sortDropdown" onchange="sortCelebrities()">
+                    <option value="popular">Popular</option>
+                    <option value="price-low">Price: Low to High</option>
+                    <option value="price-high">Price: High to Low</option>
+                    <option value="availability">Availability</option>
+                </select>
+            </div>
+        </div>
+
         <div class="celebrities-grid" id="celebritiesGrid">
             <!-- Celebrities will be loaded here by JavaScript -->
         </div>
+        <div id="noResults" class="no-results hidden">
+            <h3>No celebrities found</h3>
+            <p>Try adjusting your filters or search criteria</p>
+        </div>
         <div class="view-more-container">
-            <button class="btn-view-more" onclick="loadMoreCelebrities()">View More Celebrities</button>
+            <button class="btn-view-more" id="viewMoreBtn" onclick="window.location.href='browse.html'">View More Celebrities</button>
         </div>
     </section>
 
@@ -813,27 +1105,27 @@
             <p>Find celebrities from your favorite industry</p>
         </div>
         <div class="categories-grid">
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='browse.html?category=Hollywood'">
                 <div class="category-icon">🎬</div>
                 <h3>Hollywood</h3>
                 <p class="category-count">35+ Stars Available</p>
             </div>
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='browse.html?category=K-Drama'">
                 <div class="category-icon">🎭</div>
                 <h3>K-Drama</h3>
                 <p class="category-count">20+ Stars Available</p>
             </div>
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='browse.html?category=Business'">
                 <div class="category-icon">💼</div>
                 <h3>Business</h3>
                 <p class="category-count">15+ Icons Available</p>
             </div>
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='browse.html?category=Athletes'">
                 <div class="category-icon">⚽</div>
                 <h3>Athletes</h3>
                 <p class="category-count">18+ Champions Available</p>
             </div>
-            <div class="category-card">
+            <div class="category-card" onclick="window.location.href='browse.html?category=Musicians'">
                 <div class="category-icon">🎵</div>
                 <h3>Musicians</h3>
                 <p class="category-count">22+ Artists Available</p>
@@ -872,8 +1164,8 @@
             <h2>Ready to Meet Your Icon?</h2>
             <p>Join thousands of fans who've already made their dream meetings come true</p>
             <div class="cta-buttons">
-                <button class="btn-primary">Start Exploring</button>
-                <button class="btn-secondary">Learn More</button>
+                <button class="btn-primary" onclick="window.location.href='browse.html'">Start Exploring</button>
+                <button class="btn-secondary" onclick="scrollToSection('how-it-works')">Learn More</button>
             </div>
         </div>
     </section>
@@ -894,8 +1186,8 @@
             <div class="footer-section">
                 <h3>For Fans</h3>
                 <ul>
-                    <li><a href="#">Browse Celebrities</a></li>
-                    <li><a href="#">How It Works</a></li>
+                    <li><a href="#celebrities">Browse Celebrities</a></li>
+                    <li><a href="#how-it-works">How It Works</a></li>
                     <li><a href="#">Pricing</a></li>
                     <li><a href="#">Gift Cards</a></li>
                 </ul>
@@ -928,147 +1220,355 @@
         // Celebrity data - 100 diverse celebrities
         const celebrities = [
             // Hollywood (35)
-            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", price: "$5,000", verified: true },
-            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", price: "$7,500", verified: true },
-            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", price: "$6,000", verified: true },
-            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", price: "$5,500", verified: true },
-            { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", price: "$6,500", verified: true },
-            { name: "Ryan Reynolds", category: "Hollywood", location: "Vancouver • Mar 25", price: "$8,000", verified: true },
-            { name: "Scarlett Johansson", category: "Hollywood", location: "New York • Apr 1", price: "$7,000", verified: true },
-            { name: "Timothée Chalamet", category: "Hollywood", location: "Paris • Mar 28", price: "$5,500", verified: true },
-            { name: "Florence Pugh", category: "Hollywood", location: "London • Apr 3", price: "$4,500", verified: true },
-            { name: "Michael B. Jordan", category: "Hollywood", location: "Atlanta • Mar 30", price: "$6,000", verified: true },
-            { name: "Dwayne Johnson", category: "Hollywood", location: "Miami • Apr 10", price: "$15,000", verified: true },
-            { name: "Gal Gadot", category: "Hollywood", location: "Tel Aviv • Apr 8", price: "$7,000", verified: true },
-            { name: "Robert Downey Jr.", category: "Hollywood", location: "Los Angeles • Apr 12", price: "$12,000", verified: true },
-            { name: "Jennifer Lawrence", category: "Hollywood", location: "New York • Apr 6", price: "$8,500", verified: true },
-            { name: "Brad Pitt", category: "Hollywood", location: "Los Angeles • Apr 15", price: "$10,000", verified: true },
-            { name: "Leonardo DiCaprio", category: "Hollywood", location: "New York • Apr 20", price: "$12,000", verified: true },
-            { name: "Angelina Jolie", category: "Hollywood", location: "London • Apr 18", price: "$9,000", verified: true },
-            { name: "Tom Cruise", category: "Hollywood", location: "Dubai • Apr 22", price: "$15,000", verified: true },
-            { name: "Keanu Reeves", category: "Hollywood", location: "Tokyo • Apr 25", price: "$10,000", verified: true },
-            { name: "Anne Hathaway", category: "Hollywood", location: "Paris • Apr 28", price: "$6,500", verified: true },
-            { name: "Will Smith", category: "Hollywood", location: "Los Angeles • May 1", price: "$9,000", verified: true },
-            { name: "Charlize Theron", category: "Hollywood", location: "Cape Town • May 3", price: "$7,500", verified: true },
-            { name: "Matt Damon", category: "Hollywood", location: "Boston • May 5", price: "$7,000", verified: true },
-            { name: "Natalie Portman", category: "Hollywood", location: "Jerusalem • May 8", price: "$6,000", verified: true },
-            { name: "Hugh Jackman", category: "Hollywood", location: "Sydney • May 10", price: "$8,000", verified: true },
-            { name: "Viola Davis", category: "Hollywood", location: "New York • May 12", price: "$6,500", verified: true },
-            { name: "Denzel Washington", category: "Hollywood", location: "Los Angeles • May 15", price: "$10,000", verified: true },
-            { name: "Meryl Streep", category: "Hollywood", location: "New York • May 18", price: "$12,000", verified: true },
-            { name: "Tom Hanks", category: "Hollywood", location: "Los Angeles • May 20", price: "$11,000", verified: true },
-            { name: "Cate Blanchett", category: "Hollywood", location: "Sydney • May 22", price: "$7,500", verified: true },
-            { name: "Jason Momoa", category: "Hollywood", location: "Honolulu • May 25", price: "$6,500", verified: true },
-            { name: "Priyanka Chopra", category: "Hollywood", location: "Mumbai • May 28", price: "$5,500", verified: true },
-            { name: "Idris Elba", category: "Hollywood", location: "London • Jun 1", price: "$7,000", verified: true },
-            { name: "Lupita Nyong'o", category: "Hollywood", location: "Nairobi • Jun 3", price: "$6,000", verified: true },
-            { name: "Oscar Isaac", category: "Hollywood", location: "Guatemala City • Jun 5", price: "$5,500", verified: true },
+            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", price: 5000, verified: true },
+            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", price: 7500, verified: true },
+            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", price: 6000, verified: true },
+            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", price: 5500, verified: true },
+            { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", price: 6500, verified: true },
+            { name: "Ryan Reynolds", category: "Hollywood", location: "Vancouver • Mar 25", city: "Vancouver", price: 8000, verified: true },
+            { name: "Scarlett Johansson", category: "Hollywood", location: "New York • Apr 1", city: "New York", price: 7000, verified: true },
+            { name: "Timothée Chalamet", category: "Hollywood", location: "Paris • Mar 28", city: "Paris", price: 5500, verified: true },
+            { name: "Florence Pugh", category: "Hollywood", location: "London • Apr 3", city: "London", price: 4500, verified: true },
+            { name: "Michael B. Jordan", category: "Hollywood", location: "Atlanta • Mar 30", city: "Atlanta", price: 6000, verified: true },
+            { name: "Dwayne Johnson", category: "Hollywood", location: "Miami • Apr 10", city: "Miami", price: 15000, verified: true },
+            { name: "Gal Gadot", category: "Hollywood", location: "Tel Aviv • Apr 8", city: "Tel Aviv", price: 7000, verified: true },
+            { name: "Robert Downey Jr.", category: "Hollywood", location: "Los Angeles • Apr 12", city: "Los Angeles", price: 12000, verified: true },
+            { name: "Jennifer Lawrence", category: "Hollywood", location: "New York • Apr 6", city: "New York", price: 8500, verified: true },
+            { name: "Brad Pitt", category: "Hollywood", location: "Los Angeles • Apr 15", city: "Los Angeles", price: 10000, verified: true },
+            { name: "Leonardo DiCaprio", category: "Hollywood", location: "New York • Apr 20", city: "New York", price: 12000, verified: true },
+            { name: "Angelina Jolie", category: "Hollywood", location: "London • Apr 18", city: "London", price: 9000, verified: true },
+            { name: "Tom Cruise", category: "Hollywood", location: "Dubai • Apr 22", city: "Dubai", price: 15000, verified: true },
+            { name: "Keanu Reeves", category: "Hollywood", location: "Tokyo • Apr 25", city: "Tokyo", price: 10000, verified: true },
+            { name: "Anne Hathaway", category: "Hollywood", location: "Paris • Apr 28", city: "Paris", price: 6500, verified: true },
+            { name: "Will Smith", category: "Hollywood", location: "Los Angeles • May 1", city: "Los Angeles", price: 9000, verified: true },
+            { name: "Charlize Theron", category: "Hollywood", location: "Cape Town • May 3", city: "Cape Town", price: 7500, verified: true },
+            { name: "Matt Damon", category: "Hollywood", location: "Boston • May 5", city: "Boston", price: 7000, verified: true },
+            { name: "Natalie Portman", category: "Hollywood", location: "Jerusalem • May 8", city: "Jerusalem", price: 6000, verified: true },
+            { name: "Hugh Jackman", category: "Hollywood", location: "Sydney • May 10", city: "Sydney", price: 8000, verified: true },
+            { name: "Viola Davis", category: "Hollywood", location: "New York • May 12", city: "New York", price: 6500, verified: true },
+            { name: "Denzel Washington", category: "Hollywood", location: "Los Angeles • May 15", city: "Los Angeles", price: 10000, verified: true },
+            { name: "Meryl Streep", category: "Hollywood", location: "New York • May 18", city: "New York", price: 12000, verified: true },
+            { name: "Tom Hanks", category: "Hollywood", location: "Los Angeles • May 20", city: "Los Angeles", price: 11000, verified: true },
+            { name: "Cate Blanchett", category: "Hollywood", location: "Sydney • May 22", city: "Sydney", price: 7500, verified: true },
+            { name: "Jason Momoa", category: "Hollywood", location: "Honolulu • May 25", city: "Honolulu", price: 6500, verified: true },
+            { name: "Priyanka Chopra", category: "Hollywood", location: "Mumbai • May 28", city: "Mumbai", price: 5500, verified: true },
+            { name: "Idris Elba", category: "Hollywood", location: "London • Jun 1", city: "London", price: 7000, verified: true },
+            { name: "Lupita Nyong'o", category: "Hollywood", location: "Nairobi • Jun 3", city: "Nairobi", price: 6000, verified: true },
+            { name: "Oscar Isaac", category: "Hollywood", location: "Guatemala City • Jun 5", city: "Guatemala City", price: 5500, verified: true },
 
             // K-Drama (20)
-            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", price: "$4,000", verified: true },
-            { name: "Song Hye-kyo", category: "K-Drama", location: "Seoul • Mar 19", price: "$4,500", verified: true },
-            { name: "Lee Min-ho", category: "K-Drama", location: "Seoul • Mar 21", price: "$5,000", verified: true },
-            { name: "IU (Lee Ji-eun)", category: "K-Drama", location: "Seoul • Mar 24", price: "$6,000", verified: true },
-            { name: "Kim Soo-hyun", category: "K-Drama", location: "Seoul • Mar 27", price: "$5,500", verified: true },
-            { name: "Jun Ji-hyun", category: "K-Drama", location: "Seoul • Mar 29", price: "$5,000", verified: true },
-            { name: "Hyun Bin", category: "K-Drama", location: "Seoul • Apr 2", price: "$6,000", verified: true },
-            { name: "Son Ye-jin", category: "K-Drama", location: "Seoul • Apr 4", price: "$5,500", verified: true },
-            { name: "Park Bo-gum", category: "K-Drama", location: "Seoul • Apr 7", price: "$4,500", verified: true },
-            { name: "Bae Suzy", category: "K-Drama", location: "Seoul • Apr 9", price: "$4,000", verified: true },
-            { name: "Gong Yoo", category: "K-Drama", location: "Busan • Apr 11", price: "$5,500", verified: true },
-            { name: "Lee Jong-suk", category: "K-Drama", location: "Seoul • Apr 14", price: "$4,500", verified: true },
-            { name: "Park Shin-hye", category: "K-Drama", location: "Seoul • Apr 16", price: "$4,000", verified: true },
-            { name: "Ji Chang-wook", category: "K-Drama", location: "Seoul • Apr 19", price: "$4,500", verified: true },
-            { name: "Kim Go-eun", category: "K-Drama", location: "Seoul • Apr 21", price: "$4,000", verified: true },
-            { name: "Lee Sung-kyung", category: "K-Drama", location: "Seoul • Apr 24", price: "$3,500", verified: true },
-            { name: "Nam Joo-hyuk", category: "K-Drama", location: "Seoul • Apr 26", price: "$3,800", verified: true },
-            { name: "Han So-hee", category: "K-Drama", location: "Seoul • Apr 29", price: "$4,200", verified: true },
-            { name: "Ahn Hyo-seop", category: "K-Drama", location: "Seoul • May 2", price: "$3,800", verified: true },
-            { name: "Kim Tae-ri", category: "K-Drama", location: "Seoul • May 4", price: "$4,500", verified: true },
+            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", price: 4000, verified: true },
+            { name: "Song Hye-kyo", category: "K-Drama", location: "Seoul • Mar 19", city: "Seoul", price: 4500, verified: true },
+            { name: "Lee Min-ho", category: "K-Drama", location: "Seoul • Mar 21", city: "Seoul", price: 5000, verified: true },
+            { name: "IU (Lee Ji-eun)", category: "K-Drama", location: "Seoul • Mar 24", city: "Seoul", price: 6000, verified: true },
+            { name: "Kim Soo-hyun", category: "K-Drama", location: "Seoul • Mar 27", city: "Seoul", price: 5500, verified: true },
+            { name: "Jun Ji-hyun", category: "K-Drama", location: "Seoul • Mar 29", city: "Seoul", price: 5000, verified: true },
+            { name: "Hyun Bin", category: "K-Drama", location: "Seoul • Apr 2", city: "Seoul", price: 6000, verified: true },
+            { name: "Son Ye-jin", category: "K-Drama", location: "Seoul • Apr 4", city: "Seoul", price: 5500, verified: true },
+            { name: "Park Bo-gum", category: "K-Drama", location: "Seoul • Apr 7", city: "Seoul", price: 4500, verified: true },
+            { name: "Bae Suzy", category: "K-Drama", location: "Seoul • Apr 9", city: "Seoul", price: 4000, verified: true },
+            { name: "Gong Yoo", category: "K-Drama", location: "Busan • Apr 11", city: "Busan", price: 5500, verified: true },
+            { name: "Lee Jong-suk", category: "K-Drama", location: "Seoul • Apr 14", city: "Seoul", price: 4500, verified: true },
+            { name: "Park Shin-hye", category: "K-Drama", location: "Seoul • Apr 16", city: "Seoul", price: 4000, verified: true },
+            { name: "Ji Chang-wook", category: "K-Drama", location: "Seoul • Apr 19", city: "Seoul", price: 4500, verified: true },
+            { name: "Kim Go-eun", category: "K-Drama", location: "Seoul • Apr 21", city: "Seoul", price: 4000, verified: true },
+            { name: "Lee Sung-kyung", category: "K-Drama", location: "Seoul • Apr 24", city: "Seoul", price: 3500, verified: true },
+            { name: "Nam Joo-hyuk", category: "K-Drama", location: "Seoul • Apr 26", city: "Seoul", price: 3800, verified: true },
+            { name: "Han So-hee", category: "K-Drama", location: "Seoul • Apr 29", city: "Seoul", price: 4200, verified: true },
+            { name: "Ahn Hyo-seop", category: "K-Drama", location: "Seoul • May 2", city: "Seoul", price: 3800, verified: true },
+            { name: "Kim Tae-ri", category: "K-Drama", location: "Seoul • May 4", city: "Seoul", price: 4500, verified: true },
 
             // Business (15)
-            { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", price: "$50,000", verified: true },
-            { name: "Mark Zuckerberg", category: "Business", location: "Palo Alto • Mar 23", price: "$40,000", verified: true },
-            { name: "Jeff Bezos", category: "Business", location: "Seattle • Mar 26", price: "$60,000", verified: true },
-            { name: "Bill Gates", category: "Business", location: "Seattle • Apr 13", price: "$55,000", verified: true },
-            { name: "Warren Buffett", category: "Business", location: "Omaha • Apr 17", price: "$50,000", verified: true },
-            { name: "Richard Branson", category: "Business", location: "London • Apr 23", price: "$35,000", verified: true },
-            { name: "Oprah Winfrey", category: "Business", location: "Chicago • Apr 27", price: "$45,000", verified: true },
-            { name: "Jack Ma", category: "Business", location: "Hangzhou • Apr 30", price: "$40,000", verified: true },
-            { name: "Sheryl Sandberg", category: "Business", location: "San Francisco • May 6", price: "$30,000", verified: true },
-            { name: "Tim Cook", category: "Business", location: "Cupertino • May 9", price: "$38,000", verified: true },
-            { name: "Satya Nadella", category: "Business", location: "Seattle • May 11", price: "$32,000", verified: true },
-            { name: "Sundar Pichai", category: "Business", location: "Mountain View • May 14", price: "$35,000", verified: true },
-            { name: "Arianna Huffington", category: "Business", location: "New York • May 16", price: "$25,000", verified: true },
-            { name: "Sara Blakely", category: "Business", location: "Atlanta • May 19", price: "$22,000", verified: true },
-            { name: "Marc Benioff", category: "Business", location: "San Francisco • May 21", price: "$28,000", verified: true },
+            { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", city: "San Francisco", price: 50000, verified: true },
+            { name: "Mark Zuckerberg", category: "Business", location: "Palo Alto • Mar 23", city: "Palo Alto", price: 40000, verified: true },
+            { name: "Jeff Bezos", category: "Business", location: "Seattle • Mar 26", city: "Seattle", price: 60000, verified: true },
+            { name: "Bill Gates", category: "Business", location: "Seattle • Apr 13", city: "Seattle", price: 55000, verified: true },
+            { name: "Warren Buffett", category: "Business", location: "Omaha • Apr 17", city: "Omaha", price: 50000, verified: true },
+            { name: "Richard Branson", category: "Business", location: "London • Apr 23", city: "London", price: 35000, verified: true },
+            { name: "Oprah Winfrey", category: "Business", location: "Chicago • Apr 27", city: "Chicago", price: 45000, verified: true },
+            { name: "Jack Ma", category: "Business", location: "Hangzhou • Apr 30", city: "Hangzhou", price: 40000, verified: true },
+            { name: "Sheryl Sandberg", category: "Business", location: "San Francisco • May 6", city: "San Francisco", price: 30000, verified: true },
+            { name: "Tim Cook", category: "Business", location: "Cupertino • May 9", city: "Cupertino", price: 38000, verified: true },
+            { name: "Satya Nadella", category: "Business", location: "Seattle • May 11", city: "Seattle", price: 32000, verified: true },
+            { name: "Sundar Pichai", category: "Business", location: "Mountain View • May 14", city: "Mountain View", price: 35000, verified: true },
+            { name: "Arianna Huffington", category: "Business", location: "New York • May 16", city: "New York", price: 25000, verified: true },
+            { name: "Sara Blakely", category: "Business", location: "Atlanta • May 19", city: "Atlanta", price: 22000, verified: true },
+            { name: "Marc Benioff", category: "Business", location: "San Francisco • May 21", city: "San Francisco", price: 28000, verified: true },
 
             // Athletes (18)
-            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", price: "$25,000", verified: true },
-            { name: "Lionel Messi", category: "Athletes", location: "Miami • Apr 8", price: "$30,000", verified: true },
-            { name: "LeBron James", category: "Athletes", location: "Los Angeles • Apr 14", price: "$20,000", verified: true },
-            { name: "Serena Williams", category: "Athletes", location: "Miami • Apr 20", price: "$18,000", verified: true },
-            { name: "Stephen Curry", category: "Athletes", location: "San Francisco • Apr 25", price: "$15,000", verified: true },
-            { name: "Rafael Nadal", category: "Athletes", location: "Barcelona • Apr 28", price: "$16,000", verified: true },
-            { name: "Naomi Osaka", category: "Athletes", location: "Tokyo • May 1", price: "$12,000", verified: true },
-            { name: "Neymar Jr.", category: "Athletes", location: "Riyadh • May 4", price: "$18,000", verified: true },
-            { name: "Simone Biles", category: "Athletes", location: "Houston • May 7", price: "$14,000", verified: true },
-            { name: "Usain Bolt", category: "Athletes", location: "Kingston • May 10", price: "$16,000", verified: true },
-            { name: "Roger Federer", category: "Athletes", location: "Zurich • May 13", price: "$20,000", verified: true },
-            { name: "Tom Brady", category: "Athletes", location: "Tampa • May 17", price: "$22,000", verified: true },
-            { name: "Lewis Hamilton", category: "Athletes", location: "Monaco • May 20", price: "$25,000", verified: true },
-            { name: "Kylian Mbappé", category: "Athletes", location: "Paris • May 23", price: "$20,000", verified: true },
-            { name: "Kevin Durant", category: "Athletes", location: "Phoenix • May 26", price: "$16,000", verified: true },
-            { name: "Conor McGregor", category: "Athletes", location: "Dublin • May 29", price: "$18,000", verified: true },
-            { name: "Virat Kohli", category: "Athletes", location: "Mumbai • Jun 2", price: "$15,000", verified: true },
-            { name: "Novak Djokovic", category: "Athletes", location: "Belgrade • Jun 4", price: "$17,000", verified: true },
+            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", price: 25000, verified: true },
+            { name: "Lionel Messi", category: "Athletes", location: "Miami • Apr 8", city: "Miami", price: 30000, verified: true },
+            { name: "LeBron James", category: "Athletes", location: "Los Angeles • Apr 14", city: "Los Angeles", price: 20000, verified: true },
+            { name: "Serena Williams", category: "Athletes", location: "Miami • Apr 20", city: "Miami", price: 18000, verified: true },
+            { name: "Stephen Curry", category: "Athletes", location: "San Francisco • Apr 25", city: "San Francisco", price: 15000, verified: true },
+            { name: "Rafael Nadal", category: "Athletes", location: "Barcelona • Apr 28", city: "Barcelona", price: 16000, verified: true },
+            { name: "Naomi Osaka", category: "Athletes", location: "Tokyo • May 1", city: "Tokyo", price: 12000, verified: true },
+            { name: "Neymar Jr.", category: "Athletes", location: "Riyadh • May 4", city: "Riyadh", price: 18000, verified: true },
+            { name: "Simone Biles", category: "Athletes", location: "Houston • May 7", city: "Houston", price: 14000, verified: true },
+            { name: "Usain Bolt", category: "Athletes", location: "Kingston • May 10", city: "Kingston", price: 16000, verified: true },
+            { name: "Roger Federer", category: "Athletes", location: "Zurich • May 13", city: "Zurich", price: 20000, verified: true },
+            { name: "Tom Brady", category: "Athletes", location: "Tampa • May 17", city: "Tampa", price: 22000, verified: true },
+            { name: "Lewis Hamilton", category: "Athletes", location: "Monaco • May 20", city: "Monaco", price: 25000, verified: true },
+            { name: "Kylian Mbappé", category: "Athletes", location: "Paris • May 23", city: "Paris", price: 20000, verified: true },
+            { name: "Kevin Durant", category: "Athletes", location: "Phoenix • May 26", city: "Phoenix", price: 16000, verified: true },
+            { name: "Conor McGregor", category: "Athletes", location: "Dublin • May 29", city: "Dublin", price: 18000, verified: true },
+            { name: "Virat Kohli", category: "Athletes", location: "Mumbai • Jun 2", city: "Mumbai", price: 15000, verified: true },
+            { name: "Novak Djokovic", category: "Athletes", location: "Belgrade • Jun 4", city: "Belgrade", price: 17000, verified: true },
 
             // Musicians (22)
-            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", price: "$20,000", verified: true },
-            { name: "Ed Sheeran", category: "Musicians", location: "London • Mar 25", price: "$15,000", verified: true },
-            { name: "Beyoncé", category: "Musicians", location: "Houston • Mar 28", price: "$25,000", verified: true },
-            { name: "The Weeknd", category: "Musicians", location: "Toronto • Apr 1", price: "$16,000", verified: true },
-            { name: "Billie Eilish", category: "Musicians", location: "Los Angeles • Apr 5", price: "$14,000", verified: true },
-            { name: "Drake", category: "Musicians", location: "Toronto • Apr 10", price: "$18,000", verified: true },
-            { name: "Ariana Grande", category: "Musicians", location: "New York • Apr 15", price: "$16,000", verified: true },
-            { name: "Bruno Mars", category: "Musicians", location: "Las Vegas • Apr 18", price: "$17,000", verified: true },
-            { name: "Adele", category: "Musicians", location: "London • Apr 22", price: "$20,000", verified: true },
-            { name: "BTS (Group)", category: "Musicians", location: "Seoul • Apr 26", price: "$35,000", verified: true },
-            { name: "Rihanna", category: "Musicians", location: "Barbados • May 2", price: "$22,000", verified: true },
-            { name: "Justin Bieber", category: "Musicians", location: "Los Angeles • May 6", price: "$15,000", verified: true },
-            { name: "Shawn Mendes", category: "Musicians", location: "Toronto • May 9", price: "$12,000", verified: true },
-            { name: "Dua Lipa", category: "Musicians", location: "London • May 12", price: "$13,000", verified: true },
-            { name: "Bad Bunny", category: "Musicians", location: "San Juan • May 15", price: "$16,000", verified: true },
-            { name: "Lady Gaga", category: "Musicians", location: "New York • May 18", price: "$18,000", verified: true },
-            { name: "Post Malone", category: "Musicians", location: "Dallas • May 21", price: "$14,000", verified: true },
-            { name: "Doja Cat", category: "Musicians", location: "Los Angeles • May 24", price: "$12,000", verified: true },
-            { name: "Harry Styles", category: "Musicians", location: "London • May 27", price: "$17,000", verified: true },
-            { name: "Olivia Rodrigo", category: "Musicians", location: "Los Angeles • May 30", price: "$11,000", verified: true },
-            { name: "Coldplay", category: "Musicians", location: "London • Jun 3", price: "$25,000", verified: true },
-            { name: "Imagine Dragons", category: "Musicians", location: "Las Vegas • Jun 6", price: "$16,000", verified: true }
+            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", price: 20000, verified: true },
+            { name: "Ed Sheeran", category: "Musicians", location: "London • Mar 25", city: "London", price: 15000, verified: true },
+            { name: "Beyoncé", category: "Musicians", location: "Houston • Mar 28", city: "Houston", price: 25000, verified: true },
+            { name: "The Weeknd", category: "Musicians", location: "Toronto • Apr 1", city: "Toronto", price: 16000, verified: true },
+            { name: "Billie Eilish", category: "Musicians", location: "Los Angeles • Apr 5", city: "Los Angeles", price: 14000, verified: true },
+            { name: "Drake", category: "Musicians", location: "Toronto • Apr 10", city: "Toronto", price: 18000, verified: true },
+            { name: "Ariana Grande", category: "Musicians", location: "New York • Apr 15", city: "New York", price: 16000, verified: true },
+            { name: "Bruno Mars", category: "Musicians", location: "Las Vegas • Apr 18", city: "Las Vegas", price: 17000, verified: true },
+            { name: "Adele", category: "Musicians", location: "London • Apr 22", city: "London", price: 20000, verified: true },
+            { name: "BTS (Group)", category: "Musicians", location: "Seoul • Apr 26", city: "Seoul", price: 35000, verified: true },
+            { name: "Rihanna", category: "Musicians", location: "Barbados • May 2", city: "Barbados", price: 22000, verified: true },
+            { name: "Justin Bieber", category: "Musicians", location: "Los Angeles • May 6", city: "Los Angeles", price: 15000, verified: true },
+            { name: "Shawn Mendes", category: "Musicians", location: "Toronto • May 9", city: "Toronto", price: 12000, verified: true },
+            { name: "Dua Lipa", category: "Musicians", location: "London • May 12", city: "London", price: 13000, verified: true },
+            { name: "Bad Bunny", category: "Musicians", location: "San Juan • May 15", city: "San Juan", price: 16000, verified: true },
+            { name: "Lady Gaga", category: "Musicians", location: "New York • May 18", city: "New York", price: 18000, verified: true },
+            { name: "Post Malone", category: "Musicians", location: "Dallas • May 21", city: "Dallas", price: 14000, verified: true },
+            { name: "Doja Cat", category: "Musicians", location: "Los Angeles • May 24", city: "Los Angeles", price: 12000, verified: true },
+            { name: "Harry Styles", category: "Musicians", location: "London • May 27", city: "London", price: 17000, verified: true },
+            { name: "Olivia Rodrigo", category: "Musicians", location: "Los Angeles • May 30", city: "Los Angeles", price: 11000, verified: true },
+            { name: "Coldplay", category: "Musicians", location: "London • Jun 3", city: "London", price: 25000, verified: true },
+            { name: "Imagine Dragons", category: "Musicians", location: "Las Vegas • Jun 6", city: "Las Vegas", price: 16000, verified: true }
         ];
 
+        // State variables
+        let filteredCelebrities = [...celebrities];
         let displayedCelebrities = 8;
+        let currentCategory = 'All';
+        let currentSort = 'popular';
+        let searchCity = '';
+        let searchDate = '';
+        let watchlist = new Set();
 
-        // Load initial celebrities
+        // Color palettes for celebrity initials
+        const colorPalettes = [
+            'linear-gradient(135deg, #667eea, #764ba2)',
+            'linear-gradient(135deg, #f093fb, #f5576c)',
+            'linear-gradient(135deg, #4facfe, #00f2fe)',
+            'linear-gradient(135deg, #43e97b, #38f9d7)',
+            'linear-gradient(135deg, #fa709a, #fee140)',
+            'linear-gradient(135deg, #30cfd0, #330867)',
+            'linear-gradient(135deg, #a8edea, #fed6e3)',
+            'linear-gradient(135deg, #ff9a9e, #fecfef)',
+            'linear-gradient(135deg, #ffecd2, #fcb69f)',
+            'linear-gradient(135deg, #ff6e7f, #bfe9ff)'
+        ];
+
+        // Get initials from name
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+        }
+
+        // Get random color for celebrity
+        function getColorForCelebrity(name) {
+            const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            return colorPalettes[index % colorPalettes.length];
+        }
+
+        // Toggle hamburger menu
+        function toggleMobileMenu() {
+            const menu = document.getElementById('mobileMenu');
+            const overlay = document.getElementById('mobileOverlay');
+            const hamburger = document.getElementById('hamburger');
+
+            menu.classList.toggle('active');
+            overlay.classList.toggle('active');
+            hamburger.classList.toggle('active');
+        }
+
+        // Scroll to top
+        function scrollToTop() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Scroll to section
+        function scrollToSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            if (section) {
+                section.scrollIntoView({ behavior: 'smooth', block: 'start' });
+            }
+        }
+
+        // Scroll to celebrities
+        function scrollToCelebrities() {
+            scrollToSection('celebrities');
+        }
+
+        // Toggle watchlist
+        function toggleWatchlist(event, name) {
+            event.stopPropagation();
+            const btn = event.currentTarget;
+
+            if (watchlist.has(name)) {
+                watchlist.delete(name);
+                btn.classList.remove('active');
+                btn.innerHTML = '🤍';
+            } else {
+                watchlist.add(name);
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+
+        // Filter by category pill
+        function filterByCategory(button) {
+            // Update active pill
+            document.querySelectorAll('.filter-pill').forEach(pill => {
+                pill.classList.remove('active');
+            });
+            button.classList.add('active');
+
+            currentCategory = button.getAttribute('data-category');
+            applyFilters();
+        }
+
+        // Filter by category card
+        function filterByCategoryCard(category) {
+            // Scroll to celebrities section
+            scrollToCelebrities();
+
+            // Find and click the corresponding filter pill
+            setTimeout(() => {
+                const pills = document.querySelectorAll('.filter-pill');
+                pills.forEach(pill => {
+                    if (pill.getAttribute('data-category') === category) {
+                        filterByCategory(pill);
+                    }
+                });
+            }, 500);
+        }
+
+        // Sort celebrities
+        function sortCelebrities() {
+            currentSort = document.getElementById('sortDropdown').value;
+            applyFilters();
+        }
+
+        // Apply search filters
+        function applySearch() {
+            searchCity = document.getElementById('cityFilter').value;
+            searchDate = document.getElementById('dateFilter').value;
+
+            const filterInfo = document.getElementById('filterInfo');
+            const filterText = document.getElementById('filterText');
+
+            if (searchCity || searchDate) {
+                let text = 'Filtering: ';
+                if (searchCity) text += `City: ${searchCity} `;
+                if (searchDate) text += `Date: ${searchDate}`;
+                filterText.textContent = text;
+                filterInfo.classList.add('active');
+            } else {
+                filterInfo.classList.remove('active');
+            }
+
+            applyFilters();
+        }
+
+        // Clear search filters
+        function clearSearchFilters() {
+            document.getElementById('cityFilter').value = '';
+            document.getElementById('dateFilter').value = '';
+            searchCity = '';
+            searchDate = '';
+            document.getElementById('filterInfo').classList.remove('active');
+            applyFilters();
+        }
+
+        // Apply all filters
+        function applyFilters() {
+            filteredCelebrities = celebrities.filter(celeb => {
+                // Category filter
+                if (currentCategory !== 'All' && celeb.category !== currentCategory) {
+                    return false;
+                }
+
+                // City filter
+                if (searchCity && celeb.city !== searchCity) {
+                    return false;
+                }
+
+                // Date filter (simplified - just checks if date is set)
+                // In a real app, you'd parse the celebrity's availability dates
+
+                return true;
+            });
+
+            // Sort
+            switch (currentSort) {
+                case 'price-low':
+                    filteredCelebrities.sort((a, b) => a.price - b.price);
+                    break;
+                case 'price-high':
+                    filteredCelebrities.sort((a, b) => b.price - a.price);
+                    break;
+                case 'availability':
+                    // Sort by location alphabetically
+                    filteredCelebrities.sort((a, b) => a.location.localeCompare(b.location));
+                    break;
+                default:
+                    // Popular - keep original order
+                    break;
+            }
+
+            displayedCelebrities = Math.min(8, filteredCelebrities.length);
+            loadCelebrities();
+        }
+
+        // Load celebrities
         function loadCelebrities() {
             const grid = document.getElementById('celebritiesGrid');
+            const noResults = document.getElementById('noResults');
+            const viewMoreBtn = document.getElementById('viewMoreBtn');
+
             grid.innerHTML = '';
 
-            const celebsToShow = celebrities.slice(0, displayedCelebrities);
+            if (filteredCelebrities.length === 0) {
+                noResults.classList.remove('hidden');
+                viewMoreBtn.style.display = 'none';
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            const celebsToShow = filteredCelebrities.slice(0, displayedCelebrities);
 
             celebsToShow.forEach(celeb => {
                 const card = createCelebrityCard(celeb);
                 grid.innerHTML += card;
             });
+
+            // Show/hide view more button
+            if (displayedCelebrities >= filteredCelebrities.length) {
+                viewMoreBtn.style.display = 'none';
+            } else {
+                viewMoreBtn.style.display = 'inline-block';
+            }
         }
 
         // Create celebrity card HTML
         function createCelebrityCard(celeb) {
+            const initials = getInitials(celeb.name);
+            const color = getColorForCelebrity(celeb.name);
+            const isInWatchlist = watchlist.has(celeb.name);
+            const heartIcon = isInWatchlist ? '❤️' : '🤍';
+            const watchlistClass = isInWatchlist ? 'active' : '';
+
             return `
-                <div class="celebrity-card">
-                    <div class="celebrity-image">
+                <div class="celebrity-card" onclick="alert('Booking ${celeb.name}...')">
+                    <div class="celebrity-image" style="background: ${color}">
                         ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
+                        <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
+                        <div class="celebrity-initials">${initials}</div>
                     </div>
                     <div class="celebrity-info">
                         <div class="celebrity-name">${celeb.name}</div>
@@ -1077,8 +1577,8 @@
                             📍 ${celeb.location}
                         </div>
                         <div class="celebrity-price">
-                            <span class="price">${celeb.price}</span>
-                            <button class="book-btn">Book Now</button>
+                            <span class="price">$${celeb.price.toLocaleString()}</span>
+                            <button class="book-btn" onclick="event.stopPropagation(); alert('Booking ${celeb.name}...')">Book Now</button>
                         </div>
                     </div>
                 </div>
@@ -1087,12 +1587,8 @@
 
         // Load more celebrities
         function loadMoreCelebrities() {
-            displayedCelebrities = Math.min(displayedCelebrities + 8, celebrities.length);
+            displayedCelebrities = Math.min(displayedCelebrities + 8, filteredCelebrities.length);
             loadCelebrities();
-
-            if (displayedCelebrities >= celebrities.length) {
-                document.querySelector('.btn-view-more').style.display = 'none';
-            }
         }
 
         // Navbar scroll effect
@@ -1109,12 +1605,15 @@
         document.querySelectorAll('a[href^="#"]').forEach(anchor => {
             anchor.addEventListener('click', function (e) {
                 e.preventDefault();
-                const target = document.querySelector(this.getAttribute('href'));
-                if (target) {
-                    target.scrollIntoView({
-                        behavior: 'smooth',
-                        block: 'start'
-                    });
+                const href = this.getAttribute('href');
+                if (href !== '#') {
+                    const target = document.querySelector(href);
+                    if (target) {
+                        target.scrollIntoView({
+                            behavior: 'smooth',
+                            block: 'start'
+                        });
+                    }
                 }
             });
         });
