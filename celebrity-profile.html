@@ -1,0 +1,1466 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Celebrity Profile - StarryMeet</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        :root {
+            --purple: #6B46C1;
+            --purple-dark: #553C9A;
+            --purple-light: #8B5CF6;
+            --gold: #D4AF37;
+            --gold-light: #F4D03F;
+            --white: #FFFFFF;
+            --gray-50: #F9FAFB;
+            --gray-100: #F3F4F6;
+            --gray-200: #E5E7EB;
+            --gray-300: #D1D5DB;
+            --gray-600: #4B5563;
+            --gray-800: #1F2937;
+            --gray-900: #111827;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            color: var(--gray-900);
+            line-height: 1.6;
+            background: var(--gray-50);
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            backdrop-filter: blur(10px);
+            box-shadow: 0 2px 20px rgba(0, 0, 0, 0.05);
+            z-index: 1000;
+        }
+
+        .nav-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 1.2rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.8rem;
+            font-weight: 800;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            letter-spacing: -0.5px;
+            text-decoration: none;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2.5rem;
+            align-items: center;
+            list-style: none;
+        }
+
+        .nav-links a {
+            color: var(--gray-800);
+            text-decoration: none;
+            font-weight: 500;
+            transition: color 0.3s;
+            font-size: 0.95rem;
+        }
+
+        .nav-links a:hover {
+            color: var(--purple);
+        }
+
+        .btn-signin {
+            background: var(--purple);
+            color: white;
+            padding: 0.7rem 1.8rem;
+            border-radius: 50px;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .btn-signin:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 8px 20px rgba(107, 70, 193, 0.3);
+        }
+
+        /* Back Button */
+        .back-button {
+            margin-top: 100px;
+            max-width: 1400px;
+            margin-left: auto;
+            margin-right: auto;
+            padding: 1rem 2rem;
+        }
+
+        .back-btn {
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-800);
+            text-decoration: none;
+            font-weight: 600;
+            transition: color 0.3s;
+        }
+
+        .back-btn:hover {
+            color: var(--purple);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1400px;
+            margin: 0 auto;
+            padding: 0 2rem 4rem;
+            display: flex;
+            gap: 2rem;
+        }
+
+        .content-area {
+            flex: 1;
+        }
+
+        /* Hero Section */
+        .hero-profile {
+            background: white;
+            border-radius: 20px;
+            overflow: hidden;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .hero-image {
+            height: 400px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+        }
+
+        .hero-image::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            right: 0;
+            height: 60%;
+            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.7));
+        }
+
+        .hero-initials {
+            font-size: 8rem;
+            font-weight: 900;
+            color: white;
+            z-index: 1;
+            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
+        }
+
+        .hero-actions {
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            z-index: 2;
+            display: flex;
+            gap: 1rem;
+        }
+
+        .action-btn {
+            width: 45px;
+            height: 45px;
+            background: white;
+            border-radius: 50%;
+            border: none;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            font-size: 1.3rem;
+            transition: all 0.3s;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .action-btn:hover {
+            transform: scale(1.1);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        .action-btn.active {
+            background: var(--purple);
+        }
+
+        .hero-info {
+            padding: 2rem;
+        }
+
+        .hero-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .celebrity-name-hero {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--gray-900);
+        }
+
+        .verified-badge-hero {
+            background: var(--gold);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 700;
+            display: flex;
+            align-items: center;
+            gap: 0.3rem;
+        }
+
+        .category-badge {
+            background: var(--purple-light);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            font-size: 0.9rem;
+            font-weight: 600;
+        }
+
+        .rating-section {
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            font-size: 1.1rem;
+            color: var(--gray-700);
+        }
+
+        .stars {
+            color: var(--gold);
+            font-size: 1.3rem;
+        }
+
+        /* Section Styles */
+        .section {
+            background: white;
+            border-radius: 20px;
+            padding: 2.5rem;
+            margin-bottom: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 800;
+            margin-bottom: 1.5rem;
+            color: var(--gray-900);
+        }
+
+        /* About Section */
+        .bio {
+            font-size: 1.05rem;
+            line-height: 1.8;
+            color: var(--gray-700);
+            margin-bottom: 2rem;
+        }
+
+        .achievements {
+            list-style: none;
+            display: flex;
+            flex-direction: column;
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .achievement-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            font-size: 1.05rem;
+        }
+
+        .achievement-icon {
+            color: var(--purple);
+            font-size: 1.5rem;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+        }
+
+        .social-btn {
+            width: 50px;
+            height: 50px;
+            background: var(--gray-100);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-decoration: none;
+            font-size: 1.5rem;
+            transition: all 0.3s;
+        }
+
+        .social-btn:hover {
+            background: var(--purple);
+            color: white;
+            transform: translateY(-3px);
+        }
+
+        /* Availability Cards */
+        .availability-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .availability-card {
+            background: var(--gray-50);
+            border-radius: 15px;
+            padding: 1.5rem;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s;
+        }
+
+        .availability-card:hover {
+            border-color: var(--purple);
+            box-shadow: 0 4px 15px rgba(107, 70, 193, 0.1);
+        }
+
+        .city-name {
+            font-size: 1.3rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .date-range {
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .venue {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .slots-info {
+            color: var(--purple);
+            font-weight: 600;
+            margin-bottom: 1rem;
+            font-size: 0.9rem;
+        }
+
+        .book-btn-card {
+            width: 100%;
+            padding: 0.8rem;
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .book-btn-card:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Pricing Cards */
+        .pricing-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 2rem;
+        }
+
+        .pricing-card {
+            background: var(--gray-50);
+            border-radius: 20px;
+            padding: 2rem;
+            border: 2px solid var(--gray-200);
+            transition: all 0.3s;
+            position: relative;
+        }
+
+        .pricing-card.popular {
+            border-color: var(--purple);
+            box-shadow: 0 8px 30px rgba(107, 70, 193, 0.2);
+        }
+
+        .pricing-card.popular::before {
+            content: 'Most Popular';
+            position: absolute;
+            top: -15px;
+            left: 50%;
+            transform: translateX(-50%);
+            background: var(--purple);
+            color: white;
+            padding: 0.5rem 1.5rem;
+            border-radius: 50px;
+            font-size: 0.85rem;
+            font-weight: 700;
+        }
+
+        .pricing-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .pricing-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .pricing-duration {
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-amount {
+            font-size: 2.5rem;
+            font-weight: 900;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        .pricing-description {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+            font-size: 0.95rem;
+        }
+
+        .pricing-includes {
+            list-style: none;
+            margin-bottom: 2rem;
+        }
+
+        .pricing-includes li {
+            padding: 0.5rem 0;
+            display: flex;
+            align-items: center;
+            gap: 0.5rem;
+            color: var(--gray-700);
+        }
+
+        .pricing-includes li::before {
+            content: '✓';
+            color: var(--purple);
+            font-weight: 700;
+        }
+
+        .select-btn {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: var(--purple);
+            border: 2px solid var(--purple);
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .select-btn:hover, .pricing-card.popular .select-btn {
+            background: var(--purple);
+            color: white;
+        }
+
+        /* Guidelines */
+        .guidelines-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .guideline-item {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            padding: 1rem;
+            background: var(--gray-50);
+            border-radius: 10px;
+        }
+
+        .guideline-icon {
+            font-size: 1.8rem;
+        }
+
+        .guideline-icon.check {
+            color: var(--purple);
+        }
+
+        .guideline-icon.cross {
+            color: #EF4444;
+        }
+
+        /* Reviews */
+        .rating-breakdown {
+            margin-bottom: 2rem;
+        }
+
+        .rating-row {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 0.8rem;
+        }
+
+        .rating-label {
+            width: 60px;
+            font-weight: 600;
+        }
+
+        .rating-bar {
+            flex: 1;
+            height: 10px;
+            background: var(--gray-200);
+            border-radius: 5px;
+            overflow: hidden;
+        }
+
+        .rating-fill {
+            height: 100%;
+            background: var(--gold);
+        }
+
+        .rating-percentage {
+            width: 50px;
+            text-align: right;
+            color: var(--gray-600);
+        }
+
+        .reviews-list {
+            display: flex;
+            flex-direction: column;
+            gap: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .review-card {
+            padding: 1.5rem;
+            background: var(--gray-50);
+            border-radius: 15px;
+        }
+
+        .review-header {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-avatar {
+            width: 50px;
+            height: 50px;
+            background: linear-gradient(135deg, var(--purple), var(--purple-light));
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.2rem;
+        }
+
+        .review-meta {
+            flex: 1;
+        }
+
+        .review-author {
+            font-weight: 700;
+            margin-bottom: 0.2rem;
+        }
+
+        .review-date {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .review-rating {
+            color: var(--gold);
+        }
+
+        .review-text {
+            color: var(--gray-700);
+            line-height: 1.7;
+            margin-bottom: 1rem;
+        }
+
+        .helpful-btn {
+            background: white;
+            border: 1px solid var(--gray-300);
+            padding: 0.5rem 1rem;
+            border-radius: 50px;
+            cursor: pointer;
+            font-size: 0.9rem;
+            transition: all 0.3s;
+        }
+
+        .helpful-btn:hover {
+            border-color: var(--purple);
+            color: var(--purple);
+        }
+
+        .load-more-btn {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: var(--purple);
+            border: 2px solid var(--purple);
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .load-more-btn:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        /* Similar Celebrities */
+        .similar-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .celebrity-card {
+            background: white;
+            border-radius: 15px;
+            overflow: hidden;
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .celebrity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 8px 25px rgba(0, 0, 0, 0.15);
+        }
+
+        .celebrity-image-card {
+            height: 200px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .celebrity-initials-card {
+            font-size: 3rem;
+            font-weight: 900;
+            color: white;
+            z-index: 1;
+        }
+
+        .celebrity-info-card {
+            padding: 1.2rem;
+        }
+
+        .celebrity-name-card {
+            font-weight: 700;
+            margin-bottom: 0.5rem;
+        }
+
+        .celebrity-category-card {
+            color: var(--purple);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .celebrity-price-card {
+            font-weight: 800;
+            color: var(--purple);
+            font-size: 1.2rem;
+        }
+
+        /* Sticky Sidebar */
+        .booking-sidebar {
+            width: 350px;
+            position: sticky;
+            top: 100px;
+            height: fit-content;
+        }
+
+        .booking-card {
+            background: white;
+            border-radius: 20px;
+            padding: 2rem;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+        }
+
+        .booking-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .booking-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            color: white;
+        }
+
+        .booking-info {
+            flex: 1;
+        }
+
+        .booking-name {
+            font-weight: 700;
+            font-size: 1.2rem;
+            margin-bottom: 0.3rem;
+        }
+
+        .next-available {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .starting-price {
+            font-size: 0.9rem;
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .price-display {
+            font-size: 2rem;
+            font-weight: 900;
+            color: var(--purple);
+            margin-bottom: 1.5rem;
+        }
+
+        .booking-dropdown {
+            width: 100%;
+            padding: 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 10px;
+            font-size: 1rem;
+            margin-bottom: 1rem;
+            outline: none;
+            cursor: pointer;
+        }
+
+        .booking-dropdown:focus {
+            border-color: var(--purple);
+        }
+
+        .book-now-btn {
+            width: 100%;
+            padding: 1.2rem;
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            transition: all 0.3s;
+        }
+
+        .book-now-btn:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+        }
+
+        .message-btn {
+            width: 100%;
+            padding: 1rem;
+            background: white;
+            color: var(--purple);
+            border: 2px solid var(--purple);
+            border-radius: 10px;
+            font-weight: 700;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .message-btn:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        /* Error Page */
+        .error-page {
+            max-width: 600px;
+            margin: 150px auto;
+            text-align: center;
+            padding: 3rem;
+            background: white;
+            border-radius: 20px;
+            box-shadow: 0 4px 20px rgba(0, 0, 0, 0.08);
+        }
+
+        .error-page h1 {
+            font-size: 3rem;
+            color: var(--purple);
+            margin-bottom: 1rem;
+        }
+
+        .error-page p {
+            font-size: 1.2rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        .error-btn {
+            padding: 1rem 2.5rem;
+            background: var(--purple);
+            color: white;
+            text-decoration: none;
+            border-radius: 50px;
+            font-weight: 700;
+            display: inline-block;
+            transition: all 0.3s;
+        }
+
+        .error-btn:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-container {
+                flex-direction: column;
+            }
+
+            .booking-sidebar {
+                width: 100%;
+                position: relative;
+                top: 0;
+                order: -1;
+            }
+        }
+
+        @media (max-width: 768px) {
+            .celebrity-name-hero {
+                font-size: 2rem;
+            }
+
+            .hero-image {
+                height: 300px;
+            }
+
+            .hero-initials {
+                font-size: 5rem;
+            }
+
+            .pricing-grid, .availability-grid, .similar-grid {
+                grid-template-columns: 1fr;
+            }
+
+            .section {
+                padding: 1.5rem;
+            }
+        }
+
+        .hidden {
+            display: none;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="index.html#how-it-works">How It Works</a></li>
+                <li><a href="#" class="btn-signin">Sign In</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="browse.html" class="back-btn">← Back to Browse</a>
+    </div>
+
+    <!-- Error Page (shown if celebrity not found) -->
+    <div class="error-page hidden" id="errorPage">
+        <h1>Celebrity Not Found</h1>
+        <p>Sorry, we couldn't find the celebrity you're looking for.</p>
+        <a href="browse.html" class="error-btn">Browse All Celebrities</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container hidden" id="mainContainer">
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Hero Section -->
+            <div class="hero-profile">
+                <div class="hero-image" id="heroImage">
+                    <div class="hero-initials" id="heroInitials">EW</div>
+                    <div class="hero-actions">
+                        <button class="action-btn" id="shareBtn" onclick="shareCelebrity()">🔗</button>
+                        <button class="action-btn" id="watchlistBtn" onclick="toggleWatchlist()">🤍</button>
+                    </div>
+                </div>
+                <div class="hero-info">
+                    <div class="hero-header">
+                        <h1 class="celebrity-name-hero" id="celebrityName">Celebrity Name</h1>
+                        <span class="verified-badge-hero">✓ Verified</span>
+                        <span class="category-badge" id="categoryBadge">Category</span>
+                    </div>
+                    <div class="rating-section">
+                        <span class="stars">★★★★★</span>
+                        <span>4.9 (127 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section">
+                <h2 class="section-title">About <span id="aboutName">Celebrity</span></h2>
+                <p class="bio" id="bioText">
+                    A globally recognized talent with years of experience in their field, bringing inspiration and
+                    expertise to every interaction. Known for their professionalism, charisma, and genuine connection
+                    with fans, they have become one of the most sought-after personalities for exclusive meetups.
+                    Their journey has inspired millions worldwide, and now you have the opportunity to meet them
+                    face-to-face in an intimate, professional setting.
+                </p>
+                <ul class="achievements">
+                    <li class="achievement-item">
+                        <span class="achievement-icon">🏆</span>
+                        <span>Multiple award winner and industry leader</span>
+                    </li>
+                    <li class="achievement-item">
+                        <span class="achievement-icon">🌟</span>
+                        <span>Over 10 years of professional experience</span>
+                    </li>
+                    <li class="achievement-item">
+                        <span class="achievement-icon">🎬</span>
+                        <span>Featured in major international productions</span>
+                    </li>
+                    <li class="achievement-item">
+                        <span class="achievement-icon">💫</span>
+                        <span>Recognized for philanthropic work and advocacy</span>
+                    </li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" class="social-btn">📷</a>
+                    <a href="#" class="social-btn">🐦</a>
+                    <a href="#" class="social-btn">📘</a>
+                </div>
+            </div>
+
+            <!-- Upcoming Availability -->
+            <div class="section">
+                <h2 class="section-title">Upcoming Availability</h2>
+                <div class="availability-grid" id="availabilityGrid">
+                    <!-- Availability cards will be loaded here -->
+                </div>
+            </div>
+
+            <!-- Meeting Types & Pricing -->
+            <div class="section" id="meetingTypes">
+                <h2 class="section-title">Meeting Types</h2>
+                <div class="pricing-grid" id="pricingGrid">
+                    <!-- Pricing cards will be loaded here -->
+                </div>
+            </div>
+
+            <!-- What to Expect -->
+            <div class="section">
+                <h2 class="section-title">What to Expect</h2>
+                <div class="guidelines-grid">
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Professional venue</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Privacy guaranteed</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Photos allowed</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Respectful interaction</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon cross">✗</span>
+                        <span>No gifts/large items</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="section">
+                <h2 class="section-title">Reviews</h2>
+                <div class="rating-breakdown">
+                    <div class="rating-row">
+                        <span class="rating-label">5 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 80%"></div></div>
+                        <span class="rating-percentage">80%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">4 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 15%"></div></div>
+                        <span class="rating-percentage">15%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">3 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 3%"></div></div>
+                        <span class="rating-percentage">3%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">2 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 1%"></div></div>
+                        <span class="rating-percentage">1%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">1 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 1%"></div></div>
+                        <span class="rating-percentage">1%</span>
+                    </div>
+                </div>
+
+                <div class="reviews-list">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">JD</div>
+                            <div class="review-meta">
+                                <div class="review-author">John Doe</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">2 weeks ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            An absolutely incredible experience! Professional, warm, and genuinely interested in our conversation.
+                            The venue was perfect and the entire team made sure everything ran smoothly. Worth every penny!
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (24)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">SM</div>
+                            <div class="review-meta">
+                                <div class="review-author">Sarah Miller</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">1 month ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            A dream come true! Got to have an extended conversation and even received personalized advice.
+                            The celebrity was incredibly down-to-earth and made the experience unforgettable.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (18)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">MK</div>
+                            <div class="review-meta">
+                                <div class="review-author">Michael Kim</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">2 months ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            Exceeded all expectations! The meeting was well-organized, private, and felt very personal.
+                            Got amazing photos and memories that will last a lifetime.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (31)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">AL</div>
+                            <div class="review-meta">
+                                <div class="review-author">Anna Lopez</div>
+                                <div class="review-rating">★★★★☆</div>
+                                <div class="review-date">3 months ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            Great experience overall! The celebrity was very kind and approachable. The only minor issue was
+                            the session felt a bit rushed, but still an amazing opportunity.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (12)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">RP</div>
+                            <div class="review-meta">
+                                <div class="review-author">Ryan Peterson</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">4 months ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            Absolutely phenomenal! Professional setup, friendly staff, and the celebrity was incredibly
+                            genuine. This is definitely worth the investment for any true fan.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (27)</button>
+                    </div>
+                </div>
+
+                <button class="load-more-btn">Load More Reviews</button>
+            </div>
+
+            <!-- Similar Celebrities -->
+            <div class="section">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="similar-grid" id="similarGrid">
+                    <!-- Similar celebrity cards will be loaded here -->
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Booking Sidebar -->
+        <aside class="booking-sidebar">
+            <div class="booking-card">
+                <div class="booking-header">
+                    <div class="booking-photo" id="bookingPhoto">EW</div>
+                    <div class="booking-info">
+                        <div class="booking-name" id="bookingName">Celebrity</div>
+                        <div class="next-available" id="nextAvailable">Next: Mar 15, London</div>
+                    </div>
+                </div>
+                <div class="starting-price">Starting from</div>
+                <div class="price-display" id="priceDisplay">$5,000</div>
+                <select class="booking-dropdown" id="meetingTypeDropdown" onchange="updatePrice()">
+                    <option value="">Select Meeting Type</option>
+                    <option value="quick">Quick Meet (15 min)</option>
+                    <option value="standard">Standard Session (30 min)</option>
+                    <option value="premium">Premium Experience (60 min)</option>
+                </select>
+                <button class="book-now-btn" onclick="bookNow()">Book Now</button>
+                <button class="message-btn">Message Celebrity Team</button>
+            </div>
+        </aside>
+    </div>
+
+    <script>
+        // Celebrity data - same as browse.html
+        const celebrities = [
+            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true },
+            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
+            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
+            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },
+            { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", country: "Australia", price: 6500, verified: true, trending: true },
+            { name: "Ryan Reynolds", category: "Hollywood", location: "Vancouver • Mar 25", city: "Vancouver", country: "Canada", price: 8000, verified: true, trending: false },
+            { name: "Scarlett Johansson", category: "Hollywood", location: "New York • Apr 1", city: "New York", country: "USA", price: 7000, verified: true, trending: false },
+            { name: "Timothée Chalamet", category: "Hollywood", location: "Paris • Mar 28", city: "Paris", country: "France", price: 5500, verified: true, trending: true },
+            { name: "Florence Pugh", category: "Hollywood", location: "London • Apr 3", city: "London", country: "UK", price: 4500, verified: true, trending: false },
+            { name: "Michael B. Jordan", category: "Hollywood", location: "Atlanta • Mar 30", city: "Atlanta", country: "USA", price: 6000, verified: true, trending: false },
+            { name: "Dwayne Johnson", category: "Hollywood", location: "Miami • Apr 10", city: "Miami", country: "USA", price: 15000, verified: true, trending: true },
+            { name: "Gal Gadot", category: "Hollywood", location: "Tel Aviv • Apr 8", city: "Tel Aviv", country: "Israel", price: 7000, verified: true, trending: false },
+            { name: "Robert Downey Jr.", category: "Hollywood", location: "Los Angeles • Apr 12", city: "Los Angeles", country: "USA", price: 12000, verified: true, trending: false },
+            { name: "Jennifer Lawrence", category: "Hollywood", location: "New York • Apr 6", city: "New York", country: "USA", price: 8500, verified: true, trending: false },
+            { name: "Brad Pitt", category: "Hollywood", location: "Los Angeles • Apr 15", city: "Los Angeles", country: "USA", price: 10000, verified: true, trending: false },
+            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true },
+            { name: "Song Hye-kyo", category: "K-Drama", location: "Seoul • Mar 19", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
+            { name: "Lee Min-ho", category: "K-Drama", location: "Seoul • Mar 21", city: "Seoul", country: "South Korea", price: 5000, verified: true, trending: true },
+            { name: "IU (Lee Ji-eun)", category: "K-Drama", location: "Seoul • Mar 24", city: "Seoul", country: "South Korea", price: 6000, verified: true, trending: true },
+            { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", city: "San Francisco", country: "USA", price: 50000, verified: true, trending: true },
+            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true },
+            { name: "Lionel Messi", category: "Athletes", location: "Miami • Apr 8", city: "Miami", country: "USA", price: 30000, verified: true, trending: true },
+            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true },
+            { name: "Beyoncé", category: "Musicians", location: "Houston • Mar 28", city: "Houston", country: "USA", price: 25000, verified: true, trending: true },
+            { name: "BTS (Group)", category: "Musicians", location: "Seoul • Apr 26", city: "Seoul", country: "South Korea", price: 35000, verified: true, trending: true }
+        ];
+
+        // Color palettes
+        const colorPalettes = [
+            'linear-gradient(135deg, #667eea, #764ba2)',
+            'linear-gradient(135deg, #f093fb, #f5576c)',
+            'linear-gradient(135deg, #4facfe, #00f2fe)',
+            'linear-gradient(135deg, #43e97b, #38f9d7)',
+            'linear-gradient(135deg, #fa709a, #fee140)',
+            'linear-gradient(135deg, #30cfd0, #330867)',
+            'linear-gradient(135deg, #a8edea, #fed6e3)',
+            'linear-gradient(135deg, #ff9a9e, #fecfef)',
+            'linear-gradient(135deg, #ffecd2, #fcb69f)',
+            'linear-gradient(135deg, #ff6e7f, #bfe9ff)'
+        ];
+
+        let currentCelebrity = null;
+        let watchlist = new Set();
+
+        // Get initials
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+        }
+
+        // Get color
+        function getColorForCelebrity(name) {
+            const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            return colorPalettes[index % colorPalettes.length];
+        }
+
+        // Load celebrity from URL
+        function loadCelebrity() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const celebrityName = urlParams.get('name');
+
+            if (!celebrityName) {
+                showError();
+                return;
+            }
+
+            currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
+
+            if (!currentCelebrity) {
+                showError();
+                return;
+            }
+
+            document.getElementById('errorPage').classList.add('hidden');
+            document.getElementById('mainContainer').classList.remove('hidden');
+
+            renderCelebrity();
+        }
+
+        // Show error page
+        function showError() {
+            document.getElementById('errorPage').classList.remove('hidden');
+            document.getElementById('mainContainer').classList.add('hidden');
+        }
+
+        // Render celebrity
+        function renderCelebrity() {
+            const initials = getInitials(currentCelebrity.name);
+            const color = getColorForCelebrity(currentCelebrity.name);
+
+            // Hero section
+            document.getElementById('heroImage').style.background = color;
+            document.getElementById('heroInitials').textContent = initials;
+            document.getElementById('celebrityName').textContent = currentCelebrity.name;
+            document.getElementById('categoryBadge').textContent = currentCelebrity.category;
+            document.getElementById('aboutName').textContent = currentCelebrity.name;
+
+            // Booking sidebar
+            document.getElementById('bookingPhoto').textContent = initials;
+            document.getElementById('bookingPhoto').style.background = color;
+            document.getElementById('bookingName').textContent = currentCelebrity.name;
+            document.getElementById('nextAvailable').textContent = `Next: ${currentCelebrity.location}`;
+            document.getElementById('priceDisplay').textContent = `$${currentCelebrity.price.toLocaleString()}`;
+
+            // Render availability
+            renderAvailability();
+
+            // Render pricing
+            renderPricing();
+
+            // Render similar celebrities
+            renderSimilarCelebrities();
+        }
+
+        // Render availability
+        function renderAvailability() {
+            const locations = [
+                { city: currentCelebrity.city, country: currentCelebrity.country, date: currentCelebrity.location, venue: 'Premium Hotel Suite', slots: 3 },
+                { city: 'New York', country: 'USA', date: 'Apr 12-14', venue: 'Manhattan Convention Center', slots: 5 },
+                { city: 'Tokyo', country: 'Japan', date: 'Apr 20-22', venue: 'Grand Tokyo Hotel', slots: 2 },
+                { city: 'Paris', country: 'France', date: 'May 5-7', venue: 'Le Grand Hotel', slots: 4 }
+            ];
+
+            const grid = document.getElementById('availabilityGrid');
+            grid.innerHTML = locations.map(loc => `
+                <div class="availability-card">
+                    <div class="city-name">${getFlag(loc.country)} ${loc.city}</div>
+                    <div class="date-range">📅 ${loc.date}</div>
+                    <div class="venue">📍 ${loc.venue}</div>
+                    <div class="slots-info">${loc.slots} slots remaining</div>
+                    <button class="book-btn-card" onclick="scrollToBooking()">Book Now</button>
+                </div>
+            `).join('');
+        }
+
+        // Get flag emoji
+        function getFlag(country) {
+            const flags = {
+                'USA': '🇺🇸', 'UK': '🇬🇧', 'France': '🇫🇷', 'Japan': '🇯🇵',
+                'South Korea': '🇰🇷', 'Australia': '🇦🇺', 'Canada': '🇨🇦'
+            };
+            return flags[country] || '🌍';
+        }
+
+        // Render pricing
+        function renderPricing() {
+            const basePrice = currentCelebrity.price;
+            const standardPrice = Math.round(basePrice * 1.5);
+            const premiumPrice = Math.round(basePrice * 2.5);
+
+            const grid = document.getElementById('pricingGrid');
+            grid.innerHTML = `
+                <div class="pricing-card">
+                    <div class="pricing-icon">🤝</div>
+                    <h3 class="pricing-title">Quick Meet</h3>
+                    <div class="pricing-duration">15 minutes</div>
+                    <div class="pricing-amount">$${basePrice.toLocaleString()}</div>
+                    <p class="pricing-description">Brief meet & greet, photo opportunity</p>
+                    <ul class="pricing-includes">
+                        <li>One photo opportunity</li>
+                        <li>Autograph session</li>
+                        <li>Brief conversation</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectMeeting('quick')">Select</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="pricing-icon">⭐</div>
+                    <h3 class="pricing-title">Standard Session</h3>
+                    <div class="pricing-duration">30 minutes</div>
+                    <div class="pricing-amount">$${standardPrice.toLocaleString()}</div>
+                    <p class="pricing-description">Extended conversation and Q&A</p>
+                    <ul class="pricing-includes">
+                        <li>Multiple photo opportunities</li>
+                        <li>Autograph session</li>
+                        <li>Extended discussion</li>
+                        <li>Q&A session</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectMeeting('standard')">Select</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-icon">👑</div>
+                    <h3 class="pricing-title">Premium Experience</h3>
+                    <div class="pricing-duration">60 minutes</div>
+                    <div class="pricing-amount">$${premiumPrice.toLocaleString()}</div>
+                    <p class="pricing-description">In-depth mentorship or business consultation</p>
+                    <ul class="pricing-includes">
+                        <li>Professional photoshoot</li>
+                        <li>Personalized advice</li>
+                        <li>Video message</li>
+                        <li>Extended consultation</li>
+                        <li>Exclusive memorabilia</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectMeeting('premium')">Select</button>
+                </div>
+            `;
+        }
+
+        // Render similar celebrities
+        function renderSimilarCelebrities() {
+            const similar = celebrities
+                .filter(c => c.category === currentCelebrity.category && c.name !== currentCelebrity.name)
+                .slice(0, 4);
+
+            const grid = document.getElementById('similarGrid');
+            grid.innerHTML = similar.map(celeb => {
+                const initials = getInitials(celeb.name);
+                const color = getColorForCelebrity(celeb.name);
+                return `
+                    <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                        <div class="celebrity-image-card" style="background: ${color}">
+                            <div class="celebrity-initials-card">${initials}</div>
+                        </div>
+                        <div class="celebrity-info-card">
+                            <div class="celebrity-name-card">${celeb.name}</div>
+                            <div class="celebrity-category-card">${celeb.category}</div>
+                            <div class="celebrity-price-card">$${celeb.price.toLocaleString()}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Select meeting type
+        function selectMeeting(type) {
+            const dropdown = document.getElementById('meetingTypeDropdown');
+            dropdown.value = type;
+            updatePrice();
+            scrollToBooking();
+        }
+
+        // Update price based on selection
+        function updatePrice() {
+            const type = document.getElementById('meetingTypeDropdown').value;
+            const basePrice = currentCelebrity.price;
+            let price = basePrice;
+
+            if (type === 'standard') price = Math.round(basePrice * 1.5);
+            if (type === 'premium') price = Math.round(basePrice * 2.5);
+
+            document.getElementById('priceDisplay').textContent = `$${price.toLocaleString()}`;
+        }
+
+        // Scroll to booking
+        function scrollToBooking() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Book now
+        function bookNow() {
+            const type = document.getElementById('meetingTypeDropdown').value;
+            if (!type) {
+                alert('Please select a meeting type first');
+                return;
+            }
+            window.location.href = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}`;
+        }
+
+        // Toggle watchlist
+        function toggleWatchlist() {
+            const btn = document.getElementById('watchlistBtn');
+            if (watchlist.has(currentCelebrity.name)) {
+                watchlist.delete(currentCelebrity.name);
+                btn.classList.remove('active');
+                btn.innerHTML = '🤍';
+            } else {
+                watchlist.add(currentCelebrity.name);
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+
+        // Share celebrity
+        function shareCelebrity() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: `Meet ${currentCelebrity.name} on StarryMeet`,
+                    text: `Check out this exclusive opportunity to meet ${currentCelebrity.name}!`,
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard!');
+            }
+        }
+
+        // Initialize
+        loadCelebrity();
+    </script>
+</body>
+</html>

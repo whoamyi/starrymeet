@@ -1298,7 +1298,7 @@
             const watchlistClass = isInWatchlist ? 'active' : '';
 
             return `
-                <div class="celebrity-card" onclick="alert('Booking ${celeb.name}...')">
+                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
                     <div class="celebrity-image" style="background: ${color}">
                         ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
@@ -1310,7 +1310,7 @@
                         <div class="celebrity-location">📍 ${celeb.location}</div>
                         <div class="celebrity-price">
                             <span class="price">$${celeb.price.toLocaleString()}</span>
-                            <button class="book-btn" onclick="event.stopPropagation(); alert('Booking ${celeb.name}...')">Book</button>
+                            <button class="book-btn" onclick="event.stopPropagation(); window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">Book</button>
                         </div>
                     </div>
                 </div>
@@ -1326,7 +1326,7 @@
             const watchlistClass = isInWatchlist ? 'active' : '';
 
             return `
-                <div class="celebrity-card-list" onclick="alert('Booking ${celeb.name}...')">
+                <div class="celebrity-card-list" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
                     <div class="celebrity-image-list" style="background: ${color}">
                         ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')" style="top: 12px; right: 12px;">${heartIcon}</button>
@@ -1345,7 +1345,7 @@
                             </div>
                         </div>
                         <div class="celebrity-actions-list">
-                            <button class="book-btn" style="padding: 0.8rem 2rem; font-size: 0.95rem;" onclick="event.stopPropagation(); alert('Booking ${celeb.name}...')">Book Now</button>
+                            <button class="book-btn" style="padding: 0.8rem 2rem; font-size: 0.95rem;" onclick="event.stopPropagation(); window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">Book Now</button>
                         </div>
                     </div>
                 </div>
