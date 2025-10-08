@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://starrymeet.com/celebrity-profile.html">
+    <meta property="og:title" content="Celebrity Profile - StarryMeet">
+    <meta property="og:description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Celebrity Profile - StarryMeet">
+    <meta name="twitter:description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
+
     <title>Celebrity Profile - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
@@ -807,10 +820,10 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">✨ StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
             <ul class="nav-links">
                 <li><a href="browse.html">Browse</a></li>
                 <li><a href="how-it-works.html">How It Works</a></li>
