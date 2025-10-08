@@ -18,7 +18,7 @@
 | 3 | celebrity-profile.html | 🟢 Complete | High | 5 | 5 | 2025-10-08 |
 | 4 | booking.html | 🟢 Complete | High | 6 | 6 | 2025-10-08 |
 | 5 | dashboard.html | 🟢 Complete | Medium | 4 | 4 | 2025-10-08 |
-| 6 | how-it-works.html | 🔴 Not Started | Medium | - | - | - |
+| 6 | how-it-works.html | 🟢 Complete | Medium | 4 | 4 | 2025-10-08 |
 | 7 | about.html | 🔴 Not Started | Medium | - | - | - |
 | 8 | for-celebrities.html | 🔴 Not Started | Medium | - | - | - |
 | 9 | faq.html | 🔴 Not Started | Low | - | - | - |
@@ -83,11 +83,14 @@
 - **Issues**: #32-#35 in DEBUG-LOG.md
 
 ### 6. how-it-works.html
-- **Status**: 🔴 Not Started
+- **Status**: 🟢 Complete
 - **Priority**: Medium
-- **Issues Found**: 0
-- **Issues Fixed**: 0
-- **Notes**: Informational page
+- **Issues Found**: 4
+- **Issues Fixed**: 4
+- **Notes**: Informational page - All standard issues fixed: 1 HIGH (meta description), 3 MEDIUM (OG/Twitter tags, nav ARIA, hamburger ARIA).
+- **Started**: 2025-10-08
+- **Completed**: 2025-10-08
+- **Issues**: #36-#39 in DEBUG-LOG.md
 
 ### 7. about.html
 - **Status**: 🔴 Not Started
@@ -143,10 +146,10 @@
 ## Overall Progress
 
 - **Total Pages**: 13
-- **Completed**: 5
+- **Completed**: 6
 - **In Progress**: 0
-- **Not Started**: 8
-- **Completion**: 38.5%
+- **Not Started**: 7
+- **Completion**: 46.2%
 
 ---
 
