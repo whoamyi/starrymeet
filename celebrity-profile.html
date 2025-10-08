@@ -1383,10 +1383,8 @@
 
         // Select meeting type
         function selectMeeting(type) {
-            const dropdown = document.getElementById('meetingTypeDropdown');
-            dropdown.value = type;
-            updatePrice();
-            scrollToBooking();
+            // Direct booking with pre-selected meeting type
+            window.location.href = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}`;
         }
 
         // Update price based on selection
