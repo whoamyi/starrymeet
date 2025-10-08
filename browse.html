@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Browse and discover celebrities available for exclusive face-to-face meetings. Filter by category, location, and price to find your favorite stars.">
     <title>Browse Celebrities - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
@@ -788,7 +789,7 @@
             <!-- Location Filter -->
             <div class="filter-section">
                 <h3>Location</h3>
-                <select class="filter-dropdown" id="countryFilter" onchange="updateCityFilter()">
+                <select class="filter-dropdown" id="countryFilter" onchange="updateCityFilter()" aria-label="Filter by country">
                     <option value="">All Countries</option>
                     <option value="USA">United States</option>
                     <option value="UK">United Kingdom</option>
@@ -800,7 +801,7 @@
                     <option value="UAE">UAE</option>
                     <option value="India">India</option>
                 </select>
-                <select class="filter-dropdown" id="cityFilter" onchange="applyFilters()">
+                <select class="filter-dropdown" id="cityFilter" onchange="applyFilters()" aria-label="Filter by city">
                     <option value="">All Cities</option>
                 </select>
             </div>
