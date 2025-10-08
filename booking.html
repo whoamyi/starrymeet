@@ -1489,17 +1489,16 @@
             const celebrityName = urlParams.get('celebrity');
             const meetingType = urlParams.get('type');
 
-            // Validate celebrity
+            // Validate celebrity - default to first celebrity if none specified
             if (!celebrityName) {
-                showError();
-                return;
-            }
+                currentCelebrity = celebrities[0];
+            } else {
+                currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
 
-            currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
-
-            if (!currentCelebrity) {
-                showError();
-                return;
+                if (!currentCelebrity) {
+                    showError();
+                    return;
+                }
             }
 
             // Show booking flow

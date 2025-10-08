@@ -33,6 +33,8 @@
             background: white;
             border-right: 1px solid var(--gray-200);
             position: fixed;
+            top: 70px;
+            left: 0;
             height: calc(100vh - 70px);
             overflow-y: auto;
             padding: 2rem 0;
@@ -804,8 +806,16 @@
             color: var(--gray-700);
         }
 
+        /* Footer adjustment for sidebar */
+        footer {
+            margin-left: 250px;
+        }
+
         /* Responsive */
         @media (max-width: 768px) {
+            footer {
+                margin-left: 0;
+            }
             .sidebar {
                 transform: translateX(-100%);
                 transition: transform 0.3s;
