@@ -23,7 +23,7 @@
 | 8 | for-celebrities.html | 🟢 Complete | Medium | 4 | 4 | 2025-10-08 |
 | 9 | faq.html | 🟢 Complete | Low | 4 | 4 | 2025-10-08 |
 | 10 | contact.html | 🟢 Complete | Low | 4 | 4 | 2025-10-08 |
-| 11 | terms.html | 🔴 Not Started | Low | - | - | - |
+| 11 | terms.html | 🟢 Complete | Low | 4 | 4 | 2025-10-08 |
 | 12 | privacy.html | 🔴 Not Started | Low | - | - | - |
 | 13 | 404.html | 🔴 Not Started | Low | - | - | - |
 
@@ -133,11 +133,14 @@
 - **Issues**: #52-#55 in DEBUG-LOG.md
 
 ### 11. terms.html
-- **Status**: 🔴 Not Started
+- **Status**: 🟢 Complete
 - **Priority**: Low
-- **Issues Found**: 0
-- **Issues Fixed**: 0
-- **Notes**: Terms of service
+- **Issues Found**: 4
+- **Issues Fixed**: 4
+- **Notes**: Terms of service - All standard issues fixed: 1 HIGH (meta description), 3 MEDIUM (OG/Twitter tags, nav ARIA, hamburger ARIA).
+- **Started**: 2025-10-08
+- **Completed**: 2025-10-08
+- **Issues**: #56-#59 in DEBUG-LOG.md
 
 ### 12. privacy.html
 - **Status**: 🔴 Not Started
@@ -158,10 +161,10 @@
 ## Overall Progress
 
 - **Total Pages**: 13
-- **Completed**: 10
+- **Completed**: 11
 - **In Progress**: 0
-- **Not Started**: 3
-- **Completion**: 76.9%
+- **Not Started**: 2
+- **Completion**: 84.6%
 
 ---
 
