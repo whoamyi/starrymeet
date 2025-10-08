@@ -49,7 +49,15 @@ Follow the same process for all 13 pages in priority order.
 | **DEBUG-LOG.md** | Log every issue found and fixed |
 | **COMPONENT-TEMPLATES.md** | Standard components for consistency |
 | **UPDATE-SUMMARY.md** | Comprehensive report of all work |
+| **AGENT-WORKFLOW.md** | Agent oversight system explained |
 | **QUICK-START.md** | This file - quick reference |
+
+## 🤖 Agent Commands
+
+| Command | Purpose |
+|---------|---------|
+| **/process-control** | Verify current step is complete before proceeding |
+| **/quality-check** | Review completed work for quality standards |
 
 ---
 
@@ -98,7 +106,7 @@ Use this for every page:
 
 ---
 
-## 🔄 Workflow Per Page
+## 🔄 Workflow Per Page (With Agent Oversight)
 
 ```
 1. UPDATE PAGE-STATUS.md
@@ -123,18 +131,31 @@ Use this for every page:
    └─ Update DEBUG-LOG.md with solution
    └─ Update issue fixed count in PAGE-STATUS.md
 
-5. COMMIT
+5. 🤖 PROCESS CONTROL CHECK
+   └─ User runs: /process-control
+   └─ Agent verifies all steps complete
+   └─ If ❌ BLOCKED: Fix missing items, run again
+   └─ If ✅ APPROVED: Proceed to quality check
+
+6. 🤖 QUALITY ASSURANCE CHECK
+   └─ User runs: /quality-check
+   └─ Agent reviews actual work quality
+   └─ If ❌ REJECTED: Fix critical issues, run again
+   └─ If ⚠️ NEEDS IMPROVEMENT: Fix issues, run again
+   └─ If ✅ APPROVED: Proceed to commit
+
+7. COMMIT
    └─ git add [files]
    └─ git commit with descriptive message
    └─ Format: "[type] page: description"
    └─ Include issue numbers
 
-6. COMPLETE
+8. COMPLETE
    └─ Mark page as "🟢 Complete" in PAGE-STATUS.md
    └─ Update overall progress percentage
    └─ Update UPDATE-SUMMARY.md
 
-7. NEXT PAGE
+9. NEXT PAGE
    └─ Move to next page in priority order
    └─ Repeat process
 ```
@@ -183,6 +204,8 @@ A page is complete when:
 - ✅ All links functional
 - ✅ All issues logged in DEBUG-LOG.md
 - ✅ All fixes documented
+- ✅ **Process Control Agent approves (✅ APPROVED)**
+- ✅ **Quality Assurance Agent approves (✅ APPROVED)**
 - ✅ Changes committed to git
 - ✅ Marked complete in PAGE-STATUS.md
 
@@ -210,6 +233,10 @@ cat PAGE-STATUS.md
 
 # View debug plan
 cat DEBUG-PLAN.md
+
+# Agent oversight commands
+/process-control    # Verify step completion
+/quality-check      # Review work quality
 
 # Add and commit
 git add [files]
