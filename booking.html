@@ -3,6 +3,20 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/booking.html">
+    <meta property="og:title" content="Book Your Meeting - StarryMeet">
+    <meta property="og:description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Book Your Meeting - StarryMeet">
+    <meta name="twitter:description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
+
     <title>Book Your Meeting - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
@@ -890,10 +904,10 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">✨ StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
             <ul class="nav-links">
                 <li><a href="browse.html">Browse</a></li>
                 <li><a href="how-it-works.html">How It Works</a></li>
@@ -1017,7 +1031,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Select Time Period <span class="required">*</span></label>
+                    <label class="form-label" for="timePeriod">Select Time Period <span class="required">*</span></label>
                     <select class="form-select" id="timePeriod">
                         <option value="">Choose a time period</option>
                         <option value="morning">Morning (9AM - 12PM)</option>
@@ -1113,7 +1127,7 @@
                 </div>
 
                 <div class="form-group">
-                    <label class="form-label">Profile Photo (Optional)</label>
+                    <label class="form-label" for="profilePhoto">Profile Photo (Optional)</label>
                     <div class="file-upload" onclick="document.getElementById('profilePhoto').click()">
                         <div class="file-upload-icon">📷</div>
                         <p>Click to upload profile photo</p>
