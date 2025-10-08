@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
     <title>Celebrity Profile - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
@@ -1098,7 +1099,7 @@
                 </div>
                 <div class="starting-price">Starting from</div>
                 <div class="price-display" id="priceDisplay">$5,000</div>
-                <select class="booking-dropdown" id="meetingTypeDropdown" onchange="updatePrice()">
+                <select class="booking-dropdown" id="meetingTypeDropdown" onchange="updatePrice()" aria-label="Select meeting type">
                     <option value="">Select Meeting Type</option>
                     <option value="quick">Quick Meet (15 min)</option>
                     <option value="standard">Standard Session (30 min)</option>

@@ -211,28 +211,29 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 
 ## Statistics
 
-- **Total Issues Found**: 15
-- **Issues Fixed**: 13
-- **Issues In Progress**: 0
+- **Total Issues Found**: 20
+- **Issues Fixed**: 15
+- **Issues In Progress**: 3
 - **Issues Deferred**: 2
 
 ### By Type:
 - HTML: 1
 - CSS: 0
 - JavaScript: 2
-- Accessibility: 9
+- Accessibility: 12
 - Performance: 1
-- SEO: 7
+- SEO: 9
 
 ### By Severity:
 - Critical: 0
-- High: 6
-- Medium: 7
+- High: 8
+- Medium: 10
 - Low: 2
 
 ### By Page:
 - index.html: 10 (8 fixed, 2 deferred)
 - browse.html: 5 (5 fixed, 0 in progress)
+- celebrity-profile.html: 5 (2 fixed, 3 in progress)
 
 ---
 
@@ -325,6 +326,91 @@ Country and city filter dropdowns have no aria-label for screen readers.
 Added aria-labels to both filter dropdowns:
 - Country filter: `aria-label="Filter by country"`
 - City filter: `aria-label="Filter by city"`
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 celebrity-profile.html - Issue #16: Missing meta description
+
+**Type**: SEO
+**Severity**: High
+**Location**: celebrity-profile.html:3-8
+
+**Problem**:
+No meta description tag in head section for celebrity profile page.
+
+**Solution**:
+Added meta description tag: `<meta name="description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">`
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 celebrity-profile.html - Issue #17: Missing OG and Twitter Card tags
+
+**Type**: SEO
+**Severity**: Medium
+**Location**: celebrity-profile.html:3-8
+
+**Problem**:
+No social media preview tags for celebrity profile page.
+
+**Solution**:
+Add Open Graph and Twitter Card meta tags specific to celebrity profile page.
+
+**Status**: In Progress
+**Commit**: -
+
+---
+
+### 2025-10-08 celebrity-profile.html - Issue #18: Navigation lacks ARIA labels
+
+**Type**: Accessibility
+**Severity**: Medium
+**Location**: celebrity-profile.html:809
+
+**Problem**:
+Nav element missing role="navigation", aria-label, and id="navbar" attributes.
+
+**Solution**:
+Add accessibility attributes to match component template.
+
+**Status**: In Progress
+**Commit**: -
+
+---
+
+### 2025-10-08 celebrity-profile.html - Issue #19: Hamburger button lacks ARIA attributes
+
+**Type**: Accessibility
+**Severity**: Medium
+**Location**: celebrity-profile.html:812
+
+**Problem**:
+Mobile hamburger button lacks aria-label, aria-expanded, aria-controls.
+
+**Solution**:
+Add ARIA attributes to hamburger button.
+
+**Status**: In Progress
+**Commit**: -
+
+---
+
+### 2025-10-08 celebrity-profile.html - Issue #20: Meeting type dropdown lacks aria-label
+
+**Type**: Accessibility
+**Severity**: High
+**Location**: celebrity-profile.html:1102
+
+**Problem**:
+Meeting type dropdown in booking sidebar has no aria-label for screen readers.
+
+**Solution**:
+Added aria-label="Select meeting type" to booking dropdown.
 
 **Status**: Fixed
 **Commit**: Pending
