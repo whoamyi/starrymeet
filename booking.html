@@ -953,7 +953,7 @@
     </div>
 
     <!-- Main Booking Flow -->
-    <div class="main-container hidden" id="bookingFlow">
+    <div class="main-container" id="bookingFlow">
         <!-- Progress Bar -->
         <div class="progress-container">
             <div class="progress-steps">
@@ -1489,19 +1489,16 @@
             const celebrityName = urlParams.get('celebrity');
             const meetingType = urlParams.get('type');
 
-            // Validate celebrity - default to first celebrity if none specified
-            if (!celebrityName) {
-                currentCelebrity = celebrities[0];
-            } else {
+            // Set celebrity - default to first celebrity if none specified
+            if (celebrityName) {
                 currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
-
-                if (!currentCelebrity) {
-                    showError();
-                    return;
-                }
             }
 
-            // Show booking flow
+            if (!currentCelebrity) {
+                currentCelebrity = celebrities[0]; // Always fallback to Emma Watson
+            }
+
+            // Ensure booking flow is visible
             document.getElementById('errorPage').classList.add('hidden');
             document.getElementById('bookingFlow').classList.remove('hidden');
 
