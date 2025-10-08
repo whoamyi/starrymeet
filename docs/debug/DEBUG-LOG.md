@@ -211,30 +211,32 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 
 ## Statistics
 
-- **Total Issues Found**: 26
-- **Issues Fixed**: 24
+- **Total Issues Found**: 31
+- **Issues Fixed**: 29
 - **Issues In Progress**: 0
 - **Issues Deferred**: 2
 
 ### By Type:
 - HTML: 1
 - CSS: 0
-- JavaScript: 2
+- JavaScript: 5
 - Accessibility: 16
 - Performance: 1
 - SEO: 11
+- UX: 1
+- Documentation: 1
 
 ### By Severity:
 - Critical: 0
-- High: 9
-- Medium: 14
-- Low: 3
+- High: 11
+- Medium: 16
+- Low: 4
 
 ### By Page:
 - index.html: 10 (8 fixed, 2 deferred)
 - browse.html: 5 (5 fixed, 0 in progress)
 - celebrity-profile.html: 5 (5 fixed, 0 in progress)
-- booking.html: 6 (6 fixed, 0 in progress)
+- booking.html: 11 (11 fixed, 0 in progress - includes integration fixes)
 
 ---
 
@@ -530,6 +532,143 @@ Label for profile photo input has no `for` attribute to associate it with the fi
 
 **Solution**:
 Added for="profilePhoto" to label element.
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 booking.html - Issue #27: Race condition in meeting type pre-selection
+
+**Type**: JavaScript
+**Severity**: High
+**Location**: booking.html:1528 (old), 1534-1547 (fixed)
+
+**Problem**:
+Meeting type pre-selection from celebrity profile used setTimeout(100ms) which was insufficient on slower devices or connections. Cards might not be rendered before selection attempt.
+
+**Solution**:
+Replaced setTimeout with double-buffered requestAnimationFrame to ensure DOM is fully ready:
+```javascript
+requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+        const selected = selectMeetingType(meetingType);
+        if (selected) {
+            console.log(`Pre-selected meeting type: ${meetingType}`);
+        }
+    });
+});
+```
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 booking.html - Issue #28: Missing DOM ready check
+
+**Type**: JavaScript
+**Severity**: High
+**Location**: booking.html:2179 (old), 2212-2217 (fixed)
+
+**Problem**:
+initializePage() executed immediately without checking if DOM was ready, causing potential initialization failures.
+
+**Solution**:
+Added proper DOM ready check:
+```javascript
+if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializePage);
+} else {
+    initializePage();
+}
+```
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 booking.html - Issue #29: Silent failures - no error handling
+
+**Type**: JavaScript
+**Severity**: Medium
+**Location**: Multiple functions
+
+**Problem**:
+No try-catch blocks or error logging throughout booking.html. Failures were silent, making debugging impossible.
+
+**Solution**:
+Added comprehensive error handling with try-catch blocks and console logging to:
+- initializePage()
+- loadCelebrityData()
+- selectMeetingType() - now returns boolean success/failure
+- selectDate()
+- selectTime()
+- nextStep()
+
+Also added:
+- Celebrity name validation with fallback
+- Missing element warnings
+- Selection status logging
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 booking.html - Issue #30: No visual feedback for pre-selection
+
+**Type**: UX
+**Severity**: Low
+**Location**: booking.html:1629
+
+**Problem**:
+When meeting type is pre-selected from celebrity profile, users have no visual indication that the selection came from the previous page.
+
+**Solution**:
+Added green "✓ Pre-selected" badge to meeting cards:
+```html
+${card.type === preSelectedType ? '<div class="pre-selected-badge">✓ Pre-selected</div>' : ''}
+```
+
+With CSS styling:
+```css
+.pre-selected-badge {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    background: var(--green);
+    color: white;
+    padding: 0.3rem 0.6rem;
+    border-radius: 20px;
+    font-size: 0.75rem;
+    font-weight: 600;
+}
+```
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-08 booking.html - Issue #31: Integration documentation missing
+
+**Type**: Documentation
+**Severity**: Medium
+**Location**: N/A - new file created
+
+**Problem**:
+No comprehensive documentation existed for the celebrity-profile → booking integration flow. Difficult to debug or understand data flow.
+
+**Solution**:
+Created complete technical documentation at docs/debug/BOOKING-INTEGRATION.md including:
+- URL parameter structure
+- JavaScript execution flow
+- Data flow diagrams
+- Troubleshooting guide
+- Testing checklist
+- Quick resume guide for session recovery
 
 **Status**: Fixed
 **Commit**: Pending

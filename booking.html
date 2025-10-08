@@ -340,6 +340,22 @@
             color: var(--purple);
         }
 
+        .pre-selected-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--green);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .meeting-card {
+            position: relative;
+        }
+
         /* Date Calendar */
         .calendar-grid {
             display: grid;
@@ -1498,48 +1514,68 @@
 
         // Initialize page
         function initializePage() {
-            // Get URL parameters
-            const urlParams = new URLSearchParams(window.location.search);
-            const celebrityName = urlParams.get('celebrity');
-            const meetingType = urlParams.get('type');
+            try {
+                // Get URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const celebrityName = urlParams.get('celebrity');
+                const meetingType = urlParams.get('type');
 
-            // Set celebrity - default to first celebrity if none specified
-            if (celebrityName) {
-                currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
+                console.log('Booking page initialized with:', { celebrityName, meetingType });
+
+                // Set celebrity - default to first celebrity if none specified
+                if (celebrityName) {
+                    currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
+
+                    if (!currentCelebrity) {
+                        console.warn(`Celebrity "${celebrityName}" not found in database`);
+                    }
+                }
+
+                if (!currentCelebrity) {
+                    currentCelebrity = celebrities[0]; // Always fallback to Emma Watson
+                    console.log('Using fallback celebrity:', currentCelebrity.name);
+                }
+
+                // Ensure booking flow is visible
+                document.getElementById('errorPage').classList.add('hidden');
+                document.getElementById('bookingFlow').classList.remove('hidden');
+
+                // Load celebrity data and generate meeting cards
+                loadCelebrityData();
+
+                // Generate calendar
+                generateCalendar();
+
+                // Pre-select meeting type if provided - use requestAnimationFrame for proper timing
+                if (meetingType) {
+                    bookingData.meetingType = meetingType;
+                    // Wait for next animation frame to ensure cards are rendered
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            const selected = selectMeetingType(meetingType);
+                            if (selected) {
+                                console.log(`Pre-selected meeting type: ${meetingType}`);
+                            } else {
+                                console.warn(`Failed to pre-select meeting type: ${meetingType}`);
+                            }
+                        });
+                    });
+                }
+
+                // Load saved data from localStorage
+                loadSavedData();
+
+                // Set up event handlers
+                document.getElementById('profilePhoto').addEventListener('change', handleFileUpload);
+                document.getElementById('timePeriod').addEventListener('change', updateTimeSlots);
+                document.getElementById('cardNumber').addEventListener('input', formatCardNumber);
+                document.getElementById('expiryDate').addEventListener('input', formatExpiryDate);
+
+                console.log('Booking page initialization complete');
+            } catch (error) {
+                console.error('Error initializing booking page:', error);
+                showError();
             }
-
-            if (!currentCelebrity) {
-                currentCelebrity = celebrities[0]; // Always fallback to Emma Watson
-            }
-
-            // Ensure booking flow is visible
-            document.getElementById('errorPage').classList.add('hidden');
-            document.getElementById('bookingFlow').classList.remove('hidden');
-
-            // Load celebrity data
-            loadCelebrityData();
-
-            // Generate calendar
-            generateCalendar();
-
-            // Pre-select meeting type if provided
-            if (meetingType) {
-                bookingData.meetingType = meetingType;
-                setTimeout(() => selectMeetingType(meetingType), 100);
-            }
-
-            // Load saved data from localStorage
-            loadSavedData();
-
-            // Set up file upload handler
-            document.getElementById('profilePhoto').addEventListener('change', handleFileUpload);
-
-            // Set up time period change handler
-            document.getElementById('timePeriod').addEventListener('change', updateTimeSlots);
-
-            // Card number formatting
-            document.getElementById('cardNumber').addEventListener('input', formatCardNumber);
-            document.getElementById('expiryDate').addEventListener('input', formatExpiryDate);
         }
 
         function showError() {
@@ -1548,31 +1584,44 @@
         }
 
         function loadCelebrityData() {
-            const initials = getInitials(currentCelebrity.name);
-            const color = getColorForCelebrity(currentCelebrity.name);
+            try {
+                const initials = getInitials(currentCelebrity.name);
+                const color = getColorForCelebrity(currentCelebrity.name);
 
-            // Update all celebrity displays
-            const celebPhotoElements = ['celebPhoto', 'paymentCelebPhoto', 'confirmCelebPhoto'];
-            celebPhotoElements.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) {
-                    el.textContent = initials;
-                    el.style.background = color;
-                }
-            });
+                // Update all celebrity displays
+                const celebPhotoElements = ['celebPhoto', 'paymentCelebPhoto', 'confirmCelebPhoto'];
+                celebPhotoElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = initials;
+                        el.style.background = color;
+                    } else {
+                        console.warn(`Element with id "${id}" not found`);
+                    }
+                });
 
-            const celebNameElements = ['celebName', 'celebNameApp', 'celebNameWhy', 'appCelebName',
-                                       'paymentCelebName', 'confirmCelebName', 'confirmCelebNameFull'];
-            celebNameElements.forEach(id => {
-                const el = document.getElementById(id);
-                if (el) el.textContent = currentCelebrity.name;
-            });
+                const celebNameElements = ['celebName', 'celebNameApp', 'celebNameWhy', 'appCelebName',
+                                           'paymentCelebName', 'confirmCelebName', 'confirmCelebNameFull'];
+                celebNameElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = currentCelebrity.name;
+                    } else {
+                        console.warn(`Element with id "${id}" not found`);
+                    }
+                });
 
-            document.getElementById('celebCategory').textContent = currentCelebrity.category;
-            document.getElementById('celebLocation').textContent = `📍 ${currentCelebrity.city}, ${currentCelebrity.country}`;
+                document.getElementById('celebCategory').textContent = currentCelebrity.category;
+                document.getElementById('celebLocation').textContent = `📍 ${currentCelebrity.city}, ${currentCelebrity.country}`;
 
-            // Generate meeting cards
-            generateMeetingCards();
+                // Generate meeting cards
+                generateMeetingCards();
+
+                console.log('Celebrity data loaded successfully:', currentCelebrity.name);
+            } catch (error) {
+                console.error('Error loading celebrity data:', error);
+                throw error;
+            }
         }
 
         function generateMeetingCards() {
@@ -1584,35 +1633,54 @@
             ];
 
             const container = document.getElementById('meetingCards');
+            const urlParams = new URLSearchParams(window.location.search);
+            const preSelectedType = urlParams.get('type');
+
             container.innerHTML = cards.map(card => `
                 <div class="meeting-card ${bookingData.meetingType === card.type ? 'selected' : ''}"
                      data-type="${card.type}"
                      data-price="${card.price}"
                      data-duration="${card.duration}"
                      onclick="selectMeetingType('${card.type}')">
+                    ${card.type === preSelectedType ? '<div class="pre-selected-badge">✓ Pre-selected</div>' : ''}
                     <div class="meeting-card-icon">${card.icon}</div>
                     <div class="meeting-card-title">${card.title}</div>
                     <div class="meeting-card-duration">${card.duration}</div>
                     <div class="meeting-card-price">$${card.price.toLocaleString()}</div>
                 </div>
             `).join('');
+
+            console.log('Meeting cards generated:', cards.length);
         }
 
         function selectMeetingType(type) {
-            // Remove previous selection
-            document.querySelectorAll('.meeting-card').forEach(card => {
-                card.classList.remove('selected');
-            });
+            try {
+                // Remove previous selection
+                document.querySelectorAll('.meeting-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
 
-            // Select new card
-            const selectedCard = document.querySelector(`[data-type="${type}"]`);
-            if (selectedCard) {
-                selectedCard.classList.add('selected');
-                bookingData.meetingType = type;
-                bookingData.price = parseInt(selectedCard.dataset.price);
-                bookingData.duration = selectedCard.dataset.duration;
-                updateSummary();
-                saveData();
+                // Select new card
+                const selectedCard = document.querySelector(`[data-type="${type}"]`);
+                if (selectedCard) {
+                    selectedCard.classList.add('selected');
+                    bookingData.meetingType = type;
+                    bookingData.price = parseInt(selectedCard.dataset.price);
+                    bookingData.duration = selectedCard.dataset.duration;
+                    updateSummary();
+                    saveData();
+
+                    // Scroll card into view
+                    selectedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    return true; // Success
+                } else {
+                    console.error(`Meeting card not found for type: ${type}`);
+                    return false; // Failure
+                }
+            } catch (error) {
+                console.error('Error selecting meeting type:', error);
+                return false;
             }
         }
 
@@ -1644,18 +1712,25 @@
         }
 
         function selectDate(dateString) {
-            // Remove previous selection
-            document.querySelectorAll('.calendar-day').forEach(day => {
-                day.classList.remove('selected');
-            });
+            try {
+                // Remove previous selection
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    day.classList.remove('selected');
+                });
 
-            // Select new date
-            const selectedDay = document.querySelector(`[data-date="${dateString}"]`);
-            if (selectedDay && !selectedDay.classList.contains('disabled')) {
-                selectedDay.classList.add('selected');
-                bookingData.date = dateString;
-                updateSummary();
-                saveData();
+                // Select new date
+                const selectedDay = document.querySelector(`[data-date="${dateString}"]`);
+                if (selectedDay && !selectedDay.classList.contains('disabled')) {
+                    selectedDay.classList.add('selected');
+                    bookingData.date = dateString;
+                    updateSummary();
+                    saveData();
+                    console.log('Date selected:', new Date(dateString).toLocaleDateString());
+                } else {
+                    console.warn('Selected date is disabled or not found');
+                }
+            } catch (error) {
+                console.error('Error selecting date:', error);
             }
         }
 
@@ -1690,16 +1765,23 @@
         }
 
         function selectTime(time) {
-            document.querySelectorAll('.time-slot').forEach(slot => {
-                slot.classList.remove('selected');
-            });
+            try {
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
 
-            const selectedSlot = document.querySelector(`[data-time="${time}"]`);
-            if (selectedSlot && !selectedSlot.classList.contains('disabled')) {
-                selectedSlot.classList.add('selected');
-                bookingData.time = time;
-                updateSummary();
-                saveData();
+                const selectedSlot = document.querySelector(`[data-time="${time}"]`);
+                if (selectedSlot && !selectedSlot.classList.contains('disabled')) {
+                    selectedSlot.classList.add('selected');
+                    bookingData.time = time;
+                    updateSummary();
+                    saveData();
+                    console.log('Time slot selected:', time);
+                } else {
+                    console.warn('Selected time slot is disabled or not found');
+                }
+            } catch (error) {
+                console.error('Error selecting time:', error);
             }
         }
 
@@ -1757,31 +1839,39 @@
 
         // Navigation functions
         function nextStep(step) {
-            // Validate current step
-            if (!validateStep(currentStep)) {
-                return;
+            try {
+                // Validate current step
+                if (!validateStep(currentStep)) {
+                    console.log(`Validation failed for step ${currentStep}`);
+                    return;
+                }
+
+                // Show loading
+                const btn = event.target.closest('.btn');
+                if (btn) btn.classList.add('loading');
+
+                // Simulate API call
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('loading');
+
+                    // Save data
+                    saveData();
+
+                    // Update progress
+                    updateProgress(step);
+
+                    // Show next step
+                    showStep(step);
+
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    console.log(`Moved to step ${step}`);
+                }, 800);
+            } catch (error) {
+                console.error('Error navigating to next step:', error);
+                alert('An error occurred. Please try again.');
             }
-
-            // Show loading
-            const btn = event.target.closest('.btn');
-            btn.classList.add('loading');
-
-            // Simulate API call
-            setTimeout(() => {
-                btn.classList.remove('loading');
-
-                // Save data
-                saveData();
-
-                // Update progress
-                updateProgress(step);
-
-                // Show next step
-                showStep(step);
-
-                // Scroll to top
-                window.scrollTo({ top: 0, behavior: 'smooth' });
-            }, 800);
         }
 
         function previousStep(step) {
@@ -2175,8 +2265,13 @@
             bookingData.celebrity = currentCelebrity.name;
         }
 
-        // Initialize on page load
-        initializePage();
+        // Initialize on page load - wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            // DOM already loaded
+            initializePage();
+        }
     </script>
 </body>
 </html>
