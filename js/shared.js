@@ -355,8 +355,30 @@ if (typeof module !== 'undefined' && module.exports) {
         showError,
         showSuccessMessage,
         toggleMobileMenu,
-        closeMobileMenu
+        closeMobileMenu,
+        handleMessageClick
     };
+
+    // Handle message click - requires authentication and booking
+    function handleMessageClick() {
+        const user = getUserProfile();
+        const bookings = getBookings();
+
+        if (!user || !user.name) {
+            showSuccessMessage('Please create an account to message celebrities');
+            setTimeout(() => {
+                window.location.href = 'dashboard.html?tab=settings';
+            }, 1500);
+            return;
+        }
+
+        if (!bookings || bookings.length === 0) {
+            showSuccessMessage('Book a meeting first to unlock messaging');
+            return;
+        }
+
+        window.location.href = 'dashboard.html?tab=messages';
+    }
 }
 
 // Log initialization
