@@ -185,10 +185,10 @@ Refactored celebrity cards with semantic HTML:
 Mobile menu overlay div exists but toggleMobileMenu() function in shared.js doesn't toggle the overlay's 'show' class, only the menu itself.
 
 **Solution**:
-Update toggleMobileMenu() function to also toggle overlay, or verify functionality works as designed.
+Updated both toggleMobileMenu() and closeMobileMenu() functions in shared.js to also toggle/remove the 'show' class on the overlay element. Now both menu and overlay work together properly.
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -212,8 +212,8 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 ## Statistics
 
 - **Total Issues Found**: 10
-- **Issues Fixed**: 7
-- **Issues In Progress**: 1
+- **Issues Fixed**: 8
+- **Issues In Progress**: 0
 - **Issues Deferred**: 2
 
 ### By Type:

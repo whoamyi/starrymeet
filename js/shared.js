@@ -302,8 +302,12 @@ function showSuccessMessage(message) {
  */
 function toggleMobileMenu() {
     const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
     if (menu) {
         menu.classList.toggle('show');
+    }
+    if (overlay) {
+        overlay.classList.toggle('show');
     }
 }
 
@@ -312,8 +316,12 @@ function toggleMobileMenu() {
  */
 function closeMobileMenu() {
     const menu = document.getElementById('mobileMenu');
+    const overlay = document.getElementById('mobileMenuOverlay');
     if (menu) {
         menu.classList.remove('show');
+    }
+    if (overlay) {
+        overlay.classList.remove('show');
     }
 }
 
