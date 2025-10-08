@@ -3,6 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city. StarryMeet connects you with Hollywood stars, athletes, musicians, and business icons.">
     <title>StarryMeet - Meet Your Icons In Person</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
@@ -892,7 +893,7 @@
             <h1>Meet Your Icons In Person</h1>
             <p>Book exclusive face-to-face meetings with world-class celebrities when they're in your city</p>
             <div class="search-container">
-                <select class="search-input" id="cityFilter" onchange="applySearch()">
+                <select class="search-input" id="cityFilter" onchange="applySearch()" aria-label="Select your city">
                     <option value="">Select Your City</option>
                     <option value="New York">New York</option>
                     <option value="Los Angeles">Los Angeles</option>
@@ -905,7 +906,7 @@
                     <option value="Sydney">Sydney</option>
                     <option value="Toronto">Toronto</option>
                 </select>
-                <input type="date" class="date-input" id="dateFilter" onchange="applySearch()">
+                <input type="date" class="date-input" id="dateFilter" onchange="applySearch()" aria-label="Select meeting date">
                 <button class="btn-primary" onclick="window.location.href='browse.html'">Explore Celebrities</button>
             </div>
             <div class="filter-info" id="filterInfo">

@@ -74,10 +74,10 @@ Add accessibility attributes: `aria-label="Toggle navigation menu"`, `aria-expan
 No meta description tag in head section. This is critical for SEO and social media previews.
 
 **Solution**:
-Add: `<meta name="description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city. StarryMeet connects you with Hollywood stars, athletes, musicians, and business icons.">`
+Added meta description tag: `<meta name="description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city. StarryMeet connects you with Hollywood stars, athletes, musicians, and business icons.">`
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -142,10 +142,12 @@ Extract page-specific styles to separate CSS file (e.g., index.css) or consolida
 Select dropdown and date input in hero search have no associated <label> elements, only placeholder/default option. Screen readers cannot properly identify these fields.
 
 **Solution**:
-Add proper <label> elements with for attributes, or use aria-label attributes on the inputs.
+Added aria-label attributes to both inputs:
+- City select: `aria-label="Select your city"`
+- Date input: `aria-label="Select meeting date"`
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -203,8 +205,8 @@ Add `id="navbar"` to the <nav> element, or change JavaScript to use `document.qu
 ## Statistics
 
 - **Total Issues Found**: 10
-- **Issues Fixed**: 0
-- **Issues In Progress**: 9
+- **Issues Fixed**: 2
+- **Issues In Progress**: 7
 - **Issues Deferred**: 1
 
 ### By Type:
