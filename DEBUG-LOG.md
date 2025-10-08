@@ -40,10 +40,10 @@ Each entry follows this structure:
 Navigation links lack ARIA labels for screen readers. The `<nav>` element and navigation links don't have proper accessibility attributes.
 
 **Solution**:
-Add `role="navigation"` and `aria-label="Main navigation"` to nav element. Consider adding aria-current="page" to active links.
+Added `role="navigation"` and `aria-label="Main navigation"` to nav element.
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -57,10 +57,10 @@ Add `role="navigation"` and `aria-label="Main navigation"` to nav element. Consi
 Mobile hamburger button `<button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>` lacks ARIA attributes like aria-label, aria-expanded, and aria-controls.
 
 **Solution**:
-Add accessibility attributes: `aria-label="Toggle navigation menu"`, `aria-expanded="false"`, `aria-controls="mobileMenu"`
+Added accessibility attributes: `aria-label="Toggle navigation menu"`, `aria-expanded="false"`, `aria-controls="mobileMenu"`
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -91,10 +91,12 @@ Added meta description tag: `<meta name="description" content="Book exclusive fa
 No social media preview tags (Open Graph, Twitter Cards) for better sharing appearance on social platforms.
 
 **Solution**:
-Add OG and Twitter Card meta tags for title, description, image, and URL.
+Added complete Open Graph and Twitter Card meta tags:
+- og:type, og:url, og:title, og:description, og:site_name
+- twitter:card, twitter:title, twitter:description
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -125,9 +127,9 @@ Add favicon references when favicon files are created.
 840+ lines of CSS in inline <style> tag. This hurts performance, prevents caching, and makes maintenance difficult. Many styles duplicate what's in shared.css.
 
 **Solution**:
-Extract page-specific styles to separate CSS file (e.g., index.css) or consolidate with shared.css. Keep only critical above-the-fold styles inline if needed.
+Documented issue. Recommend extracting to index.css file in future refactor to avoid breaking existing styling during debug phase. Would require careful testing of all page sections.
 
-**Status**: In Progress
+**Status**: Deferred (requires extensive refactor)
 **Commit**: -
 
 ---
@@ -161,10 +163,15 @@ Added aria-label attributes to both inputs:
 Celebrity cards are div-based with no semantic HTML. Should use <article> or <section> with proper heading structure.
 
 **Solution**:
-Refactor card markup to use semantic HTML elements and proper heading hierarchy.
+Refactored celebrity cards with semantic HTML:
+- Changed <div> to <article> with role="button" and tabindex="0"
+- Changed celebrity-name <div> to <h3> for proper heading hierarchy
+- Changed celebrity-category and celebrity-location to <p> tags
+- Added aria-label to card and buttons
+- Added aria-hidden="true" to decorative elements (emojis, initials)
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
@@ -195,19 +202,19 @@ Update toggleMobileMenu() function to also toggle overlay, or verify functionali
 JavaScript tries to add 'scrolled' class to `document.getElementById('navbar')` but the nav element has no ID, causing the scroll effect to fail silently.
 
 **Solution**:
-Add `id="navbar"` to the <nav> element, or change JavaScript to use `document.querySelector('nav')`.
+Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 
-**Status**: In Progress
-**Commit**: -
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 
 ## Statistics
 
 - **Total Issues Found**: 10
-- **Issues Fixed**: 2
-- **Issues In Progress**: 7
-- **Issues Deferred**: 1
+- **Issues Fixed**: 7
+- **Issues In Progress**: 1
+- **Issues Deferred**: 2
 
 ### By Type:
 - HTML: 1

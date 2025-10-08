@@ -4,6 +4,19 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city. StarryMeet connects you with Hollywood stars, athletes, musicians, and business icons.">
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/">
+    <meta property="og:title" content="StarryMeet - Meet Your Icons In Person">
+    <meta property="og:description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="StarryMeet - Meet Your Icons In Person">
+    <meta name="twitter:description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city.">
+
     <title>StarryMeet - Meet Your Icons In Person</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
@@ -850,10 +863,10 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
         <div class="nav-container">
             <a href="index.html" class="logo">✨ StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
             <ul class="nav-links">
                 <li><a href="browse.html">Browse</a></li>
                 <li><a href="how-it-works.html">How It Works</a></li>
@@ -1300,24 +1313,24 @@
             const watchlistClass = isInWatchlist ? 'active' : '';
 
             return `
-                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                <article class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" role="button" tabindex="0" aria-label="View ${celeb.name} profile">
                     <div class="celebrity-image" style="background: ${color}">
                         ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
-                        <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
-                        <div class="celebrity-initials">${initials}</div>
+                        <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')" aria-label="Add ${celeb.name} to watchlist">${heartIcon}</button>
+                        <div class="celebrity-initials" aria-hidden="true">${initials}</div>
                     </div>
                     <div class="celebrity-info">
-                        <div class="celebrity-name">${celeb.name}</div>
-                        <div class="celebrity-category">${celeb.category}</div>
-                        <div class="celebrity-location">
-                            📍 ${celeb.location}
-                        </div>
+                        <h3 class="celebrity-name">${celeb.name}</h3>
+                        <p class="celebrity-category">${celeb.category}</p>
+                        <p class="celebrity-location">
+                            <span aria-hidden="true">📍</span> ${celeb.location}
+                        </p>
                         <div class="celebrity-price">
-                            <span class="price">$${celeb.price.toLocaleString()}</span>
+                            <span class="price" aria-label="Price: $${celeb.price.toLocaleString()}">$${celeb.price.toLocaleString()}</span>
                             <button class="book-btn" onclick="event.stopPropagation(); window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Book Now</button>
                         </div>
                     </div>
-                </div>
+                </article>
             `;
         }
 
