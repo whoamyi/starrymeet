@@ -1,0 +1,301 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Privacy Policy - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        /* Page-specific styles for privacy.html */
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); line-height: 1.6; }
+        nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.05); z-index: 1000; }
+        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
+        .logo { font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--purple), var(--purple-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
+        .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
+        .nav-links a { color: var(--gray-800); text-decoration: none; font-weight: 500; transition: color 0.3s; }
+        .nav-links a:hover { color: var(--purple); }
+        .btn-signin { background: var(--purple); color: white; padding: 0.7rem 1.8rem; border-radius: 50px; font-weight: 600; }
+        .breadcrumb { max-width: 1400px; margin: 100px auto 2rem; padding: 0 2rem; color: var(--gray-600); }
+        .breadcrumb a { color: var(--purple); text-decoration: none; }
+        .hero { background: linear-gradient(135deg, var(--purple), var(--purple-light)); color: white; text-align: center; padding: 6rem 2rem; }
+        .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; }
+        .hero p { font-size: 1.3rem; opacity: 0.95; max-width: 700px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 4rem 2rem; }
+        .content-section { background: white; padding: 3rem; border-radius: 20px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); margin-bottom: 2rem; }
+        .content-section h2 { font-size: 2rem; font-weight: 800; color: var(--purple); margin-bottom: 1.5rem; }
+        .content-section h3 { font-size: 1.5rem; font-weight: 700; margin: 2rem 0 1rem; }
+        .content-section p { margin-bottom: 1rem; line-height: 1.8; color: var(--gray-700); }
+        .content-section ul, .content-section ol { margin: 1rem 0 1rem 2rem; line-height: 1.8; color: var(--gray-700); }
+        .content-section li { margin-bottom: 0.5rem; }
+        .last-updated { text-align: center; color: var(--gray-600); font-style: italic; margin-bottom: 3rem; }
+        footer { background: var(--gray-900); color: white; padding: 3rem 2rem 2rem; }
+        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
+        .footer-section h3 { margin-bottom: 1rem; font-size: 1.2rem; }
+        .footer-section ul { list-style: none; }
+        .footer-section a { color: var(--gray-200); text-decoration: none; display: block; padding: 0.3rem 0; transition: color 0.3s; }
+        .footer-section a:hover { color: var(--gold); }
+        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--gray-800); color: var(--gray-600); }
+        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .nav-links { display: none; } .content-section { padding: 2rem; } }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn-signin">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <div class="breadcrumb"><a href="index.html">Home</a> > Privacy Policy</div>
+
+    <section class="hero">
+        <h1>Privacy Policy</h1>
+        <p>Your privacy is important to us. Learn how we protect your data.</p>
+    </section>
+
+    <div class="container">
+        <p class="last-updated">Last Updated: January 15, 2025</p>
+
+        <div class="content-section">
+            <h2>1. Introduction</h2>
+            <p>Welcome to StarryMeet ("we," "us," or "our"). We respect your privacy and are committed to protecting your personal data. This Privacy Policy explains how we collect, use, disclose, and safeguard your information when you use our Platform.</p>
+            <p>Please read this Privacy Policy carefully. By using StarryMeet, you agree to the collection and use of information in accordance with this policy.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>2. Information We Collect</h2>
+            <h3>2.1 Personal Information</h3>
+            <p>We collect information that you provide directly to us, including:</p>
+            <ul>
+                <li><strong>Account Information:</strong> Name, email address, phone number, date of birth, and password</li>
+                <li><strong>Profile Information:</strong> Profile photo, bio, preferences, and interests</li>
+                <li><strong>Payment Information:</strong> Credit/debit card details, billing address, and payment history</li>
+                <li><strong>Booking Information:</strong> Celebrity preferences, meetup details, and communication with celebrities</li>
+                <li><strong>Identity Verification:</strong> Government-issued ID (for certain high-value bookings)</li>
+            </ul>
+            <h3>2.2 Automatically Collected Information</h3>
+            <p>When you use our Platform, we automatically collect certain information:</p>
+            <ul>
+                <li><strong>Device Information:</strong> IP address, browser type, operating system, and device identifiers</li>
+                <li><strong>Usage Data:</strong> Pages viewed, time spent on pages, links clicked, and search queries</li>
+                <li><strong>Location Data:</strong> Approximate location based on IP address (precise location with your permission)</li>
+                <li><strong>Cookies and Similar Technologies:</strong> We use cookies, web beacons, and similar technologies to track activity on our Platform</li>
+            </ul>
+            <h3>2.3 Information from Third Parties</h3>
+            <p>We may receive information about you from:</p>
+            <ul>
+                <li>Social media platforms (if you connect your social accounts)</li>
+                <li>Payment processors and fraud prevention services</li>
+                <li>Marketing and analytics partners</li>
+                <li>Celebrity management teams and agencies</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>3. How We Use Your Information</h2>
+            <p>We use the collected information for various purposes:</p>
+            <ul>
+                <li><strong>Provide Services:</strong> Process bookings, facilitate celebrity meetups, and manage your account</li>
+                <li><strong>Payment Processing:</strong> Complete transactions and prevent fraud</li>
+                <li><strong>Communication:</strong> Send booking confirmations, updates, reminders, and customer support messages</li>
+                <li><strong>Personalization:</strong> Customize your experience and recommend celebrities based on your preferences</li>
+                <li><strong>Marketing:</strong> Send promotional emails, newsletters, and special offers (you can opt-out anytime)</li>
+                <li><strong>Analytics:</strong> Understand how users interact with our Platform and improve our services</li>
+                <li><strong>Security:</strong> Detect, prevent, and address fraud, security breaches, and other illegal activities</li>
+                <li><strong>Legal Compliance:</strong> Comply with legal obligations, enforce our terms, and protect our rights</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>4. How We Share Your Information</h2>
+            <p>We do not sell your personal information. We may share your information in the following circumstances:</p>
+            <h3>4.1 With Celebrities and Their Teams</h3>
+            <p>When you book a meetup, we share necessary information (name, contact details, booking preferences) with the celebrity and their management team to facilitate the experience.</p>
+            <h3>4.2 Service Providers</h3>
+            <p>We share information with third-party service providers who perform services on our behalf:</p>
+            <ul>
+                <li>Payment processors (Stripe, PayPal)</li>
+                <li>Cloud hosting providers (AWS, Google Cloud)</li>
+                <li>Email service providers</li>
+                <li>Analytics providers (Google Analytics)</li>
+                <li>Customer support tools</li>
+            </ul>
+            <h3>4.3 Legal Requirements</h3>
+            <p>We may disclose your information if required by law, court order, or governmental request, or to:</p>
+            <ul>
+                <li>Comply with legal processes</li>
+                <li>Protect the rights, property, or safety of StarryMeet, our users, or the public</li>
+                <li>Detect, prevent, or address fraud, security, or technical issues</li>
+                <li>Enforce our Terms of Service</li>
+            </ul>
+            <h3>4.4 Business Transfers</h3>
+            <p>If StarryMeet is involved in a merger, acquisition, or sale of assets, your information may be transferred to the acquiring entity.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>5. Data Security</h2>
+            <p>We implement industry-standard security measures to protect your personal information:</p>
+            <ul>
+                <li>SSL/TLS encryption for data transmission</li>
+                <li>Encrypted storage of sensitive data</li>
+                <li>Regular security audits and penetration testing</li>
+                <li>Access controls and authentication mechanisms</li>
+                <li>Employee training on data protection</li>
+            </ul>
+            <p>However, no method of transmission over the internet or electronic storage is 100% secure. While we strive to protect your information, we cannot guarantee absolute security.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>6. Data Retention</h2>
+            <p>We retain your personal information for as long as necessary to:</p>
+            <ul>
+                <li>Provide our services and fulfill the purposes described in this Privacy Policy</li>
+                <li>Comply with legal obligations (e.g., tax, accounting, and auditing requirements)</li>
+                <li>Resolve disputes and enforce our agreements</li>
+            </ul>
+            <p>When we no longer need your information, we will securely delete or anonymize it. You can request deletion of your account at any time through your account settings or by contacting us.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>7. Your Privacy Rights</h2>
+            <p>Depending on your location, you may have the following rights regarding your personal information:</p>
+            <h3>7.1 Access and Portability</h3>
+            <p>You have the right to access your personal information and request a copy in a portable format.</p>
+            <h3>7.2 Correction</h3>
+            <p>You can update or correct your personal information through your account settings or by contacting us.</p>
+            <h3>7.3 Deletion</h3>
+            <p>You have the right to request deletion of your personal information, subject to certain exceptions (e.g., legal requirements).</p>
+            <h3>7.4 Opt-Out of Marketing</h3>
+            <p>You can unsubscribe from marketing emails by clicking the "unsubscribe" link in any promotional email or adjusting your account preferences.</p>
+            <h3>7.5 Do Not Track</h3>
+            <p>Our Platform does not currently respond to "Do Not Track" signals from browsers.</p>
+            <h3>7.6 California Privacy Rights</h3>
+            <p>If you are a California resident, you have additional rights under the California Consumer Privacy Act (CCPA), including the right to know what personal information we collect, the right to delete, and the right to opt-out of the sale of personal information (we do not sell your personal information).</p>
+        </div>
+
+        <div class="content-section">
+            <h2>8. Cookies and Tracking Technologies</h2>
+            <p>We use cookies and similar tracking technologies to:</p>
+            <ul>
+                <li><strong>Essential Cookies:</strong> Enable core functionality like user authentication and security</li>
+                <li><strong>Analytics Cookies:</strong> Understand how you use our Platform (Google Analytics)</li>
+                <li><strong>Advertising Cookies:</strong> Deliver personalized advertisements</li>
+                <li><strong>Preference Cookies:</strong> Remember your settings and preferences</li>
+            </ul>
+            <p>You can control cookies through your browser settings. However, disabling cookies may affect your ability to use certain features of our Platform.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>9. Third-Party Links</h2>
+            <p>Our Platform may contain links to third-party websites, services, or applications. We are not responsible for the privacy practices of these third parties. We encourage you to read their privacy policies before providing any personal information.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>10. Children's Privacy</h2>
+            <p>StarryMeet is not intended for children under the age of 13. We do not knowingly collect personal information from children under 13. If you are a parent or guardian and believe your child has provided us with personal information, please contact us, and we will delete such information.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>11. International Data Transfers</h2>
+            <p>Your information may be transferred to and processed in countries other than your country of residence. These countries may have data protection laws that are different from the laws of your country. We take appropriate safeguards to ensure your data is protected in accordance with this Privacy Policy.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>12. Changes to This Privacy Policy</h2>
+            <p>We may update this Privacy Policy from time to time to reflect changes in our practices or legal requirements. We will notify you of significant changes by:</p>
+            <ul>
+                <li>Posting the updated Privacy Policy on our Platform</li>
+                <li>Sending you an email notification</li>
+                <li>Displaying a prominent notice on our Platform</li>
+            </ul>
+            <p>Your continued use of the Platform after such changes constitutes your acceptance of the updated Privacy Policy.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>13. Contact Us</h2>
+            <p>If you have any questions, concerns, or requests regarding this Privacy Policy or our data practices, please contact us:</p>
+            <p>
+                <strong>Email:</strong> privacy@starrymeet.com<br>
+                <strong>Address:</strong> StarryMeet Inc., 123 Celebrity Boulevard, Los Angeles, CA 90028<br>
+                <strong>Phone:</strong> +1 (555) 123-4567<br>
+                <strong>Data Protection Officer:</strong> dpo@starrymeet.com
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
