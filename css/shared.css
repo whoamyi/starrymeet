@@ -546,3 +546,83 @@ a:not(.btn):hover {
     border-radius: 50%;
     animation: spin 0.6s linear infinite;
 }
+
+/* ========================================
+   MEETING TYPES LAYOUT
+   ======================================== */
+.meeting-types-container {
+    display: flex;
+    justify-content: center;
+    align-items: stretch;
+    gap: 1.5rem;
+    margin: 2rem 0;
+}
+
+.meeting-type-card {
+    flex: 1;
+    max-width: 320px;
+    background: white;
+    border: 2px solid var(--gray-200);
+    border-radius: 15px;
+    padding: 2rem;
+    text-align: center;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    cursor: pointer;
+}
+
+.meeting-type-card:hover {
+    transform: translateY(-5px);
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.1);
+    border-color: var(--purple-light);
+}
+
+.meeting-type-card.popular {
+    border-color: var(--purple);
+    box-shadow: 0 10px 30px rgba(107, 70, 193, 0.2);
+    transform: scale(1.05);
+    position: relative;
+}
+
+.meeting-type-card.popular::before {
+    content: 'MOST POPULAR';
+    position: absolute;
+    top: -15px;
+    left: 50%;
+    transform: translateX(-50%);
+    background: var(--purple);
+    color: white;
+    padding: 0.4rem 1rem;
+    border-radius: 20px;
+    font-weight: 700;
+    font-size: 0.75rem;
+    letter-spacing: 0.5px;
+}
+
+.meeting-type-card.popular:hover {
+    transform: scale(1.05) translateY(-5px);
+}
+
+.meeting-type-card.selected {
+    border-color: var(--purple);
+    background: linear-gradient(135deg, rgba(107, 70, 193, 0.05), rgba(139, 92, 246, 0.05));
+}
+
+@media (max-width: 768px) {
+    .meeting-types-container {
+        flex-direction: column;
+        align-items: center;
+    }
+
+    .meeting-type-card {
+        max-width: 100%;
+        width: 100%;
+    }
+
+    .meeting-type-card.popular {
+        transform: scale(1);
+    }
+
+    .meeting-type-card.popular:hover {
+        transform: translateY(-5px);
+    }
+}

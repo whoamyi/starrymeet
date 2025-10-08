@@ -379,6 +379,72 @@ if (typeof module !== 'undefined' && module.exports) {
 
         window.location.href = 'dashboard.html?tab=messages';
     }
+
+    // Testimonial pools for generating unique testimonials
+    const TESTIMONIAL_NAMES = [
+        'Sarah Mitchell', 'Emily Chen', 'Jessica Williams', 'Amanda Foster', 'Rachel Anderson',
+        'Michael Torres', 'David Park', 'James Rodriguez', 'Christopher Lee', 'Daniel Kim',
+        'Maria Garcia', 'Lisa Thompson', 'Jennifer Martinez', 'Michelle Davis', 'Laura Wilson',
+        'Robert Johnson', 'Kevin Brown', 'Brandon White', 'Justin Taylor', 'Tyler Moore'
+    ];
+
+    const TESTIMONIAL_LOCATIONS = [
+        'Los Angeles, CA', 'New York, NY', 'Chicago, IL', 'Miami, FL', 'Seattle, WA',
+        'Austin, TX', 'Boston, MA', 'Denver, CO', 'Portland, OR', 'San Francisco, CA',
+        'Atlanta, GA', 'Phoenix, AZ', 'Nashville, TN', 'Las Vegas, NV', 'San Diego, CA'
+    ];
+
+    const TESTIMONIAL_TEXTS = [
+        'This was absolutely incredible! The meeting felt so genuine and personal.',
+        'Worth every penny! Such a warm and authentic experience.',
+        'A dream come true! Professional, friendly, and the celebrity was amazing.',
+        'Exceeded all my expectations! Truly unforgettable moment.',
+        'Best experience ever! The platform made it so easy and seamless.',
+        'Absolutely amazing! The celebrity was so down-to-earth and kind.',
+        'Once in a lifetime opportunity! Everything was perfectly organized.',
+        'Incredible experience! The team was professional and supportive.',
+        'Beyond my wildest dreams! The meetup was better than I imagined.',
+        'Totally worth it! The celebrity was generous with their time.',
+        'Outstanding service! From booking to meeting, everything was perfect.',
+        'Life-changing experience! I\'ll treasure this memory forever.',
+        'Fantastic! The celebrity was engaging and made me feel special.',
+        'Highly recommend! Professional, authentic, and truly memorable.',
+        'Surpassed my expectations! The entire experience was flawless.'
+    ];
+
+    // Generate unique testimonials for a celebrity
+    function generateTestimonialsForCelebrity(celebrityName) {
+        const testimonials = [];
+        const seed = celebrityName.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+
+        for (let i = 0; i < 3; i++) {
+            const nameIndex = (seed + i * 7) % TESTIMONIAL_NAMES.length;
+            const locationIndex = (seed + i * 11) % TESTIMONIAL_LOCATIONS.length;
+            const textIndex = (seed + i * 13) % TESTIMONIAL_TEXTS.length;
+
+            const name = TESTIMONIAL_NAMES[nameIndex];
+            const location = TESTIMONIAL_LOCATIONS[locationIndex];
+            const text = TESTIMONIAL_TEXTS[textIndex];
+
+            const monthsAgo = ((seed + i) % 6) + 1;
+            const date = `${monthsAgo} month${monthsAgo > 1 ? 's' : ''} ago`;
+
+            testimonials.push({
+                name: name,
+                location: location,
+                rating: 5,
+                text: text,
+                date: date,
+                initials: getInitials(name),
+                color: getColorForCelebrity(name)
+            });
+        }
+
+        return testimonials;
+    }
+
+    // Add to public API
+    window.StarryMeet.generateTestimonialsForCelebrity = generateTestimonialsForCelebrity;
 }
 
 // Log initialization
