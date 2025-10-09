@@ -1,7 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <!-- Version: 2025-10-09-v1 - Fixed sidebar overlapping issues -->
+    <!-- Version: 2025-10-09-v2 - Fixed sidebar overlapping and toggle button -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Manage your StarryMeet bookings, view upcoming celebrity meetings, track your favorites, and update your profile settings.">
@@ -50,11 +50,12 @@
             position: fixed;
             top: 70px;
             left: 0;
-            height: calc(100vh - 70px);
+            bottom: 0; /* Extend to bottom */
             overflow-y: auto;
             padding: 2rem 0;
-            z-index: 100; /* Below nav but above content */
+            z-index: 10; /* Below nav, at same level as content */
             transition: transform 0.3s ease-in-out;
+            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
         }
 
         .user-profile-section {
@@ -134,12 +135,13 @@
 
         /* Main Content */
         .main-content {
-            margin-left: 250px; /* Match sidebar width */
+            margin-left: 250px; /* Match sidebar width - content starts AFTER sidebar */
             flex: 1;
             padding: 2rem;
             width: calc(100% - 250px); /* Ensure proper width calculation */
-            min-height: calc(100vh - 70px - 200px); /* Ensure content area doesn't overlap footer */
+            min-height: calc(100vh - 70px); /* Full viewport height minus nav */
             transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
+            background: var(--gray-50);
         }
 
         .content-section {
@@ -829,20 +831,21 @@
         .sidebar-toggle-btn {
             position: fixed;
             top: 85px;
-            left: 10px;
-            background: white;
-            border: 1px solid var(--gray-300);
-            border-radius: 8px;
-            padding: 0.5rem;
+            left: 260px; /* Position just outside sidebar */
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 0 8px 8px 0;
+            padding: 0.75rem 0.5rem;
             cursor: pointer;
-            z-index: 101;
+            z-index: 1000; /* Above everything */
             font-size: 1.2rem;
-            box-shadow: 0 2px 8px rgba(0,0,0,0.1);
-            transition: left 0.3s;
+            box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
+            transition: left 0.3s ease-in-out;
         }
 
         .sidebar-toggle-btn:hover {
-            background: var(--gray-50);
+            background: var(--purple-dark);
         }
 
         /* Sidebar collapsed state */
@@ -850,8 +853,8 @@
             transform: translateX(-250px);
         }
 
-        .sidebar.collapsed ~ .sidebar-toggle-btn {
-            left: 10px;
+        body:has(.sidebar.collapsed) .sidebar-toggle-btn {
+            left: 10px; /* Move to left edge when sidebar collapsed */
         }
 
         .main-content.expanded {
@@ -1463,17 +1466,25 @@
         // Tab switching
         // Toggle sidebar visibility
         function toggleSidebar() {
+            console.log('Toggle sidebar clicked');
             const sidebar = document.getElementById('sidebar');
             const mainContent = document.querySelector('.main-content');
             const footer = document.querySelector('footer');
             const toggleBtn = document.getElementById('sidebarToggle');
 
-            sidebar.classList.toggle('collapsed');
+            if (!sidebar || !mainContent || !footer || !toggleBtn) {
+                console.error('Required elements not found', {sidebar, mainContent, footer, toggleBtn});
+                return;
+            }
+
+            const isCollapsed = sidebar.classList.toggle('collapsed');
             mainContent.classList.toggle('expanded');
             footer.classList.toggle('expanded');
 
             // Update button icon
-            toggleBtn.textContent = sidebar.classList.contains('collapsed') ? '☰' : '✕';
+            toggleBtn.textContent = isCollapsed ? '☰' : '✕';
+
+            console.log('Sidebar state:', isCollapsed ? 'collapsed' : 'visible');
         }
 
         function switchTab(tabName) {
