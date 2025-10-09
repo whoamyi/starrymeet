@@ -914,25 +914,88 @@ Synchronized availability generation across both pages using identical determini
 
 ---
 
+### 2025-10-09 booking.html - Issue #39: Calendar showing slot indicators for dates without availability
+
+**Type**: JavaScript/UI Rendering
+**Severity**: High
+**Location**: booking.html:2030-2037, 1553-1586, 1941-1948
+
+**Problem**:
+User reported via screenshot: Calendar displayed green "slot" badges on dates even when console logs showed "No slots for date: 2025-10-18 at Los Angeles, USA".
+
+**Visual Evidence**:
+- Calendar showed dates Oct 18-31 with green slot indicators
+- Console simultaneously logged "No slots for date: ..." for those same dates
+- Inconsistency between visual display and actual availability data
+
+**Root Causes**:
+1. Slot indicator conditional logic wasn't strict enough: only checked `if (slots && slots.availableSlots > 0)` without validating `hasSlots`
+2. No debug visibility into which locations were actually generated for each celebrity
+3. Location dropdown could include locations with empty availability objects (exists in data but has no dates)
+4. Calendar could render with stale data from previous location selection
+
+**Solution**:
+
+1. **Stricter Slot Indicator Rendering** (lines 2030-2037):
+   - Changed condition from `if (slots && ...)` to `if (hasSlots && slots && slots.availableSlots > 0)`
+   - Added explicit else clause: `slotIndicator = ''`
+   - Added `data-has-slots` attribute to calendar days for debugging
+   ```javascript
+   if (hasSlots && slots && slots.availableSlots > 0) {
+       slotIndicator = `<div class="slots-indicator">...</div>`;
+   } else {
+       slotIndicator = ''; // Explicitly no indicator
+   }
+   ```
+
+2. **Enhanced Availability Debug Logging** (lines 1553-1554, 1586):
+   - Log which locations each celebrity will have availability at
+   - Log date count per location
+   - Example output:
+   ```
+   [DEBUG] Emma Watson (index 0) will have availability at: ['London, UK', 'Sydney, Australia', 'Los Angeles, USA']
+   [DEBUG]   London, UK: 18 dates with availability
+   [DEBUG]   Sydney, Australia: 18 dates with availability
+   [DEBUG]   Los Angeles, USA: 18 dates with availability
+   ```
+
+3. **Stricter Location Validation** (lines 1941-1948):
+   - Added date count check: `Object.keys(availabilityData[name][location]).length > 0`
+   - Warns if location exists in data but has no dates
+   - Prevents empty locations from appearing in dropdown
+
+**Behavior**:
+- Calendar now only shows slot badges when data exists
+- Disabled dates (no availability) appear grayed out with NO badge
+- Debug console shows exactly which locations have data
+- Location dropdown only shows locations with actual dates
+
+**Status**: Fixed
+**Commit**: Pending
+**Documentation**: docs/debug/CALENDAR-SLOT-DISPLAY-FIX.md
+
+---
+
 ## Statistics
 
-**Total Issues Logged**: 38
-**Fixed**: 36
+**Total Issues Logged**: 39
+**Fixed**: 37
 **In Progress**: 0
 **Deferred**: 2
 
 **Issues by Type**:
 - Accessibility: 9
 - SEO: 4
-- JavaScript: 16
+- JavaScript: 17
 - HTML: 3
 - CSS: 3
 - UX: 2
 - Data Consistency: 1
+- UI Rendering: 1
 
 **Issues by Severity**:
 - Critical: 2
-- High: 18
+- High: 19
 - Medium: 14
 - Low: 4
 

@@ -1550,6 +1550,9 @@
                     .map(c => `${c.city}, ${c.country}`);
                 locations.push(...tourCities);
 
+                // Debug: Log locations for each celebrity
+                console.log(`[DEBUG] ${celebrity.name} (index ${celebIndex}) will have availability at:`, locations);
+
                 locations.forEach((location, locIndex) => {
                     data[celebrity.name][location] = {};
 
@@ -1557,6 +1560,7 @@
                     // Use deterministic seed based on celebrity and location to ensure consistency
                     const seed = celebIndex * 1000 + locIndex * 100;
 
+                    let datesAdded = 0;
                     for (let i = 0; i < 30; i++) {
                         const date = new Date(today);
                         date.setDate(today.getDate() + i);
@@ -1576,8 +1580,10 @@
                                 times: times,
                                 booked: [] // Track booked times
                             };
+                            datesAdded++;
                         }
                     }
+                    console.log(`[DEBUG]   ${location}: ${datesAdded} dates with availability`);
                 });
             });
 
@@ -1932,11 +1938,16 @@
                     // Add pre-selected location to list if it doesn't exist and has availability
                     if (!locationsWithAvailability.includes(selectedLocation)) {
                         if (availabilityData[celebrityName] && availabilityData[celebrityName][selectedLocation]) {
-                            locationsWithAvailability.push(selectedLocation);
-                            locationsWithAvailability.sort();
-                            console.log('Added pre-selected location to dropdown:', selectedLocation);
+                            const dates = Object.keys(availabilityData[celebrityName][selectedLocation]);
+                            if (dates.length > 0) {
+                                locationsWithAvailability.push(selectedLocation);
+                                locationsWithAvailability.sort();
+                                console.log('Added pre-selected location to dropdown:', selectedLocation);
+                            } else {
+                                console.warn('Pre-selected location exists but has no dates:', selectedLocation);
+                            }
                         } else {
-                            console.warn('Pre-selected location has no availability:', selectedLocation);
+                            console.warn('Pre-selected location has no availability data:', selectedLocation);
                         }
                     }
                 } else {
@@ -2023,14 +2034,18 @@
 
                 // Build calendar day with slot indicator
                 let slotIndicator = '';
-                if (slots && slots.availableSlots > 0) {
+                if (hasSlots && slots && slots.availableSlots > 0) {
                     slotIndicator = `<div class="slots-indicator">${slots.availableSlots} slot${slots.availableSlots > 1 ? 's' : ''}</div>`;
+                } else {
+                    // Explicitly no indicator for dates without slots
+                    slotIndicator = '';
                 }
 
                 days.push(`
                     <div class="calendar-day ${!hasSlots ? 'disabled' : ''}"
                          data-date="${dateStr}"
                          data-available-slots="${slots ? slots.availableSlots : 0}"
+                         data-has-slots="${hasSlots}"
                          onclick="${hasSlots ? `selectDate('${dateStr}')` : ''}">
                         <div class="day-name">${dayName}</div>
                         <div class="day-number">${dayNumber}</div>
