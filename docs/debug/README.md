@@ -244,26 +244,29 @@ find docs/debug/pages -type f | wc -l
 
 ### Relevant Agents for Debugging
 
-#### 1. File Organization Agent (Organization Category)
-**File**: [../agents/organization/file-organization-agent.md](../agents/organization/file-organization-agent.md)
+#### 1. Organization Agent (Organization Category)
+**File**: [../agents/organization/organization-agent.md](../agents/organization/organization-agent.md)
+**Version**: 2.0.0 (Consolidated)
 
-**Purpose**: Ensures new debug files are properly categorized and placed in correct page folders
+**Purpose**: Organizes ALL project files including debug docs, agents, and future code/assets
 
 **Invoke When**:
 - Creating new debug documentation
+- Creating new agent
 - Unsure where to place a file
 - Need to update DEBUG-LOG automatically
 
 **What It Does**:
-- Analyzes file context (page, type, severity)
+- Analyzes file type and context (page, type, severity)
 - Places file in correct location
-- Updates page README
-- Updates DEBUG-LOG.md with issue number
+- Updates page README or category README
+- Updates DEBUG-LOG.md with issue number (for debug files)
 - Creates missing folders if needed
 - Verifies proper structure
 
-#### 2. Documentation Sync Agent (Documentation Category)
-**File**: [../agents/documentation/documentation-sync-agent.md](../agents/documentation/documentation-sync-agent.md)
+#### 2. Documentation Agent (Documentation Category)
+**File**: [../agents/documentation/documentation-agent.md](../agents/documentation/documentation-agent.md)
+**Version**: 1.0.0
 
 **Purpose**: Updates all site documentation when major issues are solved
 

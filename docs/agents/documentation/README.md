@@ -14,11 +14,12 @@ This folder contains agents that are responsible for keeping documentation accur
 
 ## Agents in This Category
 
-### Documentation Sync Agent
-**File**: [documentation-sync-agent.md](documentation-sync-agent.md)
+### Documentation Agent
+**File**: [documentation-agent.md](documentation-agent.md)
 **Version**: 1.0.0
 **Status**: ✅ Active
 **Created**: 2025-10-09
+**Updated**: 2025-10-10 (Renamed for consistency)
 
 **Purpose**: Automatically synchronize site documentation when major issues are fixed
 
@@ -97,6 +98,6 @@ This folder contains agents that are responsible for keeping documentation accur
 
 ---
 
-**Last Updated**: 2025-10-09
+**Last Updated**: 2025-10-10
 **Total Agents**: 1
 **Category Status**: ✅ Active

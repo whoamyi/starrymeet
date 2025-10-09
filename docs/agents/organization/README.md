@@ -8,80 +8,63 @@
 
 ## Overview
 
-This folder contains agents that ensure proper organization of files and folders throughout the project. These agents enforce naming conventions, create folder structures, and maintain organizational consistency.
+This folder contains the Organization Agent that ensures proper organization of all files throughout the project. This consolidated agent handles debug files, agent files, and future code/asset organization.
 
 ---
 
-## Agents in This Category
+## Active Agent
 
-### File Organization Agent
-**File**: [file-organization-agent.md](file-organization-agent.md)
-**Version**: 1.0.0
+### Organization Agent (Consolidated)
+**File**: [organization-agent.md](organization-agent.md)
+**Version**: 2.0.0
 **Status**: ✅ Active
-**Created**: 2025-10-09
+**Created**: 2025-10-10 (Consolidated from file-organization-agent + agent-organization-agent)
 
-**Purpose**: Automatically organize debug files into correct page-specific folders
+**Purpose**: Organize ALL project files into proper folder structures
 
 **Invoke When**:
 - Creating new debug documentation
-- Unsure where to place a file
-- Need to update DEBUG-LOG automatically
-- Creating new page folder
+- Creating new agent
+- Creating any new file that needs organization
+- Unsure where a file should be placed
+- Need to reorganize existing files
 
 **What It Does**:
-- Analyzes file context (page, type, severity)
-- Determines correct location (page folder vs. root)
+- Organizes debug files into page-specific folders
+- Organizes agent files into category folders
 - Enforces naming conventions
-- Updates page README automatically
+- Updates all READMEs automatically
 - Updates DEBUG-LOG.md with issue numbers
 - Creates missing folder structures
 - Verifies organization
 
----
-
-### Agent Organization Agent
-**File**: [agent-organization-agent.md](agent-organization-agent.md)
-**Version**: 1.0.0
-**Status**: ✅ Active
-**Created**: 2025-10-09
-
-**Purpose**: Automatically organize agent files into correct category folders
-
-**Invoke When**:
-- Creating new agent
-- Unsure which category agent belongs to
-- Need to reorganize existing agents
-- Adding new agent category
-
-**What It Does**:
-- Analyzes agent purpose
-- Determines correct category (documentation, organization, debugging, workflow)
-- Enforces agent naming conventions
-- Updates category README automatically
-- Updates main agents README
-- Creates missing categories if needed
-- Verifies agent organization
+**Handles**:
+- Debug files → `docs/debug/pages/{page-name}/`
+- Agent files → `docs/agents/{category}/`
+- Future: Code files, assets, configs
 
 ---
 
 ## Common Use Cases
 
-### When to Use Organization Agents
+### When to Use Organization Agent
 
 1. **Creating New Debug File**
-   - Invoke File Organization Agent
-   - Agent places file in correct page folder
+   - Invoke Organization Agent
+   - Agent analyzes which page and places in correct folder
+   - Updates page README and DEBUG-LOG
 
 2. **Creating New Agent**
-   - Invoke Agent Organization Agent
-   - Agent places agent in correct category
+   - Invoke Organization Agent
+   - Agent determines category and places correctly
+   - Updates category README and main agents README
 
 3. **Restructuring Project**
-   - Use organization agents to maintain consistency
+   - Use Organization Agent to maintain consistency
    - Ensures all files follow structure
 
 4. **Onboarding New Developers**
-   - Organization agents ensure they place files correctly
+   - Organization Agent ensures they place files correctly
    - Maintains structure even with new contributors
 
 ---
@@ -89,20 +72,49 @@ This folder contains agents that ensure proper organization of files and folders
 ## Workflow
 
 ```
-1. Create new file (debug doc or agent)
+1. Create new file (any type)
    ↓
-2. INVOKE: Appropriate Organization Agent
-   ↓ (File Org for debug, Agent Org for agents)
+2. INVOKE: Organization Agent
    ↓
-3. Agent analyzes context
+3. Agent analyzes file type and context
    ↓
-4. Agent places file correctly
+4. Agent determines correct location
    ↓
-5. Agent updates all READMEs
+5. Agent places file correctly
    ↓
-6. Agent verifies structure
+6. Agent updates all relevant READMEs
    ↓
-7. Commit organized files
+7. Agent verifies structure
+   ↓
+8. Commit organized files
+```
+
+---
+
+## Decision Trees
+
+### Debug Files
+```
+New debug file?
+│
+├─ Relates to specific page?
+│  ├─ YES → docs/debug/pages/{page-name}/
+│  └─ NO → docs/debug/ (root)
+│
+└─ Update DEBUG-LOG.md
+```
+
+### Agent Files
+```
+New agent file?
+│
+├─ What does it do?
+│  ├─ Documentation → docs/agents/documentation/
+│  ├─ Organization → docs/agents/organization/
+│  ├─ Debugging → docs/agents/debugging/
+│  └─ Workflow → docs/agents/workflow/
+│
+└─ Update category and main README
 ```
 
 ---
@@ -115,15 +127,23 @@ This folder contains agents that ensure proper organization of files and folders
 
 ---
 
-## Future Agents (Potential)
+## Archive
 
-- **code-organization-agent.md** - Organizes code files (JS, CSS, HTML)
-- **asset-organization-agent.md** - Organizes images, fonts, media
-- **config-organization-agent.md** - Organizes configuration files
-- **cleanup-agent.md** - Removes orphaned/unused files
+Previous versions consolidated into v2.0.0:
+- [file-organization-agent.md](archive/file-organization-agent.md) (v1.0.0)
+- [agent-organization-agent.md](archive/agent-organization-agent.md) (v1.0.0)
 
 ---
 
-**Last Updated**: 2025-10-09
-**Total Agents**: 2
+## Future Capabilities (Planned)
+
+- **Code organization** - Organize JS, CSS, HTML files
+- **Asset organization** - Organize images, fonts, media
+- **Config organization** - Organize configuration files
+- **Cleanup** - Remove orphaned/unused files
+
+---
+
+**Last Updated**: 2025-10-10
+**Total Agents**: 1 (Consolidated)
 **Category Status**: ✅ Active

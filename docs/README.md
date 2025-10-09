@@ -2,7 +2,7 @@
 
 **Project**: StarryMeet - Celebrity Meetup Platform
 **Status**: Active Development & Maintenance ✅
-**Last Updated**: 2025-10-09
+**Last Updated**: 2025-10-10
 
 ---
 
@@ -16,13 +16,13 @@ docs/
 ├── QUICK-REFERENCE.md                  ← Rapid lookup guide
 ├── EXTRACTION-COMPLETE.md              ← Template extraction record
 │
-├── agents/                             ← Automated agents (CATEGORIZED) ⭐ NEW
+├── agents/                             ← Automated agents (CATEGORIZED) ⭐ UPDATED
 │   ├── README.md                       ← Agents overview
 │   ├── documentation/                  ← Doc maintenance agents
-│   │   └── documentation-sync-agent.md
+│   │   └── documentation-agent.md      ← v1.0.0 (renamed)
 │   ├── organization/                   ← File organization agents
-│   │   ├── file-organization-agent.md
-│   │   └── agent-organization-agent.md
+│   │   ├── organization-agent.md       ← v2.0.0 (consolidated) ⭐ NEW
+│   │   └── archive/                    ← Legacy agents archived
 │   ├── debugging/                      ← Testing & QA agents (legacy)
 │   │   ├── AGENT-WORKFLOW.md
 │   │   └── AGENT-SETUP-COMPLETE.md
@@ -105,19 +105,20 @@ Agents are now organized into categories for easy discovery:
 
 **agents/README.md**
    - **Purpose**: Overview of all agent categories
-   - **Status**: Reorganized into categories 2025-10-09
+   - **Status**: Consolidated agents 2025-10-10 ⭐ UPDATED
    - **Categories**: Documentation, Organization, Debugging, Workflow
 
-**📝 Documentation Agents** (`agents/documentation/`)
-   - **documentation-sync-agent.md** - Auto-sync site docs when major issues fixed
+**📝 Documentation Agent** (`agents/documentation/`)
+   - **documentation-agent.md** (v1.0.0) - Auto-sync site docs when major issues fixed
    - **Invoke When**: Critical/High severity or 3+ issues fixed
    - **What It Does**: Updates README, QUICK-REFERENCE, SITE-ARCHITECTURE, COMPLETE-PROJECT-SUMMARY
 
-**📁 Organization Agents** (`agents/organization/`)
-   - **file-organization-agent.md** - Auto-organize debug files into page folders
-   - **agent-organization-agent.md** - Auto-organize agent files into categories
-   - **Invoke When**: Creating new files (debug docs or agents)
-   - **What It Does**: Places files correctly, updates READMEs, verifies structure
+**📁 Organization Agent** (`agents/organization/`)
+   - **organization-agent.md** (v2.0.0) ⭐ CONSOLIDATED - Organize ALL project files
+   - **Replaces**: file-organization-agent + agent-organization-agent (archived)
+   - **Invoke When**: Creating new files (debug docs, agents, future: code/assets)
+   - **What It Does**: Analyzes file type, places correctly, updates READMEs, verifies structure
+   - **Handles**: Debug files → pages/, Agent files → categories/, Future: code/assets
 
 **🐛 Debugging Agents** (`agents/debugging/`)
    - Legacy agents preserved for reference
