@@ -236,15 +236,16 @@ find docs/debug/pages -type f | wc -l
 
 ---
 
-## Automated Agents ⭐ NEW
+## Automated Agents ⭐ CATEGORIZED
 
 **Location**: `../agents/` (docs/agents/)
 **Purpose**: Maintain documentation organization and synchronization automatically
+**Structure**: Now organized into categories for easy discovery
 
-### Available Agents
+### Relevant Agents for Debugging
 
-#### 1. File Organization Agent
-**File**: [../agents/file-organization-agent.md](../agents/file-organization-agent.md)
+#### 1. File Organization Agent (Organization Category)
+**File**: [../agents/organization/file-organization-agent.md](../agents/organization/file-organization-agent.md)
 
 **Purpose**: Ensures new debug files are properly categorized and placed in correct page folders
 
@@ -261,8 +262,8 @@ find docs/debug/pages -type f | wc -l
 - Creates missing folders if needed
 - Verifies proper structure
 
-#### 2. Documentation Sync Agent
-**File**: [../agents/documentation-sync-agent.md](../agents/documentation-sync-agent.md)
+#### 2. Documentation Sync Agent (Documentation Category)
+**File**: [../agents/documentation/documentation-sync-agent.md](../agents/documentation/documentation-sync-agent.md)
 
 **Purpose**: Updates all site documentation when major issues are solved
 
@@ -299,7 +300,13 @@ find docs/debug/pages -type f | wc -l
 6. Commit organized structure + synced docs
 ```
 
-**See**: [../agents/README.md](../agents/README.md) for complete agent documentation
+**See**: [../agents/README.md](../agents/README.md) for all agent categories
+
+**All Agent Categories**:
+- 📝 [Documentation Agents](../agents/documentation/) - Doc maintenance & sync
+- 📁 [Organization Agents](../agents/organization/) - File/folder organization
+- 🐛 [Debugging Agents](../agents/debugging/) - Legacy workflow agents
+- ⚙️ [Workflow Agents](../agents/workflow/) - Future process automation
 
 ---
 

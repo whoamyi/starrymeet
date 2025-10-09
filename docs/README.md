@@ -16,12 +16,17 @@ docs/
 ├── QUICK-REFERENCE.md                  ← Rapid lookup guide
 ├── EXTRACTION-COMPLETE.md              ← Template extraction record
 │
-├── agents/                             ← Automated documentation agents ⭐ NEW
-│   ├── README.md                       ← Agents overview and usage
-│   ├── file-organization-agent.md      ← Auto-organize debug files
-│   ├── documentation-sync-agent.md     ← Auto-sync site documentation
-│   ├── AGENT-WORKFLOW.md               ← Legacy agent workflow
-│   └── AGENT-SETUP-COMPLETE.md         ← Legacy agent setup
+├── agents/                             ← Automated agents (CATEGORIZED) ⭐ NEW
+│   ├── README.md                       ← Agents overview
+│   ├── documentation/                  ← Doc maintenance agents
+│   │   └── documentation-sync-agent.md
+│   ├── organization/                   ← File organization agents
+│   │   ├── file-organization-agent.md
+│   │   └── agent-organization-agent.md
+│   ├── debugging/                      ← Testing & QA agents (legacy)
+│   │   ├── AGENT-WORKFLOW.md
+│   │   └── AGENT-SETUP-COMPLETE.md
+│   └── workflow/                       ← Process automation (future)
 │
 ├── debug/                              ← Debugging & issue tracking
 │   ├── README.md                       ← Debug structure guide ⭐ NEW
@@ -94,27 +99,33 @@ If you're new to this project, read these in order:
 
 ---
 
-### 🤖 **AUTOMATED AGENTS** (Documentation Maintenance) ⭐ NEW
+### 🤖 **AUTOMATED AGENTS** (Categorized by Purpose) ⭐ NEW
 
-Use these agents to maintain documentation organization:
+Agents are now organized into categories for easy discovery:
 
 **agents/README.md**
-   - **Purpose**: Overview of automated documentation agents
-   - **Status**: Created 2025-10-09
-   - **When to use**: Need help organizing or syncing documentation
-   - **Agents Available**:
-     - File Organization Agent - Places debug files correctly
-     - Documentation Sync Agent - Syncs site docs with changes
+   - **Purpose**: Overview of all agent categories
+   - **Status**: Reorganized into categories 2025-10-09
+   - **Categories**: Documentation, Organization, Debugging, Workflow
 
-**agents/file-organization-agent.md**
-   - **Purpose**: Auto-organize new debug files into correct page folders
-   - **Invoke When**: Creating new debug documentation
-   - **What It Does**: Places files, updates README, updates DEBUG-LOG
+**📝 Documentation Agents** (`agents/documentation/`)
+   - **documentation-sync-agent.md** - Auto-sync site docs when major issues fixed
+   - **Invoke When**: Critical/High severity or 3+ issues fixed
+   - **What It Does**: Updates README, QUICK-REFERENCE, SITE-ARCHITECTURE, COMPLETE-PROJECT-SUMMARY
 
-**agents/documentation-sync-agent.md**
-   - **Purpose**: Auto-sync site documentation when major issues fixed
-   - **Invoke When**: Critical/High severity fixes or 3+ issues fixed
-   - **What It Does**: Updates all site docs with recent changes
+**📁 Organization Agents** (`agents/organization/`)
+   - **file-organization-agent.md** - Auto-organize debug files into page folders
+   - **agent-organization-agent.md** - Auto-organize agent files into categories
+   - **Invoke When**: Creating new files (debug docs or agents)
+   - **What It Does**: Places files correctly, updates READMEs, verifies structure
+
+**🐛 Debugging Agents** (`agents/debugging/`)
+   - Legacy agents preserved for reference
+   - Future: test-runner, bug-reporter, code-quality agents
+
+**⚙️ Workflow Agents** (`agents/workflow/`)
+   - Prepared for future workflow automation
+   - Future: git-commit, deployment, pr-review agents
 
 ---
 
