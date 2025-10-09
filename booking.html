@@ -2285,10 +2285,13 @@
         }
 
         // Cancel modal
-        document.getElementById('cancelBtn').addEventListener('click', (e) => {
-            e.preventDefault();
-            document.getElementById('cancelModal').classList.add('show');
-        });
+        const cancelBtn = document.getElementById('cancelBtn');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('cancelModal').classList.add('show');
+            });
+        }
 
         function closeCancelModal() {
             document.getElementById('cancelModal').classList.remove('show');

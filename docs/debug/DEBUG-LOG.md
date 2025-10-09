@@ -211,15 +211,15 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 
 ## Statistics
 
-- **Total Issues Found**: 31
-- **Issues Fixed**: 29
+- **Total Issues Found**: 32
+- **Issues Fixed**: 30
 - **Issues In Progress**: 0
 - **Issues Deferred**: 2
 
 ### By Type:
 - HTML: 1
 - CSS: 0
-- JavaScript: 5
+- JavaScript: 6
 - Accessibility: 16
 - Performance: 1
 - SEO: 11
@@ -227,7 +227,7 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 - Documentation: 1
 
 ### By Severity:
-- Critical: 0
+- Critical: 1
 - High: 11
 - Medium: 16
 - Low: 4
@@ -236,7 +236,7 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 - index.html: 10 (8 fixed, 2 deferred)
 - browse.html: 5 (5 fixed, 0 in progress)
 - celebrity-profile.html: 5 (5 fixed, 0 in progress)
-- booking.html: 11 (11 fixed, 0 in progress - includes integration fixes)
+- booking.html: 12 (12 fixed, 0 in progress - includes integration fixes)
 
 ---
 
@@ -672,6 +672,40 @@ Created complete technical documentation at docs/debug/BOOKING-INTEGRATION.md in
 
 **Status**: Fixed
 **Commit**: Pending
+
+---
+
+### 2025-10-09 booking.html - Issue #32: Null cancelBtn causing page crash
+
+**Type**: JavaScript
+**Severity**: Critical
+**Location**: booking.html:2288
+
+**Problem**:
+JavaScript error `Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')` at line 2288. The code attempted to attach an event listener to `#cancelBtn` element which doesn't exist in the HTML, causing the entire booking page JavaScript to fail and preventing data from loading from celebrity-profile.html.
+
+Console error:
+```
+booking.html?celebrity=Emma%20Watson&type=standard:2288 Uncaught TypeError: Cannot read properties of null (reading 'addEventListener')
+    at booking.html?celebrity=Emma%20Watson&type=standard:2288:45
+```
+
+**Solution**:
+Added null check before attaching event listener:
+```javascript
+const cancelBtn = document.getElementById('cancelBtn');
+if (cancelBtn) {
+    cancelBtn.addEventListener('click', (e) => {
+        e.preventDefault();
+        document.getElementById('cancelModal').classList.add('show');
+    });
+}
+```
+
+This prevents the error and allows the page to initialize properly. The cancel modal functionality exists but there's no button to trigger it in the current UI - this should be addressed in future updates if cancel functionality is needed.
+
+**Status**: Fixed
+**Commit**: 4a8f9e2 (pending)
 
 ---
 
