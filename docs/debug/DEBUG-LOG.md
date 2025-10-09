@@ -1061,6 +1061,146 @@ const slots = celebrityData[primaryLocation][firstDate].slots; // Only Day 0
 - Medium: 14
 - Low: 4
 
+### 2025-10-09 dashboard.html - Issue #39: Duplicate toggleSidebar() functions
+
+**Type**: JavaScript
+**Severity**: Critical
+**Location**: dashboard.html:1448 and dashboard.html:1899
+
+**Problem**:
+Two conflicting `toggleSidebar()` functions were defined. The first used `.collapsed` class and attempted to manipulate footer/main content. The second used `.show` class matching the CSS. This caused inconsistent sidebar behavior and state conflicts.
+
+**Solution**:
+Removed the first (outdated) `toggleSidebar()` function. Enhanced the second function to control overlay and toggle button icon states.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+### 2025-10-09 dashboard.html - Issue #40: Inconsistent button class naming
+
+**Type**: CSS/HTML
+**Severity**: High
+**Location**: dashboard.html:960
+
+**Problem**:
+HTML used `sidebar-toggle-btn` class while CSS defined styles for `hamburger-menu-btn`, causing the toggle button to be unstyled and mispositioned.
+
+**Solution**:
+Renamed button class from `sidebar-toggle-btn` to `hamburger-menu-btn` to match CSS definitions.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+### 2025-10-09 dashboard.html - Issue #41: Fixed positioning causing layout conflicts
+
+**Type**: CSS/Layout
+**Severity**: High
+**Location**: dashboard.html:35-79
+
+**Problem**:
+Sidebar used `position: fixed` causing overlapping content, complex margin calculations, and difficult responsive behavior with z-index conflicts.
+
+**Solution**:
+Converted to flexbox-based layout with body as flex column, dashboard-container using flex: 1, and sidebar as flex item with conditional width (0 on mobile, 250px on desktop). Sidebar uses `width: 0` by default and `.show` class adds `width: 250px` on mobile.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+### 2025-10-09 dashboard.html - Issue #42: Missing mobile sidebar overlay
+
+**Type**: UX/Mobile
+**Severity**: Medium
+**Location**: N/A (missing feature)
+
+**Problem**:
+No overlay when sidebar opened on mobile. Users couldn't close sidebar by clicking outside, and there was no visual indication of overlay state.
+
+**Solution**:
+Added `.sidebar-overlay` element with semi-transparent background (rgba(0,0,0,0.5)), z-index: 999, showing only on mobile when sidebar is active. Clicking overlay closes sidebar.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+### 2025-10-09 dashboard.html - Issue #43: Missing sidebar padding
+
+**Type**: CSS/Layout
+**Severity**: Low
+**Location**: dashboard.html:66-79
+
+**Problem**:
+Sidebar content touched edges when visible, lacking the original `padding: 2rem 0` from previous implementation.
+
+**Solution**:
+Added `padding: 2rem 0` to both `.sidebar.show` (mobile) and desktop media query `.sidebar`.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+### 2025-10-09 dashboard.html - Issue #44: Toggle button icon not updating
+
+**Type**: JavaScript/UX
+**Severity**: Medium
+**Location**: dashboard.html:1876-1888
+
+**Problem**:
+Toggle button always showed hamburger icon (☰) regardless of sidebar state, providing no visual feedback.
+
+**Solution**:
+Enhanced `toggleSidebar()` to check sidebar state and update button text: ✕ when open, ☰ when closed.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+### 2025-10-09 dashboard.html - Issue #45: Overlay persisting after tab switch
+
+**Type**: JavaScript/UX
+**Severity**: Medium
+**Location**: dashboard.html:1498-1503
+
+**Problem**:
+`switchTab()` function closed sidebar on mobile but didn't remove overlay or reset toggle button icon, leaving overlay visible with wrong button state.
+
+**Solution**:
+Updated `switchTab()` to also remove `.show` from overlay and reset button text to '☰' when switching tabs on mobile.
+
+**Status**: Fixed
+**Commit**: 78810fb
+
+---
+
+## Summary Statistics
+
+**Total Issues**: 45
+**Fixed**: 45
+**In Progress**: 0
+**Deferred**: 0
+
+### By Type:
+- HTML: 5
+- CSS: 12
+- JavaScript: 10
+- Accessibility: 8
+- Performance: 3
+- SEO: 7
+
+### By Severity:
+- Critical: 2
+- High: 23
+- Medium: 16
+- Low: 4
+
 ---
 
 ## Notes
