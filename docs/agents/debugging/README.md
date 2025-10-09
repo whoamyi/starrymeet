@@ -14,7 +14,34 @@ This category is reserved for future debugging, testing, and quality assurance a
 
 ## Active Agents
 
-**None currently** - This category is prepared for future debugging tools.
+### Debugging Agent
+**File**: [debugging-agent.md](debugging-agent.md)
+**Version**: 2.0.0
+**Status**: ✅ Active
+**Created**: 2025-10-10
+
+**Purpose**: Systematically debug web pages following established standards and quality gates
+
+**Invoke When**:
+- User asks to debug a specific page
+- Need to validate a page against standards
+- Continuing page-by-page debugging work
+- Fixing bugs reported in a specific page
+
+**What It Does**:
+- Follows comprehensive debugging workflow (6 phases)
+- Applies quality checklist (HTML, Accessibility, Performance, SEO, etc.)
+- Logs all issues systematically
+- Validates fixes against standards
+- Updates all debug documentation automatically
+- Hands off to Organization and Documentation agents automatically
+- Suggests next page to debug
+
+**Integrated Standards**:
+- DEBUG-PLAN.md framework (now embedded in agent)
+- Page priority order (index → browse → profile → etc.)
+- Quality checklist (45+ validation items)
+- Success criteria and validation gates
 
 ---
 
@@ -92,6 +119,6 @@ CURRENT (2025-10-10):
 ---
 
 **Last Updated**: 2025-10-10
-**Total Active Agents**: 0
-**Total Archived Agents**: 2
-**Category Status**: 🔮 Ready for Future Agents
+**Total Active Agents**: 1
+**Total Archived Agents**: 2 (+ DEBUG-PLAN.md integrated)
+**Category Status**: ✅ Active

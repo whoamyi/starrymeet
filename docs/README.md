@@ -107,23 +107,37 @@ Agents are now organized into categories for easy discovery:
    - **Status**: Consolidated agents 2025-10-10 ⭐ UPDATED
    - **Categories**: Documentation, Organization, Debugging, Workflow
 
+**🐛 Debugging Agent** (`agents/debugging/`) ⭐ NEW
+   - **debugging-agent.md** (v2.0.0) - Systematic page debugging with embedded standards
+   - **Replaces**: DEBUG-PLAN.md (now integrated into agent)
+   - **Invoke When**: "Debug {page-name}.html" or fix bugs in specific page
+   - **What It Does**:
+     - 6-phase debugging workflow (Preparation → Logging → Fixes → Validation → Documentation → Git)
+     - 45+ quality checklist items (HTML, Accessibility, Performance, SEO, etc.)
+     - Automatic handoff to Organization & Documentation agents
+     - Suggests next page to debug
+   - **Embedded Standards**: Page priority order, quality gates, success criteria
+
 **📝 Documentation Agent** (`agents/documentation/`)
-   - **documentation-agent.md** (v1.0.0) - Auto-sync site docs when major issues fixed
+   - **documentation-agent.md** (v2.0.0) - Auto-sync all site docs with comprehensive workflow
    - **Invoke When**: Critical/High severity or 3+ issues fixed
-   - **What It Does**: Updates README, QUICK-REFERENCE, SITE-ARCHITECTURE, COMPLETE-PROJECT-SUMMARY
+   - **What It Does**:
+     - 7-phase documentation sync workflow
+     - Updates all 4 main docs (README, QUICK-REFERENCE, SITE-ARCHITECTURE, COMPLETE-PROJECT-SUMMARY)
+     - Cross-file consistency validation
+     - Version management and commit history updates
+   - **Embedded Standards**: Update thresholds, validation checklists, handoff protocols
 
 **📁 Organization Agent** (`agents/organization/`)
-   - **organization-agent.md** (v2.0.0) ⭐ CONSOLIDATED - Organize ALL project files
+   - **organization-agent.md** (v3.0.0) - Organize ALL project files with comprehensive workflow
    - **Replaces**: file-organization-agent + agent-organization-agent (archived)
    - **Invoke When**: Creating new files (debug docs, agents, future: code/assets)
-   - **What It Does**: Analyzes file type, places correctly, updates READMEs, verifies structure
-   - **Handles**: Debug files → pages/, Agent files → categories/, Future: code/assets
-
-**🐛 Debugging Agents** (`agents/debugging/`)
-   - **None currently active** - Category reserved for future
-   - Legacy agents archived (process-control, quality-check)
-   - Functionality handled by organization-agent and documentation-agent
-   - Future: test-runner, bug-reporter, code-quality agents
+   - **What It Does**:
+     - 6-phase organization workflow
+     - Automatic README and master log updates
+     - Structure verification
+     - Handoff protocols to Documentation Agent
+   - **Embedded Standards**: Naming conventions, decision trees, folder structure
 
 **⚙️ Workflow Agents** (`agents/workflow/`)
    - Prepared for future workflow automation

@@ -16,10 +16,10 @@ This folder contains agents that are responsible for keeping documentation accur
 
 ### Documentation Agent
 **File**: [documentation-agent.md](documentation-agent.md)
-**Version**: 1.0.0
+**Version**: 2.0.0
 **Status**: ✅ Active
 **Created**: 2025-10-09
-**Updated**: 2025-10-10 (Renamed for consistency)
+**Updated**: 2025-10-10 (v2.0.0 - Added comprehensive workflow)
 
 **Purpose**: Automatically synchronize site documentation when major issues are fixed
 

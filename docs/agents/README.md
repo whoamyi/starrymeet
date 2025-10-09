@@ -15,20 +15,53 @@
 
 | Agent | Category | Status | Version |
 |-------|----------|--------|---------|
-| Documentation Agent | Documentation | ✅ Active | 1.0.0 |
-| Organization Agent | Organization | ✅ Active | 2.0.0 (Consolidated) |
+| Debugging Agent | Debugging | ✅ Active | 2.0.0 (Workflow) |
+| Documentation Agent | Documentation | ✅ Active | 2.0.0 (Workflow) |
+| Organization Agent | Organization | ✅ Active | 3.0.0 (Workflow) |
+
+**All agents now follow comprehensive workflow format** - Each agent includes:
+- 🎯 Mission & invocation triggers
+- 📐 Standards & framework
+- 🔄 Phase-by-phase execution workflow
+- ✅ Validation checklist
+- 🔁 Agent handoff protocol
+- 🎯 Example executions
 
 For full documentation, see category READMEs.
 
 ## Recent Updates (2025-10-10)
 
-**Agent Consolidation & Cleanup**: Simplified agent structure by consolidating and archiving redundant agents.
+**Major Update: Comprehensive Workflow Integration** 🎯
 
-**Consolidation**:
-- Merged file-organization-agent + agent-organization-agent → organization-agent (v2.0.0)
-- Renamed documentation-sync-agent → documentation-agent (for consistency)
+All agents now include embedded standards, execution workflows, and automatic handoff protocols:
 
-**Archive**:
-- Archived debugging category legacy agents (process-control, quality-check)
-- Archived corresponding slash commands to `.claude/commands/archive/`
-- Functionality now handled by organization-agent and documentation-agent
+**New Debugging Agent (v2.0.0)**:
+- Integrated DEBUG-PLAN.md framework directly into agent
+- 6-phase systematic debugging workflow
+- 45+ quality checklist items
+- Automatic handoff to Organization & Documentation agents
+- DEBUG-PLAN.md archived (now embedded in agent)
+
+**Organization Agent (v3.0.0)**:
+- Added comprehensive 6-phase workflow
+- Naming conventions and decision trees embedded
+- Automatic README and master log updates
+- Handoff protocols defined
+
+**Documentation Agent (v2.0.0)**:
+- Added 7-phase documentation sync workflow
+- Update thresholds and version management embedded
+- Cross-file consistency validation
+- Handoff protocols defined
+
+**Why This Change?**:
+- No need to reference separate plan files
+- Each agent is self-contained with its own standards
+- Agents know when to hand off to other agents
+- Validation and quality gates built into each agent
+- Easier to invoke - just refer to one agent file
+
+**Previous Updates**:
+- Merged file-organization-agent + agent-organization-agent → organization-agent
+- Archived debugging legacy agents (process-control, quality-check)
+- Archived slash commands to `.claude/commands/archive/`
