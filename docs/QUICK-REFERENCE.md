@@ -1,7 +1,7 @@
 # Quick Reference Guide - StarryMeet
 
 **Purpose**: Rapid lookup for common tasks and information
-**Last Updated**: 2025-10-08
+**Last Updated**: 2025-10-09
 
 ---
 
@@ -18,10 +18,11 @@ js/shared.js          - All celebrity data & shared functions
 
 ### Most Important Docs
 ```
-docs/SITE-ARCHITECTURE.md       - Page interactions & data flow
-docs/COMPLETE-PROJECT-SUMMARY.md - Full project overview
-docs/debug/PAGE-STATUS.md        - Current status (100% complete)
-docs/debug/BOOKING-INTEGRATION.md - Critical integration details
+docs/SITE-ARCHITECTURE.md                   - Page interactions & data flow
+docs/COMPLETE-PROJECT-SUMMARY.md            - Full project overview
+docs/debug/README.md                        - Debug documentation structure
+docs/debug/DEBUG-LOG.md                     - All 45 issues chronologically
+docs/debug/pages/booking/BOOKING-INTEGRATION.md - Critical integration details
 ```
 
 ---
@@ -34,7 +35,7 @@ docs/debug/BOOKING-INTEGRATION.md - Critical integration details
 | 2 | browse.html | Celebrity browsing | HIGH | 5 | Filters, search, 12 celebrity cards |
 | 3 | celebrity-profile.html | Celebrity details | HIGH | 5 | Bio, pricing, booking dropdown |
 | 4 | booking.html | 5-step booking | HIGH | 11 | **CRITICAL** Pre-selection integration |
-| 5 | dashboard.html | User account | MEDIUM | 4 | Bookings, favorites, settings |
+| 5 | dashboard.html | User account | MEDIUM | 11 | Sidebar, bookings, favorites, messages, settings |
 | 6 | how-it-works.html | Platform guide | MEDIUM | 4 | 4-step process, benefits |
 | 7 | about.html | Company info | MEDIUM | 4 | Story, mission, values, stats |
 | 8 | for-celebrities.html | Celebrity recruitment | MEDIUM | 4 | Benefits, calculator, testimonials |
@@ -242,6 +243,16 @@ calculateTotal()            - Computes price (lines ~1800)
 processPayment()            - Handles payment (lines ~1900)
 ```
 
+### From dashboard.html (specific to that page)
+```javascript
+toggleSidebar()             - Toggles mobile sidebar with overlay
+switchTab(tabName)          - Switches between dashboard sections
+loadUpcomingMeetings()      - Loads upcoming meetings
+loadPastMeetings()          - Loads meeting history
+loadSavedCelebrities()      - Loads watchlist
+loadMessages()              - Loads chat conversations
+```
+
 ### From browse.html (specific to that page)
 ```javascript
 loadCelebrities()           - Loads all 12 celebrities
@@ -386,17 +397,17 @@ try {
 
 **URL**: `https://github.com/whoamyi/starrymeet.git`
 **Branch**: `main`
-**Last Commit**: `f924e81` - PROJECT 100% COMPLETE
+**Last Commit**: `30b77bf` - Debug documentation reorganization
 
-### Recent Commits
+### Recent Commits (2025-10-09)
 ```
-f924e81 - Complete 404.html + PROJECT 100% COMPLETE
-d8c221b - Complete privacy.html debugging
-9e51a75 - Complete terms.html debugging
-0752485 - Complete contact.html debugging
-2991bfe - Complete faq.html debugging
-dc3fe60 - Complete for-celebrities.html debugging
-6c4f8d2 - Complete booking integration (Issues #27-#31)
+30b77bf - refactor: Reorganize debug documentation into page-specific structure
+8dbf403 - docs: Add comprehensive debug documentation for dashboard sidebar fix
+78810fb - fix: Complete dashboard sidebar layout improvements with mobile overlay
+9df0ee0 - fix: Improve dashboard sidebar layout and fix toggle button
+68f8c21 - fix: Fix sidebar overlapping main content and footer in dashboard
+e3f048b - feat: Show total available slots on profile instead of first date only
+0c36665 - debug: Add detailed logging for calendar slot count generation
 ```
 
 ---
@@ -485,9 +496,12 @@ http://localhost:8000/dashboard.html
 7. **docs/templates/CSS-REFERENCE.md** - All CSS variables
 8. **docs/templates/JS-REFERENCE.md** - All JavaScript functions
 
-### Debug Logs
-9. **docs/debug/DEBUG-LOG-COMPLETE.md** - All 65 issues documented
-10. **docs/debug/14-POINT-CHECKLIST.md** - Debugging checklist
+### Debug Documentation
+9. **docs/debug/README.md** - Debug documentation structure guide
+10. **docs/debug/DEBUG-LOG.md** - All 45 issues chronologically
+11. **docs/debug/pages/dashboard/** - Dashboard-specific issues
+12. **docs/debug/pages/booking/** - Booking-specific issues
+13. **docs/debug/pages/celebrity-profile/** - Profile-specific issues
 
 ---
 
@@ -519,5 +533,30 @@ http://localhost:8000/dashboard.html
 
 ---
 
-**Quick Reference Last Updated**: 2025-10-08
+---
+
+## 🆕 Recent Updates (2025-10-09)
+
+### Dashboard Improvements
+- **Sidebar Layout Overhaul**: Converted from fixed positioning to flexbox
+- **Mobile Overlay**: Added semi-transparent overlay for better UX
+- **Toggle Icon**: Button changes from ☰ to ✕ when sidebar is open
+- **Auto-close**: Sidebar and overlay auto-close when switching tabs
+- **Issues Fixed**: #39-#45 (7 issues) - See `docs/debug/pages/dashboard/`
+
+### Debug Documentation Reorganization
+- **New Structure**: Page-specific folders under `docs/debug/pages/`
+- **Easy Navigation**: Find all dashboard issues in `/dashboard/`, booking in `/booking/`, etc.
+- **Master Log**: `DEBUG-LOG.md` maintains chronological history of all 45 issues
+- **READMEs**: Each page folder has its own summary and navigation guide
+
+### Celebrity Profile Enhancements
+- **Total Slots**: Now shows total available slots across all locations/dates
+- **Calendar Fix**: Only shows indicators for dates with actual availability
+- **Location Integration**: Book Now buttons pass location context correctly
+
+---
+
+**Quick Reference Last Updated**: 2025-10-09
 **Project Status**: Production Ready ✅
+**Total Issues Fixed**: 45

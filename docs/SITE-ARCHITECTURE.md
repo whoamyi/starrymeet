@@ -1,7 +1,7 @@
 # StarryMeet Site Architecture & Page Interactions
 
-**Last Updated**: 2025-10-08
-**Version**: 1.0.0
+**Last Updated**: 2025-10-09
+**Version**: 1.1.0
 
 ---
 
@@ -331,28 +331,53 @@ if (meetingType) {
 
 ### 5. dashboard.html (User Dashboard)
 **File**: `/home/whoami/starrymeet/dashboard.html`
-**Lines**: ~1000 total
-**Purpose**: User account and booking management
+**Lines**: ~1900 total
+**Purpose**: User account and booking management with tabbed interface
+**Recent Updates**: 2025-10-09 - Sidebar layout overhaul (Issues #39-#45)
 
 #### What It Does
-- Displays user profile information
-- Shows upcoming bookings (next 7 days)
-- Lists past bookings with review status
-- Displays favorite celebrities
-- Account settings and preferences
-- Booking history with filters
+- **Collapsible Sidebar Navigation**: User profile + 6 tabs (Overview, Upcoming, Past, Favorites, Messages, Settings)
+- **Overview Tab**: Stats dashboard with next meeting card and recommendations
+- **Upcoming Meetings**: List of scheduled bookings
+- **Past Meetings**: History with review functionality
+- **Saved Celebrities**: Watchlist management
+- **Messages Tab**: Chat interface for booking coordination
+- **Account Settings**: Profile management and preferences
+
+#### Layout Architecture (Flexbox-Based)
+```
+body (flex column)
+├── nav (fixed, 70px)
+├── breadcrumb
+├── hamburger-menu-btn (mobile only)
+├── sidebar-overlay (mobile only, click-to-close)
+├── dashboard-container (flex: 1)
+│   ├── sidebar (flex item, 250px on desktop, collapsible on mobile)
+│   └── main-content (flex: 1)
+└── footer
+```
 
 #### Key Sections
-- **Profile Card** (lines ~150-220): User avatar, name, email, member since
-- **Upcoming Bookings** (lines ~240-400): Cards with booking details
-- **Past Bookings** (lines ~410-600): History with review buttons
-- **Favorites** (lines ~610-750): Saved celebrities
-- **Settings** (lines ~760-900): Account preferences
+- **Sidebar** (lines ~964-1002): User profile, navigation menu with 7 items
+- **Overview Tab** (lines ~1007-1081): Stats grid, next meeting card, recommendations
+- **Upcoming Meetings** (lines ~1084-1093): Future bookings list
+- **Past Meetings** (lines ~1096-1133): History with reviews
+- **Saved Celebrities** (lines ~1135-1143): Watchlist
+- **Messages Tab** (lines ~1145-1220): Chat interface with conversation list
+- **Account Settings** (lines ~1222-1310): Profile editing form
+
+#### Mobile Features (≤768px)
+- Sidebar hidden by default (`width: 0`)
+- Hamburger button visible in top-left
+- Click hamburger: sidebar slides in from left with overlay
+- Click overlay or switch tabs: auto-close sidebar
+- Toggle icon changes: ☰ ↔ ✕
 
 #### Links To (Outgoing)
 - `booking.html` - "New Booking" button
-- `celebrity-profile.html?name=[celebrity]` - From booking cards
+- `celebrity-profile.html?name=[celebrity]` - From booking/recommendation cards
 - `browse.html` - "Browse More" button
+- `index.html` - Logout redirects here
 
 #### Links From (Incoming)
 - `booking.html` - After successful booking
@@ -361,16 +386,30 @@ if (meetingType) {
 
 #### Data Used
 - LocalStorage: `userData` object with user info
-- LocalStorage: `bookingHistory` array of past bookings
+- LocalStorage: `bookingHistory` array of bookings
 - LocalStorage: `favorites` array of celebrity names
+- SessionStorage: `currentChat` for messages
 
 #### JavaScript Functions
-- `loadUserData()` - Loads user profile from localStorage
-- `loadUpcomingBookings()` - Displays next bookings
-- `loadPastBookings()` - Shows booking history
-- `loadFavorites()` - Displays favorite celebrities
-- `cancelBooking(id)` - Cancels a booking
-- `leaveReview(id)` - Opens review modal
+- `toggleSidebar()` - Toggles mobile sidebar + overlay + icon
+- `switchTab(tabName)` - Switches dashboard sections, auto-closes sidebar on mobile
+- `initializePage()` - Initializes user data and loads default tab
+- `loadUpcomingMeetings()` - Displays next bookings
+- `loadPastMeetings()` - Shows booking history
+- `loadSavedCelebrities()` - Displays watchlist
+- `loadMessages()` - Loads chat conversations
+- `loadNextMeeting()` - Shows next upcoming meeting card
+- `logout()` - Clears localStorage and redirects
+
+#### Recent Fixes (2025-10-09)
+- **Issue #39**: Removed duplicate `toggleSidebar()` functions
+- **Issue #40**: Fixed inconsistent button class naming
+- **Issue #41**: Converted from fixed to flexbox layout
+- **Issue #42**: Added mobile overlay for better UX
+- **Issue #43**: Added sidebar padding
+- **Issue #44**: Toggle button icon now updates (☰ ↔ ✕)
+- **Issue #45**: Overlay now closes with sidebar on tab switch
+- **See**: `docs/debug/pages/dashboard/` for complete documentation
 
 ---
 
@@ -1175,6 +1214,56 @@ browse.html?category=Musicians
 
 ---
 
-**Last Updated**: 2025-10-08
-**Version**: 1.0.0
+## Debug Documentation Structure
+
+**Location**: `docs/debug/`
+**Organization**: Page-specific folders for easy navigation
+**Last Reorganized**: 2025-10-09
+
+### Directory Structure
+```
+docs/debug/
+├── README.md                    - Structure guide
+├── DEBUG-PLAN.md                - Master debugging framework
+├── DEBUG-LOG.md                 - Chronological log of all 45 issues
+├── PAGE-STATUS.md               - Page completion tracker
+├── COMPONENT-TEMPLATES.md       - Reusable component standards
+│
+└── pages/                       - Page-specific debug docs
+    ├── dashboard/
+    │   ├── README.md
+    │   └── DASHBOARD-SIDEBAR-FIX.md (Issues #39-#45)
+    │
+    ├── booking/
+    │   ├── README.md
+    │   ├── BOOKING-FIX-SUMMARY.md
+    │   └── BOOKING-INTEGRATION.md
+    │
+    └── celebrity-profile/
+        ├── README.md
+        ├── AVAILABILITY-SYNC-FIX.md
+        ├── CALENDAR-SLOT-DISPLAY-FIX.md
+        ├── TOTAL-SLOTS-FIX.md
+        ├── LOCATION-AVAILABILITY-INTEGRATION.md
+        └── ISSUES-33-36-SUMMARY.md
+```
+
+### How to Use
+- **Debugging specific page?** → Go to `docs/debug/pages/{page-name}/`
+- **Want chronological history?** → See `docs/debug/DEBUG-LOG.md`
+- **Need framework reference?** → See `docs/debug/DEBUG-PLAN.md`
+- **Starting fresh?** → Read `docs/debug/README.md`
+
+### Benefits
+✅ Page-specific organization - all dashboard issues in one folder
+✅ Easy navigation with README files at each level
+✅ Master log maintains complete chronological history
+✅ Scalable structure for adding new pages
+✅ Cross-referenced documentation
+
+---
+
+**Last Updated**: 2025-10-09
+**Version**: 1.1.0
 **Status**: Production Ready
+**Total Issues Fixed**: 45

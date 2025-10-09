@@ -1,8 +1,8 @@
 # StarryMeet Documentation
 
 **Project**: StarryMeet - Celebrity Meetup Platform
-**Status**: 100% Complete ✅
-**Last Updated**: 2025-10-08
+**Status**: Active Development & Maintenance ✅
+**Last Updated**: 2025-10-09
 
 ---
 
@@ -17,11 +17,23 @@ docs/
 ├── EXTRACTION-COMPLETE.md              ← Template extraction record
 │
 ├── debug/                              ← Debugging & issue tracking
+│   ├── README.md                       ← Debug structure guide ⭐ NEW
+│   ├── DEBUG-PLAN.md                   ← Master debugging framework
+│   ├── DEBUG-LOG.md                    ← All 45+ issues chronologically
 │   ├── PAGE-STATUS.md                  ← Live status tracker (100%)
-│   ├── DEBUG-LOG-COMPLETE.md           ← All 65 issues documented
-│   ├── 14-POINT-CHECKLIST.md           ← Debugging checklist
-│   ├── BOOKING-INTEGRATION.md          ← Integration technical guide
-│   └── INTEGRATION-COMPLETE-SUMMARY.md ← Integration completion record
+│   ├── COMPONENT-TEMPLATES.md          ← Reusable components
+│   │
+│   └── pages/                          ← Page-specific issues ⭐ NEW
+│       ├── dashboard/
+│       │   ├── README.md
+│       │   └── DASHBOARD-SIDEBAR-FIX.md (Issues #39-#45)
+│       ├── booking/
+│       │   ├── README.md
+│       │   ├── BOOKING-FIX-SUMMARY.md
+│       │   └── BOOKING-INTEGRATION.md
+│       └── celebrity-profile/
+│           ├── README.md
+│           └── [5 issue-specific files]
 │
 └── templates/                          ← Reusable code templates
     ├── HEADER-NAV.md                   ← Navigation template
@@ -79,25 +91,36 @@ If you're new to this project, read these in order:
 
 Use these when debugging or tracking issues:
 
-4. **debug/PAGE-STATUS.md**
-   - **Purpose**: Track debugging progress
-   - **Status**: 13/13 pages complete (100%) ✅
-   - **When to use**: Check what's been fixed
+4. **debug/README.md** ⭐ NEW
+   - **Purpose**: Navigate the debug documentation structure
+   - **Status**: Reorganized 2025-10-09
+   - **When to use**: Finding page-specific issues
    - **Contents**:
-     - Status overview table
-     - Detailed status per page
-     - Overall progress metrics
+     - Structure explanation
+     - Navigation guide
+     - File naming conventions
+     - Usage workflow examples
 
-5. **debug/DEBUG-LOG-COMPLETE.md**
-   - **Purpose**: All 65 issues documented
-   - **Status**: 63 fixed, 2 deferred
-   - **When to use**: Look up specific issue details
+5. **debug/DEBUG-LOG.md**
+   - **Purpose**: Master chronological log of all issues
+   - **Status**: 45+ issues documented and fixed ✅
+   - **When to use**: See all issues chronologically
    - **Contents**:
-     - Issues #1-#65 with full details
+     - Issues #1-#45+ with full details
+     - Quick navigation to page-specific docs
      - Root cause analysis
      - Solutions implemented
      - Code examples
-     - Testing results
+
+6. **debug/pages/{page-name}/** ⭐ NEW
+   - **Purpose**: Page-specific issue documentation
+   - **Structure**: Separate folder for each HTML page
+   - **When to use**: Debugging a specific page
+   - **Contents**:
+     - dashboard/ - Dashboard sidebar, layout (Issues #39-#45)
+     - booking/ - Booking integration issues
+     - celebrity-profile/ - Calendar, slots, availability issues
+     - Each folder has README + issue-specific files
 
 6. **debug/14-POINT-CHECKLIST.md**
    - **Purpose**: Systematic debugging process
@@ -348,8 +371,11 @@ less docs/debug/14-POINT-CHECKLIST.md
 - [Meta Tags](templates/META-TAGS.md)
 
 ### Debug
-- [All Issues](debug/DEBUG-LOG-COMPLETE.md)
-- [14-Point Checklist](debug/14-POINT-CHECKLIST.md)
+- [Debug Structure Guide](debug/README.md) ⭐ NEW
+- [All Issues Chronologically](debug/DEBUG-LOG.md)
+- [Dashboard Issues](debug/pages/dashboard/)
+- [Booking Issues](debug/pages/booking/)
+- [Celebrity Profile Issues](debug/pages/celebrity-profile/)
 
 ---
 
@@ -357,11 +383,11 @@ less docs/debug/14-POINT-CHECKLIST.md
 
 ### Coverage
 - **Total pages documented**: 13/13 (100%)
-- **Total issues documented**: 65/65 (100%)
+- **Total issues documented**: 45+ (all fixed ✅)
 - **Templates created**: 6
-- **Debug docs**: 5
-- **Total documentation files**: 15
-- **Total documentation lines**: ~10,000+
+- **Debug docs**: 20+ files (reorganized into page folders)
+- **Total documentation files**: 25+
+- **Total documentation lines**: ~12,000+
 
 ### Quality Indicators
 - ✅ Every page has detailed breakdown
@@ -370,10 +396,35 @@ less docs/debug/14-POINT-CHECKLIST.md
 - ✅ Every integration has data flow diagram
 - ✅ Every component has template
 - ✅ Cross-references between docs
+- ✅ Page-specific debug organization (NEW)
 
 ---
 
-**Last Updated**: 2025-10-08
-**Documentation Status**: Complete ✅
+## 🆕 Recent Updates (2025-10-09)
+
+### Dashboard Improvements
+- **Sidebar Layout Overhaul**: Flexbox-based layout replacing fixed positioning
+- **Mobile Overlay**: Click-outside-to-close with semi-transparent background
+- **Toggle Icon**: Changes from ☰ to ✕ when sidebar is open
+- **Issues Fixed**: #39-#45 (7 issues)
+- **Documentation**: See [debug/pages/dashboard/](debug/pages/dashboard/)
+
+### Debug Documentation Reorganization
+- **New Structure**: Page-specific folders under `debug/pages/`
+- **Better Navigation**: Each page folder has its own README
+- **Master Log Preserved**: `DEBUG-LOG.md` maintains chronological history
+- **Easier Debugging**: Find all dashboard issues in one folder
+- **Documentation**: See [debug/README.md](debug/README.md)
+
+### Celebrity Profile Enhancements
+- **Total Slots Fix**: Aggregates across all locations and dates
+- **Calendar Fix**: Only shows indicators for dates with availability
+- **Sync Fix**: Consistent slot counts between profile and booking
+
+---
+
+**Last Updated**: 2025-10-09
+**Documentation Status**: Active & Maintained ✅
 **Project Status**: Production Ready 🚀
-**Total Docs**: 15 files (~10,000 lines)
+**Total Docs**: 25+ files (~12,000+ lines)
+**Total Issues Fixed**: 45+
