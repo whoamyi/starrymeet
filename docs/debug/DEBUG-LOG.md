@@ -976,10 +976,71 @@ User reported via screenshot: Calendar displayed green "slot" badges on dates ev
 
 ---
 
+### 2025-10-09 celebrity-profile.html - Issue #40: Profile showing first date slots instead of total available slots
+
+**Type**: Feature/UX Enhancement
+**Severity**: High
+**Location**: celebrity-profile.html:1354-1400, 1416-1419
+
+**Problem**:
+User requested: "on the profile page, each location should display the total number slots they have in the booking page.. so that, anytime when slots are booked, they will also be able to automatically display on the profile"
+
+**Previous Behavior**:
+- Profile showed only first date's slot count
+- Example: "London: 1 slot remaining" (only Day 0's count)
+- All 3 locations showed "1 slot remaining"
+- Misleading - actually 54 slots available per location across 18 dates
+- Users couldn't see total availability at a glance
+
+**Root Cause**:
+Code only retrieved first date's slots:
+```javascript
+const firstDate = dates[0];
+const slots = celebrityData[primaryLocation][firstDate].slots; // Only Day 0
+```
+
+**Solution**:
+
+1. **Calculate Total Slots** (lines 1354-1369 for primary, 1383-1400 for tours):
+   ```javascript
+   // Sum slots across ALL dates
+   let totalSlots = 0;
+   dates.forEach(date => {
+       totalSlots += celebrityData[location][date].slots;
+   });
+   ```
+
+2. **Added Date Count Tracking**:
+   - Stores `dateCount` for future enhancements
+   - Example: "54 slots across 18 dates"
+
+3. **Enhanced Console Logging** (lines 1416-1419):
+   ```javascript
+   locations.forEach(loc => {
+       console.log(`  ${loc.city}, ${loc.country}: ${loc.slots} total slots across ${loc.dateCount} dates`);
+   });
+   ```
+
+**Result**:
+- Profile now shows: "Sydney: 54 slots remaining", "London: 54 slots remaining", "Los Angeles: 54 slots remaining"
+- Accurate representation of total availability
+- Users can make informed booking decisions
+- Foundation for real-time booking updates when slots are booked
+
+**Example** (Chris Hemsworth):
+- **Before**: All locations showed "1 slot remaining"
+- **After**: All locations show "54 slots remaining" (18 dates × avg 3 slots/date)
+
+**Status**: Fixed
+**Commit**: Pending
+**Documentation**: docs/debug/TOTAL-SLOTS-FIX.md
+
+---
+
 ## Statistics
 
-**Total Issues Logged**: 39
-**Fixed**: 37
+**Total Issues Logged**: 40
+**Fixed**: 38
 **In Progress**: 0
 **Deferred**: 2
 
@@ -992,10 +1053,11 @@ User reported via screenshot: Calendar displayed green "slot" badges on dates ev
 - UX: 2
 - Data Consistency: 1
 - UI Rendering: 1
+- Feature/UX Enhancement: 1
 
 **Issues by Severity**:
 - Critical: 2
-- High: 19
+- High: 20
 - Medium: 14
 - Low: 4
 

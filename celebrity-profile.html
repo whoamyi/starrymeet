@@ -1351,15 +1351,20 @@
             if (celebrityData[primaryLocation]) {
                 const dates = Object.keys(celebrityData[primaryLocation]);
                 if (dates.length > 0) {
-                    // Get first available date with slots
+                    // Calculate TOTAL slots across all dates for this location
+                    let totalSlots = 0;
+                    dates.forEach(date => {
+                        totalSlots += celebrityData[primaryLocation][date].slots;
+                    });
+
                     const firstDate = dates[0];
-                    const slots = celebrityData[primaryLocation][firstDate].slots;
                     locations.push({
                         city: currentCelebrity.city,
                         country: currentCelebrity.country,
                         date: currentCelebrity.location.split('•')[1]?.trim() || formatDateRange(firstDate),
                         venue: getVenueName(currentCelebrity.city),
-                        slots: slots,
+                        slots: totalSlots, // Total across all dates
+                        dateCount: dates.length,
                         rawDate: firstDate
                     });
                 }
@@ -1375,16 +1380,21 @@
                 if (celebrityData[location]) {
                     const dates = Object.keys(celebrityData[location]);
                     if (dates.length > 0) {
-                        // Get first available date with slots
+                        // Calculate TOTAL slots across all dates for this location
+                        let totalSlots = 0;
+                        dates.forEach(date => {
+                            totalSlots += celebrityData[location][date].slots;
+                        });
+
                         const firstDate = dates[0];
-                        const slots = celebrityData[location][firstDate].slots;
                         const [city, country] = location.split(', ');
                         locations.push({
                             city: city,
                             country: country,
                             date: formatDateRange(firstDate),
                             venue: getVenueName(city),
-                            slots: slots,
+                            slots: totalSlots, // Total across all dates
+                            dateCount: dates.length,
                             rawDate: firstDate
                         });
                     }
@@ -1402,7 +1412,11 @@
                 </div>
             `).join('');
 
-            console.log(`Rendered ${locations.length} locations with availability for ${currentCelebrity.name}`);
+            // Log total slots per location for verification
+            console.log(`Rendered ${locations.length} locations with availability for ${currentCelebrity.name}:`);
+            locations.forEach(loc => {
+                console.log(`  ${loc.city}, ${loc.country}: ${loc.slots} total slots across ${loc.dateCount} dates`);
+            });
         }
 
         // Format date for display
