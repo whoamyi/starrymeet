@@ -142,34 +142,53 @@ A page is considered **DEBUGGED** when:
 ### PHASE 2: ISSUE LOGGING
 
 ```
-1. Create/update page-specific debug file in docs/debug/pages/{page-name}/
-2. Log all identified issues with:
-   - Issue number
-   - Category (HTML/CSS/JS/Accessibility/etc.)
+1. Open page-specific debug-log.md: docs/debug/pages/{page-name}/debug-log.md
+2. Append new issues in chronological format with:
+   - Date and session identifier
+   - Issue number and labels (e.g., [JavaScript] [Mobile])
    - Severity (Critical/High/Medium/Low)
-   - Description
    - Location in code
+   - Problem, Solution, Testing, Status
 ```
 
-**Output**: Comprehensive issue documentation
+**Output**: Chronological entry appended to debug-log.md
 
-**Template**:
+**Template** (append to existing debug-log.md):
 ```markdown
-## Issue #{number}: {Brief Description}
+## {DATE} - {Session Description} (Issues #{start}-#{end})
 
-**Category**: HTML | CSS | JavaScript | Accessibility | Performance | SEO
+**Summary**: {Brief overview of work session}
+**Severity**: {Overall severity}
+**Commit**: {commit-hash}
+
+---
+
+### Issue #{number}: `[Label1]` `[Label2]` {Brief Description}
+
 **Severity**: Critical | High | Medium | Low
 **Location**: {file}:{line} or {function/section}
 
 **Problem**:
 {Detailed description of what's wrong}
 
-**Impact**:
-{How this affects users/functionality}
-
 **Solution**:
-{What needs to be fixed}
+{What was fixed - include code snippets if helpful}
+
+**Testing**:
+- ✅ Test case 1
+- ✅ Test case 2
+
+**Status**: ✅ Fixed | ⏳ In Progress | ❌ Blocked
+**Date Fixed**: {date}
+
+---
 ```
+
+**Label Examples**:
+- `[JavaScript]`, `[CSS]`, `[HTML]`
+- `[Mobile]`, `[Desktop]`, `[Tablet]`
+- `[Sidebar]`, `[Calendar]`, `[Integration]`
+- `[Race Condition]`, `[Null Safety]`
 
 ---
 
@@ -223,22 +242,24 @@ After all fixes applied, validate:
 ### PHASE 5: DOCUMENTATION UPDATE
 
 ```
-1. Update debug file with:
-   - All fixes applied
-   - Testing results
-   - Lessons learned
-   - Any remaining issues (if applicable)
+1. Update page debug-log.md (docs/debug/pages/{page-name}/debug-log.md):
+   - Ensure all fixes documented
+   - Mark issues as "✅ Fixed"
+   - Add "Summary of Work Session" section at end
+   - Include commit hash when available
+   - Update "Last Updated" date at top of file
 
-2. Update DEBUG-LOG.md with:
-   - Total issues fixed
-   - Issue number range
-   - Brief summary
+2. Update master DEBUG-LOG.md (optional - may phase out):
+   - Add brief entry referencing page-specific log
+   - Link to page debug-log for details
 
 3. Update PAGE-STATUS.md:
    - Mark page as "✅ Completed"
    - Add completion date
    - Note total issues fixed
 ```
+
+**Note**: Page-specific `debug-log.md` is now the single source of truth for that page's debugging history.
 
 ---
 
