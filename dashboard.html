@@ -35,27 +35,47 @@
             font-size: 1.5rem;
         }
 
-        /* Dashboard Layout */
-        .dashboard-container {
+        /* Dashboard Layout - Clean Flexbox */
+        body {
             display: flex;
-            margin-top: 70px;
-            min-height: calc(100vh - 70px - 200px); /* Subtract footer height */
+            flex-direction: column;
+            min-height: 100vh;
         }
 
-        /* Sidebar */
+        .dashboard-container {
+            display: flex;
+            flex: 1; /* Takes remaining space between nav and footer */
+            margin-top: 70px; /* Nav height */
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar - Collapsible */
         .sidebar {
-            width: 250px;
+            width: 0; /* Hidden by default on mobile */
+            min-width: 0;
             background: white;
             border-right: 1px solid var(--gray-200);
-            position: fixed;
-            top: 70px;
-            left: 0;
-            bottom: 0; /* Extend to bottom */
             overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.3s ease-in-out, min-width 0.3s ease-in-out;
+            flex-shrink: 0; /* Don't shrink */
+        }
+
+        .sidebar.show {
+            width: 250px;
+            min-width: 250px;
             padding: 2rem 0;
-            z-index: 10; /* Below nav, at same level as content */
-            transition: transform 0.3s ease-in-out;
-            box-shadow: 2px 0 8px rgba(0, 0, 0, 0.1); /* Subtle shadow for depth */
+        }
+
+        /* Desktop: sidebar always visible */
+        @media (min-width: 769px) {
+            .sidebar {
+                width: 250px;
+                min-width: 250px;
+                padding: 2rem 0;
+            }
         }
 
         .user-profile-section {
@@ -135,13 +155,12 @@
 
         /* Main Content */
         .main-content {
-            margin-left: 250px; /* Match sidebar width - content starts AFTER sidebar */
-            flex: 1;
+            flex: 1; /* Takes remaining space */
             padding: 2rem;
-            width: calc(100% - 250px); /* Ensure proper width calculation */
-            min-height: calc(100vh - 70px); /* Full viewport height minus nav */
-            transition: margin-left 0.3s ease-in-out, width 0.3s ease-in-out;
             background: var(--gray-50);
+            overflow-y: auto;
+            width: 100%; /* Full width of remaining space */
+            max-width: 100%;
         }
 
         .content-section {
@@ -818,82 +837,71 @@
             margin-bottom: 1.5rem;
         }
 
-        /* Mobile Menu & Sidebar Toggle */
-        .mobile-menu-btn {
-            display: none;
-            background: none;
-            border: none;
-            font-size: 1.5rem;
-            cursor: pointer;
-            color: var(--gray-700);
-        }
-
-        .sidebar-toggle-btn {
+        /* Hamburger Menu Button */
+        .hamburger-menu-btn {
+            display: none; /* Hidden on desktop */
             position: fixed;
             top: 85px;
-            left: 260px; /* Position just outside sidebar */
+            left: 10px;
             background: var(--purple);
             color: white;
             border: none;
-            border-radius: 0 8px 8px 0;
-            padding: 0.75rem 0.5rem;
+            border-radius: 8px;
+            padding: 0.75rem;
             cursor: pointer;
-            z-index: 1000; /* Above everything */
-            font-size: 1.2rem;
-            box-shadow: 2px 2px 8px rgba(0,0,0,0.2);
-            transition: left 0.3s ease-in-out;
+            z-index: 1000;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
         }
 
-        .sidebar-toggle-btn:hover {
+        .hamburger-menu-btn:hover {
             background: var(--purple-dark);
         }
 
-        /* Sidebar collapsed state */
-        .sidebar.collapsed {
-            transform: translateX(-250px);
+        /* Show hamburger on mobile */
+        @media (max-width: 768px) {
+            .hamburger-menu-btn {
+                display: block;
+            }
+
+            /* Overlay when sidebar is open on mobile */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            /* Sidebar above overlay when shown */
+            .sidebar.show {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                bottom: 0;
+                z-index: 1001;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+            }
         }
 
-        body:has(.sidebar.collapsed) .sidebar-toggle-btn {
-            left: 10px; /* Move to left edge when sidebar collapsed */
-        }
-
-        .main-content.expanded {
-            margin-left: 0;
-            width: 100%;
-        }
-
-        footer.expanded {
-            margin-left: 0;
-        }
-
-        /* Footer adjustment for sidebar */
+        /* Footer - Full Width */
         footer {
-            margin-left: 250px;
-            transition: margin-left 0.3s;
+            width: 100%;
+            margin: 0;
+            flex-shrink: 0; /* Don't shrink */
         }
 
         /* Responsive */
         @media (max-width: 768px) {
-            footer {
-                margin-left: 0;
-            }
-            .sidebar {
-                transform: translateX(-100%);
-                transition: transform 0.3s;
-                z-index: 999;
-            }
-
-            .sidebar.show {
-                transform: translateX(0);
-            }
-
             .main-content {
-                margin-left: 0;
                 padding: 1rem;
-            }
-
-            .mobile-menu-btn {
-                display: block;
             }
 
             .stats-grid {
@@ -976,8 +984,11 @@
 
     <div class="breadcrumb"><a href="index.html">Home</a> > Dashboard</div>
 
-    <!-- Sidebar Toggle Button -->
-    <button class="sidebar-toggle-btn" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <button class="hamburger-menu-btn" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
 
     <div class="dashboard-container">
         <!-- Sidebar -->
@@ -1464,29 +1475,6 @@
         }
 
         // Tab switching
-        // Toggle sidebar visibility
-        function toggleSidebar() {
-            console.log('Toggle sidebar clicked');
-            const sidebar = document.getElementById('sidebar');
-            const mainContent = document.querySelector('.main-content');
-            const footer = document.querySelector('footer');
-            const toggleBtn = document.getElementById('sidebarToggle');
-
-            if (!sidebar || !mainContent || !footer || !toggleBtn) {
-                console.error('Required elements not found', {sidebar, mainContent, footer, toggleBtn});
-                return;
-            }
-
-            const isCollapsed = sidebar.classList.toggle('collapsed');
-            mainContent.classList.toggle('expanded');
-            footer.classList.toggle('expanded');
-
-            // Update button icon
-            toggleBtn.textContent = isCollapsed ? '☰' : '✕';
-
-            console.log('Sidebar state:', isCollapsed ? 'collapsed' : 'visible');
-        }
-
         function switchTab(tabName) {
             // Update URL hash
             window.location.hash = tabName;
@@ -1507,9 +1495,11 @@
             const activeNav = document.querySelector(`[data-tab="${tabName}"]`);
             if (activeNav) activeNav.classList.add('active');
 
-            // Hide mobile sidebar
+            // Hide mobile sidebar and overlay
             if (window.innerWidth <= 768) {
                 document.getElementById('sidebar').classList.remove('show');
+                document.getElementById('sidebarOverlay').classList.remove('show');
+                document.getElementById('sidebarToggle').textContent = '☰';
             }
 
             // Load tab data
@@ -1917,7 +1907,19 @@
         }
 
         function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show');
+
+            // Update button icon
+            if (sidebar.classList.contains('show')) {
+                toggleBtn.textContent = '✕';
+            } else {
+                toggleBtn.textContent = '☰';
+            }
         }
 
         function logout() {
