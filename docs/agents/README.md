@@ -22,7 +22,13 @@ For full documentation, see category READMEs.
 
 ## Recent Updates (2025-10-10)
 
-**Agent Consolidation**: Simplified agent structure by consolidating multiple agents into single comprehensive agents per category.
+**Agent Consolidation & Cleanup**: Simplified agent structure by consolidating and archiving redundant agents.
+
+**Consolidation**:
 - Merged file-organization-agent + agent-organization-agent → organization-agent (v2.0.0)
 - Renamed documentation-sync-agent → documentation-agent (for consistency)
-- Archived legacy agents in category archive folders
+
+**Archive**:
+- Archived debugging category legacy agents (process-control, quality-check)
+- Archived corresponding slash commands to `.claude/commands/archive/`
+- Functionality now handled by organization-agent and documentation-agent

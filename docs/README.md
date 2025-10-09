@@ -23,9 +23,8 @@ docs/
 │   ├── organization/                   ← File organization agents
 │   │   ├── organization-agent.md       ← v2.0.0 (consolidated) ⭐ NEW
 │   │   └── archive/                    ← Legacy agents archived
-│   ├── debugging/                      ← Testing & QA agents (legacy)
-│   │   ├── AGENT-WORKFLOW.md
-│   │   └── AGENT-SETUP-COMPLETE.md
+│   ├── debugging/                      ← Testing & QA agents (future)
+│   │   └── archive/                    ← Legacy agents archived
 │   └── workflow/                       ← Process automation (future)
 │
 ├── debug/                              ← Debugging & issue tracking
@@ -121,7 +120,9 @@ Agents are now organized into categories for easy discovery:
    - **Handles**: Debug files → pages/, Agent files → categories/, Future: code/assets
 
 **🐛 Debugging Agents** (`agents/debugging/`)
-   - Legacy agents preserved for reference
+   - **None currently active** - Category reserved for future
+   - Legacy agents archived (process-control, quality-check)
+   - Functionality handled by organization-agent and documentation-agent
    - Future: test-runner, bug-reporter, code-quality agents
 
 **⚙️ Workflow Agents** (`agents/workflow/`)

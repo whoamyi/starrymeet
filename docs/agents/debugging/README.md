@@ -8,68 +8,48 @@
 
 ## Overview
 
-This folder contains agents that help with the debugging process, enforce quality standards, and manage testing workflows. These agents ensure code quality and proper debug procedures are followed.
+This category is reserved for future debugging, testing, and quality assurance agents. Historical agents have been archived as their functionality is now handled by the organization and documentation agents.
 
 ---
 
-## Agents in This Category
+## Active Agents
 
-### Process Control Agent (Legacy)
-**File**: [AGENT-WORKFLOW.md](AGENT-WORKFLOW.md)
-**Version**: 1.0.0
-**Status**: 📚 Legacy (Reference Only)
-**Created**: 2025-10-08
+**None currently** - This category is prepared for future debugging tools.
 
-**Purpose**: Workflow enforcer for systematic debugging process
+---
 
-**Original Use**:
+## Archive
+
+Legacy agents (archived 2025-10-10):
+
+### Process Control Agent
+**File**: [archive/AGENT-WORKFLOW.md](archive/AGENT-WORKFLOW.md)
+**Slash Command**: `/process-control` (archived in `.claude/commands/archive/`)
+**Status**: 📦 Archived
+**Reason**: Functionality replaced by organization-agent.md
+
+**Original Purpose**: Workflow enforcer for systematic debugging process
 - Ensured each debug step completed before next
 - Blocked progression when requirements not met
-- Enforced DEBUG-PLAN.md framework
 
-**Note**: Historical reference for original debug workflow. Modern workflow uses organization and documentation agents instead.
+### Quality Assurance Agent
+**File**: [archive/AGENT-SETUP-COMPLETE.md](archive/AGENT-SETUP-COMPLETE.md)
+**Slash Command**: `/quality-check` (archived in `.claude/commands/archive/`)
+**Status**: 📦 Archived
+**Reason**: Functionality replaced by documentation-agent.md
 
----
-
-### Quality Assurance Agent (Legacy)
-**File**: [AGENT-SETUP-COMPLETE.md](AGENT-SETUP-COMPLETE.md)
-**Version**: 1.0.0
-**Status**: 📚 Legacy (Reference Only)
-**Created**: 2025-10-08
-
-**Purpose**: Quality inspector for debug setup completion
-
-**Original Use**:
+**Original Purpose**: Quality inspector for debug completion
 - Reviewed completed debug work for quality
-- Blocked approval when quality insufficient
 - Validated debug checklist completion
-
-**Note**: Historical reference. Quality is now maintained through documentation sync and file organization agents.
-
----
-
-## Common Use Cases
-
-### Historical Context (Legacy Agents)
-
-These agents were part of the original debug workflow:
-
-1. **Systematic Debugging**
-   - Process Control Agent enforced step-by-step workflow
-   - Quality Assurance Agent validated each phase
-
-2. **Quality Gates**
-   - Agents prevented moving forward with incomplete work
-   - Ensured all checklist items completed
 
 ---
 
 ## Current Debugging Workflow
 
-Modern debugging uses:
-- **File Organization Agent** (organization category) - Organizes debug files
-- **Documentation Sync Agent** (documentation category) - Syncs docs with fixes
-- **DEBUG-PLAN.md** framework - Manual process adherence
+Modern debugging uses agents from other categories:
+- **Organization Agent** (organization category) - Organizes debug files into page folders
+- **Documentation Agent** (documentation category) - Syncs site docs with fixes
+- **DEBUG-PLAN.md** framework - Structured debugging approach
 
 ---
 
@@ -77,17 +57,19 @@ Modern debugging uses:
 
 ```
 OLD (2025-10-08):
-1. Process Control Agent checks readiness
+1. /process-control checks readiness
 2. Do debugging work
-3. Quality Assurance Agent validates
+3. /quality-check validates
 4. Move to next phase
 
-NEW (2025-10-09):
+CURRENT (2025-10-10):
 1. Do debugging work following DEBUG-PLAN
-2. File Organization Agent organizes debug docs
-3. Documentation Sync Agent syncs site docs
+2. Invoke Organization Agent to organize debug docs
+3. Invoke Documentation Agent to sync site docs
 4. Commit with organized structure
 ```
+
+**Why the Change?**: Consolidation simplified the agent system. Instead of specialized debugging agents, the general-purpose organization and documentation agents now handle debug workflow automatically.
 
 ---
 
@@ -109,6 +91,7 @@ NEW (2025-10-09):
 
 ---
 
-**Last Updated**: 2025-10-09
-**Total Agents**: 2 (Legacy)
-**Category Status**: 📚 Reference (Legacy agents preserved for historical context)
+**Last Updated**: 2025-10-10
+**Total Active Agents**: 0
+**Total Archived Agents**: 2
+**Category Status**: 🔮 Ready for Future Agents
