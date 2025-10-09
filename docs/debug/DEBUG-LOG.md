@@ -2,11 +2,20 @@
 
 **Project**: StarryMeet
 **Started**: 2025-10-08
-**Last Updated**: 2025-10-09
+**Last Updated**: 2025-10-10
 
-> **📁 New Structure**: This is the **master chronological log** of all issues across all pages.
-> For **page-specific details**, see: `docs/debug/pages/{page-name}/`
-> For **structure guide**, see: [README.md](README.md)
+> **📌 SINGLE SOURCE OF TRUTH**: This is the **master chronological log** recording ALL issues across ALL pages.
+>
+> **Purpose**: Track every issue found and fixed in one central location
+> **Updated by**: Debugging Agent (automatically) after each debugging session
+> **Format**: Chronological entries with issue numbers, page, type, severity, and links
+>
+> **Related Files**:
+> - **Page-specific details**: `docs/debug/pages/{page-name}/` - Detailed debug docs per page
+> - **Page status**: [PAGE-STATUS.md](PAGE-STATUS.md) - Completion tracker
+> - **Structure guide**: [README.md](README.md) - Documentation navigation
+>
+> **Archived**: Historical snapshots moved to `archive/` (DEBUG-LOG-COMPLETE.md, etc.)
 
 ---
 

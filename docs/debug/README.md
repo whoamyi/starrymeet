@@ -1,7 +1,23 @@
 # Debug Documentation Structure
 
 **Project**: StarryMeet
-**Last Updated**: 2025-10-09
+**Last Updated**: 2025-10-10
+
+---
+
+## 📌 Core Principle: Minimal Essential Files
+
+This directory follows a **consolidated approach** - we maintain only the essential files needed for current and future debugging work:
+
+**Active Files (4 main files)**:
+1. **DEBUG-LOG.md** - 📌 Single source of truth for ALL issues
+2. **PAGE-STATUS.md** - Page completion tracker
+3. **COMPONENT-TEMPLATES.md** - Reusable component standards
+4. **README.md** - This file (navigation guide)
+
+**Archive**: Historical snapshots and outdated workflows moved to `archive/` folder
+
+**No more duplicate files** - each piece of information has ONE authoritative location.
 
 ---
 
@@ -16,33 +32,34 @@ This directory contains all debugging documentation for the StarryMeet project, 
 ```
 docs/debug/
 ├── README.md                          # This file - structure guide
-├── DEBUG-PLAN.md                      # Master debugging framework
-├── DEBUG-LOG.md                       # Chronological log of ALL issues (master reference)
-├── DEBUG-LOG-COMPLETE.md              # Archived completed debug log
-├── COMPONENT-TEMPLATES.md             # Reusable component standards
+├── DEBUG-LOG.md                       # 📌 MASTER LOG - Single source of truth for all issues
 ├── PAGE-STATUS.md                     # Page completion status tracker
-├── QUICK-START.md                     # Quick reference guide
-├── UPDATE-SUMMARY.md                  # Summary of all updates
-├── INTEGRATION-COMPLETE-SUMMARY.md    # Integration completion summary
+├── COMPONENT-TEMPLATES.md             # Reusable component standards
+│
+├── archive/                           # Historical/completed documentation
+│   ├── DEBUG-PLAN.md                  # Now integrated into debugging-agent.md
+│   ├── DEBUG-LOG-COMPLETE.md          # Historical snapshot (replaced by DEBUG-LOG.md)
+│   ├── INTEGRATION-COMPLETE-SUMMARY.md # Specific completed work (historical)
+│   ├── UPDATE-SUMMARY.md              # Project summary (historical)
+│   └── QUICK-START.md                 # Old workflow guide (outdated)
 │
 └── pages/                             # Page-specific debug documentation
     ├── dashboard/                     # dashboard.html issues
-    │   └── DASHBOARD-SIDEBAR-FIX.md   # Sidebar layout and mobile fixes
+    │   ├── README.md                  # Dashboard debug overview
+    │   └── DASHBOARD-SIDEBAR-FIX.md   # Sidebar layout and mobile fixes (#39-#45)
     │
     ├── booking/                       # booking.html issues
+    │   ├── README.md                  # Booking debug overview
     │   ├── BOOKING-FIX-SUMMARY.md     # Booking integration summary
     │   └── BOOKING-INTEGRATION.md     # Complete booking integration docs
     │
-    ├── celebrity-profile/             # celebrity-profile.html issues
-    │   ├── AVAILABILITY-SYNC-FIX.md           # Slot count synchronization
-    │   ├── CALENDAR-SLOT-DISPLAY-FIX.md       # Calendar slot indicators
-    │   ├── TOTAL-SLOTS-FIX.md                 # Total slots display
-    │   ├── LOCATION-AVAILABILITY-INTEGRATION.md # Location-aware booking
-    │   └── ISSUES-33-36-SUMMARY.md            # Multiple related fixes
-    │
-    ├── browse/                        # browse.html issues (none yet)
-    │
-    └── index/                         # index.html issues (none yet)
+    └── celebrity-profile/             # celebrity-profile.html issues
+        ├── README.md                  # Celebrity profile debug overview
+        ├── AVAILABILITY-SYNC-FIX.md           # Slot count synchronization
+        ├── CALENDAR-SLOT-DISPLAY-FIX.md       # Calendar slot indicators
+        ├── TOTAL-SLOTS-FIX.md                 # Total slots display
+        ├── LOCATION-AVAILABILITY-INTEGRATION.md # Location-aware booking
+        └── ISSUES-33-36-SUMMARY.md            # Multiple related fixes
 ```
 
 ---
@@ -64,13 +81,16 @@ docs/debug/
 
 ### Quick Navigation:
 
-- **Want the debugging framework?** → `DEBUG-PLAN.md`
-- **Want to see all issues chronologically?** → `DEBUG-LOG.md`
-- **Want dashboard issues?** → `pages/dashboard/`
-- **Want booking issues?** → `pages/booking/`
-- **Want profile page issues?** → `pages/celebrity-profile/`
-- **Want component templates?** → `COMPONENT-TEMPLATES.md`
-- **Want page completion status?** → `PAGE-STATUS.md`
+**Main Files**:
+- **Debugging framework?** → [debugging-agent.md](../agents/debugging/debugging-agent.md) (comprehensive workflow)
+- **All issues chronologically?** → [DEBUG-LOG.md](DEBUG-LOG.md) (📌 single source of truth)
+- **Page completion status?** → [PAGE-STATUS.md](PAGE-STATUS.md)
+- **Reusable components?** → [COMPONENT-TEMPLATES.md](COMPONENT-TEMPLATES.md)
+
+**Page-Specific Issues**:
+- **Dashboard issues?** → [pages/dashboard/](pages/dashboard/)
+- **Booking issues?** → [pages/booking/](pages/booking/)
+- **Profile page issues?** → [pages/celebrity-profile/](pages/celebrity-profile/)
 
 ---
 
