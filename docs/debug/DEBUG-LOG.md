@@ -2,6 +2,20 @@
 
 **Project**: StarryMeet
 **Started**: 2025-10-08
+**Last Updated**: 2025-10-09
+
+> **📁 New Structure**: This is the **master chronological log** of all issues across all pages.
+> For **page-specific details**, see: `docs/debug/pages/{page-name}/`
+> For **structure guide**, see: [README.md](README.md)
+
+---
+
+## Quick Navigation
+
+- **Dashboard Issues**: [pages/dashboard/](pages/dashboard/) - Issues #39-#45
+- **Booking Issues**: [pages/booking/](pages/booking/) - Various issues
+- **Celebrity Profile Issues**: [pages/celebrity-profile/](pages/celebrity-profile/) - Calendar, slots, availability
+- **All Pages**: See [README.md](README.md) for complete structure
 
 ---
 
