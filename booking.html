@@ -374,6 +374,7 @@
             justify-content: center;
             cursor: pointer;
             transition: all 0.3s;
+            position: relative;
         }
 
         .calendar-day:hover:not(.disabled) {
@@ -384,6 +385,11 @@
         .calendar-day.selected {
             background: var(--purple);
             border-color: var(--purple);
+            color: white;
+        }
+
+        .calendar-day.selected .slots-indicator {
+            background: rgba(255, 255, 255, 0.2);
             color: white;
         }
 
@@ -404,6 +410,17 @@
 
         .calendar-day.selected .day-name {
             color: rgba(255, 255, 255, 0.8);
+        }
+
+        .slots-indicator {
+            position: absolute;
+            bottom: 2px;
+            font-size: 0.65rem;
+            background: var(--green);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
         }
 
         /* Time Slots */
@@ -1512,6 +1529,157 @@
         let currentCelebrity = null;
         let bookingData = {};
 
+        // Availability Database
+        // Structure: { "Celebrity Name": { "Location": { "YYYY-MM-DD": { slots: number, times: [] } } } }
+        const availabilityData = generateAvailabilityData();
+
+        function generateAvailabilityData() {
+            const data = {};
+            const today = new Date();
+
+            celebrities.forEach((celebrity, celebIndex) => {
+                data[celebrity.name] = {};
+
+                // Get all unique locations for this celebrity from the database
+                const locations = [`${celebrity.city}, ${celebrity.country}`];
+
+                // Add a few additional tour locations
+                const tourCities = celebrities
+                    .filter(c => c.name !== celebrity.name)
+                    .slice(0, 2)
+                    .map(c => `${c.city}, ${c.country}`);
+                locations.push(...tourCities);
+
+                locations.forEach((location, locIndex) => {
+                    data[celebrity.name][location] = {};
+
+                    // Generate availability for next 30 days
+                    // Use deterministic seed based on celebrity and location to ensure consistency
+                    const seed = celebIndex * 1000 + locIndex * 100;
+
+                    for (let i = 0; i < 30; i++) {
+                        const date = new Date(today);
+                        date.setDate(today.getDate() + i);
+                        const dateStr = date.toISOString().split('T')[0];
+
+                        // Use deterministic "random" based on seed + day
+                        // This ensures each location has different but consistent availability
+                        const dayHash = (seed + i * 7) % 100;
+
+                        // 60% chance of having slots on any given day
+                        if (dayHash < 60) {
+                            const numSlots = (dayHash % 5) + 1; // 1-5 slots deterministically
+                            const times = generateTimeSlots(numSlots, seed + i);
+
+                            data[celebrity.name][location][dateStr] = {
+                                slots: numSlots,
+                                times: times,
+                                booked: [] // Track booked times
+                            };
+                        }
+                    }
+                });
+            });
+
+            console.log('Availability data generated:', Object.keys(data).length, 'celebrities');
+            return data;
+        }
+
+        function generateTimeSlots(count, seed = 0) {
+            const allTimes = [
+                "09:00", "10:00", "11:00", "12:00",
+                "13:00", "14:00", "15:00", "16:00",
+                "17:00", "18:00", "19:00", "20:00"
+            ];
+
+            // Use seed for deterministic shuffling
+            const times = [...allTimes];
+            for (let i = times.length - 1; i > 0; i--) {
+                const j = (seed + i) % (i + 1);
+                [times[i], times[j]] = [times[j], times[i]];
+            }
+
+            return times.slice(0, count).sort();
+        }
+
+        // Get available slots for a specific celebrity, location, and date
+        function getAvailableSlots(celebrityName, location, dateStr) {
+            try {
+                if (!availabilityData[celebrityName]) {
+                    console.warn(`No availability data for celebrity: ${celebrityName}`);
+                    return null;
+                }
+                if (!availabilityData[celebrityName][location]) {
+                    console.warn(`No availability data for location: ${location}`);
+                    return null;
+                }
+                if (!availabilityData[celebrityName][location][dateStr]) {
+                    console.log(`No slots for date: ${dateStr} at ${location}`);
+                    return null;
+                }
+
+                const dayData = availabilityData[celebrityName][location][dateStr];
+                const availableTimes = dayData.times.filter(time => !dayData.booked.includes(time));
+
+                // Only log on first call or when specifically debugging
+                if (window.debugAvailability) {
+                    console.log(`Slots for ${dateStr}:`, {
+                        total: dayData.slots,
+                        available: availableTimes.length,
+                        times: availableTimes,
+                        allTimes: dayData.times,
+                        booked: dayData.booked
+                    });
+                }
+
+                return {
+                    totalSlots: dayData.slots,
+                    availableSlots: availableTimes.length,
+                    times: availableTimes,
+                    bookedTimes: dayData.booked
+                };
+            } catch (error) {
+                console.error('Error getting available slots:', error);
+                return null;
+            }
+        }
+
+        // Check if a date has any available slots
+        function hasAvailableSlots(celebrityName, location, dateStr) {
+            const slots = getAvailableSlots(celebrityName, location, dateStr);
+            return slots && slots.availableSlots > 0;
+        }
+
+        // Book a time slot
+        function bookTimeSlot(celebrityName, location, dateStr, time) {
+            try {
+                if (!availabilityData[celebrityName][location][dateStr]) {
+                    console.error('No availability data for this date');
+                    return false;
+                }
+
+                const dayData = availabilityData[celebrityName][location][dateStr];
+
+                if (!dayData.times.includes(time)) {
+                    console.error('Time not available');
+                    return false;
+                }
+
+                if (dayData.booked.includes(time)) {
+                    console.error('Time already booked');
+                    return false;
+                }
+
+                dayData.booked.push(time);
+                console.log(`Booked: ${celebrityName} at ${location} on ${dateStr} at ${time}`);
+                console.log(`Remaining slots: ${dayData.times.length - dayData.booked.length}`);
+                return true;
+            } catch (error) {
+                console.error('Error booking time slot:', error);
+                return false;
+            }
+        }
+
         // Utility functions
         function getInitials(name) {
             return name.split(' ').map(n => n[0]).join('').substring(0, 2);
@@ -1601,12 +1769,28 @@
                 const locationSelect = document.getElementById('locationSelect');
                 if (locationSelect) {
                     locationSelect.addEventListener('change', function() {
-                        bookingData.location = this.value;
+                        const newLocation = this.value;
+                        console.log('Location changed to:', newLocation);
+
+                        bookingData.location = newLocation;
+
+                        // Clear date and time selections when location changes
+                        bookingData.date = null;
+                        bookingData.time = null;
+                        document.querySelectorAll('.calendar-day').forEach(day => {
+                            day.classList.remove('selected');
+                        });
+                        document.querySelectorAll('.time-slot').forEach(slot => {
+                            slot.classList.remove('selected');
+                        });
+
                         hideError('locationError');
                         saveData();
+                        updateSummary();
+
                         // Regenerate calendar with new location's available dates
                         generateCalendar();
-                        console.log('Calendar regenerated for location:', this.value);
+                        console.log('✅ Calendar regenerated for location:', newLocation);
                     });
                 }
 
@@ -1717,8 +1901,21 @@
 
         function populateLocations() {
             try {
-                // Get unique locations from all celebrities
-                const locations = [...new Set(celebrities.map(c => `${c.city}, ${c.country}`))].sort();
+                const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+
+                // Get only locations where this celebrity has availability
+                const allLocations = [...new Set(celebrities.map(c => `${c.city}, ${c.country}`))];
+                const locationsWithAvailability = allLocations.filter(location => {
+                    // Check if celebrity has any availability data for this location
+                    if (availabilityData[celebrityName] && availabilityData[celebrityName][location]) {
+                        // Check if there's at least one date with slots
+                        const dates = Object.keys(availabilityData[celebrityName][location]);
+                        return dates.length > 0;
+                    }
+                    return false;
+                }).sort();
+
+                console.log(`Found ${locationsWithAvailability.length} locations with availability for ${celebrityName}:`, locationsWithAvailability);
 
                 const locationSelect = document.getElementById('locationSelect');
                 if (!locationSelect) {
@@ -1732,11 +1929,15 @@
                     selectedLocation = `${bookingData.preSelectedCity}, ${bookingData.preSelectedCountry}`;
                     console.log('Using pre-selected location from URL:', selectedLocation);
 
-                    // Add pre-selected location to list if it doesn't exist
-                    if (!locations.includes(selectedLocation)) {
-                        locations.push(selectedLocation);
-                        locations.sort();
-                        console.log('Added pre-selected location to dropdown:', selectedLocation);
+                    // Add pre-selected location to list if it doesn't exist and has availability
+                    if (!locationsWithAvailability.includes(selectedLocation)) {
+                        if (availabilityData[celebrityName] && availabilityData[celebrityName][selectedLocation]) {
+                            locationsWithAvailability.push(selectedLocation);
+                            locationsWithAvailability.sort();
+                            console.log('Added pre-selected location to dropdown:', selectedLocation);
+                        } else {
+                            console.warn('Pre-selected location has no availability:', selectedLocation);
+                        }
                     }
                 } else {
                     selectedLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
@@ -1745,12 +1946,12 @@
 
                 // Add options
                 locationSelect.innerHTML = '<option value="">Choose a location</option>' +
-                    locations.map(loc => `<option value="${loc}">${loc}</option>`).join('');
+                    locationsWithAvailability.map(loc => `<option value="${loc}">${loc}</option>`).join('');
 
                 locationSelect.value = selectedLocation;
                 bookingData.location = selectedLocation;
 
-                console.log('Locations populated:', locations.length);
+                console.log('Locations populated:', locationsWithAvailability.length);
             } catch (error) {
                 console.error('Error populating locations:', error);
             }
@@ -1792,47 +1993,58 @@
             const today = new Date();
             const days = [];
 
-            // Get selected location to filter dates
+            // Get selected location and celebrity
             const selectedLocation = bookingData.location || '';
-            console.log('Generating calendar for location:', selectedLocation);
+            const celebrityName = currentCelebrity ? currentCelebrity.name : '';
 
-            // Determine date availability based on location
-            // For demonstration: Each location has specific available date ranges
-            const getDateAvailability = (date, location) => {
-                if (!location) return Math.random() < 0.2; // Random if no location selected
+            console.log('Generating calendar for:', { celebrity: celebrityName, location: selectedLocation });
 
-                // Parse date range from celebrity profile if available
-                if (bookingData.preSelectedDateRange) {
-                    // Example: "Apr 12-14" or "Mar 15"
-                    // For simplicity, allow dates in the next 2 weeks for pre-selected locations
-                    const daysDiff = Math.floor((date - today) / (1000 * 60 * 60 * 24));
-                    return daysDiff < 0 || daysDiff > 14 || Math.random() < 0.3;
-                }
-
-                // Default: Randomly disable ~20% of dates, but more consistent for specific locations
-                return Math.random() < 0.2;
-            };
+            if (!selectedLocation || !celebrityName) {
+                console.warn('Cannot generate calendar: missing celebrity or location');
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Please select a location to see available dates</p>';
+                return;
+            }
 
             // Generate next 28 days (4 weeks)
+            let datesWithSlots = 0;
             for (let i = 0; i < 28; i++) {
                 const date = new Date(today);
                 date.setDate(today.getDate() + i);
+                const dateStr = date.toISOString().split('T')[0];
 
                 const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
                 const dayNumber = date.getDate();
-                const isDisabled = getDateAvailability(date, selectedLocation);
+
+                // Check if this date has available slots
+                const hasSlots = hasAvailableSlots(celebrityName, selectedLocation, dateStr);
+                const slots = hasSlots ? getAvailableSlots(celebrityName, selectedLocation, dateStr) : null;
+
+                if (hasSlots) datesWithSlots++;
+
+                // Build calendar day with slot indicator
+                let slotIndicator = '';
+                if (slots && slots.availableSlots > 0) {
+                    slotIndicator = `<div class="slots-indicator">${slots.availableSlots} slot${slots.availableSlots > 1 ? 's' : ''}</div>`;
+                }
 
                 days.push(`
-                    <div class="calendar-day ${isDisabled ? 'disabled' : ''}"
-                         data-date="${date.toISOString()}"
-                         onclick="${!isDisabled ? `selectDate('${date.toISOString()}')` : ''}">
+                    <div class="calendar-day ${!hasSlots ? 'disabled' : ''}"
+                         data-date="${dateStr}"
+                         data-available-slots="${slots ? slots.availableSlots : 0}"
+                         onclick="${hasSlots ? `selectDate('${dateStr}')` : ''}">
                         <div class="day-name">${dayName}</div>
                         <div class="day-number">${dayNumber}</div>
+                        ${slotIndicator}
                     </div>
                 `);
             }
 
             container.innerHTML = days.join('');
+            console.log(`Calendar generated: ${datesWithSlots} dates with available slots`);
+
+            if (datesWithSlots === 0) {
+                container.innerHTML += '<p style="padding: 1rem; text-align: center; color: #ff6b6b;">No available dates for this location in the next 4 weeks. Please select a different location.</p>';
+            }
         }
 
         function selectDate(dateString) {
@@ -1847,9 +2059,24 @@
                 if (selectedDay && !selectedDay.classList.contains('disabled')) {
                     selectedDay.classList.add('selected');
                     bookingData.date = dateString;
+
+                    // Clear previously selected time since date changed
+                    bookingData.time = null;
+                    document.querySelectorAll('.time-slot').forEach(slot => {
+                        slot.classList.remove('selected');
+                    });
+
                     updateSummary();
                     saveData();
-                    console.log('Date selected:', new Date(dateString).toLocaleDateString());
+
+                    // Update time slots for new date
+                    const period = document.getElementById('timePeriod').value;
+                    if (period) {
+                        updateTimeSlots();
+                    }
+
+                    const availableSlots = selectedDay.getAttribute('data-available-slots');
+                    console.log(`Date selected: ${new Date(dateString).toLocaleDateString()} (${availableSlots} slots available)`);
                 } else {
                     console.warn('Selected date is disabled or not found');
                 }
@@ -1859,33 +2086,102 @@
         }
 
         function updateTimeSlots() {
+            const container = document.getElementById('timeSlots');
             const period = document.getElementById('timePeriod').value;
+
+            console.log('🔍 updateTimeSlots called with:', {
+                date: bookingData.date,
+                period: period,
+                location: bookingData.location
+            });
+
+            // Check if date is selected
+            if (!bookingData.date) {
+                document.getElementById('timeSlotsGroup').style.display = 'none';
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Please select a date first</p>';
+                console.warn('No date selected');
+                return;
+            }
+
+            // Check if period is selected
             if (!period) {
                 document.getElementById('timeSlotsGroup').style.display = 'none';
+                console.log('No period selected yet');
                 return;
             }
 
             document.getElementById('timeSlotsGroup').style.display = 'block';
 
-            const timeRanges = {
-                morning: ['9:00 AM', '9:30 AM', '10:00 AM', '10:30 AM', '11:00 AM', '11:30 AM'],
-                afternoon: ['1:00 PM', '1:30 PM', '2:00 PM', '2:30 PM', '3:00 PM', '3:30 PM', '4:00 PM', '4:30 PM'],
-                evening: ['6:00 PM', '6:30 PM', '7:00 PM', '7:30 PM', '8:00 PM', '8:30 PM']
+            // Get available times for the selected date and location
+            const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+            const location = bookingData.location || '';
+            const dateStr = bookingData.date;
+
+            console.log('📅 Fetching slots for:', { celebrity: celebrityName, location, date: dateStr, period });
+
+            if (!celebrityName || !location || !dateStr) {
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Missing booking information</p>';
+                return;
+            }
+
+            // Get available slots for this date
+            const availabilitySlots = getAvailableSlots(celebrityName, location, dateStr);
+
+            if (!availabilitySlots || availabilitySlots.availableSlots === 0) {
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #ff6b6b;">No available time slots for this date</p>';
+                return;
+            }
+
+            // Filter times by period
+            const periodRanges = {
+                morning: { start: 9, end: 12 },
+                afternoon: { start: 12, end: 18 },
+                evening: { start: 18, end: 21 }
             };
 
-            const slots = timeRanges[period] || [];
-            const container = document.getElementById('timeSlots');
+            console.log('Available times before filtering:', availabilitySlots.times);
+            console.log('Selected period:', period, periodRanges[period]);
 
-            container.innerHTML = slots.map(time => {
-                const isDisabled = Math.random() < 0.3; // Randomly disable ~30% of slots
+            const range = periodRanges[period];
+            if (!range) {
+                console.error('Invalid period:', period);
+                container.innerHTML = `<p style="padding: 1rem; text-align: center; color: #ff6b6b;">Invalid time period selected</p>`;
+                return;
+            }
+
+            const filteredTimes = availabilitySlots.times.filter(time => {
+                const hour = parseInt(time.split(':')[0]);
+                const inRange = hour >= range.start && hour < range.end;
+                console.log(`Time ${time} (hour ${hour}): ${inRange ? 'IN' : 'OUT'} of range ${range.start}-${range.end}`);
+                return inRange;
+            });
+
+            console.log('Filtered times for', period, ':', filteredTimes);
+
+            if (filteredTimes.length === 0) {
+                container.innerHTML = `<p style="padding: 1rem; text-align: center; color: #ff6b6b;">No available slots in the ${period}. Try a different time period.</p>`;
+                return;
+            }
+
+            // Render available time slots
+            container.innerHTML = filteredTimes.map(time => {
+                // Convert 24h to 12h format with AM/PM
+                const [hour, minute] = time.split(':');
+                const hour24 = parseInt(hour);
+                const hour12 = hour24 % 12 || 12;
+                const ampm = hour24 < 12 ? 'AM' : 'PM';
+                const displayTime = `${hour12}:${minute} ${ampm}`;
+
                 return `
-                    <div class="time-slot ${isDisabled ? 'disabled' : ''}"
+                    <div class="time-slot"
                          data-time="${time}"
-                         onclick="${!isDisabled ? `selectTime('${time}')` : ''}">
-                        ${time}
+                         onclick="selectTime('${time}')">
+                        ${displayTime}
                     </div>
                 `;
             }).join('');
+
+            console.log(`${filteredTimes.length} time slots available for ${period}`);
         }
 
         function selectTime(time) {
@@ -1968,6 +2264,25 @@
                 if (!validateStep(currentStep)) {
                     console.log(`Validation failed for step ${currentStep}`);
                     return;
+                }
+
+                // If moving from step 1 to step 2, book the time slot
+                if (currentStep === 1 && step === 2) {
+                    const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+                    const location = bookingData.location;
+                    const date = bookingData.date;
+                    const time = bookingData.time;
+
+                    if (celebrityName && location && date && time) {
+                        const booked = bookTimeSlot(celebrityName, location, date, time);
+                        if (!booked) {
+                            alert('This time slot is no longer available. Please select another time.');
+                            // Refresh time slots
+                            updateTimeSlots();
+                            return;
+                        }
+                        console.log('✅ Time slot successfully reserved');
+                    }
                 }
 
                 // Show loading
@@ -2232,13 +2547,22 @@
             }, { once: true });
         }
 
+        function hideError(errorId) {
+            const error = document.getElementById(errorId);
+            if (error) {
+                error.classList.remove('show');
+            }
+        }
+
         function showError(errorId) {
             const error = document.getElementById(errorId);
-            error.classList.add('show');
+            if (error) {
+                error.classList.add('show');
 
-            setTimeout(() => {
-                error.classList.remove('show');
-            }, 3000);
+                setTimeout(() => {
+                    error.classList.remove('show');
+                }, 3000);
+            }
         }
 
         // Complete booking

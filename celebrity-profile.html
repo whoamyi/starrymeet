@@ -1285,29 +1285,111 @@
             renderSimilarCelebrities();
         }
 
+        // Generate availability data - MUST match booking.html logic exactly
+        function generateAvailabilityDataForProfile() {
+            const data = {};
+            const today = new Date();
+
+            celebrities.forEach((celebrity, celebIndex) => {
+                data[celebrity.name] = {};
+
+                // Get all unique locations for this celebrity
+                const locations = [`${celebrity.city}, ${celebrity.country}`];
+
+                // Add a few additional tour locations (same as booking.html)
+                const tourCities = celebrities
+                    .filter(c => c.name !== celebrity.name)
+                    .slice(0, 2)
+                    .map(c => `${c.city}, ${c.country}`);
+                locations.push(...tourCities);
+
+                locations.forEach((location, locIndex) => {
+                    data[celebrity.name][location] = {};
+
+                    // Use same deterministic seed as booking.html
+                    const seed = celebIndex * 1000 + locIndex * 100;
+
+                    for (let i = 0; i < 30; i++) {
+                        const date = new Date(today);
+                        date.setDate(today.getDate() + i);
+                        const dateStr = date.toISOString().split('T')[0];
+
+                        // Same hash calculation as booking.html
+                        const dayHash = (seed + i * 7) % 100;
+
+                        // 60% chance of having slots on any given day
+                        if (dayHash < 60) {
+                            const numSlots = (dayHash % 5) + 1; // 1-5 slots deterministically
+
+                            data[celebrity.name][location][dateStr] = {
+                                slots: numSlots
+                            };
+                        }
+                    }
+                });
+            });
+
+            return data;
+        }
+
         // Render availability
         function renderAvailability() {
-            // Get actual locations from celebrities database where this celebrity might visit
-            // For demonstration, show current celebrity's location plus a few nearby cities
-            const locations = [
-                { city: currentCelebrity.city, country: currentCelebrity.country, date: currentCelebrity.location, venue: 'Premium Hotel Suite', slots: 3 }
-            ];
+            // Generate availability data using same logic as booking.html
+            const availabilityData = generateAvailabilityDataForProfile();
+            const celebrityData = availabilityData[currentCelebrity.name];
 
-            // Add other celebrities' locations as potential tour stops
-            // Filter to show diverse locations (max 3 additional)
-            const otherLocations = celebrities
-                .filter(c => c.name !== currentCelebrity.name) // Exclude current celebrity
-                .filter(c => `${c.city}, ${c.country}` !== `${currentCelebrity.city}, ${currentCelebrity.country}`) // Exclude duplicate cities
-                .slice(0, 3) // Take first 3
-                .map(c => ({
-                    city: c.city,
-                    country: c.country,
-                    date: c.location.split('•')[1]?.trim() || 'TBA',
-                    venue: getVenueName(c.city),
-                    slots: Math.floor(Math.random() * 5) + 1
-                }));
+            if (!celebrityData) {
+                console.error('No availability data for celebrity');
+                return;
+            }
 
-            locations.push(...otherLocations);
+            // Get all locations with availability
+            const locations = [];
+
+            // Get primary location (celebrity's home city)
+            const primaryLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+            if (celebrityData[primaryLocation]) {
+                const dates = Object.keys(celebrityData[primaryLocation]);
+                if (dates.length > 0) {
+                    // Get first available date with slots
+                    const firstDate = dates[0];
+                    const slots = celebrityData[primaryLocation][firstDate].slots;
+                    locations.push({
+                        city: currentCelebrity.city,
+                        country: currentCelebrity.country,
+                        date: currentCelebrity.location.split('•')[1]?.trim() || formatDateRange(firstDate),
+                        venue: getVenueName(currentCelebrity.city),
+                        slots: slots,
+                        rawDate: firstDate
+                    });
+                }
+            }
+
+            // Get tour locations
+            const tourCities = celebrities
+                .filter(c => c.name !== currentCelebrity.name)
+                .slice(0, 2)
+                .map(c => `${c.city}, ${c.country}`);
+
+            tourCities.forEach(location => {
+                if (celebrityData[location]) {
+                    const dates = Object.keys(celebrityData[location]);
+                    if (dates.length > 0) {
+                        // Get first available date with slots
+                        const firstDate = dates[0];
+                        const slots = celebrityData[location][firstDate].slots;
+                        const [city, country] = location.split(', ');
+                        locations.push({
+                            city: city,
+                            country: country,
+                            date: formatDateRange(firstDate),
+                            venue: getVenueName(city),
+                            slots: slots,
+                            rawDate: firstDate
+                        });
+                    }
+                }
+            });
 
             const grid = document.getElementById('availabilityGrid');
             grid.innerHTML = locations.map(loc => `
@@ -1315,10 +1397,20 @@
                     <div class="city-name">${getFlag(loc.country)} ${loc.city}</div>
                     <div class="date-range">📅 ${loc.date}</div>
                     <div class="venue">📍 ${loc.venue}</div>
-                    <div class="slots-info">${loc.slots} slots remaining</div>
+                    <div class="slots-info">${loc.slots} slot${loc.slots > 1 ? 's' : ''} remaining</div>
                     <button class="book-btn-card" onclick="bookFromLocation('${loc.city}', '${loc.country}', '${loc.date}')">Book Now</button>
                 </div>
             `).join('');
+
+            console.log(`Rendered ${locations.length} locations with availability for ${currentCelebrity.name}`);
+        }
+
+        // Format date for display
+        function formatDateRange(dateStr) {
+            const date = new Date(dateStr);
+            const month = date.toLocaleDateString('en-US', { month: 'short' });
+            const day = date.getDate();
+            return `${month} ${day}`;
         }
 
         // Get flag emoji

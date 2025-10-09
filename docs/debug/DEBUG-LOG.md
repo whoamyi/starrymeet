@@ -861,6 +861,83 @@ This caused the booking page to always default to the celebrity's primary locati
 
 ---
 
+### 2025-10-09 celebrity-profile.html - Issue #38: Inconsistent availability data between profile and booking pages
+
+**Type**: JavaScript/Data Consistency
+**Severity**: High
+**Location**: celebrity-profile.html:1288-1414
+
+**Problem**:
+User reported: "the number of dates with selectable available slots on calendar is inconsistent with initial number of slot available from celebrity profile"
+
+Root cause:
+- celebrity-profile.html used `Math.random()` to generate slot counts for Upcoming Availability cards
+- booking.html used deterministic seed-based generation for calendar availability
+- Two systems generated different data, causing inconsistent user experience:
+  - Profile might show "3 slots remaining"
+  - Booking calendar would show different slot counts (1, 2, 4, 5)
+  - Total available dates didn't match between pages
+
+**Solution**:
+Synchronized availability generation across both pages using identical deterministic algorithm:
+
+1. **Added `generateAvailabilityDataForProfile()`** (lines 1288-1333):
+   - Uses same seed formula as booking.html: `seed = celebIndex * 1000 + locIndex * 100`
+   - Same hash calculation: `dayHash = (seed + i * 7) % 100`
+   - Same slot calculation: `numSlots = (dayHash % 5) + 1` (1-5 slots)
+   - Generates consistent data for 30 days ahead
+
+2. **Modified `renderAvailability()`** (lines 1335-1406):
+   - Now generates data deterministically instead of using random
+   - Shows first available date for each location (as preview)
+   - Displays accurate slot count for that specific date
+   - Logs: "Rendered X locations with availability for [Celebrity]"
+
+3. **Added `formatDateRange()`** (lines 1408-1414):
+   - Converts ISO date strings to display format
+   - Example: "2025-03-15" → "Mar 15"
+
+**Behavior**:
+- **Profile page**: Shows first available date per location (preview)
+- **Booking page**: Shows all available dates in calendar (complete schedule)
+- **Consistency**: Both pages now generate identical underlying data
+
+**Example** (Chris Hemsworth, index 1):
+- Location 0 (Sydney): Day 0 has 1 slot ✅
+- Profile shows: "1 slot remaining"
+- Booking calendar day 0: "1 slot" ✅
+- Data matches perfectly
+
+**Status**: Fixed
+**Commit**: Pending
+**Documentation**: docs/debug/AVAILABILITY-SYNC-FIX.md
+
+---
+
+## Statistics
+
+**Total Issues Logged**: 38
+**Fixed**: 36
+**In Progress**: 0
+**Deferred**: 2
+
+**Issues by Type**:
+- Accessibility: 9
+- SEO: 4
+- JavaScript: 16
+- HTML: 3
+- CSS: 3
+- UX: 2
+- Data Consistency: 1
+
+**Issues by Severity**:
+- Critical: 2
+- High: 18
+- Medium: 14
+- Low: 4
+
+---
+
 ## Notes
 
 - Update this log in real-time as issues are discovered and fixed
