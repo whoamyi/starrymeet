@@ -236,13 +236,81 @@ find docs/debug/pages -type f | wc -l
 
 ---
 
+## Automated Agents ⭐ NEW
+
+**Location**: `../agents/` (docs/agents/)
+**Purpose**: Maintain documentation organization and synchronization automatically
+
+### Available Agents
+
+#### 1. File Organization Agent
+**File**: [../agents/file-organization-agent.md](../agents/file-organization-agent.md)
+
+**Purpose**: Ensures new debug files are properly categorized and placed in correct page folders
+
+**Invoke When**:
+- Creating new debug documentation
+- Unsure where to place a file
+- Need to update DEBUG-LOG automatically
+
+**What It Does**:
+- Analyzes file context (page, type, severity)
+- Places file in correct location
+- Updates page README
+- Updates DEBUG-LOG.md with issue number
+- Creates missing folders if needed
+- Verifies proper structure
+
+#### 2. Documentation Sync Agent
+**File**: [../agents/documentation-sync-agent.md](../agents/documentation-sync-agent.md)
+
+**Purpose**: Updates all site documentation when major issues are solved
+
+**Invoke When**:
+- Fixed Critical or High severity issue
+- Fixed 3+ related issues
+- Made significant feature changes
+- Reorganized documentation
+
+**What It Does**:
+- Updates docs/README.md
+- Updates docs/QUICK-REFERENCE.md
+- Updates docs/SITE-ARCHITECTURE.md
+- Updates docs/COMPLETE-PROJECT-SUMMARY.md
+- Adds "Recent Updates" sections
+- Maintains version numbers
+- Creates cross-references
+
+### Agent Workflow
+
+```
+1. Fix issue in code
+   ↓
+2. Create debug documentation
+   ↓
+3. INVOKE: File Organization Agent
+   ↓ (Places file, updates DEBUG-LOG)
+   ↓
+4. Is it major? (Critical/High or 3+ issues)
+   ↓
+5. YES → INVOKE: Documentation Sync Agent
+   ↓      (Updates all site docs)
+   ↓
+6. Commit organized structure + synced docs
+```
+
+**See**: [../agents/README.md](../agents/README.md) for complete agent documentation
+
+---
+
 ## Maintenance
 
-- **Keep DEBUG-LOG.md updated**: Always add entries chronologically
+- **Keep DEBUG-LOG.md updated**: Always add entries chronologically (or use File Organization Agent)
 - **Update page files**: When fixing issues on specific pages
 - **Don't duplicate**: Page files have details, DEBUG-LOG has summaries
 - **Cross-reference**: Link between DEBUG-LOG and page-specific files
 - **Follow the framework**: Always use DEBUG-PLAN.md format
+- **Use agents**: Invoke agents to automate organization and sync ⭐ NEW
 
 ---
 
