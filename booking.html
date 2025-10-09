@@ -1,6 +1,7 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
+    <!-- Version: 2025-10-09-v2 - Fixed slot count display -->
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
@@ -2035,7 +2036,20 @@
                 // Build calendar day with slot indicator
                 let slotIndicator = '';
                 if (hasSlots && slots && slots.availableSlots > 0) {
-                    slotIndicator = `<div class="slots-indicator">${slots.availableSlots} slot${slots.availableSlots > 1 ? 's' : ''}</div>`;
+                    const slotCount = slots.availableSlots;
+                    const slotWord = slotCount === 1 ? 'slot' : 'slots';
+
+                    // Debug: Log slot count for verification
+                    if (i < 5) { // Only log first 5 dates to avoid spam
+                        console.log(`[CALENDAR BUILD] Day ${i}, Date ${dateStr}:`, {
+                            totalSlots: slots.totalSlots,
+                            availableSlots: slotCount,
+                            timesCount: slots.times ? slots.times.length : 0,
+                            htmlWillShow: `${slotCount} ${slotWord}`
+                        });
+                    }
+
+                    slotIndicator = `<div class="slots-indicator">${slotCount} ${slotWord}</div>`;
                 } else {
                     // Explicitly no indicator for dates without slots
                     slotIndicator = '';
@@ -2045,6 +2059,7 @@
                     <div class="calendar-day ${!hasSlots ? 'disabled' : ''}"
                          data-date="${dateStr}"
                          data-available-slots="${slots ? slots.availableSlots : 0}"
+                         data-total-slots="${slots ? slots.totalSlots : 0}"
                          data-has-slots="${hasSlots}"
                          onclick="${hasSlots ? `selectDate('${dateStr}')` : ''}">
                         <div class="day-name">${dayName}</div>
