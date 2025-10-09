@@ -31,7 +31,7 @@
         }
 
         .nav-container {
-            max-width: 1000px;
+            max-width: 1200px;
         }
 
         .cancel-booking {
@@ -1032,6 +1032,16 @@
                 </div>
 
                 <div class="form-group">
+                    <label class="form-label" for="locationSelect">Select Location <span class="required">*</span></label>
+                    <select class="form-select" id="locationSelect">
+                        <option value="">Choose a location</option>
+                        <!-- Location options will be populated by JavaScript -->
+                    </select>
+                    <div class="form-hint">Select the city where you'd like to meet</div>
+                    <div class="error-message" id="locationError">Please select a location</div>
+                </div>
+
+                <div class="form-group">
                     <label class="form-label">Meeting Type <span class="required">*</span></label>
                     <div class="meeting-cards" id="meetingCards">
                         <!-- Meeting cards will be loaded here -->
@@ -1566,10 +1576,34 @@
                 loadSavedData();
 
                 // Set up event handlers
-                document.getElementById('profilePhoto').addEventListener('change', handleFileUpload);
-                document.getElementById('timePeriod').addEventListener('change', updateTimeSlots);
-                document.getElementById('cardNumber').addEventListener('input', formatCardNumber);
-                document.getElementById('expiryDate').addEventListener('input', formatExpiryDate);
+                const locationSelect = document.getElementById('locationSelect');
+                if (locationSelect) {
+                    locationSelect.addEventListener('change', function() {
+                        bookingData.location = this.value;
+                        hideError('locationError');
+                        saveData();
+                    });
+                }
+
+                const profilePhoto = document.getElementById('profilePhoto');
+                if (profilePhoto) {
+                    profilePhoto.addEventListener('change', handleFileUpload);
+                }
+
+                const timePeriod = document.getElementById('timePeriod');
+                if (timePeriod) {
+                    timePeriod.addEventListener('change', updateTimeSlots);
+                }
+
+                const cardNumber = document.getElementById('cardNumber');
+                if (cardNumber) {
+                    cardNumber.addEventListener('input', formatCardNumber);
+                }
+
+                const expiryDate = document.getElementById('expiryDate');
+                if (expiryDate) {
+                    expiryDate.addEventListener('input', formatExpiryDate);
+                }
 
                 console.log('Booking page initialization complete');
             } catch (error) {
@@ -1614,6 +1648,9 @@
                 document.getElementById('celebCategory').textContent = currentCelebrity.category;
                 document.getElementById('celebLocation').textContent = `📍 ${currentCelebrity.city}, ${currentCelebrity.country}`;
 
+                // Populate location selector
+                populateLocations();
+
                 // Generate meeting cards
                 generateMeetingCards();
 
@@ -1651,6 +1688,32 @@
             `).join('');
 
             console.log('Meeting cards generated:', cards.length);
+        }
+
+        function populateLocations() {
+            try {
+                // Get unique locations from all celebrities
+                const locations = [...new Set(celebrities.map(c => `${c.city}, ${c.country}`))].sort();
+
+                const locationSelect = document.getElementById('locationSelect');
+                if (!locationSelect) {
+                    console.error('Location select element not found');
+                    return;
+                }
+
+                // Add options
+                locationSelect.innerHTML = '<option value="">Choose a location</option>' +
+                    locations.map(loc => `<option value="${loc}">${loc}</option>`).join('');
+
+                // Pre-select current celebrity's location
+                const currentLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+                locationSelect.value = currentLocation;
+                bookingData.location = currentLocation;
+
+                console.log('Locations populated:', locations.length);
+            } catch (error) {
+                console.error('Error populating locations:', error);
+            }
         }
 
         function selectMeetingType(type) {
@@ -1924,6 +1987,15 @@
 
         function validateStep1() {
             let isValid = true;
+
+            // Validate location
+            const locationSelect = document.getElementById('locationSelect');
+            if (!locationSelect || !locationSelect.value) {
+                showError('locationError');
+                isValid = false;
+            } else {
+                bookingData.location = locationSelect.value;
+            }
 
             if (!bookingData.meetingType) {
                 alert('Please select a meeting type');
