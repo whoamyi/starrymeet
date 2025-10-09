@@ -1287,12 +1287,27 @@
 
         // Render availability
         function renderAvailability() {
+            // Get actual locations from celebrities database where this celebrity might visit
+            // For demonstration, show current celebrity's location plus a few nearby cities
             const locations = [
-                { city: currentCelebrity.city, country: currentCelebrity.country, date: currentCelebrity.location, venue: 'Premium Hotel Suite', slots: 3 },
-                { city: 'New York', country: 'USA', date: 'Apr 12-14', venue: 'Manhattan Convention Center', slots: 5 },
-                { city: 'Tokyo', country: 'Japan', date: 'Apr 20-22', venue: 'Grand Tokyo Hotel', slots: 2 },
-                { city: 'Paris', country: 'France', date: 'May 5-7', venue: 'Le Grand Hotel', slots: 4 }
+                { city: currentCelebrity.city, country: currentCelebrity.country, date: currentCelebrity.location, venue: 'Premium Hotel Suite', slots: 3 }
             ];
+
+            // Add other celebrities' locations as potential tour stops
+            // Filter to show diverse locations (max 3 additional)
+            const otherLocations = celebrities
+                .filter(c => c.name !== currentCelebrity.name) // Exclude current celebrity
+                .filter(c => `${c.city}, ${c.country}` !== `${currentCelebrity.city}, ${currentCelebrity.country}`) // Exclude duplicate cities
+                .slice(0, 3) // Take first 3
+                .map(c => ({
+                    city: c.city,
+                    country: c.country,
+                    date: c.location.split('•')[1]?.trim() || 'TBA',
+                    venue: getVenueName(c.city),
+                    slots: Math.floor(Math.random() * 5) + 1
+                }));
+
+            locations.push(...otherLocations);
 
             const grid = document.getElementById('availabilityGrid');
             grid.innerHTML = locations.map(loc => `
@@ -1301,7 +1316,7 @@
                     <div class="date-range">📅 ${loc.date}</div>
                     <div class="venue">📍 ${loc.venue}</div>
                     <div class="slots-info">${loc.slots} slots remaining</div>
-                    <button class="book-btn-card" onclick="scrollToBooking()">Book Now</button>
+                    <button class="book-btn-card" onclick="bookFromLocation('${loc.city}', '${loc.country}', '${loc.date}')">Book Now</button>
                 </div>
             `).join('');
         }
@@ -1310,9 +1325,36 @@
         function getFlag(country) {
             const flags = {
                 'USA': '🇺🇸', 'UK': '🇬🇧', 'France': '🇫🇷', 'Japan': '🇯🇵',
-                'South Korea': '🇰🇷', 'Australia': '🇦🇺', 'Canada': '🇨🇦'
+                'South Korea': '🇰🇷', 'Australia': '🇦🇺', 'Canada': '🇨🇦',
+                'Israel': '🇮🇱', 'Saudi Arabia': '🇸🇦'
             };
             return flags[country] || '🌍';
+        }
+
+        // Get venue name based on city
+        function getVenueName(city) {
+            const venues = {
+                'London': 'Savoy Hotel',
+                'Sydney': 'Opera House Hotel',
+                'Los Angeles': 'Beverly Hills Hotel',
+                'New York': 'Plaza Hotel',
+                'Paris': 'Le Grand Hotel',
+                'Tokyo': 'Grand Tokyo Hotel',
+                'Seoul': 'Shilla Hotel',
+                'Vancouver': 'Fairmont Hotel',
+                'San Francisco': 'Palace Hotel',
+                'Seattle': 'Fairmont Olympic',
+                'Miami': 'Fontainebleau',
+                'Atlanta': 'Four Seasons',
+                'Chicago': 'Peninsula Hotel',
+                'Nashville': 'Grand Hyatt',
+                'Houston': 'Post Oak Hotel',
+                'Tampa': 'JW Marriott',
+                'Palo Alto': 'Four Seasons',
+                'Riyadh': 'Ritz-Carlton',
+                'Tel Aviv': 'Carlton Hotel'
+            };
+            return venues[city] || 'Luxury Hotel Suite';
         }
 
         // Render pricing
@@ -1426,6 +1468,15 @@
                 return;
             }
             window.location.href = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}`;
+        }
+
+        // Book from location card in upcoming availability
+        function bookFromLocation(city, country, dateRange) {
+            console.log('bookFromLocation called with:', { city, country, dateRange });
+            const type = document.getElementById('meetingTypeDropdown').value || 'standard';
+            const url = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}&city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&dateRange=${encodeURIComponent(dateRange)}`;
+            console.log('Navigating to:', url);
+            window.location.href = url;
         }
 
         // Toggle watchlist

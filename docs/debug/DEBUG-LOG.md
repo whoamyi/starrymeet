@@ -211,32 +211,32 @@ Added `id="navbar"` to the <nav> element. This was fixed together with Issue #1.
 
 ## Statistics
 
-- **Total Issues Found**: 32
-- **Issues Fixed**: 30
+- **Total Issues Found**: 37
+- **Issues Fixed**: 35
 - **Issues In Progress**: 0
 - **Issues Deferred**: 2
 
 ### By Type:
 - HTML: 1
 - CSS: 0
-- JavaScript: 6
+- JavaScript: 10
 - Accessibility: 16
 - Performance: 1
 - SEO: 11
-- UX: 1
+- UX: 2
 - Documentation: 1
 
 ### By Severity:
 - Critical: 1
-- High: 11
-- Medium: 16
+- High: 14
+- Medium: 18
 - Low: 4
 
 ### By Page:
 - index.html: 10 (8 fixed, 2 deferred)
 - browse.html: 5 (5 fixed, 0 in progress)
-- celebrity-profile.html: 5 (5 fixed, 0 in progress)
-- booking.html: 12 (12 fixed, 0 in progress - includes integration fixes)
+- celebrity-profile.html: 7 (7 fixed, 0 in progress)
+- booking.html: 15 (15 fixed, 0 in progress - includes integration fixes)
 
 ---
 
@@ -706,6 +706,158 @@ This prevents the error and allows the page to initialize properly. The cancel m
 
 **Status**: Fixed
 **Commit**: 4a8f9e2 (pending)
+
+---
+
+### 2025-10-09 celebrity-profile.html - Issue #33: Book Now button not navigating to booking page
+
+**Type**: JavaScript
+**Severity**: High
+**Location**: celebrity-profile.html:1304, 1417-1419
+
+**Problem**:
+Book Now buttons in Upcoming Availability section called `scrollToBooking()` which only scrolled to top of page instead of navigating user to booking.html with the selected location data. This made the location cards non-functional for booking.
+
+**Solution**:
+Created new `bookFromLocation(city, country, dateRange)` function that:
+1. Captures location data from the clicked card
+2. Gets selected meeting type (or defaults to 'standard')
+3. Constructs URL with all parameters: celebrity, type, city, country, dateRange
+4. Navigates to booking.html
+
+Updated button onclick from:
+```javascript
+onclick="scrollToBooking()"
+```
+To:
+```javascript
+onclick="bookFromLocation('${loc.city}', '${loc.country}', '${loc.date}')"
+```
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-09 booking.html - Issue #34: Location parameters not received from URL
+
+**Type**: JavaScript
+**Severity**: High
+**Location**: booking.html:1529-1541
+
+**Problem**:
+booking.html parsed `celebrity` and `type` parameters but ignored `city`, `country`, and `dateRange` parameters passed from celebrity profile's location cards. This prevented pre-selection of location and date filtering.
+
+**Solution**:
+Extended URL parameter parsing to capture all location data:
+```javascript
+const preSelectedCity = urlParams.get('city');
+const preSelectedCountry = urlParams.get('country');
+const preSelectedDateRange = urlParams.get('dateRange');
+```
+
+Stored in bookingData for use throughout booking flow:
+```javascript
+if (preSelectedCity) {
+    bookingData.preSelectedCity = preSelectedCity;
+    bookingData.preSelectedCountry = preSelectedCountry;
+    bookingData.preSelectedDateRange = preSelectedDateRange;
+}
+```
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-09 booking.html - Issue #35: Location not pre-selected from URL parameters
+
+**Type**: JavaScript/UX
+**Severity**: Medium
+**Location**: booking.html:1728-1740
+
+**Problem**:
+Location dropdown always defaulted to celebrity's primary location, ignoring pre-selected location passed via URL parameters from upcoming availability cards. Users had to manually re-select their chosen location.
+
+**Solution**:
+Modified `populateLocations()` to prioritize URL parameters over default:
+```javascript
+let selectedLocation;
+if (bookingData.preSelectedCity && bookingData.preSelectedCountry) {
+    selectedLocation = `${bookingData.preSelectedCity}, ${bookingData.preSelectedCountry}`;
+} else {
+    selectedLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+}
+locationSelect.value = selectedLocation;
+```
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-09 booking.html - Issue #36: Calendar dates not filtered by selected location
+
+**Type**: JavaScript/UX
+**Severity**: High
+**Location**: booking.html:1778-1824, 1599-1609
+
+**Problem**:
+Calendar showed random date availability (20% disabled) regardless of selected location. Dates didn't reflect actual availability for specific locations, creating inconsistent user experience.
+
+**Solution**:
+1. Updated `generateCalendar()` to be location-aware:
+   - Reads `bookingData.location` and `bookingData.preSelectedDateRange`
+   - Applies location-specific date availability logic
+   - Favors dates within 2 weeks for pre-selected locations
+
+2. Added event listener to regenerate calendar when location changes:
+```javascript
+locationSelect.addEventListener('change', function() {
+    bookingData.location = this.value;
+    generateCalendar(); // Refresh dates for new location
+});
+```
+
+This ensures date availability updates dynamically based on selected location.
+
+**Status**: Fixed
+**Commit**: Pending
+
+---
+
+### 2025-10-09 celebrity-profile.html + booking.html - Issue #37: Location dropdown not displaying pre-selected location
+
+**Type**: JavaScript
+**Severity**: High
+**Location**: booking.html:1736-1740, celebrity-profile.html:1289-1310
+
+**Problem**:
+When clicking "Book Now" from Upcoming Availability cards, the pre-selected location wasn't appearing in the booking page dropdown because:
+1. Hardcoded example locations (Tokyo, Paris) in celebrity-profile.html didn't exist in the main celebrities database
+2. The dropdown only populated with locations from the celebrities array, so pre-selected locations from URL parameters couldn't be selected
+
+This caused the booking page to always default to the celebrity's primary location instead of the user's chosen location.
+
+**Solution**:
+1. **Dynamic Location Addition** (booking.html:1736-1740):
+   - Modified `populateLocations()` to check if pre-selected location exists in the list
+   - If not found, dynamically adds it to the dropdown before populating
+   ```javascript
+   if (!locations.includes(selectedLocation)) {
+       locations.push(selectedLocation);
+       locations.sort();
+       console.log('Added pre-selected location to dropdown:', selectedLocation);
+   }
+   ```
+
+2. **Real Celebrity Locations** (celebrity-profile.html:1289-1310):
+   - Replaced hardcoded example locations with actual locations from celebrities database
+   - Now shows celebrity's primary location plus 3 other real celebrity locations
+   - Ensures all locations shown are available in the system
+
+**Status**: Fixed
+**Commit**: Pending
 
 ---
 

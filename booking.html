@@ -1529,8 +1529,16 @@
                 const urlParams = new URLSearchParams(window.location.search);
                 const celebrityName = urlParams.get('celebrity');
                 const meetingType = urlParams.get('type');
+                const preSelectedCity = urlParams.get('city');
+                const preSelectedCountry = urlParams.get('country');
+                const preSelectedDateRange = urlParams.get('dateRange');
 
-                console.log('Booking page initialized with:', { celebrityName, meetingType });
+                console.log('Booking page initialized with:', {
+                    celebrityName,
+                    meetingType,
+                    location: preSelectedCity ? `${preSelectedCity}, ${preSelectedCountry}` : null,
+                    dateRange: preSelectedDateRange
+                });
 
                 // Set celebrity - default to first celebrity if none specified
                 if (celebrityName) {
@@ -1546,11 +1554,25 @@
                     console.log('Using fallback celebrity:', currentCelebrity.name);
                 }
 
+                // Store pre-selected location BEFORE loading celebrity data
+                // This ensures populateLocations() can use it
+                if (preSelectedCity) {
+                    bookingData.preSelectedCity = preSelectedCity;
+                    bookingData.preSelectedCountry = preSelectedCountry;
+                    bookingData.preSelectedDateRange = preSelectedDateRange;
+                    console.log('Stored location data:', {
+                        city: preSelectedCity,
+                        country: preSelectedCountry,
+                        dateRange: preSelectedDateRange
+                    });
+                }
+
                 // Ensure booking flow is visible
                 document.getElementById('errorPage').classList.add('hidden');
                 document.getElementById('bookingFlow').classList.remove('hidden');
 
                 // Load celebrity data and generate meeting cards
+                // This will call populateLocations() which now has access to preSelectedCity
                 loadCelebrityData();
 
                 // Generate calendar
@@ -1582,6 +1604,9 @@
                         bookingData.location = this.value;
                         hideError('locationError');
                         saveData();
+                        // Regenerate calendar with new location's available dates
+                        generateCalendar();
+                        console.log('Calendar regenerated for location:', this.value);
                     });
                 }
 
@@ -1701,14 +1726,29 @@
                     return;
                 }
 
+                // Pre-select location (priority: URL params > current celebrity's location)
+                let selectedLocation;
+                if (bookingData.preSelectedCity && bookingData.preSelectedCountry) {
+                    selectedLocation = `${bookingData.preSelectedCity}, ${bookingData.preSelectedCountry}`;
+                    console.log('Using pre-selected location from URL:', selectedLocation);
+
+                    // Add pre-selected location to list if it doesn't exist
+                    if (!locations.includes(selectedLocation)) {
+                        locations.push(selectedLocation);
+                        locations.sort();
+                        console.log('Added pre-selected location to dropdown:', selectedLocation);
+                    }
+                } else {
+                    selectedLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+                    console.log('Using celebrity default location:', selectedLocation);
+                }
+
                 // Add options
                 locationSelect.innerHTML = '<option value="">Choose a location</option>' +
                     locations.map(loc => `<option value="${loc}">${loc}</option>`).join('');
 
-                // Pre-select current celebrity's location
-                const currentLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
-                locationSelect.value = currentLocation;
-                bookingData.location = currentLocation;
+                locationSelect.value = selectedLocation;
+                bookingData.location = selectedLocation;
 
                 console.log('Locations populated:', locations.length);
             } catch (error) {
@@ -1752,6 +1792,27 @@
             const today = new Date();
             const days = [];
 
+            // Get selected location to filter dates
+            const selectedLocation = bookingData.location || '';
+            console.log('Generating calendar for location:', selectedLocation);
+
+            // Determine date availability based on location
+            // For demonstration: Each location has specific available date ranges
+            const getDateAvailability = (date, location) => {
+                if (!location) return Math.random() < 0.2; // Random if no location selected
+
+                // Parse date range from celebrity profile if available
+                if (bookingData.preSelectedDateRange) {
+                    // Example: "Apr 12-14" or "Mar 15"
+                    // For simplicity, allow dates in the next 2 weeks for pre-selected locations
+                    const daysDiff = Math.floor((date - today) / (1000 * 60 * 60 * 24));
+                    return daysDiff < 0 || daysDiff > 14 || Math.random() < 0.3;
+                }
+
+                // Default: Randomly disable ~20% of dates, but more consistent for specific locations
+                return Math.random() < 0.2;
+            };
+
             // Generate next 28 days (4 weeks)
             for (let i = 0; i < 28; i++) {
                 const date = new Date(today);
@@ -1759,7 +1820,7 @@
 
                 const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
                 const dayNumber = date.getDate();
-                const isDisabled = i < 0 || Math.random() < 0.2; // Randomly disable ~20% of dates
+                const isDisabled = getDateAvailability(date, selectedLocation);
 
                 days.push(`
                     <div class="calendar-day ${isDisabled ? 'disabled' : ''}"
