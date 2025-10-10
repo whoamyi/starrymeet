@@ -22,12 +22,6 @@
     <script src="js/shared.js"></script>
     <style>
         /* Page-specific styles - minimal layout only */
-        .breadcrumb {
-            max-width: 1200px;
-            margin: calc(var(--nav-height) + var(--space-4)) auto var(--space-4);
-            padding: 0 var(--space-8);
-            color: var(--text-tertiary);
-        }
 
         .hero {
             background: var(--primary-gradient);
@@ -249,95 +243,6 @@
         </ul>
     </div>
 
-    <div class="breadcrumb"><a href="index.html">Home</a> > Contact Us</div>
-
-    <section class="hero">
-        <h1>Get in Touch</h1>
-        <p>Have questions? We're here to help 24/7</p>
-    </section>
-
-    <div class="container">
-        <div class="contact-layout">
-            <div class="form-section">
-                <h2 class="form-title">Send Us a Message</h2>
-                <div class="success-message" id="successMessage">✓ Message sent successfully! We'll get back to you within 24 hours.</div>
-                <form id="contactForm" onsubmit="submitForm(event)">
-                    <div class="form-group">
-                        <label class="form-label">Name *</label>
-                        <input type="text" class="form-input" id="name" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Email *</label>
-                        <input type="email" class="form-input" id="email" required>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Subject *</label>
-                        <select class="form-select" id="subject" required>
-                            <option value="">Select a subject</option>
-                            <option value="general">General Inquiry</option>
-                            <option value="booking">Booking Help</option>
-                            <option value="celebrity">Celebrity Application</option>
-                            <option value="technical">Technical Issue</option>
-                            <option value="partnership">Partnership Opportunity</option>
-                            <option value="other">Other</option>
-                        </select>
-                    </div>
-                    <div class="form-group">
-                        <label class="form-label">Message *</label>
-                        <textarea class="form-textarea" id="message" required placeholder="Tell us how we can help..."></textarea>
-                    </div>
-                    <button type="submit" class="btn-submit">Send Message</button>
-                </form>
-            </div>
-
-            <div class="info-section">
-                <div class="info-card">
-                    <h3>Contact Information</h3>
-                    <div class="info-item">
-                        <div class="info-icon">📧</div>
-                        <div class="info-text">
-                            <strong>Email</strong>
-                            <a href="mailto:support@starrymeet.com">support@starrymeet.com</a>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">📞</div>
-                        <div class="info-text">
-                            <strong>Phone</strong>
-                            <a href="tel:+15551234567">+1 (555) 123-4567</a>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">🕐</div>
-                        <div class="info-text">
-                            <strong>Support Hours</strong>
-                            24/7 Support Available
-                        </div>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <h3>Follow Us</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-btn">📷</a>
-                        <a href="#" class="social-btn">🐦</a>
-                        <a href="#" class="social-btn">📘</a>
-                        <a href="#" class="social-btn">💼</a>
-                    </div>
-                </div>
-
-                <div class="info-card">
-                    <h3>Headquarters</h3>
-                    <div class="info-text" style="line-height: 1.8;">
-                        <strong>StarryMeet Inc.</strong><br>
-                        123 Celebrity Boulevard<br>
-                        Los Angeles, CA 90028<br>
-                        United States
-                    </div>
-                </div>
-            </div>
-        </div>
-    </div>
 
     <footer>
         <div class="footer-container">
