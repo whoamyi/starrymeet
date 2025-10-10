@@ -21,54 +21,190 @@
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
     <style>
-        * { margin: 0; padding: 0; box-sizing: border-box; }
-        :root { --purple: #6B46C1; --purple-dark: #553C9A; --purple-light: #8B5CF6; --gold: #D4AF37; --green: #10B981; --white: #FFFFFF; --gray-50: #F9FAFB; --gray-100: #F3F4F6; --gray-200: #E5E7EB; --gray-600: #4B5563; --gray-700: #374151; --gray-800: #1F2937; --gray-900: #111827; }
-        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif; color: var(--gray-900); line-height: 1.6; }
-        nav { position: fixed; top: 0; width: 100%; background: rgba(255,255,255,0.98); backdrop-filter: blur(10px); box-shadow: 0 2px 20px rgba(0,0,0,0.05); z-index: 1000; }
-        .nav-container { max-width: 1400px; margin: 0 auto; padding: 1.2rem 2rem; display: flex; justify-content: space-between; align-items: center; }
-        .logo { font-size: 1.8rem; font-weight: 800; background: linear-gradient(135deg, var(--purple), var(--purple-light)); -webkit-background-clip: text; -webkit-text-fill-color: transparent; text-decoration: none; }
-        .nav-links { display: flex; gap: 2.5rem; align-items: center; list-style: none; }
-        .nav-links a { color: var(--gray-800); text-decoration: none; font-weight: 500; transition: color 0.3s; }
-        .nav-links a:hover { color: var(--purple); }
-        .btn-signin { background: var(--purple); color: white; padding: 0.7rem 1.8rem; border-radius: 50px; font-weight: 600; }
-        .breadcrumb { max-width: 1400px; margin: 100px auto 2rem; padding: 0 2rem; color: var(--gray-600); }
-        .breadcrumb a { color: var(--purple); text-decoration: none; }
-        .hero { background: linear-gradient(135deg, var(--purple), var(--purple-light)); color: white; text-align: center; padding: 6rem 2rem; }
-        .hero h1 { font-size: 3.5rem; font-weight: 900; margin-bottom: 1rem; }
-        .hero p { font-size: 1.3rem; opacity: 0.95; max-width: 700px; margin: 0 auto 2rem; }
-        .container { max-width: 1200px; margin: 0 auto; padding: 4rem 2rem; }
-        .section-title { font-size: 2.5rem; font-weight: 800; text-align: center; margin-bottom: 3rem; }
-        .benefits-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-        .benefit-card { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); transition: transform 0.3s; }
-        .benefit-card:hover { transform: translateY(-5px); }
-        .benefit-icon { font-size: 3rem; margin-bottom: 1rem; }
-        .benefit-card h3 { font-size: 1.5rem; margin-bottom: 1rem; color: var(--purple); }
-        .steps-container { display: grid; gap: 2rem; }
-        .step-card { background: var(--gray-50); padding: 2rem; border-radius: 15px; display: flex; gap: 1.5rem; }
-        .step-number { width: 60px; height: 60px; background: var(--purple); color: white; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 2rem; font-weight: 900; flex-shrink: 0; }
-        .testimonial-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr)); gap: 2rem; margin-bottom: 4rem; }
-        .testimonial { background: white; padding: 2rem; border-radius: 15px; box-shadow: 0 4px 15px rgba(0,0,0,0.08); }
-        .testimonial-header { display: flex; gap: 1rem; margin-bottom: 1rem; }
-        .testimonial-photo { width: 60px; height: 60px; background: linear-gradient(135deg, var(--purple), var(--purple-light)); border-radius: 50%; display: flex; align-items: center; justify-content: center; color: white; font-weight: 900; font-size: 1.5rem; }
-        .calculator { background: var(--gray-50); padding: 3rem; border-radius: 20px; margin: 4rem 0; }
-        .calc-inputs { display: grid; grid-template-columns: 1fr 1fr; gap: 2rem; margin-bottom: 2rem; }
-        .calc-input { display: flex; flex-direction: column; }
-        .calc-input label { font-weight: 700; margin-bottom: 0.5rem; }
-        .calc-input input { padding: 1rem; border: 2px solid var(--gray-200); border-radius: 10px; font-size: 1.1rem; }
-        .calc-result { background: var(--purple); color: white; padding: 2rem; border-radius: 15px; text-align: center; }
-        .calc-result-amount { font-size: 3rem; font-weight: 900; margin: 1rem 0; }
-        .cta-box { background: linear-gradient(135deg, var(--purple), var(--purple-light)); color: white; text-align: center; padding: 4rem 2rem; border-radius: 20px; margin-top: 4rem; }
-        .cta-box h2 { font-size: 2.5rem; font-weight: 800; margin-bottom: 1rem; }
-        .btn { display: inline-block; padding: 1rem 2.5rem; background: white; color: var(--purple); text-decoration: none; border-radius: 50px; font-weight: 700; font-size: 1.1rem; transition: all 0.3s; }
-        .btn:hover { transform: translateY(-3px); box-shadow: 0 10px 30px rgba(0,0,0,0.2); }
-        footer { background: var(--gray-900); color: white; padding: 3rem 2rem 2rem; }
-        .footer-container { max-width: 1400px; margin: 0 auto; display: grid; grid-template-columns: repeat(auto-fit, minmax(200px, 1fr)); gap: 3rem; margin-bottom: 2rem; }
-        .footer-section h3 { margin-bottom: 1rem; font-size: 1.2rem; }
-        .footer-section ul { list-style: none; }
-        .footer-section a { color: var(--gray-200); text-decoration: none; display: block; padding: 0.3rem 0; transition: color 0.3s; }
-        .footer-section a:hover { color: var(--gold); }
-        .footer-bottom { text-align: center; padding-top: 2rem; border-top: 1px solid var(--gray-800); color: var(--gray-600); }
-        @media (max-width: 768px) { .hero h1 { font-size: 2.5rem; } .calc-inputs { grid-template-columns: 1fr; } .nav-links { display: none; } }
+        /* Minimal page-specific styles - inherit dark theme from shared.css */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: calc(var(--nav-height) + var(--space-4)) auto var(--space-4);
+            padding: 0 var(--space-8);
+            color: var(--text-tertiary);
+        }
+
+        .hero {
+            text-align: center;
+            padding: var(--space-20) var(--space-8);
+            margin-top: var(--nav-height);
+        }
+
+        .hero h1 {
+            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            margin-bottom: var(--space-4);
+        }
+
+        .hero p {
+            font-size: var(--text-xl);
+            max-width: 700px;
+            margin: 0 auto var(--space-8);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-16);
+        }
+
+        .benefit-card {
+            background: #000000;
+            padding: var(--space-6);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-4);
+        }
+
+        .benefit-card h3 {
+            font-size: var(--text-2xl);
+            margin-bottom: var(--space-3);
+            color: var(--primary);
+        }
+
+        .steps-container {
+            display: grid;
+            gap: var(--space-6);
+        }
+
+        .step-card {
+            background: #000000;
+            padding: var(--space-6);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            display: flex;
+            gap: var(--space-6);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 900;
+            flex-shrink: 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-16);
+        }
+
+        .testimonial {
+            background: #000000;
+            padding: var(--space-6);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .testimonial-header {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+
+        .testimonial-photo {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 900;
+            font-size: 1.5rem;
+        }
+
+        .calculator {
+            background: #000000;
+            padding: var(--space-12);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            margin: var(--space-16) 0;
+        }
+
+        .calc-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .calc-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-input label {
+            font-weight: 700;
+            margin-bottom: var(--space-2);
+            color: var(--white);
+        }
+
+        .calc-input input {
+            padding: var(--space-4);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-lg);
+            background: #000000;
+            color: var(--white);
+        }
+
+        .calc-result {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--space-8);
+            border-radius: var(--radius-2xl);
+            text-align: center;
+        }
+
+        .calc-result-amount {
+            font-size: 3rem;
+            font-weight: 900;
+            margin: var(--space-4) 0;
+        }
+
+        .cta-box {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--space-16) var(--space-8);
+            border-radius: var(--radius-2xl);
+            margin-top: var(--space-16);
+        }
+
+        .cta-box h2 {
+            font-size: var(--text-5xl);
+            font-weight: 800;
+            margin-bottom: var(--space-4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .calc-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
     </style>
 </head>
 <body>
@@ -157,36 +293,36 @@
             <div class="step-card">
                 <div class="step-number">1</div>
                 <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--purple);">Apply & Verify</h3>
-                    <p style="color: var(--gray-700);">Submit your application and complete our verification process. We verify your identity and work with your management team.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Apply & Verify</h3>
+                    <p>Submit your application and complete our verification process. We verify your identity and work with your management team.</p>
                 </div>
             </div>
             <div class="step-card">
                 <div class="step-number">2</div>
                 <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--purple);">Set Availability</h3>
-                    <p style="color: var(--gray-700);">Add your travel schedule, set your pricing, and choose meeting types you're comfortable with.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Set Availability</h3>
+                    <p>Add your travel schedule, set your pricing, and choose meeting types you're comfortable with.</p>
                 </div>
             </div>
             <div class="step-card">
                 <div class="step-number">3</div>
                 <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--purple);">Approve Bookings</h3>
-                    <p style="color: var(--gray-700);">Review applications from fans and approve meetings that interest you. You maintain full control.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Approve Bookings</h3>
+                    <p>Review applications from fans and approve meetings that interest you. You maintain full control.</p>
                 </div>
             </div>
             <div class="step-card">
                 <div class="step-number">4</div>
                 <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--purple);">Meet Fans</h3>
-                    <p style="color: var(--gray-700);">Show up at professional venues we arrange. Create meaningful connections with people who admire your work.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Meet Fans</h3>
+                    <p>Show up at professional venues we arrange. Create meaningful connections with people who admire your work.</p>
                 </div>
             </div>
             <div class="step-card">
                 <div class="step-number">5</div>
                 <div>
-                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem; color: var(--purple);">Get Paid</h3>
-                    <p style="color: var(--gray-700);">Receive payments within 7 days. We handle all transactions, taxes, and provide detailed earning reports.</p>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Get Paid</h3>
+                    <p>Receive payments within 7 days. We handle all transactions, taxes, and provide detailed earning reports.</p>
                 </div>
             </div>
         </div>
@@ -198,36 +334,36 @@
                     <div class="testimonial-photo">JL</div>
                     <div>
                         <div style="font-weight: 700; margin-bottom: 0.2rem;">Jennifer Lawrence</div>
-                        <div style="color: var(--gray-600); font-size: 0.9rem;">Hollywood Actress</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Hollywood Actress</div>
                     </div>
                 </div>
-                <p style="color: var(--gray-700); line-height: 1.7;">"StarryMeet lets me connect with genuine fans on my schedule. I love hearing their stories and seeing how my work has impacted their lives. It's incredibly rewarding."</p>
+                <p style="line-height: 1.7;">"StarryMeet lets me connect with genuine fans on my schedule. I love hearing their stories and seeing how my work has impacted their lives. It's incredibly rewarding."</p>
             </div>
             <div class="testimonial">
                 <div class="testimonial-header">
                     <div class="testimonial-photo">EM</div>
                     <div>
                         <div style="font-weight: 700; margin-bottom: 0.2rem;">Elon Musk</div>
-                        <div style="color: var(--gray-600); font-size: 0.9rem;">Business Leader</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Business Leader</div>
                     </div>
                 </div>
-                <p style="color: var(--gray-700); line-height: 1.7;">"I travel constantly for work. StarryMeet makes it easy to monetize that time and meet entrepreneurs who are building the future. The platform handles everything seamlessly."</p>
+                <p style="line-height: 1.7;">"I travel constantly for work. StarryMeet makes it easy to monetize that time and meet entrepreneurs who are building the future. The platform handles everything seamlessly."</p>
             </div>
             <div class="testimonial">
                 <div class="testimonial-header">
                     <div class="testimonial-photo">TS</div>
                     <div>
                         <div style="font-weight: 700; margin-bottom: 0.2rem;">Taylor Swift</div>
-                        <div style="color: var(--gray-600); font-size: 0.9rem;">Musician</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Musician</div>
                     </div>
                 </div>
-                <p style="color: var(--gray-700); line-height: 1.7;">"Meeting my fans in this intimate setting is so much better than quick photo ops. These are real conversations that mean something to both of us."</p>
+                <p style="line-height: 1.7;">"Meeting my fans in this intimate setting is so much better than quick photo ops. These are real conversations that mean something to both of us."</p>
             </div>
         </div>
 
         <h2 class="section-title">Earnings Calculator</h2>
         <div class="calculator">
-            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem; color: var(--gray-700);">Estimate your potential monthly earnings</p>
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Estimate your potential monthly earnings</p>
             <div class="calc-inputs">
                 <div class="calc-input">
                     <label>Meetings per month</label>
