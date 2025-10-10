@@ -28,8 +28,8 @@ html {
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
-    color: var(--text-primary);
-    background: var(--bg-primary);
+    color: var(--white);
+    background: #000000;
     overflow-x: hidden;
 }
 
@@ -56,11 +56,11 @@ body {
     --error: #EF4444;                /* Red */
     --info: #3B82F6;                 /* Blue */
 
-    /* Neutral Colors - Dark Theme (Cameo-inspired) */
-    --black: #000000;
-    --rich-black: #0D0D0D;           /* Primary background - not pure black */
-    --dark-surface: #1A1A1A;         /* Card/surface background */
-    --dark-elevated: #252525;        /* Elevated elements */
+    /* Neutral Colors - Pure Black Theme */
+    --black: #000000;                /* Pure black - the ONLY background color */
+    --rich-black: #000000;           /* Pure black everywhere */
+    --dark-surface: #000000;         /* Pure black for cards/surfaces */
+    --dark-elevated: #000000;        /* Pure black for elevated elements */
     --white: #FFFFFF;
     --off-white: #F5F5F5;
     --gray-50: #F9FAFB;
@@ -74,13 +74,13 @@ body {
     --gray-800: #1F2937;
     --gray-900: #111827;
 
-    /* Background Colors - Dark Theme */
-    --bg-primary: #0D0D0D;           /* Rich black - main background */
-    --bg-secondary: #1A1A1A;         /* Cards, surfaces */
-    --bg-tertiary: #252525;          /* Elevated elements */
-    --bg-dark: #000000;              /* Pure black for contrast */
-    --bg-glass: rgba(26, 26, 26, 0.8);
-    --bg-glass-dark: rgba(13, 13, 13, 0.9);
+    /* Background Colors - Pure Black Theme */
+    --bg-primary: #000000;           /* Pure black - main background */
+    --bg-secondary: #000000;         /* Pure black - cards, surfaces */
+    --bg-tertiary: #000000;          /* Pure black - elevated elements */
+    --bg-dark: #000000;              /* Pure black everywhere */
+    --bg-glass: rgba(0, 0, 0, 0.95);
+    --bg-glass-dark: rgba(0, 0, 0, 0.98);
 
     /* Text Colors - Dark Theme Hierarchy (STANDARD)
 
@@ -98,10 +98,11 @@ body {
     --text-inverse: #0D0D0D;         /* For light backgrounds */
     --text-muted: #505050;           /* Very subtle text */
 
-    /* Border Colors - Dark Theme */
-    --border-light: rgba(255, 255, 255, 0.08);    /* Subtle borders */
-    --border-medium: rgba(255, 255, 255, 0.12);   /* Medium borders */
-    --border-dark: rgba(255, 255, 255, 0.16);     /* Visible borders */
+    /* Border Colors - Very Subtle on Black */
+    --border-light: rgba(139, 92, 246, 0.08);    /* Subtle purple tint borders */
+    --border-medium: rgba(139, 92, 246, 0.12);   /* Medium purple tint borders */
+    --border-dark: rgba(139, 92, 246, 0.16);     /* More visible purple borders */
+    --border-gold: rgba(245, 158, 11, 0.12);     /* Gold tint borders for accents */
 
     /* Spacing Scale - Consistent & Harmonious */
     --space-1: 0.25rem;   /* 4px */
@@ -126,19 +127,19 @@ body {
     --radius-2xl: 32px;
     --radius-full: 9999px;
 
-    /* Shadows - Dark Theme Optimized */
-    --shadow-xs: 0 1px 2px 0 rgba(0, 0, 0, 0.3);
-    --shadow-sm: 0 2px 8px 0 rgba(0, 0, 0, 0.4);
-    --shadow-md: 0 4px 16px 0 rgba(0, 0, 0, 0.5);
-    --shadow-lg: 0 8px 32px 0 rgba(0, 0, 0, 0.6);
-    --shadow-xl: 0 16px 48px 0 rgba(0, 0, 0, 0.7);
-    --shadow-2xl: 0 24px 64px 0 rgba(0, 0, 0, 0.8);
-    --shadow-glow: 0 0 32px rgba(139, 92, 246, 0.2);      /* Subtle purple glow */
-    --shadow-glow-sm: 0 0 16px rgba(139, 92, 246, 0.15);
-    --shadow-glow-md: 0 0 24px rgba(139, 92, 246, 0.25);
-    --shadow-glow-lg: 0 0 48px rgba(139, 92, 246, 0.3);
-    --shadow-glow-xl: 0 0 64px rgba(139, 92, 246, 0.35);
-    --shadow-gold-glow: 0 0 32px rgba(245, 158, 11, 0.2);  /* Subtle gold glow */
+    /* Shadows - Extremely Subtle Like a Mirage */
+    --shadow-xs: 0 0 0 0 transparent;
+    --shadow-sm: 0 0 0 0 transparent;
+    --shadow-md: 0 0 8px 0 rgba(139, 92, 246, 0.03);
+    --shadow-lg: 0 0 12px 0 rgba(139, 92, 246, 0.04);
+    --shadow-xl: 0 0 16px 0 rgba(139, 92, 246, 0.05);
+    --shadow-2xl: 0 0 20px 0 rgba(139, 92, 246, 0.06);
+    --shadow-glow: 0 0 20px rgba(139, 92, 246, 0.08);      /* Very subtle purple glow - like a mirage */
+    --shadow-glow-sm: 0 0 12px rgba(139, 92, 246, 0.06);   /* Barely perceptible */
+    --shadow-glow-md: 0 0 16px rgba(139, 92, 246, 0.07);
+    --shadow-glow-lg: 0 0 24px rgba(139, 92, 246, 0.09);
+    --shadow-glow-xl: 0 0 32px rgba(139, 92, 246, 0.1);
+    --shadow-gold-glow: 0 0 20px rgba(245, 158, 11, 0.08);  /* Subtle gold glow */
 
     /* Transitions - Smooth & Premium */
     --transition-fast: 150ms cubic-bezier(0.4, 0, 0.2, 1);
@@ -656,12 +657,12 @@ header.scrolled,
 }
 
 /* ========================================
-   CARD SYSTEM - ELEVATED & PREMIUM (DARK THEME)
+   CARD SYSTEM - PURE BLACK WITH SUBTLE BORDERS (UNIVERSAL)
    ======================================== */
 .card {
-    background: var(--bg-secondary);
+    background: #000000;
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
     overflow: hidden;
     transition: var(--transition-base);
     border: 1px solid var(--border-light);
@@ -669,8 +670,8 @@ header.scrolled,
 
 .card:hover {
     box-shadow: var(--shadow-glow-sm);
-    transform: translateY(-4px);
-    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+    border-color: rgba(139, 92, 246, 0.2);
 }
 
 .card-image {
@@ -686,13 +687,13 @@ header.scrolled,
 .card-header {
     padding: var(--space-6) var(--space-8);
     border-bottom: 1px solid var(--border-light);
-    background: var(--bg-tertiary);
+    background: #000000;
 }
 
 .card-footer {
     padding: var(--space-6) var(--space-8);
     border-top: 1px solid var(--border-light);
-    background: var(--bg-tertiary);
+    background: #000000;
 }
 
 .card-title {
@@ -747,12 +748,12 @@ header.scrolled,
 .form-textarea {
     width: 100%;
     padding: var(--space-4) var(--space-5);
-    border: 2px solid var(--border-medium);
+    border: 1px solid var(--border-medium);
     border-radius: var(--radius-lg);
     font-size: var(--text-base);
     font-family: var(--font-sans);
-    color: var(--text-primary);
-    background: var(--bg-tertiary);
+    color: var(--white);
+    background: #000000;
     transition: var(--transition-base);
 }
 
@@ -871,15 +872,17 @@ header.scrolled,
 }
 
 /* ========================================
-   FOOTER - DARK & ELEGANT (UNIVERSAL)
+   FOOTER - PURE BLACK WITH PERFECT ALIGNMENT (UNIVERSAL)
    ======================================== */
 footer {
-    background: var(--black);
+    background: #000000;
     color: var(--text-secondary);
-    padding: var(--space-20) var(--space-8) var(--space-8);
+    padding: var(--space-20) 0 var(--space-8);
     position: relative;
     overflow: hidden;
     margin-top: var(--space-20);
+    display: flex;
+    flex-direction: column;
 }
 
 footer::before {
@@ -889,23 +892,25 @@ footer::before {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--accent), transparent);
+    background: linear-gradient(90deg, transparent, rgba(245, 158, 11, 0.3), transparent);
 }
 
 .footer-container {
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+    padding: 0 var(--space-8);
+    display: flex;
+    justify-content: space-between;
     gap: var(--space-12);
     margin-bottom: var(--space-12);
-    justify-content: space-between;
-    align-items: start;
 }
 
 .footer-section {
+    flex: 1;
     display: flex;
     flex-direction: column;
+    min-width: 200px;
 }
 
 .footer-section h3 {
@@ -952,14 +957,21 @@ footer::before {
     color: var(--text-tertiary);
     font-size: var(--text-sm);
     max-width: 1400px;
+    width: 100%;
     margin: 0 auto;
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
 }
 
 @media (max-width: 768px) {
     .footer-container {
-        grid-template-columns: 1fr;
+        flex-direction: column;
         gap: var(--space-8);
         text-align: center;
+    }
+
+    .footer-section {
+        align-items: center;
     }
 }
 
@@ -1135,10 +1147,10 @@ footer::before {
 
 /* Section Containers */
 .section {
-    background: var(--bg-secondary);
+    background: #000000;
     border-radius: var(--radius-2xl);
     padding: var(--space-8);
-    box-shadow: var(--shadow-lg);
+    box-shadow: none;
     border: 1px solid var(--border-light);
 }
 
@@ -1328,19 +1340,29 @@ tr:hover {
     margin: 0 var(--space-4);
 }
 
-/* Container */
+/* Container - Perfect Centering with Equal Margins */
 .container {
     max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--space-8);
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
+    padding-left: var(--space-8);
+    padding-right: var(--space-8);
+    background: #000000 !important;
 }
 
 .container-sm {
     max-width: 800px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 .container-lg {
     max-width: 1600px;
+    width: 100%;
+    margin-left: auto;
+    margin-right: auto;
 }
 
 /* Grid System */
@@ -1399,7 +1421,7 @@ tr:hover {
    UNIVERSAL DARK THEME RULES
    ======================================== */
 
-/* ALL containers and boxes should be dark */
+/* ALL containers and boxes are PURE BLACK */
 .container,
 .box,
 .panel,
@@ -1412,11 +1434,11 @@ tr:hover {
 [class*="-box"],
 [class*="-card"],
 [class*="-panel"] {
-    background: var(--bg-secondary);
-    color: var(--text-primary);
+    background: #000000 !important;
+    color: var(--white);
 }
 
-/* Nested boxes/cards inside containers */
+/* Nested boxes/cards inside containers - ALSO PURE BLACK */
 .container .box,
 .container .card,
 .container .panel,
@@ -1424,19 +1446,19 @@ tr:hover {
 .section .box,
 [class*="container"] [class*="-card"],
 [class*="container"] [class*="-box"] {
-    background: var(--bg-tertiary);
+    background: #000000 !important;
     border: 1px solid var(--border-light);
     border-radius: var(--radius-lg);
 }
 
-/* Universal hover effect for all interactive cards/boxes */
+/* Universal hover effect - extremely subtle like a mirage */
 .card:hover,
 .box:hover,
 [class*="-card"]:hover,
 [class*="-box"]:hover,
 [class*="-item"]:hover {
     box-shadow: var(--shadow-glow-sm);
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.15);
     transform: translateY(-2px);
 }
 
@@ -1550,21 +1572,21 @@ ul li, ol li {
     text-decoration: underline;
 }
 
-/* All main page areas should have dark background */
+/* All main page areas are PURE BLACK */
 main,
 .main,
 .page,
 .page-wrapper,
 body {
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: #000000 !important;
+    color: var(--white);
 }
 
-/* Hero sections */
+/* Hero sections - PURE BLACK */
 .hero,
 [class*="hero-"] {
-    background: var(--bg-primary);
-    color: var(--text-primary);
+    background: #000000 !important;
+    color: var(--white);
 }
 
 .hero h1, .hero h2 {
@@ -1575,13 +1597,13 @@ body {
     color: var(--text-secondary) !important;
 }
 
-/* Ensure all input elements are dark */
+/* Ensure all input elements are PURE BLACK */
 input:not([type="radio"]):not([type="checkbox"]),
 textarea,
 select {
-    background: var(--bg-tertiary) !important;
-    color: var(--text-primary) !important;
-    border: 2px solid var(--border-medium) !important;
+    background: #000000 !important;
+    color: var(--white) !important;
+    border: 1px solid var(--border-medium) !important;
 }
 
 input::placeholder,
