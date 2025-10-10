@@ -1,7 +1,11 @@
 # StarryMeet Site Architecture & Page Interactions
 
-**Last Updated**: 2025-10-09
-**Version**: 1.1.0
+**Last Updated**: 2025-10-10
+**Version**: 1.2.0
+
+> **Note**: This document describes the **current implementation** (as-built).
+> For the **target architecture vision** (full-stack plan), see: [ARCHITECTURE-VISION.md](ARCHITECTURE-VISION.md)
+> For the **gap analysis** (what's left to build), see: [IMPLEMENTATION-ROADMAP.md](IMPLEMENTATION-ROADMAP.md)
 
 ---
 

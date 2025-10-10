@@ -1,7 +1,7 @@
 # Quick Reference Guide - StarryMeet
 
 **Purpose**: Rapid lookup for common tasks and information
-**Last Updated**: 2025-10-09
+**Last Updated**: 2025-10-10
 
 ---
 
@@ -18,11 +18,13 @@ js/shared.js          - All celebrity data & shared functions
 
 ### Most Important Docs
 ```
-docs/SITE-ARCHITECTURE.md                   - Page interactions & data flow
+docs/ARCHITECTURE-VISION.md                 - Full-stack architecture (end goal) ⭐ NEW
+docs/IMPLEMENTATION-ROADMAP.md              - Gap analysis & phases ⭐ NEW
+docs/SITE-ARCHITECTURE.md                   - Current implementation (as-built)
 docs/COMPLETE-PROJECT-SUMMARY.md            - Full project overview
 docs/debug/README.md                        - Debug documentation structure
 docs/debug/DEBUG-LOG.md                     - All 45 issues chronologically
-docs/debug/pages/booking/BOOKING-INTEGRATION.md - Critical integration details
+docs/debug/pages/*/debug-log.md             - Page-specific consolidated logs ⭐ NEW
 ```
 
 ---

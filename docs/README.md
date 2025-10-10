@@ -2,7 +2,7 @@
 
 **Project**: StarryMeet - Celebrity Meetup Platform
 **Status**: Active Development & Maintenance ✅
-**Last Updated**: 2025-10-10
+**Last Updated**: 2025-10-10 (Architecture Vision Complete)
 
 ---
 
@@ -12,39 +12,45 @@
 docs/
 ├── README.md                           ← You are here
 ├── COMPLETE-PROJECT-SUMMARY.md         ← Full project overview
-├── SITE-ARCHITECTURE.md                ← Page interactions & data flow
+├── SITE-ARCHITECTURE.md                ← Current implementation (as-built)
+├── ARCHITECTURE-VISION.md              ← Full-stack target architecture ⭐ NEW
+├── IMPLEMENTATION-ROADMAP.md           ← Gap analysis & phases ⭐ NEW
 ├── QUICK-REFERENCE.md                  ← Rapid lookup guide
 ├── EXTRACTION-COMPLETE.md              ← Template extraction record
 │
 ├── agents/                             ← Automated agents (CATEGORIZED) ⭐ UPDATED
 │   ├── README.md                       ← Agents overview
 │   ├── documentation/                  ← Doc maintenance agents
-│   │   └── documentation-agent.md      ← v1.0.0 (renamed)
-│   ├── organization/                   ← File organization agents
-│   │   ├── organization-agent.md       ← v2.0.0 (consolidated) ⭐ NEW
+│   │   ├── documentation-agent.md      ← v2.0.0 (comprehensive workflow)
 │   │   └── archive/                    ← Legacy agents archived
-│   ├── debugging/                      ← Testing & QA agents (future)
+│   ├── organization/                   ← File organization agents
+│   │   ├── organization-agent.md       ← v3.0.0 (consolidated) ⭐ UPDATED
+│   │   └── archive/                    ← Legacy agents archived
+│   ├── debugging/                      ← Debugging agents
+│   │   ├── debugging-agent.md          ← v2.0.0 (with embedded DEBUG-PLAN) ⭐ UPDATED
 │   │   └── archive/                    ← Legacy agents archived
 │   └── workflow/                       ← Process automation (future)
 │
 ├── debug/                              ← Debugging & issue tracking
-│   ├── README.md                       ← Debug structure guide ⭐ NEW
-│   ├── DEBUG-PLAN.md                   ← Master debugging framework
-│   ├── DEBUG-LOG.md                    ← All 45+ issues chronologically
+│   ├── README.md                       ← Debug structure guide ⭐ UPDATED
+│   ├── DEBUG-LOG.md                    ← Master chronological log (may phase out)
 │   ├── PAGE-STATUS.md                  ← Live status tracker (100%)
 │   ├── COMPONENT-TEMPLATES.md          ← Reusable components
+│   ├── archive/                        ← Archived debug files (consolidated)
 │   │
-│   └── pages/                          ← Page-specific issues ⭐ NEW
+│   └── pages/                          ← Page-specific debug logs ⭐ UPDATED
 │       ├── dashboard/
+│       │   ├── debug-log.md            ← Single consolidated log (7 issues)
 │       │   ├── README.md
-│       │   └── DASHBOARD-SIDEBAR-FIX.md (Issues #39-#45)
+│       │   └── archive/                ← Old individual files
 │       ├── booking/
+│       │   ├── debug-log.md            ← Single consolidated log (5 issues)
 │       │   ├── README.md
-│       │   ├── BOOKING-FIX-SUMMARY.md
-│       │   └── BOOKING-INTEGRATION.md
+│       │   └── archive/                ← Old individual files
 │       └── celebrity-profile/
+│           ├── debug-log.md            ← Single consolidated log (10 issues)
 │           ├── README.md
-│           └── [5 issue-specific files]
+│           └── archive/                ← Old individual files
 │
 └── templates/                          ← Reusable code templates
     ├── HEADER-NAV.md                   ← Navigation template
@@ -75,9 +81,9 @@ If you're new to this project, read these in order:
      - Command cheat sheet
 
 2. **SITE-ARCHITECTURE.md** ⭐⭐
-   - **Purpose**: Understand how the site works
+   - **Purpose**: Understand current implementation (as-built)
    - **Read time**: 30-45 minutes
-   - **When to use**: Need to understand page interactions
+   - **When to use**: Need to understand current page interactions
    - **Contents**:
      - Page-by-page breakdown (13 pages)
      - Data flow diagrams
@@ -85,10 +91,39 @@ If you're new to this project, read these in order:
      - Shared components
      - Navigation paths
 
-3. **COMPLETE-PROJECT-SUMMARY.md** ⭐⭐⭐
+3. **ARCHITECTURE-VISION.md** ⭐⭐⭐ NEW
+   - **Purpose**: Full-stack architecture target (end goal)
+   - **Read time**: 60-90 minutes
+   - **When to use**: Planning backend development or scaling
+   - **Contents**:
+     - Complete system architecture
+     - Technology stack (React, Node.js, PostgreSQL, AWS)
+     - Microservices design (8 services)
+     - Database schema (12+ tables)
+     - API design (RESTful endpoints)
+     - Payment processing (Stripe integration)
+     - Real-time features (WebSocket)
+     - Security & compliance
+     - Scalability plan (4 phases)
+
+4. **IMPLEMENTATION-ROADMAP.md** ⭐⭐⭐ NEW
+   - **Purpose**: Gap analysis and prioritized implementation plan
+   - **Read time**: 45-60 minutes
+   - **When to use**: Planning development phases
+   - **Contents**:
+     - Gap analysis (vision vs. current)
+     - 4 implementation phases (10-14 months)
+     - Phase 1: MVP Foundation (backend API, auth, payments)
+     - Phase 2: Core Backend (microservices, real-time)
+     - Phase 3: Frontend Migration (vanilla JS → React)
+     - Phase 4: Advanced Features (Elasticsearch, mobile apps)
+     - Technical requirements and team needs
+     - Cost estimates and timeline
+
+5. **COMPLETE-PROJECT-SUMMARY.md** ⭐⭐
    - **Purpose**: Complete project history and details
    - **Read time**: 45-60 minutes
-   - **When to use**: Need full context of project
+   - **When to use**: Need full context of current implementation
    - **Contents**:
      - Executive summary
      - All issues fixed
@@ -417,11 +452,15 @@ less docs/debug/14-POINT-CHECKLIST.md
 
 ## 🔗 Quick Links
 
+### Architecture & Planning (NEW)
+- [Architecture Vision](ARCHITECTURE-VISION.md) ⭐ NEW - Full-stack target architecture
+- [Implementation Roadmap](IMPLEMENTATION-ROADMAP.md) ⭐ NEW - Gap analysis & phases
+- [Site Architecture](SITE-ARCHITECTURE.md) - Current implementation
+
 ### Most Frequently Accessed
 - [Quick Reference](QUICK-REFERENCE.md) ⭐
 - [Page Status Tracker](debug/PAGE-STATUS.md) ⭐
-- [Booking Integration](debug/BOOKING-INTEGRATION.md) ⭐
-- [Site Architecture](SITE-ARCHITECTURE.md) ⭐
+- [Complete Project Summary](COMPLETE-PROJECT-SUMMARY.md) ⭐
 
 ### Templates
 - [Header Navigation](templates/HEADER-NAV.md)
@@ -458,31 +497,57 @@ less docs/debug/14-POINT-CHECKLIST.md
 
 ---
 
-## 🆕 Recent Updates (2025-10-09)
+## 🆕 Recent Updates (2025-10-10)
 
-### Dashboard Improvements
+### Architecture Vision & Roadmap (NEW - 2025-10-10)
+- **Architecture Vision Document**: Complete full-stack architecture plan
+  - Technology stack: React, Node.js, PostgreSQL, Redis, Elasticsearch
+  - Microservices: 8 services (User, Celebrity, Booking, Payment, etc.)
+  - Database schema: 12+ tables with complete ERD
+  - Payment processing: Stripe with Connect for payouts
+  - Real-time: WebSocket + Socket.io for chat and notifications
+  - Infrastructure: AWS ECS, RDS, S3, CloudFront
+  - Scalability: 4 phases from MVP to Enterprise
+  - **Document**: See [ARCHITECTURE-VISION.md](ARCHITECTURE-VISION.md)
+
+- **Implementation Roadmap**: Gap analysis and phased implementation
+  - Current completion: ~15% (frontend UI/UX complete, no backend)
+  - Phase 1 (3-4 months): MVP Foundation - backend API, auth, payments
+  - Phase 2 (2-3 months): Core Backend - microservices, real-time features
+  - Phase 3 (3-4 months): Frontend Migration - vanilla JS → React 18
+  - Phase 4 (2-3 months): Advanced Features - Elasticsearch, mobile apps
+  - Total timeline: 10-14 months with 3-5 developers
+  - **Document**: See [IMPLEMENTATION-ROADMAP.md](IMPLEMENTATION-ROADMAP.md)
+
+### Debug Documentation Consolidation (2025-10-10)
+- **Single Debug Log per Page**: Consolidated all page debug files
+  - `dashboard/debug-log.md` - 7 issues with labels [Sidebar], [Layout], [Mobile]
+  - `booking/debug-log.md` - 5 issues with labels [Integration], [JavaScript]
+  - `celebrity-profile/debug-log.md` - 10 issues with labels [Calendar], [Slots]
+- **Searchable Labels**: Easy to find recurring issues by label
+- **Chronological Format**: All issues in time order with Problem → Solution → Testing
+- **Archive System**: Old individual files moved to archive/ folders
+
+### Agent System Enhancement (2025-10-10)
+- **Consolidated Agents**: Reduced from 6+ agents to 3 core agents
+  - `debugging-agent.md` v2.0.0 - Now includes embedded DEBUG-PLAN standards
+  - `documentation-agent.md` v2.0.0 - Comprehensive 7-phase workflow
+  - `organization-agent.md` v3.0.0 - Handles ALL file organization
+- **Self-Contained Workflows**: Each agent includes standards, validation, and handoff
+- **Archived Legacy**: Old agents moved to archive/ folders
+
+### Dashboard Improvements (2025-10-09)
 - **Sidebar Layout Overhaul**: Flexbox-based layout replacing fixed positioning
 - **Mobile Overlay**: Click-outside-to-close with semi-transparent background
 - **Toggle Icon**: Changes from ☰ to ✕ when sidebar is open
 - **Issues Fixed**: #39-#45 (7 issues)
-- **Documentation**: See [debug/pages/dashboard/](debug/pages/dashboard/)
-
-### Debug Documentation Reorganization
-- **New Structure**: Page-specific folders under `debug/pages/`
-- **Better Navigation**: Each page folder has its own README
-- **Master Log Preserved**: `DEBUG-LOG.md` maintains chronological history
-- **Easier Debugging**: Find all dashboard issues in one folder
-- **Documentation**: See [debug/README.md](debug/README.md)
-
-### Celebrity Profile Enhancements
-- **Total Slots Fix**: Aggregates across all locations and dates
-- **Calendar Fix**: Only shows indicators for dates with availability
-- **Sync Fix**: Consistent slot counts between profile and booking
+- **Documentation**: See [debug/pages/dashboard/debug-log.md](debug/pages/dashboard/debug-log.md)
 
 ---
 
-**Last Updated**: 2025-10-09
+**Last Updated**: 2025-10-10
 **Documentation Status**: Active & Maintained ✅
-**Project Status**: Production Ready 🚀
-**Total Docs**: 25+ files (~12,000+ lines)
+**Current Implementation**: Frontend Complete (15% overall) 🚀
+**Architecture Vision**: Complete & Documented ✅
+**Total Docs**: 30+ files (~25,000+ lines)
 **Total Issues Fixed**: 45+
