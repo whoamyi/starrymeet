@@ -82,10 +82,19 @@ body {
     --bg-glass: rgba(26, 26, 26, 0.8);
     --bg-glass-dark: rgba(13, 13, 13, 0.9);
 
-    /* Text Colors - Optimized for Dark Background */
-    --text-primary: #FFFFFF;         /* Primary text - white */
-    --text-secondary: #A0A0A0;       /* Secondary text - light gray */
-    --text-tertiary: #6B6B6B;        /* Tertiary text - medium gray */
+    /* Text Colors - Dark Theme Hierarchy (STANDARD)
+
+       USE THIS HIERARCHY FOR ALL TEXT:
+       --text-primary: ALL headings (h1-h6), titles, important labels
+       --text-secondary: Body text, descriptions (if short)
+       --text-tertiary: Subtle labels, helper text, placeholders
+       --text-muted: Very subtle/disabled text
+
+       NEVER use dark colors for headings on dark backgrounds!
+    */
+    --text-primary: #FFFFFF;         /* Primary text - white (ALL HEADINGS) */
+    --text-secondary: #B0B0B0;       /* Secondary text - light gray (slightly brighter) */
+    --text-tertiary: #808080;        /* Tertiary text - medium gray */
     --text-inverse: #0D0D0D;         /* For light backgrounds */
     --text-muted: #505050;           /* Very subtle text */
 
