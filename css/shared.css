@@ -403,7 +403,7 @@ nav.scrolled {
     width: 85%;
     max-width: 400px;
     height: 100vh;
-    background: var(--white);
+    background: var(--bg-secondary);
     z-index: var(--z-modal);
     transition: right var(--transition-slow);
     box-shadow: var(--shadow-2xl);
@@ -439,7 +439,7 @@ nav.scrolled {
 }
 
 .mobile-menu-close:hover {
-    background: var(--gray-200);
+    background: var(--bg-tertiary);
     color: var(--primary);
     transform: rotate(90deg);
 }
@@ -543,15 +543,16 @@ nav.scrolled {
 
 /* Outline Button */
 .btn-outline {
-    background: white;
-    color: var(--primary);
+    background: transparent;
+    color: var(--text-primary);
     border: 2px solid var(--border-medium);
     box-shadow: var(--shadow-sm);
 }
 
 .btn-outline:hover {
     border-color: var(--primary);
-    background: var(--bg-secondary);
+    background: rgba(139, 92, 246, 0.1);
+    color: var(--primary);
     transform: translateY(-2px);
 }
 
@@ -645,20 +646,21 @@ nav.scrolled {
 }
 
 /* ========================================
-   CARD SYSTEM - ELEVATED & PREMIUM
+   CARD SYSTEM - ELEVATED & PREMIUM (DARK THEME)
    ======================================== */
 .card {
-    background: var(--white);
+    background: var(--bg-secondary);
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-sm);
+    box-shadow: var(--shadow-md);
     overflow: hidden;
     transition: var(--transition-base);
     border: 1px solid var(--border-light);
 }
 
 .card:hover {
-    box-shadow: var(--shadow-xl);
+    box-shadow: var(--shadow-glow-sm);
     transform: translateY(-4px);
+    border-color: rgba(139, 92, 246, 0.3);
 }
 
 .card-image {
@@ -674,13 +676,23 @@ nav.scrolled {
 .card-header {
     padding: var(--space-6) var(--space-8);
     border-bottom: 1px solid var(--border-light);
-    background: var(--bg-secondary);
+    background: var(--bg-tertiary);
 }
 
 .card-footer {
     padding: var(--space-6) var(--space-8);
     border-top: 1px solid var(--border-light);
-    background: var(--bg-secondary);
+    background: var(--bg-tertiary);
+}
+
+.card-title {
+    color: var(--text-primary);
+    font-weight: 700;
+    margin-bottom: var(--space-3);
+}
+
+.card-text {
+    color: var(--text-secondary);
 }
 
 /* Card Variants */
@@ -700,12 +712,12 @@ nav.scrolled {
 }
 
 .card-elevated:hover {
-    box-shadow: var(--shadow-2xl);
+    box-shadow: var(--shadow-glow-lg);
     transform: translateY(-8px);
 }
 
 /* ========================================
-   FORM STYLES - MODERN & CLEAN
+   FORM STYLES - MODERN & CLEAN (DARK THEME)
    ======================================== */
 .form-group {
     margin-bottom: var(--space-6);
@@ -730,7 +742,7 @@ nav.scrolled {
     font-size: var(--text-base);
     font-family: var(--font-sans);
     color: var(--text-primary);
-    background: var(--white);
+    background: var(--bg-tertiary);
     transition: var(--transition-base);
 }
 
@@ -1063,23 +1075,263 @@ footer::before {
 }
 
 /* ========================================
-   SCROLLBAR STYLING
+   SCROLLBAR STYLING (DARK THEME)
    ======================================== */
 ::-webkit-scrollbar {
     width: 12px;
 }
 
 ::-webkit-scrollbar-track {
-    background: var(--gray-100);
+    background: var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--gray-300);
+    background: var(--bg-tertiary);
     border-radius: var(--radius-full);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
+}
+
+/* ========================================
+   COMMON DARK THEME COMPONENTS
+   ======================================== */
+
+/* Section Containers */
+.section {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+}
+
+.section-header {
+    margin-bottom: var(--space-6);
+}
+
+.section-title {
+    color: var(--text-primary);
+    font-family: var(--font-display);
+    font-weight: 800;
+    margin-bottom: var(--space-3);
+}
+
+.section-subtitle,
+.section-description {
+    color: var(--text-secondary);
+    font-size: var(--text-lg);
+}
+
+/* Modal Styles */
+.modal {
+    position: fixed;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background: rgba(0, 0, 0, 0.8);
+    backdrop-filter: blur(4px);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: var(--z-modal);
+}
+
+.modal-content {
+    background: var(--bg-secondary);
+    border-radius: var(--radius-2xl);
+    padding: var(--space-8);
+    max-width: 500px;
+    width: 90%;
+    box-shadow: var(--shadow-2xl);
+    border: 1px solid var(--border-light);
+}
+
+.modal-title {
+    color: var(--text-primary);
+    font-size: var(--text-3xl);
+    font-weight: 800;
+    margin-bottom: var(--space-4);
+}
+
+.modal-body {
+    color: var(--text-secondary);
+    margin-bottom: var(--space-6);
+}
+
+/* Dropdown/Select Styles */
+select,
+.dropdown {
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    border: 2px solid var(--border-medium);
+    border-radius: var(--radius-lg);
+    padding: var(--space-3) var(--space-4);
+    font-family: var(--font-sans);
+    cursor: pointer;
+    transition: var(--transition-base);
+}
+
+select:hover,
+.dropdown:hover {
+    border-color: var(--primary);
+}
+
+select:focus,
+.dropdown:focus {
+    outline: none;
+    border-color: var(--primary);
+    box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+}
+
+/* Table Styles */
+table {
+    width: 100%;
+    border-collapse: collapse;
+    background: var(--bg-secondary);
+    border-radius: var(--radius-lg);
+    overflow: hidden;
+}
+
+thead {
+    background: var(--bg-tertiary);
+}
+
+th {
+    color: var(--text-primary);
+    font-weight: 700;
+    text-align: left;
+    padding: var(--space-4);
+    border-bottom: 2px solid var(--border-medium);
+}
+
+td {
+    color: var(--text-secondary);
+    padding: var(--space-4);
+    border-bottom: 1px solid var(--border-light);
+}
+
+tr:last-child td {
+    border-bottom: none;
+}
+
+tr:hover {
+    background: var(--bg-tertiary);
+}
+
+/* Alert/Notification Styles */
+.alert {
+    padding: var(--space-4) var(--space-6);
+    border-radius: var(--radius-lg);
+    border-left: 4px solid;
+    margin-bottom: var(--space-4);
+}
+
+.alert-success {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: var(--success);
+    color: var(--success);
+}
+
+.alert-error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: var(--error);
+    color: var(--error);
+}
+
+.alert-warning {
+    background: rgba(245, 158, 11, 0.1);
+    border-color: var(--warning);
+    color: var(--warning);
+}
+
+.alert-info {
+    background: rgba(59, 130, 246, 0.1);
+    border-color: var(--info);
+    color: var(--info);
+}
+
+/* Tooltip Styles */
+.tooltip {
+    position: relative;
+}
+
+.tooltip-text {
+    visibility: hidden;
+    background: var(--bg-tertiary);
+    color: var(--text-primary);
+    text-align: center;
+    padding: var(--space-2) var(--space-3);
+    border-radius: var(--radius-md);
+    position: absolute;
+    z-index: var(--z-tooltip);
+    bottom: 125%;
+    left: 50%;
+    transform: translateX(-50%);
+    white-space: nowrap;
+    font-size: var(--text-sm);
+    box-shadow: var(--shadow-lg);
+    border: 1px solid var(--border-light);
+}
+
+.tooltip:hover .tooltip-text {
+    visibility: visible;
+}
+
+/* Divider */
+.divider {
+    height: 1px;
+    background: var(--border-medium);
+    margin: var(--space-8) 0;
+}
+
+.divider-vertical {
+    width: 1px;
+    background: var(--border-medium);
+    margin: 0 var(--space-4);
+}
+
+/* Container */
+.container {
+    max-width: 1400px;
+    margin: 0 auto;
+    padding: 0 var(--space-8);
+}
+
+.container-sm {
+    max-width: 800px;
+}
+
+.container-lg {
+    max-width: 1600px;
+}
+
+/* Grid System */
+.grid {
+    display: grid;
+    gap: var(--space-6);
+}
+
+.grid-cols-2 {
+    grid-template-columns: repeat(2, 1fr);
+}
+
+.grid-cols-3 {
+    grid-template-columns: repeat(3, 1fr);
+}
+
+.grid-cols-4 {
+    grid-template-columns: repeat(4, 1fr);
+}
+
+@media (max-width: 768px) {
+    .grid-cols-2,
+    .grid-cols-3,
+    .grid-cols-4 {
+        grid-template-columns: 1fr;
+    }
 }
 
 /* ========================================
