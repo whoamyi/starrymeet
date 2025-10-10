@@ -24,10 +24,10 @@
         /* Page-specific styles for index.html */
         /* Navigation styles moved to shared.css - using global nav styles */
 
-        /* Hero Section - Premium Redesign */
+        /* Hero Section - Dark Elegant Theme */
         .hero {
             margin-top: var(--nav-height);
-            background: var(--primary-gradient);
+            background: var(--bg-primary);  /* Rich black background */
             padding: clamp(4rem, 10vw, 8rem) var(--space-4) clamp(5rem, 12vw, 10rem);
             text-align: center;
             position: relative;
@@ -41,7 +41,7 @@
             right: -20%;
             width: 800px;
             height: 800px;
-            background: radial-gradient(circle, rgba(255, 255, 255, 0.15) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);  /* Subtle purple glow */
             border-radius: 50%;
             animation: float 20s infinite ease-in-out;
         }
@@ -53,7 +53,7 @@
             left: -10%;
             width: 600px;
             height: 600px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.2) 0%, transparent 70%);
+            background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%);  /* Subtle gold glow */
             border-radius: 50%;
             animation: float 15s infinite ease-in-out reverse;
         }
@@ -76,27 +76,27 @@
             font-weight: 900;
             line-height: 1.1;
             margin-bottom: var(--space-4);
-            color: var(--white);
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+            color: var(--white);  /* Pure white on dark background */
+            text-shadow: 0 2px 40px rgba(139, 92, 246, 0.3);  /* Subtle purple glow on text */
             animation: fadeInUp 0.8s var(--ease-bounce);
         }
 
         .hero p {
             font-size: clamp(1.1rem, 2vw, 1.5rem);
-            color: rgba(255, 255, 255, 0.95);
+            color: var(--text-secondary);  /* Light gray for contrast */
             margin-bottom: var(--space-6);
             animation: fadeInUp 0.8s var(--ease-bounce) 0.2s backwards;
             line-height: 1.6;
         }
 
-        /* Search Container - Premium Glass Design */
+        /* Search Container - Dark Glass Design */
         .search-container {
-            background: rgba(255, 255, 255, 0.95);
+            background: var(--bg-secondary);  /* Dark surface */
             backdrop-filter: blur(10px) saturate(180%);
             -webkit-backdrop-filter: blur(10px) saturate(180%);
             border-radius: var(--radius-full);
             padding: var(--space-2);
-            box-shadow: var(--shadow-2xl), 0 0 0 1px rgba(0, 0, 0, 0.05);
+            box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-medium);
             display: flex;
             gap: var(--space-2);
             max-width: 700px;
@@ -107,19 +107,24 @@
         .search-input, .date-input {
             flex: 1;
             padding: var(--space-3) var(--space-4);
-            border: none;
-            background: var(--gray-50);
+            border: 1px solid var(--border-medium);
+            background: var(--bg-tertiary);  /* Slightly lighter dark surface */
             border-radius: var(--radius-full);
             font-size: var(--text-base);
             font-family: var(--font-body);
             outline: none;
             transition: var(--transition-base);
-            color: var(--gray-900);
+            color: var(--white);  /* White text */
+        }
+
+        .search-input::placeholder, .date-input::placeholder {
+            color: var(--text-tertiary);  /* Subtle gray for placeholder */
         }
 
         .search-input:focus, .date-input:focus {
-            background: var(--white);
-            box-shadow: var(--shadow-md);
+            background: var(--bg-secondary);
+            border-color: var(--primary);  /* Purple border on focus */
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);  /* Subtle purple glow */
             transform: scale(1.02);
         }
 
@@ -508,7 +513,7 @@
         }
 
         .category-card {
-            background: var(--primary-gradient);
+            background: var(--bg-secondary);  /* Dark surface instead of purple */
             padding: var(--space-8) var(--space-4);
             border-radius: var(--radius-2xl);
             text-align: center;
@@ -516,7 +521,8 @@
             transition: var(--transition-slow);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-lg);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
         }
 
         .category-card::before {
@@ -526,7 +532,7 @@
             left: 0;
             right: 0;
             bottom: 0;
-            background: linear-gradient(135deg, transparent, rgba(255, 255, 255, 0.2));
+            background: linear-gradient(135deg, transparent, rgba(139, 92, 246, 0.1));  /* Subtle purple on hover */
             opacity: 0;
             transition: var(--transition-base);
         }
@@ -537,7 +543,8 @@
 
         .category-card:hover {
             transform: translateY(-8px);
-            box-shadow: var(--shadow-glow-xl);
+            box-shadow: var(--shadow-glow-sm);  /* Subtle purple glow */
+            border-color: rgba(139, 92, 246, 0.3);
         }
 
         .category-icon {
@@ -562,8 +569,10 @@
 
         /* Trust Section - Premium Dark */
         .trust-section {
-            background: var(--primary-gradient);
+            background: var(--bg-tertiary);  /* Slightly elevated dark surface */
             color: var(--white);
+            border-top: 1px solid var(--border-light);
+            border-bottom: 1px solid var(--border-light);
         }
 
         .trust-section .section-header h2,
