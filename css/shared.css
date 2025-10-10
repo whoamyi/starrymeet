@@ -170,6 +170,11 @@ body {
     --z-modal: 1050;
     --z-popover: 1060;
     --z-tooltip: 1070;
+
+    /* Layout */
+    --nav-height: 80px;
+    --footer-height: auto;
+    --max-width: 1400px;
 }
 
 /* ========================================
@@ -232,9 +237,12 @@ a:hover {
 }
 
 /* ========================================
-   NAVIGATION - GLASS MORPHISM
+   NAVIGATION - GLASS MORPHISM (UNIVERSAL)
    ======================================== */
-nav {
+nav,
+header,
+.header,
+.navbar {
     position: fixed;
     top: 0;
     left: 0;
@@ -248,7 +256,9 @@ nav {
     transition: var(--transition-base);
 }
 
-nav.scrolled {
+nav.scrolled,
+header.scrolled,
+.header.scrolled {
     background: rgba(13, 13, 13, 0.98);
     box-shadow: var(--shadow-md);
 }
@@ -861,14 +871,15 @@ nav.scrolled {
 }
 
 /* ========================================
-   FOOTER - DARK & ELEGANT
+   FOOTER - DARK & ELEGANT (UNIVERSAL)
    ======================================== */
 footer {
-    background: var(--gray-950);
-    color: var(--gray-300);
+    background: var(--black);
+    color: var(--text-secondary);
     padding: var(--space-20) var(--space-8) var(--space-8);
     position: relative;
     overflow: hidden;
+    margin-top: var(--space-20);
 }
 
 footer::before {
@@ -878,7 +889,7 @@ footer::before {
     left: 0;
     right: 0;
     height: 1px;
-    background: linear-gradient(90deg, transparent, var(--primary), transparent);
+    background: linear-gradient(90deg, transparent, var(--accent), transparent);
 }
 
 .footer-container {
@@ -888,6 +899,13 @@ footer::before {
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: var(--space-12);
     margin-bottom: var(--space-12);
+    justify-content: space-between;
+    align-items: start;
+}
+
+.footer-section {
+    display: flex;
+    flex-direction: column;
 }
 
 .footer-section h3 {
@@ -909,10 +927,11 @@ footer::before {
 }
 
 .footer-section a {
-    color: var(--gray-400);
+    color: var(--text-secondary);
     text-decoration: none;
     transition: var(--transition-base);
     font-size: var(--text-sm);
+    display: inline-block;
 }
 
 .footer-section a:hover {
@@ -920,12 +939,28 @@ footer::before {
     padding-left: var(--space-2);
 }
 
+.footer-section p {
+    color: var(--text-secondary);
+    font-size: var(--text-sm);
+    line-height: 1.8;
+}
+
 .footer-bottom {
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
+    border-top: 1px solid var(--border-light);
     padding-top: var(--space-8);
     text-align: center;
-    color: var(--gray-500);
+    color: var(--text-tertiary);
     font-size: var(--text-sm);
+    max-width: 1400px;
+    margin: 0 auto;
+}
+
+@media (max-width: 768px) {
+    .footer-container {
+        grid-template-columns: 1fr;
+        gap: var(--space-8);
+        text-align: center;
+    }
 }
 
 /* ========================================
@@ -1358,6 +1393,267 @@ tr:hover {
         --text-5xl: 2rem;
         --text-4xl: 1.75rem;
     }
+}
+
+/* ========================================
+   UNIVERSAL DARK THEME RULES
+   ======================================== */
+
+/* ALL containers and boxes should be dark */
+.container,
+.box,
+.panel,
+.wrapper,
+.content,
+.main-content,
+.page-container,
+.content-wrapper,
+[class*="container"],
+[class*="-box"],
+[class*="-card"],
+[class*="-panel"] {
+    background: var(--bg-secondary);
+    color: var(--text-primary);
+}
+
+/* Nested boxes/cards inside containers */
+.container .box,
+.container .card,
+.container .panel,
+.section .card,
+.section .box,
+[class*="container"] [class*="-card"],
+[class*="container"] [class*="-box"] {
+    background: var(--bg-tertiary);
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-lg);
+}
+
+/* Universal hover effect for all interactive cards/boxes */
+.card:hover,
+.box:hover,
+[class*="-card"]:hover,
+[class*="-box"]:hover,
+[class*="-item"]:hover {
+    box-shadow: var(--shadow-glow-sm);
+    border-color: rgba(139, 92, 246, 0.3);
+    transform: translateY(-2px);
+}
+
+/* All buttons have consistent hover behavior */
+button,
+.btn,
+[class*="btn-"],
+[type="button"],
+[type="submit"] {
+    transition: all var(--transition-base);
+    font-weight: 600;
+    cursor: pointer;
+}
+
+button:hover:not(:disabled),
+.btn:hover:not(:disabled),
+[class*="btn-"]:hover:not(:disabled) {
+    box-shadow: var(--shadow-glow-sm);
+    transform: translateY(-2px);
+}
+
+button:active:not(:disabled),
+.btn:active:not(:disabled) {
+    transform: translateY(0);
+}
+
+button:disabled,
+.btn:disabled,
+.btn.disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+    transform: none !important;
+}
+
+/* Text on dark backgrounds - UNIVERSAL RULE */
+.card *,
+.box *,
+.section *,
+.panel *,
+.container *,
+[class*="-card"] *,
+[class*="-box"] * {
+    /* Headings are white */
+}
+
+.card h1, .card h2, .card h3, .card h4, .card h5, .card h6,
+.box h1, .box h2, .box h3, .box h4, .box h5, .box h6,
+.section h1, .section h2, .section h3, .section h4, .section h5, .section h6,
+.panel h1, .panel h2, .panel h3, .panel h4, .panel h5, .panel h6,
+[class*="-title"],
+[class*="-heading"],
+.title,
+.heading,
+.name,
+.label,
+dt,
+legend,
+summary {
+    color: var(--text-primary) !important;
+}
+
+/* Descriptions/body text are light gray */
+.card p,
+.box p,
+.section p,
+.panel p,
+[class*="-description"],
+[class*="-text"],
+[class*="-subtitle"],
+.description,
+.subtitle,
+dd {
+    color: var(--text-secondary) !important;
+}
+
+/* Small text / hints / metadata */
+small,
+.small,
+[class*="-meta"],
+[class*="-hint"],
+[class*="-helper"],
+.meta,
+.hint {
+    color: var(--text-tertiary) !important;
+    font-size: var(--text-sm);
+}
+
+/* All lists */
+ul, ol {
+    color: var(--text-secondary);
+}
+
+ul li, ol li {
+    color: var(--text-secondary);
+}
+
+/* Links inside dark containers */
+.card a:not(.btn),
+.box a:not(.btn),
+.section a:not(.btn),
+.panel a:not(.btn) {
+    color: var(--primary);
+    text-decoration: none;
+}
+
+.card a:not(.btn):hover,
+.box a:not(.btn):hover,
+.section a:not(.btn):hover,
+.panel a:not(.btn):hover {
+    color: var(--primary-light);
+    text-decoration: underline;
+}
+
+/* All main page areas should have dark background */
+main,
+.main,
+.page,
+.page-wrapper,
+body {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+/* Hero sections */
+.hero,
+[class*="hero-"] {
+    background: var(--bg-primary);
+    color: var(--text-primary);
+}
+
+.hero h1, .hero h2 {
+    color: var(--white) !important;
+}
+
+.hero p {
+    color: var(--text-secondary) !important;
+}
+
+/* Ensure all input elements are dark */
+input:not([type="radio"]):not([type="checkbox"]),
+textarea,
+select {
+    background: var(--bg-tertiary) !important;
+    color: var(--text-primary) !important;
+    border: 2px solid var(--border-medium) !important;
+}
+
+input::placeholder,
+textarea::placeholder {
+    color: var(--text-tertiary) !important;
+}
+
+/* Checkboxes and radio buttons */
+input[type="checkbox"],
+input[type="radio"] {
+    cursor: pointer;
+}
+
+/* All labels */
+label {
+    color: var(--text-primary);
+    font-weight: 600;
+}
+
+/* Status indicators */
+.status,
+.badge,
+[class*="-status"],
+[class*="-badge"] {
+    font-size: var(--text-xs);
+    font-weight: 700;
+    padding: var(--space-1) var(--space-3);
+    border-radius: var(--radius-full);
+}
+
+/* Images maintain their natural appearance */
+img {
+    border-radius: var(--radius-lg);
+}
+
+/* Horizontal rules / dividers */
+hr {
+    border: none;
+    height: 1px;
+    background: var(--border-medium);
+    margin: var(--space-8) 0;
+}
+
+/* Code blocks */
+code,
+pre {
+    background: var(--bg-tertiary);
+    color: var(--primary-light);
+    padding: var(--space-1) var(--space-2);
+    border-radius: var(--radius-sm);
+    font-family: 'Courier New', monospace;
+    font-size: 0.9em;
+}
+
+pre {
+    padding: var(--space-4);
+    overflow-x: auto;
+    border: 1px solid var(--border-light);
+}
+
+pre code {
+    background: none;
+    padding: 0;
+}
+
+/* Blockquotes */
+blockquote {
+    border-left: 4px solid var(--primary);
+    padding-left: var(--space-4);
+    margin: var(--space-6) 0;
+    color: var(--text-secondary);
+    font-style: italic;
 }
 
 /* ========================================
