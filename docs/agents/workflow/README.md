@@ -14,7 +14,34 @@ This folder contains agents that coordinate development workflows, manage git op
 
 ## Agents in This Category
 
-Currently empty - ready for future workflow agents.
+### redesign-agent.md (v1.0.0) ✅ ACTIVE
+**Purpose**: Systematic approach to major design/styling overhauls
+
+**When to Use**:
+- User requests design improvements ("make it look premium")
+- Platform redesign needed (e.g., "like Cameo")
+- Creating new design system
+- Major styling overhaul
+
+**Features**:
+- Analysis phase (identifies current issues)
+- Design system planning
+- Phased implementation (foundation → pages → polish)
+- Visual QA checklist
+- Handoff protocols to documentation/organization agents
+
+**Example**:
+```
+User: "Make StarryMeet look like a million-dollar platform"
+↓
+Redesign Agent:
+1. Analyzes current design issues
+2. Creates design system v2.0
+3. Updates shared.css with premium styles
+4. Updates pages one by one
+5. Tests responsive + accessibility
+6. Hands off to documentation agent
+```
 
 ---
 
