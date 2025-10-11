@@ -513,58 +513,61 @@
         }
 
         .category-card {
-            background: var(--bg-secondary);  /* Dark surface instead of purple */
-            padding: var(--space-8) var(--space-4);
+            padding: var(--space-12) var(--space-6);
             border-radius: var(--radius-2xl);
             text-align: center;
             cursor: pointer;
-            transition: var(--transition-slow);
+            transition: var(--transition-base);
             position: relative;
             overflow: hidden;
-            box-shadow: var(--shadow-md);
-            border: 1px solid var(--border-light);
+            box-shadow: none;
+            border: none;
         }
 
-        .category-card::before {
-            content: '';
-            position: absolute;
-            top: 0;
-            left: 0;
-            right: 0;
-            bottom: 0;
-            background: linear-gradient(135deg, transparent, rgba(139, 92, 246, 0.1));  /* Subtle purple on hover */
-            opacity: 0;
-            transition: var(--transition-base);
+        /* Cameo-style vibrant gradients for each category */
+        .category-card:nth-child(1) {
+            background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);  /* Purple - Hollywood */
         }
 
-        .category-card:hover::before {
-            opacity: 1;
+        .category-card:nth-child(2) {
+            background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);  /* Pink - K-Drama */
+        }
+
+        .category-card:nth-child(3) {
+            background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);  /* Orange - Business */
+        }
+
+        .category-card:nth-child(4) {
+            background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);  /* Blue - Athletes */
+        }
+
+        .category-card:nth-child(5) {
+            background: linear-gradient(135deg, #5EEAD4 0%, #14B8A6 100%);  /* Teal - Musicians */
         }
 
         .category-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-glow-sm);  /* Subtle purple glow */
-            border-color: rgba(139, 92, 246, 0.3);
+            transform: translateY(-6px);
+            box-shadow: var(--shadow-glow-lg);
         }
 
         .category-icon {
-            font-size: 3.5rem;
-            margin-bottom: var(--space-3);
-            filter: drop-shadow(0 4px 8px rgba(0, 0, 0, 0.2));
+            font-size: 4rem;
+            margin-bottom: var(--space-4);
+            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
         }
 
         .category-card h3 {
-            color: var(--white);
-            font-family: var(--font-display);
+            color: white;
+            font-family: var(--font-sans);  /* Modern sans-serif */
             font-size: var(--text-2xl);
-            font-weight: 800;
+            font-weight: 700;
             margin-bottom: var(--space-2);
         }
 
         .category-count {
             color: rgba(255, 255, 255, 0.95);
             font-size: var(--text-base);
-            font-weight: 600;
+            font-weight: 500;
         }
 
         /* Trust Section - Premium Dark */
