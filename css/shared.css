@@ -179,46 +179,52 @@ body {
 }
 
 /* ========================================
-   TYPOGRAPHY
+   TYPOGRAPHY - CAMEO-INSPIRED MINIMAL ELEGANCE
    ======================================== */
 h1, h2, h3, h4, h5, h6 {
     font-weight: 700;
-    line-height: 1.2;
+    line-height: 1.1;  /* Tighter for modern look */
     color: var(--text-primary);
     letter-spacing: -0.02em;
     margin: 0;
 }
 
 h1 {
-    font-size: var(--text-6xl);
-    font-family: var(--font-display);
+    font-size: var(--text-5xl);  /* Reduced from 6xl - more restrained like Cameo */
+    font-family: var(--font-sans);  /* Sans-serif for cleaner look */
     font-weight: 800;
 }
 
 h2 {
-    font-size: var(--text-5xl);
-    font-family: var(--font-display);
+    font-size: var(--text-4xl);  /* Reduced from 5xl */
+    font-family: var(--font-sans);
+    font-weight: 700;
 }
 
 h3 {
-    font-size: var(--text-4xl);
+    font-size: var(--text-3xl);
+    font-weight: 700;
 }
 
 h4 {
-    font-size: var(--text-3xl);
+    font-size: var(--text-2xl);
+    font-weight: 600;
 }
 
 h5 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-xl);
+    font-weight: 600;
 }
 
 h6 {
-    font-size: var(--text-xl);
+    font-size: var(--text-lg);
+    font-weight: 600;
 }
 
 p {
     margin: 0;
     color: var(--text-secondary);
+    line-height: 1.6;
 }
 
 a {
@@ -232,9 +238,9 @@ a:hover {
 }
 
 @media (max-width: 768px) {
-    h1 { font-size: var(--text-5xl); }
-    h2 { font-size: var(--text-4xl); }
-    h3 { font-size: var(--text-3xl); }
+    h1 { font-size: var(--text-4xl); }
+    h2 { font-size: var(--text-3xl); }
+    h3 { font-size: var(--text-2xl); }
 }
 
 /* ========================================
@@ -487,7 +493,7 @@ header.scrolled,
     justify-content: center;
     gap: var(--space-2);
     padding: var(--space-4) var(--space-8);
-    border-radius: var(--radius-lg);
+    border-radius: var(--radius-full);  /* Fully rounded like Cameo */
     font-weight: 700;
     font-size: var(--text-base);
     font-family: var(--font-sans);
@@ -519,22 +525,23 @@ header.scrolled,
     height: 300px;
 }
 
-/* Primary Button - Gradient with Glow */
+/* Primary Button - Gradient with Glow (Cameo Style) */
 .btn-primary {
     background: var(--primary-gradient);
     color: white;
-    box-shadow: var(--shadow-md);
+    box-shadow: none;  /* Clean, no shadow by default */
     position: relative;
     z-index: 1;
+    border: none;
 }
 
 .btn-primary:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow-lg);
+    transform: translateY(-3px);  /* Slightly more lift */
+    box-shadow: var(--shadow-glow-md);  /* Subtle glow on hover */
 }
 
 .btn-primary:active {
-    transform: translateY(0);
+    transform: translateY(-1px);  /* Stay slightly elevated */
 }
 
 /* Secondary Button - Ghost with Border */
@@ -725,6 +732,98 @@ header.scrolled,
 .card-elevated:hover {
     box-shadow: var(--shadow-glow-lg);
     transform: translateY(-8px);
+}
+
+/* ========================================
+   CAMEO-INSPIRED GRADIENT CARDS
+   ======================================== */
+/* These are vibrant gradient cards like Cameo's occasion cards */
+
+.card-gradient-purple {
+    background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-purple * {
+    color: white !important;
+}
+
+.card-gradient-pink {
+    background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-pink * {
+    color: white !important;
+}
+
+.card-gradient-red {
+    background: linear-gradient(135deg, #FCA5A5 0%, #EF4444 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-red * {
+    color: white !important;
+}
+
+.card-gradient-blue {
+    background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-blue * {
+    color: white !important;
+}
+
+.card-gradient-teal {
+    background: linear-gradient(135deg, #5EEAD4 0%, #14B8A6 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-teal * {
+    color: white !important;
+}
+
+.card-gradient-lime {
+    background: linear-gradient(135deg, #BEF264 0%, #84CC16 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-lime * {
+    color: white !important;
+}
+
+.card-gradient-orange {
+    background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);
+    border: none;
+    color: white;
+}
+
+.card-gradient-orange * {
+    color: white !important;
+}
+
+.card-gradient-gold {
+    background: var(--accent-gradient);
+    border: none;
+    color: white;
+}
+
+.card-gradient-gold * {
+    color: white !important;
+}
+
+/* Gradient cards have no border on hover */
+[class*="card-gradient"]:hover {
+    border: none;
+    box-shadow: var(--shadow-glow-lg);
+    transform: translateY(-4px);
 }
 
 /* ========================================
