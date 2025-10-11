@@ -1122,8 +1122,13 @@ footer::before {
 }
 
 /* ========================================
-   SCROLLBAR STYLING (DARK THEME)
+   SCROLLBAR STYLING (DARK THEME) - ALWAYS VISIBLE
    ======================================== */
+html {
+    overflow-y: scroll;  /* Force scrollbar to always show */
+    scrollbar-gutter: stable;  /* Reserve space for scrollbar */
+}
+
 ::-webkit-scrollbar {
     width: 12px;
 }
@@ -1133,12 +1138,19 @@ footer::before {
 }
 
 ::-webkit-scrollbar-thumb {
-    background: var(--bg-tertiary);
+    background: rgba(139, 92, 246, 0.4);  /* Always visible purple tint */
     border-radius: var(--radius-full);
+    border: 2px solid var(--bg-primary);
 }
 
 ::-webkit-scrollbar-thumb:hover {
     background: var(--primary);
+}
+
+/* Firefox scrollbar support */
+* {
+    scrollbar-width: thin;
+    scrollbar-color: rgba(139, 92, 246, 0.4) var(--bg-primary);
 }
 
 /* ========================================
@@ -1582,11 +1594,17 @@ body {
     color: var(--white);
 }
 
-/* Hero sections - PURE BLACK */
+/* Hero sections - TRANSPARENT (allows page-specific gradients) */
 .hero,
 [class*="hero-"] {
-    background: #000000 !important;
+    /* NO background override - allows page-specific gradients to show through */
     color: var(--white);
+}
+
+.hero .hero-content,
+.hero-content,
+[class*="hero-content"] {
+    background: transparent !important;
 }
 
 .hero h1, .hero h2 {
@@ -1595,6 +1613,18 @@ body {
 
 .hero p {
     color: var(--text-secondary) !important;
+}
+
+/* Price Elements - Modern Clean Font with White Color */
+.price,
+span.price,
+[class*="-price"],
+[class*="price-"] {
+    color: #FFFFFF !important;
+    font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif !important;
+    font-weight: 700 !important;
+    font-size: var(--text-2xl) !important;
+    letter-spacing: -0.02em !important;
 }
 
 /* Ensure all input elements are PURE BLACK */
