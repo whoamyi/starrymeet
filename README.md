@@ -2,9 +2,21 @@
 
 > Connect fans with their icons through authentic, unforgettable experiences
 
+**Version**: 2.0.0
+**Design System**: Cameo-Inspired Luxury Minimal
+**Status**: Production Ready ✅
+
 ## 🌟 Overview
 
 StarryMeet is a premium platform that enables fans to book one-on-one meetings with verified celebrities. The platform features 35 celebrities across multiple categories including Hollywood stars, K-Drama icons, business leaders, athletes, and musicians.
+
+### Design Philosophy (v2.0)
+Inspired by Cameo's sophisticated aesthetics, StarryMeet v2.0 features:
+- **Pure Black Theme** (#000000) with luxury purple and gold accents
+- **Minimal Elegance** - Restrained typography, clean lines, breathing room
+- **Vibrant Gradients** - 8 Cameo-style gradient card variants for emphasis
+- **Gold Verified Badges** - Luxury gold gradient accents for verified elements
+- **Subtle Interactions** - Gentle hover effects, smooth transitions
 
 ## 📋 Features
 
@@ -72,10 +84,39 @@ saveToWatchlist(name)        // Save celebrity
 navigateToPage(page, params) // Navigate with params
 ```
 
+## 🎨 Design System (v2.0)
+
+### Key Features
+- **Typography**: Inter sans-serif, restrained sizing (h1: 48px, h2: 36px)
+- **Buttons**: Fully rounded with gradient backgrounds, subtle hover glows
+- **Cards**: 8 vibrant gradient variants (purple, pink, red, blue, teal, lime, orange, gold)
+- **Badges**: Gold gradient verified badges with uppercase styling
+- **Colors**: Pure black backgrounds (#000000) with purple (#8B5CF6) and gold (#F59E0B) accents
+- **Shadows**: Extremely subtle purple-tinted glows (like a mirage)
+
+### CSS Architecture
+- **Variables**: Complete design token system in `css/shared.css`
+- **Universal Dark Theme**: All pages use consistent #000000 backgrounds
+- **Responsive**: Mobile-first design with tablet and desktop breakpoints
+
 ## 📄 Documentation
 
-See `INTEGRATION.md` for complete integration guide.
+### Essential Docs
+- `docs/QUICK-REFERENCE.md` - Fast lookup for common tasks
+- `docs/SITE-ARCHITECTURE.md` - Complete architecture with v2.0 design system
+- `docs/design/DESIGN-SYSTEM-V2.md` - Complete design system specifications
+- `docs/design/REDESIGN-QA-CHECKLIST.md` - Quality assurance checklist
+- `INTEGRATION.md` - Integration guide
+
+### Recent Updates (v2.0)
+- **Typography Refinement**: Reduced h1 from 60px to 48px, h2 from 48px to 36px
+- **Button Enhancement**: Fully rounded corners, gradient backgrounds, subtle hover glows
+- **Gradient Cards**: Added 8 Cameo-style gradient card variants for emphasis
+- **Gold Verified Badges**: Luxury gold gradient with uppercase styling
+- **Pure Black Theme**: All pages use #000000 backgrounds consistently
+- **Legal Pages Fixed**: Removed inline CSS conflicts from privacy.html and terms.html
 
 ---
 
-**Built with Claude Code** - Version 1.0
+**Built with Claude Code** - Version 2.0.0
+**Design System**: v2.0 - Cameo-Inspired Luxury Minimal

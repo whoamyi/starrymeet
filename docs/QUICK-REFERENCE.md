@@ -1,7 +1,8 @@
 # Quick Reference Guide - StarryMeet
 
 **Purpose**: Rapid lookup for common tasks and information
-**Last Updated**: 2025-10-10
+**Last Updated**: 2025-10-11
+**Design System**: v2.0 - Cameo-Inspired Luxury Minimal
 
 ---
 
@@ -346,20 +347,62 @@ try {
 
 ## 🎨 CSS Variables (from css/shared.css)
 
+### Design System v2.0 (Cameo-Inspired)
+
+**Primary Colors**:
 ```css
---purple: #6B46C1          /* Primary brand color */
---purple-dark: #553C9A     /* Hover states */
---purple-light: #8B5CF6    /* Gradients */
---gold: #D4AF37            /* Premium accents */
---green: #10B981           /* Success states */
---white: #FFFFFF
---gray-50: #F9FAFB         /* Light backgrounds */
---gray-100: #F3F4F6
---gray-200: #E5E7EB        /* Borders */
---gray-600: #4B5563        /* Body text */
---gray-700: #374151
---gray-800: #1F2937
---gray-900: #111827        /* Headers */
+--primary: #8B5CF6              /* Electric Violet */
+--primary-dark: #7C3AED         /* Deep Violet */
+--primary-light: #A78BFA        /* Soft Violet */
+--primary-gradient: linear-gradient(135deg, #8B5CF6 0%, #EC4899 100%);
+```
+
+**Accent Colors (Luxury Gold)**:
+```css
+--accent: #F59E0B               /* Amber Gold */
+--accent-dark: #D97706          /* Deep Amber */
+--accent-light: #FCD34D         /* Light Gold */
+--accent-gradient: linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%);
+```
+
+**Dark Theme Colors**:
+```css
+--black: #000000                /* Pure black - ONLY background */
+--white: #FFFFFF                /* Pure white - primary text */
+--text-primary: #FFFFFF         /* Headings, important text */
+--text-secondary: #B0B0B0       /* Body text, descriptions */
+--text-tertiary: #808080        /* Subtle labels, helper text */
+--text-muted: #505050           /* Very subtle text */
+```
+
+**Border Colors (Subtle Purple Tint)**:
+```css
+--border-light: rgba(139, 92, 246, 0.08);    /* Subtle purple borders */
+--border-medium: rgba(139, 92, 246, 0.12);   /* Medium borders */
+--border-dark: rgba(139, 92, 246, 0.16);     /* Visible borders */
+--border-gold: rgba(245, 158, 11, 0.12);     /* Gold accent borders */
+```
+
+**Typography (Restrained Sizing)**:
+```css
+--text-xs: 0.75rem;      /* 12px */
+--text-sm: 0.875rem;     /* 14px */
+--text-base: 1rem;       /* 16px */
+--text-lg: 1.125rem;     /* 18px */
+--text-xl: 1.25rem;      /* 20px */
+--text-2xl: 1.5rem;      /* 24px */
+--text-3xl: 1.875rem;    /* 30px */
+--text-4xl: 2.25rem;     /* 36px - h2 size */
+--text-5xl: 3rem;        /* 48px - h1 size */
+--text-6xl: 3.75rem;     /* 60px */
+```
+
+**Shadows (Extremely Subtle)**:
+```css
+--shadow-glow-sm: 0 0 12px rgba(139, 92, 246, 0.06);   /* Barely visible */
+--shadow-glow-md: 0 0 16px rgba(139, 92, 246, 0.07);   /* Subtle */
+--shadow-glow-lg: 0 0 24px rgba(139, 92, 246, 0.09);   /* More visible */
+--shadow-gold-glow: 0 0 20px rgba(245, 158, 11, 0.08); /* Gold glow */
 ```
 
 ---
@@ -557,8 +600,98 @@ http://localhost:8000/dashboard.html
 - **Calendar Fix**: Only shows indicators for dates with actual availability
 - **Location Integration**: Book Now buttons pass location context correctly
 
+## 🎨 New Design System Classes (v2.0)
+
+### Gradient Cards (Cameo-Style)
+**8 vibrant gradient variants** for emphasis:
+```html
+<div class="card card-gradient-purple">Content</div>
+<div class="card card-gradient-pink">Content</div>
+<div class="card card-gradient-red">Content</div>
+<div class="card card-gradient-blue">Content</div>
+<div class="card card-gradient-teal">Content</div>
+<div class="card card-gradient-lime">Content</div>
+<div class="card card-gradient-orange">Content</div>
+<div class="card card-gradient-gold">Content</div>
+```
+
+**Features**:
+- No borders (clean look)
+- White text automatically applied
+- Enhanced hover: translateY(-4px) + glow
+- Use sparingly for emphasis only
+
+**Usage Example** (index.html categories):
+```html
+<div class="category-card card-gradient-purple">
+    <div class="category-icon">🎬</div>
+    <h3>Hollywood</h3>
+    <p>150+ celebrities</p>
+</div>
+```
+
+### Verified Badge (Gold Luxury)
+**Universal gold gradient badge** for verified elements:
+```css
+.verified-badge {
+    background: var(--accent-gradient);  /* Gold gradient */
+    color: white;
+    font-weight: 800;
+    text-transform: uppercase;
+    letter-spacing: 0.05em;
+    box-shadow: var(--shadow-gold-glow);
+}
+```
+
+**Usage**:
+```html
+<span class="verified-badge">✓ Verified</span>
+```
+
+### Button System (Enhanced)
+**Primary Button** (Gradient + Fully Rounded):
+```css
+.btn-primary {
+    background: var(--primary-gradient);
+    border-radius: var(--radius-full);  /* Fully rounded */
+    box-shadow: none;  /* Clean default */
+}
+
+.btn-primary:hover {
+    transform: translateY(-3px);
+    box-shadow: var(--shadow-glow-md);  /* Subtle glow on hover */
+}
+```
+
+### Card System
+**Standard Cards** (Pure Black):
+```css
+.card {
+    background: #000000;
+    border: 1px solid var(--border-light);
+    border-radius: var(--radius-2xl);  /* 32px */
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    box-shadow: var(--shadow-glow-sm);
+    border-color: rgba(139, 92, 246, 0.2);
+}
+```
+
+### Typography (v2.0 Changes)
+**Heading Sizes** (Reduced for minimal elegance):
+- h1: 48px (reduced from 60px)
+- h2: 36px (reduced from 48px)
+- h3: 30px (same)
+- h4: 24px (weight 600)
+- Line-height: 1.1 (tightened from 1.2)
+- Font-family: Inter sans-serif (cleaner look)
+
 ---
 
-**Quick Reference Last Updated**: 2025-10-09
+**Quick Reference Last Updated**: 2025-10-11
+**Design System Version**: v2.0 - Cameo-Inspired
 **Project Status**: Production Ready ✅
 **Total Issues Fixed**: 45
+**Major Redesign**: Complete

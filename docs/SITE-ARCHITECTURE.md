@@ -1,21 +1,24 @@
 # StarryMeet Site Architecture & Page Interactions
 
-**Last Updated**: 2025-10-10
-**Version**: 1.2.0
+**Last Updated**: 2025-10-11
+**Version**: 2.0.0
+**Design System**: v2.0 - Cameo-Inspired Luxury Minimal
 
 > **Note**: This document describes the **current implementation** (as-built).
 > For the **target architecture vision** (full-stack plan), see: [ARCHITECTURE-VISION.md](ARCHITECTURE-VISION.md)
 > For the **gap analysis** (what's left to build), see: [IMPLEMENTATION-ROADMAP.md](IMPLEMENTATION-ROADMAP.md)
+> For the **design system specs**, see: [design/DESIGN-SYSTEM-V2.md](design/DESIGN-SYSTEM-V2.md)
 
 ---
 
 ## Table of Contents
 1. [Site Overview](#site-overview)
-2. [Page-by-Page Breakdown](#page-by-page-breakdown)
-3. [Page Interaction Map](#page-interaction-map)
-4. [Data Flow Diagrams](#data-flow-diagrams)
-5. [Shared Components](#shared-components)
-6. [Navigation Paths](#navigation-paths)
+2. [Visual Design System](#visual-design-system)
+3. [Page-by-Page Breakdown](#page-by-page-breakdown)
+4. [Page Interaction Map](#page-interaction-map)
+5. [Data Flow Diagrams](#data-flow-diagrams)
+6. [Shared Components](#shared-components)
+7. [Navigation Paths](#navigation-paths)
 
 ---
 
@@ -41,6 +44,83 @@ StarryMeet is a celebrity meetup booking platform with 13 pages organized into 4
 11. **terms.html** → Legal terms
 12. **privacy.html** → Privacy policy
 13. **404.html** → Error page
+
+---
+
+## Visual Design System
+
+### Design Philosophy (v2.0)
+**Inspired by**: Cameo's luxury minimal aesthetics
+**Theme**: Pure Black (#000000) with sophisticated purple and gold accents
+**Core Principles**:
+1. **Minimal Elegance** - Restrained sizing, clean lines, breathing room
+2. **Luxury Accents** - Gold for verified badges, purple for interactive elements
+3. **Vibrant Gradients** - Used sparingly for emphasis (8 gradient variants)
+4. **Subtle Interactions** - Gentle hover effects, smooth transitions
+5. **Pure Black Theme** - #000000 backgrounds with extremely subtle purple-tinted shadows
+
+### Typography (Cameo-Inspired)
+- **Font Family**: Inter (sans-serif) for all headings and UI elements
+- **Heading Sizes**: Reduced and restrained (h1: 48px, h2: 36px, h3: 30px)
+- **Line Height**: Tightened to 1.1 for modern look
+- **Font Weights**: 700-800 for headings, 600 for subheadings
+- **Body Text**: 16px with 1.6 line-height, color: #B0B0B0 (light gray)
+
+### Button System
+- **Primary**: Gradient background (purple to pink), fully rounded (border-radius: full)
+- **Hover**: translateY(-3px) with subtle purple glow
+- **No Default Shadow**: Clean appearance, shadow appears only on hover
+- **Secondary**: Ghost style with purple border
+
+### Card System
+**Standard Cards** (Dark):
+- Background: Pure black (#000000)
+- Border: 1px solid rgba(139, 92, 246, 0.08) - subtle purple tint
+- Border Radius: 32px (var(--radius-2xl))
+- Hover: Gentle lift (-4px) + subtle purple glow
+
+**Gradient Cards** (Cameo-Style):
+- 8 vibrant gradient variants: purple, pink, red, blue, teal, lime, orange, gold
+- Used strategically on index.html for category cards
+- No borders, white text, enhanced hover effects
+- Example usage: Browse by Category section on homepage
+
+### Badge System
+**Verified Badge** (Gold Luxury):
+- Background: Gold gradient (linear-gradient(135deg, #F59E0B 0%, #FCD34D 100%))
+- Font: 800 weight, uppercase, tight letter-spacing
+- Shadow: Subtle gold glow (rgba(245, 158, 11, 0.08))
+- Applied universally to all verified elements
+
+### Color Palette
+**Primary**: #8B5CF6 (Electric Violet)
+**Accent**: #F59E0B (Amber Gold) - for verified badges
+**Background**: #000000 (Pure Black) - only background color used
+**Text Colors**:
+- Primary: #FFFFFF (white) - all headings
+- Secondary: #B0B0B0 (light gray) - body text
+- Tertiary: #808080 (medium gray) - labels, helper text
+
+### Spacing & Shadows
+- **Spacing Scale**: 4px base (--space-1 through --space-24)
+- **Shadows**: Extremely subtle purple-tinted glows (like a mirage)
+- **Transitions**: 150-350ms with cubic-bezier easing
+
+### CSS Variables
+All design tokens defined in `/home/whoami/starrymeet/css/shared.css`:
+- Color system (--primary, --accent, --text-primary, etc.)
+- Spacing scale (--space-1 through --space-24)
+- Typography scale (--text-xs through --text-7xl)
+- Border radius (--radius-xs through --radius-full)
+- Shadows (--shadow-xs through --shadow-glow-xl)
+
+### Recent Design Changes (v2.0)
+1. **Typography Refinement**: Reduced h1 from 60px to 48px, h2 from 48px to 36px
+2. **Button Enhancement**: Fully rounded corners, gradient backgrounds, subtle hover glows
+3. **Gradient Cards**: Added 8 Cameo-style gradient card variants for emphasis
+4. **Gold Verified Badges**: Luxury gold gradient with uppercase styling
+5. **Pure Black Theme**: All pages use #000000 backgrounds consistently
+6. **Legal Pages Fixed**: Removed inline CSS conflicts from privacy.html and terms.html
 
 ---
 
@@ -1267,7 +1347,9 @@ docs/debug/
 
 ---
 
-**Last Updated**: 2025-10-09
-**Version**: 1.1.0
+**Last Updated**: 2025-10-11
+**Version**: 2.0.0
+**Design System**: v2.0 - Cameo-Inspired Luxury Minimal
 **Status**: Production Ready
 **Total Issues Fixed**: 45
+**Major Redesign**: Complete
