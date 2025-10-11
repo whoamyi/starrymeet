@@ -22,6 +22,18 @@
     <script src="js/shared.js"></script>
     <style>
         /* Page-specific styles - minimal layout only */
+        .breadcrumb {
+            max-width: 1400px;
+            margin: calc(var(--nav-height) + var(--space-4)) auto var(--space-4);
+            padding: 0 var(--space-8);
+            color: var(--text-tertiary);
+        }
+
+        .breadcrumb a {
+            color: var(--primary);
+            text-decoration: none;
+        }
+
         .hero {
             background: var(--primary-gradient);
             color: white;
@@ -212,7 +224,25 @@
             line-height: 1.8;
         }
 
-        /* CTA section inherits from shared.css */
+        .cta-section {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--space-20) var(--space-8);
+            margin-top: var(--space-16);
+        }
+
+        .cta-section h2 {
+            font-size: var(--text-4xl);
+            font-weight: 800;
+            margin-bottom: var(--space-4);
+        }
+
+        .cta-section p {
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-8);
+            opacity: 0.95;
+        }
 
         @media (max-width: 768px) {
             .hero h1 {
@@ -271,6 +301,11 @@
             <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
             <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
         </ul>
+    </div>
+
+    <!-- Breadcrumb -->
+    <div class="breadcrumb">
+        <a href="index.html">Home</a> > How It Works
     </div>
 
     <!-- Hero -->

@@ -22,6 +22,12 @@
     <title>FAQ - StarryMeet</title>
     <style>
         /* Page-specific styles - minimal layout only */
+        .breadcrumb {
+            max-width: 1000px;
+            margin: calc(var(--nav-height) + var(--space-4)) auto var(--space-4);
+            padding: 0 var(--space-8);
+            color: var(--text-tertiary);
+        }
 
         .hero {
             background: var(--primary-gradient);
@@ -209,6 +215,106 @@
         </ul>
     </div>
 
+    <div class="breadcrumb"><a href="index.html">Home</a> > FAQ</div>
+
+    <section class="hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about StarryMeet</p>
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for answers..." oninput="searchFAQ()">
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="showCategory('general')">General</div>
+            <div class="tab" onclick="showCategory('booking')">Booking & Payment</div>
+            <div class="tab" onclick="showCategory('meetings')">Meetings</div>
+            <div class="tab" onclick="showCategory('cancellations')">Cancellations</div>
+            <div class="tab" onclick="showCategory('celebrities')">For Celebrities</div>
+        </div>
+
+        <div class="faq-category active" id="general">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What is StarryMeet?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>StarryMeet is a premium platform connecting fans with verified celebrities for one-on-one meetings. We offer a safe, professional way to meet your icons in person through three meeting types: Quick Meet (15 min), Standard Session (30 min), and Premium Experience (60 min).</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do I know celebrities are real?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Every celebrity undergoes rigorous verification. We verify their identity with government IDs, work directly with their management teams, and ensure all profiles are authentic. Look for the "✓ Verified" badge on celebrity profiles. We guarantee 100% authentic experiences.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Is StarryMeet available worldwide?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Yes! We operate in 50+ cities across North America, Europe, Asia, and Australia. Celebrities travel frequently, so new locations are added regularly. Check the Browse page to see which celebrities are coming to your city.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="booking">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do I book a meeting?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Browse celebrities, select one you want to meet, choose your preferred date/time and meeting type, fill out an application explaining why you want to meet them, and complete secure payment. You'll receive confirmation within 24-48 hours after celebrity approval.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What payment methods do you accept?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>We accept all major credit cards (Visa, Mastercard, American Express, Discover) and debit cards. All payments are processed securely through Stripe with bank-level encryption.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>When will my card be charged?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Your card is charged immediately upon booking. If your meeting isn't approved by the celebrity, you'll receive a full refund within 5-7 business days.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="meetings">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What happens during a meeting?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Meetings take place in premium, private venues. You'll have the celebrity's full attention for the duration. You can ask questions, take photos, get autographs, and have meaningful conversations. Professional and respectful behavior is expected.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Can I bring someone with me?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Quick Meets are typically one-on-one. For Standard and Premium sessions, you may request to bring one guest—this requires celebrity approval and may incur an additional fee. Minors must be accompanied by a parent/guardian.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Are photos and videos allowed?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Yes! Personal photos and videos are encouraged. Bring your smartphone or camera. Premium Experiences include professional photography. Photos/videos cannot be used commercially without permission.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="cancellations">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What is your cancellation policy?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Full refund if cancelled 7+ days before your meeting. 50% refund if cancelled 3-6 days before. No refund for cancellations less than 3 days before. Refunds are processed within 5-7 business days.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Can I reschedule my meeting?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Yes! You can reschedule up to 7 days before at no cost, subject to availability. For changes within 7 days, contact support. We'll do our best to accommodate you.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What if the celebrity cancels?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>If a celebrity cancels, you receive a full refund within 5-7 business days. We'll also offer priority rebooking or credits toward another celebrity meeting. Celebrity cancellations are rare.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="celebrities">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do I apply as a celebrity?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Email apply@starrymeet.com with your name, social media links, and management contact. We'll guide you through verification and onboarding. The process typically takes 1-2 weeks.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How much can I earn as a celebrity?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Earnings vary based on your pricing and availability. Top celebrities earn $50,000-$200,000+ monthly. You set your own prices and approve all bookings. Use our earnings calculator on the For Celebrities page.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do celebrities get paid?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Payments are processed within 7 days after each meeting via direct deposit or wire transfer. We handle all tax documentation and provide detailed earning reports. StarryMeet takes a 20% platform fee.</p></div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2>Still Have Questions?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Our support team is here to help 24/7</p>
+            <a href="contact.html" class="btn-cta">Contact Support</a>
+        </div>
+    </div>
 
     <footer>
         <div class="footer-container">
