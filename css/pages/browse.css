@@ -17,8 +17,8 @@ body {
     max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
-    gap: var(--space-6);
-    padding: var(--space-4);
+    gap: var(--space-8);
+    padding: var(--space-6);
 }
 
 /* Filter Sidebar - Premium Glass Effect */
@@ -302,12 +302,10 @@ input:checked + .toggle-slider:before {
 
 /* Search Bar - Premium */
 .search-section {
-    background: var(--bg-secondary);
+    background: transparent;
     padding: var(--space-4);
     border-radius: var(--radius-2xl);
-    margin-bottom: var(--space-4);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
+    margin-bottom: var(--space-6);
 }
 
 .search-bar {
@@ -348,12 +346,10 @@ input:checked + .toggle-slider:before {
 
 /* Results Toolbar - Premium */
 .results-toolbar {
-    background: var(--bg-secondary);
+    background: transparent;
     padding: var(--space-4);
     border-radius: var(--radius-2xl);
-    margin-bottom: var(--space-4);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
+    margin-bottom: var(--space-6);
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -441,7 +437,7 @@ input:checked + .toggle-slider:before {
 .celebrities-grid {
     display: grid;
     grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-    gap: var(--space-6);
+    gap: var(--space-8);
 }
 
 .celebrity-card {
@@ -690,10 +686,8 @@ input:checked + .toggle-slider:before {
 .no-results {
     text-align: center;
     padding: var(--space-12) var(--space-4);
-    background: var(--bg-secondary);
+    background: transparent;
     border-radius: var(--radius-2xl);
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
 }
 
 .no-results h3 {

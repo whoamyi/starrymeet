@@ -203,7 +203,7 @@
 
 .carousel-wrapper {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-6);
     overflow-x: auto;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
@@ -258,7 +258,7 @@
 /* Celebrity Cards - Compact */
 .celebrities-carousel {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-6);
 }
 
 .celebrity-card {
@@ -425,7 +425,7 @@
 /* Categories Carousel - Compact */
 .categories-carousel {
     display: flex;
-    gap: var(--space-4);
+    gap: var(--space-6);
 }
 
 .category-card {
@@ -495,7 +495,7 @@
 
 .steps-carousel {
     display: flex;
-    gap: var(--space-6);
+    gap: var(--space-8);
 }
 
 .step {
@@ -573,7 +573,7 @@
 
 .trust-carousel {
     display: flex;
-    gap: var(--space-6);
+    gap: var(--space-8);
 }
 
 .trust-item {
