@@ -438,19 +438,19 @@
 
 .book-btn {
     background: none;
-    color: var(--primary);
+    color: var(--text-tertiary);
     padding: 0;
     border: none;
     border-radius: 0;
     font-size: 0.70rem;
-    font-weight: 700;
+    font-weight: 400;
     cursor: pointer;
     transition: var(--transition-base);
     text-decoration: none;
 }
 
 .book-btn:hover {
-    color: var(--primary-light);
+    color: var(--text-secondary);
 }
 
 /* Categories Carousel */
