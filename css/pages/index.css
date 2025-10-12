@@ -71,12 +71,9 @@
 
 /* Search Container - Compact */
 .search-container {
-    background: var(--bg-secondary);
-    backdrop-filter: blur(10px) saturate(180%);
-    -webkit-backdrop-filter: blur(10px) saturate(180%);
+    background: transparent;
     border-radius: var(--radius-full);
     padding: var(--space-1-5);
-    box-shadow: var(--shadow-md), 0 0 0 1px var(--border-medium);
     display: flex;
     gap: var(--space-2);
     max-width: 700px;
@@ -114,8 +111,9 @@
 
 /* Trust Indicators - Compact Inline */
 .trust-indicators-section {
-    padding: var(--space-4) var(--space-4);
-    background: var(--bg-secondary);
+    padding: var(--space-8) var(--space-4);
+    background: transparent;
+    margin-bottom: var(--space-6);
 }
 
 .trust-indicators-container {
@@ -169,11 +167,11 @@
     font-size: var(--text-sm);
 }
 
-/* Section - Compact */
+/* Section - Compact with breathing room */
 .section {
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-8) var(--space-4);
     max-width: 1400px;
-    margin: 0 auto;
+    margin: 0 auto var(--space-8);
 }
 
 .section-header {
@@ -492,7 +490,7 @@
 
 /* How It Works - Compact Horizontal */
 .how-it-works {
-    background: var(--bg-light);
+    background: transparent;
 }
 
 .steps-carousel {
@@ -564,11 +562,9 @@
 
 /* Trust Section - Compact */
 .trust-section {
-    background: var(--bg-tertiary);
+    background: transparent;
     color: var(--white);
-    border-top: 1px solid var(--border-light);
-    border-bottom: 1px solid var(--border-light);
-    padding: var(--space-6) var(--space-4);
+    padding: var(--space-8) var(--space-4);
 }
 
 .trust-section .section-header h2 {
@@ -623,9 +619,10 @@
 
 /* CTA Section - Compact */
 .cta-section {
-    background: var(--bg-light);
+    background: transparent;
     text-align: center;
-    padding: var(--space-8) var(--space-4);
+    padding: var(--space-12) var(--space-4);
+    margin-top: var(--space-8);
 }
 
 .cta-content h2 {
