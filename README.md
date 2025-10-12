@@ -16,7 +16,7 @@ StarryMeet is a premium full-stack platform that enables fans to book one-on-one
 - Pure HTML/CSS/JavaScript
 - Cameo-inspired design system
 - 13 responsive pages
-- Progressive Web App ready
+- GitHub Pages deployment
 
 **Backend**:
 - Node.js 20 + Express + TypeScript
@@ -27,11 +27,17 @@ StarryMeet is a premium full-stack platform that enables fans to book one-on-one
 
 ## 🚀 Quick Start
 
-### Frontend
+### Frontend (Local Development)
 
 ```bash
-cd frontend
+# Option 1: Live Server (recommended)
 npx live-server
+
+# Option 2: Python
+python3 -m http.server 8080
+
+# Option 3: PHP
+php -S localhost:8080
 ```
 
 Open browser to `http://localhost:8080`
@@ -44,53 +50,66 @@ npm install
 cp .env.example .env
 # Edit .env with database credentials
 npx ts-node src/seed.ts  # Seed 35 celebrities
-npm run dev              # Start on port 3000
+npx ts-node src/server.ts # Start on port 3000
 ```
 
 Backend API: `http://localhost:3000`
+
+**See [SETUP.md](SETUP.md) for detailed setup instructions.**
 
 ## 📁 Project Structure
 
 ```
 starrymeet/
-├── frontend/                   # Frontend application
-│   ├── index.html             # Homepage
-│   ├── browse.html            # Browse celebrities
-│   ├── celebrity-profile.html # Celebrity details
-│   ├── booking.html           # 5-step booking flow
-│   ├── dashboard.html         # User dashboard
-│   ├── css/
-│   │   ├── shared.css         # Global styles
-│   │   └── pages/             # Page-specific styles
-│   ├── js/
-│   │   └── shared.js          # Global JavaScript
-│   └── README.md              # Frontend documentation
+├── index.html              # 🏠 Homepage (GitHub Pages entry)
+├── browse.html             # Browse celebrities
+├── celebrity-profile.html  # Celebrity details
+├── booking.html            # 5-step booking flow
+├── dashboard.html          # User dashboard
+├── *.html                  # Other pages (13 total)
 │
-├── backend/                   # Backend API
+├── css/
+│   ├── shared.css          # Global styles & design system
+│   └── pages/              # Page-specific styles
+│       ├── index.css
+│       ├── browse.css
+│       └── ...
+│
+├── js/
+│   ├── shared.js           # Global JavaScript & utilities
+│   └── api.js              # Backend API client
+│
+├── assets/                 # Images, icons, media
+│
+├── backend/                # 🔧 Backend API
 │   ├── src/
-│   │   ├── config/            # Database config
-│   │   ├── models/            # Sequelize models
-│   │   │   ├── User.ts
-│   │   │   ├── Celebrity.ts
-│   │   │   ├── Booking.ts
-│   │   │   ├── Payment.ts
-│   │   │   └── Review.ts
-│   │   ├── controllers/       # Request handlers
-│   │   ├── routes/            # API routes
-│   │   ├── middleware/        # Auth, errors
-│   │   ├── services/          # Business logic
-│   │   └── seeders/           # Database seeds
+│   │   ├── config/         # Database config
+│   │   ├── models/         # Sequelize models (5 models)
+│   │   ├── controllers/    # Request handlers
+│   │   ├── routes/         # API routes
+│   │   ├── middleware/     # Auth, errors
+│   │   └── server.ts       # Entry point
 │   ├── package.json
-│   └── README.md              # Backend documentation
+│   └── README.md           # Backend docs
 │
-└── docs/                      # Documentation
-    ├── ARCHITECTURE-VISION.md
-    ├── IMPLEMENTATION-ROADMAP.md
-    ├── BACKEND-IMPLEMENTATION-PLAN.md
-    └── design/
-        ├── DESIGN-SYSTEM-V2.md
-        └── BRAND-IDENTITY.md
+├── docs/                   # 📚 Documentation
+│   ├── ARCHITECTURE-VISION.md
+│   ├── IMPLEMENTATION-ROADMAP.md
+│   ├── BACKEND-IMPLEMENTATION-PLAN.md
+│   └── design/
+│
+├── README.md               # This file
+├── SETUP.md                # Setup guide
+└── .nojekyll               # GitHub Pages config
 ```
+
+### Why This Structure?
+
+✅ **HTML at root**: GitHub Pages requires `index.html` at root
+✅ **Backend separated**: Clean separation, can deploy independently
+✅ **CSS/JS organized**: Easy to find and maintain
+✅ **Documentation**: All docs in `docs/` folder
+✅ **Deployment ready**: Frontend auto-deploys via GitHub Pages
 
 ## 📋 Features
 
@@ -114,6 +133,7 @@ starrymeet/
 - **Sequelize ORM**: Database abstraction layer
 - **JWT Auth**: Stateless authentication
 - **Stripe Integration**: Production-ready payments
+- **API Client**: Frontend JavaScript client for easy integration
 
 ## 🎨 Design System (v2.0)
 
@@ -130,7 +150,7 @@ Inspired by Cameo's sophisticated aesthetics:
 - **Buttons**: Fully rounded with gradient backgrounds, subtle hover glows
 - **Cards**: 8 vibrant gradient variants for emphasis
 - **Colors**: Pure black backgrounds with purple (#8B5CF6) and gold (#F59E0B) accents
-- **Shadows**: Extremely subtle purple-tinted glows
+- **Responsive**: Mobile-first design with breakpoints at 768px and 1024px
 
 ## 🔌 API Endpoints
 
@@ -166,7 +186,7 @@ POST   /api/payments/webhook          # Stripe webhook handler
 
 ### Core Tables
 - **users** - User accounts with JWT authentication
-- **celebrities** - Celebrity profiles with pricing
+- **celebrities** - Celebrity profiles with pricing (35 seeded)
 - **bookings** - Booking records with status lifecycle
 - **payments** - Stripe payment records
 - **reviews** - User reviews and ratings
@@ -177,28 +197,14 @@ POST   /api/payments/webhook          # Stripe webhook handler
 - **13 Pages**: Complete website
 - **35 Celebrities**: Across 5 categories
 - **100% Responsive**: Mobile-first design
-- **0 Dependencies**: Pure HTML/CSS/JS
+- **0 Build Dependencies**: Pure HTML/CSS/JS
 
 ### Backend
 - **26 TypeScript files**: ~2,080 lines of code
 - **5 Database models**: Full relational schema
 - **4 Controller files**: Complete CRUD operations
 - **REST API**: All endpoints documented
-
-## 📄 Documentation
-
-### Essential Docs
-- **[Frontend README](frontend/README.md)** - Frontend setup and development
-- **[Backend README](backend/README.md)** - Backend setup and API docs
-- **[Architecture Vision](docs/ARCHITECTURE-VISION.md)** - Complete full-stack vision
-- **[Implementation Roadmap](docs/IMPLEMENTATION-ROADMAP.md)** - 4-phase plan
-- **[Backend Implementation Plan](docs/BACKEND-IMPLEMENTATION-PLAN.md)** - Detailed guide
-- **[Design System v2](docs/design/DESIGN-SYSTEM-V2.md)** - Design specifications
-
-### Quick Links
-- `docs/QUICK-REFERENCE.md` - Fast lookup guide
-- `docs/SITE-ARCHITECTURE.md` - Architecture overview
-- `docs/design/BRAND-IDENTITY.md` - Brand guidelines
+- **JWT Auth**: Secure authentication
 
 ## 🔧 Development
 
@@ -222,12 +228,12 @@ npm install
 cp .env.example .env
 # Edit .env with your credentials
 npx ts-node src/seed.ts
-npm run dev
+npx ts-node src/server.ts
 ```
 
-3. **Setup Frontend**
+3. **Open Frontend**
 ```bash
-cd frontend
+# From root directory
 npx live-server
 ```
 
@@ -236,40 +242,47 @@ npx live-server
 - Backend API: `http://localhost:3000`
 - API Health: `http://localhost:3000/health`
 
-### Environment Variables
+**See [SETUP.md](SETUP.md) for complete setup guide.**
 
-Create `backend/.env`:
+## 📄 Documentation
 
-```env
-NODE_ENV=development
-PORT=3000
+### Essential Docs
+- **[SETUP.md](SETUP.md)** - Complete setup guide (start here!)
+- **[backend/README.md](backend/README.md)** - Backend API documentation
+- **[docs/ARCHITECTURE-VISION.md](docs/ARCHITECTURE-VISION.md)** - Full-stack architecture
+- **[docs/IMPLEMENTATION-ROADMAP.md](docs/IMPLEMENTATION-ROADMAP.md)** - Development roadmap
+- **[docs/design/DESIGN-SYSTEM-V2.md](docs/design/DESIGN-SYSTEM-V2.md)** - Design specifications
 
-DB_HOST=localhost
-DB_PORT=5432
-DB_NAME=starrymeet_dev
-DB_USER=postgres
-DB_PASSWORD=your_password
-
-JWT_SECRET=your_super_secret_jwt_key
-JWT_EXPIRES_IN=7d
-
-STRIPE_SECRET_KEY=sk_test_your_key
-STRIPE_WEBHOOK_SECRET=whsec_your_secret
-
-SENDGRID_API_KEY=SG.your_key
-SENDGRID_FROM_EMAIL=noreply@starrymeet.com
-
-FRONTEND_URL=http://localhost:8080
-```
+### Quick Reference
+- `docs/QUICK-REFERENCE.md` - Fast lookup guide
+- `docs/SITE-ARCHITECTURE.md` - Architecture overview
+- `docs/design/BRAND-IDENTITY.md` - Brand guidelines
 
 ## 🚀 Deployment
 
 ### Frontend (GitHub Pages)
-Already configured with `.nojekyll` file.
-Deploy: `git push origin main`
 
-### Backend (AWS)
-See [Backend README](backend/README.md) for AWS ECS deployment instructions.
+Already configured! Frontend auto-deploys to GitHub Pages:
+
+```bash
+git push origin main
+```
+
+**Live URL**: `https://whoamyi.github.io/starrymeet/`
+
+### Backend (Production)
+
+Deploy to AWS, Heroku, Railway, or any Node.js hosting:
+
+```bash
+# Build
+npm run build
+
+# Start
+npm start
+```
+
+See [backend/README.md](backend/README.md) for detailed deployment instructions.
 
 ## 📈 Roadmap
 
@@ -280,12 +293,13 @@ See [Backend README](backend/README.md) for AWS ECS deployment instructions.
 - [x] Stripe payment integration
 - [x] Celebrity search and filtering
 - [x] Booking system
+- [x] Frontend-Backend integration
 
-### Phase 2: Production (Next)
-- [ ] Frontend-Backend integration
+### Phase 2: Production (In Progress)
+- [x] API client for frontend
 - [ ] Real-time messaging
 - [ ] Email notifications (SendGrid)
-- [ ] AWS deployment
+- [ ] Production deployment
 - [ ] SSL/HTTPS setup
 
 ### Phase 3: Scale (Future)
@@ -309,6 +323,10 @@ Private project - All rights reserved.
 **Tech Stack**: HTML/CSS/JS + Node.js/Express/TypeScript + PostgreSQL
 **Design System**: v2.0 - Cameo-Inspired Luxury Minimal
 
-**Frontend**: ✅ Complete
-**Backend**: ✅ Complete
-**Status**: Ready for Integration & Deployment
+**Frontend**: ✅ Complete - Live on GitHub Pages
+**Backend**: ✅ Complete - Ready for deployment
+**Status**: Full-Stack Platform Ready for Production
+
+💻 **Quick Start**: See [SETUP.md](SETUP.md)
+🔌 **API Docs**: See [backend/README.md](backend/README.md)
+🎨 **Design**: See [docs/design/](docs/design/)
