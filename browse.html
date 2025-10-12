@@ -642,7 +642,10 @@
                         <div class="celebrity-location">📍 ${celeb.location}</div>
                         <div class="celebrity-price">
                             <span class="price">$${celeb.price.toLocaleString()}</span>
-                            <button class="book-btn" onclick="event.stopPropagation(); window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Reserve</button>
+                            <div class="celebrity-rating">
+                                <span class="rating-star">★</span>
+                                <span>4.95</span>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -677,7 +680,10 @@
                             </div>
                         </div>
                         <div class="celebrity-actions-list">
-                            <button class="book-btn book-btn-list" onclick="event.stopPropagation(); window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Reserve</button>
+                            <div class="celebrity-rating">
+                                <span class="rating-star">★</span>
+                                <span>4.95</span>
+                            </div>
                         </div>
                     </div>
                 </div>
