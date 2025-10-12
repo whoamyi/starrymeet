@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/pages/index.css">
     <script src="js/shared.js"></script>
+    <script src="js/api.js"></script>
 </head>
 <body>
     <!-- Navigation -->
@@ -292,8 +293,33 @@
     </footer>
 
     <script>
-        // Use celebrity data from shared.js
-        const celebrities = getAllCelebrities();
+        // Use celebrity data from shared.js (fallback for now)
+        let celebrities = getAllCelebrities();
+
+        // Load celebrities from backend API
+        async function loadCelebritiesFromAPI() {
+            try {
+                const response = await api.getCelebrities({ featured: true, limit: 12 });
+                if (response.success && response.data.celebrities) {
+                    // Convert backend format to frontend format
+                    celebrities = response.data.celebrities.map(celeb => ({
+                        name: celeb.display_name,
+                        category: celeb.category,
+                        location: celeb.location || 'Not specified',
+                        city: celeb.location ? celeb.location.split(',')[0] : '',
+                        country: celeb.location ? celeb.location.split(',')[1]?.trim() : '',
+                        price: Math.round((celeb.standard_meet_price_cents || 0) / 100),
+                        verified: celeb.is_verified,
+                        trending: celeb.is_featured
+                    }));
+                    filteredCelebrities = [...celebrities];
+                    loadCelebrities();
+                }
+            } catch (error) {
+                console.error('Failed to load celebrities from API:', error);
+                // Keep using fallback data from shared.js
+            }
+        }
 
         // State variables
         let filteredCelebrities = [...celebrities];
@@ -553,6 +579,9 @@
 
         // Initialize
         loadCelebrities();
+
+        // Load from API when page loads
+        loadCelebritiesFromAPI();
     </script>
 </body>
 </html>
