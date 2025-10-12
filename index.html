@@ -64,7 +64,7 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Your hero. Your moment. Your memory.</h1>
+            <h1>Your Memory. Your Moment</h1>
             <p>Connect face-to-face with the stars who inspire you—exclusive in-person experiences you'll treasure forever</p>
             <div class="search-container">
                 <select class="search-input" id="cityFilter" onchange="applySearch()" aria-label="Select your city">
@@ -94,24 +94,23 @@
     <section class="trust-indicators-section">
         <div class="trust-indicators-container">
             <div class="carousel-container">
+                <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('trust-indicators-carousel', -1)">‹</button>
+                <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('trust-indicators-carousel', 1)">›</button>
                 <div class="carousel-wrapper trust-indicators-carousel">
                     <div class="trust-indicator-item">
                         <!-- <div class="trust-indicator-icon">✓</div> -->
                         <div class="trust-badge">Identity Verified</div>
-                        <h3>Verified Stars</h3>
-                        <p>Every celebrity identity is personally verified by our security team</p>
+                        <p>Verified by our security team</p>
                     </div>
                     <div class="trust-indicator-item">
                         <!-- <div class="trust-indicator-icon">📍</div> -->
                         <div class="trust-badge">Location Vetted</div>
-                        <h3>Safe Venues</h3>
-                        <p>All meeting locations are pre-screened for your safety and comfort</p>
+                        <p>Pre-screened safe venues</p>
                     </div>
                     <div class="trust-indicator-item">
                         <!-- <div class="trust-indicator-icon">💬</div> -->
                         <div class="trust-badge">Secure Payment</div>
-                        <h3>24/7 Support</h3>
-                        <p>Concierge team available around the clock for your peace of mind</p>
+                        <p>24/7 concierge support</p>
                     </div>
                 </div>
             </div>
@@ -126,6 +125,8 @@
         </div>
 
         <div class="carousel-container">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('celebritiesGrid', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('celebritiesGrid', 1)">›</button>
             <div class="carousel-wrapper celebrities-carousel" id="celebritiesGrid">
                 <!-- Celebrities will be loaded here by JavaScript -->
             </div>
@@ -142,6 +143,8 @@
             <h2>How It Works</h2>
         </div>
         <div class="carousel-container">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('steps-carousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('steps-carousel', 1)">›</button>
             <div class="carousel-wrapper steps-carousel">
                 <div class="step">
                     <div class="step-icon">
@@ -177,6 +180,8 @@
             <h2>Browse by Category</h2>
         </div>
         <div class="carousel-container">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('categories-carousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('categories-carousel', 1)">›</button>
             <div class="carousel-wrapper categories-carousel">
                 <div class="category-card" onclick="window.location.href='browse.html?category=Hollywood'">
                     <div class="category-icon">🎬</div>
@@ -213,6 +218,8 @@
             <h2>Why Choose StarryMeet</h2>
         </div>
         <div class="carousel-container">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('trust-carousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('trust-carousel', 1)">›</button>
             <div class="carousel-wrapper trust-carousel">
                 <div class="trust-item">
                     <div class="trust-icon">✓</div>
@@ -321,6 +328,18 @@
         // Scroll to celebrities
         function scrollToCelebrities() {
             scrollToSection('celebrities');
+        }
+
+        // Scroll carousel
+        function scrollCarousel(carouselClass, direction) {
+            const carousel = document.querySelector('.' + carouselClass);
+            if (!carousel) return;
+
+            const scrollAmount = carousel.clientWidth * 0.8;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
         }
 
         // Toggle watchlist
