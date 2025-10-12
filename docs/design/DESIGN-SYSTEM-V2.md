@@ -1,9 +1,30 @@
-# StarryMeet Design System v2.0
+# ⚠️ DEPRECATED - StarryMeet Design System v2.0
+
+**This document is deprecated as of 2025-10-11.**
+
+This technical reference has been superseded by the comprehensive StarryMeet Brand Identity system:
+
+**New Brand System Documentation:**
+- **Brand Foundation (WHY):** [BRAND-IDENTITY.md](BRAND-IDENTITY.md) - Permanent brand principles and philosophy
+- **Implementation Guide (HOW):** [DESIGN-IMPLEMENTATION-PLAN.md](DESIGN-IMPLEMENTATION-PLAN.md) - Tactical implementation steps
+- **Migration Guide:** [MIGRATION-GUIDE.md](MIGRATION-GUIDE.md) - Step-by-step migration from v2.0 to new brand
+
+**Key Changes:**
+- From Cameo-inspired → Authentic StarryMeet identity for in-person meetings
+- From 80/20 color rule → 90/10 (more premium restraint)
+- Added cyan trust indicators (safety-first positioning)
+- Transactional voice → Transformational voice ("moments" not "bookings")
+
+**This document is preserved for historical reference only.**
+
+---
+
+# [ARCHIVED] StarryMeet Design System v2.0
 **Cameo-Inspired Luxury Minimal Design**
 
 Version: 2.0.0
 Last Updated: 2025-10-11
-Status: Production Ready ✅
+Status: ⚠️ ARCHIVED - See new brand system above
 
 ---
 

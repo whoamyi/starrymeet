@@ -3,757 +3,24 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city. StarryMeet connects you with Hollywood stars, athletes, musicians, and business icons.">
+    <meta name="description" content="Connect face-to-face with the stars who inspire you. StarryMeet creates exclusive in-person experiences with Hollywood stars, athletes, musicians, and icons—memories you'll treasure forever.">
 
     <!-- Open Graph Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://starrymeet.com/">
-    <meta property="og:title" content="StarryMeet - Meet Your Icons In Person">
-    <meta property="og:description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city.">
+    <meta property="og:title" content="StarryMeet - Your hero. Your moment. Your memory.">
+    <meta property="og:description" content="Connect face-to-face with the stars who inspire you—exclusive in-person experiences you'll treasure forever.">
     <meta property="og:site_name" content="StarryMeet">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="StarryMeet - Meet Your Icons In Person">
-    <meta name="twitter:description" content="Book exclusive face-to-face meetings with world-class celebrities when they visit your city.">
+    <meta name="twitter:title" content="StarryMeet - Your hero. Your moment. Your memory.">
+    <meta name="twitter:description" content="Connect face-to-face with the stars who inspire you—exclusive in-person experiences you'll treasure forever.">
 
-    <title>StarryMeet - Meet Your Icons In Person</title>
+    <title>StarryMeet - Your hero. Your moment. Your memory.</title>
     <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/pages/index.css">
     <script src="js/shared.js"></script>
-    <style>
-        /* Page-specific styles for index.html */
-        /* Navigation styles moved to shared.css - using global nav styles */
-
-        /* Hero Section - Dark Elegant Theme */
-        .hero {
-            margin-top: var(--nav-height);
-            background: var(--bg-primary);  /* Rich black background */
-            padding: clamp(4rem, 10vw, 8rem) var(--space-4) clamp(5rem, 12vw, 10rem);
-            text-align: center;
-            position: relative;
-            overflow: hidden;
-        }
-
-        .hero::before {
-            content: '';
-            position: absolute;
-            top: -50%;
-            right: -20%;
-            width: 800px;
-            height: 800px;
-            background: radial-gradient(circle, rgba(139, 92, 246, 0.08) 0%, transparent 70%);  /* Subtle purple glow */
-            border-radius: 50%;
-            animation: float 20s infinite ease-in-out;
-        }
-
-        .hero::after {
-            content: '';
-            position: absolute;
-            bottom: -30%;
-            left: -10%;
-            width: 600px;
-            height: 600px;
-            background: radial-gradient(circle, rgba(245, 158, 11, 0.06) 0%, transparent 70%);  /* Subtle gold glow */
-            border-radius: 50%;
-            animation: float 15s infinite ease-in-out reverse;
-        }
-
-        @keyframes float {
-            0%, 100% { transform: translateY(0) scale(1); }
-            50% { transform: translateY(-30px) scale(1.05); }
-        }
-
-        .hero-content {
-            max-width: 900px;
-            margin: 0 auto;
-            position: relative;
-            z-index: 1;
-        }
-
-        .hero h1 {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 6vw, 4.5rem);
-            font-weight: 900;
-            line-height: 1.1;
-            margin-bottom: var(--space-4);
-            color: var(--white);  /* Pure white on dark background */
-            text-shadow: 0 2px 40px rgba(139, 92, 246, 0.3);  /* Subtle purple glow on text */
-            animation: fadeInUp 0.8s var(--ease-bounce);
-        }
-
-        .hero p {
-            font-size: clamp(1.1rem, 2vw, 1.5rem);
-            color: var(--text-secondary);  /* Light gray for contrast */
-            margin-bottom: var(--space-6);
-            animation: fadeInUp 0.8s var(--ease-bounce) 0.2s backwards;
-            line-height: 1.6;
-        }
-
-        /* Search Container - Dark Glass Design */
-        .search-container {
-            background: var(--bg-secondary);  /* Dark surface */
-            backdrop-filter: blur(10px) saturate(180%);
-            -webkit-backdrop-filter: blur(10px) saturate(180%);
-            border-radius: var(--radius-full);
-            padding: var(--space-2);
-            box-shadow: var(--shadow-lg), 0 0 0 1px var(--border-medium);
-            display: flex;
-            gap: var(--space-2);
-            max-width: 700px;
-            margin: 0 auto var(--space-4);
-            animation: fadeInUp 0.8s var(--ease-bounce) 0.4s backwards;
-        }
-
-        .search-input, .date-input {
-            flex: 1;
-            padding: var(--space-3) var(--space-4);
-            border: 1px solid var(--border-medium);
-            background: var(--bg-tertiary);  /* Slightly lighter dark surface */
-            border-radius: var(--radius-full);
-            font-size: var(--text-base);
-            font-family: var(--font-body);
-            outline: none;
-            transition: var(--transition-base);
-            color: var(--white);  /* White text */
-        }
-
-        .search-input::placeholder, .date-input::placeholder {
-            color: var(--text-tertiary);  /* Subtle gray for placeholder */
-        }
-
-        .search-input:focus, .date-input:focus {
-            background: var(--bg-secondary);
-            border-color: var(--primary);  /* Purple border on focus */
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);  /* Subtle purple glow */
-            transform: scale(1.02);
-        }
-
-        /* Buttons use shared.css classes - override positioning only */
-        .search-container .btn-primary {
-            white-space: nowrap;
-        }
-
-        .filter-info {
-            display: none;
-            margin-top: var(--space-3);
-            padding: var(--space-2) var(--space-4);
-            background: rgba(255, 255, 255, 0.95);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-full);
-            box-shadow: var(--shadow-lg);
-            display: inline-flex;
-            align-items: center;
-            gap: var(--space-3);
-        }
-
-        .filter-info.active {
-            display: inline-flex;
-        }
-
-        .clear-filters {
-            background: var(--white);
-            color: var(--primary);
-            border: 2px solid var(--white);
-            padding: var(--space-2) var(--space-4);
-            border-radius: var(--radius-full);
-            cursor: pointer;
-            font-size: var(--text-sm);
-            font-weight: 700;
-            transition: var(--transition-base);
-            font-family: var(--font-body);
-        }
-
-        .clear-filters:hover {
-            background: var(--accent);
-            color: var(--white);
-            border-color: var(--accent);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow-md);
-        }
-
-        /* Featured Celebrities Section */
-        .section {
-            padding: clamp(4rem, 8vw, 6rem) var(--space-4);
-            max-width: 1400px;
-            margin: 0 auto;
-        }
-
-        .section-header {
-            text-align: center;
-            margin-bottom: var(--space-8);
-        }
-
-        .section-header h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2rem, 4vw, 3.5rem);
-            font-weight: 900;
-            color: var(--text-primary);  /* WHITE for headings on dark background */
-            margin-bottom: var(--space-3);
-            line-height: 1.2;
-        }
-
-        .section-header p {
-            font-size: var(--text-xl);
-            color: var(--text-secondary);  /* Light gray for descriptions */
-            line-height: 1.6;
-        }
-
-        /* Filter Controls - Premium Design */
-        .filter-controls {
-            margin-bottom: var(--space-6);
-        }
-
-        .filter-row {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            flex-wrap: wrap;
-            gap: var(--space-4);
-            margin-bottom: var(--space-4);
-        }
-
-        .category-filters {
-            display: flex;
-            gap: var(--space-2);
-            flex-wrap: wrap;
-        }
-
-        .filter-pill {
-            padding: var(--space-2) var(--space-4);
-            border-radius: var(--radius-full);
-            border: 2px solid var(--gray-200);
-            background: var(--white);
-            cursor: pointer;
-            transition: var(--transition-base);
-            font-weight: 700;
-            font-size: var(--text-sm);
-            font-family: var(--font-body);
-        }
-
-        .filter-pill:hover {
-            border-color: var(--primary-light);
-            color: var(--primary);
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .filter-pill.active {
-            background: var(--primary-gradient);
-            color: var(--white);
-            border-color: transparent;
-            box-shadow: var(--shadow-glow-md);
-        }
-
-        .sort-dropdown {
-            padding: var(--space-2) var(--space-4);
-            border-radius: var(--radius-full);
-            border: 2px solid var(--gray-200);
-            background: var(--white);
-            cursor: pointer;
-            font-weight: 700;
-            font-size: var(--text-sm);
-            font-family: var(--font-body);
-            outline: none;
-            transition: var(--transition-base);
-        }
-
-        .sort-dropdown:hover, .sort-dropdown:focus {
-            border-color: var(--primary);
-            box-shadow: var(--shadow-md);
-        }
-
-        /* Celebrity Grid - Premium Cards */
-        .celebrities-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-            gap: var(--space-6);
-            margin-bottom: var(--space-6);
-        }
-
-        .celebrity-card {
-            background: var(--white);
-            border-radius: var(--radius-2xl);
-            overflow: hidden;
-            box-shadow: var(--shadow-md);
-            transition: all 0.4s var(--ease-bounce);
-            cursor: pointer;
-            position: relative;
-            border: 1px solid var(--border-light);
-        }
-
-        .celebrity-card:hover {
-            transform: translateY(-8px);
-            box-shadow: var(--shadow-2xl);
-        }
-
-        .celebrity-image {
-            width: 100%;
-            height: 320px;
-            position: relative;
-            overflow: hidden;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-        }
-
-        .celebrity-initials {
-            font-family: var(--font-display);
-            font-size: 4rem;
-            font-weight: 900;
-            color: var(--white);
-            z-index: 1;
-            text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
-        }
-
-        .celebrity-image::after {
-            content: '';
-            position: absolute;
-            bottom: 0;
-            left: 0;
-            right: 0;
-            height: 50%;
-            background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.4));
-        }
-
-        .verified-badge {
-            position: absolute;
-            top: var(--space-3);
-            left: var(--space-3);
-            background: var(--accent-gradient);
-            color: var(--white);
-            padding: var(--space-2) var(--space-3);
-            border-radius: var(--radius-full);
-            font-size: var(--text-xs);
-            font-weight: 800;
-            display: flex;
-            align-items: center;
-            gap: var(--space-1);
-            z-index: 2;
-            box-shadow: var(--shadow-md);
-        }
-
-        .watchlist-btn {
-            position: absolute;
-            top: var(--space-3);
-            right: var(--space-3);
-            width: 44px;
-            height: 44px;
-            background: var(--white);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            cursor: pointer;
-            border: none;
-            font-size: var(--text-xl);
-            transition: var(--transition-base);
-            z-index: 2;
-            box-shadow: var(--shadow-md);
-        }
-
-        .watchlist-btn:hover {
-            transform: scale(1.15);
-            box-shadow: var(--shadow-lg);
-        }
-
-        .watchlist-btn.active {
-            background: var(--primary);
-            color: var(--white);
-        }
-
-        .celebrity-info {
-            padding: var(--space-4);
-        }
-
-        .celebrity-name {
-            font-family: var(--font-display);
-            font-size: var(--text-xl);
-            font-weight: 800;
-            margin-bottom: var(--space-2);
-            color: var(--text-primary);  /* WHITE for celebrity names */
-        }
-
-        .celebrity-category {
-            color: var(--primary);  /* Purple for category - accent color */
-            font-size: var(--text-sm);
-            font-weight: 700;
-            margin-bottom: var(--space-3);
-            text-transform: uppercase;
-            letter-spacing: 0.5px;
-        }
-
-        .celebrity-location {
-            display: flex;
-            align-items: center;
-            gap: var(--space-2);
-            color: var(--text-secondary);  /* Light gray for location */
-            font-size: var(--text-sm);
-        }
-
-        .celebrity-price {
-            margin-top: var(--space-3);
-            padding-top: var(--space-3);
-            border-top: 1px solid var(--border-light);
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-        }
-
-        .price {
-            font-family: var(--font-display);
-            font-size: var(--text-2xl);
-            font-weight: 900;
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .book-btn {
-            background: var(--primary-gradient);
-            color: var(--white);
-            padding: var(--space-2) var(--space-4);
-            border-radius: var(--radius-full);
-            font-size: var(--text-sm);
-            font-weight: 700;
-            border: none;
-            cursor: pointer;
-            transition: var(--transition-base);
-            box-shadow: var(--shadow-sm);
-        }
-
-        .book-btn:hover {
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow-md);
-        }
-
-        .no-results {
-            text-align: center;
-            padding: var(--space-8) var(--space-4);
-            color: var(--gray-600);
-        }
-
-        .no-results h3 {
-            font-family: var(--font-display);
-            font-size: var(--text-3xl);
-            margin-bottom: var(--space-3);
-            color: var(--text-primary);  /* WHITE for no-results heading */
-        }
-
-        /* How It Works - Premium Steps */
-        .how-it-works {
-            background: var(--bg-light);
-        }
-
-        .steps-container {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-8);
-        }
-
-        .step {
-            text-align: center;
-            padding: var(--space-4);
-        }
-
-        .step-icon {
-            width: 120px;
-            height: 120px;
-            background: var(--primary-gradient);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-4);
-            font-size: 3rem;
-            box-shadow: var(--shadow-glow-lg);
-            transition: var(--transition-slow);
-        }
-
-        .step:hover .step-icon {
-            transform: scale(1.1) rotateY(10deg);
-            box-shadow: var(--shadow-glow-xl);
-        }
-
-        .step-number {
-            position: absolute;
-            top: -12px;
-            right: -12px;
-            background: var(--accent-gradient);
-            width: 42px;
-            height: 42px;
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-weight: 900;
-            font-size: var(--text-lg);
-            color: var(--white);
-            box-shadow: var(--shadow-md);
-        }
-
-        .step h3 {
-            font-family: var(--font-display);
-            font-size: var(--text-2xl);
-            margin-bottom: var(--space-3);
-            color: var(--text-primary);  /* WHITE for step titles */
-        }
-
-        .step p {
-            color: var(--text-secondary);  /* Light gray for step descriptions */
-            font-size: var(--text-lg);
-            line-height: 1.7;
-        }
-
-        /* Categories - Premium Cards */
-        .categories-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-6);
-        }
-
-        .category-card {
-            padding: var(--space-12) var(--space-6);
-            border-radius: var(--radius-2xl);
-            text-align: center;
-            cursor: pointer;
-            transition: var(--transition-base);
-            position: relative;
-            overflow: hidden;
-            box-shadow: none;
-            border: none;
-        }
-
-        /* Cameo-style vibrant gradients for each category */
-        .category-card:nth-child(1) {
-            background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);  /* Purple - Hollywood */
-        }
-
-        .category-card:nth-child(2) {
-            background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);  /* Pink - K-Drama */
-        }
-
-        .category-card:nth-child(3) {
-            background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);  /* Orange - Business */
-        }
-
-        .category-card:nth-child(4) {
-            background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);  /* Blue - Athletes */
-        }
-
-        .category-card:nth-child(5) {
-            background: linear-gradient(135deg, #5EEAD4 0%, #14B8A6 100%);  /* Teal - Musicians */
-        }
-
-        .category-card:hover {
-            transform: translateY(-6px);
-            box-shadow: var(--shadow-glow-lg);
-        }
-
-        .category-icon {
-            font-size: 4rem;
-            margin-bottom: var(--space-4);
-            filter: drop-shadow(0 4px 12px rgba(0, 0, 0, 0.3));
-        }
-
-        .category-card h3 {
-            color: white;
-            font-family: var(--font-sans);  /* Modern sans-serif */
-            font-size: var(--text-2xl);
-            font-weight: 700;
-            margin-bottom: var(--space-2);
-        }
-
-        .category-count {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: var(--text-base);
-            font-weight: 500;
-        }
-
-        /* Trust Section - Premium Dark */
-        .trust-section {
-            background: var(--bg-tertiary);  /* Slightly elevated dark surface */
-            color: var(--white);
-            border-top: 1px solid var(--border-light);
-            border-bottom: 1px solid var(--border-light);
-        }
-
-        .trust-section .section-header h2,
-        .trust-section .section-header p {
-            color: var(--white);
-        }
-
-        .trust-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
-            gap: var(--space-8);
-        }
-
-        .trust-item {
-            text-align: center;
-            padding: var(--space-4);
-        }
-
-        .trust-icon {
-            width: 100px;
-            height: 100px;
-            background: rgba(255, 255, 255, 0.15);
-            backdrop-filter: blur(10px);
-            border-radius: var(--radius-full);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            margin: 0 auto var(--space-4);
-            font-size: 2.5rem;
-            box-shadow: var(--shadow-lg);
-            transition: var(--transition-base);
-        }
-
-        .trust-item:hover .trust-icon {
-            transform: scale(1.1);
-            background: rgba(255, 255, 255, 0.25);
-        }
-
-        .trust-item h3 {
-            font-family: var(--font-display);
-            font-size: var(--text-2xl);
-            margin-bottom: var(--space-3);
-            font-weight: 800;
-        }
-
-        .trust-item p {
-            color: rgba(255, 255, 255, 0.95);
-            font-size: var(--text-lg);
-            line-height: 1.7;
-        }
-
-        /* CTA Section - Premium Light */
-        .cta-section {
-            background: var(--bg-light);
-            text-align: center;
-            padding: clamp(5rem, 10vw, 8rem) var(--space-4);
-        }
-
-        .cta-content h2 {
-            font-family: var(--font-display);
-            font-size: clamp(2.5rem, 5vw, 4rem);
-            font-weight: 900;
-            margin-bottom: var(--space-4);
-            background: var(--primary-gradient);
-            -webkit-background-clip: text;
-            -webkit-text-fill-color: transparent;
-            background-clip: text;
-        }
-
-        .cta-content p {
-            font-size: var(--text-xl);
-            color: var(--text-secondary);  /* Light gray for CTA description */
-            margin-bottom: var(--space-6);
-            line-height: 1.6;
-        }
-
-        .cta-buttons {
-            display: flex;
-            gap: var(--space-4);
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-
-        /* Footer - uses shared.css footer styles */
-
-        /* Animations - shared.css provides fadeInUp */
-        @keyframes fadeInUp {
-            from {
-                opacity: 0;
-                transform: translateY(30px);
-            }
-            to {
-                opacity: 1;
-                transform: translateY(0);
-            }
-        }
-
-        /* Responsive Design */
-        @media (max-width: 768px) {
-            .search-container {
-                flex-direction: column;
-                border-radius: var(--radius-xl);
-            }
-
-            .filter-row {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .category-filters {
-                justify-content: center;
-            }
-
-            .sort-dropdown {
-                width: 100%;
-            }
-
-            .celebrities-grid {
-                grid-template-columns: 1fr;
-                gap: var(--space-4);
-            }
-
-            .cta-buttons {
-                flex-direction: column;
-                align-items: stretch;
-            }
-
-            .btn-primary, .btn-secondary {
-                width: 100%;
-            }
-        }
-
-        @media (max-width: 480px) {
-            .hero {
-                padding: clamp(3rem, 8vw, 4rem) var(--space-3) clamp(4rem, 10vw, 5rem);
-            }
-
-            .section {
-                padding: clamp(3rem, 6vw, 4rem) var(--space-3);
-            }
-
-            .filter-pill {
-                font-size: var(--text-xs);
-                padding: var(--space-1-5) var(--space-3);
-            }
-        }
-
-        /* View More Button */
-        .view-more-container {
-            text-align: center;
-            margin-top: var(--space-6);
-        }
-
-        .btn-view-more {
-            background: var(--white);
-            color: var(--primary);
-            padding: var(--space-3) var(--space-8);
-            border: 2px solid var(--primary);
-            border-radius: var(--radius-full);
-            font-size: var(--text-lg);
-            font-weight: 700;
-            cursor: pointer;
-            transition: var(--transition-base);
-            font-family: var(--font-body);
-        }
-
-        .btn-view-more:hover {
-            background: var(--primary-gradient);
-            color: var(--white);
-            border-color: transparent;
-            transform: translateY(-2px);
-            box-shadow: var(--shadow-glow-lg);
-        }
-
-        .hidden {
-            display: none;
-        }
-    </style>
 </head>
 <body>
     <!-- Navigation -->
@@ -797,8 +64,8 @@
     <!-- Hero Section -->
     <section class="hero">
         <div class="hero-content">
-            <h1>Meet Your Icons In Person</h1>
-            <p>Book exclusive face-to-face meetings with world-class celebrities when they're in your city</p>
+            <h1>Your hero. Your moment. Your memory.</h1>
+            <p>Connect face-to-face with the stars who inspire you—exclusive in-person experiences you'll treasure forever</p>
             <div class="search-container">
                 <select class="search-input" id="cityFilter" onchange="applySearch()" aria-label="Select your city">
                     <option value="">Select Your City</option>
@@ -814,7 +81,7 @@
                     <option value="Toronto">Toronto</option>
                 </select>
                 <input type="date" class="date-input" id="dateFilter" onchange="applySearch()" aria-label="Select meeting date">
-                <button class="btn btn-primary btn-lg" onclick="window.location.href='browse.html'">Explore Celebrities</button>
+                <button class="btn btn-primary btn-lg" onclick="window.location.href='browse.html'">Discover Your Moment</button>
             </div>
             <div class="filter-info" id="filterInfo">
                 <span id="filterText"></span>
@@ -823,42 +90,49 @@
         </div>
     </section>
 
+    <!-- Trust Indicators - NEW Brand Identity -->
+    <section class="trust-indicators-section">
+        <div class="trust-indicators-container">
+            <div class="carousel-container">
+                <div class="carousel-wrapper trust-indicators-carousel">
+                    <div class="trust-indicator-item">
+                        <div class="trust-indicator-icon">✓</div>
+                        <div class="trust-badge">Identity Verified</div>
+                        <h3>Verified Stars</h3>
+                        <p>Every celebrity identity is personally verified by our security team</p>
+                    </div>
+                    <div class="trust-indicator-item">
+                        <div class="trust-indicator-icon">📍</div>
+                        <div class="trust-badge">Location Vetted</div>
+                        <h3>Safe Venues</h3>
+                        <p>All meeting locations are pre-screened for your safety and comfort</p>
+                    </div>
+                    <div class="trust-indicator-item">
+                        <div class="trust-indicator-icon">💬</div>
+                        <div class="trust-badge">Secure Payment</div>
+                        <h3>24/7 Support</h3>
+                        <p>Concierge team available around the clock for your peace of mind</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
     <!-- Featured Celebrities -->
     <section class="section" id="celebrities">
         <div class="section-header">
-            <h2>Featured Celebrities</h2>
-            <p>Meet the stars available for exclusive meetups</p>
+            <h2>Featured Stars</h2>
+            <a href="browse.html" class="view-all-link">View All →</a>
         </div>
 
-        <!-- Filter Controls -->
-        <div class="filter-controls">
-            <div class="filter-row">
-                <div class="category-filters">
-                    <button class="filter-pill active" data-category="All" onclick="filterByCategory(this)">All</button>
-                    <button class="filter-pill" data-category="Hollywood" onclick="filterByCategory(this)">Hollywood</button>
-                    <button class="filter-pill" data-category="K-Drama" onclick="filterByCategory(this)">K-Drama</button>
-                    <button class="filter-pill" data-category="Business" onclick="filterByCategory(this)">Business</button>
-                    <button class="filter-pill" data-category="Athletes" onclick="filterByCategory(this)">Athletes</button>
-                    <button class="filter-pill" data-category="Musicians" onclick="filterByCategory(this)">Musicians</button>
-                </div>
-                <select class="sort-dropdown" id="sortDropdown" onchange="sortCelebrities()">
-                    <option value="popular">Popular</option>
-                    <option value="price-low">Price: Low to High</option>
-                    <option value="price-high">Price: High to Low</option>
-                    <option value="availability">Availability</option>
-                </select>
+        <div class="carousel-container">
+            <div class="carousel-wrapper celebrities-carousel" id="celebritiesGrid">
+                <!-- Celebrities will be loaded here by JavaScript -->
             </div>
         </div>
-
-        <div class="celebrities-grid" id="celebritiesGrid">
-            <!-- Celebrities will be loaded here by JavaScript -->
-        </div>
         <div id="noResults" class="no-results hidden">
-            <h3>No celebrities found</h3>
-            <p>Try adjusting your filters or search criteria</p>
-        </div>
-        <div class="view-more-container">
-            <button class="btn-view-more" id="viewMoreBtn" onclick="window.location.href='browse.html'">View More Celebrities</button>
+            <h3>No stars found</h3>
+            <p>Try adjusting your search</p>
         </div>
     </section>
 
@@ -866,32 +140,33 @@
     <section class="section how-it-works" id="how-it-works">
         <div class="section-header">
             <h2>How It Works</h2>
-            <p>Three simple steps to meet your favorite celebrity</p>
         </div>
-        <div class="steps-container">
-            <div class="step">
-                <div class="step-icon" style="position: relative;">
-                    <span style="color: white;">🔍</span>
-                    <div class="step-number">1</div>
+        <div class="carousel-container">
+            <div class="carousel-wrapper steps-carousel">
+                <div class="step">
+                    <div class="step-icon">
+                        <span>🔍</span>
+                        <div class="step-number">1</div>
+                    </div>
+                    <h3>Discover Your Star</h3>
+                    <p>Explore verified stars visiting your city and find the perfect moment waiting to happen</p>
                 </div>
-                <h3>Browse & Discover</h3>
-                <p>Explore our verified celebrity roster and find your icon when they're visiting your city</p>
-            </div>
-            <div class="step">
-                <div class="step-icon" style="position: relative;">
-                    <span style="color: white;">📅</span>
-                    <div class="step-number">2</div>
+                <div class="step">
+                    <div class="step-icon">
+                        <span>📅</span>
+                        <div class="step-number">2</div>
+                    </div>
+                    <h3>Reserve Your Moment</h3>
+                    <p>Select your preferred time and secure your experience through our protected payment system</p>
                 </div>
-                <h3>Book Your Slot</h3>
-                <p>Choose your preferred time slot and complete the secure payment process in minutes</p>
-            </div>
-            <div class="step">
-                <div class="step-icon" style="position: relative;">
-                    <span style="color: white;">⭐</span>
-                    <div class="step-number">3</div>
+                <div class="step">
+                    <div class="step-icon">
+                        <span>⭐</span>
+                        <div class="step-number">3</div>
+                    </div>
+                    <h3>Experience the Magic</h3>
+                    <p>Arrive at our vetted venue and create a memory that will last forever</p>
                 </div>
-                <h3>Meet Your Icon</h3>
-                <p>Show up at the designated venue and enjoy an unforgettable face-to-face experience</p>
             </div>
         </div>
     </section>
@@ -900,33 +175,34 @@
     <section class="section">
         <div class="section-header">
             <h2>Browse by Category</h2>
-            <p>Find celebrities from your favorite industry</p>
         </div>
-        <div class="categories-grid">
-            <div class="category-card" onclick="window.location.href='browse.html?category=Hollywood'">
-                <div class="category-icon">🎬</div>
-                <h3>Hollywood</h3>
-                <p class="category-count">35+ Stars Available</p>
-            </div>
-            <div class="category-card" onclick="window.location.href='browse.html?category=K-Drama'">
-                <div class="category-icon">🎭</div>
-                <h3>K-Drama</h3>
-                <p class="category-count">20+ Stars Available</p>
-            </div>
-            <div class="category-card" onclick="window.location.href='browse.html?category=Business'">
-                <div class="category-icon">💼</div>
-                <h3>Business</h3>
-                <p class="category-count">15+ Icons Available</p>
-            </div>
-            <div class="category-card" onclick="window.location.href='browse.html?category=Athletes'">
-                <div class="category-icon">⚽</div>
-                <h3>Athletes</h3>
-                <p class="category-count">18+ Champions Available</p>
-            </div>
-            <div class="category-card" onclick="window.location.href='browse.html?category=Musicians'">
-                <div class="category-icon">🎵</div>
-                <h3>Musicians</h3>
-                <p class="category-count">22+ Artists Available</p>
+        <div class="carousel-container">
+            <div class="carousel-wrapper categories-carousel">
+                <div class="category-card" onclick="window.location.href='browse.html?category=Hollywood'">
+                    <div class="category-icon">🎬</div>
+                    <h3>Hollywood</h3>
+                    <p class="category-count">35+ Stars Available</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='browse.html?category=K-Drama'">
+                    <div class="category-icon">🎭</div>
+                    <h3>K-Drama</h3>
+                    <p class="category-count">20+ Stars Available</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='browse.html?category=Business'">
+                    <div class="category-icon">💼</div>
+                    <h3>Business</h3>
+                    <p class="category-count">15+ Icons Available</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='browse.html?category=Athletes'">
+                    <div class="category-icon">⚽</div>
+                    <h3>Athletes</h3>
+                    <p class="category-count">18+ Champions Available</p>
+                </div>
+                <div class="category-card" onclick="window.location.href='browse.html?category=Musicians'">
+                    <div class="category-icon">🎵</div>
+                    <h3>Musicians</h3>
+                    <p class="category-count">22+ Artists Available</p>
+                </div>
             </div>
         </div>
     </section>
@@ -935,23 +211,24 @@
     <section class="section trust-section">
         <div class="section-header">
             <h2>Why Choose StarryMeet</h2>
-            <p>Your safety and satisfaction are our top priorities</p>
         </div>
-        <div class="trust-grid">
-            <div class="trust-item">
-                <div class="trust-icon">✓</div>
-                <h3>Verified Profiles</h3>
-                <p>Every celebrity on our platform is personally verified and authenticated by our team</p>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">🔒</div>
-                <h3>Secure Payments</h3>
-                <p>Bank-level encryption and secure payment processing protect your transactions</p>
-            </div>
-            <div class="trust-item">
-                <div class="trust-icon">💬</div>
-                <h3>24/7 Support</h3>
-                <p>Our dedicated concierge team is available around the clock to assist you</p>
+        <div class="carousel-container">
+            <div class="carousel-wrapper trust-carousel">
+                <div class="trust-item">
+                    <div class="trust-icon">✓</div>
+                    <h3>Verified Profiles</h3>
+                    <p>Every celebrity on our platform is personally verified and authenticated by our team</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">🔒</div>
+                    <h3>Secure Payments</h3>
+                    <p>Bank-level encryption and secure payment processing protect your transactions</p>
+                </div>
+                <div class="trust-item">
+                    <div class="trust-icon">💬</div>
+                    <h3>24/7 Support</h3>
+                    <p>Our dedicated concierge team is available around the clock to assist you</p>
+                </div>
             </div>
         </div>
     </section>
@@ -959,10 +236,10 @@
     <!-- CTA Section -->
     <section class="cta-section">
         <div class="cta-content">
-            <h2>Ready to Meet Your Icon?</h2>
-            <p>Join thousands of fans who've already made their dream meetings come true</p>
+            <h2>Ready to Create Your Moment?</h2>
+            <p>Join thousands who've transformed their dreams into unforgettable memories</p>
             <div class="cta-buttons">
-                <button class="btn btn-primary btn-lg" onclick="window.location.href='browse.html'">Start Exploring</button>
+                <button class="btn btn-primary btn-lg" onclick="window.location.href='browse.html'">Discover Your Moment</button>
                 <button class="btn btn-outline btn-lg" onclick="scrollToSection('how-it-works')">Learn More</button>
             </div>
         </div>
@@ -1221,7 +498,7 @@
                         </p>
                         <div class="celebrity-price">
                             <span class="price" aria-label="Price: $${celeb.price.toLocaleString()}">$${celeb.price.toLocaleString()}</span>
-                            <button class="book-btn" onclick="event.stopPropagation(); window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Book Now</button>
+                            <button class="book-btn" onclick="event.stopPropagation(); window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Reserve</button>
                         </div>
                     </div>
                 </article>
