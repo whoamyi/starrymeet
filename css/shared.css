@@ -6,9 +6,10 @@
  */
 
 /* ========================================
-   GOOGLE FONTS IMPORT
+   GOOGLE FONTS IMPORT - INTER ONLY (CAMEO STYLE)
    ======================================== */
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=Playfair+Display:wght@700;800;900&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');
+/* Removed Playfair Display - Cameo uses only sans-serif */
 
 /* ========================================
    CSS RESET
@@ -154,21 +155,22 @@ body {
     --transition-slow: 350ms cubic-bezier(0.4, 0, 0.2, 1);
     --transition-bounce: 500ms cubic-bezier(0.68, -0.55, 0.265, 1.55);
 
-    /* Typography Scale */
+    /* Typography Scale - CAMEO MINIMAL (STRICT) */
     --font-sans: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    --font-display: 'Playfair Display', Georgia, serif;
+    --font-display: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; /* No serif - pure sans */
 
-    --text-xs: 0.75rem;      /* 12px */
-    --text-sm: 0.875rem;     /* 14px */
-    --text-base: 1rem;       /* 16px */
-    --text-lg: 1.125rem;     /* 18px */
-    --text-xl: 1.25rem;      /* 20px */
-    --text-2xl: 1.5rem;      /* 24px */
-    --text-3xl: 1.875rem;    /* 30px */
-    --text-4xl: 2.25rem;     /* 36px */
-    --text-5xl: 3rem;        /* 48px */
-    --text-6xl: 3.75rem;     /* 60px */
-    --text-7xl: 4.5rem;      /* 72px */
+    /* ONLY 4 TEXT SIZES - EXTREME CONSISTENCY */
+    --text-xs: 0.75rem;      /* 12px - tiny labels only */
+    --text-sm: 0.875rem;     /* 14px - small text */
+    --text-base: 1rem;       /* 16px - ALL BODY TEXT (standard) */
+    --text-lg: 1.125rem;     /* 18px - slightly larger text */
+    --text-xl: 1.25rem;      /* 20px - small headings */
+    --text-2xl: 1.5rem;      /* 24px - main headings (h2, h3) */
+    --text-3xl: 1.75rem;     /* 28px - page titles (h1) */
+    --text-4xl: 1.75rem;     /* 28px - MAX SIZE (h1 on desktop) */
+    --text-5xl: 1.75rem;     /* NO LONGER USED */
+    --text-6xl: 1.75rem;     /* NO LONGER USED */
+    --text-7xl: 1.75rem;     /* NO LONGER USED */
 
     /* Z-Index Scale */
     --z-dropdown: 1000;
@@ -186,52 +188,55 @@ body {
 }
 
 /* ========================================
-   TYPOGRAPHY - CAMEO-INSPIRED MINIMAL ELEGANCE
+   TYPOGRAPHY - TRUE CAMEO MINIMAL (STRICT)
    ======================================== */
 h1, h2, h3, h4, h5, h6 {
-    font-weight: 700;
-    line-height: 1.1;  /* Tighter for modern look */
+    font-weight: 600;  /* Less bold - more refined */
+    line-height: 1.3;
     color: var(--text-primary);
-    letter-spacing: -0.02em;
+    letter-spacing: -0.01em;  /* Less tight */
     margin: 0;
+    font-family: var(--font-sans);  /* Always sans-serif */
 }
 
+/* SMALL HEADINGS - Cameo style */
 h1 {
-    font-size: var(--text-5xl);  /* Reduced from 6xl - more restrained like Cameo */
-    font-family: var(--font-sans);  /* Sans-serif for cleaner look */
-    font-weight: 800;
+    font-size: var(--text-3xl);  /* 28px MAX - small and refined */
+    font-weight: 600;
 }
 
 h2 {
-    font-size: var(--text-4xl);  /* Reduced from 5xl */
-    font-family: var(--font-sans);
-    font-weight: 700;
+    font-size: var(--text-2xl);  /* 24px - main section headings */
+    font-weight: 600;
 }
 
 h3 {
-    font-size: var(--text-3xl);
-    font-weight: 700;
+    font-size: var(--text-xl);  /* 20px - subsection headings */
+    font-weight: 600;
 }
 
 h4 {
-    font-size: var(--text-2xl);
+    font-size: var(--text-lg);  /* 18px */
     font-weight: 600;
 }
 
 h5 {
-    font-size: var(--text-xl);
+    font-size: var(--text-base);  /* 16px - same as body */
     font-weight: 600;
 }
 
 h6 {
-    font-size: var(--text-lg);
+    font-size: var(--text-sm);  /* 14px */
     font-weight: 600;
 }
 
+/* ALL BODY TEXT IS 16px - COMPLETE CONSISTENCY */
 p {
     margin: 0;
     color: var(--text-secondary);
     line-height: 1.6;
+    font-size: var(--text-base);  /* Always 16px */
+    font-weight: 400;
 }
 
 a {
@@ -244,10 +249,14 @@ a:hover {
     color: var(--primary-dark);
 }
 
+/* Mobile headings - EVEN SMALLER for app-like feel */
 @media (max-width: 768px) {
-    h1 { font-size: var(--text-4xl); }
-    h2 { font-size: var(--text-3xl); }
-    h3 { font-size: var(--text-2xl); }
+    h1 { font-size: var(--text-2xl); }  /* 24px on mobile */
+    h2 { font-size: var(--text-xl); }   /* 20px on mobile */
+    h3 { font-size: var(--text-lg); }   /* 18px on mobile */
+
+    /* All body text stays 16px - NEVER CHANGES */
+    p { font-size: var(--text-base); }
 }
 
 /* ========================================
@@ -287,14 +296,14 @@ header.scrolled,
 }
 
 .logo {
-    font-size: var(--text-3xl);
-    font-weight: 900;
-    font-family: var(--font-display);
+    font-size: var(--text-2xl);  /* Smaller, more refined */
+    font-weight: 700;  /* Less bold */
+    font-family: var(--font-sans);  /* Sans-serif, not display */
     background: var(--primary-gradient);
     -webkit-background-clip: text;
     -webkit-text-fill-color: transparent;
     background-clip: text;
-    letter-spacing: -0.03em;
+    letter-spacing: -0.01em;  /* Less tight */
     text-decoration: none;
     transition: var(--transition-base);
 }
@@ -744,12 +753,15 @@ header.scrolled,
 
 .card-title {
     color: var(--text-primary);
-    font-weight: 700;
+    font-weight: 600;  /* Less bold */
     margin-bottom: var(--space-3);
+    font-size: var(--text-lg);  /* Consistent size */
 }
 
 .card-text {
     color: var(--text-secondary);
+    font-size: var(--text-base);  /* Always 16px */
+    font-weight: 400;
 }
 
 /* Card Variants */
@@ -774,127 +786,30 @@ header.scrolled,
 }
 
 /* ========================================
-   CAMEO-INSPIRED GRADIENT CARDS
+   GRADIENT CARDS - REMOVED (TRUE CAMEO MINIMAL)
    ======================================== */
 
-/* ========================================
-   GRADIENT CARD USAGE GUIDELINES (90/10 RULE - Brand Identity)
-   ========================================
+/* CAMEO DOESN'T USE GRADIENT CARDS
 
-   StarryMeet uses a 90/10 color rule (vs Cameo's 80/20).
-   MORE restraint = MORE premium = justified higher pricing for in-person meetings.
+   Cameo uses 95% black/white/gray with RARE purple accent.
+   Gradient cards are TOO COLORFUL for true minimal design.
 
-   90% = Black, white, gray
-   10% = Color accents (pink, purple, cyan, gold)
+   REMOVED ALL GRADIENT CLASSES:
+   - card-gradient-purple
+   - card-gradient-pink
+   - card-gradient-red
+   - card-gradient-blue
+   - card-gradient-teal
+   - card-gradient-lime
+   - card-gradient-orange
+   - card-gradient-gold
 
-   GRADIENT CARDS: Use EVEN MORE sparingly than Cameo
-   Maximum 2-4 visible gradient cards per page.
+   USE INSTEAD:
+   - Standard .card (black with gray border)
+   - .btn-primary (ONLY purple element for CTAs)
 
-   WHEN TO USE gradient cards:
-   ✅ Featured celebrity spotlight (1 per page max)
-   ✅ Premium tier pricing cards (VIP/exclusive tiers)
-   ✅ Special announcement or event
-   ✅ VIP category highlight (1-2 max)
-
-   WHEN NOT TO USE gradient cards:
-   ❌ All category cards (use 2-3 max, rest should be standard black cards)
-   ❌ Regular navigation elements
-   ❌ Standard content cards
-   ❌ Repeated grid elements (like lists of many celebrities)
-
-   Current v2.0 usage: Homepage has 8 gradient category cards
-   New brand identity: Reduce to 4-6 maximum
-
-   Why fewer gradients? In-person meetings are MORE premium than videos.
-   More visual restraint communicates higher value and exclusivity.
-   ======================================== */
-
-.card-gradient-purple {
-    background: linear-gradient(135deg, #A78BFA 0%, #8B5CF6 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-purple * {
-    color: white !important;
-}
-
-.card-gradient-pink {
-    background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-pink * {
-    color: white !important;
-}
-
-.card-gradient-red {
-    background: linear-gradient(135deg, #FCA5A5 0%, #EF4444 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-red * {
-    color: white !important;
-}
-
-.card-gradient-blue {
-    background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-blue * {
-    color: white !important;
-}
-
-.card-gradient-teal {
-    background: linear-gradient(135deg, #5EEAD4 0%, #14B8A6 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-teal * {
-    color: white !important;
-}
-
-.card-gradient-lime {
-    background: linear-gradient(135deg, #BEF264 0%, #84CC16 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-lime * {
-    color: white !important;
-}
-
-.card-gradient-orange {
-    background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);
-    border: none;
-    color: white;
-}
-
-.card-gradient-orange * {
-    color: white !important;
-}
-
-.card-gradient-gold {
-    background: var(--accent-gradient);
-    border: none;
-    color: white;
-}
-
-.card-gradient-gold * {
-    color: white !important;
-}
-
-/* Gradient cards have no border on hover */
-[class*="card-gradient"]:hover {
-    border: none;
-    box-shadow: var(--shadow-glow-lg);
-    transform: translateY(-4px);
-}
+   Color should feel RARE and SPECIAL, not everywhere.
+*/
 
 /* ========================================
    CAROUSEL SYSTEM - COMPACT HORIZONTAL SCROLL
@@ -1088,97 +1003,67 @@ header.scrolled,
 }
 
 /* ========================================
-   EXCELLENCE BADGE - GOLD (UPDATED - Brand Identity)
+   BADGES - MINIMAL GRAY (TRUE CAMEO STYLE)
    ======================================== */
-/* Gold badges indicate EXCELLENCE (premium tier, VIP status)
-   Use for: premium celebrities, VIP features, top-tier experiences
-   NOT for: basic verification (use cyan trust badge instead)
+/* Cameo uses simple gray badges, not colorful ones
+   ONE exception: Primary CTA button is purple
+   Everything else is gray/white/black
 */
 
 .verified-badge,
 .badge-verified,
 .badge-premium,
 .badge-vip,
+.trust-badge,
+.badge-trust,
+.badge-verified-identity,
+.badge-secure,
+.badge-location-verified,
 [class*="premium"],
 [class*="vip"] {
-    background: var(--accent-gradient) !important;
-    color: white !important;
-    padding: var(--space-2) var(--space-3);
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    padding: var(--space-1) var(--space-3);
     border-radius: var(--radius-full);
+    border: 1px solid var(--border-medium);
     font-size: var(--text-xs);
-    font-weight: 800;
+    font-weight: 600;  /* Less bold */
     display: inline-flex;
     align-items: center;
     gap: var(--space-1);
-    box-shadow: var(--shadow-gold-glow);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
+    box-shadow: none;
+    text-transform: none;  /* No uppercase */
+    letter-spacing: 0;
     transition: var(--transition-base);
 }
 
 .verified-badge:hover,
 .badge-premium:hover,
-.badge-vip:hover {
-    box-shadow: 0 0 32px rgba(245, 158, 11, 0.3);
-    transform: scale(1.05);
+.badge-vip:hover,
+.trust-badge:hover {
+    border-color: var(--border-dark);
+    transform: none;  /* No scale animation */
 }
 
-/* Star icon for excellence badges */
-.badge-premium::before,
-.badge-vip::before {
-    content: '★';
-    font-weight: var(--font-extrabold);
-}
-
-/* ========================================
-   TRUST BADGE - CYAN (NEW - Brand Identity)
-   ======================================== */
-/* Cyan badges indicate TRUST (verification, safety)
-   Gold badges indicate EXCELLENCE (VIP, premium)
-   Use cyan for: verified identity, vetted location, secure payment
-   Use gold for: premium tier, VIP status, top celebrity
-*/
-
-.trust-badge,
-.badge-trust,
-.badge-verified-identity,
-.badge-secure,
-.badge-location-verified {
-    background: var(--trust-gradient) !important;
-    color: white !important;
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
-    font-weight: 800;
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-1);
-    box-shadow: 0 0 20px rgba(6, 182, 212, 0.2);
-    text-transform: uppercase;
-    letter-spacing: 0.05em;
-    transition: var(--transition-base);
-}
-
-.trust-badge:hover,
-.badge-trust:hover,
-.badge-verified-identity:hover,
-.badge-secure:hover {
-    box-shadow: 0 0 32px rgba(6, 182, 212, 0.35);
-    transform: scale(1.05);
-}
-
-/* Checkmark icon for trust badges */
+/* Simple checkmark - no fancy icons */
+.verified-badge::before,
+.badge-verified::before,
 .trust-badge::before,
 .badge-trust::before,
 .badge-verified-identity::before,
 .badge-secure::before {
     content: '✓';
-    font-weight: 800;
+    font-weight: 400;
+    font-size: var(--text-xs);
 }
 
-/* Location verified badge variant */
+.badge-premium::before,
+.badge-vip::before {
+    content: '';  /* No star */
+}
+
 .badge-location-verified::before {
-    content: '📍';
+    content: '';  /* No emoji */
 }
 
 /* ========================================
@@ -1482,15 +1367,17 @@ html {
 
 .section-title {
     color: var(--text-primary);
-    font-family: var(--font-display);
-    font-weight: 800;
+    font-family: var(--font-sans);  /* Sans-serif only */
+    font-weight: 600;  /* Less bold */
     margin-bottom: var(--space-3);
+    font-size: var(--text-2xl);  /* Consistent size */
 }
 
 .section-subtitle,
 .section-description {
     color: var(--text-secondary);
-    font-size: var(--text-lg);
+    font-size: var(--text-base);  /* Same as all body text - 16px */
+    font-weight: 400;
 }
 
 /* Modal Styles */
@@ -1520,8 +1407,8 @@ html {
 
 .modal-title {
     color: var(--text-primary);
-    font-size: var(--text-3xl);
-    font-weight: 800;
+    font-size: var(--text-xl);  /* Smaller */
+    font-weight: 600;  /* Less bold */
     margin-bottom: var(--space-4);
 }
 
@@ -2047,63 +1934,75 @@ input:focus-visible {
 }
 
 /* ========================================
-   MOBILE-FIRST ENHANCEMENTS - APP-LIKE FEEL
+   MOBILE - COMPACT APP-LIKE FEEL (TRUE CAMEO)
    ======================================== */
 @media (max-width: 768px) {
-    /* Enhanced border visibility on mobile - mysterious but visible */
+    /* COMPACT borders and spacing - app-like */
     .card,
     [class*="-card"],
     .section,
     input,
     select,
     textarea {
-        border-color: var(--border-mobile) !important;
-        border-radius: var(--radius-xl) !important; /* Rounder on mobile for app feel */
+        border-color: var(--border-light) !important;
+        border-radius: var(--radius-lg) !important; /* Less rounded for compact feel */
     }
 
-    /* Carousel mobile optimizations */
+    /* Carousel - MUCH MORE COMPACT */
     .carousel-wrapper {
-        gap: var(--space-3);
-        padding: var(--space-3) var(--space-2);
-        scroll-padding: var(--space-4);
+        gap: var(--space-2);  /* Tighter spacing */
+        padding: var(--space-2) 0;
+        scroll-padding: var(--space-2);
     }
 
-    /* Mobile touch-friendly spacing */
+    /* Buttons - SMALLER for compact feel */
     .btn {
-        min-height: 48px; /* Touch target size */
-        padding: var(--space-4) var(--space-6);
+        min-height: 42px; /* Smaller touch target */
+        padding: var(--space-3) var(--space-5);  /* Tighter padding */
+        font-size: var(--text-sm);  /* Smaller text */
     }
 
-    /* Larger tap targets on mobile */
+    /* Tap targets - compact but accessible */
     a,
     button,
     .clickable {
-        min-height: 44px;
+        min-height: 40px;  /* Smaller */
         display: inline-flex;
         align-items: center;
     }
 
-    /* Container padding optimization for mobile */
+    /* Container - TIGHTER padding */
     .container,
     .section {
         padding-left: var(--space-4);
         padding-right: var(--space-4);
     }
 
-    /* Hero section mobile optimization */
-    .hero {
-        padding: var(--space-8) var(--space-4);
+    /* Card body - LESS padding */
+    .card-body {
+        padding: var(--space-5);  /* Was var(--space-8) */
     }
 
-    /* Card hover effects disabled on mobile (prevents sticky hover) */
+    /* Hero - COMPACT spacing */
+    .hero {
+        padding: var(--space-6) var(--space-4);
+    }
+
+    /* Disable hover on mobile */
     .card:hover,
     [class*="-card"]:hover {
         transform: none;
+        box-shadow: none;
     }
 
-    /* Mobile-friendly font sizes */
+    /* Small consistent body text */
     body {
-        font-size: 16px; /* Prevents zoom on input focus */
+        font-size: 16px; /* Prevents zoom */
+    }
+
+    /* Logo smaller on mobile */
+    .logo {
+        font-size: var(--text-xl);
     }
 }
 
