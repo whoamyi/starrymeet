@@ -398,11 +398,11 @@
 }
 
 .celebrity-name {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: var(--text-base);
-    font-weight: 800;
+    font-weight: 400;
     margin-bottom: var(--space-1);
-    color: var(--text-primary);
+    color: var(--white);
     white-space: nowrap;
     overflow: hidden;
     text-overflow: ellipsis;
@@ -436,26 +436,22 @@
 
 .price {
     font-family: var(--font-body);
-    font-size: var(--text-sm);
+    font-size: 12px;
     font-weight: 400;
     color: var(--white);
 }
 
-.book-btn {
-    background: none;
-    color: var(--text-tertiary);
-    padding: 0;
-    border: none;
-    border-radius: 0;
-    font-size: 0.70rem;
-    font-weight: 400;
-    cursor: pointer;
-    transition: var(--transition-base);
-    text-decoration: none;
+.celebrity-rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 12px;
+    color: var(--text-secondary);
 }
 
-.book-btn:hover {
-    color: var(--text-secondary);
+.rating-star {
+    color: #F59E0B;
+    font-size: 12px;
 }
 
 /* Categories Carousel */

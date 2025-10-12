@@ -537,11 +537,11 @@ input:checked + .toggle-slider:before {
 }
 
 .celebrity-name {
-    font-family: var(--font-display);
+    font-family: var(--font-body);
     font-size: var(--text-xl);
-    font-weight: 800;
+    font-weight: 400;
     margin-bottom: var(--space-2);
-    color: var(--text-primary);
+    color: var(--white);
 }
 
 .celebrity-category {
@@ -558,7 +558,7 @@ input:checked + .toggle-slider:before {
     align-items: center;
     gap: var(--space-2);
     color: var(--text-secondary);
-    font-size: var(--text-sm);
+    font-size: 0.70rem;
     margin-bottom: var(--space-3);
 }
 
@@ -571,32 +571,23 @@ input:checked + .toggle-slider:before {
 }
 
 .price {
-    font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 900;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
-}
-
-.book-btn {
-    background: var(--primary-gradient);
-    color: var(--white);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-full);
-    font-size: var(--text-sm);
-    font-weight: 700;
     font-family: var(--font-body);
-    border: none;
-    cursor: pointer;
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-sm);
+    font-size: 12px;
+    font-weight: 400;
+    color: var(--white);
 }
 
-.book-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow-md);
+.celebrity-rating {
+    display: flex;
+    align-items: center;
+    gap: var(--space-1);
+    font-size: 12px;
+    color: var(--text-secondary);
+}
+
+.rating-star {
+    color: #F59E0B;
+    font-size: 12px;
 }
 
 /* List View */
