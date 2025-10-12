@@ -202,21 +202,28 @@
     justify-content: center;
 }
 
-/* Carousel Navigation Arrows (Minimal White Line Style) */
+/* Carousel Navigation Arrows (Traffic Light Style - Subtle Fade In) */
 .carousel-arrow {
     position: absolute;
     top: 50%;
     z-index: 10;
     background: transparent;
     border: none;
-    border-left: 2px solid rgba(255, 255, 255, 0.6);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.6);
+    border-left: 2px solid rgba(255, 255, 255, 0.3);
+    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
     width: 16px;
     height: 16px;
     cursor: pointer;
-    transition: var(--transition-base);
+    transition: opacity 0.6s ease, border-color 0.3s ease, transform 0.3s ease;
     padding: 0;
     font-size: 0;
+    opacity: 0.5;  /* Start subtle */
+}
+
+/* Fade in on hover - traffic light effect */
+.carousel-container:hover .carousel-arrow {
+    opacity: 1;
+    border-color: rgba(255, 255, 255, 0.8);
 }
 
 .carousel-arrow:hover {
@@ -229,7 +236,7 @@
 }
 
 .carousel-arrow-left:hover {
-    transform: translateY(-50%) rotate(45deg) scale(1.2);
+    transform: translateY(-50%) rotate(45deg) scale(1.1);  /* Less aggressive */
 }
 
 .carousel-arrow-right {
@@ -238,7 +245,7 @@
 }
 
 .carousel-arrow-right:hover {
-    transform: translateY(-50%) rotate(-135deg) scale(1.2);
+    transform: translateY(-50%) rotate(-135deg) scale(1.1);  /* Less aggressive */
 }
 
 /* Hide arrows on desktop for centered carousels */

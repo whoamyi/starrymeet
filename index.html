@@ -537,7 +537,10 @@
                         </p>
                         <div class="celebrity-price">
                             <span class="price" aria-label="Price: $${celeb.price.toLocaleString()}">$${celeb.price.toLocaleString()}</span>
-                            <button class="book-btn" onclick="event.stopPropagation(); window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Reserve</button>
+                            <div class="celebrity-rating">
+                                <span class="rating-star">★</span>
+                                <span>4.95</span>
+                            </div>
                         </div>
                     </div>
                 </article>
