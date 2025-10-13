@@ -278,12 +278,26 @@
     justify-content: center;
 }
 
+/* REFINED: Subtle texture overlay for sophistication */
+.celebrity-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.1) 0%, transparent 50%);
+    mix-blend-mode: overlay;
+    z-index: 1;
+    pointer-events: none;
+}
+
 .celebrity-initials {
     font-family: var(--font-display);
-    font-size: 2.5rem;
-    font-weight: 900;
+    font-size: 4rem;  /* REFINED: Increased from 2.5rem for more drama */
+    font-weight: 700;  /* REFINED: Less heavy than 900 */
+    letter-spacing: 0.05em;  /* REFINED: Add slight tracking */
     color: var(--white);
-    z-index: 1;
+    z-index: 2;  /* Above texture overlay */
     text-shadow: 0 4px 20px rgba(0, 0, 0, 0.3);
 }
 
@@ -301,17 +315,19 @@
     position: absolute;
     top: var(--space-2);
     left: var(--space-2);
-    background: var(--accent-gradient);
-    color: var(--white);
-    padding: var(--space-1) var(--space-2);
+    background: transparent !important;  /* REFINED: Minimal gray instead of gold gradient */
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-medium);
+    padding: var(--space-1) var(--space-3);
     border-radius: var(--radius-full);
     font-size: 0.65rem;
-    font-weight: 800;
+    font-weight: 600;  /* REFINED: Less bold */
     display: flex;
     align-items: center;
     gap: var(--space-1);
-    z-index: 2;
-    box-shadow: var(--shadow-sm);
+    z-index: 3;  /* Above texture overlay */
+    box-shadow: none;
+    text-transform: none;
 }
 
 .watchlist-btn {
@@ -375,8 +391,9 @@
 }
 
 .celebrity-price {
-    padding-top: var(--space-2);
-    border-top: 1px solid var(--border-light);
+    padding-top: var(--space-4);  /* REFINED: More breathing room */
+    margin-top: var(--space-3);
+    border-top: 1px solid rgba(139, 92, 246, 0.1);  /* REFINED: Purple tint for subtle emphasis */
     display: flex;
     justify-content: space-between;
     align-items: center;
@@ -384,9 +401,10 @@
 
 .price {
     font-family: var(--font-body);
-    font-size: 1.4rem;  /* Exactly 1.4rem as specified */
-    font-weight: 400;
-    color: var(--white);
+    font-size: 0.875rem !important;  /* REFINED: 14px as requested */
+    font-weight: 600 !important;  /* REFINED: More weight for prominence */
+    color: var(--text-primary) !important;  /* Pure white */
+    letter-spacing: -0.01em;
 }
 
 .celebrity-rating {
