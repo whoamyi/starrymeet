@@ -815,33 +815,122 @@ header.scrolled,
 */
 
 /* ========================================
-   CAROUSEL SYSTEM - COMPACT HORIZONTAL SCROLL
+   CAROUSEL SYSTEM - COMPACT HORIZONTAL SCROLL (v2.1.0 ENHANCED)
    ======================================== */
 /* Carousel Container */
 .carousel-container {
     position: relative;
-    overflow: hidden;
+    overflow: visible;  /* Allow arrows to show outside */
+    padding: 0 var(--space-12);  /* Space for arrows */
 }
 
 .carousel-wrapper {
     display: flex;
     gap: var(--space-4);
     overflow-x: auto;
+    overflow-y: hidden;
     scroll-behavior: smooth;
     scroll-snap-type: x mandatory;
-    -webkit-overflow-scrolling: touch;
-    scrollbar-width: none;
-    -ms-overflow-style: none;
-    padding: var(--space-2) 0;
+    -webkit-overflow-scrolling: touch;  /* Smooth iOS scrolling */
+    scrollbar-width: thin;  /* Show thin scrollbar */
+    -ms-overflow-style: -ms-autohiding-scrollbar;
+    padding: var(--space-2) 0 var(--space-4) 0;  /* Bottom padding for scrollbar */
+    cursor: grab;
+    user-select: none;
 }
 
+.carousel-wrapper:active {
+    cursor: grabbing;
+}
+
+/* Show subtle scrollbar on desktop */
 .carousel-wrapper::-webkit-scrollbar {
-    display: none;
+    height: 6px;
+}
+
+.carousel-wrapper::-webkit-scrollbar-track {
+    background: rgba(139, 92, 246, 0.05);
+    border-radius: var(--radius-full);
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb {
+    background: rgba(139, 92, 246, 0.3);
+    border-radius: var(--radius-full);
+}
+
+.carousel-wrapper::-webkit-scrollbar-thumb:hover {
+    background: rgba(139, 92, 246, 0.5);
 }
 
 .carousel-wrapper > * {
     flex: 0 0 auto;
     scroll-snap-align: start;
+}
+
+/* Desktop Carousel Navigation Arrows */
+.carousel-arrow {
+    position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 0, 0, 0.9);
+    border: 1px solid var(--border-medium);
+    border-radius: var(--radius-full);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    cursor: pointer;
+    z-index: 10;
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+    color: var(--text-primary);
+    font-size: var(--text-xl);
+    box-shadow: var(--shadow-lg);
+}
+
+.carousel-arrow:hover {
+    background: var(--primary);
+    color: white;
+    border-color: var(--primary);
+    transform: translateY(-50%) scale(1.1);
+    box-shadow: var(--shadow-glow-md);
+}
+
+.carousel-arrow:active {
+    transform: translateY(-50%) scale(0.95);
+}
+
+.carousel-arrow-left {
+    left: 0;
+}
+
+.carousel-arrow-right {
+    right: 0;
+}
+
+.carousel-arrow.disabled {
+    opacity: 0.3;
+    cursor: not-allowed;
+    pointer-events: none;
+}
+
+/* Hide arrows on mobile */
+@media (max-width: 768px) {
+    .carousel-arrow {
+        display: none;
+    }
+
+    .carousel-container {
+        padding: 0;
+    }
+
+    .carousel-wrapper {
+        scrollbar-width: none;  /* Hide scrollbar on mobile */
+    }
+
+    .carousel-wrapper::-webkit-scrollbar {
+        display: none;
+    }
 }
 
 /* View All Link for Carousels */
