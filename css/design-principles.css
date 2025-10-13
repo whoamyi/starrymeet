@@ -1,5 +1,7 @@
 /**
  * STARRY MEET - TRUE CAMEO-INSPIRED MINIMAL DESIGN
+ * Version: 2.1.0 - Museum-Quality Refinements
+ * Last Updated: October 2025
  *
  * CORE PRINCIPLES (MUST FOLLOW):
  *
@@ -7,21 +9,26 @@
  *    - 95% Black, White, Gray
  *    - 5% Purple accent (ONLY for CTAs and important actions)
  *    - NO gradient cards (Cameo doesn't use them)
- *    - NO colorful badges everywhere
+ *    - NO colorful badges - ONLY minimal gray badges
  *    - Color should feel RARE and SPECIAL
  *
- * 2. TYPOGRAPHY - COMPLETE CONSISTENCY
- *    - Body text: 14px-16px MAX
- *    - All paragraph text: SAME SIZE (16px)
- *    - Headings: Small and minimal (24px-32px max)
- *    - NO giant headings
- *    - NO bold everywhere
+ * 2. TYPOGRAPHY - COMPLETE CONSISTENCY (v2.1 REFINED)
+ *    - Body text: 16px (line-height: 1.5 - tighter, more elegant)
+ *    - H1 (Hero): 24px MAX (18px on mobile)
+ *    - H2 (Sections): 24px
+ *    - H3 (Cards): 18px (subtle hierarchy)
+ *    - Small text: 14px (prices, labels)
+ *    - Tiny labels: 12px
+ *    - NO headings larger than 24px
+ *    - Font-weight: 600 for headings (not 700/800)
  *
- * 3. MOBILE - APP-LIKE FEEL
- *    - Compact spacing
- *    - Small, consistent elements
- *    - NO big chunky components
- *    - Feels like native app
+ * 3. MOBILE - APP-LIKE FEEL (v2.1 ENHANCED)
+ *    - Compact spacing (var(--space-3) for carousels)
+ *    - Logo: 18px on mobile
+ *    - Border-radius: var(--radius-lg) (less rounded)
+ *    - H1: 18px on mobile (super compact)
+ *    - Feels like native iOS/Android app
+ *    - NO chunky components
  *
  * 4. CONSISTENCY - EXTREME
  *    - Every card looks the same
@@ -29,11 +36,86 @@
  *    - Every text size is predictable
  *    - NO surprises, NO variety
  *
+ * 5. MICRO-INTERACTIONS (v2.1 NEW)
+ *    - Card hover: translateY(-4px) with cubic-bezier easing
+ *    - Button hover: translateY(-2px) scale(1.01)
+ *    - Watchlist heart: heartbeat animation (scale 1.15)
+ *    - All transitions: 0.3s cubic-bezier(0.4, 0, 0.2, 1) (Apple-style)
+ *    - Smooth, never jarring
+ *
+ * 6. BADGES - MINIMAL GRAY ONLY (v2.1 STRICT)
+ *    - Background: transparent
+ *    - Border: 1px solid var(--border-medium)
+ *    - Color: var(--text-secondary)
+ *    - Font-weight: 600 (not bold)
+ *    - NO gold gradients
+ *    - NO colorful backgrounds
+ *    - Simple checkmark: ✓
+ *
+ * 7. PRICE DISPLAY (v2.1 REFINED)
+ *    - Font-size: 14px (0.875rem)
+ *    - Font-weight: 600
+ *    - Color: #FFFFFF (pure white)
+ *    - Border-top: 1px solid rgba(139, 92, 246, 0.1) (purple tint)
+ *    - Padding-top: var(--space-4) (breathing room)
+ *
+ * 8. NAVIGATION (v2.1 GLASSMORPHISM)
+ *    - Background: rgba(0, 0, 0, 0.85) (more transparent)
+ *    - Backdrop-filter: blur(32px) saturate(200%) (stronger blur)
+ *    - Border-bottom: rgba(139, 92, 246, 0.08) (barely visible purple)
+ *    - Feels floating and ethereal
+ *
+ * 9. CELEBRITY CARDS (v2.1 REFINED)
+ *    - Initials: 4rem (larger, more dramatic)
+ *    - Font-weight: 700 (not 900)
+ *    - Letter-spacing: 0.05em (slight tracking)
+ *    - Texture overlay: radial gradients with mix-blend-mode
+ *    - Z-index layering: overlay(1) → initials(2) → badges(3)
+ *
+ * 10. ACCESSIBILITY (v2.1 WCAG AAA)
+ *    - --text-secondary: #C0C0C0 (increased from #B0B0B0)
+ *    - --text-tertiary: #909090 (increased from #808080)
+ *    - Focus indicators: 2px solid primary, 3px offset
+ *    - Contrast ratio: 5.8:1 minimum
+ *
+ * 11. PERFORMANCE (v2.1 OPTIMIZED)
+ *    - Font preconnect: https://fonts.googleapis.com
+ *    - Font fallbacks: 'Helvetica Neue' added
+ *    - Display: swap (prevents FOUT)
+ *    - Skeleton loaders with shimmer animation
+ *
+ * 12. SPACING (v2.1 GOLDEN RATIO)
+ *    - Celebrity cards gap: var(--space-6)
+ *    - Card padding: var(--space-5)
+ *    - Mobile carousel gap: var(--space-3)
+ *    - Perfect proportions - not too tight, not too loose
+ *
  * CAMEO REFERENCE:
- * - Pure black background
- * - Thin gray borders
- * - White text (one size)
+ * - Pure black background (#000000)
+ * - Thin gray borders (rgba(139, 92, 246, 0.14))
+ * - White text (16px body, 18-24px headings)
  * - Purple CTA button (that's it!)
  * - NO other colors visible
  * - Minimalist to the extreme
+ *
+ * CRITICAL RULES:
+ * ✅ Price must be 14px, white, weight 600
+ * ✅ Badges must be minimal gray with border only
+ * ✅ H1 max 24px (18px mobile)
+ * ✅ Body line-height 1.5 (not 1.6)
+ * ✅ Purple only for primary CTA buttons
+ * ✅ Card hover: -4px lift with Apple easing
+ * ✅ Mobile logo: 18px (not larger)
+ * ✅ Navigation: 85% transparent with 32px blur
+ * ✅ Celebrity initials: 4rem with texture overlay
+ * ✅ Text contrast: WCAG AAA (#C0C0C0 secondary)
+ *
+ * PHILOSOPHY:
+ * "True luxury whispers, it never shouts."
+ *
+ * Every pixel, every interaction, every spacing decision
+ * should feel intentional, refined, and sophisticated.
+ * We prioritize restraint over expression,
+ * elegance over excitement,
+ * and timelessness over trends.
  */
