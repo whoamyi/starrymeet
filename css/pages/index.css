@@ -198,57 +198,9 @@
     justify-content: center;
 }
 
-/* Carousel Navigation Arrows (Fixed, Subtle, Traffic Light) */
+/* Carousel Navigation Arrows - REMOVED */
 .carousel-arrow {
-    position: fixed;  /* Fixed position - no dangling */
-    top: 50%;
-    z-index: 10;
-    background: transparent;
-    border: none;
-    border-left: 2px solid rgba(255, 255, 255, 0.3);
-    border-bottom: 2px solid rgba(255, 255, 255, 0.3);
-    width: 16px;
-    height: 16px;
-    cursor: pointer;
-    transition: opacity 0.6s ease, border-color 0.3s ease;  /* No transform transition */
-    padding: 0;
-    font-size: 0;
-    opacity: 0.4;  /* Very subtle start */
-    pointer-events: auto;  /* Allow clicking through */
-}
-
-/* Fade in on hover - traffic light effect */
-.carousel-container:hover .carousel-arrow {
-    opacity: 0.9;
-    border-color: rgba(255, 255, 255, 0.7);
-}
-
-.carousel-arrow:hover {
-    border-color: rgba(255, 255, 255, 1);
-}
-
-.carousel-arrow-left {
-    left: 8px;
-    transform: translateY(-50%) rotate(45deg);  /* Fixed transform, never changes */
-}
-
-.carousel-arrow-right {
-    right: 8px;
-    transform: translateY(-50%) rotate(-135deg);  /* Fixed transform, never changes */
-}
-
-/* Hide arrows on desktop for centered carousels */
-@media (min-width: 769px) {
-    .carousel-centered:not(.carousel-mobile-arrows) .carousel-arrow {
-        display: none;
-    }
-}
-
-/* Show arrows on mobile for carousel-mobile-arrows */
-@media (max-width: 768px) {
-    .carousel-mobile-arrows .carousel-arrow {
-        display: block;
-    }
+    display: none !important;  /* Completely removed - no cursor */
 }
 
 /* Celebrity Cards - Compact with Half-Height Side Borders */
