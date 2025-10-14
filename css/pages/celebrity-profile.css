@@ -1,5 +1,6 @@
 /* ========================================
    CELEBRITY-PROFILE.HTML - PAGE-SPECIFIC STYLES
+   v2.1.0 - Museum-Quality Design Standards
    ======================================== */
 
 body {
@@ -79,10 +80,23 @@ body {
 .hero-initials {
     font-family: var(--font-display);
     font-size: clamp(5rem, 12vw, 9rem);
-    font-weight: 900;
+    font-weight: 700;  /* v2.1.0: Reduced from 900 for refinement */
     color: var(--white);
-    z-index: 1;
+    z-index: 2;  /* v2.1.0: Above texture overlay */
     text-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
+    letter-spacing: 0.05em;  /* v2.1.0: Added spacing */
+}
+
+/* v2.1.0: Texture overlay for hero image */
+.hero-image::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.1) 0%, transparent 50%);
+    mix-blend-mode: overlay;
+    z-index: 1;
 }
 
 .hero-actions {
@@ -133,31 +147,34 @@ body {
 
 .celebrity-name-hero {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
+    font-size: clamp(1.5rem, 4vw, 1.5rem);  /* v2.1.0: 24px max for consistency */
+    font-weight: 600;  /* v2.1.0: Reduced from 900 */
     color: var(--text-primary);
 }
 
+/* v2.1.0: Minimal gray badges */
 .verified-badge-hero {
-    background: var(--accent-gradient);
-    color: var(--white);
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-medium);
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
-    font-weight: 800;
+    font-weight: 600;  /* v2.1.0: Reduced from 800 */
     display: flex;
     align-items: center;
     gap: var(--space-1-5);
-    box-shadow: var(--shadow-md);
+    box-shadow: none;
 }
 
 .category-badge {
-    background: var(--primary-light);
-    color: var(--white);
+    background: transparent !important;
+    color: var(--text-secondary) !important;
+    border: 1px solid var(--border-medium);
     padding: var(--space-2) var(--space-4);
     border-radius: var(--radius-full);
     font-size: var(--text-sm);
-    font-weight: 700;
+    font-weight: 600;  /* v2.1.0: Reduced from 700 */
 }
 
 .rating-section {
@@ -182,18 +199,19 @@ body {
     margin-bottom: var(--space-8);
 }
 
+/* v2.1.0: Consistent typography */
 .section-title {
     font-family: var(--font-display);
-    font-size: var(--text-3xl);
-    font-weight: 900;
+    font-size: var(--text-3xl);  /* 24px */
+    font-weight: 600;  /* v2.1.0: Reduced from 900 */
     margin-bottom: var(--space-5);
     color: var(--text-primary);
 }
 
 /* About Section */
 .bio {
-    font-size: 1.05rem;
-    line-height: 1.8;
+    font-size: 1rem;  /* v2.1.0: Standard base size */
+    line-height: 1.5;  /* v2.1.0: Reduced from 1.8 for consistency */
     color: var(--text-secondary);
     margin-bottom: 2rem;
 }
@@ -210,7 +228,7 @@ body {
     display: flex;
     align-items: center;
     gap: 1rem;
-    font-size: 1.05rem;
+    font-size: 1rem;  /* v2.1.0: Standard base size */
     color: var(--text-primary);
 }
 
@@ -268,8 +286,8 @@ body {
 }
 
 .city-name {
-    font-size: 1.3rem;
-    font-weight: 700;
+    font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
+    font-weight: 600;  /* v2.1.0: Consistent weight */
     margin-bottom: 0.5rem;
     display: flex;
     align-items: center;
@@ -363,8 +381,8 @@ body {
 
 .pricing-title {
     font-family: var(--font-display);
-    font-size: var(--text-2xl);
-    font-weight: 800;
+    font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
+    font-weight: 600;  /* v2.1.0: Reduced from 800 */
     margin-bottom: var(--space-2);
     color: var(--text-primary);
 }
@@ -377,12 +395,9 @@ body {
 
 .pricing-amount {
     font-family: var(--font-display);
-    font-size: clamp(2rem, 4vw, 3rem);
-    font-weight: 900;
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    font-size: 0.875rem !important;  /* v2.1.0: 14px as user requested */
+    font-weight: 600 !important;  /* v2.1.0: Consistent with design */
+    color: #FFFFFF !important;  /* v2.1.0: White text */
     margin-bottom: var(--space-3);
 }
 
@@ -539,7 +554,7 @@ body {
 }
 
 .review-author {
-    font-weight: 700;
+    font-weight: 600;  /* v2.1.0: Consistent weight */
     margin-bottom: 0.2rem;
     color: var(--text-primary);
 }
@@ -592,31 +607,33 @@ body {
     color: white;
 }
 
-/* Similar Celebrities - Carousel */
+/* Similar Celebrities - Carousel (v2.1.0: Match homepage design) */
 .similar-carousel {
     display: flex;
     gap: var(--space-6);
 }
 
 .similar-carousel .celebrity-card {
-    min-width: 250px;
+    min-width: 200px;  /* v2.1.0: MATCH HOMEPAGE SIZE */
+    width: 200px;
     flex-shrink: 0;
 }
 
 .celebrity-card {
-    background: var(--bg-tertiary);
-    border-radius: 15px;
+    background: transparent;  /* v2.1.0: Transparent background */
+    border-radius: var(--radius-lg);
     overflow: hidden;
-    box-shadow: var(--shadow-md);
-    border: 1px solid var(--border-light);
-    transition: all 0.3s;
+    box-shadow: none;
+    border: none;  /* v2.1.0: No border */
+    border-bottom: 1px solid rgba(139, 92, 246, 0.25);  /* v2.1.0: Only bottom border */
+    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* v2.1.0: Apple easing */
     cursor: pointer;
 }
 
 .celebrity-card:hover {
-    transform: translateY(-5px);
+    transform: translateY(-4px);  /* v2.1.0: Consistent -4px lift */
     box-shadow: var(--shadow-glow-sm);
-    border-color: rgba(139, 92, 246, 0.3);
+    border-color: rgba(139, 92, 246, 0.5);
 }
 
 .celebrity-image-card {
@@ -625,51 +642,73 @@ body {
     display: flex;
     align-items: center;
     justify-content: center;
+    border-radius: var(--radius-lg);
+    overflow: hidden;
 }
 
-.celebrity-initials-card {
-    font-size: 3rem;
-    font-weight: 900;
-    color: white;
+/* v2.1.0: Texture overlay for celebrity cards */
+.celebrity-image-card::before {
+    content: '';
+    position: absolute;
+    inset: 0;
+    background:
+        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
+        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.1) 0%, transparent 50%);
+    mix-blend-mode: overlay;
     z-index: 1;
 }
 
+.celebrity-initials-card {
+    font-size: 4rem;  /* v2.1.0: Increased from 3rem to match homepage */
+    font-weight: 700;  /* v2.1.0: Reduced from 900 */
+    color: white;
+    z-index: 2;  /* v2.1.0: Above texture overlay */
+    letter-spacing: 0.05em;  /* v2.1.0: Added spacing */
+}
+
 .celebrity-info-card {
-    padding: 1.2rem;
+    padding: var(--space-3);  /* v2.1.0: Reduced padding */
 }
 
 .celebrity-name-card {
     font-family: var(--font-body);
     font-size: var(--text-base);
-    font-weight: 400;
-    margin-bottom: 0.5rem;
-    color: var(--white);
+    font-weight: 600;  /* v2.1.0: Increased from 400 */
+    margin-bottom: var(--space-2);
+    color: var(--text-primary);  /* v2.1.0: Changed from white */
 }
 
 .celebrity-category-card {
-    color: var(--primary);
-    font-size: 0.9rem;
-    margin-bottom: 0.5rem;
+    color: var(--text-secondary);  /* v2.1.0: Changed from primary */
+    font-size: var(--text-sm);
+    margin-bottom: var(--space-2);
+    font-weight: 500;
 }
 
 .celebrity-price-card {
     font-family: var(--font-body);
-    font-size: 12px;
-    font-weight: 400;
-    color: var(--white);
+    padding-top: var(--space-4);
+    margin-top: var(--space-3);
+    border-top: 1px solid rgba(139, 92, 246, 0.1);  /* v2.1.0: Purple border-top */
+}
+
+.celebrity-price-card .price {
+    font-size: 0.875rem !important;  /* v2.1.0: 14px as user requested */
+    font-weight: 600 !important;
+    color: #FFFFFF !important;  /* v2.1.0: White */
 }
 
 .celebrity-rating {
     display: flex;
     align-items: center;
     gap: var(--space-1);
-    font-size: 12px;
+    font-size: var(--text-sm);
     color: var(--text-secondary);
 }
 
 .rating-star {
     color: #F59E0B;
-    font-size: 12px;
+    font-size: var(--text-sm);
 }
 
 /* Sticky Sidebar */
@@ -713,8 +752,8 @@ body {
 }
 
 .booking-name {
-    font-weight: 700;
-    font-size: 1.2rem;
+    font-weight: 600;  /* v2.1.0: Consistent weight */
+    font-size: var(--text-xl);  /* v2.1.0: 18px */
     margin-bottom: 0.3rem;
     color: var(--text-primary);
 }
@@ -731,9 +770,9 @@ body {
 }
 
 .price-display {
-    font-size: 2rem;
-    font-weight: 900;
-    color: var(--primary);
+    font-size: 0.875rem;  /* v2.1.0: 14px as user requested */
+    font-weight: 600;  /* v2.1.0: Consistent weight */
+    color: #FFFFFF;  /* v2.1.0: White */
     margin-bottom: 1.5rem;
 }
 
@@ -844,9 +883,10 @@ body {
     }
 }
 
+/* v2.1.0: Mobile responsiveness */
 @media (max-width: 768px) {
     .celebrity-name-hero {
-        font-size: 2rem;
+        font-size: 1.125rem;  /* v2.1.0: 18px mobile */
     }
 
     .hero-image {
@@ -862,7 +902,11 @@ body {
     }
 
     .section {
-        padding: 1.5rem;
+        padding: var(--space-4);
+    }
+
+    .section-title {
+        font-size: 1.125rem;  /* v2.1.0: 18px mobile for consistency */
     }
 }
 
