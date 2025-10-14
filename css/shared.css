@@ -31,7 +31,7 @@ body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
     line-height: 1.6;
     color: var(--white);
-    background: #000000;
+    background: var(--bg-primary);  /* Modern dark mode: #0f0f0f */
     overflow-x: hidden;
 }
 
@@ -64,11 +64,11 @@ body {
     --error: #EF4444;                /* Red */
     --info: #3B82F6;                 /* Blue */
 
-    /* Neutral Colors - Pure Black Theme */
-    --black: #000000;                /* Pure black - the ONLY background color */
-    --rich-black: #000000;           /* Pure black everywhere */
-    --dark-surface: #000000;         /* Pure black for cards/surfaces */
-    --dark-elevated: #000000;        /* Pure black for elevated elements */
+    /* Neutral Colors - Modern Dark Mode Theme (Friendly Black) */
+    --black: #0f0f0f;                /* Modern dark mode - not pure black */
+    --rich-black: #121212;           /* Rich dark - comfortable for eyes */
+    --dark-surface: #1a1a1a;         /* Slightly lighter for surfaces */
+    --dark-elevated: #1e1e1e;        /* Elevated elements - subtle distinction */
     --white: #FFFFFF;
     --off-white: #F5F5F5;
     --gray-50: #F9FAFB;
@@ -82,13 +82,13 @@ body {
     --gray-800: #1F2937;
     --gray-900: #111827;
 
-    /* Background Colors - Pure Black Theme */
-    --bg-primary: #000000;           /* Pure black - main background */
-    --bg-secondary: #000000;         /* Pure black - cards, surfaces */
-    --bg-tertiary: #000000;          /* Pure black - elevated elements */
-    --bg-dark: #000000;              /* Pure black everywhere */
-    --bg-glass: rgba(0, 0, 0, 0.95);
-    --bg-glass-dark: rgba(0, 0, 0, 0.98);
+    /* Background Colors - Modern Dark Mode Theme */
+    --bg-primary: #0f0f0f;           /* Modern dark - main background */
+    --bg-secondary: #1a1a1a;         /* Slightly lighter - cards, surfaces */
+    --bg-tertiary: #1e1e1e;          /* Elevated - modals, dropdowns */
+    --bg-dark: #0a0a0a;              /* Darker areas - contrast */
+    --bg-glass: rgba(15, 15, 15, 0.95);
+    --bg-glass-dark: rgba(10, 10, 10, 0.98);
 
     /* Text Colors - Dark Theme Hierarchy (STANDARD) - IMPROVED ACCESSIBILITY
 
@@ -272,10 +272,10 @@ header,
     left: 0;
     right: 0;
     width: 100%;
-    background: rgba(0, 0, 0, 0.85);  /* REFINED: More transparent for ethereal feel */
-    backdrop-filter: blur(32px) saturate(200%);  /* REFINED: Stronger blur */
+    background: rgba(15, 15, 15, 0.85);  /* Modern dark with transparency */
+    backdrop-filter: blur(32px) saturate(200%);
     -webkit-backdrop-filter: blur(32px) saturate(200%);
-    border-bottom: 1px solid rgba(139, 92, 246, 0.08);  /* REFINED: Barely visible purple tint */
+    border-bottom: 1px solid rgba(139, 92, 246, 0.08);
     z-index: var(--z-sticky);
     transition: var(--transition-base);
 }
@@ -283,7 +283,7 @@ header,
 nav.scrolled,
 header.scrolled,
 .header.scrolled {
-    background: rgba(13, 13, 13, 0.98);
+    background: rgba(26, 26, 26, 0.98);  /* Slightly lighter when scrolled */
     box-shadow: var(--shadow-md);
 }
 
@@ -717,7 +717,7 @@ header.scrolled,
    CARD SYSTEM - PURE BLACK WITH SUBTLE BORDERS (UNIVERSAL)
    ======================================== */
 .card {
-    background: #000000;
+    background: var(--bg-secondary);  /* Modern dark: #1a1a1a */
     border-radius: var(--radius-2xl);
     box-shadow: none;
     overflow: hidden;
@@ -1917,11 +1917,11 @@ span.price,
     letter-spacing: -0.01em !important;  /* Tighter tracking */
 }
 
-/* Ensure all input elements are PURE BLACK */
+/* Ensure all input elements use modern dark background */
 input:not([type="radio"]):not([type="checkbox"]),
 textarea,
 select {
-    background: #000000 !important;
+    background: var(--bg-secondary) !important;  /* Modern dark: #1a1a1a */
     color: var(--white) !important;
     border: 1px solid var(--border-medium) !important;
 }
