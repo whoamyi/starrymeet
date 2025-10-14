@@ -29,7 +29,8 @@
         }
 
         .hero h1 {
-            font-size: clamp(2.5rem, 5vw, 3.5rem);
+            font-size: clamp(1.125rem, 4vw, 1.5rem);  /* v2.1.0: 24px max, 18px mobile */
+            font-weight: 600;  /* v2.1.0: Consistent weight */
             margin-bottom: var(--space-4);
         }
 
@@ -41,22 +42,22 @@
 
         .mission {
             text-align: center;
-            font-size: var(--text-lg);
-            line-height: 1.8;
+            font-size: var(--text-base);  /* v2.1.0: Standard base size */
+            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
             margin-bottom: var(--space-16);
             padding: var(--space-8);
         }
 
         .mission-title {
-            font-size: var(--text-3xl);
-            font-weight: 700;
+            font-size: var(--text-3xl);  /* 24px */
+            font-weight: 600;  /* v2.1.0: Reduced from 700 */
             margin-bottom: var(--space-4);
             color: var(--primary);
         }
 
         .story {
-            font-size: var(--text-lg);
-            line-height: 1.8;
+            font-size: var(--text-base);  /* v2.1.0: Standard base size */
+            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
         }
 
         .story p {
@@ -75,7 +76,8 @@
         }
 
         .value-card h3 {
-            font-size: var(--text-2xl);
+            font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
+            font-weight: 600;  /* v2.1.0: Consistent weight */
             margin-bottom: var(--space-3);
             color: var(--primary);
         }
@@ -97,7 +99,7 @@
 
         .stat-number {
             font-size: 3rem;
-            font-weight: 900;
+            font-weight: 700;  /* v2.1.0: Reduced from 900 */
             margin-bottom: var(--space-2);
         }
 
@@ -116,8 +118,8 @@
         }
 
         .cta-section h2 {
-            font-size: var(--text-5xl);
-            font-weight: 800;
+            font-size: var(--text-3xl);  /* v2.1.0: 24px for consistency */
+            font-weight: 600;  /* v2.1.0: Reduced from 800 */
             margin-bottom: var(--space-4);
         }
 
@@ -129,7 +131,7 @@
 
         @media (max-width: 768px) {
             .hero h1 {
-                font-size: 2.5rem;
+                font-size: 1.125rem;  /* v2.1.0: 18px mobile */
             }
         }
     </style>
