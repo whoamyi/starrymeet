@@ -5,8 +5,43 @@
    ======================================== */
 
 /* Prevent horizontal overflow globally */
-* {
-    max-width: 100%;
+html, body {
+    overflow-x: hidden !important;
+    width: 100vw;
+    max-width: 100vw;
+    position: relative;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+}
+
+/* Ensure all sections stay within viewport */
+section,
+.hero,
+.categories-section,
+.occasions-section,
+.top-ten-section,
+.quick-meets-section,
+.how-it-works-section,
+.reviews-section,
+.bottom-categories-section,
+.features-section,
+footer {
+    width: 100%;
+    max-width: 100vw;
+    box-sizing: border-box;
+    overflow: hidden;
+    position: relative;
+}
+
+/* Prevent all carousels from causing horizontal scroll */
+.top-ten-carousel,
+.quick-meets-carousel,
+.reviews-carousel,
+.categories-container {
+    contain: layout;
 }
 
 /* Ensure cards preserve their individual backgrounds */
@@ -15,11 +50,6 @@
 .step-card,
 .feature-card {
     background: inherit !important;
-}
-
-html, body {
-    overflow-x: hidden !important;
-    width: 100%;
 }
 
 /* ========================================
