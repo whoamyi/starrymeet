@@ -103,38 +103,38 @@
                 </button>
                 <div class="checkbox-group collapsible" id="categories">
                     <div class="checkbox-item">
-                        <input type="checkbox" id="cat-hollywood" value="Hollywood">
+                        <input type="checkbox" id="cat-hollywood" value="Hollywood" onchange="applyFilters()">
                         <label for="cat-hollywood">
                             <span>Hollywood</span>
-                            <span class="checkbox-count">35</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-kdrama" value="K-Drama">
-                        <label for="cat-kdrama">
-                            <span>K-Drama</span>
-                            <span class="checkbox-count">20</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-business" value="Business">
-                        <label for="cat-business">
-                            <span>Business</span>
                             <span class="checkbox-count">15</span>
                         </label>
                     </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="cat-athletes" value="Athletes">
-                        <label for="cat-athletes">
-                            <span>Athletes</span>
-                            <span class="checkbox-count">18</span>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cat-kdrama" value="K-Drama" onchange="applyFilters()">
+                        <label for="cat-kdrama">
+                            <span>K-Drama</span>
+                            <span class="checkbox-count">5</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="cat-business" value="Business" onchange="applyFilters()">
+                        <label for="cat-business">
+                            <span>Business</span>
+                            <span class="checkbox-count">5</span>
                         </label>
                     </div>
                     <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="cat-musicians" value="Musicians">
+                        <input type="checkbox" id="cat-athletes" value="Athletes" onchange="applyFilters()">
+                        <label for="cat-athletes">
+                            <span>Athletes</span>
+                            <span class="checkbox-count">5</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="cat-musicians" value="Musicians" onchange="applyFilters()">
                         <label for="cat-musicians">
                             <span>Musicians</span>
-                            <span class="checkbox-count">22</span>
+                            <span class="checkbox-count">5</span>
                         </label>
                     </div>
                     <button class="show-more-btn" onclick="toggleShowMore('categories')">Show more</button>
@@ -149,45 +149,45 @@
                 </button>
                 <div class="checkbox-group collapsible" id="locations">
                     <div class="checkbox-item">
-                        <input type="checkbox" id="loc-usa" value="USA">
+                        <input type="checkbox" id="loc-usa" value="USA" onchange="applyFilters()">
                         <label for="loc-usa">
                             <span>United States</span>
-                            <span class="checkbox-count">45</span>
+                            <span class="checkbox-count">17</span>
                         </label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="loc-uk" value="UK">
+                        <input type="checkbox" id="loc-uk" value="UK" onchange="applyFilters()">
                         <label for="loc-uk">
                             <span>United Kingdom</span>
-                            <span class="checkbox-count">12</span>
+                            <span class="checkbox-count">3</span>
                         </label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="loc-korea" value="South Korea">
+                        <input type="checkbox" id="loc-korea" value="South Korea" onchange="applyFilters()">
                         <label for="loc-korea">
                             <span>South Korea</span>
-                            <span class="checkbox-count">18</span>
+                            <span class="checkbox-count">6</span>
                         </label>
                     </div>
                     <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="loc-france" value="France">
+                        <input type="checkbox" id="loc-france" value="France" onchange="applyFilters()">
                         <label for="loc-france">
                             <span>France</span>
-                            <span class="checkbox-count">8</span>
+                            <span class="checkbox-count">1</span>
                         </label>
                     </div>
                     <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="loc-japan" value="Japan">
-                        <label for="loc-japan">
-                            <span>Japan</span>
-                            <span class="checkbox-count">10</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="loc-australia" value="Australia">
+                        <input type="checkbox" id="loc-australia" value="Australia" onchange="applyFilters()">
                         <label for="loc-australia">
                             <span>Australia</span>
-                            <span class="checkbox-count">7</span>
+                            <span class="checkbox-count">2</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="loc-canada" value="Canada" onchange="applyFilters()">
+                        <label for="loc-canada">
+                            <span>Canada</span>
+                            <span class="checkbox-count">1</span>
                         </label>
                     </div>
                     <button class="show-more-btn" onclick="toggleShowMore('locations')">Show more</button>
@@ -374,130 +374,8 @@
     </footer>
 
     <script>
-        // Celebrity data - 110 diverse celebrities (100 + 10 more)
-        const celebrities = [
-            // Hollywood (35)
-            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true },
-            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
-            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
-            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },
-            { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", country: "Australia", price: 6500, verified: true, trending: true },
-            { name: "Ryan Reynolds", category: "Hollywood", location: "Vancouver • Mar 25", city: "Vancouver", country: "Canada", price: 8000, verified: true, trending: false },
-            { name: "Scarlett Johansson", category: "Hollywood", location: "New York • Apr 1", city: "New York", country: "USA", price: 7000, verified: true, trending: false },
-            { name: "Timothée Chalamet", category: "Hollywood", location: "Paris • Mar 28", city: "Paris", country: "France", price: 5500, verified: true, trending: true },
-            { name: "Florence Pugh", category: "Hollywood", location: "London • Apr 3", city: "London", country: "UK", price: 4500, verified: true, trending: false },
-            { name: "Michael B. Jordan", category: "Hollywood", location: "Atlanta • Mar 30", city: "Atlanta", country: "USA", price: 6000, verified: true, trending: false },
-            { name: "Dwayne Johnson", category: "Hollywood", location: "Miami • Apr 10", city: "Miami", country: "USA", price: 15000, verified: true, trending: true },
-            { name: "Gal Gadot", category: "Hollywood", location: "Tel Aviv • Apr 8", city: "Tel Aviv", country: "Israel", price: 7000, verified: true, trending: false },
-            { name: "Robert Downey Jr.", category: "Hollywood", location: "Los Angeles • Apr 12", city: "Los Angeles", country: "USA", price: 12000, verified: true, trending: false },
-            { name: "Jennifer Lawrence", category: "Hollywood", location: "New York • Apr 6", city: "New York", country: "USA", price: 8500, verified: true, trending: false },
-            { name: "Brad Pitt", category: "Hollywood", location: "Los Angeles • Apr 15", city: "Los Angeles", country: "USA", price: 10000, verified: true, trending: false },
-            { name: "Leonardo DiCaprio", category: "Hollywood", location: "New York • Apr 20", city: "New York", country: "USA", price: 12000, verified: true, trending: false },
-            { name: "Angelina Jolie", category: "Hollywood", location: "London • Apr 18", city: "London", country: "UK", price: 9000, verified: true, trending: false },
-            { name: "Tom Cruise", category: "Hollywood", location: "Dubai • Apr 22", city: "Dubai", country: "UAE", price: 15000, verified: true, trending: true },
-            { name: "Keanu Reeves", category: "Hollywood", location: "Tokyo • Apr 25", city: "Tokyo", country: "Japan", price: 10000, verified: true, trending: true },
-            { name: "Anne Hathaway", category: "Hollywood", location: "Paris • Apr 28", city: "Paris", country: "France", price: 6500, verified: true, trending: false },
-            { name: "Will Smith", category: "Hollywood", location: "Los Angeles • May 1", city: "Los Angeles", country: "USA", price: 9000, verified: true, trending: false },
-            { name: "Charlize Theron", category: "Hollywood", location: "Cape Town • May 3", city: "Cape Town", country: "South Africa", price: 7500, verified: true, trending: false },
-            { name: "Matt Damon", category: "Hollywood", location: "Boston • May 5", city: "Boston", country: "USA", price: 7000, verified: true, trending: false },
-            { name: "Natalie Portman", category: "Hollywood", location: "Jerusalem • May 8", city: "Jerusalem", country: "Israel", price: 6000, verified: true, trending: false },
-            { name: "Hugh Jackman", category: "Hollywood", location: "Sydney • May 10", city: "Sydney", country: "Australia", price: 8000, verified: true, trending: false },
-            { name: "Viola Davis", category: "Hollywood", location: "New York • May 12", city: "New York", country: "USA", price: 6500, verified: true, trending: false },
-            { name: "Denzel Washington", category: "Hollywood", location: "Los Angeles • May 15", city: "Los Angeles", country: "USA", price: 10000, verified: true, trending: false },
-            { name: "Meryl Streep", category: "Hollywood", location: "New York • May 18", city: "New York", country: "USA", price: 12000, verified: true, trending: false },
-            { name: "Tom Hanks", category: "Hollywood", location: "Los Angeles • May 20", city: "Los Angeles", country: "USA", price: 11000, verified: true, trending: false },
-            { name: "Cate Blanchett", category: "Hollywood", location: "Sydney • May 22", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: false },
-            { name: "Jason Momoa", category: "Hollywood", location: "Honolulu • May 25", city: "Honolulu", country: "USA", price: 6500, verified: true, trending: false },
-            { name: "Priyanka Chopra", category: "Hollywood", location: "Mumbai • May 28", city: "Mumbai", country: "India", price: 5500, verified: true, trending: true },
-            { name: "Idris Elba", category: "Hollywood", location: "London • Jun 1", city: "London", country: "UK", price: 7000, verified: true, trending: false },
-            { name: "Lupita Nyong'o", category: "Hollywood", location: "Nairobi • Jun 3", city: "Nairobi", country: "Kenya", price: 6000, verified: true, trending: false },
-            { name: "Oscar Isaac", category: "Hollywood", location: "Guatemala City • Jun 5", city: "Guatemala City", country: "Guatemala", price: 5500, verified: true, trending: false },
-
-            // K-Drama (20)
-            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true },
-            { name: "Song Hye-kyo", category: "K-Drama", location: "Seoul • Mar 19", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
-            { name: "Lee Min-ho", category: "K-Drama", location: "Seoul • Mar 21", city: "Seoul", country: "South Korea", price: 5000, verified: true, trending: true },
-            { name: "IU (Lee Ji-eun)", category: "K-Drama", location: "Seoul • Mar 24", city: "Seoul", country: "South Korea", price: 6000, verified: true, trending: true },
-            { name: "Kim Soo-hyun", category: "K-Drama", location: "Seoul • Mar 27", city: "Seoul", country: "South Korea", price: 5500, verified: true, trending: false },
-            { name: "Jun Ji-hyun", category: "K-Drama", location: "Seoul • Mar 29", city: "Seoul", country: "South Korea", price: 5000, verified: true, trending: false },
-            { name: "Hyun Bin", category: "K-Drama", location: "Seoul • Apr 2", city: "Seoul", country: "South Korea", price: 6000, verified: true, trending: false },
-            { name: "Son Ye-jin", category: "K-Drama", location: "Seoul • Apr 4", city: "Seoul", country: "South Korea", price: 5500, verified: true, trending: false },
-            { name: "Park Bo-gum", category: "K-Drama", location: "Seoul • Apr 7", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
-            { name: "Bae Suzy", category: "K-Drama", location: "Seoul • Apr 9", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: false },
-            { name: "Gong Yoo", category: "K-Drama", location: "Busan • Apr 11", city: "Busan", country: "South Korea", price: 5500, verified: true, trending: false },
-            { name: "Lee Jong-suk", category: "K-Drama", location: "Seoul • Apr 14", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
-            { name: "Park Shin-hye", category: "K-Drama", location: "Seoul • Apr 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: false },
-            { name: "Ji Chang-wook", category: "K-Drama", location: "Seoul • Apr 19", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
-            { name: "Kim Go-eun", category: "K-Drama", location: "Seoul • Apr 21", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: false },
-            { name: "Lee Sung-kyung", category: "K-Drama", location: "Seoul • Apr 24", city: "Seoul", country: "South Korea", price: 3500, verified: true, trending: false },
-            { name: "Nam Joo-hyuk", category: "K-Drama", location: "Seoul • Apr 26", city: "Seoul", country: "South Korea", price: 3800, verified: true, trending: false },
-            { name: "Han So-hee", category: "K-Drama", location: "Seoul • Apr 29", city: "Seoul", country: "South Korea", price: 4200, verified: true, trending: true },
-            { name: "Ahn Hyo-seop", category: "K-Drama", location: "Seoul • May 2", city: "Seoul", country: "South Korea", price: 3800, verified: true, trending: false },
-            { name: "Kim Tae-ri", category: "K-Drama", location: "Seoul • May 4", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
-
-            // Business (15)
-            { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", city: "San Francisco", country: "USA", price: 50000, verified: true, trending: true },
-            { name: "Mark Zuckerberg", category: "Business", location: "Palo Alto • Mar 23", city: "Palo Alto", country: "USA", price: 40000, verified: true, trending: false },
-            { name: "Jeff Bezos", category: "Business", location: "Seattle • Mar 26", city: "Seattle", country: "USA", price: 60000, verified: true, trending: true },
-            { name: "Bill Gates", category: "Business", location: "Seattle • Apr 13", city: "Seattle", country: "USA", price: 55000, verified: true, trending: false },
-            { name: "Warren Buffett", category: "Business", location: "Omaha • Apr 17", city: "Omaha", country: "USA", price: 50000, verified: true, trending: false },
-            { name: "Richard Branson", category: "Business", location: "London • Apr 23", city: "London", country: "UK", price: 35000, verified: true, trending: false },
-            { name: "Oprah Winfrey", category: "Business", location: "Chicago • Apr 27", city: "Chicago", country: "USA", price: 45000, verified: true, trending: false },
-            { name: "Jack Ma", category: "Business", location: "Hangzhou • Apr 30", city: "Hangzhou", country: "China", price: 40000, verified: true, trending: false },
-            { name: "Sheryl Sandberg", category: "Business", location: "San Francisco • May 6", city: "San Francisco", country: "USA", price: 30000, verified: true, trending: false },
-            { name: "Tim Cook", category: "Business", location: "Cupertino • May 9", city: "Cupertino", country: "USA", price: 38000, verified: true, trending: false },
-            { name: "Satya Nadella", category: "Business", location: "Seattle • May 11", city: "Seattle", country: "USA", price: 32000, verified: true, trending: false },
-            { name: "Sundar Pichai", category: "Business", location: "Mountain View • May 14", city: "Mountain View", country: "USA", price: 35000, verified: true, trending: false },
-            { name: "Arianna Huffington", category: "Business", location: "New York • May 16", city: "New York", country: "USA", price: 25000, verified: true, trending: false },
-            { name: "Sara Blakely", category: "Business", location: "Atlanta • May 19", city: "Atlanta", country: "USA", price: 22000, verified: true, trending: false },
-            { name: "Marc Benioff", category: "Business", location: "San Francisco • May 21", city: "San Francisco", country: "USA", price: 28000, verified: true, trending: false },
-
-            // Athletes (18)
-            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true },
-            { name: "Lionel Messi", category: "Athletes", location: "Miami • Apr 8", city: "Miami", country: "USA", price: 30000, verified: true, trending: true },
-            { name: "LeBron James", category: "Athletes", location: "Los Angeles • Apr 14", city: "Los Angeles", country: "USA", price: 20000, verified: true, trending: true },
-            { name: "Serena Williams", category: "Athletes", location: "Miami • Apr 20", city: "Miami", country: "USA", price: 18000, verified: true, trending: false },
-            { name: "Stephen Curry", category: "Athletes", location: "San Francisco • Apr 25", city: "San Francisco", country: "USA", price: 15000, verified: true, trending: false },
-            { name: "Rafael Nadal", category: "Athletes", location: "Barcelona • Apr 28", city: "Barcelona", country: "Spain", price: 16000, verified: true, trending: false },
-            { name: "Naomi Osaka", category: "Athletes", location: "Tokyo • May 1", city: "Tokyo", country: "Japan", price: 12000, verified: true, trending: false },
-            { name: "Neymar Jr.", category: "Athletes", location: "Riyadh • May 4", city: "Riyadh", country: "Saudi Arabia", price: 18000, verified: true, trending: false },
-            { name: "Simone Biles", category: "Athletes", location: "Houston • May 7", city: "Houston", country: "USA", price: 14000, verified: true, trending: false },
-            { name: "Usain Bolt", category: "Athletes", location: "Kingston • May 10", city: "Kingston", country: "Jamaica", price: 16000, verified: true, trending: false },
-            { name: "Roger Federer", category: "Athletes", location: "Zurich • May 13", city: "Zurich", country: "Switzerland", price: 20000, verified: true, trending: false },
-            { name: "Tom Brady", category: "Athletes", location: "Tampa • May 17", city: "Tampa", country: "USA", price: 22000, verified: true, trending: false },
-            { name: "Lewis Hamilton", category: "Athletes", location: "Monaco • May 20", city: "Monaco", country: "Monaco", price: 25000, verified: true, trending: false },
-            { name: "Kylian Mbappé", category: "Athletes", location: "Paris • May 23", city: "Paris", country: "France", price: 20000, verified: true, trending: true },
-            { name: "Kevin Durant", category: "Athletes", location: "Phoenix • May 26", city: "Phoenix", country: "USA", price: 16000, verified: true, trending: false },
-            { name: "Conor McGregor", category: "Athletes", location: "Dublin • May 29", city: "Dublin", country: "Ireland", price: 18000, verified: true, trending: false },
-            { name: "Virat Kohli", category: "Athletes", location: "Mumbai • Jun 2", city: "Mumbai", country: "India", price: 15000, verified: true, trending: true },
-            { name: "Novak Djokovic", category: "Athletes", location: "Belgrade • Jun 4", city: "Belgrade", country: "Serbia", price: 17000, verified: true, trending: false },
-
-            // Musicians (22)
-            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true },
-            { name: "Ed Sheeran", category: "Musicians", location: "London • Mar 25", city: "London", country: "UK", price: 15000, verified: true, trending: false },
-            { name: "Beyoncé", category: "Musicians", location: "Houston • Mar 28", city: "Houston", country: "USA", price: 25000, verified: true, trending: true },
-            { name: "The Weeknd", category: "Musicians", location: "Toronto • Apr 1", city: "Toronto", country: "Canada", price: 16000, verified: true, trending: false },
-            { name: "Billie Eilish", category: "Musicians", location: "Los Angeles • Apr 5", city: "Los Angeles", country: "USA", price: 14000, verified: true, trending: true },
-            { name: "Drake", category: "Musicians", location: "Toronto • Apr 10", city: "Toronto", country: "Canada", price: 18000, verified: true, trending: false },
-            { name: "Ariana Grande", category: "Musicians", location: "New York • Apr 15", city: "New York", country: "USA", price: 16000, verified: true, trending: false },
-            { name: "Bruno Mars", category: "Musicians", location: "Las Vegas • Apr 18", city: "Las Vegas", country: "USA", price: 17000, verified: true, trending: false },
-            { name: "Adele", category: "Musicians", location: "London • Apr 22", city: "London", country: "UK", price: 20000, verified: true, trending: false },
-            { name: "BTS (Group)", category: "Musicians", location: "Seoul • Apr 26", city: "Seoul", country: "South Korea", price: 35000, verified: true, trending: true },
-            { name: "Rihanna", category: "Musicians", location: "Barbados • May 2", city: "Bridgetown", country: "Barbados", price: 22000, verified: true, trending: false },
-            { name: "Justin Bieber", category: "Musicians", location: "Los Angeles • May 6", city: "Los Angeles", country: "USA", price: 15000, verified: true, trending: false },
-            { name: "Shawn Mendes", category: "Musicians", location: "Toronto • May 9", city: "Toronto", country: "Canada", price: 12000, verified: true, trending: false },
-            { name: "Dua Lipa", category: "Musicians", location: "London • May 12", city: "London", country: "UK", price: 13000, verified: true, trending: true },
-            { name: "Bad Bunny", category: "Musicians", location: "San Juan • May 15", city: "San Juan", country: "Puerto Rico", price: 16000, verified: true, trending: true },
-            { name: "Lady Gaga", category: "Musicians", location: "New York • May 18", city: "New York", country: "USA", price: 18000, verified: true, trending: false },
-            { name: "Post Malone", category: "Musicians", location: "Dallas • May 21", city: "Dallas", country: "USA", price: 14000, verified: true, trending: false },
-            { name: "Doja Cat", category: "Musicians", location: "Los Angeles • May 24", city: "Los Angeles", country: "USA", price: 12000, verified: true, trending: true },
-            { name: "Harry Styles", category: "Musicians", location: "London • May 27", city: "London", country: "UK", price: 17000, verified: true, trending: true },
-            { name: "Olivia Rodrigo", category: "Musicians", location: "Los Angeles • May 30", city: "Los Angeles", country: "USA", price: 11000, verified: true, trending: true },
-            { name: "Coldplay", category: "Musicians", location: "London • Jun 3", city: "London", country: "UK", price: 25000, verified: true, trending: false },
-            { name: "Imagine Dragons", category: "Musicians", location: "Las Vegas • Jun 6", city: "Las Vegas", country: "USA", price: 16000, verified: true, trending: false }
-        ];
-
-        // City mappings by country
+        // Use shared celebrity data from shared.js
+        const celebrities = CELEBRITIES;
         const cityByCountry = {
             "USA": ["Los Angeles", "New York", "Miami", "Atlanta", "San Francisco", "Seattle", "Chicago", "Boston", "Las Vegas", "Nashville", "Dallas", "Houston", "Phoenix", "Tampa", "Palo Alto", "Cupertino", "Mountain View", "Omaha", "Honolulu"],
             "UK": ["London"],
