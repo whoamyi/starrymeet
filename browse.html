@@ -30,16 +30,14 @@
     <!-- Navigation -->
     <nav role="navigation" aria-label="Main navigation" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">✨ StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
-                <li><a href="browse.html">Browse</a></li>
-                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="browse.html">Browse stars</a></li>
+                <li><a href="how-it-works.html">How it works</a></li>
+                <li><a href="for-celebrities.html">For celebrities</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="for-celebrities.html">For Celebrities</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+                <li><a href="dashboard.html">Log in</a></li>
             </ul>
         </div>
     </nav>
@@ -50,31 +48,46 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-            <span class="logo">✨ StarryMeet</span>
+            <span class="logo">StarryMeet</span>
             <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
         </div>
         <ul class="mobile-menu-links">
             <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
-            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
-            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse stars</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For celebrities</a></li>
             <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
-            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
-            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
-            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
-            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Log in</a></li>
         </ul>
     </div>
+
+    <!-- Mobile Filter Button -->
+    <button class="mobile-filter-btn" onclick="toggleMobileFilters()" aria-label="Open filters">
+        <span class="filter-icon">🔍</span>
+        <span>Filters</span>
+        <span class="filter-count-mobile" id="filterCountMobile">0</span>
+    </button>
 
     <!-- Main Container -->
     <div class="main-container">
         <!-- Filter Sidebar -->
-        <aside class="filter-sidebar">
-            <div class="filter-header">
-                <h2>Filters</h2>
-                <span class="filter-count" id="filterCount">0</span>
-            </div>
+        <aside class="filter-sidebar" id="filterSidebar">
+            <!-- Desktop Collapse Toggle -->
+            <button class="filter-collapse-btn" onclick="toggleFilterCollapse()" id="filterCollapseBtn" aria-label="Toggle filters">
+                <span id="filterCollapseText">Hide Filters</span>
+                <span class="collapse-icon" id="collapseIcon">←</span>
+            </button>
 
-            <button class="clear-filters-btn" onclick="clearAllFilters()">Clear All Filters</button>
+            <!-- Mobile Close Button -->
+            <button class="mobile-filter-close" onclick="toggleMobileFilters()" aria-label="Close filters">×</button>
+
+            <div class="filter-content" id="filterContent">
+                <div class="filter-header">
+                    <h2>Filters</h2>
+                    <span class="filter-count" id="filterCount">0</span>
+                </div>
+
+                <button class="clear-filters-btn" onclick="clearAllFilters()">Clear All Filters</button>
 
             <!-- Category Filter -->
             <div class="filter-section">
@@ -169,7 +182,11 @@
                     </label>
                 </div>
             </div>
+            </div>
         </aside>
+
+        <!-- Filter Overlay (Mobile) -->
+        <div class="filter-overlay" id="filterOverlay" onclick="toggleMobileFilters()"></div>
 
         <!-- Main Content -->
         <main class="main-content">
@@ -215,51 +232,83 @@
                 <h3>No celebrities found</h3>
                 <p>Try adjusting your filters or search criteria</p>
             </div>
+
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button class="pagination-btn" id="prevBtn" onclick="changePage(-1)" aria-label="Previous page">
+                    ← Prev
+                </button>
+                <div class="pagination-numbers" id="paginationNumbers"></div>
+                <button class="pagination-btn" id="nextBtn" onclick="changePage(1)" aria-label="Next page">
+                    Next →
+                </button>
+            </div>
         </main>
     </div>
 
     <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>StarryMeet</h3>
+        <div class="footer-main">
+            <div class="footer-newsletter">
+                <h3>Join our mailing list</h3>
+                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">→</button>
+                </form>
+                <p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p>
+                <div class="footer-cta-buttons">
+                    <a href="for-celebrities.html" class="btn btn-primary">Join as talent</a>
+                    <a href="contact.html" class="btn btn-outline">Become a partner</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>Company</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="how-it-works.html">How It Works</a></li>
-                    <li><a href="for-celebrities.html">For Celebrities</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Team</a></li>
+                    <li><a href="contact.html">Jobs</a></li>
+                    <li><a href="contact.html">Blog</a></li>
+                    <li><a href="contact.html">Press</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Support</h3>
+            <div class="footer-column">
+                <h4>Support</h4>
                 <ul>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="contact.html">Help Center</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="faq.html">Help</a></li>
+                    <li><a href="contact.html">Accessibility</a></li>
+                    <li><a href="terms.html">Refunds & Returns</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Discover</h3>
+            <div class="footer-column">
+                <h4>Shop</h4>
                 <ul>
-                    <li><a href="browse.html">Browse Celebrities</a></li>
-                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
-                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
-                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <ul>
-                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
-                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
-                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
-                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="browse.html">Gift Cards</a></li>
+                    <li><a href="for-celebrities.html">For business</a></li>
+                    <li><a href="browse.html">For kids</a></li>
                 </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Download on App Store">App Store</a>
+                <a href="#" aria-label="Get it on Google Play">Google Play</a>
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TT</a>
+                <a href="#" aria-label="Twitter/X">X</a>
+                <a href="#" aria-label="Threads">TH</a>
+                <a href="#" aria-label="Email">EM</a>
+            </div>
+            <p class="footer-copyright">© 2025 StarryMeet</p>
+            <div class="footer-legal">
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Do Not Sell My Personal Information</a>
+            </div>
         </div>
     </footer>
 
@@ -712,6 +761,148 @@
         }
 
         initializePage();
+
+        // Pagination state
+        let currentPage = 1;
+        const perPage = 12;
+
+        // Toggle mobile filters
+        function toggleMobileFilters() {
+            const sidebar = document.getElementById('filterSidebar');
+            const overlay = document.getElementById('filterOverlay');
+            sidebar.classList.toggle('active');
+            overlay.classList.toggle('active');
+            // Prevent body scroll when filters open
+            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+        }
+
+        // Toggle desktop filter collapse
+        function toggleFilterCollapse() {
+            const sidebar = document.getElementById('filterSidebar');
+            const collapseText = document.getElementById('filterCollapseText');
+            sidebar.classList.toggle('collapsed');
+            collapseText.textContent = sidebar.classList.contains('collapsed') ? 'Show Filters' : 'Hide Filters';
+        }
+
+        // Update filter counts
+        function updateFilterCounts() {
+            const count = document.getElementById('filterCount').textContent;
+            document.getElementById('filterCountMobile').textContent = count;
+        }
+
+        // Override applyFilters to update counts and reset pagination
+        const originalApplyFilters = applyFilters;
+        function applyFilters() {
+            currentPage = 1;
+            originalApplyFilters();
+            updateFilterCounts();
+            renderPagination();
+        }
+
+        // Pagination functions
+        function changePage(delta) {
+            const totalPages = Math.ceil(filteredCelebrities.length / perPage);
+            currentPage = Math.max(1, Math.min(totalPages, currentPage + delta));
+            renderCelebrities();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function goToPage(page) {
+            currentPage = page;
+            renderCelebrities();
+            renderPagination();
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function renderPagination() {
+            const totalPages = Math.ceil(filteredCelebrities.length / perPage);
+            const pagination = document.getElementById('pagination');
+            const numbersContainer = document.getElementById('paginationNumbers');
+            const prevBtn = document.getElementById('prevBtn');
+            const nextBtn = document.getElementById('nextBtn');
+
+            if (totalPages <= 1) {
+                pagination.style.display = 'none';
+                return;
+            }
+
+            pagination.style.display = 'flex';
+            prevBtn.disabled = currentPage === 1;
+            nextBtn.disabled = currentPage === totalPages;
+
+            // Build page numbers
+            let pages = [];
+
+            // Always show first page
+            pages.push(1);
+
+            // Show current ± 2 pages
+            for (let i = Math.max(2, currentPage - 2); i <= Math.min(totalPages - 1, currentPage + 2); i++) {
+                if (i > 1 && i < totalPages) {
+                    pages.push(i);
+                }
+            }
+
+            // Always show last page
+            if (totalPages > 1) {
+                pages.push(totalPages);
+            }
+
+            // Remove duplicates and sort
+            pages = [...new Set(pages)].sort((a, b) => a - b);
+
+            // Build HTML with ellipsis
+            numbersContainer.innerHTML = pages.map((page, index) => {
+                const prevPage = pages[index - 1];
+                const gap = prevPage && page - prevPage > 1 ? '<span class="pagination-ellipsis">...</span>' : '';
+                const active = page === currentPage ? 'active' : '';
+                return `${gap}<button class="pagination-num ${active}" onclick="goToPage(${page})">${page}</button>`;
+            }).join('');
+        }
+
+        // Override renderCelebrities to include pagination
+        const originalRenderCelebrities = renderCelebrities;
+        function renderCelebrities() {
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const paginatedCelebrities = filteredCelebrities.slice(start, end);
+
+            const gridContainer = document.getElementById('celebritiesGrid');
+            const listContainer = document.getElementById('celebritiesList');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+
+            gridContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+
+            resultsCount.textContent = `Showing ${start + 1}-${Math.min(end, filteredCelebrities.length)} of ${filteredCelebrities.length} celebrities`;
+
+            if (filteredCelebrities.length === 0) {
+                noResults.classList.remove('hidden');
+                gridContainer.classList.add('hidden');
+                listContainer.classList.add('hidden');
+                return;
+            }
+
+            noResults.classList.add('hidden');
+
+            if (currentView === 'grid') {
+                gridContainer.classList.remove('hidden');
+                listContainer.classList.remove('active');
+                paginatedCelebrities.forEach(celeb => {
+                    gridContainer.innerHTML += createGridCard(celeb);
+                });
+            } else {
+                gridContainer.classList.add('hidden');
+                listContainer.classList.add('active');
+                paginatedCelebrities.forEach(celeb => {
+                    listContainer.innerHTML += createListCard(celeb);
+                });
+            }
+
+            renderPagination();
+        }
     </script>
 </body>
 </html>
