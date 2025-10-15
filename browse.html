@@ -64,7 +64,16 @@
         </div>
         <ul class="mobile-menu-links">
             <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
-            <li><a href="browse.html" onclick="closeMobileMenu()">Browse stars</a></li>
+            <li class="mobile-menu-categories">
+                <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
+                <ul class="mobile-submenu" id="mobileSubmenu">
+                    <li><a href="browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
+                    <li><a href="browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
+                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
+                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
+                    <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
+                </ul>
+            </li>
             <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
             <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For celebrities</a></li>
             <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
@@ -983,6 +992,21 @@
                 return `${gap}<button class="pagination-num ${active}" onclick="goToPage(${page})">${page}</button>`;
             }).join('');
         }
+
+        // Initialize: Collapse all filter sections on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // All collapsible sections start collapsed
+            const collapsibles = document.querySelectorAll('.checkbox-group.collapsible');
+            collapsibles.forEach(section => {
+                section.classList.remove('expanded');
+            });
+
+            // All toggle buttons start not expanded
+            const toggles = document.querySelectorAll('.filter-section-toggle');
+            toggles.forEach(toggle => {
+                toggle.classList.remove('expanded');
+            });
+        });
 
     </script>
 </body>

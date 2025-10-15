@@ -335,6 +335,16 @@ function toggleCategoriesDropdown() {
     }
 }
 
+/**
+ * Toggle mobile categories submenu
+ */
+function toggleMobileCategoriesSubmenu() {
+    const submenu = document.getElementById('mobileSubmenu');
+    if (submenu) {
+        submenu.classList.toggle('active');
+    }
+}
+
 // Close dropdown when clicking outside
 if (typeof document !== 'undefined') {
     document.addEventListener('click', function(event) {
