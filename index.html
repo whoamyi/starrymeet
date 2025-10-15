@@ -32,14 +32,14 @@
     <!-- Navigation -->
     <nav role="navigation" aria-label="Main navigation" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">StarryMeet</a>
+            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
             <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
                 <li><a href="browse.html">Browse stars</a></li>
                 <li><a href="how-it-works.html">How it works</a></li>
                 <li><a href="for-celebrities.html">For celebrities</a></li>
                 <li><a href="about.html">About</a></li>
-                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Log in</a></li>
+                <li><a href="dashboard.html">Log in</a></li>
             </ul>
         </div>
     </nav>
@@ -163,8 +163,12 @@
             <h2>Top 10 on StarryMeet</h2>
             <a href="browse.html" class="view-all-link">View all</a>
         </div>
-        <div class="top-ten-carousel" id="topTenCarousel">
-            <!-- Will be populated by JavaScript -->
+        <div class="carousel-nav">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('topTenCarousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('topTenCarousel', 1)">›</button>
+            <div class="top-ten-carousel" id="topTenCarousel">
+                <!-- Will be populated by JavaScript -->
+            </div>
         </div>
     </section>
 
@@ -172,13 +176,15 @@
     <section class="quick-meets-section">
         <div class="section-header">
             <h2>Same-day availability</h2>
-            <div class="delivery-badge">
-                <span class="delivery-time">Available today</span>
-            </div>
+            <span class="delivery-time">Available today</span>
             <a href="browse.html?filter=today" class="view-all-link">View all</a>
         </div>
-        <div class="quick-meets-carousel" id="quickMeetsCarousel">
-            <!-- Will be populated by JavaScript -->
+        <div class="carousel-nav">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('quickMeetsCarousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('quickMeetsCarousel', 1)">›</button>
+            <div class="quick-meets-carousel" id="quickMeetsCarousel">
+                <!-- Will be populated by JavaScript -->
+            </div>
         </div>
     </section>
 
@@ -235,8 +241,12 @@
         <div class="section-header">
             <h2>Recent reviews</h2>
         </div>
-        <div class="reviews-carousel" id="reviewsCarousel">
-            <!-- Will be populated by JavaScript -->
+        <div class="carousel-nav">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('reviewsCarousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('reviewsCarousel', 1)">›</button>
+            <div class="reviews-carousel" id="reviewsCarousel">
+                <!-- Will be populated by JavaScript -->
+            </div>
         </div>
     </section>
 
@@ -430,10 +440,25 @@
         // Populate Quick Meets Carousel
         function loadQuickMeets() {
             const carousel = document.getElementById('quickMeetsCarousel');
-            carousel.innerHTML = celebrities.slice(0, 5).map(celeb => `
+            const quickMeets = [
+                { name: "David Anders", details: "Act, Sing & Hug-TVD, iZombie, Alias", rating: 4.94, reviews: 48, price: 77 },
+                { name: "Emma Stone", details: "Oscar Winner, La La Land, The Favourite", rating: 4.98, reviews: 127, price: 850 },
+                { name: "Kevin Hart", details: "Comedian, Actor, Central Intelligence", rating: 4.99, reviews: 178, price: 950 },
+                { name: "Serena Williams", details: "Tennis Champion, 23 Grand Slams", rating: 4.95, reviews: 92, price: 1100 },
+                { name: "Ryan Reynolds", details: "Actor, Deadpool, Free Guy", rating: 4.98, reviews: 143, price: 900 }
+            ];
+            carousel.innerHTML = quickMeets.map(celeb => `
                 <div class="quick-meet-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
                     <div class="quick-meet-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
                         <div class="celebrity-initials">${getInitials(celeb.name)}</div>
+                    </div>
+                    <div class="quick-meet-info">
+                        <h3 class="quick-meet-name">${celeb.name}</h3>
+                        <p class="quick-meet-details">${celeb.details}</p>
+                        <div class="quick-meet-meta">
+                            <span class="quick-meet-rating">${celeb.rating} (${celeb.reviews})</span>
+                            <span class="quick-meet-price">$${celeb.price}+</span>
+                        </div>
                     </div>
                 </div>
             `).join('');
@@ -457,6 +482,18 @@
         // Helper function
         function getInitials(name) {
             return name.split(' ').map(n => n[0]).join('');
+        }
+
+        // Scroll carousel function
+        function scrollCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const scrollAmount = carousel.clientWidth * 0.8;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
         }
 
         // Initialize
