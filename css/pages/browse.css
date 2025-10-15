@@ -86,6 +86,7 @@ body {
     background: #000000;
     padding: 0;
     height: 100vh;
+    max-height: 100vh;
     position: fixed;
     left: -300px;
     top: 0;
@@ -94,6 +95,8 @@ body {
     transition: left 0.3s ease;
     overflow-y: auto;
     z-index: 1000;
+    display: flex;
+    flex-direction: column;
 }
 
 .filter-sidebar.active {
@@ -121,7 +124,9 @@ body {
 }
 
 .filter-content {
-    padding: 60px 24px 24px;
+    padding: 60px 24px 80px;
+    overflow-y: auto;
+    flex: 1;
 }
 
 .filter-header-minimal {
@@ -190,8 +195,12 @@ body {
     width: 18px;
     height: 18px;
     cursor: pointer;
-    accent-color: #ffffff;
+    accent-color: #8B5CF6;
     border: 1px solid rgba(255, 255, 255, 0.3);
+}
+
+.checkbox-item input[type="checkbox"]:checked + label {
+    color: #8B5CF6;
 }
 
 .checkbox-item label {
@@ -327,6 +336,87 @@ body {
     opacity: 0;
     width: 0;
     height: 0;
+}
+
+/* Collapsible Filter Section */
+.filter-section-toggle {
+    width: 100%;
+    background: transparent;
+    border: none;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    cursor: pointer;
+    padding: 0;
+    margin-bottom: 16px;
+}
+
+.filter-section-toggle h3 {
+    margin: 0;
+}
+
+.toggle-arrow {
+    color: #ffffff;
+    font-size: 20px;
+    transition: transform 0.3s ease;
+}
+
+.filter-section-toggle.expanded .toggle-arrow {
+    transform: rotate(90deg);
+}
+
+.checkbox-group.collapsible {
+    max-height: 0;
+    overflow: hidden;
+    transition: max-height 0.3s ease;
+}
+
+.checkbox-group.collapsible.expanded {
+    max-height: 1000px;
+}
+
+.hidden-initially {
+    display: none;
+}
+
+.show-more-btn {
+    width: 100%;
+    background: transparent;
+    border: none;
+    color: #8B5CF6;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    padding: 12px 0;
+    cursor: pointer;
+    text-align: left;
+    margin-top: 8px;
+}
+
+.show-more-btn:hover {
+    text-decoration: underline;
+}
+
+/* Apply Button */
+.apply-filters-btn {
+    width: calc(100% - 48px);
+    background: #8B5CF6;
+    border: none;
+    border-radius: 8px;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    padding: 16px;
+    cursor: pointer;
+    margin: 0 24px 24px;
+    position: sticky;
+    bottom: 0;
+    transition: background 0.2s ease;
+}
+
+.apply-filters-btn:hover {
+    background: #A78BFA;
 }
 
 .toggle-slider {

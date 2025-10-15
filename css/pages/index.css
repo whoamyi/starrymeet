@@ -46,7 +46,7 @@ footer {
 
 /* Preserve occasion card inline gradient backgrounds */
 .occasion-card {
-    /* Don't override background - let inline styles work */
+    background: transparent !important;  /* Transparent to let inline styles work */
 }
 
 /* ========================================
@@ -227,7 +227,6 @@ footer {
     display: flex;
     align-items: flex-end;
     transition: transform 0.2s ease;
-    /* background intentionally not set - inline styles from HTML take precedence */
 }
 
 .occasion-card:hover {
