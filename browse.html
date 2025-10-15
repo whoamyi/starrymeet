@@ -572,6 +572,10 @@
 
             document.getElementById('filterCount').textContent = filterCount;
 
+            // Reset to page 1 when filters change
+            currentPage = 1;
+            updateFilterCounts();
+
             applySorting();
         }
 
@@ -638,8 +642,12 @@
             renderCelebrities();
         }
 
-        // Render celebrities
+        // Render celebrities with pagination
         function renderCelebrities() {
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const paginatedCelebrities = filteredCelebrities.slice(start, end);
+
             const gridContainer = document.getElementById('celebritiesGrid');
             const listContainer = document.getElementById('celebritiesList');
             const noResults = document.getElementById('noResults');
@@ -648,7 +656,7 @@
             gridContainer.innerHTML = '';
             listContainer.innerHTML = '';
 
-            resultsCount.textContent = `Showing ${filteredCelebrities.length} of ${celebrities.length} celebrities`;
+            resultsCount.textContent = `Showing ${start + 1}-${Math.min(end, filteredCelebrities.length)} of ${filteredCelebrities.length} celebrities`;
 
             if (filteredCelebrities.length === 0) {
                 noResults.classList.remove('hidden');
@@ -662,16 +670,18 @@
             if (currentView === 'grid') {
                 gridContainer.classList.remove('hidden');
                 listContainer.classList.remove('active');
-                filteredCelebrities.forEach(celeb => {
+                paginatedCelebrities.forEach(celeb => {
                     gridContainer.innerHTML += createGridCard(celeb);
                 });
             } else {
                 gridContainer.classList.add('hidden');
                 listContainer.classList.add('active');
-                filteredCelebrities.forEach(celeb => {
+                paginatedCelebrities.forEach(celeb => {
                     listContainer.innerHTML += createListCard(celeb);
                 });
             }
+
+            renderPagination();
         }
 
         // Create grid card
@@ -787,16 +797,10 @@
         // Update filter counts
         function updateFilterCounts() {
             const count = document.getElementById('filterCount').textContent;
-            document.getElementById('filterCountMobile').textContent = count;
-        }
-
-        // Override applyFilters to update counts and reset pagination
-        const originalApplyFilters = applyFilters;
-        function applyFilters() {
-            currentPage = 1;
-            originalApplyFilters();
-            updateFilterCounts();
-            renderPagination();
+            const mobileCount = document.getElementById('filterCountMobile');
+            if (mobileCount) {
+                mobileCount.textContent = count;
+            }
         }
 
         // Pagination functions
@@ -861,48 +865,6 @@
             }).join('');
         }
 
-        // Override renderCelebrities to include pagination
-        const originalRenderCelebrities = renderCelebrities;
-        function renderCelebrities() {
-            const start = (currentPage - 1) * perPage;
-            const end = start + perPage;
-            const paginatedCelebrities = filteredCelebrities.slice(start, end);
-
-            const gridContainer = document.getElementById('celebritiesGrid');
-            const listContainer = document.getElementById('celebritiesList');
-            const noResults = document.getElementById('noResults');
-            const resultsCount = document.getElementById('resultsCount');
-
-            gridContainer.innerHTML = '';
-            listContainer.innerHTML = '';
-
-            resultsCount.textContent = `Showing ${start + 1}-${Math.min(end, filteredCelebrities.length)} of ${filteredCelebrities.length} celebrities`;
-
-            if (filteredCelebrities.length === 0) {
-                noResults.classList.remove('hidden');
-                gridContainer.classList.add('hidden');
-                listContainer.classList.add('hidden');
-                return;
-            }
-
-            noResults.classList.add('hidden');
-
-            if (currentView === 'grid') {
-                gridContainer.classList.remove('hidden');
-                listContainer.classList.remove('active');
-                paginatedCelebrities.forEach(celeb => {
-                    gridContainer.innerHTML += createGridCard(celeb);
-                });
-            } else {
-                gridContainer.classList.add('hidden');
-                listContainer.classList.add('active');
-                paginatedCelebrities.forEach(celeb => {
-                    listContainer.innerHTML += createListCard(celeb);
-                });
-            }
-
-            renderPagination();
-        }
     </script>
 </body>
 </html>
