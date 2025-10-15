@@ -325,6 +325,27 @@ function closeMobileMenu() {
     }
 }
 
+/**
+ * Toggle categories dropdown in nav
+ */
+function toggleCategoriesDropdown() {
+    const dropdown = document.getElementById('categoriesDropdown');
+    if (dropdown) {
+        dropdown.classList.toggle('active');
+    }
+}
+
+// Close dropdown when clicking outside
+if (typeof document !== 'undefined') {
+    document.addEventListener('click', function(event) {
+        const dropdown = document.getElementById('categoriesDropdown');
+        const navItem = document.querySelector('.nav-item-categories');
+        if (dropdown && navItem && !navItem.contains(event.target)) {
+            dropdown.classList.remove('active');
+        }
+    });
+}
+
 // ========================================
 // INITIALIZATION
 // ========================================

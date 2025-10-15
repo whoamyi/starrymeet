@@ -33,7 +33,18 @@
             <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
             <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
-                <li><a href="browse.html">Browse stars</a></li>
+                <li class="nav-item-categories">
+                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                    <div class="categories-dropdown" id="categoriesDropdown">
+                        <a href="browse.html?category=Actors">Actors</a>
+                        <a href="browse.html?category=Musicians">Musicians</a>
+                        <a href="browse.html?category=Athletes">Athletes</a>
+                        <a href="browse.html?category=Comedians">Comedians</a>
+                        <a href="browse.html?category=Influencers">Influencers</a>
+                        <a href="browse.html?category=Reality%20TV">Reality TV</a>
+                        <a href="browse.html">View all</a>
+                    </div>
+                </li>
                 <li><a href="how-it-works.html">How it works</a></li>
                 <li><a href="for-celebrities.html">For celebrities</a></li>
                 <li><a href="about.html">About</a></li>
@@ -77,64 +88,101 @@
 
             <!-- Category Filter -->
             <div class="filter-section">
-                <h3>Category</h3>
-                <div class="checkbox-group">
+                <button class="filter-section-toggle" onclick="toggleFilterSection('categories')">
+                    <h3>Category</h3>
+                    <span class="toggle-arrow">›</span>
+                </button>
+                <div class="checkbox-group collapsible" id="categories">
                     <div class="checkbox-item">
-                        <input type="checkbox" id="cat-hollywood" value="Hollywood" onchange="applyFilters()">
+                        <input type="checkbox" id="cat-hollywood" value="Hollywood">
                         <label for="cat-hollywood">
                             <span>Hollywood</span>
                             <span class="checkbox-count">35</span>
                         </label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="cat-kdrama" value="K-Drama" onchange="applyFilters()">
+                        <input type="checkbox" id="cat-kdrama" value="K-Drama">
                         <label for="cat-kdrama">
                             <span>K-Drama</span>
                             <span class="checkbox-count">20</span>
                         </label>
                     </div>
                     <div class="checkbox-item">
-                        <input type="checkbox" id="cat-business" value="Business" onchange="applyFilters()">
+                        <input type="checkbox" id="cat-business" value="Business">
                         <label for="cat-business">
                             <span>Business</span>
                             <span class="checkbox-count">15</span>
                         </label>
                     </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-athletes" value="Athletes" onchange="applyFilters()">
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="cat-athletes" value="Athletes">
                         <label for="cat-athletes">
                             <span>Athletes</span>
                             <span class="checkbox-count">18</span>
                         </label>
                     </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-musicians" value="Musicians" onchange="applyFilters()">
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="cat-musicians" value="Musicians">
                         <label for="cat-musicians">
                             <span>Musicians</span>
                             <span class="checkbox-count">22</span>
                         </label>
                     </div>
+                    <button class="show-more-btn" onclick="toggleShowMore('categories')">Show more</button>
                 </div>
             </div>
 
             <!-- Location Filter -->
             <div class="filter-section">
-                <h3>Location</h3>
-                <select class="filter-dropdown" id="countryFilter" onchange="updateCityFilter()" aria-label="Filter by country">
-                    <option value="">All Countries</option>
-                    <option value="USA">United States</option>
-                    <option value="UK">United Kingdom</option>
-                    <option value="South Korea">South Korea</option>
-                    <option value="France">France</option>
-                    <option value="Japan">Japan</option>
-                    <option value="Australia">Australia</option>
-                    <option value="Canada">Canada</option>
-                    <option value="UAE">UAE</option>
-                    <option value="India">India</option>
-                </select>
-                <select class="filter-dropdown" id="cityFilter" onchange="applyFilters()" aria-label="Filter by city">
-                    <option value="">All Cities</option>
-                </select>
+                <button class="filter-section-toggle" onclick="toggleFilterSection('locations')">
+                    <h3>Location</h3>
+                    <span class="toggle-arrow">›</span>
+                </button>
+                <div class="checkbox-group collapsible" id="locations">
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc-usa" value="USA">
+                        <label for="loc-usa">
+                            <span>United States</span>
+                            <span class="checkbox-count">45</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc-uk" value="UK">
+                        <label for="loc-uk">
+                            <span>United Kingdom</span>
+                            <span class="checkbox-count">12</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item">
+                        <input type="checkbox" id="loc-korea" value="South Korea">
+                        <label for="loc-korea">
+                            <span>South Korea</span>
+                            <span class="checkbox-count">18</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="loc-france" value="France">
+                        <label for="loc-france">
+                            <span>France</span>
+                            <span class="checkbox-count">8</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="loc-japan" value="Japan">
+                        <label for="loc-japan">
+                            <span>Japan</span>
+                            <span class="checkbox-count">10</span>
+                        </label>
+                    </div>
+                    <div class="checkbox-item hidden-initially">
+                        <input type="checkbox" id="loc-australia" value="Australia">
+                        <label for="loc-australia">
+                            <span>Australia</span>
+                            <span class="checkbox-count">7</span>
+                        </label>
+                    </div>
+                    <button class="show-more-btn" onclick="toggleShowMore('locations')">Show more</button>
+                </div>
             </div>
 
             <!-- Date Range -->
@@ -168,6 +216,9 @@
                     </label>
                 </div>
             </div>
+
+            <!-- Apply Button -->
+            <button class="apply-filters-btn" onclick="toggleFilters()">Apply filters</button>
             </div>
         </aside>
 
@@ -781,10 +832,42 @@
         function toggleFilters() {
             const sidebar = document.getElementById('filterSidebar');
             const overlay = document.getElementById('filterOverlay');
+            const wasActive = sidebar.classList.contains('active');
+
             sidebar.classList.toggle('active');
             overlay.classList.toggle('active');
+
             // Prevent body scroll when filters open
             document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+
+            // Auto-apply filters when closing
+            if (wasActive) {
+                applyFilters();
+            }
+        }
+
+        // Toggle filter section (collapsible categories/locations)
+        function toggleFilterSection(sectionId) {
+            const section = document.getElementById(sectionId);
+            const toggle = section.previousElementSibling;
+
+            section.classList.toggle('expanded');
+            toggle.classList.toggle('expanded');
+        }
+
+        // Show more items in filter section
+        function toggleShowMore(sectionId) {
+            const section = document.getElementById(sectionId);
+            const hiddenItems = section.querySelectorAll('.hidden-initially');
+            const button = section.querySelector('.show-more-btn');
+
+            const isExpanded = hiddenItems[0].style.display !== 'none' && hiddenItems[0].style.display !== '';
+
+            hiddenItems.forEach(item => {
+                item.style.display = isExpanded ? 'none' : 'flex';
+            });
+
+            button.textContent = isExpanded ? 'Show more' : 'Show less';
         }
 
         // Render filter chips
