@@ -1746,9 +1746,9 @@ tr:hover {
 .container .box,
 .container .card,
 .container .panel,
-.section .card,
+.section .card:not(.occasion-card):not(.category-card):not(.step-card):not(.feature-card),
 .section .box,
-[class*="container"] [class*="-card"],
+[class*="container"] [class*="-card"]:not(.occasion-card):not(.category-card):not(.step-card):not(.feature-card),
 [class*="container"] [class*="-box"] {
     background: var(--bg-secondary) !important;  /* Modern dark: #1a1a1a */
     border: 1px solid var(--border-light);
