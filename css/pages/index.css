@@ -9,6 +9,14 @@
     max-width: 100%;
 }
 
+/* Ensure cards preserve their individual backgrounds */
+.occasion-card,
+.category-card,
+.step-card,
+.feature-card {
+    background: inherit !important;
+}
+
 html, body {
     overflow-x: hidden !important;
     width: 100%;
@@ -302,13 +310,14 @@ html, body {
     font-family: 'Inter', sans-serif;
     font-size: 16px;
     font-weight: 600;
-    color: #8B5CF6;
-    text-decoration: none;
-    transition: color 0.2s ease;
+    color: #FFFFFF;
+    text-decoration: underline;
+    white-space: nowrap;
+    transition: opacity 0.2s ease;
 }
 
 .view-all-link:hover {
-    color: #A78BFA;
+    opacity: 0.8;
     text-decoration: underline;
 }
 

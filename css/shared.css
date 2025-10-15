@@ -300,18 +300,14 @@ header.scrolled,
     font-size: var(--text-2xl);  /* Smaller, more refined */
     font-weight: 700;  /* Less bold */
     font-family: var(--font-sans);  /* Sans-serif, not display */
-    background: var(--primary-gradient);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    background-clip: text;
+    color: #FFFFFF !important;
     letter-spacing: -0.01em;  /* Less tight */
     text-decoration: none;
-    transition: var(--transition-base);
+    transition: opacity 0.2s ease;
 }
 
 .logo:hover {
-    transform: scale(1.02);
-    filter: brightness(1.1);
+    opacity: 0.8;
 }
 
 .nav-links {
@@ -480,25 +476,31 @@ header.scrolled,
 
 .mobile-menu-links {
     list-style: none;
-    padding: var(--space-4) 0;
+    padding: 0;
+}
+
+.mobile-menu-links li {
+    margin: 32px 0;
+    border: none;
+    padding: 0;
 }
 
 .mobile-menu-links a {
-    display: flex;
-    align-items: center;
-    padding: var(--space-5) var(--space-6);
-    color: var(--text-primary);
+    display: block;
+    color: #FFFFFF;
     text-decoration: none;
-    font-weight: 600;
-    font-size: var(--text-lg);
-    border-bottom: 1px solid var(--border-light);
-    transition: var(--transition-base);
+    font-weight: 400;
+    font-size: 20px;
+    font-family: 'Inter', sans-serif;
+    border: none;
+    padding: 0;
+    transition: opacity 0.2s ease;
 }
 
 .mobile-menu-links a:hover {
-    background: linear-gradient(90deg, rgba(139, 92, 246, 0.05) 0%, transparent 100%);
-    color: var(--primary);
-    padding-left: var(--space-8);
+    opacity: 0.7;
+    background: none;
+    padding: 0;
 }
 
 /* ========================================
