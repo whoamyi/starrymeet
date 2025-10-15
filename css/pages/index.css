@@ -4,6 +4,16 @@
    Background: #0c0d0e (Cameo exact)
    ======================================== */
 
+/* Prevent horizontal overflow globally */
+* {
+    max-width: 100%;
+}
+
+html, body {
+    overflow-x: hidden !important;
+    width: 100%;
+}
+
 /* ========================================
    HERO SECTION
    ======================================== */
@@ -12,6 +22,8 @@
     background: var(--bg-primary);  /* #0c0d0e */
     padding: 48px 24px;
     text-align: center;
+    width: 100%;
+    box-sizing: border-box;
 }
 
 .hero-content {
@@ -925,20 +937,38 @@ footer {
 
 .footer-legal {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .footer-legal a {
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     color: #6B7280;
     text-decoration: none;
     transition: color 0.2s ease;
+    word-break: break-word;
 }
 
 .footer-legal a:hover {
     color: #ffffff;
+}
+
+@media (max-width: 768px) {
+    .footer-newsletter h3,
+    .footer-column h4 {
+        font-size: 16px;
+    }
+
+    .footer-newsletter p,
+    .footer-column a {
+        font-size: 13px;
+    }
+
+    .footer-legal a {
+        font-size: 10px;
+    }
 }
 
 /* ========================================

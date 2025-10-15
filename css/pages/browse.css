@@ -1102,16 +1102,18 @@ footer::before {
 
 .footer-legal {
     display: flex;
-    gap: 24px;
+    gap: 16px;
     flex-wrap: wrap;
+    max-width: 100%;
 }
 
 .footer-legal a {
     font-family: 'Inter', sans-serif;
-    font-size: 12px;
+    font-size: 11px;
     color: #6B7280;
     text-decoration: none;
     transition: color 0.2s ease;
+    word-break: break-word;
 }
 
 .footer-legal a:hover {
