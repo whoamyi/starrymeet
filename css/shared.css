@@ -64,11 +64,11 @@ body {
     --error: #EF4444;                /* Red */
     --info: #3B82F6;                 /* Blue */
 
-    /* Neutral Colors - Modern Dark Mode Theme (Friendly Black) */
-    --black: #0f0f0f;                /* Modern dark mode - not pure black */
-    --rich-black: #121212;           /* Rich dark - comfortable for eyes */
-    --dark-surface: #1a1a1a;         /* Slightly lighter for surfaces */
-    --dark-elevated: #1e1e1e;        /* Elevated elements - subtle distinction */
+    /* Neutral Colors - Cameo A4 Dark Paper (#0c0d0e) */
+    --black: #0c0d0e;                /* Cameo exact: rgb(12, 13, 14) */
+    --rich-black: #0c0d0e;           /* Same as primary */
+    --dark-surface: #0c0d0e;         /* Flat dark paper */
+    --dark-elevated: #0c0d0e;        /* No elevation */
     --white: #FFFFFF;
     --off-white: #F5F5F5;
     --gray-50: #F9FAFB;
@@ -82,13 +82,13 @@ body {
     --gray-800: #1F2937;
     --gray-900: #111827;
 
-    /* Background Colors - Modern Dark Mode Theme */
-    --bg-primary: #0f0f0f;           /* Modern dark - main background */
-    --bg-secondary: #1a1a1a;         /* Slightly lighter - cards, surfaces */
-    --bg-tertiary: #1e1e1e;          /* Elevated - modals, dropdowns */
-    --bg-dark: #0a0a0a;              /* Darker areas - contrast */
-    --bg-glass: rgba(15, 15, 15, 0.95);
-    --bg-glass-dark: rgba(10, 10, 10, 0.98);
+    /* Background Colors - Cameo A4 Dark Paper */
+    --bg-primary: #0c0d0e;           /* Cameo dark paper - everything */
+    --bg-secondary: #0c0d0e;         /* Same - flat design */
+    --bg-tertiary: #0c0d0e;          /* Same - no elevation */
+    --bg-dark: #0c0d0e;              /* Consistent throughout */
+    --bg-glass: rgba(12, 13, 14, 0.95);
+    --bg-glass-dark: rgba(12, 13, 14, 0.98);
 
     /* Text Colors - Dark Theme Hierarchy (STANDARD) - IMPROVED ACCESSIBILITY
 
@@ -272,7 +272,7 @@ header,
     left: 0;
     right: 0;
     width: 100%;
-    background: rgba(15, 15, 15, 0.85);  /* Modern dark with transparency */
+    background: rgba(12, 13, 14, 0.85);  /* Cameo dark paper with transparency */
     backdrop-filter: blur(32px) saturate(200%);
     -webkit-backdrop-filter: blur(32px) saturate(200%);
     border-bottom: 1px solid rgba(139, 92, 246, 0.08);
@@ -283,7 +283,7 @@ header,
 nav.scrolled,
 header.scrolled,
 .header.scrolled {
-    background: rgba(26, 26, 26, 0.98);  /* Slightly lighter when scrolled */
+    background: rgba(12, 13, 14, 0.98);  /* Cameo dark paper when scrolled */
     box-shadow: var(--shadow-md);
 }
 
@@ -418,7 +418,7 @@ header.scrolled,
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(15, 15, 15, 0.6);  /* Modern dark overlay */
+    background: rgba(12, 13, 14, 0.6);  /* Cameo dark overlay */
     backdrop-filter: blur(4px);
     z-index: var(--z-modal-backdrop);
     opacity: 0;
@@ -874,7 +874,7 @@ header.scrolled,
     transform: translateY(-50%);
     width: 48px;
     height: 48px;
-    background: rgba(15, 15, 15, 0.9);  /* Modern dark with transparency */
+    background: rgba(12, 13, 14, 0.9);  /* Cameo dark with transparency */
     border: 1px solid var(--border-medium);
     border-radius: var(--radius-full);
     display: flex;
@@ -1480,7 +1480,7 @@ html {
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(15, 15, 15, 0.8);  /* Modern dark overlay */
+    background: rgba(12, 13, 14, 0.8);  /* Cameo dark overlay */
     backdrop-filter: blur(4px);
     display: flex;
     align-items: center;
