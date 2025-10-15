@@ -5,7 +5,8 @@
    ======================================== */
 
 body {
-    background: #0c0d0e;
+    background: #0c0d0e !important;
+    min-height: 100vh;
 }
 
 .nav-container {
@@ -15,12 +16,13 @@ body {
 /* Main Container - Premium Layout */
 .main-container {
     margin-top: var(--nav-height);
-    display: flex;
+    display: flex !important;
     max-width: 1600px;
     margin-left: auto;
     margin-right: auto;
-    gap: var(--space-8);
-    padding: var(--space-6);
+    gap: 24px;
+    padding: 24px;
+    flex-direction: row;
 }
 
 /* Mobile Filter Button */
@@ -543,30 +545,30 @@ input:checked + .toggle-slider:before {
 
 /* Celebrity Grid - RESPONSIVE 2/3/4 COLUMNS */
 .celebrities-grid {
-    display: grid;
+    display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px;
+    gap: 16px !important;
     width: 100%;
 }
 
 /* Mobile: 2 columns */
 @media (max-width: 767px) {
     .celebrities-grid {
-        grid-template-columns: repeat(2, 1fr);
+        grid-template-columns: repeat(2, 1fr) !important;
     }
 }
 
 /* Tablet: 3 columns */
 @media (min-width: 768px) and (max-width: 1023px) {
     .celebrities-grid {
-        grid-template-columns: repeat(3, 1fr);
+        grid-template-columns: repeat(3, 1fr) !important;
     }
 }
 
 /* Desktop: 4 columns */
 @media (min-width: 1024px) {
     .celebrities-grid {
-        grid-template-columns: repeat(4, 1fr);
+        grid-template-columns: repeat(4, 1fr) !important;
     }
 }
 
@@ -936,12 +938,17 @@ input:checked + .toggle-slider:before {
 }
 
 /* ========================================
-   FOOTER STYLES (MATCH HOMEPAGE)
+   FOOTER STYLES (MATCH HOMEPAGE) - OVERRIDE SHARED.CSS
    ======================================== */
 footer {
-    background: #0c0d0e;
-    border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 64px 24px 24px;
+    background: #0c0d0e !important;
+    border-top: 1px solid rgba(255, 255, 255, 0.1) !important;
+    padding: 64px 24px 24px !important;
+    margin-top: 0 !important;
+}
+
+footer::before {
+    display: none !important;
 }
 
 .footer-main {
