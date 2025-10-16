@@ -3,215 +3,39 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="StarryMeet Privacy Policy. Learn how we collect, use, protect, and share your personal information. Your privacy and data security are our priorities.">
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://starrymeet.com/privacy.html">
-    <meta property="og:title" content="Privacy Policy - StarryMeet">
-    <meta property="og:description" content="StarryMeet Privacy Policy. Learn how we collect, use, protect, and share your personal information. Your privacy and data security are our priorities.">
-    <meta property="og:site_name" content="StarryMeet">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="Privacy Policy - StarryMeet">
-    <meta name="twitter:description" content="StarryMeet Privacy Policy. Learn how we collect, use, protect, and share your personal information. Your privacy and data security are our priorities.">
-
     <title>Privacy Policy - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
     <style>
-        /* Page-specific styles - inherit dark theme from shared.css */
-        .hero {
-            background: var(--primary-gradient);
-            margin-top: var(--nav-height);
-            padding: var(--space-20) var(--space-8);
-            text-align: center;
-        }
-
-        .hero h1 {
-            font-size: clamp(1.125rem, 4vw, 1.5rem);
-            font-weight: 600;
-            margin-bottom: var(--space-4);
-        }
-
-        .hero p {
-            font-size: var(--text-xl);
-            opacity: 0.95;
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .container {
-            max-width: 1000px;
-            margin: 0 auto;
-            padding: var(--space-16) var(--space-8);
-        }
-
-        .content-section {
-            background: #000000;
-            padding: var(--space-12);
-            border-radius: var(--radius-2xl);
-            border: 1px solid var(--border-light);
-            margin-bottom: var(--space-8);
-        }
-
-        .content-section h2 {
-            font-size: var(--text-3xl);
-            font-weight: 600;
-            color: var(--primary);
-            margin-bottom: var(--space-6);
-        }
-
-        .content-section h3 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            color: var(--text-primary);
-            margin: var(--space-8) 0 var(--space-4);
-        }
-
-        .content-section p {
-            margin-bottom: var(--space-4);
-            line-height: 1.5;
-        }
-
-        .content-section ul,
-        .content-section ol {
-            margin: var(--space-4) 0 var(--space-4) var(--space-8);
-            line-height: 1.5;
-        }
-
-        .content-section li {
-            margin-bottom: var(--space-2);
-        }
-
-        .last-updated {
-            text-align: center;
-            color: var(--text-tertiary);
-            font-style: italic;
-            margin-bottom: var(--space-12);
-        }
+        body{background:var(--bg-primary);}
+        .hero{text-align:center;padding:120px 24px 60px;margin-top:var(--nav-height);}
+        .hero h1{font-size:clamp(2rem,5vw,3.5rem);font-weight:700;margin-bottom:16px;}
+        .hero p{font-size:1.125rem;opacity:0.7;}
+        .container{max-width:900px;margin:0 auto;padding:0 24px 100px;}
+        .section{background:rgba(234,18,121,0.03);border:1px solid rgba(234,18,121,0.1);border-radius:20px;padding:32px;margin-bottom:24px;}
+        .section h2{font-size:1.5rem;font-weight:600;margin-bottom:16px;color:var(--primary);}
+        .section p,.section ul{opacity:0.8;line-height:1.6;margin-bottom:12px;}
+        .section ul{padding-left:24px;}
+        @media(max-width:768px){.hero{padding:80px 24px 60px;}.section{padding:24px;}}
     </style>
 </head>
 <body>
-    <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
-            <ul class="nav-links">
-                <li class="nav-item-categories">
-                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
-                    <div class="categories-dropdown" id="categoriesDropdown">
-                        <a href="browse.html?category=Hollywood">Hollywood</a>
-                        <a href="browse.html?category=Musicians">Musicians</a>
-                        <a href="browse.html?category=Athletes">Athletes</a>
-                        <a href="browse.html?category=K-Drama">K-Drama</a>
-                        <a href="browse.html?category=Business">Business</a>
-                        <a href="browse.html">View all</a>
-                    </div>
-                </li>
-                <li><a href="how-it-works.html">How it works</a></li>
-                <li><a href="for-celebrities.html">Join as star</a></li>
-                <li><a href="dashboard.html">Log in</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar"><div class="nav-container"><a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a><button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button><ul class="nav-links"><li class="nav-item-categories"><a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a><div class="categories-dropdown" id="categoriesDropdown"><a href="browse.html?category=Hollywood">Hollywood</a><a href="browse.html?category=Musicians">Musicians</a><a href="browse.html?category=Athletes">Athletes</a><a href="browse.html?category=K-Drama">K-Drama</a><a href="browse.html?category=Business">Business</a><a href="browse.html">View all</a></div></li><li><a href="how-it-works.html">How it works</a></li><li><a href="for-celebrities.html">Join as star</a></li><li><a href="dashboard.html">Log in</a></li></ul></div></nav>
     <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu"><div class="mobile-menu-header"><a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a><button class="mobile-menu-close" onclick="closeMobileMenu()">×</button></div><ul class="mobile-menu-links"><li class="mobile-menu-categories"><a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a><ul class="mobile-submenu" id="mobileSubmenu"><li><a href="browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li><li><a href="browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li><li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li><li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li><li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li></ul></li><li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li><li><a href="for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li><li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li><li class="mobile-menu-login-item"><a href="dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li></ul></div>
 
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
-            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
-        </div>
-        <ul class="mobile-menu-links">
-            <li class="mobile-menu-categories">
-                <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
-                <ul class="mobile-submenu" id="mobileSubmenu">
-                    <li><a href="browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
-                    <li><a href="browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
-                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
-                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
-                    <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
-                </ul>
-            </li>
-            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
-            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
-            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
-            <li class="mobile-menu-login-item"><a href="dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li>
-        </ul>
+    <section class="hero"><h1>Privacy Policy</h1><p>Last updated: October 16, 2025</p></section>
+
+    <div class="container">
+        <div class="section"><h2>Information we collect</h2><p>We collect information you provide when creating an account, booking meetings, or contacting support. This includes name, email, payment info, and booking preferences.</p></div>
+        <div class="section"><h2>How we use your data</h2><ul><li>Process bookings and payments</li><li>Communicate about meetings and account activity</li><li>Improve our platform and services</li><li>Prevent fraud and ensure security</li></ul></div>
+        <div class="section"><h2>Information sharing</h2><p>We only share your info with celebrities you're meeting (name, meeting details) and payment processors. We never sell your data to third parties.</p></div>
+        <div class="section"><h2>Data security</h2><p>We use industry-standard encryption and security measures to protect your information. All payment data is processed securely through PCI-compliant providers.</p></div>
+        <div class="section"><h2>Your rights</h2><p>You can access, update, or delete your personal data anytime through your account settings. Contact us at privacy@starrymeet.com for data requests.</p></div>
+        <div class="section"><h2>Cookies</h2><p>We use cookies for authentication, preferences, and analytics. You can control cookie settings in your browser.</p></div>
+        <div class="section"><h2>Contact us</h2><p>Questions about privacy? Email us at <a href="mailto:privacy@starrymeet.com" style="color:var(--primary);">privacy@starrymeet.com</a></p></div>
     </div>
 
-    <!-- Footer -->
-    <footer>
-        <div class="footer-main">
-            <div class="footer-newsletter">
-                <h3>Join our mailing list</h3>
-                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit" class="btn btn-primary">→</button>
-                </form>
-                <p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p>
-                <div class="footer-cta-buttons">
-                    <a href="for-celebrities.html" class="btn btn-primary">Join as talent</a>
-                    <a href="contact.html" class="btn btn-outline">Become a partner</a>
-                </div>
-            </div>
-        </div>
-
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="contact.html">Team</a></li>
-                    <li><a href="contact.html">Jobs</a></li>
-                    <li><a href="contact.html">Blog</a></li>
-                    <li><a href="contact.html">Press</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="faq.html">Help</a></li>
-                    <li><a href="contact.html">Accessibility</a></li>
-                    <li><a href="terms.html">Refunds & Returns</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Shop</h4>
-                <ul>
-                    <li><a href="browse.html">Gift Cards</a></li>
-                    <li><a href="for-celebrities.html">For business</a></li>
-                    <li><a href="browse.html">For kids</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="footer-social">
-                <a href="#" aria-label="Download on App Store">App Store</a>
-                <a href="#" aria-label="Get it on Google Play">Google Play</a>
-                <a href="#" aria-label="Instagram">IG</a>
-                <a href="#" aria-label="TikTok">TT</a>
-                <a href="#" aria-label="Twitter/X">X</a>
-                <a href="#" aria-label="Threads">TH</a>
-                <a href="#" aria-label="Email">EM</a>
-            </div>
-            <p class="footer-copyright">© 2025 StarryMeet</p>
-            <div class="footer-legal">
-                <a href="terms.html">Terms of Service</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="contact.html">Do Not Sell My Personal Information</a>
-            </div>
-            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
-                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
-            </div>
-        </div>
-    </footer>
+    <footer><div class="footer-main"><div class="footer-newsletter"><h3>Join our mailing list</h3><p>Be the first to know about the newest stars and best deals on StarryMeet</p><form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');"><input type="email" placeholder="Your email" required><button type="submit" class="btn btn-primary">→</button></form><p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p><div class="footer-cta-buttons"><a href="for-celebrities.html" class="btn btn-primary">Join as talent</a><a href="contact.html" class="btn btn-outline">Become a partner</a></div></div></div><div class="footer-columns"><div class="footer-column"><h4>Company</h4><ul><li><a href="about.html">About</a></li><li><a href="contact.html">Team</a></li><li><a href="contact.html">Jobs</a></li><li><a href="contact.html">Blog</a></li><li><a href="contact.html">Press</a></li></ul></div><div class="footer-column"><h4>Support</h4><ul><li><a href="faq.html">Help</a></li><li><a href="contact.html">Accessibility</a></li><li><a href="terms.html">Refunds & Returns</a></li></ul></div><div class="footer-column"><h4>Shop</h4><ul><li><a href="browse.html">Gift Cards</a></li><li><a href="for-celebrities.html">For business</a></li><li><a href="browse.html">For kids</a></li></ul></div></div><div class="footer-bottom"><div class="footer-social"><a href="#" aria-label="Download on App Store">App Store</a><a href="#" aria-label="Get it on Google Play">Google Play</a><a href="#" aria-label="Instagram">IG</a><a href="#" aria-label="TikTok">TT</a><a href="#" aria-label="Twitter/X">X</a><a href="#" aria-label="Threads">TH</a><a href="#" aria-label="Email">EM</a></div><p class="footer-copyright">© 2025 StarryMeet</p><div class="footer-legal"><a href="terms.html">Terms of Service</a><a href="privacy.html">Privacy Policy</a><a href="contact.html">Do Not Sell My Personal Information</a></div><div class="footer-locale" style="text-align: center; margin-top: 32px;"><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button></div></div></footer>
 </body>
 </html>
