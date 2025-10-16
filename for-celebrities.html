@@ -203,18 +203,26 @@
     </style>
 </head>
 <body>
+    <!-- Navigation -->
     <nav role="navigation" aria-label="Main navigation" id="navbar">
         <div class="nav-container">
-            <a href="index.html" class="logo">✨ StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
             <ul class="nav-links">
-                <li><a href="browse.html">Browse</a></li>
-                <li><a href="how-it-works.html">How It Works</a></li>
-                <li><a href="about.html">About</a></li>
-                <li><a href="for-celebrities.html">For Celebrities</a></li>
-                <li><a href="faq.html">FAQ</a></li>
-                <li><a href="contact.html">Contact</a></li>
-                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+                <li class="nav-item-categories">
+                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                    <div class="categories-dropdown" id="categoriesDropdown">
+                        <a href="browse.html?category=Hollywood">Hollywood</a>
+                        <a href="browse.html?category=Musicians">Musicians</a>
+                        <a href="browse.html?category=Athletes">Athletes</a>
+                        <a href="browse.html?category=K-Drama">K-Drama</a>
+                        <a href="browse.html?category=Business">Business</a>
+                        <a href="browse.html">View all</a>
+                    </div>
+                </li>
+                <li><a href="how-it-works.html">How it works</a></li>
+                <li><a href="for-celebrities.html">Join as star</a></li>
+                <li><a href="dashboard.html">Log in</a></li>
             </ul>
         </div>
     </nav>
@@ -225,61 +233,26 @@
     <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
-            <span class="logo">✨ StarryMeet</span>
+            <a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
             <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
         </div>
         <ul class="mobile-menu-links">
-            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
-            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
-            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
-            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
-            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
-            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
-            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
-            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+            <li class="mobile-menu-categories">
+                <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
+                <ul class="mobile-submenu" id="mobileSubmenu">
+                    <li><a href="browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
+                    <li><a href="browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
+                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
+                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
+                    <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
+                </ul>
+            </li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
+            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
+            <li class="mobile-menu-login-item"><a href="dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li>
         </ul>
     </div>
-
-    <section class="hero">
-        <h1>Join StarryMeet as a Celebrity</h1>
-        <p>Monetize your travel schedule and connect with your true fans on your own terms</p>
-        <a href="mailto:apply@starrymeet.com" class="btn" style="margin-top: 1rem;">Apply to Join</a>
-    </section>
-
-    <div class="container">
-        <h2 class="section-title">Why Join StarryMeet?</h2>
-        <div class="benefits-grid">
-            <div class="benefit-card">
-                <div class="benefit-icon">💰</div>
-                <h3>Monetize Your Travel</h3>
-                <p>Turn your existing travel schedule into earning opportunities. Set your own prices and availability to maximize your time.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">🎯</div>
-                <h3>Full Control</h3>
-                <p>You decide when, where, and who you meet. Approve every booking personally and maintain complete control over your schedule.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">❤️</div>
-                <h3>Connect with True Fans</h3>
-                <p>Meet people who genuinely appreciate your work. Each fan submits an application explaining why they want to meet you.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">📅</div>
-                <h3>Flexible Scheduling</h3>
-                <p>Add availability around your existing commitments. No long-term contracts or minimum requirements.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">👑</div>
-                <h3>Premium Positioning</h3>
-                <p>Be featured alongside top talent. Our platform attracts serious fans willing to pay for authentic experiences.</p>
-            </div>
-            <div class="benefit-card">
-                <div class="benefit-icon">🛡️</div>
-                <h3>Professional Support</h3>
-                <p>Dedicated team handles bookings, payments, and logistics. We vet all fans and provide 24/7 support.</p>
-            </div>
-        </div>
 
         <h2 class="section-title">How It Works</h2>
         <div class="steps-container">
@@ -381,47 +354,72 @@
         </div>
     </div>
 
+    <!-- Footer -->
     <footer>
-        <div class="footer-container">
-            <div class="footer-section">
-                <h3>StarryMeet</h3>
+        <div class="footer-main">
+            <div class="footer-newsletter">
+                <h3>Join our mailing list</h3>
+                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">→</button>
+                </form>
+                <p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p>
+                <div class="footer-cta-buttons">
+                    <a href="for-celebrities.html" class="btn btn-primary">Join as talent</a>
+                    <a href="contact.html" class="btn btn-outline">Become a partner</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>Company</h4>
                 <ul>
-                    <li><a href="about.html">About Us</a></li>
-                    <li><a href="how-it-works.html">How It Works</a></li>
-                    <li><a href="for-celebrities.html">For Celebrities</a></li>
-                    <li><a href="contact.html">Contact</a></li>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Team</a></li>
+                    <li><a href="contact.html">Jobs</a></li>
+                    <li><a href="contact.html">Blog</a></li>
+                    <li><a href="contact.html">Press</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Support</h3>
+            <div class="footer-column">
+                <h4>Support</h4>
                 <ul>
-                    <li><a href="faq.html">FAQ</a></li>
-                    <li><a href="contact.html">Help Center</a></li>
-                    <li><a href="terms.html">Terms of Service</a></li>
-                    <li><a href="privacy.html">Privacy Policy</a></li>
+                    <li><a href="faq.html">Help</a></li>
+                    <li><a href="contact.html">Accessibility</a></li>
+                    <li><a href="terms.html">Refunds & Returns</a></li>
                 </ul>
             </div>
-            <div class="footer-section">
-                <h3>Discover</h3>
+            <div class="footer-column">
+                <h4>Shop</h4>
                 <ul>
-                    <li><a href="browse.html">Browse Celebrities</a></li>
-                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
-                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
-                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
-                </ul>
-            </div>
-            <div class="footer-section">
-                <h3>Connect</h3>
-                <ul>
-                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
-                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
-                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
-                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                    <li><a href="browse.html">Gift Cards</a></li>
+                    <li><a href="for-celebrities.html">For business</a></li>
+                    <li><a href="browse.html">For kids</a></li>
                 </ul>
             </div>
         </div>
+
         <div class="footer-bottom">
-            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+            <div class="footer-social">
+                <a href="#" aria-label="Download on App Store">App Store</a>
+                <a href="#" aria-label="Get it on Google Play">Google Play</a>
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TT</a>
+                <a href="#" aria-label="Twitter/X">X</a>
+                <a href="#" aria-label="Threads">TH</a>
+                <a href="#" aria-label="Email">EM</a>
+            </div>
+            <p class="footer-copyright">© 2025 StarryMeet</p>
+            <div class="footer-legal">
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Do Not Sell My Personal Information</a>
+            </div>
+            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
+                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
+            </div>
         </div>
     </footer>
 
