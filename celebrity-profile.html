@@ -16,7 +16,7 @@
         .container {
             max-width: 1200px;
             margin: 0 auto;
-            padding: 40px 24px;
+            padding: 40px 24px 80px;
         }
 
         /* Hero Section */
@@ -85,8 +85,9 @@
         }
 
         .stars {
-            color: #ffffff;
+            color: #FFD700;
             font-size: 1.25rem;
+            letter-spacing: 2px;
         }
 
         .bio {
@@ -153,15 +154,34 @@
             padding: 24px;
             transition: all 0.3s;
             cursor: pointer;
+            position: relative;
         }
 
         .meeting-option:hover {
-            border-color: rgba(255, 255, 255, 0.2);
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.02);
         }
 
         .meeting-option.selected {
-            border-color: #ffffff;
-            background: rgba(255, 255, 255, 0.03);
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.03);
+        }
+
+        .meeting-option.selected::before {
+            content: '✓';
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            width: 28px;
+            height: 28px;
+            background: rgba(255, 215, 0, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 0.875rem;
+            font-weight: 700;
+            color: #FFD700;
         }
 
         .option-header {
@@ -199,38 +219,221 @@
             font-size: 0.8125rem;
         }
 
-        /* Reviews */
+        /* Reviews Carousel */
+        .reviews-carousel {
+            position: relative;
+        }
+
         .reviews {
             display: flex;
-            flex-direction: column;
-            gap: 20px;
+            overflow: hidden;
+            position: relative;
         }
 
         .review-card {
+            min-width: 100%;
             background: #0a0a0a;
             border: 1px solid rgba(255, 255, 255, 0.08);
             border-radius: 16px;
-            padding: 24px;
+            padding: 32px;
+            transition: opacity 0.5s;
         }
 
         .review-header {
             display: flex;
             justify-content: space-between;
             align-items: center;
-            margin-bottom: 12px;
+            margin-bottom: 16px;
         }
 
         .reviewer-name {
             font-weight: 600;
+            font-size: 1.125rem;
         }
 
         .review-rating {
-            color: #ffffff;
+            color: #FFD700;
+            font-size: 1.125rem;
+            letter-spacing: 2px;
         }
 
         .review-text {
             opacity: 0.8;
-            line-height: 1.6;
+            line-height: 1.7;
+            font-size: 1.0625rem;
+        }
+
+        .carousel-controls {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            gap: 16px;
+            margin-top: 24px;
+        }
+
+        .carousel-btn {
+            width: 40px;
+            height: 40px;
+            background: rgba(255, 255, 255, 0.05);
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 50%;
+            color: #ffffff;
+            font-size: 1.25rem;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .carousel-btn:hover {
+            background: rgba(255, 215, 0, 0.1);
+            border-color: rgba(255, 215, 0, 0.3);
+        }
+
+        .carousel-dots {
+            display: flex;
+            gap: 8px;
+        }
+
+        .carousel-dot {
+            width: 8px;
+            height: 8px;
+            background: rgba(255, 255, 255, 0.2);
+            border-radius: 50%;
+            cursor: pointer;
+            transition: all 0.3s;
+        }
+
+        .carousel-dot.active {
+            background: #FFD700;
+            width: 24px;
+            border-radius: 4px;
+        }
+
+        /* Location & Availability */
+        .availability-section {
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            padding: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 20px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 10px;
+            font-size: 0.9375rem;
+        }
+
+        .form-group select {
+            width: 100%;
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px 16px;
+            color: #ffffff;
+            font-size: 1rem;
+            cursor: pointer;
+        }
+
+        .form-group select:focus {
+            outline: none;
+            border-color: rgba(255, 215, 0, 0.4);
+        }
+
+        .available-slots {
+            display: grid;
+            grid-template-columns: repeat(3, 1fr);
+            gap: 12px;
+            margin-top: 16px;
+        }
+
+        .slot-btn {
+            background: #000000;
+            border: 1px solid rgba(255, 255, 255, 0.15);
+            border-radius: 12px;
+            padding: 12px;
+            color: #ffffff;
+            font-size: 0.9375rem;
+            cursor: pointer;
+            transition: all 0.2s;
+            text-align: center;
+        }
+
+        .slot-btn:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            background: rgba(255, 215, 0, 0.02);
+        }
+
+        .slot-btn.selected {
+            border-color: rgba(255, 215, 0, 0.5);
+            background: rgba(255, 215, 0, 0.05);
+            font-weight: 600;
+        }
+
+        .slot-btn.unavailable {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* Recommendations */
+        .recommendations {
+            margin-top: 80px;
+        }
+
+        .celeb-grid {
+            display: grid;
+            grid-template-columns: repeat(4, 1fr);
+            gap: 24px;
+            margin-top: 24px;
+        }
+
+        .celeb-card {
+            background: #0a0a0a;
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 16px;
+            overflow: hidden;
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .celeb-card:hover {
+            border-color: rgba(255, 215, 0, 0.3);
+            transform: translateY(-4px);
+        }
+
+        .celeb-image {
+            width: 100%;
+            aspect-ratio: 1;
+            background: linear-gradient(135deg, rgba(255, 255, 255, 0.2) 0%, rgba(255, 255, 255, 0.05) 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+        }
+
+        .celeb-info {
+            padding: 16px;
+        }
+
+        .celeb-name {
+            font-weight: 600;
+            font-size: 1.0625rem;
+            margin-bottom: 4px;
+        }
+
+        .celeb-category {
+            font-size: 0.875rem;
+            opacity: 0.6;
+            margin-bottom: 8px;
+        }
+
+        .celeb-price {
+            font-weight: 700;
+            color: #FFD700;
         }
 
         /* Booking Sidebar */
@@ -280,7 +483,7 @@
         }
 
         .btn-book:hover {
-            background: #e6e6e6;
+            background: #FFD700;
             transform: translateY(-2px);
         }
 
@@ -353,6 +556,15 @@
             .quick-stats {
                 flex-wrap: wrap;
                 gap: 20px;
+            }
+
+            .available-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .celeb-grid {
+                grid-template-columns: repeat(2, 1fr);
+                gap: 16px;
             }
         }
     </style>
@@ -496,38 +708,107 @@
                     </div>
                 </section>
 
-                <!-- Reviews -->
+                <!-- Location & Availability -->
+                <section>
+                    <h2 class="section-title">Check Availability</h2>
+                    <div class="availability-section">
+                        <div class="form-group">
+                            <label>Select Location</label>
+                            <select id="locationSelect" onchange="updateAvailability()">
+                                <option value="la">Los Angeles, CA</option>
+                                <option value="ny">New York, NY</option>
+                                <option value="nash">Nashville, TN</option>
+                                <option value="london">London, UK</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Select Date</label>
+                            <select id="dateSelect" onchange="updateTimeSlots()">
+                                <option value="jan15">January 15, 2026</option>
+                                <option value="jan22">January 22, 2026</option>
+                                <option value="feb05">February 5, 2026</option>
+                                <option value="feb12">February 12, 2026</option>
+                            </select>
+                        </div>
+                        <div class="form-group">
+                            <label>Available Time Slots</label>
+                            <div class="available-slots">
+                                <button class="slot-btn" onclick="selectSlot(this)">10:00 AM</button>
+                                <button class="slot-btn unavailable">11:00 AM</button>
+                                <button class="slot-btn" onclick="selectSlot(this)">2:00 PM</button>
+                                <button class="slot-btn" onclick="selectSlot(this)">3:30 PM</button>
+                                <button class="slot-btn unavailable">5:00 PM</button>
+                                <button class="slot-btn" onclick="selectSlot(this)">6:00 PM</button>
+                            </div>
+                        </div>
+                    </div>
+                </section>
+
+                <!-- Reviews Carousel -->
                 <section>
                     <h2 class="section-title">Recent Reviews</h2>
-                    <div class="reviews">
-                        <div class="review-card">
-                            <div class="review-header">
-                                <span class="reviewer-name">Sarah M.</span>
-                                <span class="review-rating">★★★★★</span>
+                    <div class="reviews-carousel">
+                        <div class="reviews" id="reviewsContainer">
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Sarah M.</span>
+                                    <span class="review-rating">★★★★★</span>
+                                </div>
+                                <p class="review-text">
+                                    Absolutely incredible experience! Taylor was so warm and genuine. We talked about songwriting and she gave me amazing advice. Worth every penny!
+                                </p>
                             </div>
-                            <p class="review-text">
-                                Absolutely incredible experience! Taylor was so warm and genuine. We talked about songwriting and she gave me amazing advice. Worth every penny!
-                            </p>
-                        </div>
 
-                        <div class="review-card">
-                            <div class="review-header">
-                                <span class="reviewer-name">Michael K.</span>
-                                <span class="review-rating">★★★★★</span>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Michael K.</span>
+                                    <span class="review-rating">★★★★★</span>
+                                </div>
+                                <p class="review-text">
+                                    A dream come true. She took time to really connect and made me feel like I was the only person in the room. The photos are treasures I'll keep forever.
+                                </p>
                             </div>
-                            <p class="review-text">
-                                A dream come true. She took time to really connect and made me feel like I was the only person in the room. The photos are treasures I'll keep forever.
-                            </p>
-                        </div>
 
-                        <div class="review-card">
-                            <div class="review-header">
-                                <span class="reviewer-name">Emily R.</span>
-                                <span class="review-rating">★★★★★</span>
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Emily R.</span>
+                                    <span class="review-rating">★★★★★</span>
+                                </div>
+                                <p class="review-text">
+                                    Professional, kind, and incredibly generous with her time. She signed my guitar and we talked about music for 45 minutes. Unforgettable!
+                                </p>
                             </div>
-                            <p class="review-text">
-                                Professional, kind, and incredibly generous with her time. She signed my guitar and we talked about music for 45 minutes. Unforgettable!
-                            </p>
+
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="reviewer-name">David L.</span>
+                                    <span class="review-rating">★★★★★</span>
+                                </div>
+                                <p class="review-text">
+                                    Meeting Taylor exceeded all expectations. She was personable, funny, and genuinely interested in our conversation. The entire team was professional. Highly recommend!
+                                </p>
+                            </div>
+
+                            <div class="review-card">
+                                <div class="review-header">
+                                    <span class="reviewer-name">Jennifer T.</span>
+                                    <span class="review-rating">★★★★★</span>
+                                </div>
+                                <p class="review-text">
+                                    This was a once-in-a-lifetime experience! Taylor made me feel so special and the photos turned out beautifully. The meet and greet was perfectly organized. Can't wait to do it again!
+                                </p>
+                            </div>
+                        </div>
+                        <div class="carousel-controls">
+                            <button class="carousel-btn" onclick="prevReview()">‹</button>
+                            <div class="carousel-dots">
+                                <span class="carousel-dot active" onclick="goToReview(0)"></span>
+                                <span class="carousel-dot" onclick="goToReview(1)"></span>
+                                <span class="carousel-dot" onclick="goToReview(2)"></span>
+                                <span class="carousel-dot" onclick="goToReview(3)"></span>
+                                <span class="carousel-dot" onclick="goToReview(4)"></span>
+                            </div>
+                            <button class="carousel-btn" onclick="nextReview()">›</button>
                         </div>
                     </div>
                 </section>
@@ -536,11 +817,11 @@
             <!-- Booking Sidebar -->
             <aside class="booking-sidebar">
                 <div class="booking-card">
-                    <h3>Book Your Meeting</h3>
+                    <h3>Request Meeting</h3>
                     <div class="price-display" id="selectedPrice">$1,500</div>
                     <div class="price-note">per meeting</div>
 
-                    <button class="btn-book" onclick="alert('Redirecting to booking page...')">Book Now</button>
+                    <button class="btn-book" onclick="window.location.href='booking.html'">Request to Meet</button>
                     <button class="btn-secondary" onclick="alert('Added to favorites!')">Save to Favorites</button>
 
                     <div class="booking-info">
@@ -553,31 +834,172 @@
                             <span>7 days notice</span>
                         </div>
                         <div class="info-item">
-                            <span class="info-label">Location</span>
-                            <span>Los Angeles, CA</span>
-                        </div>
-                        <div class="info-item">
-                            <span class="info-label">Next available</span>
-                            <span>Jan 15, 2026</span>
+                            <span class="info-label">Approval rate</span>
+                            <span>95%</span>
                         </div>
                     </div>
                 </div>
             </aside>
         </div>
+
+        <!-- Recommendations -->
+        <section class="recommendations">
+            <h2 class="section-title">Celebrities you might also like</h2>
+            <div class="celeb-grid">
+                <div class="celeb-card" onclick="window.location.href='celebrity-profile.html'">
+                    <div class="celeb-image">BM</div>
+                    <div class="celeb-info">
+                        <div class="celeb-name">Bruno Mars</div>
+                        <div class="celeb-category">Musician</div>
+                        <div class="celeb-price">From $800</div>
+                    </div>
+                </div>
+                <div class="celeb-card" onclick="window.location.href='celebrity-profile.html'">
+                    <div class="celeb-image">AB</div>
+                    <div class="celeb-info">
+                        <div class="celeb-name">Ariana Grande</div>
+                        <div class="celeb-category">Musician</div>
+                        <div class="celeb-price">From $1,200</div>
+                    </div>
+                </div>
+                <div class="celeb-card" onclick="window.location.href='celebrity-profile.html'">
+                    <div class="celeb-image">ES</div>
+                    <div class="celeb-info">
+                        <div class="celeb-name">Ed Sheeran</div>
+                        <div class="celeb-category">Musician</div>
+                        <div class="celeb-price">From $1,000</div>
+                    </div>
+                </div>
+                <div class="celeb-card" onclick="window.location.href='celebrity-profile.html'">
+                    <div class="celeb-image">SG</div>
+                    <div class="celeb-info">
+                        <div class="celeb-name">Selena Gomez</div>
+                        <div class="celeb-category">Musician</div>
+                        <div class="celeb-price">From $900</div>
+                    </div>
+                </div>
+            </div>
+        </section>
     </div>
 
+    <footer>
+        <div class="footer-main">
+            <div class="footer-newsletter">
+                <h3>Join our mailing list</h3>
+                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">→</button>
+                </form>
+                <p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p>
+                <div class="footer-cta-buttons">
+                    <a href="for-celebrities.html" class="btn btn-primary">Join as talent</a>
+                    <a href="contact.html" class="btn btn-outline">Become a partner</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="contact.html">Team</a></li>
+                    <li><a href="contact.html">Jobs</a></li>
+                    <li><a href="contact.html">Blog</a></li>
+                    <li><a href="contact.html">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">Help</a></li>
+                    <li><a href="contact.html">Accessibility</a></li>
+                    <li><a href="terms.html">Refunds & Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="browse.html">Gift Cards</a></li>
+                    <li><a href="for-celebrities.html">For business</a></li>
+                    <li><a href="browse.html">For kids</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-social">
+                <a href="#" aria-label="Download on App Store">App Store</a>
+                <a href="#" aria-label="Get it on Google Play">Google Play</a>
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TT</a>
+                <a href="#" aria-label="Twitter/X">X</a>
+                <a href="#" aria-label="Threads">TH</a>
+                <a href="#" aria-label="Email">EM</a>
+            </div>
+            <p class="footer-copyright">© 2025 StarryMeet</p>
+            <div class="footer-legal">
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Do Not Sell My Personal Information</a>
+            </div>
+            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
+                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
+            </div>
+        </div>
+    </footer>
+
     <script>
+        let currentReview = 0;
+        const totalReviews = 5;
+
         function selectOption(element, price) {
-            // Remove selected class from all options
             document.querySelectorAll('.meeting-option').forEach(opt => {
                 opt.classList.remove('selected');
             });
-
-            // Add selected class to clicked option
             element.classList.add('selected');
-
-            // Update price display
             document.getElementById('selectedPrice').textContent = '$' + price.toLocaleString();
+        }
+
+        function selectSlot(element) {
+            if (element.classList.contains('unavailable')) return;
+            document.querySelectorAll('.slot-btn').forEach(btn => {
+                btn.classList.remove('selected');
+            });
+            element.classList.add('selected');
+        }
+
+        function updateAvailability() {
+            // In a real app, this would fetch availability from the server
+            console.log('Location changed, updating availability...');
+        }
+
+        function updateTimeSlots() {
+            // In a real app, this would fetch time slots for the selected date
+            console.log('Date changed, updating time slots...');
+        }
+
+        function goToReview(index) {
+            currentReview = index;
+            updateCarousel();
+        }
+
+        function nextReview() {
+            currentReview = (currentReview + 1) % totalReviews;
+            updateCarousel();
+        }
+
+        function prevReview() {
+            currentReview = (currentReview - 1 + totalReviews) % totalReviews;
+            updateCarousel();
+        }
+
+        function updateCarousel() {
+            const container = document.getElementById('reviewsContainer');
+            container.style.transform = `translateX(-${currentReview * 100}%)`;
+
+            document.querySelectorAll('.carousel-dot').forEach((dot, index) => {
+                dot.classList.toggle('active', index === currentReview);
+            });
         }
     </script>
 </body>
