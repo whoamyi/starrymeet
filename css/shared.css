@@ -267,7 +267,7 @@ nav,
 header,
 .header,
 .navbar {
-    position: fixed;
+    /* position: fixed; - Commented out to fix dashboard layout issues */
     top: 0;
     left: 0;
     right: 0;
