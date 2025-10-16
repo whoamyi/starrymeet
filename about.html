@@ -3,137 +3,31 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Learn about StarryMeet's mission to connect fans with celebrities. Our story, values, and team dedicated to creating unforgettable meeting experiences.">
-
-    <!-- Open Graph / Social Media Meta Tags -->
-    <meta property="og:type" content="website">
-    <meta property="og:url" content="https://starrymeet.com/about.html">
-    <meta property="og:title" content="About Us - StarryMeet">
-    <meta property="og:description" content="Learn about StarryMeet's mission to connect fans with celebrities. Our story, values, and team dedicated to creating unforgettable meeting experiences.">
-    <meta property="og:site_name" content="StarryMeet">
-
-    <!-- Twitter Card Meta Tags -->
-    <meta name="twitter:card" content="summary_large_image">
-    <meta name="twitter:title" content="About Us - StarryMeet">
-    <meta name="twitter:description" content="Learn about StarryMeet's mission to connect fans with celebrities. Our story, values, and team dedicated to creating unforgettable meeting experiences.">
-
+    <meta name="description" content="StarryMeet connects fans with celebrities for authentic face-to-face meetings. Your moment. Your memory.">
+    <meta property="og:title" content="About StarryMeet">
+    <meta property="og:description" content="StarryMeet connects fans with celebrities for authentic face-to-face meetings. Your moment. Your memory.">
     <title>About Us - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
     <style>
-        /* Page-specific styles - minimal overrides only */
-        .hero {
-            text-align: center;
-            padding: var(--space-20) var(--space-8);
-            margin-top: var(--nav-height);
-        }
-
-        .hero h1 {
-            font-size: clamp(1.125rem, 4vw, 1.5rem);  /* v2.1.0: 24px max, 18px mobile */
-            font-weight: 600;  /* v2.1.0: Consistent weight */
-            margin-bottom: var(--space-4);
-        }
-
-        .hero p {
-            font-size: var(--text-xl);
-            max-width: 700px;
-            margin: 0 auto;
-        }
-
-        .mission {
-            text-align: center;
-            font-size: var(--text-base);  /* v2.1.0: Standard base size */
-            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
-            margin-bottom: var(--space-16);
-            padding: var(--space-8);
-        }
-
-        .mission-title {
-            font-size: var(--text-3xl);  /* 24px */
-            font-weight: 600;  /* v2.1.0: Reduced from 700 */
-            margin-bottom: var(--space-4);
-            color: var(--primary);
-        }
-
-        .story {
-            font-size: var(--text-base);  /* v2.1.0: Standard base size */
-            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
-        }
-
-        .story p {
-            margin-bottom: var(--space-6);
-        }
-
-        .values-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-            gap: var(--space-6);
-        }
-
-        .value-icon {
-            font-size: 3rem;
-            margin-bottom: var(--space-4);
-        }
-
-        .value-card h3 {
-            font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
-            font-weight: 600;  /* v2.1.0: Consistent weight */
-            margin-bottom: var(--space-3);
-            color: var(--primary);
-        }
-
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-            gap: var(--space-6);
-            background: var(--primary-gradient);
-            padding: var(--space-16) var(--space-8);
-            border-radius: var(--radius-2xl);
-            margin: var(--space-16) 0;
-        }
-
-        .stat {
-            text-align: center;
-            color: white;
-        }
-
-        .stat-number {
-            font-size: 3rem;
-            font-weight: 700;  /* v2.1.0: Reduced from 900 */
-            margin-bottom: var(--space-2);
-        }
-
-        .stat-label {
-            font-size: var(--text-lg);
-            opacity: 0.95;
-        }
-
-        .cta-section {
-            background: var(--primary-gradient);
-            color: white;
-            text-align: center;
-            padding: var(--space-20) var(--space-8);
-            margin-top: var(--space-16);
-            border-radius: var(--radius-2xl);
-        }
-
-        .cta-section h2 {
-            font-size: var(--text-3xl);  /* v2.1.0: 24px for consistency */
-            font-weight: 600;  /* v2.1.0: Reduced from 800 */
-            margin-bottom: var(--space-4);
-        }
-
-        .cta-section p {
-            font-size: var(--text-xl);
-            margin-bottom: var(--space-8);
-            opacity: 0.95;
-        }
-
-        @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.125rem;  /* v2.1.0: 18px mobile */
-            }
-        }
+        body { background: var(--bg-primary); }
+        .hero { text-align: center; padding: 140px 24px 100px; margin-top: var(--nav-height); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4.5rem); font-weight: 700; margin-bottom: 24px; line-height: 1.1; }
+        .hero p { font-size: 1.5rem; opacity: 0.8; max-width: 700px; margin: 0 auto; }
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px 100px; }
+        .section { margin: 100px 0; }
+        .section h2 { font-size: 2.5rem; font-weight: 700; margin-bottom: 24px; text-align: center; }
+        .section p { font-size: 1.25rem; line-height: 1.6; opacity: 0.8; text-align: center; max-width: 800px; margin: 0 auto 60px; }
+        .stats { display: grid; grid-template-columns: repeat(auto-fit, minmax(220px, 1fr)); gap: 40px; margin: 80px 0; }
+        .stat { text-align: center; padding: 40px; background: rgba(234, 18, 121, 0.03); border: 1px solid rgba(234, 18, 121, 0.1); border-radius: 20px; }
+        .stat-number { font-size: 3.5rem; font-weight: 700; color: var(--primary); margin-bottom: 12px; }
+        .stat-label { font-size: 1.125rem; opacity: 0.7; }
+        .values { display: grid; grid-template-columns: repeat(auto-fit, minmax(280px, 1fr)); gap: 32px; }
+        .value-card { padding: 32px; background: rgba(234, 18, 121, 0.03); border: 1px solid rgba(234, 18, 121, 0.1); border-radius: 20px; }
+        .value-icon { font-size: 60px; margin-bottom: 20px; }
+        .value-card h3 { font-size: 1.5rem; font-weight: 600; margin-bottom: 12px; color: var(--primary); }
+        .value-card p { opacity: 0.8; line-height: 1.6; }
+        @media (max-width: 768px) { .hero { padding: 100px 24px 80px; } .section h2 { font-size: 2rem; } }
     </style>
 </head>
 <body>
@@ -160,11 +54,7 @@
             </ul>
         </div>
     </nav>
-
-    <!-- Mobile Menu Overlay -->
     <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
-
-    <!-- Mobile Menu -->
     <div class="mobile-menu" id="mobileMenu">
         <div class="mobile-menu-header">
             <a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
@@ -187,31 +77,46 @@
             <li class="mobile-menu-login-item"><a href="dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li>
         </ul>
     </div>
-        </section>
 
-        <div class="stats-grid">
-            <div class="stat">
-                <div class="stat-number">100+</div>
-                <div class="stat-label">Verified Celebrities</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">50+</div>
-                <div class="stat-label">Cities Worldwide</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">10,000+</div>
-                <div class="stat-label">Meetings Booked</div>
-            </div>
-            <div class="stat">
-                <div class="stat-number">4.9★</div>
-                <div class="stat-label">Average Rating</div>
-            </div>
+    <!-- Hero -->
+    <section class="hero">
+        <h1>Connecting fans<br>with their icons</h1>
+        <p>We believe everyone deserves a moment with the people who inspire them</p>
+    </section>
+
+    <!-- Content -->
+    <div class="container">
+        <div class="section">
+            <h2>Our mission</h2>
+            <p>To create authentic, meaningful connections between celebrities and their fans through face-to-face meetings. We're building a platform where inspiration meets reality, and dreams become memories.</p>
         </div>
 
-        <div class="cta-section">
-            <h2>Join Thousands of Happy Fans</h2>
-            <p>Start your journey to meeting your icon today</p>
-            <a href="browse.html" class="btn-cta">Browse Celebrities</a>
+        <div class="stats">
+            <div class="stat"><div class="stat-number">50K+</div><div class="stat-label">Meetings created</div></div>
+            <div class="stat"><div class="stat-number">10K+</div><div class="stat-label">Verified celebrities</div></div>
+            <div class="stat"><div class="stat-number">98%</div><div class="stat-label">Satisfaction rate</div></div>
+            <div class="stat"><div class="stat-number">2020</div><div class="stat-label">Founded</div></div>
+        </div>
+
+        <div class="section">
+            <h2>What we value</h2>
+            <div class="values">
+                <div class="value-card">
+                    <div class="value-icon">🤝</div>
+                    <h3>Authenticity</h3>
+                    <p>Every celebrity is verified. Every meeting is real. No fakes, no scams.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">⭐</div>
+                    <h3>Quality</h3>
+                    <p>Premium venues. Professional staff. Experiences you'll treasure forever.</p>
+                </div>
+                <div class="value-card">
+                    <div class="value-icon">🛡️</div>
+                    <h3>Trust</h3>
+                    <p>Secure payments. Clear policies. Your satisfaction guaranteed.</p>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -232,7 +137,6 @@
                 </div>
             </div>
         </div>
-
         <div class="footer-columns">
             <div class="footer-column">
                 <h4>Company</h4>
@@ -261,7 +165,6 @@
                 </ul>
             </div>
         </div>
-
         <div class="footer-bottom">
             <div class="footer-social">
                 <a href="#" aria-label="Download on App Store">App Store</a>
