@@ -311,16 +311,27 @@ footer {
    TOP 10 SECTION
    ======================================== */
 .top-ten-section {
-    padding: 48px 24px;
+    padding: 48px 16px;
     background: var(--bg-primary);
 }
 
 .section-header {
-    max-width: 1200px;
-    margin: 0 auto 24px;
+    max-width: 100%;
+    margin: 0 0 24px;
     display: flex;
     justify-content: space-between;
     align-items: center;
+}
+
+@media (min-width: 1024px) {
+    .top-ten-section {
+        padding: 48px 24px;
+    }
+
+    .section-header {
+        max-width: 1200px;
+        margin: 0 auto 24px;
+    }
 }
 
 .section-header h2 {
@@ -347,8 +358,8 @@ footer {
 }
 
 .top-ten-carousel {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: flex;
     gap: 16px;
     overflow-x: auto;
@@ -356,6 +367,13 @@ footer {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 8px;
+}
+
+@media (min-width: 1024px) {
+    .top-ten-carousel {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 .top-ten-carousel::-webkit-scrollbar {
@@ -465,8 +483,14 @@ footer {
    QUICK MEETS SECTION
    ======================================== */
 .quick-meets-section {
-    padding: 48px 24px;
+    padding: 48px 16px;
     background: var(--bg-primary);
+}
+
+@media (min-width: 1024px) {
+    .quick-meets-section {
+        padding: 48px 24px;
+    }
 }
 
 .delivery-badge {
@@ -482,8 +506,8 @@ footer {
 }
 
 .quick-meets-carousel {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: flex;
     gap: 16px;
     overflow-x: auto;
@@ -491,6 +515,13 @@ footer {
     -webkit-overflow-scrolling: touch;
     scrollbar-width: none;
     padding-bottom: 8px;
+}
+
+@media (min-width: 1024px) {
+    .quick-meets-carousel {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 .quick-meets-carousel::-webkit-scrollbar {
@@ -565,8 +596,14 @@ footer {
    HOW IT WORKS SECTION
    ======================================== */
 .how-it-works-section {
-    padding: 48px 24px;
+    padding: 48px 16px;
     background: var(--bg-primary);
+}
+
+@media (min-width: 1024px) {
+    .how-it-works-section {
+        padding: 48px 24px;
+    }
 }
 
 .how-it-works-section h2 {
@@ -597,11 +634,18 @@ footer {
 }
 
 .steps-grid {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 32px;
+}
+
+@media (min-width: 1024px) {
+    .steps-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 .step-card {
@@ -640,13 +684,19 @@ footer {
    REVIEWS SECTION
    ======================================== */
 .reviews-section {
-    padding: 48px 24px;
+    padding: 48px 16px;
     background: var(--bg-primary);
 }
 
+@media (min-width: 1024px) {
+    .reviews-section {
+        padding: 48px 24px;
+    }
+}
+
 .reviews-carousel {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: flex;
     gap: 16px;
     overflow-x: auto;
@@ -658,6 +708,13 @@ footer {
 
 .reviews-carousel::-webkit-scrollbar {
     display: none;
+}
+
+@media (min-width: 1024px) {
+    .reviews-carousel {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 .review-card {
@@ -710,8 +767,14 @@ footer {
    BOTTOM CATEGORIES SECTION
    ======================================== */
 .bottom-categories-section {
-    padding: 48px 24px;
+    padding: 48px 16px;
     background: var(--bg-primary);
+}
+
+@media (min-width: 1024px) {
+    .bottom-categories-section {
+        padding: 48px 24px;
+    }
 }
 
 .bottom-categories-section h2 {
@@ -741,11 +804,18 @@ footer {
 }
 
 .features-grid {
-    max-width: 1200px;
-    margin: 0 auto;
+    max-width: 100%;
+    margin: 0;
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
     gap: 32px;
+}
+
+@media (min-width: 1024px) {
+    .features-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 .feature-card {
