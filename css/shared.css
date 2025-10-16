@@ -558,9 +558,9 @@ header.scrolled,
     background: none;
 }
 
-.mobile-menu-links > li.mobile-menu-locale {
-    margin-top: 48px;
-    margin-bottom: 16px;
+.mobile-menu-links > li.mobile-menu-login-item {
+    margin-top: auto;
+    margin-bottom: 0;
 }
 
 /* Mobile Submenu */
