@@ -497,6 +497,12 @@ header.scrolled,
     background: #000000;
 }
 
+.mobile-menu-header .logo {
+    color: #ffffff;
+    text-decoration: none;
+    cursor: pointer;
+}
+
 .mobile-menu-close {
     font-size: 32px;
     cursor: pointer;
