@@ -44,11 +44,6 @@ footer {
     contain: layout;
 }
 
-/* Preserve occasion card inline gradient backgrounds */
-.occasion-card {
-    background: transparent !important;  /* Transparent to let inline styles work */
-}
-
 /* ========================================
    HERO SECTION
    ======================================== */
@@ -113,14 +108,14 @@ footer {
    CATEGORIES SECTION - CIRCULAR BUBBLES
    ======================================== */
 .categories-section {
-    padding: 48px 0;
+    padding: 48px 16px;
     background: var(--bg-primary);
 }
 
 .categories-container {
     max-width: 100%;
     margin: 0;
-    padding: 0 16px;
+    padding: 0;
     display: flex;
     gap: 24px;
     overflow-x: auto;
@@ -129,6 +124,18 @@ footer {
     scrollbar-width: none;
     padding-bottom: 8px;
     justify-content: flex-start;
+}
+
+@media (min-width: 1024px) {
+    .categories-section {
+        padding: 48px 24px;
+    }
+
+    .categories-container {
+        max-width: 1200px;
+        margin: 0 auto;
+        justify-content: center;
+    }
 }
 
 .categories-container::-webkit-scrollbar {
@@ -214,6 +221,24 @@ footer {
     display: grid;
     grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
     gap: 16px;
+}
+
+@media (min-width: 1024px) {
+    .occasions-section {
+        padding: 48px 24px;
+    }
+
+    .occasions-section h2 {
+        max-width: 1200px;
+        margin-left: auto;
+        margin-right: auto;
+        margin-bottom: 24px;
+    }
+
+    .occasions-grid {
+        max-width: 1200px;
+        margin: 0 auto;
+    }
 }
 
 .occasion-card {
@@ -845,7 +870,7 @@ footer {
 footer {
     background: var(--bg-primary);
     border-top: 1px solid rgba(255, 255, 255, 0.1);
-    padding: 64px 24px 24px;
+    padding: 48px 24px 24px;
 }
 
 .footer-main {
@@ -969,15 +994,23 @@ footer {
 .footer-columns {
     max-width: 1200px;
     margin: 0 auto 48px;
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-    gap: 32px;
+    display: flex;
+    flex-direction: column;
+    gap: 48px;
+}
+
+@media (min-width: 768px) {
+    .footer-columns {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+        gap: 32px;
+    }
 }
 
 .footer-column h4 {
     font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    font-weight: 600;
+    font-size: 18px;
+    font-weight: 700;
     color: #ffffff;
     margin: 0 0 16px 0;
 }
@@ -989,16 +1022,17 @@ footer {
 }
 
 .footer-column li {
-    margin-bottom: 12px;
+    margin-bottom: 16px;
 }
 
 .footer-column a {
     font-family: 'Inter', sans-serif;
-    font-size: 14px;
+    font-size: 16px;
     font-weight: 400;
-    color: #9CA3AF;
+    color: #999999;
     text-decoration: none;
     transition: color 0.2s ease;
+    display: block;
 }
 
 .footer-column a:hover {
@@ -1015,7 +1049,7 @@ footer {
 .footer-social {
     display: flex;
     gap: 16px;
-    margin-bottom: 16px;
+    margin-bottom: 32px;
     flex-wrap: wrap;
 }
 
@@ -1036,7 +1070,7 @@ footer {
     font-family: 'Inter', sans-serif;
     font-size: 14px;
     color: #6B7280;
-    margin: 16px 0;
+    margin: 0 0 24px 0;
 }
 
 .footer-legal {
@@ -1044,6 +1078,7 @@ footer {
     gap: 16px;
     flex-wrap: wrap;
     max-width: 100%;
+    margin-bottom: 32px;
 }
 
 .footer-legal a {
