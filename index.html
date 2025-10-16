@@ -65,7 +65,6 @@
             <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
         </div>
         <ul class="mobile-menu-links">
-            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
             <li class="mobile-menu-categories">
                 <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
                 <ul class="mobile-submenu" id="mobileSubmenu">
@@ -76,9 +75,11 @@
                     <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
                 </ul>
             </li>
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
             <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
             <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For celebrities</a></li>
             <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
             <li><a href="dashboard.html" onclick="closeMobileMenu()">Log in</a></li>
         </ul>
     </div>
@@ -411,6 +412,9 @@
                 <a href="terms.html">Terms of Service</a>
                 <a href="privacy.html">Privacy Policy</a>
                 <a href="contact.html">Do Not Sell My Personal Information</a>
+            </div>
+            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
+                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
             </div>
         </div>
     </footer>

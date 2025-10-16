@@ -345,6 +345,131 @@ function toggleMobileCategoriesSubmenu() {
     }
 }
 
+/**
+ * Locale detection and management
+ */
+const LOCALE_DATA = {
+    languages: [
+        { code: 'EN', name: 'English' },
+        { code: 'ES', name: 'Español' },
+        { code: 'FR', name: 'Français' },
+        { code: 'DE', name: 'Deutsch' },
+        { code: 'IT', name: 'Italiano' },
+        { code: 'PT', name: 'Português' }
+    ],
+    countries: {
+        'United States': '$ USD',
+        'Spain': '€ EUR',
+        'France': '€ EUR',
+        'Germany': '€ EUR',
+        'Italy': '€ EUR',
+        'United Kingdom': '£ GBP',
+        'Canada': '$ CAD',
+        'Australia': '$ AUD',
+        'Brazil': 'R$ BRL',
+        'Mexico': '$ MXN'
+    }
+};
+
+function detectLocale() {
+    const stored = localStorage.getItem('starryMeetLocale');
+    if (stored) {
+        return JSON.parse(stored);
+    }
+
+    // Auto-detect from browser
+    const browserLang = navigator.language.split('-')[0].toUpperCase();
+    const language = LOCALE_DATA.languages.find(l => l.code === browserLang)?.code || 'EN';
+
+    return {
+        language: language,
+        country: 'United States',
+        currency: '$ USD'
+    };
+}
+
+function updateLocaleDisplay() {
+    const locale = detectLocale();
+    const text = `${locale.language} | ${locale.country} | ${locale.currency}`;
+
+    const mobileText = document.getElementById('mobileLocaleText');
+    const footerText = document.getElementById('footerLocaleText');
+
+    if (mobileText) mobileText.textContent = text;
+    if (footerText) footerText.textContent = text;
+}
+
+function openLocaleModal() {
+    const locale = detectLocale();
+    const modal = document.createElement('div');
+    modal.id = 'localeModal';
+    modal.className = 'locale-modal';
+    modal.innerHTML = `
+        <div class="locale-modal-overlay" onclick="closeLocaleModal()"></div>
+        <div class="locale-modal-content">
+            <button class="locale-modal-close" onclick="closeLocaleModal()">×</button>
+            <h2>Locale Preferences</h2>
+            <p class="locale-modal-subtitle">Select your preferred language, country, and currency</p>
+
+            <div class="locale-form">
+                <div class="locale-field">
+                    <label>Language</label>
+                    <select id="localeLanguage">
+                        ${LOCALE_DATA.languages.map(l =>
+                            `<option value="${l.code}" ${l.code === locale.language ? 'selected' : ''}>${l.name}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+
+                <div class="locale-field">
+                    <label>Country</label>
+                    <p class="locale-note">To select a country, please login or create an account</p>
+                    <select id="localeCountry" disabled>
+                        ${Object.keys(LOCALE_DATA.countries).map(country =>
+                            `<option value="${country}" ${country === locale.country ? 'selected' : ''}>${country}</option>`
+                        ).join('')}
+                    </select>
+                </div>
+
+                <div class="locale-field">
+                    <label>Currency</label>
+                    <input type="text" id="localeCurrency" value="${locale.currency}" disabled>
+                </div>
+
+                <button class="locale-save-btn" onclick="saveLocale()">Save Preferences</button>
+            </div>
+        </div>
+    `;
+
+    document.body.appendChild(modal);
+    document.body.style.overflow = 'hidden';
+}
+
+function closeLocaleModal() {
+    const modal = document.getElementById('localeModal');
+    if (modal) {
+        modal.remove();
+        document.body.style.overflow = '';
+    }
+}
+
+function saveLocale() {
+    const language = document.getElementById('localeLanguage').value;
+    const country = document.getElementById('localeCountry').value;
+    const currency = LOCALE_DATA.countries[country] || '$ USD';
+
+    const locale = { language, country, currency };
+    localStorage.setItem('starryMeetLocale', JSON.stringify(locale));
+
+    updateLocaleDisplay();
+    closeLocaleModal();
+}
+
+// Initialize locale on page load
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', updateLocaleDisplay);
+}
+
 // Close dropdown when clicking outside
 if (typeof document !== 'undefined') {
     document.addEventListener('click', function(event) {
