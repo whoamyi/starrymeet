@@ -3,203 +3,180 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <meta name="description" content="Contact StarryMeet support. Get help with bookings, celebrity applications, partnerships, or general questions. 24/7 support available.">
+    <meta name="description" content="Get in touch with StarryMeet. Our support team is here 24/7 to help with bookings, questions, and partnership inquiries.">
 
     <!-- Open Graph / Social Media Meta Tags -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://starrymeet.com/contact.html">
     <meta property="og:title" content="Contact Us - StarryMeet">
-    <meta property="og:description" content="Contact StarryMeet support. Get help with bookings, celebrity applications, partnerships, or general questions. 24/7 support available.">
+    <meta property="og:description" content="Get in touch with StarryMeet. Our support team is here 24/7 to help with bookings, questions, and partnership inquiries.">
     <meta property="og:site_name" content="StarryMeet">
 
     <!-- Twitter Card Meta Tags -->
     <meta name="twitter:card" content="summary_large_image">
     <meta name="twitter:title" content="Contact Us - StarryMeet">
-    <meta name="twitter:description" content="Contact StarryMeet support. Get help with bookings, celebrity applications, partnerships, or general questions. 24/7 support available.">
+    <meta name="twitter:description" content="Get in touch with StarryMeet. Our support team is here 24/7 to help with bookings, questions, and partnership inquiries.">
 
     <title>Contact Us - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <script src="js/shared.js"></script>
     <style>
-        /* Page-specific styles - minimal layout only */
+        body {
+            background: var(--bg-primary);
+        }
+
         .hero {
-            background: var(--primary-gradient);
-            color: white;
             text-align: center;
-            padding: var(--space-20) var(--space-8);
+            padding: 120px 24px 80px;
             margin-top: var(--nav-height);
         }
 
         .hero h1 {
-            font-size: clamp(1.125rem, 4vw, 1.5rem);
-            font-weight: 600;
-            margin-bottom: var(--space-4);
+            font-size: clamp(2.5rem, 5vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 16px;
         }
 
         .hero p {
-            font-size: var(--text-xl);
-            opacity: 0.95;
-            max-width: 700px;
+            font-size: 1.25rem;
+            opacity: 0.7;
+            max-width: 600px;
             margin: 0 auto;
         }
 
         .container {
-            max-width: 1200px;
+            max-width: 1100px;
             margin: 0 auto;
-            padding: var(--space-16) var(--space-8);
+            padding: 0 24px 100px;
         }
 
-        .contact-layout {
+        .contact-grid {
             display: grid;
-            grid-template-columns: 2fr 1fr;
-            gap: var(--space-16);
+            grid-template-columns: 1fr 1fr;
+            gap: 60px;
+            margin-bottom: 80px;
         }
 
-        .form-section {
-            background: #000000;
-            padding: var(--space-12);
-            border-radius: var(--radius-2xl);
-            border: 1px solid var(--border-light);
-        }
-
-        .form-title {
-            font-size: var(--text-3xl);
-            font-weight: 600;
-            margin-bottom: var(--space-8);
-        }
-
-        .form-group {
-            margin-bottom: var(--space-6);
-        }
-
-        .form-label {
-            display: block;
-            font-weight: 600;
-            margin-bottom: var(--space-2);
-        }
-
-        .form-input, .form-select, .form-textarea {
-            width: 100%;
-            padding: var(--space-4);
-            border: 2px solid var(--border-medium);
-            border-radius: var(--radius-lg);
-            font-size: var(--text-base);
-            font-family: inherit;
-            background: #000000;
-            color: var(--white);
-        }
-
-        .form-input:focus, .form-select:focus, .form-textarea:focus {
-            outline: none;
-            border-color: var(--primary);
-            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
-        }
-
-        .form-textarea {
-            resize: vertical;
-            min-height: 150px;
-        }
-
-        .btn-submit {
-            width: 100%;
-            padding: var(--space-5);
-            background: var(--primary);
-            color: white;
-            border: none;
-            border-radius: var(--radius-lg);
-            font-weight: 600;
-            font-size: var(--text-lg);
-            cursor: pointer;
-            transition: all 0.3s;
-        }
-
-        .btn-submit:hover {
-            background: var(--primary-dark);
-            transform: translateY(-2px);
-        }
-
-        .info-card {
-            background: #000000;
-            padding: var(--space-8);
-            border-radius: var(--radius-xl);
-            border: 1px solid var(--border-light);
-            margin-bottom: var(--space-8);
-        }
-
-        .info-card h3 {
-            font-size: var(--text-xl);
-            font-weight: 600;
-            margin-bottom: var(--space-6);
-            color: var(--primary);
+        .contact-info h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 32px;
         }
 
         .info-item {
-            display: flex;
-            align-items: start;
-            gap: var(--space-4);
-            margin-bottom: var(--space-6);
-        }
-
-        .info-icon {
-            font-size: 1.5rem;
-        }
-
-        .info-text strong {
-            display: block;
-            margin-bottom: var(--space-1);
-        }
-
-        .info-text a {
-            color: var(--primary);
-            text-decoration: none;
-        }
-
-        .social-links {
-            display: flex;
-            gap: var(--space-4);
-        }
-
-        .social-btn {
-            width: 50px;
-            height: 50px;
-            border: 1px solid var(--border-medium);
-            border-radius: 50%;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            text-decoration: none;
-            font-size: 1.5rem;
+            background: rgba(234, 18, 121, 0.03);
+            border: 1px solid rgba(234, 18, 121, 0.1);
+            border-radius: 16px;
+            padding: 24px;
+            margin-bottom: 20px;
             transition: all 0.3s;
         }
 
-        .social-btn:hover {
+        .info-item:hover {
+            border-color: rgba(234, 18, 121, 0.3);
+            transform: translateY(-2px);
+        }
+
+        .info-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+            color: var(--primary);
+        }
+
+        .info-item p {
+            opacity: 0.8;
+            line-height: 1.6;
+        }
+
+        .info-item a {
+            color: var(--primary);
+            text-decoration: none;
+            font-weight: 600;
+        }
+
+        .contact-form {
+            background: rgba(234, 18, 121, 0.03);
+            border: 1px solid rgba(234, 18, 121, 0.1);
+            border-radius: 24px;
+            padding: 40px;
+        }
+
+        .contact-form h2 {
+            font-size: 1.75rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+        }
+
+        .form-group {
+            margin-bottom: 24px;
+        }
+
+        .form-group label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .form-group input,
+        .form-group textarea,
+        .form-group select {
+            width: 100%;
+            padding: 14px 18px;
+            border: 1px solid rgba(234, 18, 121, 0.2);
+            border-radius: 12px;
+            background: rgba(234, 18, 121, 0.03);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s;
+        }
+
+        .form-group input:focus,
+        .form-group textarea:focus,
+        .form-group select:focus {
+            outline: none;
+            border-color: var(--primary);
+            background: rgba(234, 18, 121, 0.05);
+        }
+
+        .form-group textarea {
+            min-height: 150px;
+            resize: vertical;
+        }
+
+        .form-group select {
+            cursor: pointer;
+        }
+
+        .btn-submit {
             background: var(--primary);
             color: white;
-            transform: translateY(-3px);
-        }
-
-        .success-message {
-            display: none;
-            background: var(--success);
-            color: white;
-            padding: var(--space-6);
-            border-radius: var(--radius-lg);
-            text-align: center;
+            padding: 16px 48px;
+            border: none;
+            border-radius: 50px;
+            font-size: 1.125rem;
             font-weight: 600;
-            margin-bottom: var(--space-8);
+            cursor: pointer;
+            width: 100%;
+            transition: transform 0.2s;
         }
 
-        .success-message.show {
-            display: block;
+        .btn-submit:hover {
+            transform: translateY(-2px);
         }
 
         @media (max-width: 768px) {
-            .hero h1 {
-                font-size: 1.125rem;
+            .hero {
+                padding: 80px 24px 60px;
             }
 
-            .contact-layout {
+            .contact-grid {
                 grid-template-columns: 1fr;
+                gap: 40px;
+            }
+
+            .contact-form {
+                padding: 28px;
             }
         }
     </style>
@@ -255,41 +232,76 @@
             <li class="mobile-menu-login-item"><a href="dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li>
         </ul>
     </div>
-                    <div class="info-item">
-                        <div class="info-icon">📞</div>
-                        <div class="info-text">
-                            <strong>Phone</strong>
-                            <a href="tel:+15551234567">+1 (555) 123-4567</a>
-                        </div>
-                    </div>
-                    <div class="info-item">
-                        <div class="info-icon">🕐</div>
-                        <div class="info-text">
-                            <strong>Support Hours</strong>
-                            24/7 Support Available
-                        </div>
-                    </div>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <h1>Get in touch</h1>
+        <p>We're here to help. Reach out anytime, day or night.</p>
+    </section>
+
+    <!-- Main Content -->
+    <div class="container">
+        <div class="contact-grid">
+            <!-- Contact Info -->
+            <div class="contact-info">
+                <h2>Contact information</h2>
+
+                <div class="info-item">
+                    <h3>📧 Email support</h3>
+                    <p>General inquiries:<br><a href="mailto:hello@starrymeet.com">hello@starrymeet.com</a></p>
+                    <p style="margin-top: 12px;">Celebrity applications:<br><a href="mailto:apply@starrymeet.com">apply@starrymeet.com</a></p>
                 </div>
 
-                <div class="info-card">
-                    <h3>Follow Us</h3>
-                    <div class="social-links">
-                        <a href="#" class="social-btn">📷</a>
-                        <a href="#" class="social-btn">🐦</a>
-                        <a href="#" class="social-btn">📘</a>
-                        <a href="#" class="social-btn">💼</a>
-                    </div>
+                <div class="info-item">
+                    <h3>📞 Phone support</h3>
+                    <p>Available 24/7 for urgent matters<br><strong>+1 (555) 123-4567</strong></p>
                 </div>
 
-                <div class="info-card">
-                    <h3>Headquarters</h3>
-                    <div class="info-text" style="line-height: 1.5;">
-                        <strong>StarryMeet Inc.</strong><br>
-                        123 Celebrity Boulevard<br>
-                        Los Angeles, CA 90028<br>
-                        United States
-                    </div>
+                <div class="info-item">
+                    <h3>💬 Live chat</h3>
+                    <p>Fastest response time. Click the chat icon in the bottom right corner for instant help.</p>
                 </div>
+
+                <div class="info-item">
+                    <h3>🏢 Office</h3>
+                    <p>StarryMeet Inc.<br>123 Celebrity Boulevard<br>Los Angeles, CA 90028<br>United States</p>
+                </div>
+            </div>
+
+            <!-- Contact Form -->
+            <div class="contact-form">
+                <h2>Send us a message</h2>
+                <form onsubmit="event.preventDefault(); alert('Message sent! We will get back to you within 24 hours.');">
+                    <div class="form-group">
+                        <label for="name">Your name *</label>
+                        <input type="text" id="name" name="name" required placeholder="John Doe">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="email">Email address *</label>
+                        <input type="email" id="email" name="email" required placeholder="you@example.com">
+                    </div>
+
+                    <div class="form-group">
+                        <label for="subject">Subject *</label>
+                        <select id="subject" name="subject" required>
+                            <option value="">Choose a topic...</option>
+                            <option value="booking">Booking question</option>
+                            <option value="payment">Payment issue</option>
+                            <option value="technical">Technical support</option>
+                            <option value="celebrity">Celebrity application</option>
+                            <option value="partnership">Partnership inquiry</option>
+                            <option value="other">Other</option>
+                        </select>
+                    </div>
+
+                    <div class="form-group">
+                        <label for="message">Message *</label>
+                        <textarea id="message" name="message" required placeholder="Tell us how we can help..."></textarea>
+                    </div>
+
+                    <button type="submit" class="btn-submit">Send message</button>
+                </form>
             </div>
         </div>
     </div>
@@ -362,27 +374,5 @@
             </div>
         </div>
     </footer>
-
-    <script>
-        function submitForm(event) {
-            event.preventDefault();
-            const name = document.getElementById('name').value;
-            const email = document.getElementById('email').value;
-            const subject = document.getElementById('subject').value;
-            const message = document.getElementById('message').value;
-
-            // Show success message
-            document.getElementById('successMessage').classList.add('show');
-            document.getElementById('contactForm').reset();
-
-            // Scroll to success message
-            window.scrollTo({ top: 0, behavior: 'smooth' });
-
-            // Hide success message after 5 seconds
-            setTimeout(() => {
-                document.getElementById('successMessage').classList.remove('show');
-            }, 5000);
-        }
-    </script>
 </body>
 </html>
