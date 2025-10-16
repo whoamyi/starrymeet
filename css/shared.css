@@ -539,10 +539,10 @@ header.scrolled,
     color: #FFFFFF;
     text-decoration: none;
     font-weight: 400;
-    font-size: 12px !important;
+    font-size: 18px !important;
     font-family: 'Inter', sans-serif;
     border: none;
-    padding: 20px 0;
+    padding: 24px 0;
     transition: opacity 0.2s ease;
     text-align: center;
 }
@@ -550,7 +550,11 @@ header.scrolled,
 .mobile-menu-links > li > a:hover {
     opacity: 0.7;
     background: none;
-    padding: 20px 0;
+    padding: 24px 0;
+}
+
+.mobile-menu-links > li:last-child {
+    margin-top: 80px;
 }
 
 /* Mobile Submenu */
@@ -575,7 +579,7 @@ header.scrolled,
     color: rgba(255, 255, 255, 0.7);
     text-decoration: none;
     font-weight: 400;
-    font-size: 12px !important;
+    font-size: 16px !important;
     font-family: 'Inter', sans-serif;
     padding: 16px 0;
     text-align: center;
@@ -584,6 +588,160 @@ header.scrolled,
 
 .mobile-submenu a:hover {
     opacity: 0.7;
+}
+
+/* Locale Button */
+.locale-btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    border: 1px solid rgba(255, 255, 255, 0.3);
+    padding: 12px 20px;
+    border-radius: 999px;
+    font-size: 14px;
+    background: transparent;
+    color: #ffffff;
+    font-family: 'Inter', sans-serif;
+    font-weight: 400;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.locale-btn:hover {
+    opacity: 0.7;
+}
+
+.mobile-menu-links .locale-btn {
+    font-size: 18px !important;
+    padding: 24px 0;
+    border: none;
+    justify-content: center;
+}
+
+/* Locale Modal */
+.locale-modal {
+    position: fixed;
+    inset: 0;
+    z-index: 10000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+}
+
+.locale-modal-overlay {
+    position: absolute;
+    inset: 0;
+    background: rgba(0, 0, 0, 0.7);
+    backdrop-filter: blur(4px);
+}
+
+.locale-modal-content {
+    position: relative;
+    background: #000000;
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 16px;
+    padding: 32px;
+    max-width: 500px;
+    width: 90%;
+    max-height: 90vh;
+    overflow-y: auto;
+    z-index: 1;
+}
+
+.locale-modal-close {
+    position: absolute;
+    top: 16px;
+    right: 16px;
+    background: none;
+    border: none;
+    color: #ffffff;
+    font-size: 32px;
+    cursor: pointer;
+    line-height: 1;
+    padding: 0;
+    width: 40px;
+    height: 40px;
+}
+
+.locale-modal-close:hover {
+    opacity: 0.7;
+}
+
+.locale-modal-content h2 {
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 600;
+    color: #ffffff;
+    margin: 0 0 8px 0;
+}
+
+.locale-modal-subtitle {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.7);
+    margin: 0 0 32px 0;
+}
+
+.locale-form {
+    display: flex;
+    flex-direction: column;
+    gap: 24px;
+}
+
+.locale-field {
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+}
+
+.locale-field label {
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    font-weight: 600;
+    color: #ffffff;
+}
+
+.locale-note {
+    font-family: 'Inter', sans-serif;
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.5);
+    margin: 0;
+}
+
+.locale-field select,
+.locale-field input {
+    padding: 12px 16px;
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 14px;
+    color: #ffffff;
+    outline: none;
+}
+
+.locale-field select:disabled,
+.locale-field input:disabled {
+    opacity: 0.5;
+    cursor: not-allowed;
+}
+
+.locale-save-btn {
+    width: 100%;
+    padding: 16px;
+    background: linear-gradient(135deg, #EA1279 0%, #8B5CF6 100%);
+    border: none;
+    border-radius: 8px;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    cursor: pointer;
+    transition: opacity 0.2s ease;
+}
+
+.locale-save-btn:hover {
+    opacity: 0.9;
 }
 
 /* ========================================
