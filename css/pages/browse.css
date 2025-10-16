@@ -82,16 +82,16 @@ body {
 
 /* Filter Sidebar - CAMEO MINIMAL BLACK & WHITE */
 .filter-sidebar {
-    width: 300px;
+    width: 280px;
     background: #000000;
     padding: 0;
-    height: 80vh;
-    max-height: 80vh;
+    height: 100vh;
+    max-height: 100vh;
     position: fixed;
-    left: -300px;
-    top: 10vh;
-    box-shadow: 2px 0 12px rgba(0, 0, 0, 0.3);
-    border: none;
+    left: -280px;
+    top: 0;
+    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+    border-right: 1px solid rgba(255, 255, 255, 0.08);
     transition: left 0.3s ease;
     overflow-y: auto;
     z-index: 1000;
@@ -124,34 +124,47 @@ body {
 }
 
 .filter-content {
-    padding: 60px 24px 80px;
+    padding: 24px 20px 40px;
     overflow-y: auto;
     flex: 1;
 }
 
 .filter-header-minimal {
-    margin-bottom: 32px;
-    text-align: right;
+    margin-bottom: 24px;
+    padding-bottom: 16px;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.08);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-header-minimal h2 {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: #ffffff;
+    margin: 0;
 }
 
 .clear-all-link {
-    color: #ffffff;
-    font-family: 'Inter', sans-serif;
-    font-size: 14px;
-    font-weight: 400;
+    color: rgba(255, 255, 255, 0.6);
+    font-size: 0.875rem;
+    font-weight: 500;
     text-decoration: none;
     border: none;
     background: none;
     cursor: pointer;
+    padding: 0;
+    transition: color 0.2s;
 }
 
 .clear-all-link:hover {
-    text-decoration: underline;
+    color: #ffffff;
+    text-decoration: none;
 }
 
 
 .filter-section {
-    margin-bottom: 32px;
+    margin-bottom: 28px;
     padding-bottom: 0;
     border-bottom: none;
 }
@@ -161,9 +174,8 @@ body {
 }
 
 .filter-section h3 {
-    font-family: 'Inter', sans-serif;
-    font-size: 16px;
-    margin-bottom: 16px;
+    font-size: 0.9375rem;
+    margin-bottom: 12px;
     color: #ffffff;
     font-weight: 600;
     text-transform: none;
@@ -179,28 +191,30 @@ body {
 .checkbox-item {
     display: flex;
     align-items: center;
-    gap: 12px;
+    gap: 10px;
     cursor: pointer;
-    padding: 8px 0;
+    padding: 6px 0;
     border-radius: 0;
     transition: opacity 0.2s ease;
 }
 
 .checkbox-item:hover {
-    opacity: 0.8;
+    opacity: 0.7;
     background: transparent;
 }
 
 .checkbox-item input[type="checkbox"] {
-    width: 18px;
-    height: 18px;
+    width: 16px;
+    height: 16px;
     cursor: pointer;
-    accent-color: #EA1279;
-    border: 1px solid rgba(255, 255, 255, 0.3);
+    accent-color: #FFD700;
+    border: 1px solid rgba(255, 255, 255, 0.2);
+    flex-shrink: 0;
 }
 
 .checkbox-item input[type="checkbox"]:checked + label {
     color: #ffffff;
+    font-weight: 500;
 }
 
 .checkbox-item label {
@@ -209,13 +223,13 @@ body {
     display: flex;
     justify-content: space-between;
     font-weight: 400;
-    color: #ffffff;
-    font-size: 15px;
+    color: rgba(255, 255, 255, 0.9);
+    font-size: 0.875rem;
 }
 
 .checkbox-count {
-    color: rgba(255, 255, 255, 0.5);
-    font-size: 14px;
+    color: rgba(255, 255, 255, 0.4);
+    font-size: 0.8125rem;
 }
 
 .filter-dropdown {
