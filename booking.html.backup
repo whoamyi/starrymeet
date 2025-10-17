@@ -1,0 +1,2771 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Version: 2025-10-09-v2 - Fixed slot count display -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/booking.html">
+    <meta property="og:title" content="Book Your Meeting - StarryMeet">
+    <meta property="og:description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Book Your Meeting - StarryMeet">
+    <meta name="twitter:description" content="Complete your celebrity meeting booking. Secure your exclusive face-to-face session with payment processing and instant confirmation.">
+
+    <title>Book Your Meeting - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        /* Page-specific styles for booking.html - Premium Design */
+        body {
+            background: var(--bg-secondary);
+        }
+
+        nav {
+            background: var(--bg-glass-dark);
+        }
+
+        .nav-container {
+            max-width: 1200px;
+        }
+
+        .cancel-booking {
+            color: var(--text-secondary);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-body);
+            padding: var(--space-2) var(--space-4);
+            border: 2px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            transition: var(--transition-base);
+        }
+
+        .cancel-booking:hover {
+            border-color: var(--error);
+            color: var(--error);
+            background: rgba(239, 68, 68, 0.05);
+        }
+
+        /* Main Container */
+        .main-container {
+            max-width: 1000px;
+            margin: calc(var(--nav-height) + var(--space-6)) auto var(--space-12);
+            padding: 0 var(--space-4);
+        }
+
+        /* Progress Bar - Premium */
+        .progress-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-6);
+            box-shadow: var(--shadow-lg);
+            margin-bottom: var(--space-6);
+            border: 1px solid var(--border-light);
+        }
+
+        .progress-steps {
+            display: flex;
+            justify-content: space-between;
+            position: relative;
+        }
+
+        .progress-line {
+            position: absolute;
+            top: 24px;
+            left: 0;
+            right: 0;
+            height: 4px;
+            background: var(--border-medium);
+            z-index: 0;
+            border-radius: var(--radius-full);
+        }
+
+        .progress-line-fill {
+            height: 100%;
+            background: var(--primary-gradient);
+            transition: width 0.5s var(--ease-bounce);
+            border-radius: var(--radius-full);
+        }
+
+        .progress-step {
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            position: relative;
+            z-index: 1;
+            flex: 1;
+        }
+
+        .step-circle {
+            width: 50px;
+            height: 50px;
+            border-radius: var(--radius-full);
+            background: var(--bg-tertiary);
+            border: 4px solid var(--border-medium);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 600;
+            font-family: var(--font-display);
+            color: var(--text-tertiary);
+            margin-bottom: var(--space-2);
+            transition: var(--transition-slow);
+            box-shadow: var(--shadow-sm);
+        }
+
+        .progress-step.active .step-circle {
+            background: var(--primary-gradient);
+            border-color: transparent;
+            color: var(--white);
+            transform: scale(1.15);
+            box-shadow: var(--shadow-glow-md);
+        }
+
+        .progress-step.completed .step-circle {
+            background: var(--success);
+            border-color: transparent;
+            color: var(--white);
+        }
+
+        .step-label {
+            font-size: var(--text-sm);
+            color: var(--text-secondary);
+            font-weight: 600;
+            text-align: center;
+        }
+
+        .progress-step.active .step-label {
+            color: var(--primary);
+        }
+
+        /* Form Container - Premium */
+        .form-container {
+            background: var(--bg-secondary);
+            border-radius: var(--radius-2xl);
+            padding: var(--space-8);
+            box-shadow: var(--shadow-lg);
+            border: 1px solid var(--border-light);
+        }
+
+        .step-content {
+            display: none;
+        }
+
+        .step-content.active {
+            display: block;
+        }
+
+        .step-title {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin-bottom: 0.5rem;
+        }
+
+        .step-subtitle {
+            color: var(--text-secondary);
+            margin-bottom: 2rem;
+        }
+
+        /* Celebrity Header */
+        .celebrity-header {
+            display: flex;
+            gap: 1.5rem;
+            padding: 1.5rem;
+            background: var(--bg-tertiary);
+            border-radius: 12px;
+            margin-bottom: 2rem;
+        }
+
+        .celebrity-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 12px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .celebrity-details {
+            flex: 1;
+        }
+
+        .celebrity-name {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .celebrity-meta {
+            color: var(--text-secondary);
+            display: flex;
+            flex-direction: column;
+            gap: 0.3rem;
+        }
+
+        /* Form Elements */
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--text-primary);
+        }
+
+        .required {
+            color: var(--red);
+        }
+
+        .form-input,
+        .form-select,
+        .form-textarea {
+            width: 100%;
+            padding: 0.9rem 1rem;
+            border: 2px solid var(--border-medium);
+            border-radius: 10px;
+            font-size: 1rem;
+            transition: all 0.3s;
+            font-family: inherit;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .form-input:focus,
+        .form-select:focus,
+        .form-textarea:focus {
+            outline: none;
+            border-color: var(--primary);
+            box-shadow: 0 0 0 3px rgba(139, 92, 246, 0.1);
+        }
+
+        .form-input.error,
+        .form-select.error,
+        .form-textarea.error {
+            border-color: var(--red);
+        }
+
+        .form-textarea {
+            resize: vertical;
+            min-height: 120px;
+        }
+
+        .char-count {
+            text-align: right;
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-top: 0.3rem;
+        }
+
+        .error-message {
+            color: var(--red);
+            font-size: 0.85rem;
+            margin-top: 0.3rem;
+            display: none;
+        }
+
+        .error-message.show {
+            display: block;
+        }
+
+        .form-hint {
+            font-size: 0.85rem;
+            color: var(--text-tertiary);
+            margin-top: 0.3rem;
+        }
+
+        /* Meeting Type Cards */
+        .meeting-cards {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: 1rem;
+            margin-bottom: 2rem;
+        }
+
+        .meeting-card {
+            border: 2px solid var(--border-medium);
+            border-radius: 12px;
+            padding: 1.5rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-align: center;
+            background: var(--bg-tertiary);
+        }
+
+        .meeting-card:hover {
+            border-color: var(--primary);
+            box-shadow: var(--shadow-glow-sm);
+        }
+
+        .meeting-card.selected {
+            border-color: var(--primary);
+            background: rgba(139, 92, 246, 0.1);
+        }
+
+        .meeting-card-icon {
+            font-size: 2.5rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meeting-card-title {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+            color: var(--text-primary);
+        }
+
+        .meeting-card-duration {
+            color: var(--text-secondary);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .meeting-card-price {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        .pre-selected-badge {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            background: var(--green);
+            color: white;
+            padding: 0.3rem 0.6rem;
+            border-radius: 20px;
+            font-size: 0.75rem;
+            font-weight: 600;
+        }
+
+        .meeting-card {
+            position: relative;
+        }
+
+        /* Date Calendar */
+        .calendar-grid {
+            display: grid;
+            grid-template-columns: repeat(7, 1fr);
+            gap: 0.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .calendar-day {
+            aspect-ratio: 1;
+            border: 2px solid var(--border-medium);
+            border-radius: 8px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            justify-content: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            position: relative;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .calendar-day:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: var(--bg-secondary);
+        }
+
+        .calendar-day.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .calendar-day.selected .slots-indicator {
+            background: rgba(255, 255, 255, 0.2);
+            color: white;
+        }
+
+        .calendar-day.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        .day-number {
+            font-weight: 600;
+            font-size: 1.1rem;
+        }
+
+        .day-name {
+            font-size: 0.75rem;
+            color: var(--text-secondary);
+        }
+
+        .calendar-day.selected .day-name {
+            color: rgba(255, 255, 255, 0.8);
+        }
+
+        .slots-indicator {
+            position: absolute;
+            bottom: 2px;
+            font-size: 0.65rem;
+            background: var(--green);
+            color: white;
+            padding: 2px 6px;
+            border-radius: 10px;
+            font-weight: 600;
+        }
+
+        /* Time Slots */
+        .time-slots {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(100px, 1fr));
+            gap: 0.8rem;
+            margin-top: 1rem;
+        }
+
+        .time-slot {
+            padding: 0.8rem;
+            border: 2px solid var(--border-medium);
+            border-radius: 8px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            font-weight: 600;
+            background: var(--bg-tertiary);
+            color: var(--text-primary);
+        }
+
+        .time-slot:hover:not(.disabled) {
+            border-color: var(--primary);
+            background: var(--bg-secondary);
+        }
+
+        .time-slot.selected {
+            background: var(--primary);
+            border-color: var(--primary);
+            color: white;
+        }
+
+        .time-slot.disabled {
+            opacity: 0.3;
+            cursor: not-allowed;
+        }
+
+        /* File Upload */
+        .file-upload {
+            border: 2px dashed var(--border-medium);
+            border-radius: 10px;
+            padding: 2rem;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s;
+            background: var(--bg-tertiary);
+            color: var(--text-secondary);
+        }
+
+        .file-upload:hover {
+            border-color: var(--primary);
+            background: var(--bg-secondary);
+        }
+
+        .file-upload-icon {
+            font-size: 3rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .file-input {
+            display: none;
+        }
+
+        /* Checkbox */
+        .checkbox-group {
+            display: flex;
+            align-items: flex-start;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox-input {
+            width: 20px;
+            height: 20px;
+            cursor: pointer;
+        }
+
+        .checkbox-label {
+            flex: 1;
+            cursor: pointer;
+            user-select: none;
+            color: var(--text-primary);
+        }
+
+        /* Summary Box */
+        .summary-box {
+            background: var(--bg-tertiary);
+            border: 2px solid var(--border-medium);
+            border-radius: 12px;
+            padding: 1.5rem;
+            margin-bottom: 2rem;
+        }
+
+        .summary-title {
+            font-weight: 600;
+            font-size: var(--text-xl);
+            margin-bottom: 1rem;
+            color: var(--text-primary);
+        }
+
+        .summary-row {
+            display: flex;
+            justify-content: space-between;
+            margin-bottom: 0.8rem;
+            color: var(--text-secondary);
+        }
+
+        .summary-row.total {
+            border-top: 2px solid var(--border-medium);
+            padding-top: 1rem;
+            margin-top: 1rem;
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--primary);
+        }
+
+        /* Order Summary (Payment Step) */
+        .payment-layout {
+            display: grid;
+            grid-template-columns: 1fr 1.5fr;
+            gap: 2rem;
+        }
+
+        .order-summary {
+            background: var(--bg-tertiary);
+            padding: 2rem;
+            border-radius: 12px;
+            height: fit-content;
+        }
+
+        /* Coupon Code */
+        .coupon-toggle {
+            color: var(--primary);
+            font-weight: 600;
+            cursor: pointer;
+            margin-bottom: 1rem;
+            display: inline-block;
+        }
+
+        .coupon-input-group {
+            display: none;
+            margin-bottom: 1.5rem;
+        }
+
+        .coupon-input-group.show {
+            display: flex;
+            gap: 0.5rem;
+        }
+
+        .coupon-input {
+            flex: 1;
+        }
+
+        .apply-coupon-btn {
+            padding: 0.9rem 1.5rem;
+            background: var(--bg-tertiary);
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            color: var(--text-primary);
+        }
+
+        .apply-coupon-btn:hover {
+            background: var(--primary);
+            color: white;
+        }
+
+        /* Security Badge */
+        .security-badge {
+            text-align: center;
+            color: var(--text-secondary);
+            margin: 1.5rem 0;
+            font-size: 0.9rem;
+        }
+
+        /* Navigation Buttons */
+        .form-navigation {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 2.5rem;
+            padding-top: 2rem;
+            border-top: 1px solid var(--gray-200);
+        }
+
+        .btn {
+            padding: 1rem 2rem;
+            border: none;
+            border-radius: 10px;
+            font-weight: 700;
+            font-size: 1rem;
+            cursor: pointer;
+            transition: all 0.3s;
+            display: inline-flex;
+            align-items: center;
+            gap: 0.5rem;
+        }
+
+        .btn-primary {
+            background: var(--purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(107, 70, 193, 0.3);
+        }
+
+        .btn-primary:disabled {
+            background: var(--gray-300);
+            cursor: not-allowed;
+            transform: none;
+        }
+
+        .btn-secondary {
+            /* Background inherits #000000 from shared.css */
+            color: var(--gray-700);
+            border: 2px solid var(--gray-300);
+        }
+
+        .btn-secondary:hover {
+            border-color: var(--primary);
+            opacity: 0.8;
+        }
+
+        .btn-success {
+            background: var(--green);
+            color: white;
+            font-size: 1.1rem;
+            padding: 1.2rem 2.5rem;
+        }
+
+        .btn-success:hover {
+            background: var(--green-dark);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 12px rgba(16, 185, 129, 0.3);
+        }
+
+        .btn-outline {
+            /* Background inherits #000000 from shared.css */
+            color: var(--purple);
+            border: 2px solid var(--purple);
+        }
+
+        .btn-outline:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        /* Loading Spinner */
+        .btn .spinner {
+            display: none;
+            width: 16px;
+            height: 16px;
+            border: 2px solid white;
+            border-top-color: transparent;
+            border-radius: 50%;
+            animation: spin 0.6s linear infinite;
+        }
+
+        .btn.loading .spinner {
+            display: block;
+        }
+
+        .btn.loading .btn-text {
+            display: none;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        /* Confirmation Page */
+        .confirmation-container {
+            text-align: center;
+            padding: 3rem 2rem;
+        }
+
+        .success-icon {
+            width: 100px;
+            height: 100px;
+            background: var(--green);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 2rem;
+            font-size: 3.5rem;
+            color: white;
+            animation: scaleIn 0.5s ease;
+        }
+
+        @keyframes scaleIn {
+            from { transform: scale(0); }
+            to { transform: scale(1); }
+        }
+
+        .confirmation-title {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            color: var(--gray-900);
+            margin-bottom: 1rem;
+        }
+
+        .confirmation-message {
+            font-size: 1.1rem;
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+            max-width: 600px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .reference-number {
+            display: inline-block;
+            background: var(--purple-light);
+            color: white;
+            padding: 0.8rem 2rem;
+            border-radius: 50px;
+            font-weight: 700;
+            font-size: 1.1rem;
+            margin-bottom: 2rem;
+        }
+
+        .booking-details-card {
+            background: var(--gray-50);
+            border-radius: 15px;
+            padding: 2rem;
+            margin: 2rem 0;
+            text-align: left;
+        }
+
+        .detail-row {
+            display: flex;
+            justify-content: space-between;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-200);
+        }
+
+        .detail-row:last-child {
+            border-bottom: none;
+        }
+
+        .detail-label {
+            color: var(--gray-600);
+            font-weight: 600;
+        }
+
+        .detail-value {
+            font-weight: 600;
+            color: var(--gray-900);
+        }
+
+        .action-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: center;
+            margin: 2rem 0;
+        }
+
+        .next-steps {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 15px;
+            padding: 2rem;
+            margin-top: 3rem;
+            text-align: left;
+        }
+
+        .next-steps-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-item {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .step-number {
+            width: 40px;
+            height: 40px;
+            background: var(--purple);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .step-content h4 {
+            font-weight: 700;
+            margin-bottom: 0.3rem;
+        }
+
+        .step-content p {
+            color: var(--gray-600);
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 15px;
+            padding: 2.5rem;
+            max-width: 500px;
+            width: 90%;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: 1rem;
+        }
+
+        .modal-message {
+            color: var(--gray-600);
+            margin-bottom: 2rem;
+        }
+
+        .modal-buttons {
+            display: flex;
+            gap: 1rem;
+            justify-content: flex-end;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-container {
+                margin-top: 80px;
+                padding: 0 1rem;
+            }
+
+            .form-container {
+                padding: 1.5rem;
+            }
+
+            .progress-container {
+                padding: 1.5rem 1rem;
+            }
+
+            .progress-steps {
+                gap: 0.5rem;
+            }
+
+            .step-circle {
+                width: 35px;
+                height: 35px;
+                font-size: 0.9rem;
+            }
+
+            .step-label {
+                font-size: 0.7rem;
+            }
+
+            .celebrity-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .celebrity-photo {
+                margin: 0 auto;
+            }
+
+            .meeting-cards {
+                grid-template-columns: 1fr;
+            }
+
+            .payment-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .order-summary {
+                order: -1;
+            }
+
+            .calendar-grid {
+                grid-template-columns: repeat(4, 1fr);
+            }
+
+            .time-slots {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .action-buttons {
+                flex-direction: column;
+            }
+
+            .form-navigation {
+                flex-direction: column;
+                gap: 1rem;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <!-- Cancel Modal -->
+    <div class="modal" id="cancelModal">
+        <div class="modal-content">
+            <h3 class="modal-title">Cancel Booking?</h3>
+            <p class="modal-message">Are you sure you want to cancel? Your progress will be lost and you'll be returned to the browse page.</p>
+            <div class="modal-buttons">
+                <button class="btn btn-secondary" onclick="closeCancelModal()">Continue Booking</button>
+                <button class="btn btn-primary" onclick="confirmCancel()">Yes, Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Error Page -->
+    <div class="main-container hidden" id="errorPage">
+        <div class="form-container" style="text-align: center; padding: 4rem 2rem;">
+            <h1 style="font-size: 3rem; color: var(--purple); margin-bottom: 1rem;">Booking Error</h1>
+            <p style="font-size: 1.2rem; color: var(--gray-600); margin-bottom: 2rem;">
+                No celebrity selected. Please select a celebrity from the browse page.
+            </p>
+            <a href="browse.html" class="btn btn-primary">Browse Celebrities</a>
+        </div>
+    </div>
+
+    <!-- Main Booking Flow -->
+    <div class="main-container" id="bookingFlow">
+        <!-- Progress Bar -->
+        <div class="progress-container">
+            <div class="progress-steps">
+                <div class="progress-line">
+                    <div class="progress-line-fill" id="progressFill" style="width: 0%"></div>
+                </div>
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <div class="step-label">Select Meeting</div>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <div class="step-label">Personal Info</div>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <div class="step-label">Application</div>
+                </div>
+                <div class="progress-step" data-step="4">
+                    <div class="step-circle">4</div>
+                    <div class="step-label">Payment</div>
+                </div>
+                <div class="progress-step" data-step="5">
+                    <div class="step-circle">5</div>
+                    <div class="step-label">Confirmation</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Form Container -->
+        <div class="form-container">
+            <!-- Step 1: Select Meeting -->
+            <div class="step-content active" id="step1">
+                <h2 class="step-title">Select Your Meeting</h2>
+                <p class="step-subtitle">Choose your preferred meeting type, date, and time</p>
+
+                <div class="celebrity-header" id="celebrityHeader">
+                    <div class="celebrity-photo" id="celebPhoto">EW</div>
+                    <div class="celebrity-details">
+                        <div class="celebrity-name" id="celebName">Loading...</div>
+                        <div class="celebrity-meta">
+                            <span id="celebCategory">Category</span>
+                            <span id="celebLocation">📍 Location</span>
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="locationSelect">Select Location <span class="required">*</span></label>
+                    <select class="form-select" id="locationSelect">
+                        <option value="">Choose a location</option>
+                        <!-- Location options will be populated by JavaScript -->
+                    </select>
+                    <div class="form-hint">Select the city where you'd like to meet</div>
+                    <div class="error-message" id="locationError">Please select a location</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Meeting Type <span class="required">*</span></label>
+                    <div class="meeting-cards" id="meetingCards">
+                        <!-- Meeting cards will be loaded here -->
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label">Select Date <span class="required">*</span></label>
+                    <div class="calendar-grid" id="calendar">
+                        <!-- Calendar will be generated here -->
+                    </div>
+                    <div class="error-message" id="dateError">Please select a date</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="timePeriod">Select Time Period <span class="required">*</span></label>
+                    <select class="form-select" id="timePeriod">
+                        <option value="">Choose a time period</option>
+                        <option value="morning">Morning (9AM - 12PM)</option>
+                        <option value="afternoon">Afternoon (1PM - 5PM)</option>
+                        <option value="evening">Evening (6PM - 9PM)</option>
+                    </select>
+                </div>
+
+                <div class="form-group" id="timeSlotsGroup" style="display: none;">
+                    <label class="form-label">Select Specific Time <span class="required">*</span></label>
+                    <div class="time-slots" id="timeSlots">
+                        <!-- Time slots will be generated here -->
+                    </div>
+                    <div class="error-message" id="timeError">Please select a time slot</div>
+                </div>
+
+                <div class="summary-box">
+                    <div class="summary-row">
+                        <span>Duration:</span>
+                        <strong id="summaryDuration">Not selected</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Date & Time:</span>
+                        <strong id="summaryDateTime">Not selected</strong>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="summaryPrice">$0</span>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <div></div>
+                    <button class="btn btn-primary" onclick="nextStep(2)">
+                        <span class="btn-text">Continue to Personal Details →</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 2: Personal Details -->
+            <div class="step-content" id="step2">
+                <h2 class="step-title">Personal Details</h2>
+                <p class="step-subtitle">Please provide your contact information</p>
+
+                <div class="form-group">
+                    <label class="form-label" for="fullName">Full Name <span class="required">*</span></label>
+                    <input type="text" class="form-input" id="fullName" placeholder="John Doe">
+                    <div class="error-message" id="fullNameError">Please enter your full name</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="email">Email Address <span class="required">*</span></label>
+                    <input type="email" class="form-input" id="email" placeholder="john@example.com">
+                    <div class="error-message" id="emailError">Please enter a valid email address</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="phone">Phone Number <span class="required">*</span></label>
+                    <input type="tel" class="form-input" id="phone" placeholder="+1 (555) 123-4567">
+                    <div class="error-message" id="phoneError">Please enter a valid phone number (10-15 digits)</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="country">Country <span class="required">*</span></label>
+                    <select class="form-select" id="country">
+                        <option value="">Select your country</option>
+                        <option value="USA">United States</option>
+                        <option value="UK">United Kingdom</option>
+                        <option value="Canada">Canada</option>
+                        <option value="Australia">Australia</option>
+                        <option value="France">France</option>
+                        <option value="Germany">Germany</option>
+                        <option value="Japan">Japan</option>
+                        <option value="South Korea">South Korea</option>
+                        <option value="India">India</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-message" id="countryError">Please select your country</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="city">City <span class="required">*</span></label>
+                    <input type="text" class="form-input" id="city" placeholder="New York">
+                    <div class="error-message" id="cityError">Please enter your city</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="dob">Date of Birth <span class="required">*</span></label>
+                    <input type="date" class="form-input" id="dob">
+                    <div class="form-hint">You must be 18 or older to book a meeting</div>
+                    <div class="error-message" id="dobError">You must be at least 18 years old</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="profilePhoto">Profile Photo (Optional)</label>
+                    <div class="file-upload" onclick="document.getElementById('profilePhoto').click()">
+                        <div class="file-upload-icon">📷</div>
+                        <p>Click to upload profile photo</p>
+                        <p style="font-size: 0.85rem; color: var(--gray-500); margin-top: 0.5rem;">Max 5MB (JPG, PNG)</p>
+                    </div>
+                    <input type="file" id="profilePhoto" class="file-input" accept="image/jpeg,image/png">
+                    <div id="fileName" style="margin-top: 0.5rem; color: var(--purple); font-weight: 600;"></div>
+                </div>
+
+                <div class="form-navigation">
+                    <button class="btn btn-secondary" onclick="previousStep(1)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(3)">
+                        <span class="btn-text">Continue to Application →</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 3: Application -->
+            <div class="step-content" id="step3">
+                <h2 class="step-title">Application</h2>
+                <p class="step-subtitle">Tell us about yourself and why you want to meet <span id="celebNameApp"></span></p>
+
+                <div class="summary-box">
+                    <div class="summary-title">Booking Summary</div>
+                    <div class="summary-row">
+                        <span>Celebrity:</span>
+                        <strong id="appCelebName">-</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Date & Time:</span>
+                        <strong id="appDateTime">-</strong>
+                    </div>
+                    <div class="summary-row">
+                        <span>Meeting Type:</span>
+                        <strong id="appMeetingType">-</strong>
+                    </div>
+                    <div class="summary-row total">
+                        <span>Total:</span>
+                        <span id="appPrice">$0</span>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="whyMeet">Why do you want to meet <span id="celebNameWhy"></span>? <span class="required">*</span></label>
+                    <textarea class="form-textarea" id="whyMeet" placeholder="Share your story, what inspires you about them, and what meeting them would mean to you..." oninput="updateCharCount('whyMeet')"></textarea>
+                    <div class="char-count" id="whyMeetCount">0 / 500 characters (min 100)</div>
+                    <div class="error-message" id="whyMeetError">Please enter at least 100 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="whatDiscuss">What would you like to discuss? <span class="required">*</span></label>
+                    <textarea class="form-textarea" id="whatDiscuss" placeholder="Topics, questions, or areas of interest you'd like to explore during the meeting..." oninput="updateCharCount('whatDiscuss')"></textarea>
+                    <div class="char-count" id="whatDiscussCount">0 / 500 characters (min 100)</div>
+                    <div class="error-message" id="whatDiscussError">Please enter at least 100 characters</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="background">Your Background/Profession <span class="required">*</span></label>
+                    <select class="form-select" id="background">
+                        <option value="">Select your background</option>
+                        <option value="Student">Student</option>
+                        <option value="Professional">Professional</option>
+                        <option value="Entrepreneur">Entrepreneur</option>
+                        <option value="Artist">Artist/Creative</option>
+                        <option value="Fan">Fan/Enthusiast</option>
+                        <option value="Media">Media/Press</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <div class="error-message" id="backgroundError">Please select your background</div>
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="instagram">Instagram Handle (Optional)</label>
+                    <input type="text" class="form-input" id="instagram" placeholder="@yourusername">
+                </div>
+
+                <div class="form-group">
+                    <label class="form-label" for="twitter">Twitter/X Handle (Optional)</label>
+                    <input type="text" class="form-input" id="twitter" placeholder="@yourusername">
+                </div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox-input" id="termsAccept">
+                    <label class="checkbox-label" for="termsAccept">
+                        I agree to StarryMeet's Terms of Service and understand meetings are subject to celebrity approval <span class="required">*</span>
+                    </label>
+                </div>
+                <div class="error-message" id="termsError">You must agree to the terms</div>
+
+                <div class="checkbox-group">
+                    <input type="checkbox" class="checkbox-input" id="cancellationAccept">
+                    <label class="checkbox-label" for="cancellationAccept">
+                        I understand the cancellation policy: Full refund if cancelled 7+ days before, 50% if 3-6 days, no refund if less than 3 days <span class="required">*</span>
+                    </label>
+                </div>
+                <div class="error-message" id="cancellationError">You must agree to the cancellation policy</div>
+
+                <div class="form-navigation">
+                    <button class="btn btn-secondary" onclick="previousStep(2)">← Back</button>
+                    <button class="btn btn-primary" onclick="nextStep(4)">
+                        <span class="btn-text">Continue to Payment →</span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 4: Payment -->
+            <div class="step-content" id="step4">
+                <h2 class="step-title">Payment</h2>
+                <p class="step-subtitle">Complete your booking by providing payment details</p>
+
+                <div class="payment-layout">
+                    <div class="order-summary">
+                        <h3 style="font-weight: 600; margin-bottom: 1.5rem;">Order Summary</h3>
+
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-200);">
+                            <div class="celebrity-photo" id="paymentCelebPhoto" style="width: 60px; height: 60px; font-size: 1.5rem;">EW</div>
+                            <div>
+                                <div style="font-weight: 600; margin-bottom: 0.3rem;" id="paymentCelebName">Celebrity</div>
+                                <div style="color: var(--gray-600); font-size: 0.9rem;" id="paymentMeetingType">Meeting Type</div>
+                            </div>
+                        </div>
+
+                        <div class="summary-row">
+                            <span>Date & Time:</span>
+                            <strong id="paymentDateTime">-</strong>
+                        </div>
+                        <div class="summary-row">
+                            <span>Location:</span>
+                            <strong id="paymentLocation">-</strong>
+                        </div>
+                        <div class="summary-row" style="border-top: 1px solid var(--gray-300); padding-top: 1rem; margin-top: 1rem;">
+                            <span>Subtotal:</span>
+                            <span id="paymentSubtotal">$0</span>
+                        </div>
+                        <div class="summary-row">
+                            <span>Service Fee (15%):</span>
+                            <span id="paymentServiceFee">$0</span>
+                        </div>
+                        <div class="summary-row total">
+                            <span>Total:</span>
+                            <span id="paymentTotal">$0</span>
+                        </div>
+                    </div>
+
+                    <div>
+                        <h3 style="font-weight: 600; margin-bottom: 1.5rem;">Payment Method</h3>
+
+                        <div class="form-group">
+                            <label class="form-label">Card Number <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="cardNumber" placeholder="1234 5678 9012 3456" maxlength="19">
+                            <div class="error-message" id="cardNumberError">Please enter a valid 16-digit card number</div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label">Cardholder Name <span class="required">*</span></label>
+                            <input type="text" class="form-input" id="cardholderName" placeholder="John Doe">
+                            <div class="error-message" id="cardholderNameError">Please enter the cardholder name</div>
+                        </div>
+
+                        <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 1rem;">
+                            <div class="form-group">
+                                <label class="form-label">Expiration Date <span class="required">*</span></label>
+                                <input type="text" class="form-input" id="expiryDate" placeholder="MM/YY" maxlength="5">
+                                <div class="error-message" id="expiryDateError">Enter valid date (MM/YY)</div>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label">CVV <span class="required">*</span></label>
+                                <input type="text" class="form-input" id="cvv" placeholder="123" maxlength="4">
+                                <div class="error-message" id="cvvError">Enter 3-4 digits</div>
+                            </div>
+                        </div>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox-input" id="billingAddress" checked>
+                            <label class="checkbox-label" for="billingAddress">
+                                Billing address same as contact address
+                            </label>
+                        </div>
+
+                        <div style="margin: 1.5rem 0;">
+                            <span class="coupon-toggle" onclick="toggleCoupon()">+ Have a promo code?</span>
+                            <div class="coupon-input-group" id="couponGroup">
+                                <input type="text" class="form-input coupon-input" id="couponCode" placeholder="Enter code">
+                                <button class="apply-coupon-btn" onclick="applyCoupon()">Apply</button>
+                            </div>
+                        </div>
+
+                        <div class="security-badge">
+                            🔒 Secure Payment • All transactions are encrypted
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-navigation">
+                    <button class="btn btn-secondary" onclick="previousStep(3)">← Back</button>
+                    <button class="btn btn-success" onclick="completeBooking()">
+                        <span class="btn-text">Confirm & Pay <span id="finalPaymentAmount">$0</span></span>
+                        <div class="spinner"></div>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Step 5: Confirmation -->
+            <div class="step-content" id="step5">
+                <div class="confirmation-container">
+                    <div class="success-icon">✓</div>
+                    <h1 class="confirmation-title">Booking Request Submitted!</h1>
+                    <p class="confirmation-message">
+                        Your meeting request has been sent to <strong id="confirmCelebName"></strong>'s team for approval.
+                        You'll receive a confirmation email within 24-48 hours.
+                    </p>
+                    <div class="reference-number" id="referenceNumber">SM-2025-001234</div>
+
+                    <div class="booking-details-card">
+                        <div style="display: flex; gap: 1rem; margin-bottom: 1.5rem; padding-bottom: 1.5rem; border-bottom: 2px solid var(--gray-200);">
+                            <div class="celebrity-photo" id="confirmCelebPhoto" style="width: 70px; height: 70px; font-size: 1.8rem;">EW</div>
+                            <div>
+                                <div style="font-weight: 600; font-size: var(--text-xl); margin-bottom: 0.3rem;" id="confirmCelebNameFull">Celebrity</div>
+                                <div style="color: var(--gray-600);" id="confirmMeetingType">Meeting Type</div>
+                            </div>
+                        </div>
+
+                        <div class="detail-row">
+                            <span class="detail-label">📅 Date & Time:</span>
+                            <span class="detail-value" id="confirmDateTime">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">📍 Location:</span>
+                            <span class="detail-value" id="confirmLocation">-</span>
+                        </div>
+                        <div class="detail-row">
+                            <span class="detail-label">💰 Total Paid:</span>
+                            <span class="detail-value" style="color: var(--purple); font-size: 1.3rem;" id="confirmTotal">$0</span>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons">
+                        <button class="btn btn-outline" onclick="downloadReceipt()">📄 Download Receipt</button>
+                        <button class="btn btn-outline" onclick="addToCalendar()">📅 Add to Calendar</button>
+                    </div>
+
+                    <div class="next-steps">
+                        <h3 class="next-steps-title">What Happens Next?</h3>
+
+                        <div class="step-item">
+                            <div class="step-number">1</div>
+                            <div class="step-content">
+                                <h4>Approval within 48 hours</h4>
+                                <p>The celebrity's team will review your application and approve or suggest alternative times.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-number">2</div>
+                            <div class="step-content">
+                                <h4>Confirmation email</h4>
+                                <p>You'll receive meeting details, venue information, and preparation guidelines via email.</p>
+                            </div>
+                        </div>
+
+                        <div class="step-item">
+                            <div class="step-number">3</div>
+                            <div class="step-content">
+                                <h4>Prepare for your meeting</h4>
+                                <p>Review the guidelines, plan your questions, and get ready for an unforgettable experience!</p>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="action-buttons" style="margin-top: 2rem;">
+                        <button class="btn btn-primary" onclick="window.location.href='index.html'">View Dashboard</button>
+                        <button class="btn btn-outline" onclick="window.location.href='browse.html'">Browse More Celebrities</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Celebrity data (same as other pages)
+        const celebrities = [
+            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true },
+            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
+            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
+            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },
+            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true },
+            { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", city: "San Francisco", country: "USA", price: 50000, verified: true, trending: true },
+            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true },
+            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true }
+        ];
+
+        // Color palettes
+        const colorPalettes = [
+            'linear-gradient(135deg, #667eea, #764ba2)',
+            'linear-gradient(135deg, #f093fb, #f5576c)',
+            'linear-gradient(135deg, #4facfe, #00f2fe)',
+            'linear-gradient(135deg, #43e97b, #38f9d7)',
+            'linear-gradient(135deg, #fa709a, #fee140)',
+            'linear-gradient(135deg, #30cfd0, #330867)',
+            'linear-gradient(135deg, #a8edea, #fed6e3)',
+            'linear-gradient(135deg, #ff9a9e, #fecfef)',
+            'linear-gradient(135deg, #ffecd2, #fcb69f)',
+            'linear-gradient(135deg, #ff6e7f, #bfe9ff)'
+        ];
+
+        // Global state
+        let currentStep = 1;
+        let currentCelebrity = null;
+        let bookingData = {};
+
+        // Availability Database
+        // Structure: { "Celebrity Name": { "Location": { "YYYY-MM-DD": { slots: number, times: [] } } } }
+        const availabilityData = generateAvailabilityData();
+
+        function generateAvailabilityData() {
+            const data = {};
+            const today = new Date();
+
+            celebrities.forEach((celebrity, celebIndex) => {
+                data[celebrity.name] = {};
+
+                // Get all unique locations for this celebrity from the database
+                const locations = [`${celebrity.city}, ${celebrity.country}`];
+
+                // Add a few additional tour locations
+                const tourCities = celebrities
+                    .filter(c => c.name !== celebrity.name)
+                    .slice(0, 2)
+                    .map(c => `${c.city}, ${c.country}`);
+                locations.push(...tourCities);
+
+                // Debug: Log locations for each celebrity
+                console.log(`[DEBUG] ${celebrity.name} (index ${celebIndex}) will have availability at:`, locations);
+
+                locations.forEach((location, locIndex) => {
+                    data[celebrity.name][location] = {};
+
+                    // Generate availability for next 30 days
+                    // Use deterministic seed based on celebrity and location to ensure consistency
+                    const seed = celebIndex * 1000 + locIndex * 100;
+
+                    let datesAdded = 0;
+                    for (let i = 0; i < 30; i++) {
+                        const date = new Date(today);
+                        date.setDate(today.getDate() + i);
+                        const dateStr = date.toISOString().split('T')[0];
+
+                        // Use deterministic "random" based on seed + day
+                        // This ensures each location has different but consistent availability
+                        const dayHash = (seed + i * 7) % 100;
+
+                        // 60% chance of having slots on any given day
+                        if (dayHash < 60) {
+                            const numSlots = (dayHash % 5) + 1; // 1-5 slots deterministically
+                            const times = generateTimeSlots(numSlots, seed + i);
+
+                            data[celebrity.name][location][dateStr] = {
+                                slots: numSlots,
+                                times: times,
+                                booked: [] // Track booked times
+                            };
+                            datesAdded++;
+                        }
+                    }
+                    console.log(`[DEBUG]   ${location}: ${datesAdded} dates with availability`);
+                });
+            });
+
+            console.log('Availability data generated:', Object.keys(data).length, 'celebrities');
+            return data;
+        }
+
+        function generateTimeSlots(count, seed = 0) {
+            const allTimes = [
+                "09:00", "10:00", "11:00", "12:00",
+                "13:00", "14:00", "15:00", "16:00",
+                "17:00", "18:00", "19:00", "20:00"
+            ];
+
+            // Use seed for deterministic shuffling
+            const times = [...allTimes];
+            for (let i = times.length - 1; i > 0; i--) {
+                const j = (seed + i) % (i + 1);
+                [times[i], times[j]] = [times[j], times[i]];
+            }
+
+            return times.slice(0, count).sort();
+        }
+
+        // Get available slots for a specific celebrity, location, and date
+        function getAvailableSlots(celebrityName, location, dateStr) {
+            try {
+                if (!availabilityData[celebrityName]) {
+                    console.warn(`No availability data for celebrity: ${celebrityName}`);
+                    return null;
+                }
+                if (!availabilityData[celebrityName][location]) {
+                    console.warn(`No availability data for location: ${location}`);
+                    return null;
+                }
+                if (!availabilityData[celebrityName][location][dateStr]) {
+                    console.log(`No slots for date: ${dateStr} at ${location}`);
+                    return null;
+                }
+
+                const dayData = availabilityData[celebrityName][location][dateStr];
+                const availableTimes = dayData.times.filter(time => !dayData.booked.includes(time));
+
+                // Only log on first call or when specifically debugging
+                if (window.debugAvailability) {
+                    console.log(`Slots for ${dateStr}:`, {
+                        total: dayData.slots,
+                        available: availableTimes.length,
+                        times: availableTimes,
+                        allTimes: dayData.times,
+                        booked: dayData.booked
+                    });
+                }
+
+                return {
+                    totalSlots: dayData.slots,
+                    availableSlots: availableTimes.length,
+                    times: availableTimes,
+                    bookedTimes: dayData.booked
+                };
+            } catch (error) {
+                console.error('Error getting available slots:', error);
+                return null;
+            }
+        }
+
+        // Check if a date has any available slots
+        function hasAvailableSlots(celebrityName, location, dateStr) {
+            const slots = getAvailableSlots(celebrityName, location, dateStr);
+            return slots && slots.availableSlots > 0;
+        }
+
+        // Book a time slot
+        function bookTimeSlot(celebrityName, location, dateStr, time) {
+            try {
+                if (!availabilityData[celebrityName][location][dateStr]) {
+                    console.error('No availability data for this date');
+                    return false;
+                }
+
+                const dayData = availabilityData[celebrityName][location][dateStr];
+
+                if (!dayData.times.includes(time)) {
+                    console.error('Time not available');
+                    return false;
+                }
+
+                if (dayData.booked.includes(time)) {
+                    console.error('Time already booked');
+                    return false;
+                }
+
+                dayData.booked.push(time);
+                console.log(`Booked: ${celebrityName} at ${location} on ${dateStr} at ${time}`);
+                console.log(`Remaining slots: ${dayData.times.length - dayData.booked.length}`);
+                return true;
+            } catch (error) {
+                console.error('Error booking time slot:', error);
+                return false;
+            }
+        }
+
+        // Utility functions
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+        }
+
+        function getColorForCelebrity(name) {
+            const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            return colorPalettes[index % colorPalettes.length];
+        }
+
+        // Initialize page
+        function initializePage() {
+            try {
+                // Get URL parameters
+                const urlParams = new URLSearchParams(window.location.search);
+                const celebrityName = urlParams.get('celebrity');
+                const meetingType = urlParams.get('type');
+                const preSelectedCity = urlParams.get('city');
+                const preSelectedCountry = urlParams.get('country');
+                const preSelectedDateRange = urlParams.get('dateRange');
+
+                console.log('Booking page initialized with:', {
+                    celebrityName,
+                    meetingType,
+                    location: preSelectedCity ? `${preSelectedCity}, ${preSelectedCountry}` : null,
+                    dateRange: preSelectedDateRange
+                });
+
+                // Set celebrity - default to first celebrity if none specified
+                if (celebrityName) {
+                    currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
+
+                    if (!currentCelebrity) {
+                        console.warn(`Celebrity "${celebrityName}" not found in database`);
+                    }
+                }
+
+                if (!currentCelebrity) {
+                    currentCelebrity = celebrities[0]; // Always fallback to Emma Watson
+                    console.log('Using fallback celebrity:', currentCelebrity.name);
+                }
+
+                // Store pre-selected location BEFORE loading celebrity data
+                // This ensures populateLocations() can use it
+                if (preSelectedCity) {
+                    bookingData.preSelectedCity = preSelectedCity;
+                    bookingData.preSelectedCountry = preSelectedCountry;
+                    bookingData.preSelectedDateRange = preSelectedDateRange;
+                    console.log('Stored location data:', {
+                        city: preSelectedCity,
+                        country: preSelectedCountry,
+                        dateRange: preSelectedDateRange
+                    });
+                }
+
+                // Ensure booking flow is visible
+                document.getElementById('errorPage').classList.add('hidden');
+                document.getElementById('bookingFlow').classList.remove('hidden');
+
+                // Load celebrity data and generate meeting cards
+                // This will call populateLocations() which now has access to preSelectedCity
+                loadCelebrityData();
+
+                // Generate calendar
+                generateCalendar();
+
+                // Pre-select meeting type if provided - use requestAnimationFrame for proper timing
+                if (meetingType) {
+                    bookingData.meetingType = meetingType;
+                    // Wait for next animation frame to ensure cards are rendered
+                    requestAnimationFrame(() => {
+                        requestAnimationFrame(() => {
+                            const selected = selectMeetingType(meetingType);
+                            if (selected) {
+                                console.log(`Pre-selected meeting type: ${meetingType}`);
+                            } else {
+                                console.warn(`Failed to pre-select meeting type: ${meetingType}`);
+                            }
+                        });
+                    });
+                }
+
+                // Load saved data from localStorage
+                loadSavedData();
+
+                // Set up event handlers
+                const locationSelect = document.getElementById('locationSelect');
+                if (locationSelect) {
+                    locationSelect.addEventListener('change', function() {
+                        const newLocation = this.value;
+                        console.log('Location changed to:', newLocation);
+
+                        bookingData.location = newLocation;
+
+                        // Clear date and time selections when location changes
+                        bookingData.date = null;
+                        bookingData.time = null;
+                        document.querySelectorAll('.calendar-day').forEach(day => {
+                            day.classList.remove('selected');
+                        });
+                        document.querySelectorAll('.time-slot').forEach(slot => {
+                            slot.classList.remove('selected');
+                        });
+
+                        hideError('locationError');
+                        saveData();
+                        updateSummary();
+
+                        // Regenerate calendar with new location's available dates
+                        generateCalendar();
+                        console.log('✅ Calendar regenerated for location:', newLocation);
+                    });
+                }
+
+                const profilePhoto = document.getElementById('profilePhoto');
+                if (profilePhoto) {
+                    profilePhoto.addEventListener('change', handleFileUpload);
+                }
+
+                const timePeriod = document.getElementById('timePeriod');
+                if (timePeriod) {
+                    timePeriod.addEventListener('change', updateTimeSlots);
+                }
+
+                const cardNumber = document.getElementById('cardNumber');
+                if (cardNumber) {
+                    cardNumber.addEventListener('input', formatCardNumber);
+                }
+
+                const expiryDate = document.getElementById('expiryDate');
+                if (expiryDate) {
+                    expiryDate.addEventListener('input', formatExpiryDate);
+                }
+
+                console.log('Booking page initialization complete');
+            } catch (error) {
+                console.error('Error initializing booking page:', error);
+                showError();
+            }
+        }
+
+        function showError() {
+            document.getElementById('errorPage').classList.remove('hidden');
+            document.getElementById('bookingFlow').classList.add('hidden');
+        }
+
+        function loadCelebrityData() {
+            try {
+                const initials = getInitials(currentCelebrity.name);
+                const color = getColorForCelebrity(currentCelebrity.name);
+
+                // Update all celebrity displays
+                const celebPhotoElements = ['celebPhoto', 'paymentCelebPhoto', 'confirmCelebPhoto'];
+                celebPhotoElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = initials;
+                        el.style.background = color;
+                    } else {
+                        console.warn(`Element with id "${id}" not found`);
+                    }
+                });
+
+                const celebNameElements = ['celebName', 'celebNameApp', 'celebNameWhy', 'appCelebName',
+                                           'paymentCelebName', 'confirmCelebName', 'confirmCelebNameFull'];
+                celebNameElements.forEach(id => {
+                    const el = document.getElementById(id);
+                    if (el) {
+                        el.textContent = currentCelebrity.name;
+                    } else {
+                        console.warn(`Element with id "${id}" not found`);
+                    }
+                });
+
+                document.getElementById('celebCategory').textContent = currentCelebrity.category;
+                document.getElementById('celebLocation').textContent = `📍 ${currentCelebrity.city}, ${currentCelebrity.country}`;
+
+                // Populate location selector
+                populateLocations();
+
+                // Generate meeting cards
+                generateMeetingCards();
+
+                console.log('Celebrity data loaded successfully:', currentCelebrity.name);
+            } catch (error) {
+                console.error('Error loading celebrity data:', error);
+                throw error;
+            }
+        }
+
+        function generateMeetingCards() {
+            const basePrice = currentCelebrity.price;
+            const cards = [
+                { type: 'quick', icon: '🤝', title: 'Quick Meet', duration: '15 minutes', price: basePrice },
+                { type: 'standard', icon: '⭐', title: 'Standard Session', duration: '30 minutes', price: Math.round(basePrice * 1.5) },
+                { type: 'premium', icon: '👑', title: 'Premium Experience', duration: '60 minutes', price: Math.round(basePrice * 2.5) }
+            ];
+
+            const container = document.getElementById('meetingCards');
+            const urlParams = new URLSearchParams(window.location.search);
+            const preSelectedType = urlParams.get('type');
+
+            container.innerHTML = cards.map(card => `
+                <div class="meeting-card ${bookingData.meetingType === card.type ? 'selected' : ''}"
+                     data-type="${card.type}"
+                     data-price="${card.price}"
+                     data-duration="${card.duration}"
+                     onclick="selectMeetingType('${card.type}')">
+                    ${card.type === preSelectedType ? '<div class="pre-selected-badge">✓ Pre-selected</div>' : ''}
+                    <div class="meeting-card-icon">${card.icon}</div>
+                    <div class="meeting-card-title">${card.title}</div>
+                    <div class="meeting-card-duration">${card.duration}</div>
+                    <div class="meeting-card-price">$${card.price.toLocaleString()}</div>
+                </div>
+            `).join('');
+
+            console.log('Meeting cards generated:', cards.length);
+        }
+
+        function populateLocations() {
+            try {
+                const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+
+                // Get only locations where this celebrity has availability
+                const allLocations = [...new Set(celebrities.map(c => `${c.city}, ${c.country}`))];
+                const locationsWithAvailability = allLocations.filter(location => {
+                    // Check if celebrity has any availability data for this location
+                    if (availabilityData[celebrityName] && availabilityData[celebrityName][location]) {
+                        // Check if there's at least one date with slots
+                        const dates = Object.keys(availabilityData[celebrityName][location]);
+                        return dates.length > 0;
+                    }
+                    return false;
+                }).sort();
+
+                console.log(`Found ${locationsWithAvailability.length} locations with availability for ${celebrityName}:`, locationsWithAvailability);
+
+                const locationSelect = document.getElementById('locationSelect');
+                if (!locationSelect) {
+                    console.error('Location select element not found');
+                    return;
+                }
+
+                // Pre-select location (priority: URL params > current celebrity's location)
+                let selectedLocation;
+                if (bookingData.preSelectedCity && bookingData.preSelectedCountry) {
+                    selectedLocation = `${bookingData.preSelectedCity}, ${bookingData.preSelectedCountry}`;
+                    console.log('Using pre-selected location from URL:', selectedLocation);
+
+                    // Add pre-selected location to list if it doesn't exist and has availability
+                    if (!locationsWithAvailability.includes(selectedLocation)) {
+                        if (availabilityData[celebrityName] && availabilityData[celebrityName][selectedLocation]) {
+                            const dates = Object.keys(availabilityData[celebrityName][selectedLocation]);
+                            if (dates.length > 0) {
+                                locationsWithAvailability.push(selectedLocation);
+                                locationsWithAvailability.sort();
+                                console.log('Added pre-selected location to dropdown:', selectedLocation);
+                            } else {
+                                console.warn('Pre-selected location exists but has no dates:', selectedLocation);
+                            }
+                        } else {
+                            console.warn('Pre-selected location has no availability data:', selectedLocation);
+                        }
+                    }
+                } else {
+                    selectedLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+                    console.log('Using celebrity default location:', selectedLocation);
+                }
+
+                // Add options
+                locationSelect.innerHTML = '<option value="">Choose a location</option>' +
+                    locationsWithAvailability.map(loc => `<option value="${loc}">${loc}</option>`).join('');
+
+                locationSelect.value = selectedLocation;
+                bookingData.location = selectedLocation;
+
+                console.log('Locations populated:', locationsWithAvailability.length);
+            } catch (error) {
+                console.error('Error populating locations:', error);
+            }
+        }
+
+        function selectMeetingType(type) {
+            try {
+                // Remove previous selection
+                document.querySelectorAll('.meeting-card').forEach(card => {
+                    card.classList.remove('selected');
+                });
+
+                // Select new card
+                const selectedCard = document.querySelector(`[data-type="${type}"]`);
+                if (selectedCard) {
+                    selectedCard.classList.add('selected');
+                    bookingData.meetingType = type;
+                    bookingData.price = parseInt(selectedCard.dataset.price);
+                    bookingData.duration = selectedCard.dataset.duration;
+                    updateSummary();
+                    saveData();
+
+                    // Scroll card into view
+                    selectedCard.scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+
+                    return true; // Success
+                } else {
+                    console.error(`Meeting card not found for type: ${type}`);
+                    return false; // Failure
+                }
+            } catch (error) {
+                console.error('Error selecting meeting type:', error);
+                return false;
+            }
+        }
+
+        function generateCalendar() {
+            const container = document.getElementById('calendar');
+            const today = new Date();
+            const days = [];
+
+            // Get selected location and celebrity
+            const selectedLocation = bookingData.location || '';
+            const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+
+            console.log('Generating calendar for:', { celebrity: celebrityName, location: selectedLocation });
+
+            if (!selectedLocation || !celebrityName) {
+                console.warn('Cannot generate calendar: missing celebrity or location');
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Please select a location to see available dates</p>';
+                return;
+            }
+
+            // Generate next 28 days (4 weeks)
+            let datesWithSlots = 0;
+            for (let i = 0; i < 28; i++) {
+                const date = new Date(today);
+                date.setDate(today.getDate() + i);
+                const dateStr = date.toISOString().split('T')[0];
+
+                const dayName = date.toLocaleDateString('en-US', { weekday: 'short' });
+                const dayNumber = date.getDate();
+
+                // Check if this date has available slots
+                const hasSlots = hasAvailableSlots(celebrityName, selectedLocation, dateStr);
+                const slots = hasSlots ? getAvailableSlots(celebrityName, selectedLocation, dateStr) : null;
+
+                if (hasSlots) datesWithSlots++;
+
+                // Build calendar day with slot indicator
+                let slotIndicator = '';
+                if (hasSlots && slots && slots.availableSlots > 0) {
+                    const slotCount = slots.availableSlots;
+                    const slotWord = slotCount === 1 ? 'slot' : 'slots';
+
+                    // Debug: Log slot count for verification
+                    if (i < 5) { // Only log first 5 dates to avoid spam
+                        console.log(`[CALENDAR BUILD] Day ${i}, Date ${dateStr}:`, {
+                            totalSlots: slots.totalSlots,
+                            availableSlots: slotCount,
+                            timesCount: slots.times ? slots.times.length : 0,
+                            htmlWillShow: `${slotCount} ${slotWord}`
+                        });
+                    }
+
+                    slotIndicator = `<div class="slots-indicator">${slotCount} ${slotWord}</div>`;
+                } else {
+                    // Explicitly no indicator for dates without slots
+                    slotIndicator = '';
+                }
+
+                days.push(`
+                    <div class="calendar-day ${!hasSlots ? 'disabled' : ''}"
+                         data-date="${dateStr}"
+                         data-available-slots="${slots ? slots.availableSlots : 0}"
+                         data-total-slots="${slots ? slots.totalSlots : 0}"
+                         data-has-slots="${hasSlots}"
+                         onclick="${hasSlots ? `selectDate('${dateStr}')` : ''}">
+                        <div class="day-name">${dayName}</div>
+                        <div class="day-number">${dayNumber}</div>
+                        ${slotIndicator}
+                    </div>
+                `);
+            }
+
+            container.innerHTML = days.join('');
+            console.log(`Calendar generated: ${datesWithSlots} dates with available slots`);
+
+            if (datesWithSlots === 0) {
+                container.innerHTML += '<p style="padding: 1rem; text-align: center; color: #ff6b6b;">No available dates for this location in the next 4 weeks. Please select a different location.</p>';
+            }
+        }
+
+        function selectDate(dateString) {
+            try {
+                // Remove previous selection
+                document.querySelectorAll('.calendar-day').forEach(day => {
+                    day.classList.remove('selected');
+                });
+
+                // Select new date
+                const selectedDay = document.querySelector(`[data-date="${dateString}"]`);
+                if (selectedDay && !selectedDay.classList.contains('disabled')) {
+                    selectedDay.classList.add('selected');
+                    bookingData.date = dateString;
+
+                    // Clear previously selected time since date changed
+                    bookingData.time = null;
+                    document.querySelectorAll('.time-slot').forEach(slot => {
+                        slot.classList.remove('selected');
+                    });
+
+                    updateSummary();
+                    saveData();
+
+                    // Update time slots for new date
+                    const period = document.getElementById('timePeriod').value;
+                    if (period) {
+                        updateTimeSlots();
+                    }
+
+                    const availableSlots = selectedDay.getAttribute('data-available-slots');
+                    console.log(`Date selected: ${new Date(dateString).toLocaleDateString()} (${availableSlots} slots available)`);
+                } else {
+                    console.warn('Selected date is disabled or not found');
+                }
+            } catch (error) {
+                console.error('Error selecting date:', error);
+            }
+        }
+
+        function updateTimeSlots() {
+            const container = document.getElementById('timeSlots');
+            const period = document.getElementById('timePeriod').value;
+
+            console.log('🔍 updateTimeSlots called with:', {
+                date: bookingData.date,
+                period: period,
+                location: bookingData.location
+            });
+
+            // Check if date is selected
+            if (!bookingData.date) {
+                document.getElementById('timeSlotsGroup').style.display = 'none';
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Please select a date first</p>';
+                console.warn('No date selected');
+                return;
+            }
+
+            // Check if period is selected
+            if (!period) {
+                document.getElementById('timeSlotsGroup').style.display = 'none';
+                console.log('No period selected yet');
+                return;
+            }
+
+            document.getElementById('timeSlotsGroup').style.display = 'block';
+
+            // Get available times for the selected date and location
+            const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+            const location = bookingData.location || '';
+            const dateStr = bookingData.date;
+
+            console.log('📅 Fetching slots for:', { celebrity: celebrityName, location, date: dateStr, period });
+
+            if (!celebrityName || !location || !dateStr) {
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #666;">Missing booking information</p>';
+                return;
+            }
+
+            // Get available slots for this date
+            const availabilitySlots = getAvailableSlots(celebrityName, location, dateStr);
+
+            if (!availabilitySlots || availabilitySlots.availableSlots === 0) {
+                container.innerHTML = '<p style="padding: 1rem; text-align: center; color: #ff6b6b;">No available time slots for this date</p>';
+                return;
+            }
+
+            // Filter times by period
+            const periodRanges = {
+                morning: { start: 9, end: 12 },
+                afternoon: { start: 12, end: 18 },
+                evening: { start: 18, end: 21 }
+            };
+
+            console.log('Available times before filtering:', availabilitySlots.times);
+            console.log('Selected period:', period, periodRanges[period]);
+
+            const range = periodRanges[period];
+            if (!range) {
+                console.error('Invalid period:', period);
+                container.innerHTML = `<p style="padding: 1rem; text-align: center; color: #ff6b6b;">Invalid time period selected</p>`;
+                return;
+            }
+
+            const filteredTimes = availabilitySlots.times.filter(time => {
+                const hour = parseInt(time.split(':')[0]);
+                const inRange = hour >= range.start && hour < range.end;
+                console.log(`Time ${time} (hour ${hour}): ${inRange ? 'IN' : 'OUT'} of range ${range.start}-${range.end}`);
+                return inRange;
+            });
+
+            console.log('Filtered times for', period, ':', filteredTimes);
+
+            if (filteredTimes.length === 0) {
+                container.innerHTML = `<p style="padding: 1rem; text-align: center; color: #ff6b6b;">No available slots in the ${period}. Try a different time period.</p>`;
+                return;
+            }
+
+            // Render available time slots
+            container.innerHTML = filteredTimes.map(time => {
+                // Convert 24h to 12h format with AM/PM
+                const [hour, minute] = time.split(':');
+                const hour24 = parseInt(hour);
+                const hour12 = hour24 % 12 || 12;
+                const ampm = hour24 < 12 ? 'AM' : 'PM';
+                const displayTime = `${hour12}:${minute} ${ampm}`;
+
+                return `
+                    <div class="time-slot"
+                         data-time="${time}"
+                         onclick="selectTime('${time}')">
+                        ${displayTime}
+                    </div>
+                `;
+            }).join('');
+
+            console.log(`${filteredTimes.length} time slots available for ${period}`);
+        }
+
+        function selectTime(time) {
+            try {
+                document.querySelectorAll('.time-slot').forEach(slot => {
+                    slot.classList.remove('selected');
+                });
+
+                const selectedSlot = document.querySelector(`[data-time="${time}"]`);
+                if (selectedSlot && !selectedSlot.classList.contains('disabled')) {
+                    selectedSlot.classList.add('selected');
+                    bookingData.time = time;
+                    updateSummary();
+                    saveData();
+                    console.log('Time slot selected:', time);
+                } else {
+                    console.warn('Selected time slot is disabled or not found');
+                }
+            } catch (error) {
+                console.error('Error selecting time:', error);
+            }
+        }
+
+        function updateSummary() {
+            // Update Step 1 summary
+            document.getElementById('summaryDuration').textContent = bookingData.duration || 'Not selected';
+
+            let dateTimeText = 'Not selected';
+            if (bookingData.date && bookingData.time) {
+                const date = new Date(bookingData.date);
+                dateTimeText = `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })} at ${bookingData.time}`;
+            }
+            document.getElementById('summaryDateTime').textContent = dateTimeText;
+            document.getElementById('summaryPrice').textContent = bookingData.price ? `$${bookingData.price.toLocaleString()}` : '$0';
+
+            // Update Step 3 summary
+            document.getElementById('appDateTime').textContent = dateTimeText;
+            document.getElementById('appMeetingType').textContent = bookingData.duration || '-';
+            document.getElementById('appPrice').textContent = bookingData.price ? `$${bookingData.price.toLocaleString()}` : '$0';
+
+            // Update Step 4 payment summary
+            updatePaymentSummary();
+        }
+
+        function updatePaymentSummary() {
+            const subtotal = bookingData.price || 0;
+            const serviceFee = Math.round(subtotal * 0.15);
+            const total = subtotal + serviceFee;
+
+            document.getElementById('paymentSubtotal').textContent = `$${subtotal.toLocaleString()}`;
+            document.getElementById('paymentServiceFee').textContent = `$${serviceFee.toLocaleString()}`;
+            document.getElementById('paymentTotal').textContent = `$${total.toLocaleString()}`;
+            document.getElementById('finalPaymentAmount').textContent = `$${total.toLocaleString()}`;
+
+            // Update meeting type display
+            const meetingTypeNames = {
+                quick: 'Quick Meet (15 min)',
+                standard: 'Standard Session (30 min)',
+                premium: 'Premium Experience (60 min)'
+            };
+            document.getElementById('paymentMeetingType').textContent = meetingTypeNames[bookingData.meetingType] || '-';
+
+            // Update date/time
+            let dateTimeText = '-';
+            if (bookingData.date && bookingData.time) {
+                const date = new Date(bookingData.date);
+                dateTimeText = `${date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} at ${bookingData.time}`;
+            }
+            document.getElementById('paymentDateTime').textContent = dateTimeText;
+            document.getElementById('paymentLocation').textContent = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+
+            // Store total for confirmation
+            bookingData.total = total;
+        }
+
+        // Navigation functions
+        function nextStep(step) {
+            try {
+                // Validate current step
+                if (!validateStep(currentStep)) {
+                    console.log(`Validation failed for step ${currentStep}`);
+                    return;
+                }
+
+                // If moving from step 1 to step 2, book the time slot
+                if (currentStep === 1 && step === 2) {
+                    const celebrityName = currentCelebrity ? currentCelebrity.name : '';
+                    const location = bookingData.location;
+                    const date = bookingData.date;
+                    const time = bookingData.time;
+
+                    if (celebrityName && location && date && time) {
+                        const booked = bookTimeSlot(celebrityName, location, date, time);
+                        if (!booked) {
+                            alert('This time slot is no longer available. Please select another time.');
+                            // Refresh time slots
+                            updateTimeSlots();
+                            return;
+                        }
+                        console.log('✅ Time slot successfully reserved');
+                    }
+                }
+
+                // Show loading
+                const btn = event.target.closest('.btn');
+                if (btn) btn.classList.add('loading');
+
+                // Simulate API call
+                setTimeout(() => {
+                    if (btn) btn.classList.remove('loading');
+
+                    // Save data
+                    saveData();
+
+                    // Update progress
+                    updateProgress(step);
+
+                    // Show next step
+                    showStep(step);
+
+                    // Scroll to top
+                    window.scrollTo({ top: 0, behavior: 'smooth' });
+
+                    console.log(`Moved to step ${step}`);
+                }, 800);
+            } catch (error) {
+                console.error('Error navigating to next step:', error);
+                alert('An error occurred. Please try again.');
+            }
+        }
+
+        function previousStep(step) {
+            updateProgress(step);
+            showStep(step);
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        function showStep(step) {
+            // Hide all steps
+            document.querySelectorAll('.step-content').forEach(content => {
+                content.classList.remove('active');
+            });
+
+            // Show target step
+            document.getElementById(`step${step}`).classList.add('active');
+            currentStep = step;
+        }
+
+        function updateProgress(step) {
+            // Update step circles
+            document.querySelectorAll('.progress-step').forEach((stepEl, index) => {
+                const stepNumber = index + 1;
+                stepEl.classList.remove('active', 'completed');
+
+                if (stepNumber < step) {
+                    stepEl.classList.add('completed');
+                    stepEl.querySelector('.step-circle').innerHTML = '✓';
+                } else if (stepNumber === step) {
+                    stepEl.classList.add('active');
+                    stepEl.querySelector('.step-circle').innerHTML = stepNumber;
+                } else {
+                    stepEl.querySelector('.step-circle').innerHTML = stepNumber;
+                }
+            });
+
+            // Update progress bar
+            const progress = ((step - 1) / 4) * 100;
+            document.getElementById('progressFill').style.width = `${progress}%`;
+        }
+
+        // Validation functions
+        function validateStep(step) {
+            if (step === 1) return validateStep1();
+            if (step === 2) return validateStep2();
+            if (step === 3) return validateStep3();
+            if (step === 4) return validateStep4();
+            return true;
+        }
+
+        function validateStep1() {
+            let isValid = true;
+
+            // Validate location
+            const locationSelect = document.getElementById('locationSelect');
+            if (!locationSelect || !locationSelect.value) {
+                showError('locationError');
+                isValid = false;
+            } else {
+                bookingData.location = locationSelect.value;
+            }
+
+            if (!bookingData.meetingType) {
+                alert('Please select a meeting type');
+                isValid = false;
+            }
+
+            if (!bookingData.date) {
+                showError('dateError');
+                isValid = false;
+            }
+
+            if (!bookingData.time) {
+                showError('timeError');
+                isValid = false;
+            }
+
+            return isValid;
+        }
+
+        function validateStep2() {
+            let isValid = true;
+
+            // Full name
+            const fullName = document.getElementById('fullName').value.trim();
+            if (fullName.length < 2) {
+                showFieldError('fullName', 'fullNameError');
+                isValid = false;
+            }
+
+            // Email
+            const email = document.getElementById('email').value.trim();
+            const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
+            if (!emailRegex.test(email)) {
+                showFieldError('email', 'emailError');
+                isValid = false;
+            }
+
+            // Phone
+            const phone = document.getElementById('phone').value.replace(/\D/g, '');
+            if (phone.length < 10 || phone.length > 15) {
+                showFieldError('phone', 'phoneError');
+                isValid = false;
+            }
+
+            // Country
+            if (!document.getElementById('country').value) {
+                showFieldError('country', 'countryError');
+                isValid = false;
+            }
+
+            // City
+            if (document.getElementById('city').value.trim().length < 2) {
+                showFieldError('city', 'cityError');
+                isValid = false;
+            }
+
+            // Date of birth (18+)
+            const dob = new Date(document.getElementById('dob').value);
+            const age = (Date.now() - dob.getTime()) / (1000 * 60 * 60 * 24 * 365);
+            if (age < 18) {
+                showFieldError('dob', 'dobError');
+                isValid = false;
+            }
+
+            if (isValid) {
+                bookingData.fullName = fullName;
+                bookingData.email = email;
+                bookingData.phone = phone;
+                bookingData.country = document.getElementById('country').value;
+                bookingData.city = document.getElementById('city').value;
+                bookingData.dob = document.getElementById('dob').value;
+            }
+
+            return isValid;
+        }
+
+        function validateStep3() {
+            let isValid = true;
+
+            // Why meet
+            const whyMeet = document.getElementById('whyMeet').value.trim();
+            if (whyMeet.length < 100) {
+                showFieldError('whyMeet', 'whyMeetError');
+                isValid = false;
+            }
+
+            // What discuss
+            const whatDiscuss = document.getElementById('whatDiscuss').value.trim();
+            if (whatDiscuss.length < 100) {
+                showFieldError('whatDiscuss', 'whatDiscussError');
+                isValid = false;
+            }
+
+            // Background
+            if (!document.getElementById('background').value) {
+                showFieldError('background', 'backgroundError');
+                isValid = false;
+            }
+
+            // Terms
+            if (!document.getElementById('termsAccept').checked) {
+                showError('termsError');
+                isValid = false;
+            }
+
+            // Cancellation
+            if (!document.getElementById('cancellationAccept').checked) {
+                showError('cancellationError');
+                isValid = false;
+            }
+
+            if (isValid) {
+                bookingData.whyMeet = whyMeet;
+                bookingData.whatDiscuss = whatDiscuss;
+                bookingData.background = document.getElementById('background').value;
+                bookingData.instagram = document.getElementById('instagram').value;
+                bookingData.twitter = document.getElementById('twitter').value;
+            }
+
+            return isValid;
+        }
+
+        function validateStep4() {
+            let isValid = true;
+
+            // Card number (16 digits)
+            const cardNumber = document.getElementById('cardNumber').value.replace(/\D/g, '');
+            if (cardNumber.length !== 16) {
+                showFieldError('cardNumber', 'cardNumberError');
+                isValid = false;
+            }
+
+            // Cardholder name
+            if (document.getElementById('cardholderName').value.trim().length < 2) {
+                showFieldError('cardholderName', 'cardholderNameError');
+                isValid = false;
+            }
+
+            // Expiry date
+            const expiry = document.getElementById('expiryDate').value;
+            const expiryRegex = /^\d{2}\/\d{2}$/;
+            if (!expiryRegex.test(expiry)) {
+                showFieldError('expiryDate', 'expiryDateError');
+                isValid = false;
+            }
+
+            // CVV
+            const cvv = document.getElementById('cvv').value;
+            if (cvv.length < 3 || cvv.length > 4) {
+                showFieldError('cvv', 'cvvError');
+                isValid = false;
+            }
+
+            if (isValid) {
+                bookingData.cardNumber = cardNumber;
+                bookingData.cardholderName = document.getElementById('cardholderName').value;
+                bookingData.expiryDate = expiry;
+            }
+
+            return isValid;
+        }
+
+        function showFieldError(fieldId, errorId) {
+            const field = document.getElementById(fieldId);
+            const error = document.getElementById(errorId);
+            field.classList.add('error');
+            error.classList.add('show');
+
+            // Remove error on input
+            field.addEventListener('input', () => {
+                field.classList.remove('error');
+                error.classList.remove('show');
+            }, { once: true });
+        }
+
+        function hideError(errorId) {
+            const error = document.getElementById(errorId);
+            if (error) {
+                error.classList.remove('show');
+            }
+        }
+
+        function showError(errorId) {
+            const error = document.getElementById(errorId);
+            if (error) {
+                error.classList.add('show');
+
+                setTimeout(() => {
+                    error.classList.remove('show');
+                }, 3000);
+            }
+        }
+
+        // Complete booking
+        function completeBooking() {
+            if (!validateStep(4)) {
+                return;
+            }
+
+            const btn = event.target.closest('.btn');
+            btn.classList.add('loading');
+
+            // Simulate payment processing
+            setTimeout(() => {
+                btn.classList.remove('loading');
+
+                // Generate reference number
+                const referenceNumber = `SM-2025-${Math.floor(Math.random() * 900000 + 100000)}`;
+                bookingData.referenceNumber = referenceNumber;
+
+                // Update confirmation page
+                updateConfirmationPage();
+
+                // Clear localStorage
+                localStorage.removeItem('bookingData');
+
+                // Go to confirmation
+                updateProgress(5);
+                showStep(5);
+                window.scrollTo({ top: 0, behavior: 'smooth' });
+            }, 2000);
+        }
+
+        function updateConfirmationPage() {
+            document.getElementById('referenceNumber').textContent = bookingData.referenceNumber;
+
+            const meetingTypeNames = {
+                quick: 'Quick Meet (15 min)',
+                standard: 'Standard Session (30 min)',
+                premium: 'Premium Experience (60 min)'
+            };
+            document.getElementById('confirmMeetingType').textContent = meetingTypeNames[bookingData.meetingType];
+
+            let dateTimeText = '-';
+            if (bookingData.date && bookingData.time) {
+                const date = new Date(bookingData.date);
+                dateTimeText = `${date.toLocaleDateString('en-US', { weekday: 'long', month: 'long', day: 'numeric', year: 'numeric' })} at ${bookingData.time}`;
+            }
+            document.getElementById('confirmDateTime').textContent = dateTimeText;
+            document.getElementById('confirmLocation').textContent = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+            document.getElementById('confirmTotal').textContent = `$${bookingData.total.toLocaleString()}`;
+        }
+
+        // Helper functions
+        function updateCharCount(fieldId) {
+            const field = document.getElementById(fieldId);
+            const count = document.getElementById(`${fieldId}Count`);
+            count.textContent = `${field.value.length} / 500 characters (min 100)`;
+        }
+
+        function handleFileUpload(event) {
+            const file = event.target.files[0];
+            if (file) {
+                if (file.size > 5 * 1024 * 1024) {
+                    alert('File size must be less than 5MB');
+                    return;
+                }
+                document.getElementById('fileName').textContent = `✓ ${file.name}`;
+            }
+        }
+
+        function formatCardNumber(event) {
+            let value = event.target.value.replace(/\D/g, '');
+            value = value.replace(/(.{4})/g, '$1 ').trim();
+            event.target.value = value;
+        }
+
+        function formatExpiryDate(event) {
+            let value = event.target.value.replace(/\D/g, '');
+            if (value.length >= 2) {
+                value = value.substring(0, 2) + '/' + value.substring(2, 4);
+            }
+            event.target.value = value;
+        }
+
+        function toggleCoupon() {
+            document.getElementById('couponGroup').classList.toggle('show');
+        }
+
+        function applyCoupon() {
+            const code = document.getElementById('couponCode').value.toUpperCase();
+            if (code === 'FIRST10') {
+                alert('10% discount applied!');
+                // Apply discount logic here
+            } else {
+                alert('Invalid coupon code');
+            }
+        }
+
+        function downloadReceipt() {
+            alert('Receipt download will be available soon!');
+        }
+
+        function addToCalendar() {
+            alert('Calendar invite will be sent to your email!');
+        }
+
+        // Cancel modal
+        const cancelBtn = document.getElementById('cancelBtn');
+        if (cancelBtn) {
+            cancelBtn.addEventListener('click', (e) => {
+                e.preventDefault();
+                document.getElementById('cancelModal').classList.add('show');
+            });
+        }
+
+        function closeCancelModal() {
+            document.getElementById('cancelModal').classList.remove('show');
+        }
+
+        function confirmCancel() {
+            localStorage.removeItem('bookingData');
+            window.location.href = 'browse.html';
+        }
+
+        // Data persistence
+        function saveData() {
+            localStorage.setItem('bookingData', JSON.stringify(bookingData));
+        }
+
+        function loadSavedData() {
+            const saved = localStorage.getItem('bookingData');
+            if (saved) {
+                const data = JSON.parse(saved);
+
+                // Only restore if same celebrity
+                if (data.celebrity === currentCelebrity.name) {
+                    bookingData = data;
+
+                    // Restore form values
+                    if (data.fullName) document.getElementById('fullName').value = data.fullName;
+                    if (data.email) document.getElementById('email').value = data.email;
+                    if (data.phone) document.getElementById('phone').value = data.phone;
+                    if (data.country) document.getElementById('country').value = data.country;
+                    if (data.city) document.getElementById('city').value = data.city;
+                    if (data.dob) document.getElementById('dob').value = data.dob;
+                    if (data.whyMeet) {
+                        document.getElementById('whyMeet').value = data.whyMeet;
+                        updateCharCount('whyMeet');
+                    }
+                    if (data.whatDiscuss) {
+                        document.getElementById('whatDiscuss').value = data.whatDiscuss;
+                        updateCharCount('whatDiscuss');
+                    }
+                    if (data.background) document.getElementById('background').value = data.background;
+                    if (data.instagram) document.getElementById('instagram').value = data.instagram;
+                    if (data.twitter) document.getElementById('twitter').value = data.twitter;
+                }
+            }
+
+            bookingData.celebrity = currentCelebrity.name;
+        }
+
+        // Initialize on page load - wait for DOM to be ready
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', initializePage);
+        } else {
+            // DOM already loaded
+            initializePage();
+        }
+    </script>
+</body>
+</html>

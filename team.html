@@ -1,0 +1,379 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Meet the team behind StarryMeet - connecting fans with celebrities for authentic, meaningful experiences.">
+    <title>Our Team - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        body { background: var(--bg-primary); }
+        .hero { text-align: center; padding: 140px 24px 80px; margin-top: var(--nav-height); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 24px; line-height: 1.1; }
+        .hero p { font-size: 1.25rem; opacity: 0.8; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+        .container { max-width: 1200px; margin: 0 auto; padding: 0 24px 100px; }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 80px 0 48px;
+            text-align: center;
+            position: relative;
+        }
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #EA1279, #A434E5);
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+
+        .team-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 32px;
+            margin-bottom: 60px;
+        }
+
+        .team-member {
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.08);
+            border-radius: 20px;
+            padding: 32px;
+            text-align: center;
+            transition: all 0.3s ease;
+        }
+
+        .team-member:hover {
+            transform: translateY(-8px);
+            border-color: rgba(234, 18, 121, 0.3);
+            background: rgba(255, 255, 255, 0.05);
+            box-shadow: 0 12px 40px rgba(234, 18, 121, 0.15);
+        }
+
+        .member-avatar {
+            width: 120px;
+            height: 120px;
+            background: linear-gradient(135deg, #EA1279, #A434E5);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 3rem;
+            font-weight: 700;
+            color: #ffffff;
+            margin: 0 auto 20px;
+        }
+
+        .member-name {
+            font-size: 1.375rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .member-role {
+            font-size: 1rem;
+            color: var(--primary);
+            font-weight: 600;
+            margin-bottom: 12px;
+        }
+
+        .member-bio {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            opacity: 0.7;
+            margin-bottom: 16px;
+        }
+
+        .member-linkedin {
+            display: inline-flex;
+            align-items: center;
+            gap: 6px;
+            font-size: 0.875rem;
+            color: var(--primary);
+            text-decoration: none;
+            opacity: 0.8;
+            transition: opacity 0.2s;
+        }
+
+        .member-linkedin:hover {
+            opacity: 1;
+        }
+
+        .join-team {
+            background: linear-gradient(135deg, rgba(234, 18, 121, 0.08), rgba(164, 52, 229, 0.08));
+            border: 2px solid rgba(234, 18, 121, 0.2);
+            border-radius: 24px;
+            padding: 60px 40px;
+            text-align: center;
+            margin-top: 80px;
+        }
+
+        .join-team h2 {
+            font-size: 2.5rem;
+            font-weight: 700;
+            margin-bottom: 20px;
+        }
+
+        .join-team p {
+            font-size: 1.125rem;
+            opacity: 0.8;
+            margin-bottom: 32px;
+            line-height: 1.6;
+        }
+
+        .btn-join {
+            display: inline-block;
+            background: linear-gradient(135deg, #EA1279, #A434E5);
+            color: #ffffff;
+            padding: 16px 48px;
+            border-radius: 50px;
+            font-size: 1.125rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+        }
+
+        .btn-join:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 12px 32px rgba(234, 18, 121, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 100px 24px 60px; }
+            .hero h1 { font-size: 2rem; }
+            .team-grid { grid-template-columns: 1fr; gap: 24px; }
+            .section-title { font-size: 1.75rem; margin: 60px 0 32px; }
+            .join-team { padding: 40px 24px; }
+            .join-team h2 { font-size: 1.75rem; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
+            <ul class="nav-links">
+                <li class="nav-item-categories">
+                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                    <div class="categories-dropdown" id="categoriesDropdown">
+                        <a href="browse.html?category=Hollywood">Hollywood</a>
+                        <a href="browse.html?category=Musicians">Musicians</a>
+                        <a href="browse.html?category=Athletes">Athletes</a>
+                        <a href="browse.html?category=K-Drama">K-Drama</a>
+                        <a href="browse.html?category=Business">Business</a>
+                        <a href="browse.html">View all</a>
+                    </div>
+                </li>
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How it works</a></li>
+                <li><a href="for-celebrities.html" class="for-talent-link">For talent</a></li>
+            </ul>
+            <div class="nav-buttons">
+                <a href="dashboard.html" class="nav-btn nav-btn-secondary">Sign in</a>
+                <a href="dashboard.html" class="nav-btn nav-btn-primary">Sign up</a>
+            </div>
+        </div>
+        <div class="mobile-menu" id="mobileMenu">
+            <a href="browse.html">Browse</a>
+            <a href="how-it-works.html">How it works</a>
+            <a href="for-celebrities.html">For talent</a>
+            <a href="dashboard.html">Sign in</a>
+            <a href="dashboard.html" class="mobile-menu-cta">Sign up</a>
+        </div>
+    </nav>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Meet the team</h1>
+        <p>We're a passionate group dedicated to creating meaningful connections between fans and the people who inspire them.</p>
+    </div>
+
+    <!-- Team Members -->
+    <div class="container">
+        <!-- Leadership -->
+        <h2 class="section-title">Leadership</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">AS</div>
+                <h3 class="member-name">Alexandra Stone</h3>
+                <div class="member-role">Co-Founder & CEO</div>
+                <p class="member-bio">Former Head of Talent Relations at WME. 15+ years connecting brands with A-list talent. Stanford MBA.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">MC</div>
+                <h3 class="member-name">Marcus Chen</h3>
+                <div class="member-role">Co-Founder & CTO</div>
+                <p class="member-bio">Ex-Google Senior Engineer. Built scalable platforms serving 100M+ users. MIT Computer Science.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">NP</div>
+                <h3 class="member-name">Natalie Patel</h3>
+                <div class="member-role">Chief Operating Officer</div>
+                <p class="member-bio">Former VP of Operations at Airbnb Experiences. Expert in marketplace dynamics and operational excellence.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Product & Engineering -->
+        <h2 class="section-title">Product & Engineering</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">JK</div>
+                <h3 class="member-name">James Kim</h3>
+                <div class="member-role">VP of Product</div>
+                <p class="member-bio">Led product at Cameo and Patreon. Deep understanding of creator economy and fan engagement platforms.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">SR</div>
+                <h3 class="member-name">Sofia Rodriguez</h3>
+                <div class="member-role">Head of Engineering</div>
+                <p class="member-bio">Previously at Stripe and Square. Specialized in payment systems, security, and high-availability infrastructure.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">DW</div>
+                <h3 class="member-name">David Wang</h3>
+                <div class="member-role">Senior Product Designer</div>
+                <p class="member-bio">Award-winning designer from Spotify. Creates beautiful, intuitive experiences that users love.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Celebrity Relations & Operations -->
+        <h2 class="section-title">Celebrity Relations & Operations</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">ER</div>
+                <h3 class="member-name">Emma Richardson</h3>
+                <div class="member-role">VP of Celebrity Relations</div>
+                <p class="member-bio">20 years at CAA representing A-list talent. Deep relationships across entertainment, sports, and business.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">LJ</div>
+                <h3 class="member-name">Lucas Johnson</h3>
+                <div class="member-role">Director of Talent Partnerships</div>
+                <p class="member-bio">Former manager at Roc Nation. Expert at building trust and long-term partnerships with celebrities and their teams.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">PM</div>
+                <h3 class="member-name">Priya Mehta</h3>
+                <div class="member-role">Head of Operations</div>
+                <p class="member-bio">Managed high-stakes events for Fortune 500 executives. Ensures every meeting is flawless and memorable.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Marketing & Growth -->
+        <h2 class="section-title">Marketing & Growth</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">TC</div>
+                <h3 class="member-name">Taylor Cooper</h3>
+                <div class="member-role">VP of Marketing</div>
+                <p class="member-bio">Built iconic campaigns at Nike and Apple. Expert in storytelling that resonates with diverse audiences.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">KL</div>
+                <h3 class="member-name">Kai Lee</h3>
+                <div class="member-role">Head of Growth</div>
+                <p class="member-bio">Growth lead at TikTok and Uber. Data-driven approach to scaling user acquisition and retention.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">AH</div>
+                <h3 class="member-name">Aisha Harris</h3>
+                <div class="member-role">Content & Community Lead</div>
+                <p class="member-bio">Former editor at Rolling Stone. Creates compelling stories that highlight meaningful fan-celebrity connections.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Trust & Safety -->
+        <h2 class="section-title">Trust & Safety</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">RB</div>
+                <h3 class="member-name">Rachel Brooks</h3>
+                <div class="member-role">Head of Trust & Safety</div>
+                <p class="member-bio">Former FBI special agent and Airbnb Trust & Safety leader. Protects both celebrities and fans with rigorous protocols.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">VM</div>
+                <h3 class="member-name">Victor Martinez</h3>
+                <div class="member-role">Security Operations Manager</div>
+                <p class="member-bio">20 years in executive protection and event security. Ensures every meeting is safe, private, and professional.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">JT</div>
+                <h3 class="member-name">Jordan Taylor</h3>
+                <div class="member-role">Legal Counsel</div>
+                <p class="member-bio">Entertainment lawyer from Sony Music. Navigates complex contracts and ensures compliance across all jurisdictions.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Customer Experience -->
+        <h2 class="section-title">Customer Experience</h2>
+        <div class="team-grid">
+            <div class="team-member">
+                <div class="member-avatar">OA</div>
+                <h3 class="member-name">Olivia Anderson</h3>
+                <div class="member-role">Head of Customer Success</div>
+                <p class="member-bio">Built support teams at Zappos and Ritz-Carlton. Obsessed with creating 5-star experiences for every user.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+
+            <div class="team-member">
+                <div class="member-avatar">CN</div>
+                <h3 class="member-name">Chris Nguyen</h3>
+                <div class="member-role">Customer Support Lead</div>
+                <p class="member-bio">Trained in hospitality management. Ensures every inquiry is handled with empathy, speed, and professionalism.</p>
+                <a href="#" class="member-linkedin">🔗 LinkedIn</a>
+            </div>
+        </div>
+
+        <!-- Join the Team -->
+        <div class="join-team">
+            <h2>Join our mission</h2>
+            <p>We're always looking for talented, passionate people who want to create meaningful experiences and change how fans connect with their heroes.</p>
+            <a href="contact.html" class="btn-join">View Open Positions</a>
+        </div>
+    </div>
+
+    <footer></footer>
+
+    <script>
+        // Load footer
+        fetch('footer.html')
+            .then(response => response.text())
+            .then(data => {
+                document.querySelector('footer').innerHTML = data;
+            });
+    </script>
+</body>
+</html>

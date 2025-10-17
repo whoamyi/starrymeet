@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="StarryMeet Terms of Service. Learn about our policies, user conduct, booking terms, refunds, liability, and legal agreements for celebrity meetups.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/terms.html">
+    <meta property="og:title" content="Terms of Service - StarryMeet">
+    <meta property="og:description" content="StarryMeet Terms of Service. Learn about our policies, user conduct, booking terms, refunds, liability, and legal agreements for celebrity meetups.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Terms of Service - StarryMeet">
+    <meta name="twitter:description" content="StarryMeet Terms of Service. Learn about our policies, user conduct, booking terms, refunds, liability, and legal agreements for celebrity meetups.">
+
+    <title>Terms of Service - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        /* Page-specific styles - inherit dark theme from shared.css */
+        .hero {
+            background: var(--primary-gradient);
+            margin-top: var(--nav-height);
+            padding: var(--space-20) var(--space-8);
+            text-align: center;
+        }
+
+        .hero h1 {
+            font-size: clamp(1.125rem, 4vw, 1.5rem);
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+        }
+
+        .hero p {
+            font-size: var(--text-xl);
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-16) var(--space-8);
+        }
+
+        .content-section {
+            background: #000000;
+            padding: var(--space-12);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            margin-bottom: var(--space-8);
+        }
+
+        .content-section h2 {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            color: var(--primary);
+            margin-bottom: var(--space-6);
+        }
+
+        .content-section h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            color: var(--text-primary);
+            margin: var(--space-8) 0 var(--space-4);
+        }
+
+        .content-section p {
+            margin-bottom: var(--space-4);
+            line-height: 1.5;
+        }
+
+        .content-section ul,
+        .content-section ol {
+            margin: var(--space-4) 0 var(--space-4) var(--space-8);
+            line-height: 1.5;
+        }
+
+        .content-section li {
+            margin-bottom: var(--space-2);
+        }
+
+        .last-updated {
+            text-align: center;
+            color: var(--text-tertiary);
+            font-style: italic;
+            margin-bottom: var(--space-12);
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <h1>Terms of Service</h1>
+        <p>Please read these terms carefully before using StarryMeet</p>
+    </section>
+
+    <div class="container">
+        <p class="last-updated">Last Updated: January 15, 2025</p>
+
+        <div class="content-section">
+            <h2>1. Acceptance of Terms</h2>
+            <p>By accessing and using StarryMeet ("the Platform"), you accept and agree to be bound by the terms and provisions of this agreement. If you do not agree to these Terms of Service, please do not use the Platform.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>2. Description of Service</h2>
+            <p>StarryMeet is a platform that connects fans with celebrities for exclusive in-person meetings and experiences. We provide a marketplace where verified celebrities offer scheduled meetup opportunities, and users can book these experiences.</p>
+            <p>The Platform facilitates:</p>
+            <ul>
+                <li>Browsing celebrity profiles and availability</li>
+                <li>Booking and payment processing for celebrity meetups</li>
+                <li>Communication between fans and celebrity management teams</li>
+                <li>Verification and authentication of celebrity identities</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>3. User Accounts</h2>
+            <h3>3.1 Account Creation</h3>
+            <p>To book a celebrity meetup, you must create an account by providing accurate, current, and complete information. You are responsible for maintaining the confidentiality of your account credentials.</p>
+            <h3>3.2 Account Responsibilities</h3>
+            <p>You agree to:</p>
+            <ul>
+                <li>Provide accurate and truthful information during registration</li>
+                <li>Maintain the security of your password and account</li>
+                <li>Notify us immediately of any unauthorized use of your account</li>
+                <li>Be responsible for all activities that occur under your account</li>
+            </ul>
+            <h3>3.3 Account Termination</h3>
+            <p>We reserve the right to suspend or terminate your account if you violate these terms or engage in fraudulent, abusive, or illegal activities.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>4. Booking and Payments</h2>
+            <h3>4.1 Booking Process</h3>
+            <p>When you book a celebrity meetup, you enter into a binding agreement to pay the listed price plus any applicable fees. All bookings are subject to availability and confirmation.</p>
+            <h3>4.2 Pricing</h3>
+            <p>Prices are set by the celebrities or their management teams and are displayed in USD. Prices may vary based on location, duration, and type of experience. All prices are inclusive of applicable platform fees unless otherwise stated.</p>
+            <h3>4.3 Payment Terms</h3>
+            <p>Payment is required in full at the time of booking. We accept major credit cards, debit cards, and other payment methods as indicated on the Platform. All payments are processed securely through our payment partners.</p>
+            <h3>4.4 Refund Policy</h3>
+            <p>Refunds are handled according to the cancellation policy specified for each booking:</p>
+            <ul>
+                <li><strong>Full Refund:</strong> Cancellations made 7+ days before the scheduled meetup</li>
+                <li><strong>50% Refund:</strong> Cancellations made 3-6 days before the scheduled meetup</li>
+                <li><strong>No Refund:</strong> Cancellations made less than 3 days before the scheduled meetup</li>
+                <li><strong>Celebrity Cancellation:</strong> Full refund if the celebrity cancels for any reason</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>5. Celebrity Verification</h2>
+            <p>We take celebrity verification seriously. All celebrities on our Platform undergo a multi-step verification process including:</p>
+            <ul>
+                <li>Identity verification through government-issued documentation</li>
+                <li>Social media account verification</li>
+                <li>Management team confirmation</li>
+                <li>Video verification calls</li>
+            </ul>
+            <p>However, we do not guarantee the authenticity of any celebrity and encourage users to exercise reasonable judgment.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>6. User Conduct</h2>
+            <p>You agree not to:</p>
+            <ul>
+                <li>Harass, abuse, or harm celebrities or other users</li>
+                <li>Use the Platform for any illegal or unauthorized purpose</li>
+                <li>Impersonate any person or entity</li>
+                <li>Share, sell, or transfer your account to another person</li>
+                <li>Attempt to gain unauthorized access to the Platform or related systems</li>
+                <li>Record, photograph, or stream any part of the meetup without explicit written permission</li>
+                <li>Use the Platform to collect personal information about other users</li>
+                <li>Post or transmit any harmful, offensive, or inappropriate content</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>7. Intellectual Property</h2>
+            <p>The Platform and its original content, features, and functionality are owned by StarryMeet and are protected by international copyright, trademark, patent, trade secret, and other intellectual property laws.</p>
+            <p>You may not:</p>
+            <ul>
+                <li>Reproduce, distribute, or create derivative works from our content</li>
+                <li>Use our trademarks or branding without written permission</li>
+                <li>Remove or alter any copyright, trademark, or other proprietary notices</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>8. Limitation of Liability</h2>
+            <p>StarryMeet acts as a platform connecting fans with celebrities. We are not responsible for:</p>
+            <ul>
+                <li>The quality, safety, or legality of celebrity meetups</li>
+                <li>The accuracy of celebrity profiles or information</li>
+                <li>Any direct, indirect, incidental, or consequential damages arising from your use of the Platform</li>
+                <li>Any disputes between users and celebrities</li>
+                <li>Any personal injury or property damage related to meetups</li>
+            </ul>
+            <p>Our total liability to you for any claims arising from your use of the Platform shall not exceed the amount you paid to us in the 12 months preceding the claim.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>9. Indemnification</h2>
+            <p>You agree to indemnify, defend, and hold harmless StarryMeet, its affiliates, and their respective officers, directors, employees, and agents from any claims, liabilities, damages, losses, and expenses arising out of or in any way connected with:</p>
+            <ul>
+                <li>Your use of the Platform</li>
+                <li>Your violation of these Terms of Service</li>
+                <li>Your violation of any rights of another party</li>
+                <li>Your conduct at celebrity meetups</li>
+            </ul>
+        </div>
+
+        <div class="content-section">
+            <h2>10. Privacy</h2>
+            <p>Your use of the Platform is also governed by our <a href="privacy.html" style="color: var(--purple); text-decoration: underline;">Privacy Policy</a>. Please review our Privacy Policy to understand our practices regarding the collection and use of your personal information.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>11. Modifications to Terms</h2>
+            <p>We reserve the right to modify these Terms of Service at any time. We will notify users of significant changes via email or through a notice on the Platform. Your continued use of the Platform after such modifications constitutes your acceptance of the updated terms.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>12. Governing Law</h2>
+            <p>These Terms shall be governed by and construed in accordance with the laws of the State of California, United States, without regard to its conflict of law provisions.</p>
+        </div>
+
+        <div class="content-section">
+            <h2>13. Contact Information</h2>
+            <p>If you have any questions about these Terms of Service, please contact us at:</p>
+            <p>
+                <strong>Email:</strong> legal@starrymeet.com<br>
+                <strong>Address:</strong> StarryMeet Inc., 123 Celebrity Boulevard, Los Angeles, CA 90028<br>
+                <strong>Phone:</strong> +1 (555) 123-4567
+            </p>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+</body>
+</html>
