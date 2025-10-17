@@ -613,3 +613,38 @@ if (typeof module !== 'undefined' && module.exports) {
 
 // Log initialization
 console.log('StarryMeet Shared JS loaded -', CELEBRITIES.length, 'celebrities available');
+
+// ========================================
+// AUTHENTICATION MODAL INJECTION
+// ========================================
+
+/**
+ * Dynamically load and inject the authentication modal into the page
+ */
+function loadAuthModal() {
+    // Detect if we're in a subdirectory (like blog/)
+    const path = window.location.pathname;
+    const isSubdirectory = path.includes('/blog/');
+    const prefix = isSubdirectory ? '../' : '';
+
+    fetch(`${prefix}components/auth-modal.html`)
+        .then(response => response.text())
+        .then(html => {
+            const modalContainer = document.createElement('div');
+            modalContainer.innerHTML = html;
+            document.body.appendChild(modalContainer.firstElementChild);
+
+            // Load auth.js after modal is injected
+            const authScript = document.createElement('script');
+            authScript.src = `${prefix}js/auth.js`;
+            document.head.appendChild(authScript);
+        })
+        .catch(error => {
+            console.error('Failed to load auth modal:', error);
+        });
+}
+
+// Load auth modal when DOM is ready
+if (typeof document !== 'undefined') {
+    document.addEventListener('DOMContentLoaded', loadAuthModal);
+}
