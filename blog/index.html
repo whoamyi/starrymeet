@@ -1,0 +1,344 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Everything you need to know about meeting celebrities—from costs and logistics to what to say and how to stand out. Real advice from people who've made it happen.">
+    <meta property="og:title" content="StarryMeet Blog - Your Guide to Meeting Celebrities">
+    <meta property="og:description" content="Everything you need to know about meeting celebrities—from costs and logistics to what to say and how to stand out. Real advice from people who've made it happen.">
+    <title>Blog - StarryMeet</title>
+    <link rel="stylesheet" href="../css/shared.css">
+    <script src="../js/shared.js"></script>
+    <style>
+        body { background: var(--bg-primary); }
+        #navbar { position: sticky; top: 0; z-index: 1000; }
+
+        .blog-hero {
+            padding: 140px 24px 80px;
+            margin-top: var(--nav-height);
+            text-align: center;
+            max-width: 900px;
+            margin-left: auto;
+            margin-right: auto;
+        }
+
+        .blog-hero h1 {
+            font-size: clamp(2.5rem, 6vw, 4rem);
+            font-weight: 700;
+            margin-bottom: 20px;
+            line-height: 1.1;
+        }
+
+        .blog-hero p {
+            font-size: 1.25rem;
+            opacity: 0.8;
+            max-width: 600px;
+            margin: 0 auto;
+            line-height: 1.6;
+        }
+
+        .blog-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 24px 100px;
+        }
+
+        .blog-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
+            gap: 32px;
+            margin-top: 60px;
+        }
+
+        .blog-card {
+            background: rgba(234, 18, 121, 0.03);
+            border: 1px solid rgba(234, 18, 121, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+            text-decoration: none;
+            display: block;
+        }
+
+        .blog-card:hover {
+            transform: translateY(-4px);
+            border-color: rgba(234, 18, 121, 0.3);
+            background: rgba(234, 18, 121, 0.05);
+            box-shadow: 0 12px 32px rgba(234, 18, 121, 0.3);
+        }
+
+        .blog-card-category {
+            display: inline-block;
+            background: rgba(234, 18, 121, 0.15);
+            color: var(--primary);
+            padding: 6px 16px;
+            border-radius: 20px;
+            font-size: 0.8125rem;
+            font-weight: 600;
+            margin-bottom: 16px;
+        }
+
+        .blog-card h2 {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 12px;
+            line-height: 1.3;
+            color: #ffffff;
+        }
+
+        .blog-card-excerpt {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            margin-bottom: 20px;
+        }
+
+        .blog-card-meta {
+            display: flex;
+            align-items: center;
+            gap: 16px;
+            font-size: 0.875rem;
+            opacity: 0.6;
+        }
+
+        .featured-post {
+            grid-column: 1 / -1;
+            background: linear-gradient(135deg, rgba(234, 18, 121, 0.08), rgba(164, 52, 229, 0.08));
+            border: 2px solid rgba(234, 18, 121, 0.3);
+        }
+
+        .featured-post h2 {
+            font-size: 2rem;
+        }
+
+        @media (max-width: 768px) {
+            .blog-hero { padding: 100px 20px 60px; }
+            .blog-container { padding: 0 20px 80px; }
+            .blog-grid { grid-template-columns: 1fr; gap: 24px; }
+            .featured-post { grid-column: 1; }
+            .blog-card { padding: 24px; }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
+            <ul class="nav-links">
+                <li class="nav-item-categories">
+                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                    <div class="categories-dropdown" id="categoriesDropdown">
+                        <a href="../browse.html?category=Hollywood">Hollywood</a>
+                        <a href="../browse.html?category=Musicians">Musicians</a>
+                        <a href="../browse.html?category=Athletes">Athletes</a>
+                        <a href="../browse.html?category=K-Drama">K-Drama</a>
+                        <a href="../browse.html?category=Business">Business</a>
+                        <a href="../browse.html">View all</a>
+                    </div>
+                </li>
+                <li><a href="../how-it-works.html">How it works</a></li>
+                <li><a href="../for-celebrities.html">Join as star</a></li>
+                <li><a href="../dashboard.html">Log in</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="../index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li class="mobile-menu-categories">
+                <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
+                <ul class="mobile-submenu" id="mobileSubmenu">
+                    <li><a href="../browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
+                    <li><a href="../browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
+                    <li><a href="../browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
+                    <li><a href="../browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
+                    <li><a href="../browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
+                </ul>
+            </li>
+            <li><a href="../how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
+            <li><a href="../for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
+            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
+            <li class="mobile-menu-login-item"><a href="../dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero -->
+    <div class="blog-hero">
+        <h1>The StarryMeet Blog</h1>
+        <p>Real advice about meeting celebrities—from people who've actually made it happen</p>
+    </div>
+
+    <!-- Blog Grid -->
+    <div class="blog-container">
+        <div class="blog-grid">
+            <!-- Featured Post -->
+            <a href="how-to-meet-your-favorite-celebrity.html" class="blog-card featured-post">
+                <span class="blog-card-category">FEATURED</span>
+                <h2>How to Actually Meet Your Favorite Celebrity (The Real Way)</h2>
+                <p class="blog-card-excerpt">Tired of fake advice? Here's how to actually meet your favorite celebrity in person—verified methods that work, from someone who's seen it happen hundreds of times.</p>
+                <div class="blog-card-meta">
+                    <span>9 min read</span>
+                    <span>•</span>
+                    <span>Meeting Celebrities</span>
+                </div>
+            </a>
+
+            <!-- Regular Posts -->
+            <a href="how-much-does-it-cost-to-meet-a-celebrity.html" class="blog-card">
+                <span class="blog-card-category">Celebrity Experiences</span>
+                <h2>How Much Does It Cost to Meet a Celebrity?</h2>
+                <p class="blog-card-excerpt">Wondering how much it costs to meet a celebrity in person? From meet & greets to private encounters, here's what you actually pay for authentic celebrity experiences.</p>
+                <div class="blog-card-meta">
+                    <span>7 min read</span>
+                </div>
+            </a>
+
+            <a href="are-celebrity-meet-and-greets-worth-it.html" class="blog-card">
+                <span class="blog-card-category">Celebrity Experiences</span>
+                <h2>Are Celebrity Meet and Greets Worth It?</h2>
+                <p class="blog-card-excerpt">Spent $500 on a 30-second meet & greet and wondering if you got scammed? Here's the brutally honest truth about what's worth your money—and what isn't.</p>
+                <div class="blog-card-meta">
+                    <span>8 min read</span>
+                </div>
+            </a>
+
+            <a href="what-to-say-when-meeting-a-celebrity.html" class="blog-card">
+                <span class="blog-card-category">Meeting Celebrities</span>
+                <h2>What to Say When Meeting a Celebrity</h2>
+                <p class="blog-card-excerpt">You've got 30 seconds. Don't waste it on "I'm your biggest fan." Here's exactly what to say when meeting a celebrity—scripts that actually work.</p>
+                <div class="blog-card-meta">
+                    <span>10 min read</span>
+                </div>
+            </a>
+
+            <a href="how-to-get-backstage-passes.html" class="blog-card">
+                <span class="blog-card-category">Behind the Scenes</span>
+                <h2>How to Get Backstage Passes to Meet Celebrities</h2>
+                <p class="blog-card-excerpt">Backstage isn't what you think. The real story of who gets access and how—from VIP packages to industry connections to verified platforms that actually work.</p>
+                <div class="blog-card-meta">
+                    <span>9 min read</span>
+                </div>
+            </a>
+
+            <a href="celebrity-meet-and-greet-vs-private-experience.html" class="blog-card">
+                <span class="blog-card-category">Celebrity Experiences</span>
+                <h2>Celebrity Meet & Greet vs Private Experience</h2>
+                <p class="blog-card-excerpt">Same price, completely different value. Side-by-side comparison of what you actually get—and which one is worth your money.</p>
+                <div class="blog-card-meta">
+                    <span>8 min read</span>
+                </div>
+            </a>
+
+            <a href="meet-celebrities-on-a-budget.html" class="blog-card">
+                <span class="blog-card-category">Budget Tips</span>
+                <h2>How to Meet Celebrities on a Budget</h2>
+                <p class="blog-card-excerpt">You don't need $5,000. Here are the methods nobody talks about—some free, most under $500, all verified to actually work.</p>
+                <div class="blog-card-meta">
+                    <span>9 min read</span>
+                </div>
+            </a>
+
+            <a href="best-cities-to-meet-celebrities.html" class="blog-card">
+                <span class="blog-card-category">Location Strategy</span>
+                <h2>Best Cities to Meet Celebrities</h2>
+                <p class="blog-card-excerpt">Location strategy matters. Why some cities give you 10x better odds—from LA and NYC to hidden gems most people don't know about.</p>
+                <div class="blog-card-meta">
+                    <span>8 min read</span>
+                </div>
+            </a>
+
+            <a href="celebrity-meeting-changed-my-life-stories.html" class="blog-card">
+                <span class="blog-card-category">Real Stories</span>
+                <h2>Celebrity Meeting Changed My Life: Real Stories</h2>
+                <p class="blog-card-excerpt">Real stories from real people. The meetings that mattered, the moments that lasted, and what made them unforgettable.</p>
+                <div class="blog-card-meta">
+                    <span>10 min read</span>
+                </div>
+            </a>
+
+            <a href="how-celebrities-choose-who-they-meet.html" class="blog-card">
+                <span class="blog-card-category">Behind the Scenes</span>
+                <h2>How Celebrities Choose Who They Meet</h2>
+                <p class="blog-card-excerpt">Ever wonder how celebrities decide who gets approved for meetings? Inside look at what they're actually looking for—and how to stand out.</p>
+                <div class="blog-card-meta">
+                    <span>9 min read</span>
+                </div>
+            </a>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-newsletter">
+                <h3>Join our mailing list</h3>
+                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">→</button>
+                </form>
+                <p class="privacy-note">Emails subject to <a href="../privacy.html">privacy policy</a></p>
+                <div class="footer-cta-buttons">
+                    <a href="../for-celebrities.html" class="btn btn-primary">Join as talent</a>
+                    <a href="../contact.html" class="btn btn-outline">Become a partner</a>
+                </div>
+            </div>
+        </div>
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="../about.html">About</a></li>
+                    <li><a href="../team.html">Team</a></li>
+                    <li><a href="../jobs.html">Jobs</a></li>
+                    <li><a href="index.html">Blog</a></li>
+                    <li><a href="../contact.html">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="../faq.html">Help</a></li>
+                    <li><a href="../contact.html">Accessibility</a></li>
+                    <li><a href="../terms.html">Refunds & Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="../browse.html">Gift Cards</a></li>
+                    <li><a href="../for-celebrities.html">For business</a></li>
+                    <li><a href="../browse.html">For kids</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <div class="footer-social">
+                <a href="#" aria-label="Download on App Store">App Store</a>
+                <a href="#" aria-label="Get it on Google Play">Google Play</a>
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TT</a>
+                <a href="#" aria-label="Twitter/X">X</a>
+                <a href="#" aria-label="Threads">TH</a>
+                <a href="#" aria-label="Email">EM</a>
+            </div>
+            <p class="footer-copyright">© 2025 StarryMeet</p>
+            <div class="footer-legal">
+                <a href="../terms.html">Terms of Service</a>
+                <a href="../privacy.html">Privacy Policy</a>
+                <a href="../contact.html">Do Not Sell My Personal Information</a>
+            </div>
+            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
+                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>
