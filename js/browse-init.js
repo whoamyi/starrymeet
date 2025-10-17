@@ -191,11 +191,8 @@ function displayCelebrities(celebrities) {
                         <span style="color: gold; font-size: 0.875rem;">★</span>
                         <span style="opacity: 0.8; font-size: 0.875rem;">${rating} (${reviews})</span>
                     </div>
-                    <p style="opacity: 0.5; font-size: 0.875rem; margin-bottom: 12px;">${celeb.location}</p>
-                    <div style="display: flex; align-items: baseline; gap: 4px;">
-                        <span style="opacity: 0.6; font-size: 0.875rem;">From</span>
-                        <p style="font-size: 1.25rem; font-weight: 700; color: var(--primary); margin: 0;">${formatPrice(celeb.price)}</p>
-                    </div>
+                    <p style="opacity: 0.5; font-size: 0.875rem; margin-bottom: 8px;">${celeb.location}</p>
+                    <p style="opacity: 0.6; font-size: 0.875rem; margin: 0;">From ${formatPrice(celeb.price)}</p>
                 </div>
             </div>
         `;
