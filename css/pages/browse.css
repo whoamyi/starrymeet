@@ -17,7 +17,7 @@ body {
 .main-container {
     margin-top: var(--nav-height);
     display: flex !important;
-    max-width: 1600px;
+    max-width: 1400px;
     margin-left: auto;
     margin-right: auto;
     gap: 24px;
@@ -31,6 +31,9 @@ body {
     flex-wrap: wrap;
     gap: 8px;
     margin-top: 16px;
+    justify-content: center;
+    max-width: 700px;
+    width: 100%;
 }
 
 .filter-chip {
@@ -478,6 +481,9 @@ input:checked + .toggle-slider:before {
     background: transparent;
     padding: 16px 0;
     margin-bottom: 24px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
 }
 
 .search-bar {
@@ -489,6 +495,8 @@ input:checked + .toggle-slider:before {
     border-radius: 50px;
     border: 1px solid rgba(255, 255, 255, 0.1);
     transition: all 0.2s ease;
+    max-width: 500px;
+    width: 100%;
 }
 
 .search-bar:focus-within {
