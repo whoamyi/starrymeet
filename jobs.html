@@ -1,0 +1,573 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join the StarryMeet team - careers connecting fans with celebrities for authentic, meaningful experiences.">
+    <title>Careers - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        body { background: var(--bg-primary); }
+        #navbar { position: sticky; top: 0; z-index: 1000; }
+        .hero { text-align: center; padding: 100px 24px 60px; margin-top: var(--nav-height); }
+        .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 24px; line-height: 1.1; }
+        .hero p { font-size: 1.25rem; opacity: 0.8; max-width: 700px; margin: 0 auto; line-height: 1.6; }
+
+        .container { max-width: 1000px; margin: 0 auto; padding: 0 24px 100px; }
+
+        .perks-section {
+            background: linear-gradient(135deg, rgba(234, 18, 121, 0.05), rgba(164, 52, 229, 0.05));
+            border: 1px solid rgba(234, 18, 121, 0.1);
+            border-radius: 24px;
+            padding: 48px;
+            margin-bottom: 80px;
+        }
+
+        .perks-section h2 {
+            font-size: 2rem;
+            font-weight: 700;
+            margin-bottom: 32px;
+            text-align: center;
+        }
+
+        .perks-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 24px;
+        }
+
+        .perk-item {
+            text-align: center;
+        }
+
+        .perk-icon {
+            font-size: 48px;
+            margin-bottom: 16px;
+        }
+
+        .perk-item h3 {
+            font-size: 1.125rem;
+            font-weight: 600;
+            margin-bottom: 8px;
+        }
+
+        .perk-item p {
+            font-size: 0.9375rem;
+            opacity: 0.8;
+            line-height: 1.5;
+        }
+
+        .section-title {
+            font-size: 2rem;
+            font-weight: 700;
+            margin: 60px 0 40px;
+            text-align: center;
+            position: relative;
+        }
+
+        .section-title:first-of-type {
+            margin-top: 0;
+        }
+
+        .section-title::after {
+            content: '';
+            display: block;
+            width: 60px;
+            height: 4px;
+            background: linear-gradient(135deg, #EA1279, #A434E5);
+            margin: 16px auto 0;
+            border-radius: 2px;
+        }
+
+        .job-list {
+            display: flex;
+            flex-direction: column;
+            gap: 24px;
+            margin-bottom: 60px;
+        }
+
+        .job-card {
+            background: rgba(234, 18, 121, 0.03);
+            border: 1px solid rgba(234, 18, 121, 0.1);
+            border-radius: 20px;
+            padding: 32px;
+            transition: all 0.3s ease;
+        }
+
+        .job-card:hover {
+            transform: translateY(-2px);
+            border-color: rgba(234, 18, 121, 0.3);
+            background: rgba(234, 18, 121, 0.05);
+        }
+
+        .job-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: flex-start;
+            margin-bottom: 20px;
+            flex-wrap: wrap;
+            gap: 16px;
+        }
+
+        .job-title {
+            font-size: 1.5rem;
+            font-weight: 700;
+            margin-bottom: 8px;
+        }
+
+        .job-meta {
+            display: flex;
+            gap: 16px;
+            flex-wrap: wrap;
+        }
+
+        .job-meta-item {
+            font-size: 0.9375rem;
+            opacity: 0.8;
+        }
+
+        .job-department {
+            color: var(--primary);
+            font-weight: 600;
+        }
+
+        .job-description {
+            font-size: 1rem;
+            line-height: 1.6;
+            opacity: 0.9;
+            margin-bottom: 20px;
+        }
+
+        .job-requirements {
+            margin-bottom: 20px;
+        }
+
+        .job-requirements h4 {
+            font-size: 1rem;
+            font-weight: 600;
+            margin-bottom: 12px;
+            opacity: 0.9;
+        }
+
+        .job-requirements ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .job-requirements li {
+            font-size: 0.9375rem;
+            line-height: 1.6;
+            opacity: 0.8;
+            padding-left: 24px;
+            position: relative;
+            margin-bottom: 8px;
+        }
+
+        .job-requirements li::before {
+            content: '•';
+            position: absolute;
+            left: 8px;
+            color: var(--primary);
+            font-weight: 700;
+        }
+
+        .apply-btn {
+            display: inline-block;
+            background: linear-gradient(135deg, #EA1279, #A434E5);
+            color: #ffffff;
+            padding: 12px 32px;
+            border-radius: 50px;
+            font-size: 1rem;
+            font-weight: 600;
+            text-decoration: none;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .apply-btn:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 8px 24px rgba(234, 18, 121, 0.4);
+        }
+
+        @media (max-width: 768px) {
+            .hero { padding: 100px 16px 50px; }
+            .hero h1 { font-size: 1.875rem; }
+            .hero p { font-size: 1rem; }
+
+            .container { padding: 0 16px 80px; }
+
+            .perks-section {
+                padding: 32px 20px;
+                margin-bottom: 60px;
+            }
+
+            .perks-section h2 {
+                font-size: 1.5rem;
+                margin-bottom: 24px;
+            }
+
+            .perks-grid {
+                grid-template-columns: 1fr;
+                gap: 20px;
+            }
+
+            .perk-icon {
+                font-size: 40px;
+            }
+
+            .section-title {
+                font-size: 1.5rem;
+                margin: 50px 0 28px;
+            }
+
+            .job-card {
+                padding: 24px;
+            }
+
+            .job-title {
+                font-size: 1.25rem;
+            }
+
+            .job-header {
+                flex-direction: column;
+                align-items: flex-start;
+            }
+
+            .apply-btn {
+                width: 100%;
+                text-align: center;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
+            <ul class="nav-links">
+                <li class="nav-item-categories">
+                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                    <div class="categories-dropdown" id="categoriesDropdown">
+                        <a href="browse.html?category=Hollywood">Hollywood</a>
+                        <a href="browse.html?category=Musicians">Musicians</a>
+                        <a href="browse.html?category=Athletes">Athletes</a>
+                        <a href="browse.html?category=K-Drama">K-Drama</a>
+                        <a href="browse.html?category=Business">Business</a>
+                        <a href="browse.html">View all</a>
+                    </div>
+                </li>
+                <li><a href="how-it-works.html">How it works</a></li>
+                <li><a href="for-celebrities.html">Join as star</a></li>
+                <li><a href="dashboard.html">Log in</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li class="mobile-menu-categories">
+                <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
+                <ul class="mobile-submenu" id="mobileSubmenu">
+                    <li><a href="browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
+                    <li><a href="browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
+                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
+                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
+                    <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
+                </ul>
+            </li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
+            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
+            <li class="mobile-menu-login-item"><a href="dashboard.html" onclick="closeMobileMenu()" class="mobile-menu-login">Log in</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero -->
+    <div class="hero">
+        <h1>Join our mission</h1>
+        <p>Help us create meaningful connections between fans and the people who inspire them</p>
+    </div>
+
+    <!-- Content -->
+    <div class="container">
+        <!-- Perks -->
+        <div class="perks-section">
+            <h2>Why work at StarryMeet</h2>
+            <div class="perks-grid">
+                <div class="perk-item">
+                    <div class="perk-icon">💰</div>
+                    <h3>Competitive Pay</h3>
+                    <p>Top-tier salary, equity, and performance bonuses</p>
+                </div>
+                <div class="perk-item">
+                    <div class="perk-icon">🏥</div>
+                    <h3>Health & Wellness</h3>
+                    <p>Premium medical, dental, vision, and mental health coverage</p>
+                </div>
+                <div class="perk-item">
+                    <div class="perk-icon">🏖️</div>
+                    <h3>Unlimited PTO</h3>
+                    <p>Take the time you need to recharge and stay productive</p>
+                </div>
+                <div class="perk-item">
+                    <div class="perk-icon">🏠</div>
+                    <h3>Remote Friendly</h3>
+                    <p>Work from anywhere or enjoy our beautiful offices</p>
+                </div>
+                <div class="perk-item">
+                    <div class="perk-icon">📚</div>
+                    <h3>Learning Budget</h3>
+                    <p>$3,000 annual budget for courses, conferences, and books</p>
+                </div>
+                <div class="perk-item">
+                    <div class="perk-icon">⭐</div>
+                    <h3>Celebrity Access</h3>
+                    <p>Meet the stars and attend exclusive events</p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Open Positions -->
+        <h2 class="section-title">Open positions</h2>
+
+        <div class="job-list">
+            <!-- Senior Product Manager -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Senior Product Manager</h3>
+                        <div class="job-meta">
+                            <span class="job-department">Product & Engineering</span>
+                            <span class="job-meta-item">📍 San Francisco, CA or Remote</span>
+                            <span class="job-meta-item">💼 Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="job-description">Lead the development of our core marketplace platform, defining the product vision and roadmap that connects fans with celebrities. You'll work closely with engineering, design, and celebrity relations to build features that create meaningful experiences at scale.</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>5+ years of product management experience, preferably in marketplace or creator economy platforms</li>
+                        <li>Track record of shipping products that drove significant user growth and engagement</li>
+                        <li>Strong data-driven decision making and analytical skills</li>
+                        <li>Experience working with cross-functional teams and managing stakeholder expectations</li>
+                        <li>Excellent communication skills and ability to influence without authority</li>
+                    </ul>
+                </div>
+                <button class="apply-btn" onclick="alert('Application coming soon! Email careers@starrymeet.com')">Apply Now</button>
+            </div>
+
+            <!-- Trust & Safety Specialist -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Trust & Safety Specialist</h3>
+                        <div class="job-meta">
+                            <span class="job-department">Trust & Safety</span>
+                            <span class="job-meta-item">📍 Los Angeles, CA</span>
+                            <span class="job-meta-item">💼 Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="job-description">Protect our community by developing and enforcing safety protocols, conducting background checks, and responding to security incidents. You'll ensure every meeting between fans and celebrities is safe, secure, and professional.</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>3+ years in trust & safety, risk management, or security operations</li>
+                        <li>Experience with background checks, identity verification, and fraud prevention</li>
+                        <li>Strong judgment and decision-making skills under pressure</li>
+                        <li>Knowledge of privacy regulations (GDPR, CCPA) and platform safety best practices</li>
+                        <li>Excellent written and verbal communication skills</li>
+                    </ul>
+                </div>
+                <button class="apply-btn" onclick="alert('Application coming soon! Email careers@starrymeet.com')">Apply Now</button>
+            </div>
+
+            <!-- Celebrity Relations Manager -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Celebrity Relations Manager</h3>
+                        <div class="job-meta">
+                            <span class="job-department">Celebrity Relations</span>
+                            <span class="job-meta-item">📍 New York, NY or Los Angeles, CA</span>
+                            <span class="job-meta-item">💼 Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="job-description">Build and maintain relationships with celebrities, managers, and agents to grow our talent network. You'll be the face of StarryMeet to the entertainment industry, ensuring smooth onboarding and ongoing support for our celebrity partners.</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>5+ years in talent relations, artist management, or entertainment industry partnerships</li>
+                        <li>Existing network of relationships with celebrities, managers, or agents</li>
+                        <li>Deep understanding of the entertainment industry and celebrity brand management</li>
+                        <li>Exceptional interpersonal and relationship-building skills</li>
+                        <li>Willingness to travel and attend industry events</li>
+                    </ul>
+                </div>
+                <button class="apply-btn" onclick="alert('Application coming soon! Email careers@starrymeet.com')">Apply Now</button>
+            </div>
+
+            <!-- Senior Full Stack Engineer -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Senior Full Stack Engineer</h3>
+                        <div class="job-meta">
+                            <span class="job-department">Engineering</span>
+                            <span class="job-meta-item">📍 Remote (US)</span>
+                            <span class="job-meta-item">💼 Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="job-description">Build and scale the platform that powers millions of fan-celebrity connections. You'll work on everything from payment systems to real-time booking flows, ensuring reliability, security, and an exceptional user experience.</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>6+ years of software engineering experience with modern web technologies</li>
+                        <li>Strong proficiency in React, Node.js, and SQL/NoSQL databases</li>
+                        <li>Experience building scalable, high-availability systems</li>
+                        <li>Knowledge of payment processing, security best practices, and API design</li>
+                        <li>Passion for writing clean, maintainable code and mentoring junior engineers</li>
+                    </ul>
+                </div>
+                <button class="apply-btn" onclick="alert('Application coming soon! Email careers@starrymeet.com')">Apply Now</button>
+            </div>
+
+            <!-- Growth Marketing Manager -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Growth Marketing Manager</h3>
+                        <div class="job-meta">
+                            <span class="job-department">Marketing & Growth</span>
+                            <span class="job-meta-item">📍 San Francisco, CA or Remote</span>
+                            <span class="job-meta-item">💼 Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="job-description">Drive user acquisition and retention through data-driven marketing campaigns across digital channels. You'll experiment with new channels, optimize conversion funnels, and scale campaigns that bring fans and celebrities together.</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>4+ years in growth marketing, performance marketing, or digital acquisition</li>
+                        <li>Proven track record of scaling user acquisition profitably</li>
+                        <li>Deep expertise in paid social, SEM, SEO, and conversion rate optimization</li>
+                        <li>Strong analytical skills with experience using analytics tools (Google Analytics, Mixpanel, etc.)</li>
+                        <li>Creative mindset with ability to test new ideas and iterate quickly</li>
+                    </ul>
+                </div>
+                <button class="apply-btn" onclick="alert('Application coming soon! Email careers@starrymeet.com')">Apply Now</button>
+            </div>
+
+            <!-- Customer Success Lead -->
+            <div class="job-card">
+                <div class="job-header">
+                    <div>
+                        <h3 class="job-title">Customer Success Lead</h3>
+                        <div class="job-meta">
+                            <span class="job-department">Customer Experience</span>
+                            <span class="job-meta-item">📍 Remote (US)</span>
+                            <span class="job-meta-item">💼 Full-time</span>
+                        </div>
+                    </div>
+                </div>
+                <p class="job-description">Lead our customer success team to deliver 5-star experiences for every fan. You'll build processes, train team members, and personally handle high-touch support for our VIP customers and celebrity partners.</p>
+                <div class="job-requirements">
+                    <h4>Requirements:</h4>
+                    <ul>
+                        <li>5+ years in customer success, support, or hospitality leadership roles</li>
+                        <li>Experience managing teams and building customer success operations from the ground up</li>
+                        <li>Obsessed with delivering exceptional customer experiences</li>
+                        <li>Strong problem-solving skills and ability to handle difficult situations with empathy</li>
+                        <li>Experience with customer support tools (Zendesk, Intercom, etc.)</li>
+                    </ul>
+                </div>
+                <button class="apply-btn" onclick="alert('Application coming soon! Email careers@starrymeet.com')">Apply Now</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-main">
+            <div class="footer-newsletter">
+                <h3>Join our mailing list</h3>
+                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
+                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
+                    <input type="email" placeholder="Your email" required>
+                    <button type="submit" class="btn btn-primary">→</button>
+                </form>
+                <p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p>
+                <div class="footer-cta-buttons">
+                    <a href="for-celebrities.html" class="btn btn-primary">Join as talent</a>
+                    <a href="contact.html" class="btn btn-outline">Become a partner</a>
+                </div>
+            </div>
+        </div>
+
+        <div class="footer-columns">
+            <div class="footer-column">
+                <h4>Company</h4>
+                <ul>
+                    <li><a href="about.html">About</a></li>
+                    <li><a href="team.html">Team</a></li>
+                    <li><a href="jobs.html">Jobs</a></li>
+                    <li><a href="contact.html">Blog</a></li>
+                    <li><a href="contact.html">Press</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Support</h4>
+                <ul>
+                    <li><a href="faq.html">Help</a></li>
+                    <li><a href="contact.html">Accessibility</a></li>
+                    <li><a href="terms.html">Refunds & Returns</a></li>
+                </ul>
+            </div>
+            <div class="footer-column">
+                <h4>Shop</h4>
+                <ul>
+                    <li><a href="browse.html">Gift Cards</a></li>
+                    <li><a href="for-celebrities.html">For business</a></li>
+                    <li><a href="browse.html">For kids</a></li>
+                </ul>
+            </div>
+        </div>
+
+        <div class="footer-bottom">
+            <div class="footer-social">
+                <a href="#" aria-label="Download on App Store">App Store</a>
+                <a href="#" aria-label="Get it on Google Play">Google Play</a>
+                <a href="#" aria-label="Instagram">IG</a>
+                <a href="#" aria-label="TikTok">TT</a>
+                <a href="#" aria-label="Twitter/X">X</a>
+                <a href="#" aria-label="Threads">TH</a>
+                <a href="#" aria-label="Email">EM</a>
+            </div>
+            <p class="footer-copyright">© 2025 StarryMeet</p>
+            <div class="footer-legal">
+                <a href="terms.html">Terms of Service</a>
+                <a href="privacy.html">Privacy Policy</a>
+                <a href="contact.html">Do Not Sell My Personal Information</a>
+            </div>
+            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
+                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
+            </div>
+        </div>
+    </footer>
+</body>
+</html>

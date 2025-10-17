@@ -9,7 +9,8 @@
     <script src="js/shared.js"></script>
     <style>
         body { background: var(--bg-primary); }
-        .hero { text-align: center; padding: 140px 24px 80px; margin-top: var(--nav-height); }
+        #navbar { position: sticky; top: 0; z-index: 1000; }
+        .hero { text-align: center; padding: 100px 24px 60px; margin-top: var(--nav-height); }
         .hero h1 { font-size: clamp(2.5rem, 6vw, 4rem); font-weight: 700; margin-bottom: 24px; line-height: 1.1; }
         .hero p { font-size: 1.25rem; opacity: 0.8; max-width: 700px; margin: 0 auto; line-height: 1.6; }
 
@@ -18,9 +19,13 @@
         .section-title {
             font-size: 2rem;
             font-weight: 700;
-            margin: 80px 0 48px;
+            margin: 60px 0 40px;
             text-align: center;
             position: relative;
+        }
+
+        .section-title:first-child {
+            margin-top: 0;
         }
         .section-title::after {
             content: '';
@@ -52,6 +57,7 @@
             transform: translateY(-4px);
             border-color: rgba(234, 18, 121, 0.3);
             background: rgba(234, 18, 121, 0.05);
+            box-shadow: 0 12px 32px rgba(234, 18, 121, 0.3);
         }
 
         .member-avatar {
@@ -452,7 +458,7 @@
         <div class="join-team">
             <h2>Join our mission</h2>
             <p>We're always looking for talented, passionate people who want to create meaningful experiences and change how fans connect with their heroes.</p>
-            <a href="contact.html" class="btn-join">View Open Positions</a>
+            <a href="jobs.html" class="btn-join">View Open Positions</a>
         </div>
     </div>
 
