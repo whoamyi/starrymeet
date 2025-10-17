@@ -1504,19 +1504,17 @@
 
         // Proceed to booking with all collected data
         function proceedToBooking() {
-            // Build URL with all booking parameters
-            const params = new URLSearchParams({
-                celebrity: bookingState.celebrityName,
-                meetingType: bookingState.meetingType,
-                price: bookingState.price,
-                duration: bookingState.duration,
-                location: bookingState.location,
-                date: bookingState.date,
-                timeSlot: bookingState.timeSlot || ''
-            });
-
-            // Navigate to booking page with all selections
-            window.location.href = 'booking.html?' + params.toString();
+            // Use the handleRequestBooking function from celebrity-profile-init.js
+            // which properly saves data to localStorage and handles authentication
+            if (window.handleRequestBooking) {
+                // Make bookingState globally available for handleRequestBooking to access
+                window.bookingState = bookingState;
+                window.handleRequestBooking();
+            } else {
+                // Fallback if init script hasn't loaded
+                console.error('handleRequestBooking not available');
+                window.location.href = `booking.html?celebrity=${encodeURIComponent(bookingState.celebrityName)}`;
+            }
         }
 
         function goToReview(index) {

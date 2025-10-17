@@ -139,10 +139,14 @@ function applyAllFilters() {
     });
 
     displayCelebrities(filteredCelebrities);
+
+    // Update global reference for inline scripts
+    window.filteredCelebrities = filteredCelebrities;
 }
 
-// Make applyAllFilters available globally for inline event handlers
+// Make functions and data available globally for inline event handlers
 window.applyAllFilters = applyAllFilters;
+window.displayCelebrities = displayCelebrities;
 
 /**
  * Display celebrities in grid
