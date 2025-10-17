@@ -4,8 +4,10 @@
  */
 
 // Celebrity Data - Complete list used across the platform
+// Note: imageUrl field can be added to each celebrity for profile pictures (e.g., imageUrl: "path/to/image.jpg")
+// If imageUrl is not provided, the app will display colored initials as a fallback
 const CELEBRITIES = [
-    { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true },
+    { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true, imageUrl: null },
     { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
     { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
     { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },

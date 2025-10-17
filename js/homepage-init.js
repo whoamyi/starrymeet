@@ -30,10 +30,15 @@ function loadTopTen() {
         const initials = getInitials(celeb.name);
         const color = getColorForCelebrity(celeb.name);
 
+        // Use image if available, otherwise show colored initials
+        const avatarStyle = celeb.imageUrl
+            ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
+            : `background: ${color};`;
+
         return `
             <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer;">
-                <div style="width: 100%; aspect-ratio: 1; background: ${color}; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px; position: relative;">
-                    ${initials}
+                <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px; position: relative;">
+                    ${celeb.imageUrl ? '' : initials}
                     ${celeb.verified ? '<span style="position: absolute; top: 6px; right: 6px; background: gold; color: black; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">✓</span>' : ''}
                 </div>
                 <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${celeb.name}</h4>
@@ -58,10 +63,15 @@ function loadQuickMeets() {
         const initials = getInitials(celeb.name);
         const color = getColorForCelebrity(celeb.name);
 
+        // Use image if available, otherwise show colored initials
+        const avatarStyle = celeb.imageUrl
+            ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
+            : `background: ${color};`;
+
         return `
             <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer;">
-                <div style="width: 100%; aspect-ratio: 1; background: ${color}; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px;">
-                    ${initials}
+                <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px;">
+                    ${celeb.imageUrl ? '' : initials}
                 </div>
                 <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${celeb.name}</h4>
                 <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.location}</p>

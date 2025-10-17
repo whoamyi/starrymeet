@@ -31,13 +31,22 @@ if (!celebrityName) {
     } else {
         // Populate page with real celebrity data
         document.addEventListener('DOMContentLoaded', function() {
-            // Update hero image with initials and color
+            // Update hero image with photo or initials
             const heroImage = document.querySelector('.hero-image');
             if (heroImage) {
-                const initials = getInitials(celebrity.name);
-                const color = getColorForCelebrity(celebrity.name);
-                heroImage.textContent = initials;
-                heroImage.style.background = color;
+                if (celebrity.imageUrl) {
+                    // Use celebrity photo if available
+                    heroImage.style.backgroundImage = `url('${celebrity.imageUrl}')`;
+                    heroImage.style.backgroundSize = 'cover';
+                    heroImage.style.backgroundPosition = 'center';
+                    heroImage.textContent = '';
+                } else {
+                    // Fallback to colored initials
+                    const initials = getInitials(celebrity.name);
+                    const color = getColorForCelebrity(celebrity.name);
+                    heroImage.textContent = initials;
+                    heroImage.style.background = color;
+                }
             }
 
             // Update hero section
