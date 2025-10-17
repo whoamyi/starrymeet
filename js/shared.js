@@ -648,3 +648,405 @@ function loadAuthModal() {
 if (typeof document !== 'undefined') {
     document.addEventListener('DOMContentLoaded', loadAuthModal);
 }
+
+// ========================================
+// FULL-STACK DATA MANAGEMENT (localStorage MVP)
+// ========================================
+
+/**
+ * localStorage Keys
+ */
+const STORAGE_KEYS = {
+    USERS: 'starrymeet_users',
+    BOOKINGS: 'starrymeet_bookings',
+    FAVORITES: 'starrymeet_favorites',
+    SESSION: 'starrymeet_session',
+    CURRENT_BOOKING: 'starrymeet_currentBooking'
+};
+
+// ========================================
+// USER MANAGEMENT
+// ========================================
+
+/**
+ * Create a new user account
+ * @param {object} userData - User data {name, email, password}
+ * @returns {object} Created user object (without password)
+ */
+function createUser(userData) {
+    const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
+    
+    // Check if user already exists
+    const existingUser = users.find(u => u.email.toLowerCase() === userData.email.toLowerCase());
+    if (existingUser) {
+        throw new Error('User with this email already exists');
+    }
+    
+    const newUser = {
+        id: 'user_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        name: userData.name,
+        email: userData.email.toLowerCase(),
+        password: userData.password, // In production, this would be hashed
+        avatar: userData.avatar || null,
+        phone: userData.phone || '',
+        createdAt: new Date().toISOString()
+    };
+    
+    users.push(newUser);
+    localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+    
+    // Return user without password
+    const { password, ...userWithoutPassword } = newUser;
+    return userWithoutPassword;
+}
+
+/**
+ * Login user with email and password
+ * @param {string} email - User email
+ * @param {string} password - User password
+ * @returns {object} User object (without password) or null
+ */
+function loginUser(email, password) {
+    const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
+    const user = users.find(u => 
+        u.email.toLowerCase() === email.toLowerCase() && 
+        u.password === password
+    );
+    
+    if (!user) {
+        return null;
+    }
+    
+    // Set session
+    setSession(user.id);
+    
+    // Return user without password
+    const { password: _, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+}
+
+/**
+ * Logout current user
+ */
+function logoutUser() {
+    clearSession();
+    // Also clear legacy auth data
+    localStorage.removeItem('user');
+    localStorage.removeItem('isAuthenticated');
+}
+
+/**
+ * Get current logged-in user
+ * @returns {object|null} User object or null
+ */
+function getCurrentUser() {
+    const session = getSession();
+    if (!session || !session.userId) {
+        return null;
+    }
+    
+    const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
+    const user = users.find(u => u.id === session.userId);
+    
+    if (!user) {
+        return null;
+    }
+    
+    const { password, ...userWithoutPassword } = user;
+    return userWithoutPassword;
+}
+
+/**
+ * Update user profile
+ * @param {string} userId - User ID
+ * @param {object} updates - Fields to update
+ * @returns {object} Updated user object
+ */
+function updateUserProfile(userId, updates) {
+    const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
+    const userIndex = users.findIndex(u => u.id === userId);
+    
+    if (userIndex === -1) {
+        throw new Error('User not found');
+    }
+    
+    // Don't allow updating certain fields
+    delete updates.id;
+    delete updates.createdAt;
+    
+    users[userIndex] = { ...users[userIndex], ...updates };
+    localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
+    
+    const { password, ...userWithoutPassword } = users[userIndex];
+    return userWithoutPassword;
+}
+
+// ========================================
+// SESSION MANAGEMENT
+// ========================================
+
+/**
+ * Set user session
+ * @param {string} userId - User ID
+ */
+function setSession(userId) {
+    const session = {
+        userId: userId,
+        isAuthenticated: true,
+        loginTime: new Date().toISOString()
+    };
+    localStorage.setItem(STORAGE_KEYS.SESSION, JSON.stringify(session));
+}
+
+/**
+ * Get current session
+ * @returns {object|null} Session object or null
+ */
+function getSession() {
+    const session = localStorage.getItem(STORAGE_KEYS.SESSION);
+    return session ? JSON.parse(session) : null;
+}
+
+/**
+ * Clear session (logout)
+ */
+function clearSession() {
+    localStorage.removeItem(STORAGE_KEYS.SESSION);
+}
+
+/**
+ * Check if user is authenticated (for page protection)
+ * @returns {boolean} True if authenticated
+ */
+function isAuthenticated() {
+    const session = getSession();
+    return session && session.isAuthenticated === true;
+}
+
+/**
+ * Require authentication - redirect to homepage if not logged in
+ */
+function requireAuth() {
+    if (!isAuthenticated()) {
+        window.location.href = 'index.html';
+        return false;
+    }
+    return true;
+}
+
+// ========================================
+// BOOKING MANAGEMENT
+// ========================================
+
+/**
+ * Create a new booking
+ * @param {object} bookingData - Booking details
+ * @returns {object} Created booking object
+ */
+function createBooking(bookingData) {
+    const bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS) || '[]');
+    const user = getCurrentUser();
+    
+    if (!user) {
+        throw new Error('Must be logged in to create booking');
+    }
+    
+    const newBooking = {
+        id: 'booking_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9),
+        userId: user.id,
+        celebrityName: bookingData.celebrityName,
+        date: bookingData.date,
+        time: bookingData.time,
+        location: bookingData.location,
+        meetingType: bookingData.meetingType || 'Private Meet & Greet',
+        duration: bookingData.duration || '30 minutes',
+        price: bookingData.price,
+        status: 'pending', // pending, approved, rejected, completed, cancelled
+        applicationData: {
+            occupation: bookingData.occupation || '',
+            hometown: bookingData.hometown || '',
+            whyMeet: bookingData.whyMeet || '',
+            topics: bookingData.topics || ''
+        },
+        createdAt: new Date().toISOString()
+    };
+    
+    bookings.push(newBooking);
+    localStorage.setItem(STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
+    
+    return newBooking;
+}
+
+/**
+ * Get bookings for a user
+ * @param {string} userId - User ID (optional, uses current user if not provided)
+ * @param {string} status - Filter by status (optional)
+ * @returns {array} Array of booking objects
+ */
+function getBookings(userId = null, status = null) {
+    const bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS) || '[]');
+    const targetUserId = userId || getCurrentUser()?.id;
+    
+    if (!targetUserId) {
+        return [];
+    }
+    
+    let userBookings = bookings.filter(b => b.userId === targetUserId);
+    
+    if (status) {
+        userBookings = userBookings.filter(b => b.status === status);
+    }
+    
+    // Sort by creation date (newest first)
+    return userBookings.sort((a, b) => new Date(b.createdAt) - new Date(a.createdAt));
+}
+
+/**
+ * Update booking status
+ * @param {string} bookingId - Booking ID
+ * @param {string} status - New status
+ * @returns {object} Updated booking object
+ */
+function updateBookingStatus(bookingId, status) {
+    const bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS) || '[]');
+    const bookingIndex = bookings.findIndex(b => b.id === bookingId);
+    
+    if (bookingIndex === -1) {
+        throw new Error('Booking not found');
+    }
+    
+    bookings[bookingIndex].status = status;
+    bookings[bookingIndex].updatedAt = new Date().toISOString();
+    
+    localStorage.setItem(STORAGE_KEYS.BOOKINGS, JSON.stringify(bookings));
+    return bookings[bookingIndex];
+}
+
+/**
+ * Get booking by ID
+ * @param {string} bookingId - Booking ID
+ * @returns {object|null} Booking object or null
+ */
+function getBookingById(bookingId) {
+    const bookings = JSON.parse(localStorage.getItem(STORAGE_KEYS.BOOKINGS) || '[]');
+    return bookings.find(b => b.id === bookingId) || null;
+}
+
+// ========================================
+// FAVORITES MANAGEMENT
+// ========================================
+
+/**
+ * Add celebrity to favorites
+ * @param {string} userId - User ID (optional, uses current user if not provided)
+ * @param {string} celebrityName - Celebrity name
+ * @returns {boolean} Success
+ */
+function addToFavorites(userId, celebrityName) {
+    const favorites = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES) || '[]');
+    const targetUserId = userId || getCurrentUser()?.id;
+    
+    if (!targetUserId) {
+        throw new Error('Must be logged in to add favorites');
+    }
+    
+    // Check if already favorited
+    const existingFav = favorites.find(f => 
+        f.userId === targetUserId && f.celebrityName === celebrityName
+    );
+    
+    if (existingFav) {
+        return false; // Already favorited
+    }
+    
+    favorites.push({
+        userId: targetUserId,
+        celebrityName: celebrityName,
+        addedAt: new Date().toISOString()
+    });
+    
+    localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(favorites));
+    return true;
+}
+
+/**
+ * Remove celebrity from favorites
+ * @param {string} userId - User ID (optional, uses current user if not provided)
+ * @param {string} celebrityName - Celebrity name
+ * @returns {boolean} Success
+ */
+function removeFromFavorites(userId, celebrityName) {
+    const favorites = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES) || '[]');
+    const targetUserId = userId || getCurrentUser()?.id;
+    
+    if (!targetUserId) {
+        return false;
+    }
+    
+    const filteredFavorites = favorites.filter(f => 
+        !(f.userId === targetUserId && f.celebrityName === celebrityName)
+    );
+    
+    localStorage.setItem(STORAGE_KEYS.FAVORITES, JSON.stringify(filteredFavorites));
+    return true;
+}
+
+/**
+ * Get user's favorite celebrities
+ * @param {string} userId - User ID (optional, uses current user if not provided)
+ * @returns {array} Array of celebrity names
+ */
+function getFavorites(userId = null) {
+    const favorites = JSON.parse(localStorage.getItem(STORAGE_KEYS.FAVORITES) || '[]');
+    const targetUserId = userId || getCurrentUser()?.id;
+    
+    if (!targetUserId) {
+        return [];
+    }
+    
+    return favorites
+        .filter(f => f.userId === targetUserId)
+        .map(f => f.celebrityName);
+}
+
+/**
+ * Check if celebrity is favorited
+ * @param {string} userId - User ID (optional, uses current user if not provided)
+ * @param {string} celebrityName - Celebrity name
+ * @returns {boolean} True if favorited
+ */
+function isFavorite(userId, celebrityName) {
+    const favorites = getFavorites(userId);
+    return favorites.includes(celebrityName);
+}
+
+// ========================================
+// BOOKING FLOW STATE MANAGEMENT
+// ========================================
+
+/**
+ * Save current booking in progress (temporary)
+ * @param {object} bookingData - Partial booking data
+ */
+function saveCurrentBooking(bookingData) {
+    localStorage.setItem(STORAGE_KEYS.CURRENT_BOOKING, JSON.stringify(bookingData));
+}
+
+/**
+ * Get current booking in progress
+ * @returns {object|null} Booking data or null
+ */
+function getCurrentBooking() {
+    const booking = localStorage.getItem(STORAGE_KEYS.CURRENT_BOOKING);
+    return booking ? JSON.parse(booking) : null;
+}
+
+/**
+ * Clear current booking (after completion or cancellation)
+ */
+function clearCurrentBooking() {
+    localStorage.removeItem(STORAGE_KEYS.CURRENT_BOOKING);
+}
+
+// Log initialization
+console.log('StarryMeet Full-Stack Data Management loaded');
