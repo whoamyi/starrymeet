@@ -959,6 +959,64 @@
             .celeb-price {
                 font-size: 0.8125rem;
             }
+
+            /* Sticky Request Button - Mobile Only */
+            .sticky-request-btn {
+                display: none;
+                position: fixed;
+                bottom: 16px;
+                right: 16px;
+                background: linear-gradient(135deg, #ffffff 0%, #f0f0f0 100%);
+                color: #000000;
+                padding: 12px 20px;
+                border: none;
+                border-radius: 50px;
+                font-size: 0.9375rem;
+                font-weight: 600;
+                cursor: pointer;
+                z-index: 999;
+                box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+                transition: all 0.3s ease;
+                white-space: nowrap;
+            }
+
+            .sticky-request-btn.show {
+                display: block;
+                animation: slideInUp 0.3s ease;
+            }
+
+            .sticky-request-btn:hover {
+                transform: translateY(-2px);
+                box-shadow: 0 6px 20px rgba(0, 0, 0, 0.5);
+                background: linear-gradient(135deg, #FFD700 0%, #FFC700 100%);
+            }
+
+            .sticky-request-btn:active {
+                transform: translateY(0);
+            }
+
+            #stickyPrice {
+                font-weight: 700;
+                margin-left: 4px;
+            }
+
+            @keyframes slideInUp {
+                from {
+                    opacity: 0;
+                    transform: translateY(20px);
+                }
+                to {
+                    opacity: 1;
+                    transform: translateY(0);
+                }
+            }
+        }
+
+        /* Hide sticky button on desktop */
+        @media (min-width: 769px) {
+            .sticky-request-btn {
+                display: none !important;
+            }
         }
     </style>
 </head>
@@ -1281,6 +1339,11 @@
         </section>
     </div>
 
+    <!-- Sticky Request Button (Mobile Only) -->
+    <button class="sticky-request-btn" id="stickyRequestBtn" onclick="window.location.href='booking.html'">
+        Request <span id="stickyPrice">$1,500</span>
+    </button>
+
     <footer>
         <div class="footer-main">
             <div class="footer-newsletter">
@@ -1357,6 +1420,12 @@
             });
             element.classList.add('selected');
             document.getElementById('selectedPrice').textContent = '$' + price.toLocaleString();
+
+            // Update sticky button price
+            const stickyPrice = document.getElementById('stickyPrice');
+            if (stickyPrice) {
+                stickyPrice.textContent = '$' + price.toLocaleString();
+            }
         }
 
         function selectSlot(element) {
@@ -1400,6 +1469,58 @@
                 dot.classList.toggle('active', index === currentReview);
             });
         }
+
+        // Sticky Request Button - Show/Hide on Scroll
+        (function() {
+            // Only run on mobile
+            if (window.innerWidth > 768) return;
+
+            const stickyBtn = document.getElementById('stickyRequestBtn');
+            const bookingSection = document.querySelector('.booking-sidebar');
+
+            if (!stickyBtn || !bookingSection) return;
+
+            let lastScrollTop = 0;
+            let bookingSectionBottom = 0;
+
+            // Calculate booking section position
+            function updateBookingSectionPosition() {
+                const rect = bookingSection.getBoundingClientRect();
+                bookingSectionBottom = rect.bottom + window.pageYOffset;
+            }
+
+            // Initial calculation
+            updateBookingSectionPosition();
+
+            // Recalculate on resize
+            window.addEventListener('resize', function() {
+                if (window.innerWidth > 768) {
+                    stickyBtn.classList.remove('show');
+                    return;
+                }
+                updateBookingSectionPosition();
+            });
+
+            // Show/hide on scroll
+            window.addEventListener('scroll', function() {
+                if (window.innerWidth > 768) return;
+
+                const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+                const bookingRect = bookingSection.getBoundingClientRect();
+                const bookingTop = bookingRect.top + window.pageYOffset;
+                const bookingBottom = bookingRect.bottom + window.pageYOffset;
+
+                // Show button when scrolled past the booking section
+                // Hide when scrolling back up to the booking section
+                if (scrollTop > bookingBottom) {
+                    stickyBtn.classList.add('show');
+                } else {
+                    stickyBtn.classList.remove('show');
+                }
+
+                lastScrollTop = scrollTop;
+            });
+        })();
     </script>
 </body>
 </html>
