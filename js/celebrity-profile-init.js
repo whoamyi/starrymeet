@@ -126,11 +126,19 @@ if (!celebrityName) {
 
         // Handle booking request
         function handleRequestBooking() {
-            // Save celebrity to booking context
+            // Get currently selected meeting option data from the page's bookingState
+            const selectedPrice = window.bookingState?.price || celebrity.price;
+            const selectedMeetingType = window.bookingState?.meetingType || 'Standard Meet';
+            const selectedDuration = window.bookingState?.duration || '30 minutes';
+
+            // Save celebrity and selected meeting option to booking context
             saveCurrentBooking({
                 celebrityName: celebrity.name,
-                category: celebrity.category,
-                price: celebrity.price,
+                mainCategory: celebrity.mainCategory || celebrity.category,
+                subCategory: celebrity.subCategory,
+                price: selectedPrice,
+                meetingType: selectedMeetingType,
+                duration: selectedDuration,
                 location: celebrity.city,
                 country: celebrity.country
             });
@@ -142,7 +150,7 @@ if (!celebrityName) {
                 return;
             }
 
-            // Redirect to booking
+            // Redirect to booking page
             window.location.href = `booking.html?celebrity=${encodeURIComponent(celebrity.name)}`;
         }
 

@@ -398,6 +398,14 @@
             }
         }
 
+        // Render celebrities - delegates to browse-init.js
+        function renderCelebrities() {
+            // Use the function from browse-init.js if available
+            if (window.displayCelebrities && window.filteredCelebrities) {
+                window.displayCelebrities(window.filteredCelebrities);
+            }
+        }
+
         // Apply sorting
         function applySorting() {
             const sortValue = document.getElementById('sortDropdown').value;
