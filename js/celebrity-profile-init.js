@@ -57,7 +57,7 @@ if (!celebrityName) {
 
             const categoryBadge = document.querySelector('.category-badge');
             if (categoryBadge) {
-                categoryBadge.textContent = celebrity.category;
+                categoryBadge.textContent = celebrity.mainCategory || celebrity.category || '';
             }
 
             // Update bio if available
