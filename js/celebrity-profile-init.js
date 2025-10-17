@@ -31,27 +31,49 @@ if (!celebrityName) {
     } else {
         // Populate page with real celebrity data
         document.addEventListener('DOMContentLoaded', function() {
+            // Update hero image with initials and color
+            const heroImage = document.querySelector('.hero-image');
+            if (heroImage) {
+                const initials = getInitials(celebrity.name);
+                const color = getColorForCelebrity(celebrity.name);
+                heroImage.textContent = initials;
+                heroImage.style.background = color;
+            }
+
             // Update hero section
-            const heroNameElement = document.querySelector('.profile-hero h1');
+            const heroNameElement = document.querySelector('.celebrity-name');
             if (heroNameElement) {
                 heroNameElement.textContent = celebrity.name;
             }
 
-            const heroCategoryElement = document.querySelector('.profile-hero .category-tag');
-            if (heroCategoryElement) {
-                heroCategoryElement.textContent = celebrity.category;
+            const categoryBadge = document.querySelector('.category-badge');
+            if (categoryBadge) {
+                categoryBadge.textContent = celebrity.category;
             }
 
-            const heroLocationElement = document.querySelector('.profile-hero .location');
-            if (heroLocationElement) {
-                heroLocationElement.textContent = celebrity.location;
+            // Update bio if available
+            const bioElement = document.querySelector('.bio');
+            if (bioElement && celebrity.bio) {
+                bioElement.textContent = celebrity.bio;
+            }
+
+            // Update rating
+            const ratingElement = document.querySelector('.rating span:last-child');
+            if (ratingElement) {
+                ratingElement.textContent = `${celebrity.rating || 4.9} (${celebrity.reviews || 127} reviews)`;
             }
 
             // Update pricing
-            const priceElements = document.querySelectorAll('.price-amount, .hero-price');
+            const priceElements = document.querySelectorAll('.price-display, #selectedPrice');
             priceElements.forEach(el => {
                 el.textContent = formatPrice(celebrity.price);
             });
+
+            // Update sticky price
+            const stickyPrice = document.getElementById('stickyPrice');
+            if (stickyPrice) {
+                stickyPrice.textContent = formatPrice(celebrity.price);
+            }
 
             // Generate and display testimonials
             const testimonials = generateTestimonialsForCelebrity(celebrity.name);

@@ -45,19 +45,35 @@ function setupEventListeners() {
     const searchInput = document.getElementById('searchInput');
     if (searchInput) {
         searchInput.addEventListener('input', function(e) {
-            const query = e.target.value;
-            if (query.length > 0) {
-                searchCelebrities(query);
-            } else {
-                filteredCelebrities = currentCategory
-                    ? getCelebritiesByCategory(currentCategory)
-                    : [...allCelebrities];
-                displayCelebrities(filteredCelebrities);
-            }
+            applyAllFilters();
         });
     }
 
-    // Category filter buttons
+    // Category checkboxes
+    const categoryCheckboxes = document.querySelectorAll('.checkbox-item input[type="checkbox"]');
+    categoryCheckboxes.forEach(checkbox => {
+        checkbox.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    });
+
+    // Price slider
+    const priceSlider = document.getElementById('maxPriceSlider');
+    if (priceSlider) {
+        priceSlider.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+
+    // Trending toggle
+    const trendingToggle = document.getElementById('trendingToggle');
+    if (trendingToggle) {
+        trendingToggle.addEventListener('change', function() {
+            applyAllFilters();
+        });
+    }
+
+    // Category filter buttons (legacy support)
     const filterButtons = document.querySelectorAll('.filter-btn, [data-filter-category]');
     filterButtons.forEach(btn => {
         btn.addEventListener('click', function() {
@@ -66,6 +82,57 @@ function setupEventListeners() {
         });
     });
 }
+
+/**
+ * Apply all filters (checkboxes, search, price, etc.)
+ */
+function applyAllFilters() {
+    const searchTerm = document.getElementById('searchInput')?.value?.toLowerCase() || '';
+
+    // Get selected categories from checkboxes
+    const selectedCategories = Array.from(document.querySelectorAll('.checkbox-item input[type="checkbox"]:checked'))
+        .map(cb => cb.value);
+
+    // Get price filter
+    const maxPriceSlider = document.getElementById('maxPriceSlider');
+    const maxPrice = maxPriceSlider ? parseInt(maxPriceSlider.value) : 60000;
+
+    // Get trending filter
+    const trendingToggle = document.getElementById('trendingToggle');
+    const trendingOnly = trendingToggle ? trendingToggle.checked : false;
+
+    // Start with all celebrities
+    filteredCelebrities = allCelebrities.filter(celeb => {
+        // Search filter
+        if (searchTerm && !celeb.name.toLowerCase().includes(searchTerm) &&
+            !celeb.category.toLowerCase().includes(searchTerm) &&
+            !celeb.location.toLowerCase().includes(searchTerm)) {
+            return false;
+        }
+
+        // Category filter
+        if (selectedCategories.length > 0 && !selectedCategories.includes(celeb.category)) {
+            return false;
+        }
+
+        // Price filter
+        if (celeb.price > maxPrice) {
+            return false;
+        }
+
+        // Trending filter
+        if (trendingOnly && !celeb.trending) {
+            return false;
+        }
+
+        return true;
+    });
+
+    displayCelebrities(filteredCelebrities);
+}
+
+// Make applyAllFilters available globally for inline event handlers
+window.applyAllFilters = applyAllFilters;
 
 /**
  * Display celebrities in grid
@@ -92,6 +159,8 @@ function displayCelebrities(celebrities) {
     container.innerHTML = celebrities.map(celeb => {
         const initials = getInitials(celeb.name);
         const color = getColorForCelebrity(celeb.name);
+        const rating = celeb.rating || 4.9;
+        const reviews = celeb.reviews || 127;
 
         return `
             <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
@@ -103,8 +172,15 @@ function displayCelebrities(celebrities) {
                 <div class="celebrity-info" style="padding: 0 8px;">
                     <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${celeb.name}</h3>
                     <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.category}</p>
+                    <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                        <span style="color: gold; font-size: 0.875rem;">★</span>
+                        <span style="opacity: 0.8; font-size: 0.875rem;">${rating} (${reviews})</span>
+                    </div>
                     <p style="opacity: 0.5; font-size: 0.875rem; margin-bottom: 12px;">${celeb.location}</p>
-                    <p style="font-size: 1.25rem; font-weight: 700; color: var(--primary);">${formatPrice(celeb.price)}</p>
+                    <div style="display: flex; align-items: baseline; gap: 4px;">
+                        <span style="opacity: 0.6; font-size: 0.875rem;">From</span>
+                        <p style="font-size: 1.25rem; font-weight: 700; color: var(--primary); margin: 0;">${formatPrice(celeb.price)}</p>
+                    </div>
                 </div>
             </div>
         `;

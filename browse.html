@@ -390,65 +390,12 @@
             document.getElementById('maxPriceDisplay').textContent = '$' + parseInt(maxPrice).toLocaleString();
         }
 
-        // Apply all filters
+        // Apply all filters - delegates to browse-init.js
         function applyFilters() {
-            const searchTerm = document.getElementById('searchInput').value.toLowerCase();
-            const selectedCategories = Array.from(document.querySelectorAll('.checkbox-item input:checked')).map(cb => cb.value);
-            const selectedCountry = document.getElementById('countryFilter').value;
-            const selectedCity = document.getElementById('cityFilter').value;
-            const maxPrice = parseInt(document.getElementById('maxPriceSlider').value);
-            const trendingOnly = document.getElementById('trendingToggle').checked;
-
-            filteredCelebrities = celebrities.filter(celeb => {
-                // Search filter
-                if (searchTerm && !celeb.name.toLowerCase().includes(searchTerm)) {
-                    return false;
-                }
-
-                // Category filter
-                if (selectedCategories.length > 0 && !selectedCategories.includes(celeb.category)) {
-                    return false;
-                }
-
-                // Country filter
-                if (selectedCountry && celeb.country !== selectedCountry) {
-                    return false;
-                }
-
-                // City filter
-                if (selectedCity && celeb.city !== selectedCity) {
-                    return false;
-                }
-
-                // Price filter
-                if (celeb.price > maxPrice) {
-                    return false;
-                }
-
-                // Trending filter
-                if (trendingOnly && !celeb.trending) {
-                    return false;
-                }
-
-                return true;
-            });
-
-            // Update filter count
-            let filterCount = 0;
-            if (searchTerm) filterCount++;
-            if (selectedCategories.length > 0) filterCount += selectedCategories.length;
-            if (selectedCountry) filterCount++;
-            if (selectedCity) filterCount++;
-            if (maxPrice < 60000) filterCount++;
-            if (trendingOnly) filterCount++;
-
-            document.getElementById('filterCount').textContent = filterCount;
-
-            // Reset to page 1 when filters change
-            currentPage = 1;
-            renderFilterChips();
-
-            applySorting();
+            // Use the function from browse-init.js if available
+            if (window.applyAllFilters) {
+                window.applyAllFilters();
+            }
         }
 
         // Apply sorting
