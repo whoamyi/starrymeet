@@ -30,7 +30,7 @@ docs/debug/pages/*/debug-log.md             - Page-specific consolidated logs �
 
 ---
 
-## 📄 All 15 Pages at a Glance
+## 📄 All 25 Pages at a Glance
 
 | # | Page | Purpose | Priority | Issues Fixed | Key Features |
 |---|------|---------|----------|--------------|--------------|
@@ -41,14 +41,16 @@ docs/debug/pages/*/debug-log.md             - Page-specific consolidated logs �
 | 5 | dashboard.html | User account | MEDIUM | 11 | Sidebar, bookings, favorites, messages, settings |
 | 6 | how-it-works.html | Platform guide | MEDIUM | 4 | 4-step process, benefits |
 | 7 | about.html | Company info | MEDIUM | 4 | Story, mission, values, stats |
-| 8 | team.html | Team members ⭐ NEW | MEDIUM | 0 | 17 members, 6 departments, sticky header |
-| 9 | jobs.html | Careers ⭐ NEW | MEDIUM | 0 | 6 job openings, perks, sticky header |
+| 8 | team.html | Team members | MEDIUM | 0 | 17 members, 6 departments, sticky header |
+| 9 | jobs.html | Careers | MEDIUM | 0 | 6 job openings, perks, sticky header |
 | 10 | for-celebrities.html | Celebrity recruitment | MEDIUM | 4 | Benefits, calculator, testimonials |
 | 11 | faq.html | Q&A | LOW | 4 | 5 categories, 25 questions |
 | 12 | contact.html | Contact form | LOW | 4 | Form, email, phone, address |
 | 13 | terms.html | Legal terms | LOW | 4 | 13 sections, refund policy |
 | 14 | privacy.html | Privacy policy | LOW | 4 | 12 sections, GDPR/CCPA |
-| 15 | 404.html | Error page | LOW | 2 | Friendly message, CTAs |
+| 15 | blog/index.html | Blog home ⭐ NEW | MEDIUM | 0 | 10 blog posts, featured layout |
+| 16-25 | blog/*.html | Blog posts ⭐ NEW | LOW | 0 | 2,000-2,500 words, SEO optimized |
+| 26 | 404.html | Error page | LOW | 2 | Friendly message, CTAs |
 
 ---
 
