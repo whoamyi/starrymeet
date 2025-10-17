@@ -1,7 +1,7 @@
 # Quick Reference Guide - StarryMeet
 
 **Purpose**: Rapid lookup for common tasks and information
-**Last Updated**: 2025-10-11
+**Last Updated**: 2025-10-17
 **Design System**: v2.0 - Cameo-Inspired Luxury Minimal
 
 ---
@@ -30,23 +30,25 @@ docs/debug/pages/*/debug-log.md             - Page-specific consolidated logs �
 
 ---
 
-## 📄 All 13 Pages at a Glance
+## 📄 All 15 Pages at a Glance
 
 | # | Page | Purpose | Priority | Issues Fixed | Key Features |
 |---|------|---------|----------|--------------|--------------|
 | 1 | index.html | Homepage | HIGH | 8 | Hero, featured celebrities, CTAs |
 | 2 | browse.html | Celebrity browsing | HIGH | 5 | Filters, search, 12 celebrity cards |
-| 3 | celebrity-profile.html | Celebrity details | HIGH | 5 | Bio, pricing, booking dropdown |
-| 4 | booking.html | 5-step booking | HIGH | 11 | **CRITICAL** Pre-selection integration |
+| 3 | celebrity-profile.html | Celebrity details | HIGH | 5 | Bio, pricing, sticky request button |
+| 4 | booking.html | 5-step booking | HIGH | 11 | **CRITICAL** Application process, state tracking |
 | 5 | dashboard.html | User account | MEDIUM | 11 | Sidebar, bookings, favorites, messages, settings |
 | 6 | how-it-works.html | Platform guide | MEDIUM | 4 | 4-step process, benefits |
 | 7 | about.html | Company info | MEDIUM | 4 | Story, mission, values, stats |
-| 8 | for-celebrities.html | Celebrity recruitment | MEDIUM | 4 | Benefits, calculator, testimonials |
-| 9 | faq.html | Q&A | LOW | 4 | 5 categories, 25 questions |
-| 10 | contact.html | Contact form | LOW | 4 | Form, email, phone, address |
-| 11 | terms.html | Legal terms | LOW | 4 | 13 sections, refund policy |
-| 12 | privacy.html | Privacy policy | LOW | 4 | 12 sections, GDPR/CCPA |
-| 13 | 404.html | Error page | LOW | 2 | Friendly message, CTAs |
+| 8 | team.html | Team members ⭐ NEW | MEDIUM | 0 | 17 members, 6 departments, sticky header |
+| 9 | jobs.html | Careers ⭐ NEW | MEDIUM | 0 | 6 job openings, perks, sticky header |
+| 10 | for-celebrities.html | Celebrity recruitment | MEDIUM | 4 | Benefits, calculator, testimonials |
+| 11 | faq.html | Q&A | LOW | 4 | 5 categories, 25 questions |
+| 12 | contact.html | Contact form | LOW | 4 | Form, email, phone, address |
+| 13 | terms.html | Legal terms | LOW | 4 | 13 sections, refund policy |
+| 14 | privacy.html | Privacy policy | LOW | 4 | 12 sections, GDPR/CCPA |
+| 15 | 404.html | Error page | LOW | 2 | Friendly message, CTAs |
 
 ---
 

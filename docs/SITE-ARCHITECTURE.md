@@ -1,7 +1,7 @@
 # StarryMeet Site Architecture & Page Interactions
 
-**Last Updated**: 2025-10-11
-**Version**: 2.0.0
+**Last Updated**: 2025-10-17
+**Version**: 2.1.0
 **Design System**: v2.0 - Cameo-Inspired Luxury Minimal
 
 > **Note**: This document describes the **current implementation** (as-built).
@@ -24,7 +24,7 @@
 
 ## Site Overview
 
-StarryMeet is a celebrity meetup booking platform with 13 pages organized into 4 main sections:
+StarryMeet is a celebrity meetup booking platform with 15 pages organized into 5 main sections:
 
 ### Core User Journey (High Priority)
 1. **index.html** → Homepage entry point
@@ -36,14 +36,16 @@ StarryMeet is a celebrity meetup booking platform with 13 pages organized into 4
 ### Informational Pages (Medium Priority)
 6. **how-it-works.html** → Platform explanation
 7. **about.html** → Company information
-8. **for-celebrities.html** → Celebrity onboarding
+8. **team.html** → Team members ⭐ NEW
+9. **jobs.html** → Careers & job openings ⭐ NEW
+10. **for-celebrities.html** → Celebrity onboarding
 
 ### Support Pages (Low Priority)
-9. **faq.html** → Common questions
-10. **contact.html** → Contact form
-11. **terms.html** → Legal terms
-12. **privacy.html** → Privacy policy
-13. **404.html** → Error page
+11. **faq.html** → Common questions
+12. **contact.html** → Contact form
+13. **terms.html** → Legal terms
+14. **privacy.html** → Privacy policy
+15. **404.html** → Error page
 
 ---
 
@@ -570,7 +572,130 @@ body (flex column)
 
 ---
 
-### 8. for-celebrities.html (Celebrity Onboarding)
+### 8. team.html (Team Members) ⭐ NEW
+**File**: `/home/whoami/starrymeet/team.html`
+**Lines**: ~533 total
+**Purpose**: Showcase company team and culture
+
+#### What It Does
+- Displays all team members across 6 departments
+- Shows realistic backgrounds and experience
+- Links to careers page for job openings
+- Demonstrates company culture and values
+
+#### Key Sections
+- **Hero** (lines 288-291): "Meet the team" title with mission statement
+- **Leadership** (lines 296-321): 3 executives
+  - Alexandra Stone (Co-Founder & CEO) - Ex-WME
+  - Marcus Chen (Co-Founder & CTO) - Ex-Google
+  - Natalie Patel (COO) - Ex-Airbnb
+- **Product & Engineering** (lines 324-349): 3 team members
+  - James Kim (VP Product) - Ex-Cameo/Patreon
+  - Sofia Rodriguez (Head of Engineering) - Ex-Stripe/Square
+  - David Wang (Senior Product Designer) - Ex-Spotify
+- **Celebrity Relations** (lines 352-377): 3 team members
+  - Emma Richardson (VP Celebrity Relations) - Ex-CAA
+  - Lucas Johnson (Director Talent Partnerships) - Ex-Roc Nation
+  - Priya Mehta (Head of Operations) - Event management expert
+- **Marketing & Growth** (lines 380-405): 3 team members
+  - Taylor Cooper (VP Marketing) - Ex-Nike/Apple
+  - Kai Lee (Head of Growth) - Ex-TikTok/Uber
+  - Aisha Harris (Content & Community Lead) - Ex-Rolling Stone
+- **Trust & Safety** (lines 408-433): 3 team members
+  - Rachel Brooks (Head of Trust & Safety) - Ex-FBI/Airbnb
+  - Victor Martinez (Security Operations Manager) - 20 years protection
+  - Jordan Taylor (Legal Counsel) - Ex-Sony Music
+- **Customer Experience** (lines 436-453): 2 team members
+  - Olivia Anderson (Head of Customer Success) - Ex-Zappos/Ritz-Carlton
+  - Chris Nguyen (Customer Support Lead) - Hospitality management
+- **Join the Team CTA** (lines 457-460): Links to jobs.html
+
+#### Links To (Outgoing)
+- `jobs.html` - "View Open Positions" button
+- `for-celebrities.html` - "Join as talent" footer CTA
+- `contact.html` - "Become a partner" footer CTA
+
+#### Links From (Incoming)
+- All pages - "Team" link in footer Company section
+- `about.html` - "Team" link
+
+#### Data Used
+- Static team member data (17 members total)
+- Avatar gradients with initials
+
+#### Design Features
+- Sticky header for better navigation
+- Hover shadow effects: `box-shadow: 0 12px 32px rgba(234, 18, 121, 0.3)`
+- Responsive grid layout (auto-fit, minmax(280px, 1fr))
+- Avatar circles with gradient backgrounds
+- Fully responsive mobile layout
+
+---
+
+### 9. jobs.html (Careers & Job Openings) ⭐ NEW
+**File**: `/home/whoami/starrymeet/jobs.html`
+**Lines**: ~483 total
+**Purpose**: Job openings and company benefits
+
+#### What It Does
+- Lists all open positions with full descriptions
+- Showcases company benefits and perks
+- Provides application CTAs for each role
+- Demonstrates company culture and work environment
+
+#### Key Sections
+- **Hero** (lines 214-217): "Join our mission" title
+- **Why Work at StarryMeet** (lines 221-254): 6 perks
+  - Competitive Pay (top-tier salary, equity, bonuses)
+  - Health & Wellness (premium coverage)
+  - Unlimited PTO
+  - Remote Friendly
+  - Learning Budget ($3,000 annual)
+  - Celebrity Access (meet stars, exclusive events)
+- **Open Positions** (lines 257-435): 6 job listings
+  1. **Senior Product Manager** (Product & Engineering, SF/Remote)
+     - 5+ years PM experience
+     - Marketplace/creator economy focus
+  2. **Trust & Safety Specialist** (Trust & Safety, LA)
+     - 3+ years in trust & safety
+     - Background checks, fraud prevention
+  3. **Celebrity Relations Manager** (Celebrity Relations, NY/LA)
+     - 5+ years talent relations
+     - Network of celebrities/managers
+  4. **Senior Full Stack Engineer** (Engineering, Remote)
+     - 6+ years software engineering
+     - React, Node.js, scalability focus
+  5. **Growth Marketing Manager** (Marketing & Growth, SF/Remote)
+     - 4+ years growth marketing
+     - Paid social, SEM, SEO, CRO
+  6. **Customer Success Lead** (Customer Experience, Remote)
+     - 5+ years customer success leadership
+     - Team management, operations building
+
+#### Links To (Outgoing)
+- `for-celebrities.html` - "Join as talent" footer CTA
+- `contact.html` - "Become a partner" footer CTA
+- Email: careers@starrymeet.com (via Apply button alerts)
+
+#### Links From (Incoming)
+- `team.html` - "View Open Positions" button
+- All pages - "Jobs" link in footer Company section
+
+#### Data Used
+- Static job listings with full requirements
+- Department metadata, location, job type
+
+#### Design Features
+- Sticky header for consistency
+- Perks grid with emoji icons
+- Job cards with hover effects (translateY(-2px), border glow)
+- Requirements lists with bullet points
+- Apply buttons with gradient styling
+- Fully responsive mobile layout
+
+---
+
+### 10. for-celebrities.html (Celebrity Onboarding)
 **File**: `/home/whoami/starrymeet/for-celebrities.html`
 **Lines**: ~310 total
 **Purpose**: Recruit celebrities to join platform
@@ -626,7 +751,7 @@ body (flex column)
 
 ---
 
-### 9. faq.html (Frequently Asked Questions)
+### 11. faq.html (Frequently Asked Questions)
 **File**: `/home/whoami/starrymeet/faq.html`
 **Lines**: ~260 total
 **Purpose**: Answer common user questions
@@ -679,7 +804,7 @@ body (flex column)
 
 ---
 
-### 10. contact.html (Contact Form)
+### 12. contact.html (Contact Form)
 **File**: `/home/whoami/starrymeet/contact.html`
 **Lines**: ~250 total
 **Purpose**: User support and inquiries
@@ -730,7 +855,7 @@ body (flex column)
 
 ---
 
-### 11. terms.html (Terms of Service)
+### 13. terms.html (Terms of Service)
 **File**: `/home/whoami/starrymeet/terms.html`
 **Lines**: ~270 total
 **Purpose**: Legal terms and conditions
@@ -777,7 +902,7 @@ body (flex column)
 
 ---
 
-### 12. privacy.html (Privacy Policy)
+### 14. privacy.html (Privacy Policy)
 **File**: `/home/whoami/starrymeet/privacy.html`
 **Lines**: ~290 total
 **Purpose**: Privacy policy and data handling
@@ -829,7 +954,7 @@ body (flex column)
 
 ---
 
-### 13. 404.html (Error Page)
+### 15. 404.html (Error Page)
 **File**: `/home/whoami/starrymeet/404.html`
 **Lines**: ~135 total
 **Purpose**: Handle missing pages gracefully

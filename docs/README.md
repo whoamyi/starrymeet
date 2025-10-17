@@ -502,9 +502,86 @@ less docs/debug/14-POINT-CHECKLIST.md
 
 ---
 
-## 🆕 Recent Updates (2025-10-11)
+## 🆕 Recent Updates (2025-10-17)
 
-### Design System v2.0 - Major Redesign Complete
+### Team & Careers Pages + UX Enhancements (NEW - 2025-10-17)
+**Status**: ✅ Production Ready
+**Commits**: f7543f1, cffb681, 0a6eec9, 8f03498, c3b85dc
+
+**What's New**:
+- **Team Page** (`team.html`):
+  - 17 team members across 6 departments (Leadership, Product & Engineering, Celebrity Relations, Marketing, Trust & Safety, Customer Experience)
+  - Realistic backgrounds (ex-WME, Google, Airbnb, CAA, FBI, Stripe, TikTok)
+  - Avatar gradients with initials
+  - Hover shadow effects (0 12px 32px rgba(234, 18, 121, 0.3))
+  - Sticky header for better navigation
+  - Optimized spacing (reduced hero padding from 140px to 100px)
+  - Fully responsive mobile layout
+
+- **Careers Page** (`jobs.html`):
+  - 6 realistic job openings with full descriptions:
+    - Senior Product Manager (Product & Engineering, SF/Remote)
+    - Trust & Safety Specialist (Trust & Safety, LA)
+    - Celebrity Relations Manager (Celebrity Relations, NY/LA)
+    - Senior Full Stack Engineer (Engineering, Remote)
+    - Growth Marketing Manager (Marketing & Growth, SF/Remote)
+    - Customer Success Lead (Customer Experience, Remote)
+  - "Why work at StarryMeet" perks section (6 benefits with icons)
+  - Location, department, and job type metadata
+  - Requirements and application CTAs
+  - Sticky header for consistency
+
+- **Navigation Updates**:
+  - Jobs link in footer Company section now points to jobs.html
+  - "View Open Positions" button on team page linked to careers page
+
+### Booking Flow Transformation (2025-10-16)
+**Status**: ✅ Production Ready
+**Commits**: 90d01e0, eba48a2, d2f7855, 20ccd35
+
+**What's New**:
+- **Application Process Redesign**:
+  - Step 3 transformed into comprehensive application form
+  - Mandatory fields: Occupation, Hometown, Why meet (50 char min), Discussion topics (20 char min)
+  - Agreement checkbox with "approval not guaranteed" messaging
+  - Validation with specific error messages
+  - Success page shows "Request submitted!" with pending approval state
+
+- **Integrated Date/Time Confirmation**:
+  - Step 2 (date/time selection) consolidated into Step 1 as confirmation
+  - Edit mode toggle for changing meeting details
+  - Skip logic in nextStep()/prevStep() to jump from step 1 to 3
+  - Eliminates repetitive UX
+
+- **Comprehensive State Management**:
+  - Global `bookingState` object tracking: celebrity name, meeting type, price, duration, location, date, time slot
+  - URL parameter passing via URLSearchParams
+  - All selections automatically tracked and passed to booking page
+
+- **Sticky Request Button (Mobile)**:
+  - Duplicate "Request" button appears on scroll past booking section
+  - Syncs price with selected meeting option
+  - Scroll detection with JavaScript show/hide logic
+  - Direct `proceedToBooking()` integration
+
+### Celebrity Profile Mobile Rebuild (2025-10-15)
+**Status**: ✅ Production Ready
+**Commits**: 711d077, ab6421a, 8497dba, 6daa072
+
+**What's New**:
+- **Nuclear CSS Overrides**:
+  - Forced single-column layout with `max-width: 100vw !important`
+  - Aggressive mobile-first styling with !important declarations
+  - Reduced hero image from 200px to 100px
+  - All fonts and padding significantly reduced (padding 24px→12px)
+  - Fixed viewport overflow issues
+
+- **Browse Page Fixes**:
+  - Desktop max-width changed from 1600px to 1400px (consistency with other pages)
+  - Search bar centered with max-width: 500px
+  - Grid layout optimizations
+
+### Design System v2.0 - Major Redesign Complete (2025-10-11)
 **Status**: ✅ Production Ready
 **Commits**: 633e7e5, a665e75, 28ff681, c7411f5, 5490215
 
@@ -573,11 +650,12 @@ less docs/debug/14-POINT-CHECKLIST.md
 
 ---
 
-**Last Updated**: 2025-10-11
-**Version**: 2.0.0 - Major Redesign Complete
+**Last Updated**: 2025-10-17
+**Version**: 2.1.0 - Team & Careers Pages + UX Enhancements
 **Documentation Status**: Active & Maintained ✅
 **Design System**: v2.0 - Cameo-Inspired Luxury Minimal ✅
 **Current Implementation**: Frontend Complete (15% overall) 🚀
 **Architecture Vision**: Complete & Documented ✅
+**Total Pages**: 15 (13 original + team.html + jobs.html)
 **Total Docs**: 35+ files (~30,000+ lines)
 **Total Issues Fixed**: 45+
