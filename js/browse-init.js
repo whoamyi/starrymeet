@@ -103,16 +103,26 @@ function applyAllFilters() {
 
     // Start with all celebrities
     filteredCelebrities = allCelebrities.filter(celeb => {
-        // Search filter
-        if (searchTerm && !celeb.name.toLowerCase().includes(searchTerm) &&
-            !celeb.category.toLowerCase().includes(searchTerm) &&
-            !celeb.location.toLowerCase().includes(searchTerm)) {
-            return false;
+        // Search filter - search in name, main category, subcategory, and location
+        if (searchTerm) {
+            const matchesSearch =
+                celeb.name.toLowerCase().includes(searchTerm) ||
+                (celeb.mainCategory && celeb.mainCategory.toLowerCase().includes(searchTerm)) ||
+                (celeb.subCategory && celeb.subCategory.toLowerCase().includes(searchTerm)) ||
+                (celeb.category && celeb.category.toLowerCase().includes(searchTerm)) || // Legacy support
+                celeb.location.toLowerCase().includes(searchTerm);
+
+            if (!matchesSearch) return false;
         }
 
-        // Category filter
-        if (selectedCategories.length > 0 && !selectedCategories.includes(celeb.category)) {
-            return false;
+        // Category filter - check both mainCategory and subCategory
+        if (selectedCategories.length > 0) {
+            const matchesCategory = selectedCategories.some(selectedCat =>
+                celeb.mainCategory === selectedCat ||
+                celeb.subCategory === selectedCat ||
+                celeb.category === selectedCat  // Legacy support
+            );
+            if (!matchesCategory) return false;
         }
 
         // Price filter
@@ -176,7 +186,7 @@ function displayCelebrities(celebrities) {
                 </div>
                 <div class="celebrity-info" style="padding: 0 8px;">
                     <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${celeb.name}</h3>
-                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.category}</p>
+                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.mainCategory || celeb.category || ''}</p>
                     <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
                         <span style="color: gold; font-size: 0.875rem;">★</span>
                         <span style="opacity: 0.8; font-size: 0.875rem;">${rating} (${reviews})</span>

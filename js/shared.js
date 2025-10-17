@@ -6,42 +6,52 @@
 // Celebrity Data - Complete list used across the platform
 // Note: imageUrl field can be added to each celebrity for profile pictures (e.g., imageUrl: "path/to/image.jpg")
 // If imageUrl is not provided, the app will display colored initials as a fallback
+// Structure: mainCategory is the primary grouping, subCategory is the specific type
 const CELEBRITIES = [
-    { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true, imageUrl: null },
-    { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
-    { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
-    { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },
-    { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", country: "Australia", price: 6500, verified: true, trending: true },
-    { name: "Ryan Reynolds", category: "Hollywood", location: "Vancouver • Mar 25", city: "Vancouver", country: "Canada", price: 8000, verified: true, trending: false },
-    { name: "Scarlett Johansson", category: "Hollywood", location: "New York • Apr 1", city: "New York", country: "USA", price: 7000, verified: true, trending: false },
-    { name: "Timothée Chalamet", category: "Hollywood", location: "Paris • Mar 28", city: "Paris", country: "France", price: 5500, verified: true, trending: true },
-    { name: "Florence Pugh", category: "Hollywood", location: "London • Apr 3", city: "London", country: "UK", price: 4500, verified: true, trending: false },
-    { name: "Michael B. Jordan", category: "Hollywood", location: "Atlanta • Mar 30", city: "Atlanta", country: "USA", price: 6000, verified: true, trending: false },
-    { name: "Dwayne Johnson", category: "Hollywood", location: "Miami • Apr 10", city: "Miami", country: "USA", price: 15000, verified: true, trending: true },
-    { name: "Gal Gadot", category: "Hollywood", location: "Tel Aviv • Apr 8", city: "Tel Aviv", country: "Israel", price: 7000, verified: true, trending: false },
-    { name: "Robert Downey Jr.", category: "Hollywood", location: "Los Angeles • Apr 12", city: "Los Angeles", country: "USA", price: 12000, verified: true, trending: false },
-    { name: "Jennifer Lawrence", category: "Hollywood", location: "New York • Apr 6", city: "New York", country: "USA", price: 8500, verified: true, trending: false },
-    { name: "Brad Pitt", category: "Hollywood", location: "Los Angeles • Apr 15", city: "Los Angeles", country: "USA", price: 10000, verified: true, trending: false },
-    { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true },
-    { name: "Song Hye-kyo", category: "K-Drama", location: "Seoul • Mar 19", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
-    { name: "Lee Min-ho", category: "K-Drama", location: "Seoul • Mar 21", city: "Seoul", country: "South Korea", price: 5000, verified: true, trending: true },
-    { name: "IU (Lee Ji-eun)", category: "K-Drama", location: "Seoul • Mar 24", city: "Seoul", country: "South Korea", price: 6000, verified: true, trending: true },
-    { name: "Kim Soo-hyun", category: "K-Drama", location: "Seoul • Apr 2", city: "Seoul", country: "South Korea", price: 5500, verified: true, trending: false },
-    { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", city: "San Francisco", country: "USA", price: 50000, verified: true, trending: true },
-    { name: "Jeff Bezos", category: "Business", location: "Seattle • Mar 29", city: "Seattle", country: "USA", price: 45000, verified: true, trending: false },
-    { name: "Bill Gates", category: "Business", location: "Seattle • Apr 4", city: "Seattle", country: "USA", price: 40000, verified: true, trending: false },
-    { name: "Mark Zuckerberg", category: "Business", location: "Palo Alto • Mar 26", city: "Palo Alto", country: "USA", price: 35000, verified: true, trending: false },
-    { name: "Oprah Winfrey", category: "Business", location: "Chicago • Apr 9", city: "Chicago", country: "USA", price: 30000, verified: true, trending: true },
-    { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true },
-    { name: "Lionel Messi", category: "Athletes", location: "Miami • Apr 8", city: "Miami", country: "USA", price: 30000, verified: true, trending: true },
-    { name: "LeBron James", category: "Athletes", location: "Los Angeles • Apr 11", city: "Los Angeles", country: "USA", price: 20000, verified: true, trending: true },
-    { name: "Serena Williams", category: "Athletes", location: "Miami • Apr 7", city: "Miami", country: "USA", price: 18000, verified: true, trending: false },
-    { name: "Tom Brady", category: "Athletes", location: "Tampa • Apr 14", city: "Tampa", country: "USA", price: 22000, verified: true, trending: false },
-    { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true },
-    { name: "Beyoncé", category: "Musicians", location: "Houston • Mar 28", city: "Houston", country: "USA", price: 25000, verified: true, trending: true },
-    { name: "Ed Sheeran", category: "Musicians", location: "London • Apr 5", city: "London", country: "UK", price: 15000, verified: true, trending: false },
-    { name: "Ariana Grande", category: "Musicians", location: "Los Angeles • Apr 10", city: "Los Angeles", country: "USA", price: 18000, verified: true, trending: true },
-    { name: "BTS (Group)", category: "Musicians", location: "Seoul • Apr 26", city: "Seoul", country: "South Korea", price: 35000, verified: true, trending: true }
+    // Actors & Actresses
+    { name: "Emma Watson", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true, imageUrl: null },
+    { name: "Chris Hemsworth", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true, imageUrl: null },
+    { name: "Zendaya", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true, imageUrl: null },
+    { name: "Tom Holland", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false, imageUrl: null },
+    { name: "Margot Robbie", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", country: "Australia", price: 6500, verified: true, trending: true, imageUrl: null },
+    { name: "Ryan Reynolds", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Vancouver • Mar 25", city: "Vancouver", country: "Canada", price: 8000, verified: true, trending: false, imageUrl: null },
+    { name: "Scarlett Johansson", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "New York • Apr 1", city: "New York", country: "USA", price: 7000, verified: true, trending: false, imageUrl: null },
+    { name: "Timothée Chalamet", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Paris • Mar 28", city: "Paris", country: "France", price: 5500, verified: true, trending: true, imageUrl: null },
+    { name: "Florence Pugh", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "London • Apr 3", city: "London", country: "UK", price: 4500, verified: true, trending: false, imageUrl: null },
+    { name: "Michael B. Jordan", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Atlanta • Mar 30", city: "Atlanta", country: "USA", price: 6000, verified: true, trending: false, imageUrl: null },
+    { name: "Dwayne Johnson", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Miami • Apr 10", city: "Miami", country: "USA", price: 15000, verified: true, trending: true, imageUrl: null },
+    { name: "Gal Gadot", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Tel Aviv • Apr 8", city: "Tel Aviv", country: "Israel", price: 7000, verified: true, trending: false, imageUrl: null },
+    { name: "Robert Downey Jr.", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Los Angeles • Apr 12", city: "Los Angeles", country: "USA", price: 12000, verified: true, trending: false, imageUrl: null },
+    { name: "Jennifer Lawrence", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "New York • Apr 6", city: "New York", country: "USA", price: 8500, verified: true, trending: false, imageUrl: null },
+    { name: "Brad Pitt", mainCategory: "Actors & Actresses", subCategory: "Hollywood", location: "Los Angeles • Apr 15", city: "Los Angeles", country: "USA", price: 10000, verified: true, trending: false, imageUrl: null },
+
+    // K-Drama & K-Pop
+    { name: "Park Seo-joon", mainCategory: "K-Drama & K-Pop", subCategory: "K-Drama Actors", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true, imageUrl: null },
+    { name: "Song Hye-kyo", mainCategory: "K-Drama & K-Pop", subCategory: "K-Drama Actors", location: "Seoul • Mar 19", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false, imageUrl: null },
+    { name: "Lee Min-ho", mainCategory: "K-Drama & K-Pop", subCategory: "K-Drama Actors", location: "Seoul • Mar 21", city: "Seoul", country: "South Korea", price: 5000, verified: true, trending: true, imageUrl: null },
+    { name: "IU (Lee Ji-eun)", mainCategory: "K-Drama & K-Pop", subCategory: "K-Pop Idols", location: "Seoul • Mar 24", city: "Seoul", country: "South Korea", price: 6000, verified: true, trending: true, imageUrl: null },
+    { name: "Kim Soo-hyun", mainCategory: "K-Drama & K-Pop", subCategory: "K-Drama Actors", location: "Seoul • Apr 2", city: "Seoul", country: "South Korea", price: 5500, verified: true, trending: false, imageUrl: null },
+    { name: "BTS (Group)", mainCategory: "K-Drama & K-Pop", subCategory: "K-Pop Groups", location: "Seoul • Apr 26", city: "Seoul", country: "South Korea", price: 35000, verified: true, trending: true, imageUrl: null },
+
+    // Business & Entrepreneurs
+    { name: "Elon Musk", mainCategory: "Business & Entrepreneurs", subCategory: "Tech CEOs", location: "San Francisco • Mar 17", city: "San Francisco", country: "USA", price: 50000, verified: true, trending: true, imageUrl: null },
+    { name: "Jeff Bezos", mainCategory: "Business & Entrepreneurs", subCategory: "Tech CEOs", location: "Seattle • Mar 29", city: "Seattle", country: "USA", price: 45000, verified: true, trending: false, imageUrl: null },
+    { name: "Bill Gates", mainCategory: "Business & Entrepreneurs", subCategory: "Tech CEOs", location: "Seattle • Apr 4", city: "Seattle", country: "USA", price: 40000, verified: true, trending: false, imageUrl: null },
+    { name: "Mark Zuckerberg", mainCategory: "Business & Entrepreneurs", subCategory: "Tech CEOs", location: "Palo Alto • Mar 26", city: "Palo Alto", country: "USA", price: 35000, verified: true, trending: false, imageUrl: null },
+    { name: "Oprah Winfrey", mainCategory: "Business & Entrepreneurs", subCategory: "Motivational Speakers", location: "Chicago • Apr 9", city: "Chicago", country: "USA", price: 30000, verified: true, trending: true, imageUrl: null },
+
+    // Athletes
+    { name: "Cristiano Ronaldo", mainCategory: "Athletes", subCategory: "Football/Soccer", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true, imageUrl: null },
+    { name: "Lionel Messi", mainCategory: "Athletes", subCategory: "Football/Soccer", location: "Miami • Apr 8", city: "Miami", country: "USA", price: 30000, verified: true, trending: true, imageUrl: null },
+    { name: "LeBron James", mainCategory: "Athletes", subCategory: "Basketball", location: "Los Angeles • Apr 11", city: "Los Angeles", country: "USA", price: 20000, verified: true, trending: true, imageUrl: null },
+    { name: "Serena Williams", mainCategory: "Athletes", subCategory: "Tennis", location: "Miami • Apr 7", city: "Miami", country: "USA", price: 18000, verified: true, trending: false, imageUrl: null },
+    { name: "Tom Brady", mainCategory: "Athletes", subCategory: "American Football", location: "Tampa • Apr 14", city: "Tampa", country: "USA", price: 22000, verified: true, trending: false, imageUrl: null },
+
+    // Musicians
+    { name: "Taylor Swift", mainCategory: "Musicians", subCategory: "Pop", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true, imageUrl: null },
+    { name: "Beyoncé", mainCategory: "Musicians", subCategory: "R&B", location: "Houston • Mar 28", city: "Houston", country: "USA", price: 25000, verified: true, trending: true, imageUrl: null },
+    { name: "Ed Sheeran", mainCategory: "Musicians", subCategory: "Pop", location: "London • Apr 5", city: "London", country: "UK", price: 15000, verified: true, trending: false, imageUrl: null },
+    { name: "Ariana Grande", mainCategory: "Musicians", subCategory: "Pop", location: "Los Angeles • Apr 10", city: "Los Angeles", country: "USA", price: 18000, verified: true, trending: true, imageUrl: null }
 ];
 
 // Color palettes for celebrity avatars
@@ -87,7 +97,39 @@ function getAllCelebrities() {
  */
 function getCelebritiesByCategory(category) {
     if (!category) return [...CELEBRITIES];
-    return CELEBRITIES.filter(c => c.category === category);
+    // Check both mainCategory and subCategory for backwards compatibility
+    return CELEBRITIES.filter(c =>
+        c.mainCategory === category ||
+        c.subCategory === category ||
+        c.category === category  // Legacy support
+    );
+}
+
+/**
+ * Get all unique main categories
+ * @returns {array} Array of main category names
+ */
+function getAllMainCategories() {
+    const mainCategories = new Set();
+    CELEBRITIES.forEach(c => {
+        if (c.mainCategory) mainCategories.add(c.mainCategory);
+    });
+    return Array.from(mainCategories).sort();
+}
+
+/**
+ * Get all subcategories for a main category
+ * @param {string} mainCategory - Main category name
+ * @returns {array} Array of subcategory names
+ */
+function getSubCategories(mainCategory) {
+    const subCategories = new Set();
+    CELEBRITIES.forEach(c => {
+        if (c.mainCategory === mainCategory && c.subCategory) {
+            subCategories.add(c.subCategory);
+        }
+    });
+    return Array.from(subCategories).sort();
 }
 
 /**
