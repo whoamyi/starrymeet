@@ -1,0 +1,833 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
+
+    <!-- PERFORMANCE: Font preconnect for faster loading -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="profile">
+    <meta property="og:url" content="https://starrymeet.com/celebrity-profile.html">
+    <meta property="og:title" content="Celebrity Profile - StarryMeet">
+    <meta property="og:description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="Celebrity Profile - StarryMeet">
+    <meta name="twitter:description" content="View detailed celebrity profile, availability, pricing, and reviews. Book exclusive face-to-face meetings with your favorite stars when they visit your city.">
+
+    <title>Celebrity Profile - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <link rel="stylesheet" href="css/pages/celebrity-profile.css">
+    <script src="js/shared.js"></script>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <!-- Back Button -->
+    <div class="back-button">
+        <a href="browse.html" class="back-btn">← Back to Browse</a>
+    </div>
+
+    <!-- Error Page (shown if celebrity not found) -->
+    <div class="error-page hidden" id="errorPage">
+        <h1>Celebrity Not Found</h1>
+        <p>Sorry, we couldn't find the celebrity you're looking for.</p>
+        <a href="browse.html" class="error-btn">Browse All Celebrities</a>
+    </div>
+
+    <!-- Main Container -->
+    <div class="main-container hidden" id="mainContainer">
+        <!-- Content Area -->
+        <div class="content-area">
+            <!-- Hero Section -->
+            <div class="hero-profile">
+                <div class="hero-image" id="heroImage">
+                    <div class="hero-initials" id="heroInitials">EW</div>
+                    <div class="hero-actions">
+                        <button class="action-btn" id="shareBtn" onclick="shareCelebrity()">🔗</button>
+                        <button class="action-btn" id="watchlistBtn" onclick="toggleWatchlist()">🤍</button>
+                    </div>
+                </div>
+                <div class="hero-info">
+                    <div class="hero-header">
+                        <h1 class="celebrity-name-hero" id="celebrityName">Celebrity Name</h1>
+                        <span class="verified-badge-hero">✓ Verified</span>
+                        <span class="category-badge" id="categoryBadge">Category</span>
+                    </div>
+                    <div class="rating-section">
+                        <span class="stars">★★★★★</span>
+                        <span>4.9 (127 reviews)</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- About Section -->
+            <div class="section">
+                <h2 class="section-title">About <span id="aboutName">Celebrity</span></h2>
+                <p class="bio" id="bioText">
+                    A globally recognized talent with years of experience in their field, bringing inspiration and
+                    expertise to every interaction. Known for their professionalism, charisma, and genuine connection
+                    with fans, they have become one of the most sought-after personalities for exclusive meetups.
+                    Their journey has inspired millions worldwide, and now you have the opportunity to meet them
+                    face-to-face in an intimate, professional setting.
+                </p>
+                <ul class="achievements">
+                    <li class="achievement-item">
+                        <span class="achievement-icon">🏆</span>
+                        <span>Multiple award winner and industry leader</span>
+                    </li>
+                    <li class="achievement-item">
+                        <span class="achievement-icon">🌟</span>
+                        <span>Over 10 years of professional experience</span>
+                    </li>
+                    <li class="achievement-item">
+                        <span class="achievement-icon">🎬</span>
+                        <span>Featured in major international productions</span>
+                    </li>
+                    <li class="achievement-item">
+                        <span class="achievement-icon">💫</span>
+                        <span>Recognized for philanthropic work and advocacy</span>
+                    </li>
+                </ul>
+                <div class="social-links">
+                    <a href="#" class="social-btn">📷</a>
+                    <a href="#" class="social-btn">🐦</a>
+                    <a href="#" class="social-btn">📘</a>
+                </div>
+            </div>
+
+            <!-- Upcoming Availability -->
+            <div class="section">
+                <h2 class="section-title">Upcoming Availability</h2>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper availability-carousel" id="availabilityGrid">
+                        <!-- Availability cards will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- Meeting Types & Pricing -->
+            <div class="section" id="meetingTypes">
+                <h2 class="section-title">Meeting Types</h2>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper pricing-carousel" id="pricingGrid">
+                        <!-- Pricing cards will be loaded here -->
+                    </div>
+                </div>
+            </div>
+
+            <!-- What to Expect -->
+            <div class="section">
+                <h2 class="section-title">What to Expect</h2>
+                <div class="guidelines-grid">
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Professional venue</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Privacy guaranteed</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Photos allowed</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon check">✓</span>
+                        <span>Respectful interaction</span>
+                    </div>
+                    <div class="guideline-item">
+                        <span class="guideline-icon cross">✗</span>
+                        <span>No gifts/large items</span>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Reviews Section -->
+            <div class="section">
+                <h2 class="section-title">Reviews</h2>
+                <div class="rating-breakdown">
+                    <div class="rating-row">
+                        <span class="rating-label">5 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 80%"></div></div>
+                        <span class="rating-percentage">80%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">4 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 15%"></div></div>
+                        <span class="rating-percentage">15%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">3 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 3%"></div></div>
+                        <span class="rating-percentage">3%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">2 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 1%"></div></div>
+                        <span class="rating-percentage">1%</span>
+                    </div>
+                    <div class="rating-row">
+                        <span class="rating-label">1 ★</span>
+                        <div class="rating-bar"><div class="rating-fill" style="width: 1%"></div></div>
+                        <span class="rating-percentage">1%</span>
+                    </div>
+                </div>
+
+                <div class="reviews-list">
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">JD</div>
+                            <div class="review-meta">
+                                <div class="review-author">John Doe</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">2 weeks ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            An absolutely incredible experience! Professional, warm, and genuinely interested in our conversation.
+                            The venue was perfect and the entire team made sure everything ran smoothly. Worth every penny!
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (24)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">SM</div>
+                            <div class="review-meta">
+                                <div class="review-author">Sarah Miller</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">1 month ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            A dream come true! Got to have an extended conversation and even received personalized advice.
+                            The celebrity was incredibly down-to-earth and made the experience unforgettable.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (18)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">MK</div>
+                            <div class="review-meta">
+                                <div class="review-author">Michael Kim</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">2 months ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            Exceeded all expectations! The meeting was well-organized, private, and felt very personal.
+                            Got amazing photos and memories that will last a lifetime.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (31)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">AL</div>
+                            <div class="review-meta">
+                                <div class="review-author">Anna Lopez</div>
+                                <div class="review-rating">★★★★☆</div>
+                                <div class="review-date">3 months ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            Great experience overall! The celebrity was very kind and approachable. The only minor issue was
+                            the session felt a bit rushed, but still an amazing opportunity.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (12)</button>
+                    </div>
+
+                    <div class="review-card">
+                        <div class="review-header">
+                            <div class="review-avatar">RP</div>
+                            <div class="review-meta">
+                                <div class="review-author">Ryan Peterson</div>
+                                <div class="review-rating">★★★★★</div>
+                                <div class="review-date">4 months ago</div>
+                            </div>
+                        </div>
+                        <p class="review-text">
+                            Absolutely phenomenal! Professional setup, friendly staff, and the celebrity was incredibly
+                            genuine. This is definitely worth the investment for any true fan.
+                        </p>
+                        <button class="helpful-btn">👍 Helpful (27)</button>
+                    </div>
+                </div>
+
+                <button class="load-more-btn">Load More Reviews</button>
+            </div>
+
+            <!-- Similar Celebrities -->
+            <div class="section">
+                <h2 class="section-title">You May Also Like</h2>
+                <div class="carousel-container">
+                    <div class="carousel-wrapper similar-carousel" id="similarGrid">
+                        <!-- Similar celebrity cards will be loaded here -->
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Sticky Booking Sidebar -->
+        <aside class="booking-sidebar">
+            <div class="booking-card">
+                <div class="booking-header">
+                    <div class="booking-photo" id="bookingPhoto">EW</div>
+                    <div class="booking-info">
+                        <div class="booking-name" id="bookingName">Celebrity</div>
+                        <div class="next-available" id="nextAvailable">Next: Mar 15, London</div>
+                    </div>
+                </div>
+                <div class="starting-price">Starting from</div>
+                <div class="price-display" id="priceDisplay">$5,000</div>
+                <select class="booking-dropdown" id="meetingTypeDropdown" onchange="updatePrice()" aria-label="Select meeting type">
+                    <option value="">Select Meeting Type</option>
+                    <option value="quick">Quick Meet (15 min)</option>
+                    <option value="standard">Standard Session (30 min)</option>
+                    <option value="premium">Premium Experience (60 min)</option>
+                </select>
+                <button class="book-now-btn" onclick="bookNow()">Reserve Your Moment</button>
+                <button class="message-btn" onclick="handleMessageClick()">Message Celebrity Team</button>
+            </div>
+        </aside>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Celebrity data - same as browse.html
+        const celebrities = [
+            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true },
+            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
+            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
+            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },
+            { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", country: "Australia", price: 6500, verified: true, trending: true },
+            { name: "Ryan Reynolds", category: "Hollywood", location: "Vancouver • Mar 25", city: "Vancouver", country: "Canada", price: 8000, verified: true, trending: false },
+            { name: "Scarlett Johansson", category: "Hollywood", location: "New York • Apr 1", city: "New York", country: "USA", price: 7000, verified: true, trending: false },
+            { name: "Timothée Chalamet", category: "Hollywood", location: "Paris • Mar 28", city: "Paris", country: "France", price: 5500, verified: true, trending: true },
+            { name: "Florence Pugh", category: "Hollywood", location: "London • Apr 3", city: "London", country: "UK", price: 4500, verified: true, trending: false },
+            { name: "Michael B. Jordan", category: "Hollywood", location: "Atlanta • Mar 30", city: "Atlanta", country: "USA", price: 6000, verified: true, trending: false },
+            { name: "Dwayne Johnson", category: "Hollywood", location: "Miami • Apr 10", city: "Miami", country: "USA", price: 15000, verified: true, trending: true },
+            { name: "Gal Gadot", category: "Hollywood", location: "Tel Aviv • Apr 8", city: "Tel Aviv", country: "Israel", price: 7000, verified: true, trending: false },
+            { name: "Robert Downey Jr.", category: "Hollywood", location: "Los Angeles • Apr 12", city: "Los Angeles", country: "USA", price: 12000, verified: true, trending: false },
+            { name: "Jennifer Lawrence", category: "Hollywood", location: "New York • Apr 6", city: "New York", country: "USA", price: 8500, verified: true, trending: false },
+            { name: "Brad Pitt", category: "Hollywood", location: "Los Angeles • Apr 15", city: "Los Angeles", country: "USA", price: 10000, verified: true, trending: false },
+            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true },
+            { name: "Song Hye-kyo", category: "K-Drama", location: "Seoul • Mar 19", city: "Seoul", country: "South Korea", price: 4500, verified: true, trending: false },
+            { name: "Lee Min-ho", category: "K-Drama", location: "Seoul • Mar 21", city: "Seoul", country: "South Korea", price: 5000, verified: true, trending: true },
+            { name: "IU (Lee Ji-eun)", category: "K-Drama", location: "Seoul • Mar 24", city: "Seoul", country: "South Korea", price: 6000, verified: true, trending: true },
+            { name: "Elon Musk", category: "Business", location: "San Francisco • Mar 17", city: "San Francisco", country: "USA", price: 50000, verified: true, trending: true },
+            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true },
+            { name: "Lionel Messi", category: "Athletes", location: "Miami • Apr 8", city: "Miami", country: "USA", price: 30000, verified: true, trending: true },
+            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true },
+            { name: "Beyoncé", category: "Musicians", location: "Houston • Mar 28", city: "Houston", country: "USA", price: 25000, verified: true, trending: true },
+            { name: "BTS (Group)", category: "Musicians", location: "Seoul • Apr 26", city: "Seoul", country: "South Korea", price: 35000, verified: true, trending: true }
+        ];
+
+        // Color palettes
+        const colorPalettes = [
+            'linear-gradient(135deg, #667eea, #764ba2)',
+            'linear-gradient(135deg, #f093fb, #f5576c)',
+            'linear-gradient(135deg, #4facfe, #00f2fe)',
+            'linear-gradient(135deg, #43e97b, #38f9d7)',
+            'linear-gradient(135deg, #fa709a, #fee140)',
+            'linear-gradient(135deg, #30cfd0, #330867)',
+            'linear-gradient(135deg, #a8edea, #fed6e3)',
+            'linear-gradient(135deg, #ff9a9e, #fecfef)',
+            'linear-gradient(135deg, #ffecd2, #fcb69f)',
+            'linear-gradient(135deg, #ff6e7f, #bfe9ff)'
+        ];
+
+        let currentCelebrity = null;
+        let watchlist = new Set();
+
+        // Get initials
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+        }
+
+        // Get color
+        function getColorForCelebrity(name) {
+            const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            return colorPalettes[index % colorPalettes.length];
+        }
+
+        // Load celebrity from URL
+        function loadCelebrity() {
+            const urlParams = new URLSearchParams(window.location.search);
+            const celebrityName = urlParams.get('name');
+
+            if (!celebrityName) {
+                // Default to first celebrity if no name provided
+                currentCelebrity = celebrities[0];
+            } else {
+                currentCelebrity = celebrities.find(c => c.name.toLowerCase() === celebrityName.toLowerCase());
+
+                if (!currentCelebrity) {
+                    showError();
+                    return;
+                }
+            }
+
+            document.getElementById('errorPage').classList.add('hidden');
+            document.getElementById('mainContainer').classList.remove('hidden');
+
+            renderCelebrity();
+        }
+
+        // Show error page
+        function showError() {
+            document.getElementById('errorPage').classList.remove('hidden');
+            document.getElementById('mainContainer').classList.add('hidden');
+        }
+
+        // Render celebrity
+        function renderCelebrity() {
+            const initials = getInitials(currentCelebrity.name);
+            const color = getColorForCelebrity(currentCelebrity.name);
+
+            // Hero section
+            document.getElementById('heroImage').style.background = color;
+            document.getElementById('heroInitials').textContent = initials;
+            document.getElementById('celebrityName').textContent = currentCelebrity.name;
+            document.getElementById('categoryBadge').textContent = currentCelebrity.category;
+            document.getElementById('aboutName').textContent = currentCelebrity.name;
+
+            // Booking sidebar
+            document.getElementById('bookingPhoto').textContent = initials;
+            document.getElementById('bookingPhoto').style.background = color;
+            document.getElementById('bookingName').textContent = currentCelebrity.name;
+            document.getElementById('nextAvailable').textContent = `Next: ${currentCelebrity.location}`;
+            document.getElementById('priceDisplay').textContent = `$${currentCelebrity.price.toLocaleString()}`;
+
+            // Render availability
+            renderAvailability();
+
+            // Render pricing
+            renderPricing();
+
+            // Render similar celebrities
+            renderSimilarCelebrities();
+        }
+
+        // Generate availability data - MUST match booking.html logic exactly
+        function generateAvailabilityDataForProfile() {
+            const data = {};
+            const today = new Date();
+
+            celebrities.forEach((celebrity, celebIndex) => {
+                data[celebrity.name] = {};
+
+                // Get all unique locations for this celebrity
+                const locations = [`${celebrity.city}, ${celebrity.country}`];
+
+                // Add a few additional tour locations (same as booking.html)
+                const tourCities = celebrities
+                    .filter(c => c.name !== celebrity.name)
+                    .slice(0, 2)
+                    .map(c => `${c.city}, ${c.country}`);
+                locations.push(...tourCities);
+
+                locations.forEach((location, locIndex) => {
+                    data[celebrity.name][location] = {};
+
+                    // Use same deterministic seed as booking.html
+                    const seed = celebIndex * 1000 + locIndex * 100;
+
+                    for (let i = 0; i < 30; i++) {
+                        const date = new Date(today);
+                        date.setDate(today.getDate() + i);
+                        const dateStr = date.toISOString().split('T')[0];
+
+                        // Same hash calculation as booking.html
+                        const dayHash = (seed + i * 7) % 100;
+
+                        // 60% chance of having slots on any given day
+                        if (dayHash < 60) {
+                            const numSlots = (dayHash % 5) + 1; // 1-5 slots deterministically
+
+                            data[celebrity.name][location][dateStr] = {
+                                slots: numSlots
+                            };
+                        }
+                    }
+                });
+            });
+
+            return data;
+        }
+
+        // Render availability
+        function renderAvailability() {
+            // Generate availability data using same logic as booking.html
+            const availabilityData = generateAvailabilityDataForProfile();
+            const celebrityData = availabilityData[currentCelebrity.name];
+
+            if (!celebrityData) {
+                console.error('No availability data for celebrity');
+                return;
+            }
+
+            // Get all locations with availability
+            const locations = [];
+
+            // Get primary location (celebrity's home city)
+            const primaryLocation = `${currentCelebrity.city}, ${currentCelebrity.country}`;
+            if (celebrityData[primaryLocation]) {
+                const dates = Object.keys(celebrityData[primaryLocation]);
+                if (dates.length > 0) {
+                    // Calculate TOTAL slots across all dates for this location
+                    let totalSlots = 0;
+                    dates.forEach(date => {
+                        totalSlots += celebrityData[primaryLocation][date].slots;
+                    });
+
+                    const firstDate = dates[0];
+                    locations.push({
+                        city: currentCelebrity.city,
+                        country: currentCelebrity.country,
+                        date: currentCelebrity.location.split('•')[1]?.trim() || formatDateRange(firstDate),
+                        venue: getVenueName(currentCelebrity.city),
+                        slots: totalSlots, // Total across all dates
+                        dateCount: dates.length,
+                        rawDate: firstDate
+                    });
+                }
+            }
+
+            // Get tour locations
+            const tourCities = celebrities
+                .filter(c => c.name !== currentCelebrity.name)
+                .slice(0, 2)
+                .map(c => `${c.city}, ${c.country}`);
+
+            tourCities.forEach(location => {
+                if (celebrityData[location]) {
+                    const dates = Object.keys(celebrityData[location]);
+                    if (dates.length > 0) {
+                        // Calculate TOTAL slots across all dates for this location
+                        let totalSlots = 0;
+                        dates.forEach(date => {
+                            totalSlots += celebrityData[location][date].slots;
+                        });
+
+                        const firstDate = dates[0];
+                        const [city, country] = location.split(', ');
+                        locations.push({
+                            city: city,
+                            country: country,
+                            date: formatDateRange(firstDate),
+                            venue: getVenueName(city),
+                            slots: totalSlots, // Total across all dates
+                            dateCount: dates.length,
+                            rawDate: firstDate
+                        });
+                    }
+                }
+            });
+
+            const grid = document.getElementById('availabilityGrid');
+            grid.innerHTML = locations.map(loc => `
+                <div class="availability-card">
+                    <div class="city-name">${getFlag(loc.country)} ${loc.city}</div>
+                    <div class="date-range">📅 ${loc.date}</div>
+                    <div class="venue">📍 ${loc.venue}</div>
+                    <div class="slots-info">${loc.slots} slot${loc.slots > 1 ? 's' : ''} remaining</div>
+                    <button class="book-btn-card" onclick="bookFromLocation('${loc.city}', '${loc.country}', '${loc.date}')">Reserve Your Moment</button>
+                </div>
+            `).join('');
+
+            // Log total slots per location for verification
+            console.log(`Rendered ${locations.length} locations with availability for ${currentCelebrity.name}:`);
+            locations.forEach(loc => {
+                console.log(`  ${loc.city}, ${loc.country}: ${loc.slots} total slots across ${loc.dateCount} dates`);
+            });
+        }
+
+        // Format date for display
+        function formatDateRange(dateStr) {
+            const date = new Date(dateStr);
+            const month = date.toLocaleDateString('en-US', { month: 'short' });
+            const day = date.getDate();
+            return `${month} ${day}`;
+        }
+
+        // Get flag emoji
+        function getFlag(country) {
+            const flags = {
+                'USA': '🇺🇸', 'UK': '🇬🇧', 'France': '🇫🇷', 'Japan': '🇯🇵',
+                'South Korea': '🇰🇷', 'Australia': '🇦🇺', 'Canada': '🇨🇦',
+                'Israel': '🇮🇱', 'Saudi Arabia': '🇸🇦'
+            };
+            return flags[country] || '🌍';
+        }
+
+        // Get venue name based on city
+        function getVenueName(city) {
+            const venues = {
+                'London': 'Savoy Hotel',
+                'Sydney': 'Opera House Hotel',
+                'Los Angeles': 'Beverly Hills Hotel',
+                'New York': 'Plaza Hotel',
+                'Paris': 'Le Grand Hotel',
+                'Tokyo': 'Grand Tokyo Hotel',
+                'Seoul': 'Shilla Hotel',
+                'Vancouver': 'Fairmont Hotel',
+                'San Francisco': 'Palace Hotel',
+                'Seattle': 'Fairmont Olympic',
+                'Miami': 'Fontainebleau',
+                'Atlanta': 'Four Seasons',
+                'Chicago': 'Peninsula Hotel',
+                'Nashville': 'Grand Hyatt',
+                'Houston': 'Post Oak Hotel',
+                'Tampa': 'JW Marriott',
+                'Palo Alto': 'Four Seasons',
+                'Riyadh': 'Ritz-Carlton',
+                'Tel Aviv': 'Carlton Hotel'
+            };
+            return venues[city] || 'Luxury Hotel Suite';
+        }
+
+        // Render pricing
+        function renderPricing() {
+            const basePrice = currentCelebrity.price;
+            const standardPrice = Math.round(basePrice * 1.5);
+            const premiumPrice = Math.round(basePrice * 2.5);
+
+            const grid = document.getElementById('pricingGrid');
+            grid.innerHTML = `
+                <div class="pricing-card">
+                    <div class="pricing-icon">🤝</div>
+                    <h3 class="pricing-title">Quick Meet</h3>
+                    <div class="pricing-duration">15 minutes</div>
+                    <div class="pricing-amount">$${basePrice.toLocaleString()}</div>
+                    <p class="pricing-description">Brief meet & greet, photo opportunity</p>
+                    <ul class="pricing-includes">
+                        <li>One photo opportunity</li>
+                        <li>Autograph session</li>
+                        <li>Brief conversation</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectMeeting('quick')">Select</button>
+                </div>
+
+                <div class="pricing-card popular">
+                    <div class="pricing-icon">⭐</div>
+                    <h3 class="pricing-title">Standard Session</h3>
+                    <div class="pricing-duration">30 minutes</div>
+                    <div class="pricing-amount">$${standardPrice.toLocaleString()}</div>
+                    <p class="pricing-description">Extended conversation and Q&A</p>
+                    <ul class="pricing-includes">
+                        <li>Multiple photo opportunities</li>
+                        <li>Autograph session</li>
+                        <li>Extended discussion</li>
+                        <li>Q&A session</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectMeeting('standard')">Select</button>
+                </div>
+
+                <div class="pricing-card">
+                    <div class="pricing-icon">👑</div>
+                    <h3 class="pricing-title">Premium Experience</h3>
+                    <div class="pricing-duration">60 minutes</div>
+                    <div class="pricing-amount">$${premiumPrice.toLocaleString()}</div>
+                    <p class="pricing-description">In-depth mentorship or business consultation</p>
+                    <ul class="pricing-includes">
+                        <li>Professional photoshoot</li>
+                        <li>Personalized advice</li>
+                        <li>Video message</li>
+                        <li>Extended consultation</li>
+                        <li>Exclusive memorabilia</li>
+                    </ul>
+                    <button class="select-btn" onclick="selectMeeting('premium')">Select</button>
+                </div>
+            `;
+        }
+
+        // Render similar celebrities
+        function renderSimilarCelebrities() {
+            const similar = celebrities
+                .filter(c => c.category === currentCelebrity.category && c.name !== currentCelebrity.name)
+                .slice(0, 4);
+
+            const grid = document.getElementById('similarGrid');
+            grid.innerHTML = similar.map(celeb => {
+                const initials = getInitials(celeb.name);
+                const color = getColorForCelebrity(celeb.name);
+                return `
+                    <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                        <div class="celebrity-image-card" style="background: ${color}">
+                            <div class="celebrity-initials-card">${initials}</div>
+                        </div>
+                        <div class="celebrity-info-card">
+                            <div class="celebrity-name-card">${celeb.name}</div>
+                            <div class="celebrity-category-card">${celeb.category}</div>
+                            <div class="celebrity-price-card">$${celeb.price.toLocaleString()}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        // Select meeting type
+        function selectMeeting(type) {
+            // Direct booking with pre-selected meeting type
+            window.location.href = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}`;
+        }
+
+        // Update price based on selection
+        function updatePrice() {
+            const type = document.getElementById('meetingTypeDropdown').value;
+            const basePrice = currentCelebrity.price;
+            let price = basePrice;
+
+            if (type === 'standard') price = Math.round(basePrice * 1.5);
+            if (type === 'premium') price = Math.round(basePrice * 2.5);
+
+            document.getElementById('priceDisplay').textContent = `$${price.toLocaleString()}`;
+        }
+
+        // Scroll to booking
+        function scrollToBooking() {
+            window.scrollTo({ top: 0, behavior: 'smooth' });
+        }
+
+        // Book now
+        function bookNow() {
+            const type = document.getElementById('meetingTypeDropdown').value;
+            if (!type) {
+                alert('Please select a meeting type first');
+                return;
+            }
+            window.location.href = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}`;
+        }
+
+        // Book from location card in upcoming availability
+        function bookFromLocation(city, country, dateRange) {
+            console.log('bookFromLocation called with:', { city, country, dateRange });
+            const type = document.getElementById('meetingTypeDropdown').value || 'standard';
+            const url = `booking.html?celebrity=${encodeURIComponent(currentCelebrity.name)}&type=${type}&city=${encodeURIComponent(city)}&country=${encodeURIComponent(country)}&dateRange=${encodeURIComponent(dateRange)}`;
+            console.log('Navigating to:', url);
+            window.location.href = url;
+        }
+
+        // Toggle watchlist
+        function toggleWatchlist() {
+            const btn = document.getElementById('watchlistBtn');
+            if (watchlist.has(currentCelebrity.name)) {
+                watchlist.delete(currentCelebrity.name);
+                btn.classList.remove('active');
+                btn.innerHTML = '🤍';
+            } else {
+                watchlist.add(currentCelebrity.name);
+                btn.classList.add('active');
+                btn.innerHTML = '❤️';
+            }
+        }
+
+        // Share celebrity
+        function shareCelebrity() {
+            const url = window.location.href;
+            if (navigator.share) {
+                navigator.share({
+                    title: `Meet ${currentCelebrity.name} on StarryMeet`,
+                    text: `Check out this exclusive opportunity to meet ${currentCelebrity.name}!`,
+                    url: url
+                });
+            } else {
+                navigator.clipboard.writeText(url);
+                alert('Link copied to clipboard!');
+            }
+        }
+
+        // Initialize
+        loadCelebrity();
+    </script>
+</body>
+</html>

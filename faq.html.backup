@@ -1,0 +1,378 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Get answers to common questions about StarryMeet. Learn about booking, payments, cancellations, celebrity verification, and meeting experiences.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/faq.html">
+    <meta property="og:title" content="FAQ - StarryMeet">
+    <meta property="og:description" content="Get answers to common questions about StarryMeet. Learn about booking, payments, cancellations, celebrity verification, and meeting experiences.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="FAQ - StarryMeet">
+    <meta name="twitter:description" content="Get answers to common questions about StarryMeet. Learn about booking, payments, cancellations, celebrity verification, and meeting experiences.">
+
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <title>FAQ - StarryMeet</title>
+    <style>
+        /* Page-specific styles - minimal layout only */
+        .hero {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--space-20) var(--space-8) var(--space-16);
+            margin-top: var(--nav-height);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.125rem, 4vw, 1.5rem);  /* v2.1.0: 24px max, 18px mobile */
+            font-weight: 600;  /* v2.1.0: Reduced from 900 */
+            margin-bottom: var(--space-4);
+        }
+
+        .hero p {
+            font-size: var(--text-xl);
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto var(--space-8);
+        }
+
+        .search-box {
+            max-width: 600px;
+            margin: 0 auto;
+        }
+
+        .search-input {
+            width: 100%;
+            padding: var(--space-4) var(--space-6);
+            font-size: var(--text-lg);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-full);
+            background: #000000;
+            color: var(--white);
+        }
+
+        .container {
+            max-width: 1000px;
+            margin: 0 auto;
+            padding: var(--space-16) var(--space-8);
+        }
+
+        .tabs {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-8);
+            flex-wrap: wrap;
+            justify-content: center;
+        }
+
+        .tab {
+            background: #000000;
+            padding: var(--space-3) var(--space-6);
+            border: 2px solid var(--border-medium);
+            border-radius: var(--radius-full);
+            cursor: pointer;
+            font-weight: 600;
+            transition: all 0.3s;
+        }
+
+        .tab:hover {
+            border-color: var(--primary);
+        }
+
+        .tab.active {
+            background: var(--primary);
+            color: white;
+            border-color: var(--primary);
+        }
+
+        .faq-category {
+            display: none;
+        }
+
+        .faq-category.active {
+            display: block;
+        }
+
+        .faq-item {
+            background: #000000;
+            border-radius: var(--radius-xl);
+            margin-bottom: var(--space-4);
+            overflow: hidden;
+            border: 1px solid var(--border-light);
+        }
+
+        .faq-question {
+            padding: var(--space-6);
+            font-weight: 600;  /* v2.1.0: Reduced from 700 */
+            font-size: var(--text-base);  /* v2.1.0: Standard base size */
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            opacity: 0.8;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 var(--space-6);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 var(--space-6) var(--space-6);
+        }
+
+        .faq-answer p {
+            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
+        }
+
+        .cta-box {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--space-16) var(--space-8);
+            border-radius: var(--radius-2xl);
+            margin-top: var(--space-16);
+        }
+
+        .cta-box h2 {
+            font-size: var(--text-3xl);  /* v2.1.0: 24px for consistency */
+            font-weight: 600;  /* v2.1.0: Reduced from 800 */
+            margin-bottom: var(--space-4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.125rem;  /* v2.1.0: 18px mobile */
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <h1>Frequently Asked Questions</h1>
+        <p>Find answers to common questions about StarryMeet</p>
+        <div class="search-box">
+            <input type="text" class="search-input" id="searchInput" placeholder="Search for answers..." oninput="searchFAQ()">
+        </div>
+    </section>
+
+    <div class="container">
+        <div class="tabs">
+            <div class="tab active" onclick="showCategory('general')">General</div>
+            <div class="tab" onclick="showCategory('booking')">Booking & Payment</div>
+            <div class="tab" onclick="showCategory('meetings')">Meetings</div>
+            <div class="tab" onclick="showCategory('cancellations')">Cancellations</div>
+            <div class="tab" onclick="showCategory('celebrities')">For Celebrities</div>
+        </div>
+
+        <div class="faq-category active" id="general">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What is StarryMeet?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>StarryMeet is a premium platform connecting fans with verified celebrities for one-on-one meetings. We offer a safe, professional way to meet your icons in person through three meeting types: Quick Meet (15 min), Standard Session (30 min), and Premium Experience (60 min).</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do I know celebrities are real?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Every celebrity undergoes rigorous verification. We verify their identity with government IDs, work directly with their management teams, and ensure all profiles are authentic. Look for the "✓ Verified" badge on celebrity profiles. We guarantee 100% authentic experiences.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Is StarryMeet available worldwide?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Yes! We operate in 50+ cities across North America, Europe, Asia, and Australia. Celebrities travel frequently, so new locations are added regularly. Check the Browse page to see which celebrities are coming to your city.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="booking">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do I book a meeting?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Browse celebrities, select one you want to meet, choose your preferred date/time and meeting type, fill out an application explaining why you want to meet them, and complete secure payment. You'll receive confirmation within 24-48 hours after celebrity approval.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What payment methods do you accept?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>We accept all major credit cards (Visa, Mastercard, American Express, Discover) and debit cards. All payments are processed securely through Stripe with bank-level encryption.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>When will my card be charged?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Your card is charged immediately upon booking. If your meeting isn't approved by the celebrity, you'll receive a full refund within 5-7 business days.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="meetings">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What happens during a meeting?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Meetings take place in premium, private venues. You'll have the celebrity's full attention for the duration. You can ask questions, take photos, get autographs, and have meaningful conversations. Professional and respectful behavior is expected.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Can I bring someone with me?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Quick Meets are typically one-on-one. For Standard and Premium sessions, you may request to bring one guest—this requires celebrity approval and may incur an additional fee. Minors must be accompanied by a parent/guardian.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Are photos and videos allowed?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Yes! Personal photos and videos are encouraged. Bring your smartphone or camera. Premium Experiences include professional photography. Photos/videos cannot be used commercially without permission.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="cancellations">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What is your cancellation policy?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Full refund if cancelled 7+ days before your meeting. 50% refund if cancelled 3-6 days before. No refund for cancellations less than 3 days before. Refunds are processed within 5-7 business days.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>Can I reschedule my meeting?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Yes! You can reschedule up to 7 days before at no cost, subject to availability. For changes within 7 days, contact support. We'll do our best to accommodate you.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>What if the celebrity cancels?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>If a celebrity cancels, you receive a full refund within 5-7 business days. We'll also offer priority rebooking or credits toward another celebrity meeting. Celebrity cancellations are rare.</p></div>
+            </div>
+        </div>
+
+        <div class="faq-category" id="celebrities">
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do I apply as a celebrity?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Email apply@starrymeet.com with your name, social media links, and management contact. We'll guide you through verification and onboarding. The process typically takes 1-2 weeks.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How much can I earn as a celebrity?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Earnings vary based on your pricing and availability. Top celebrities earn $50,000-$200,000+ monthly. You set your own prices and approve all bookings. Use our earnings calculator on the For Celebrities page.</p></div>
+            </div>
+            <div class="faq-item">
+                <div class="faq-question" onclick="toggleFAQ(this)"><span>How do celebrities get paid?</span><span class="faq-icon">+</span></div>
+                <div class="faq-answer"><p>Payments are processed within 7 days after each meeting via direct deposit or wire transfer. We handle all tax documentation and provide detailed earning reports. StarryMeet takes a 20% platform fee.</p></div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2>Still Have Questions?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Our support team is here to help 24/7</p>
+            <a href="contact.html" class="btn-cta">Contact Support</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+            document.querySelectorAll('.faq-item').forEach(item => item.classList.remove('active'));
+            if (!isActive) faqItem.classList.add('active');
+        }
+
+        function showCategory(category) {
+            document.querySelectorAll('.tab').forEach(tab => tab.classList.remove('active'));
+            document.querySelectorAll('.faq-category').forEach(cat => cat.classList.remove('active'));
+            event.target.classList.add('active');
+            document.getElementById(category).classList.add('active');
+        }
+
+        function searchFAQ() {
+            const query = document.getElementById('searchInput').value.toLowerCase();
+            document.querySelectorAll('.faq-item').forEach(item => {
+                const text = item.textContent.toLowerCase();
+                item.style.display = text.includes(query) ? 'block' : 'none';
+            });
+        }
+    </script>
+</body>
+</html>

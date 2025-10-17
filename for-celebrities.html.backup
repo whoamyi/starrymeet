@@ -1,0 +1,440 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Join StarryMeet as a celebrity partner. Monetize your fame, connect with fans worldwide, and control your meeting schedule on your terms.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/for-celebrities.html">
+    <meta property="og:title" content="For Celebrities - StarryMeet">
+    <meta property="og:description" content="Join StarryMeet as a celebrity partner. Monetize your fame, connect with fans worldwide, and control your meeting schedule on your terms.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="For Celebrities - StarryMeet">
+    <meta name="twitter:description" content="Join StarryMeet as a celebrity partner. Monetize your fame, connect with fans worldwide, and control your meeting schedule on your terms.">
+
+    <title>For Celebrities - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        /* Minimal page-specific styles - inherit dark theme from shared.css */
+        .hero {
+            text-align: center;
+            padding: var(--space-20) var(--space-8);
+            margin-top: var(--nav-height);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.125rem, 4vw, 1.5rem);
+            margin-bottom: var(--space-4);
+            font-weight: 600;
+        }
+
+        .hero p {
+            font-size: var(--text-xl);
+            max-width: 700px;
+            margin: 0 auto var(--space-8);
+        }
+
+        .benefits-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-16);
+        }
+
+        .benefit-card {
+            background: #000000;
+            padding: var(--space-6);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .benefit-icon {
+            font-size: 3rem;
+            margin-bottom: var(--space-4);
+        }
+
+        .benefit-card h3 {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: var(--space-3);
+            color: var(--primary);
+        }
+
+        .steps-container {
+            display: grid;
+            gap: var(--space-6);
+        }
+
+        .step-card {
+            background: #000000;
+            padding: var(--space-6);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            display: flex;
+            gap: var(--space-6);
+        }
+
+        .step-number {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            flex-shrink: 0;
+        }
+
+        .testimonial-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: var(--space-6);
+            margin-bottom: var(--space-16);
+        }
+
+        .testimonial {
+            background: #000000;
+            padding: var(--space-6);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+        }
+
+        .testimonial-header {
+            display: flex;
+            gap: var(--space-4);
+            margin-bottom: var(--space-4);
+        }
+
+        .testimonial-photo {
+            width: 60px;
+            height: 60px;
+            background: var(--primary-gradient);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            font-weight: 700;
+            font-size: 1.5rem;
+        }
+
+        .calculator {
+            background: #000000;
+            padding: var(--space-12);
+            border-radius: var(--radius-2xl);
+            border: 1px solid var(--border-light);
+            margin: var(--space-16) 0;
+        }
+
+        .calc-inputs {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .calc-input {
+            display: flex;
+            flex-direction: column;
+        }
+
+        .calc-input label {
+            font-weight: 600;
+            margin-bottom: var(--space-2);
+            color: var(--white);
+        }
+
+        .calc-input input {
+            padding: var(--space-4);
+            border: 1px solid var(--border-medium);
+            border-radius: var(--radius-lg);
+            font-size: var(--text-lg);
+            background: #000000;
+            color: var(--white);
+        }
+
+        .calc-result {
+            background: var(--primary-gradient);
+            color: white;
+            padding: var(--space-8);
+            border-radius: var(--radius-2xl);
+            text-align: center;
+        }
+
+        .calc-result-amount {
+            font-size: 3rem;
+            font-weight: 700;
+            margin: var(--space-4) 0;
+        }
+
+        .cta-box {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--space-16) var(--space-8);
+            border-radius: var(--radius-2xl);
+            margin-top: var(--space-16);
+        }
+
+        .cta-box h2 {
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            margin-bottom: var(--space-4);
+        }
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.125rem;
+            }
+
+            .calc-inputs {
+                grid-template-columns: 1fr;
+            }
+        }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <section class="hero">
+        <h1>Join StarryMeet as a Celebrity</h1>
+        <p>Monetize your travel schedule and connect with your true fans on your own terms</p>
+        <a href="mailto:apply@starrymeet.com" class="btn" style="margin-top: 1rem;">Apply to Join</a>
+    </section>
+
+    <div class="container">
+        <h2 class="section-title">Why Join StarryMeet?</h2>
+        <div class="benefits-grid">
+            <div class="benefit-card">
+                <div class="benefit-icon">💰</div>
+                <h3>Monetize Your Travel</h3>
+                <p>Turn your existing travel schedule into earning opportunities. Set your own prices and availability to maximize your time.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🎯</div>
+                <h3>Full Control</h3>
+                <p>You decide when, where, and who you meet. Approve every booking personally and maintain complete control over your schedule.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">❤️</div>
+                <h3>Connect with True Fans</h3>
+                <p>Meet people who genuinely appreciate your work. Each fan submits an application explaining why they want to meet you.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">📅</div>
+                <h3>Flexible Scheduling</h3>
+                <p>Add availability around your existing commitments. No long-term contracts or minimum requirements.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">👑</div>
+                <h3>Premium Positioning</h3>
+                <p>Be featured alongside top talent. Our platform attracts serious fans willing to pay for authentic experiences.</p>
+            </div>
+            <div class="benefit-card">
+                <div class="benefit-icon">🛡️</div>
+                <h3>Professional Support</h3>
+                <p>Dedicated team handles bookings, payments, and logistics. We vet all fans and provide 24/7 support.</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">How It Works</h2>
+        <div class="steps-container">
+            <div class="step-card">
+                <div class="step-number">1</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Apply & Verify</h3>
+                    <p>Submit your application and complete our verification process. We verify your identity and work with your management team.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">2</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Set Availability</h3>
+                    <p>Add your travel schedule, set your pricing, and choose meeting types you're comfortable with.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">3</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Approve Bookings</h3>
+                    <p>Review applications from fans and approve meetings that interest you. You maintain full control.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">4</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Meet Fans</h3>
+                    <p>Show up at professional venues we arrange. Create meaningful connections with people who admire your work.</p>
+                </div>
+            </div>
+            <div class="step-card">
+                <div class="step-number">5</div>
+                <div>
+                    <h3 style="font-size: 1.5rem; margin-bottom: 0.5rem;">Get Paid</h3>
+                    <p>Receive payments within 7 days. We handle all transactions, taxes, and provide detailed earning reports.</p>
+                </div>
+            </div>
+        </div>
+
+        <h2 class="section-title" style="margin-top: 4rem;">What Celebrities Say</h2>
+        <div class="testimonial-grid">
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-photo">JL</div>
+                    <div>
+                        <div style="font-weight: 700; margin-bottom: 0.2rem;">Jennifer Lawrence</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Hollywood Actress</div>
+                    </div>
+                </div>
+                <p style="line-height: 1.5;">"StarryMeet lets me connect with genuine fans on my schedule. I love hearing their stories and seeing how my work has impacted their lives. It's incredibly rewarding."</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-photo">EM</div>
+                    <div>
+                        <div style="font-weight: 700; margin-bottom: 0.2rem;">Elon Musk</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Business Leader</div>
+                    </div>
+                </div>
+                <p style="line-height: 1.5;">"I travel constantly for work. StarryMeet makes it easy to monetize that time and meet entrepreneurs who are building the future. The platform handles everything seamlessly."</p>
+            </div>
+            <div class="testimonial">
+                <div class="testimonial-header">
+                    <div class="testimonial-photo">TS</div>
+                    <div>
+                        <div style="font-weight: 700; margin-bottom: 0.2rem;">Taylor Swift</div>
+                        <div style="font-size: 0.9rem; opacity: 0.7;">Musician</div>
+                    </div>
+                </div>
+                <p style="line-height: 1.5;">"Meeting my fans in this intimate setting is so much better than quick photo ops. These are real conversations that mean something to both of us."</p>
+            </div>
+        </div>
+
+        <h2 class="section-title">Earnings Calculator</h2>
+        <div class="calculator">
+            <p style="text-align: center; font-size: 1.2rem; margin-bottom: 2rem;">Estimate your potential monthly earnings</p>
+            <div class="calc-inputs">
+                <div class="calc-input">
+                    <label>Meetings per month</label>
+                    <input type="number" id="meetingsPerMonth" value="20" min="1" oninput="calculateEarnings()">
+                </div>
+                <div class="calc-input">
+                    <label>Price per meeting ($)</label>
+                    <input type="number" id="pricePerMeeting" value="5000" min="100" step="100" oninput="calculateEarnings()">
+                </div>
+            </div>
+            <div class="calc-result">
+                <div style="font-size: 1.2rem; opacity: 0.95;">Potential Monthly Earnings</div>
+                <div class="calc-result-amount" id="monthlyEarnings">$100,000</div>
+                <div style="opacity: 0.9;">Annually: <span id="annualEarnings" style="font-size: 1.5rem; font-weight: 600;">$1,200,000</span></div>
+            </div>
+        </div>
+
+        <div class="cta-box">
+            <h2>Ready to Join?</h2>
+            <p style="font-size: 1.2rem; margin-bottom: 2rem;">Apply now or email us at apply@starrymeet.com</p>
+            <a href="mailto:apply@starrymeet.com?subject=Celebrity Application" class="btn">Apply to Join StarryMeet</a>
+        </div>
+    </div>
+
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function calculateEarnings() {
+            const meetings = parseInt(document.getElementById('meetingsPerMonth').value) || 0;
+            const price = parseInt(document.getElementById('pricePerMeeting').value) || 0;
+            const monthly = meetings * price;
+            const annual = monthly * 12;
+            document.getElementById('monthlyEarnings').textContent = '$' + monthly.toLocaleString();
+            document.getElementById('annualEarnings').textContent = '$' + annual.toLocaleString();
+        }
+        calculateEarnings();
+    </script>
+</body>
+</html>

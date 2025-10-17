@@ -1,0 +1,600 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Learn how StarryMeet connects you with celebrities. Simple 4-step process: browse, book, meet, and share your experience with stars.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/how-it-works.html">
+    <meta property="og:title" content="How It Works - StarryMeet">
+    <meta property="og:description" content="Learn how StarryMeet connects you with celebrities. Simple 4-step process: browse, book, meet, and share your experience with stars.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="How It Works - StarryMeet">
+    <meta name="twitter:description" content="Learn how StarryMeet connects you with celebrities. Simple 4-step process: browse, book, meet, and share your experience with stars.">
+
+    <title>How It Works - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        /* Page-specific styles - minimal layout only */
+        .hero {
+            background: var(--primary-gradient);
+            color: white;
+            text-align: center;
+            padding: var(--space-20) var(--space-8);
+            margin-top: var(--nav-height);
+        }
+
+        .hero h1 {
+            font-size: clamp(1.125rem, 4vw, 1.5rem);  /* v2.1.0: 24px max, 18px mobile */
+            font-weight: 600;  /* v2.1.0: Reduced from 900 */
+            margin-bottom: var(--space-4);
+        }
+
+        .hero p {
+            font-size: var(--text-xl);
+            opacity: 0.95;
+            max-width: 700px;
+            margin: 0 auto;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: var(--space-16) var(--space-8);
+        }
+
+        .step-section {
+            margin-bottom: var(--space-20);
+        }
+
+        .step-section:nth-child(even) {
+            background: #000000;
+            margin-left: -50vw;
+            margin-right: -50vw;
+            padding-left: 50vw;
+            padding-right: 50vw;
+            padding-top: var(--space-16);
+            padding-bottom: var(--space-16);
+        }
+
+        .step-header {
+            display: flex;
+            align-items: center;
+            gap: var(--space-6);
+            margin-bottom: var(--space-8);
+        }
+
+        .step-number {
+            width: 80px;
+            height: 80px;
+            background: var(--primary-gradient);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;  /* v2.1.0: Reduced from 900 */
+            flex-shrink: 0;
+        }
+
+        .step-title {
+            font-size: var(--text-3xl);  /* v2.1.0: 24px for consistency */
+            font-weight: 600;  /* v2.1.0: Reduced from 800 */
+        }
+
+        .step-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: var(--space-12);
+            align-items: center;
+        }
+
+        .step-text h3 {
+            font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
+            font-weight: 600;  /* v2.1.0: Reduced from 700 */
+            margin-bottom: var(--space-4);
+            color: var(--primary);
+        }
+
+        .step-text p {
+            margin-bottom: var(--space-4);
+            font-size: var(--text-base);  /* v2.1.0: Standard base size */
+            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
+        }
+
+        .features-list {
+            list-style: none;
+            margin-top: var(--space-6);
+        }
+
+        .features-list li {
+            padding: var(--space-3) 0;
+            display: flex;
+            align-items: center;
+            gap: var(--space-4);
+            font-weight: 600;
+        }
+
+        .features-list li::before {
+            content: '✓';
+            background: var(--primary);
+            color: white;
+            width: 24px;
+            height: 24px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: 700;
+        }
+
+        .step-visual {
+            background: #000000;
+            border-radius: var(--radius-2xl);
+            padding: var(--space-12);
+            border: 1px solid var(--border-light);
+            text-align: center;
+        }
+
+        .step-icon {
+            font-size: 8rem;
+            margin-bottom: var(--space-4);
+        }
+
+        .faq-section {
+            background: #000000;
+            padding: var(--space-16) 0;
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: var(--text-3xl);  /* v2.1.0: 24px for consistency */
+            font-weight: 600;  /* v2.1.0: Reduced from 800 */
+            margin-bottom: var(--space-12);
+        }
+
+        .faq-grid {
+            display: grid;
+            gap: var(--space-4);
+        }
+
+        .faq-item {
+            background: #000000;
+            border-radius: var(--radius-xl);
+            border: 1px solid var(--border-light);
+            overflow: hidden;
+        }
+
+        .faq-question {
+            padding: var(--space-6);
+            font-weight: 600;  /* v2.1.0: Reduced from 700 */
+            font-size: var(--text-base);  /* v2.1.0: Standard base size */
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: all 0.3s;
+        }
+
+        .faq-question:hover {
+            opacity: 0.8;
+        }
+
+        .faq-icon {
+            font-size: 1.5rem;
+            transition: transform 0.3s;
+        }
+
+        .faq-item.active .faq-icon {
+            transform: rotate(45deg);
+        }
+
+        .faq-answer {
+            padding: 0 var(--space-6);
+            max-height: 0;
+            overflow: hidden;
+            transition: all 0.3s;
+        }
+
+        .faq-item.active .faq-answer {
+            max-height: 500px;
+            padding: 0 var(--space-6) var(--space-6);
+        }
+
+        .faq-answer p {
+            line-height: 1.5;  /* v2.1.0: Reduced from 1.8 */
+        }
+
+        /* CTA section styling removed - inherits from shared.css */
+
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 1.125rem;  /* v2.1.0: 18px mobile */
+            }
+
+            .step-content {
+                grid-template-columns: 1fr;
+            }
+
+            .step-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .step-title {
+                font-size: 1.125rem;  /* v2.1.0: 18px mobile for consistency */
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <!-- Hero -->
+    <section class="hero">
+        <h1>How StarryMeet Works</h1>
+        <p>Your journey from discovering celebrities to meeting them in person is simple, secure, and unforgettable</p>
+    </section>
+
+    <!-- Steps -->
+    <div class="container">
+        <!-- Step 1 -->
+        <section class="step-section">
+            <div class="step-header">
+                <div class="step-number">1</div>
+                <h2 class="step-title">Browse & Discover</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-text">
+                    <h3>Find Your Perfect Celebrity Match</h3>
+                    <p>
+                        Begin your journey by exploring our curated collection of over 100 verified celebrities from around the world.
+                        Our platform features Hollywood stars, K-Drama icons, business leaders, athletes, and musicians—all ready to meet
+                        their biggest fans.
+                    </p>
+                    <p>
+                        Use our powerful search and filter tools to find celebrities based on what matters most to you. Filter by location
+                        to find stars visiting your city, browse by category to discover talent in your favorite industry, or sort by price
+                        to find meetings that fit your budget.
+                    </p>
+                    <p>
+                        Each celebrity profile includes detailed information about their availability, meeting types, pricing, and reviews
+                        from other fans who've already had the experience. You can save your favorite celebrities to your watchlist and
+                        get notified when they're available in your area.
+                    </p>
+                    <p>
+                        Whether you're looking for career advice from a business mogul, inspiration from your favorite actor, or simply
+                        want to meet someone who's influenced your life—StarryMeet makes it easy to discover the perfect opportunity.
+                    </p>
+
+                    <ul class="features-list">
+                        <li>Filter by location, category, and price</li>
+                        <li>View detailed celebrity profiles and reviews</li>
+                        <li>Check real-time availability calendars</li>
+                        <li>Save favorites and get notifications</li>
+                    </ul>
+                </div>
+                <div class="step-visual">
+                    <div class="step-icon">🔍</div>
+                    <p style="font-size: 1.2rem; color: var(--gray-700); font-weight: 600;">
+                        Browse 100+ verified celebrities across 50+ cities worldwide
+                    </p>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 2 -->
+        <section class="step-section">
+            <div class="step-header">
+                <div class="step-number">2</div>
+                <h2 class="step-title">Book Your Meeting</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-visual">
+                    <div class="step-icon">📅</div>
+                    <p style="font-size: 1.2rem; color: var(--gray-700); font-weight: 600;">
+                        Simple 5-step booking process with instant confirmation
+                    </p>
+                </div>
+                <div class="step-text">
+                    <h3>Secure Your Meeting in Minutes</h3>
+                    <p>
+                        Once you've found the celebrity you want to meet, booking your experience is straightforward and secure.
+                        Choose from three meeting types: a Quick Meet (15 minutes) for autographs and photos, a Standard Session
+                        (30 minutes) for meaningful conversation, or a Premium Experience (60 minutes) for in-depth mentorship and advice.
+                    </p>
+                    <p>
+                        Select your preferred date and time from the celebrity's available slots. Fill out a brief application telling
+                        us why you want to meet them and what you'd like to discuss—this helps the celebrity prepare and makes your
+                        meeting more meaningful. All bookings are subject to celebrity approval to ensure authentic, quality interactions.
+                    </p>
+                    <p>
+                        Complete your secure payment through our encrypted checkout process. We accept all major credit cards and provide
+                        instant booking confirmation. You'll receive a detailed email with your meeting reference number, venue information,
+                        and preparation guidelines.
+                    </p>
+                    <p>
+                        Within 24-48 hours, you'll receive approval from the celebrity's team. If approved, you'll get access to message
+                        the team directly, download your booking receipt, and add the meeting to your calendar. Our team is available 24/7
+                        to help with any questions or changes you need to make.
+                    </p>
+
+                    <ul class="features-list">
+                        <li>Choose meeting type and time slot</li>
+                        <li>Submit personal application</li>
+                        <li>Secure payment processing</li>
+                        <li>Instant booking confirmation</li>
+                    </ul>
+                </div>
+            </div>
+        </section>
+
+        <!-- Step 3 -->
+        <section class="step-section">
+            <div class="step-header">
+                <div class="step-number">3</div>
+                <h2 class="step-title">Meet Your Icon</h2>
+            </div>
+            <div class="step-content">
+                <div class="step-text">
+                    <h3>Experience an Unforgettable Moment</h3>
+                    <p>
+                        The big day has arrived! Your meeting will take place at a premium venue in a private, professional setting.
+                        Arrive 15 minutes early to check in with our team. Bring a valid ID and your booking confirmation. The venue
+                        staff will guide you through the process and ensure everything runs smoothly.
+                    </p>
+                    <p>
+                        During your meeting, you'll have the celebrity's full attention for the duration of your booking. This is your
+                        time to ask questions, share your story, get advice, take photos, or simply enjoy a conversation with someone
+                        you admire. Professional photos are allowed (and encouraged!), and most celebrities are happy to sign memorabilia.
+                    </p>
+                    <p>
+                        Be respectful of the celebrity's time and personal boundaries. Come prepared with your questions or topics you'd
+                        like to discuss. Bring items you'd like signed, but keep it reasonable—usually 1-2 items for Quick Meets and up
+                        to 5 for Premium Experiences. Remember, this is a professional environment, so dress appropriately and be mindful
+                        of the guidelines.
+                    </p>
+                    <p>
+                        After your meeting, you'll have the opportunity to leave a review and share your experience with the community.
+                        Your photos and memories will last a lifetime, and you'll join thousands of satisfied fans who've had their dream
+                        celebrity meeting through StarryMeet.
+                    </p>
+
+                    <ul class="features-list">
+                        <li>Arrive 15 minutes early with ID</li>
+                        <li>Bring items to be signed (1-5 items)</li>
+                        <li>Photos and videos are encouraged</li>
+                        <li>Be respectful and professional</li>
+                    </ul>
+                </div>
+                <div class="step-visual">
+                    <div class="step-icon">⭐</div>
+                    <p style="font-size: 1.2rem; color: var(--gray-700); font-weight: 600;">
+                        Create memories that last a lifetime in a safe, professional environment
+                    </p>
+                </div>
+            </div>
+        </section>
+    </div>
+
+    <!-- FAQ Section -->
+    <section class="faq-section">
+        <div class="container">
+            <h2 class="section-title">Frequently Asked Questions</h2>
+            <div class="faq-grid">
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How far in advance should I book?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>We recommend booking at least 2-4 weeks in advance, especially for popular celebrities. However, some celebrities offer last-minute availability, so check their calendar regularly. The earlier you book, the more time slots you'll have to choose from.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if the celebrity cancels?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>If a celebrity cancels your meeting for any reason, you'll receive a full refund within 5-7 business days. We'll also offer you priority rebooking with the same celebrity or credits toward a meeting with another celebrity. While cancellations are rare, your satisfaction is our priority.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I reschedule my meeting?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! You can reschedule up to 7 days before your meeting at no additional cost, subject to the celebrity's availability. To reschedule, log into your dashboard and click "Reschedule" on your booking. For changes within 7 days of your meeting, contact our support team for assistance.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's included in each meeting type?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Quick Meet (15 min): Brief conversation, 1-2 photos, and autographs. Standard Session (30 min): Extended conversation, Q&A, multiple photos, and autographs. Premium Experience (60 min): In-depth discussion, mentorship, professional photoshoot, video message, and exclusive memorabilia.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I know meetings are authentic?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Every celebrity on StarryMeet goes through a rigorous verification process. We verify their identity, work directly with their management teams, and ensure all meetings are legitimate. You'll see a "✓ Verified" badge on authentic celebrity profiles. We guarantee 100% authentic experiences or your money back.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What's the cancellation policy?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Full refund if you cancel 7+ days before your meeting. 50% refund if you cancel 3-6 days before. No refund for cancellations less than 3 days before the meeting. All refunds are processed within 5-7 business days. We recommend purchasing travel insurance if you're booking travel for your meeting.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Can I bring a friend or family member?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Quick Meets are typically one-on-one. For Standard and Premium sessions, you can request to bring one guest—this is subject to celebrity approval and may incur an additional fee. Please mention this in your booking application. Children under 18 must be accompanied by a parent or guardian.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>Are photos and videos allowed?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Yes! Personal photos and videos are encouraged. You can use your smartphone or camera to capture the moment. For Premium Experiences, we offer professional photography services. However, you cannot use photos/videos for commercial purposes without written permission from the celebrity.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>How do I get to the venue?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Detailed venue information and directions are sent via email 24 hours before your meeting. Venues are typically located in premium hotels or private event spaces in city centers. Free parking or public transportation information is provided. If you need assistance, our concierge team is available 24/7.</p>
+                    </div>
+                </div>
+
+                <div class="faq-item">
+                    <div class="faq-question" onclick="toggleFAQ(this)">
+                        <span>What if I'm running late?</span>
+                        <span class="faq-icon">+</span>
+                    </div>
+                    <div class="faq-answer">
+                        <p>Please arrive 15 minutes early for check-in. If you're running late, call our support line immediately at +1 (555) 123-4567. We'll do our best to accommodate you, but meetings may need to be shortened to respect the celebrity's schedule. Late arrivals beyond 10 minutes may result in cancellation without refund.</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- CTA Section -->
+    <section class="cta-section">
+        <h2>Ready to Meet Your Icon?</h2>
+        <p>Join thousands of fans who've already had the experience of a lifetime</p>
+        <a href="browse.html" class="btn">Browse Celebrities</a>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        function toggleFAQ(element) {
+            const faqItem = element.parentElement;
+            const isActive = faqItem.classList.contains('active');
+
+            // Close all FAQ items
+            document.querySelectorAll('.faq-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            // Open clicked item if it wasn't active
+            if (!isActive) {
+                faqItem.classList.add('active');
+            }
+        }
+    </script>
+</body>
+</html>

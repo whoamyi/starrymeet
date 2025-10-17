@@ -1,0 +1,1960 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <!-- Version: 2025-10-09-v2 - Fixed sidebar overlapping and toggle button -->
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Manage your StarryMeet bookings, view upcoming celebrity meetings, track your favorites, and update your profile settings.">
+
+    <!-- Open Graph / Social Media Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/dashboard.html">
+    <meta property="og:title" content="My Dashboard - StarryMeet">
+    <meta property="og:description" content="Manage your StarryMeet bookings, view upcoming celebrity meetings, track your favorites, and update your profile settings.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="My Dashboard - StarryMeet">
+    <meta name="twitter:description" content="Manage your StarryMeet bookings, view upcoming celebrity meetings, track your favorites, and update your profile settings.">
+
+    <title>My Dashboard - StarryMeet</title>
+    <link rel="stylesheet" href="css/shared.css">
+    <script src="js/shared.js"></script>
+    <style>
+        /* Page-specific styles for dashboard.html - Premium Design */
+        body {
+            background: var(--bg-secondary);
+        }
+
+        nav {
+            /* Inherits from shared.css */
+        }
+
+        .logo {
+            font-size: var(--text-2xl);
+        }
+
+        /* Dashboard Layout - Premium Flexbox */
+        body {
+            display: flex;
+            flex-direction: column;
+            min-height: 100vh;
+        }
+
+        .dashboard-container {
+            display: flex;
+            flex: 1;
+            margin-top: var(--nav-height);
+            width: 100%;
+            max-width: 100%;
+            overflow-x: hidden;
+        }
+
+        /* Sidebar - Premium Glass Effect */
+        .sidebar {
+            width: 0;
+            min-width: 0;
+            border-right: 1px solid var(--border-light);
+            overflow-y: auto;
+            overflow-x: hidden;
+            transition: width 0.4s var(--ease-bounce), min-width 0.4s var(--ease-bounce);
+            flex-shrink: 0;
+            box-shadow: var(--shadow-lg);
+        }
+
+        .sidebar.show {
+            width: 280px;
+            min-width: 280px;
+            padding: var(--space-6) 0;
+        }
+
+        /* Desktop: sidebar always visible */
+        @media (min-width: 769px) {
+            .sidebar {
+                width: 280px;
+                min-width: 280px;
+                padding: var(--space-6) 0;
+            }
+        }
+
+        .user-profile-section {
+            padding: 0 var(--space-4) var(--space-6);
+            border-bottom: 2px solid var(--border-light);
+            text-align: center;
+        }
+
+        .user-avatar {
+            width: 90px;
+            height: 90px;
+            border-radius: var(--radius-full);
+            background: var(--primary-gradient);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-family: var(--font-display);
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: var(--white);
+            margin: 0 auto var(--space-3);
+            box-shadow: var(--shadow-glow-md);
+        }
+
+        .user-name {
+            font-family: var(--font-display);
+            font-weight: 600;
+            font-size: var(--text-xl);
+            margin-bottom: var(--space-2);
+            color: var(--white);
+        }
+
+        .edit-profile-link {
+            color: var(--primary);
+            text-decoration: none;
+            font-size: var(--text-sm);
+            font-weight: 600;
+            transition: var(--transition-base);
+        }
+
+        .edit-profile-link:hover {
+            color: var(--primary-dark);
+        }
+
+        .sidebar-nav {
+            padding: var(--space-4) 0;
+        }
+
+        .nav-item {
+            padding: var(--space-3) var(--space-5);
+            display: flex;
+            align-items: center;
+            gap: var(--space-3);
+            color: var(--text-primary);
+            text-decoration: none;
+            font-weight: 600;
+            font-family: var(--font-body);
+            transition: var(--transition-base);
+            cursor: pointer;
+            position: relative;
+        }
+
+        .nav-item:hover {
+            background: var(--bg-tertiary);
+            color: var(--primary);
+        }
+
+        .nav-item.active {
+            background: linear-gradient(90deg, rgba(139, 92, 246, 0.1) 0%, transparent 100%);
+            color: var(--primary);
+            border-right: 4px solid var(--primary);
+        }
+
+        .nav-icon {
+            font-size: var(--text-xl);
+        }
+
+        .badge {
+            background: var(--error);
+            color: var(--white);
+            font-size: var(--text-xs);
+            padding: var(--space-1) var(--space-2);
+            border-radius: var(--radius-full);
+            font-weight: 600;
+            margin-left: auto;
+        }
+
+        /* Main Content - Premium */
+        .main-content {
+            flex: 1;
+            padding: var(--space-6);
+            background: var(--bg-secondary);
+            overflow-y: auto;
+            width: 100%;
+            max-width: 100%;
+        }
+
+        .content-section {
+            display: none;
+        }
+
+        .content-section.active {
+            display: block;
+        }
+
+        /* Page Header - Premium */
+        .page-header {
+            margin-bottom: var(--space-6);
+        }
+
+        .page-title {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 600;
+            color: var(--white);
+            margin-bottom: var(--space-2);
+        }
+
+        .page-subtitle {
+            color: var(--text-secondary);
+            font-size: var(--text-lg);
+        }
+
+        /* Stats Cards - Premium */
+        .stats-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+            gap: var(--space-5);
+            margin-bottom: var(--space-6);
+        }
+
+        .stat-card {
+            /* Background inherits #000000 from shared.css */
+            border-radius: var(--radius-2xl);
+            padding: var(--space-5);
+            box-shadow: var(--shadow-md);
+            border: 1px solid var(--border-light);
+            transition: var(--transition-base);
+        }
+
+        .stat-card:hover {
+            transform: translateY(-4px);
+            box-shadow: var(--shadow-xl);
+        }
+
+        .stat-value {
+            font-family: var(--font-display);
+            font-size: var(--text-3xl);
+            font-weight: 700;
+            background: var(--primary-gradient);
+            -webkit-background-clip: text;
+            -webkit-text-fill-color: transparent;
+            background-clip: text;
+            margin-bottom: var(--space-2);
+        }
+
+        .stat-label {
+            color: var(--text-secondary);
+            font-weight: 600;
+            font-size: var(--text-sm);
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+        }
+
+        /* Next Meeting Card */
+        .next-meeting-card {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 2px 15px rgba(0, 0, 0, 0.08);
+            margin-bottom: 2rem;
+        }
+
+        .next-meeting-header {
+            display: flex;
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+            padding-bottom: 1.5rem;
+            border-bottom: 2px solid var(--gray-100);
+        }
+
+        .meeting-celeb-photo {
+            width: 100px;
+            height: 100px;
+            border-radius: 15px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2.5rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .meeting-info {
+            flex: 1;
+        }
+
+        .meeting-celeb-name {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .meeting-type {
+            color: var(--gray-600);
+            margin-bottom: 0.5rem;
+        }
+
+        .countdown {
+            display: inline-block;
+            background: var(--purple-light);
+            color: white;
+            padding: 0.5rem 1rem;
+            border-radius: 20px;
+            font-weight: 600;
+            font-size: 0.9rem;
+        }
+
+        .meeting-details {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 1.5rem;
+            margin-bottom: 1.5rem;
+        }
+
+        .detail-item {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+        }
+
+        .detail-icon {
+            font-size: 1.5rem;
+        }
+
+        .detail-text strong {
+            display: block;
+            font-weight: 600;
+            color: var(--white);
+        }
+
+        .detail-text span {
+            color: var(--gray-600);
+            font-size: 0.9rem;
+        }
+
+        .meeting-actions {
+            display: flex;
+            gap: 1rem;
+        }
+
+        /* Buttons */
+        .btn {
+            padding: 0.8rem 1.5rem;
+            border: none;
+            border-radius: 8px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: all 0.3s;
+            text-decoration: none;
+            display: inline-block;
+        }
+
+        .btn-primary {
+            background: var(--purple);
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: var(--purple-dark);
+            transform: translateY(-2px);
+        }
+
+        .btn-outline {
+            /* Background inherits #000000 from shared.css */
+            color: var(--purple);
+            border: 2px solid var(--purple);
+        }
+
+        .btn-outline:hover {
+            background: var(--purple);
+            color: white;
+        }
+
+        .btn-secondary {
+            /* Background inherits #000000 from shared.css */
+            color: var(--gray-700);
+        }
+
+        .btn-secondary:hover {
+            /* Background inherits #000000 from shared.css */
+        }
+
+        /* Section */
+        .section {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 15px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 2rem;
+        }
+
+        .section-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: 1.5rem;
+        }
+
+        /* Celebrity Cards Grid */
+        .celebrity-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(250px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .celebrity-card {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 12px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.08);
+            transition: all 0.3s;
+            cursor: pointer;
+        }
+
+        .celebrity-card:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 4px 15px rgba(0, 0, 0, 0.15);
+        }
+
+        .celeb-image {
+            height: 180px;
+            position: relative;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .celeb-initials {
+            font-size: 3rem;
+            font-weight: 700;
+            color: white;
+        }
+
+        .heart-icon {
+            position: absolute;
+            top: 10px;
+            right: 10px;
+            font-size: 1.5rem;
+            cursor: pointer;
+            z-index: 1;
+        }
+
+        .celeb-info {
+            padding: 1.2rem;
+        }
+
+        .celeb-name {
+            font-weight: 600;
+            margin-bottom: 0.3rem;
+        }
+
+        .celeb-category {
+            color: var(--purple);
+            font-size: 0.9rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .celeb-price {
+            font-weight: 600;
+            color: var(--purple);
+            font-size: 1.1rem;
+        }
+
+        /* Meeting Cards (List) */
+        .meeting-card {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 12px;
+            padding: 1.5rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1rem;
+            display: flex;
+            gap: 1.5rem;
+        }
+
+        .meeting-photo {
+            width: 80px;
+            height: 80px;
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 2rem;
+            font-weight: 700;
+            color: white;
+            flex-shrink: 0;
+        }
+
+        .meeting-content {
+            flex: 1;
+        }
+
+        .meeting-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: start;
+            margin-bottom: 0.8rem;
+        }
+
+        .meeting-name {
+            font-weight: 600;
+            font-size: var(--text-xl);
+            margin-bottom: 0.3rem;
+        }
+
+        .status-badge {
+            padding: 0.4rem 0.8rem;
+            border-radius: 20px;
+            font-size: 0.85rem;
+            font-weight: 600;
+        }
+
+        .status-confirmed {
+            background: #D1FAE5;
+            color: var(--green);
+        }
+
+        .status-pending {
+            background: #FEF3C7;
+            color: #D97706;
+        }
+
+        .status-action {
+            background: #FEE2E2;
+            color: var(--red);
+        }
+
+        .status-completed {
+            /* Background inherits #000000 from shared.css */
+            color: var(--gray-700);
+        }
+
+        .meeting-meta {
+            display: flex;
+            gap: 2rem;
+            color: var(--gray-600);
+            margin-bottom: 1rem;
+        }
+
+        .meeting-card-actions {
+            display: flex;
+            gap: 0.8rem;
+        }
+
+        /* Activity Feed */
+        .activity-item {
+            display: flex;
+            gap: 1rem;
+            padding: 1rem 0;
+            border-bottom: 1px solid var(--gray-100);
+        }
+
+        .activity-item:last-child {
+            border-bottom: none;
+        }
+
+        .activity-icon {
+            width: 40px;
+            height: 40px;
+            background: var(--purple-light);
+            color: white;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            flex-shrink: 0;
+        }
+
+        .activity-content {
+            flex: 1;
+        }
+
+        .activity-text {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .activity-time {
+            color: var(--gray-500);
+            font-size: 0.85rem;
+        }
+
+        /* Messages */
+        .messages-layout {
+            display: grid;
+            grid-template-columns: 300px 1fr;
+            gap: 1.5rem;
+            height: 600px;
+        }
+
+        .chat-list {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 12px;
+            overflow-y: auto;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .chat-item {
+            padding: 1rem;
+            border-bottom: 1px solid var(--gray-100);
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+
+        .chat-item:hover {
+            /* Background inherits #000000 from shared.css */
+        }
+
+        .chat-item.active {
+            background: rgba(107, 70, 193, 0.1);
+        }
+
+        .chat-header {
+            display: flex;
+            gap: 1rem;
+            margin-bottom: 0.5rem;
+        }
+
+        .chat-avatar {
+            width: 50px;
+            height: 50px;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            font-weight: 600;
+            color: white;
+        }
+
+        .chat-preview {
+            flex: 1;
+        }
+
+        .chat-name {
+            font-weight: 600;
+            margin-bottom: 0.2rem;
+        }
+
+        .chat-last-message {
+            color: var(--gray-600);
+            font-size: 0.85rem;
+            white-space: nowrap;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .message-thread {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 12px;
+            display: flex;
+            flex-direction: column;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+        }
+
+        .thread-header {
+            padding: 1.5rem;
+            border-bottom: 1px solid var(--gray-200);
+            font-weight: 600;
+            font-size: var(--text-xl);
+        }
+
+        .messages-container {
+            flex: 1;
+            overflow-y: auto;
+            padding: 1.5rem;
+        }
+
+        .message-bubble {
+            max-width: 70%;
+            padding: 0.8rem 1.2rem;
+            border-radius: 12px;
+            margin-bottom: 1rem;
+        }
+
+        .message-bubble.sent {
+            background: var(--purple);
+            color: white;
+            margin-left: auto;
+        }
+
+        .message-bubble.received {
+            /* Background inherits #000000 from shared.css */
+            color: var(--white);
+        }
+
+        .message-time {
+            font-size: 0.75rem;
+            opacity: 0.7;
+            margin-top: 0.3rem;
+        }
+
+        .message-input-container {
+            padding: 1.5rem;
+            border-top: 1px solid var(--gray-200);
+            display: flex;
+            gap: 1rem;
+        }
+
+        .message-input {
+            flex: 1;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 25px;
+            font-family: inherit;
+            font-size: 1rem;
+        }
+
+        .message-input:focus {
+            outline: none;
+            border-color: var(--purple);
+        }
+
+        /* Settings Forms */
+        .settings-section {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 12px;
+            padding: 2rem;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+            margin-bottom: 1.5rem;
+        }
+
+        .settings-title {
+            font-weight: 600;
+            font-size: var(--text-xl);
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-label {
+            display: block;
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+            color: var(--gray-700);
+        }
+
+        .form-input {
+            width: 100%;
+            padding: 0.8rem 1rem;
+            border: 2px solid var(--gray-200);
+            border-radius: 8px;
+            font-size: 1rem;
+        }
+
+        .form-input:focus {
+            outline: none;
+            border-color: var(--purple);
+        }
+
+        .checkbox-group {
+            display: flex;
+            align-items: center;
+            gap: 0.8rem;
+            margin-bottom: 1rem;
+        }
+
+        .checkbox {
+            width: 20px;
+            height: 20px;
+        }
+
+        .saved-card {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 1rem;
+            /* Background inherits #000000 from shared.css */
+            border-radius: 8px;
+            margin-bottom: 1rem;
+        }
+
+        .card-info {
+            display: flex;
+            align-items: center;
+            gap: 1rem;
+        }
+
+        .card-icon {
+            font-size: 2rem;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.5);
+            z-index: 2000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.show {
+            display: flex;
+        }
+
+        .modal-content {
+            /* Background inherits #000000 from shared.css */
+            border-radius: 15px;
+            padding: 2.5rem;
+            max-width: 600px;
+            width: 90%;
+            max-height: 90vh;
+            overflow-y: auto;
+            box-shadow: 0 10px 40px rgba(0, 0, 0, 0.2);
+        }
+
+        .modal-header {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            margin-bottom: 1.5rem;
+        }
+
+        .modal-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+        }
+
+        .close-modal {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray-400);
+            transition: color 0.3s;
+        }
+
+        .close-modal:hover {
+            color: var(--gray-700);
+        }
+
+        /* Star Rating */
+        .star-rating {
+            display: flex;
+            gap: 0.5rem;
+            margin: 1rem 0;
+        }
+
+        .star {
+            font-size: 2rem;
+            cursor: pointer;
+            color: var(--gray-300);
+            transition: color 0.3s;
+        }
+
+        .star.active {
+            color: var(--gold);
+        }
+
+        /* Empty State */
+        .empty-state {
+            text-align: center;
+            padding: 4rem 2rem;
+        }
+
+        .empty-icon {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            opacity: 0.5;
+        }
+
+        .empty-title {
+            font-size: var(--text-xl);
+            font-weight: 600;
+            margin-bottom: 0.5rem;
+        }
+
+        .empty-text {
+            color: var(--gray-600);
+            margin-bottom: 1.5rem;
+        }
+
+        /* Hamburger Menu Button */
+        .hamburger-menu-btn {
+            display: none; /* Hidden on desktop */
+            position: fixed;
+            top: 85px;
+            left: 10px;
+            background: var(--purple);
+            color: white;
+            border: none;
+            border-radius: 8px;
+            padding: 0.75rem;
+            cursor: pointer;
+            z-index: 1000;
+            font-size: 1.5rem;
+            box-shadow: 0 2px 8px rgba(0,0,0,0.2);
+        }
+
+        .hamburger-menu-btn:hover {
+            background: var(--purple-dark);
+        }
+
+        /* Show hamburger on mobile */
+        @media (max-width: 768px) {
+            .hamburger-menu-btn {
+                display: block;
+            }
+
+            /* Overlay when sidebar is open on mobile */
+            .sidebar-overlay {
+                display: none;
+                position: fixed;
+                top: 0;
+                left: 0;
+                right: 0;
+                bottom: 0;
+                background: rgba(0, 0, 0, 0.5);
+                z-index: 999;
+            }
+
+            .sidebar-overlay.show {
+                display: block;
+            }
+
+            /* Sidebar above overlay when shown */
+            .sidebar.show {
+                position: fixed;
+                top: 70px;
+                left: 0;
+                bottom: 0;
+                z-index: 1001;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+
+        /* Footer - Full Width */
+        footer {
+            width: 100%;
+            margin: 0;
+            flex-shrink: 0; /* Don't shrink */
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .main-content {
+                padding: 1rem;
+            }
+
+            .stats-grid {
+                grid-template-columns: repeat(2, 1fr);
+            }
+
+            .next-meeting-header {
+                flex-direction: column;
+                text-align: center;
+            }
+
+            .meeting-celeb-photo {
+                margin: 0 auto;
+            }
+
+            .meeting-details {
+                grid-template-columns: 1fr;
+            }
+
+            .meeting-card {
+                flex-direction: column;
+            }
+
+            .messages-layout {
+                grid-template-columns: 1fr;
+            }
+
+            .chat-list {
+                display: none;
+            }
+
+            .chat-list.show {
+                display: block;
+            }
+        }
+
+        .hidden {
+            display: none !important;
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="index.html" class="logo">✨ StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu" aria-expanded="false" aria-controls="mobileMenu">☰</button>
+            <ul class="nav-links">
+                <li><a href="browse.html">Browse</a></li>
+                <li><a href="how-it-works.html">How It Works</a></li>
+                <li><a href="about.html">About</a></li>
+                <li><a href="for-celebrities.html">For Celebrities</a></li>
+                <li><a href="faq.html">FAQ</a></li>
+                <li><a href="contact.html">Contact</a></li>
+                <li><a href="dashboard.html" class="btn btn-primary btn-sm">Dashboard</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Mobile Menu Overlay -->
+    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+    <!-- Mobile Menu -->
+    <div class="mobile-menu" id="mobileMenu">
+        <div class="mobile-menu-header">
+            <span class="logo">✨ StarryMeet</span>
+            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+        </div>
+        <ul class="mobile-menu-links">
+            <li><a href="index.html" onclick="closeMobileMenu()">Home</a></li>
+            <li><a href="browse.html" onclick="closeMobileMenu()">Browse</a></li>
+            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How It Works</a></li>
+            <li><a href="about.html" onclick="closeMobileMenu()">About</a></li>
+            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">For Celebrities</a></li>
+            <li><a href="faq.html" onclick="closeMobileMenu()">FAQ</a></li>
+            <li><a href="contact.html" onclick="closeMobileMenu()">Contact</a></li>
+            <li><a href="dashboard.html" onclick="closeMobileMenu()">Dashboard</a></li>
+        </ul>
+    </div>
+
+    <!-- Sidebar Toggle Button (Mobile) -->
+    <button class="hamburger-menu-btn" id="sidebarToggle" onclick="toggleSidebar()" aria-label="Toggle sidebar">☰</button>
+
+    <!-- Overlay for mobile sidebar -->
+    <div class="sidebar-overlay" id="sidebarOverlay" onclick="toggleSidebar()"></div>
+
+    <div class="dashboard-container">
+        <!-- Sidebar -->
+        <aside class="sidebar" id="sidebar">
+            <div class="user-profile-section">
+                <div class="user-avatar" id="userAvatar">JS</div>
+                <div class="user-name" id="userName">John Smith</div>
+                <a href="#account-settings" class="edit-profile-link" onclick="switchTab('account-settings')">Edit Profile</a>
+            </div>
+
+            <nav class="sidebar-nav">
+                <a class="nav-item active" data-tab="overview" onclick="switchTab('overview')">
+                    <span class="nav-icon">📊</span>
+                    <span>Overview</span>
+                </a>
+                <a class="nav-item" data-tab="upcoming-meetings" onclick="switchTab('upcoming-meetings')">
+                    <span class="nav-icon">📅</span>
+                    <span>Upcoming Meetings</span>
+                </a>
+                <a class="nav-item" data-tab="past-meetings" onclick="switchTab('past-meetings')">
+                    <span class="nav-icon">✅</span>
+                    <span>Past Meetings</span>
+                </a>
+                <a class="nav-item" data-tab="saved-celebrities" onclick="switchTab('saved-celebrities')">
+                    <span class="nav-icon">❤️</span>
+                    <span>Saved Celebrities</span>
+                </a>
+                <a class="nav-item" data-tab="messages" onclick="switchTab('messages')">
+                    <span class="nav-icon">💬</span>
+                    <span>Messages</span>
+                    <span class="badge">3</span>
+                </a>
+                <a class="nav-item" data-tab="account-settings" onclick="switchTab('account-settings')">
+                    <span class="nav-icon">⚙️</span>
+                    <span>Account Settings</span>
+                </a>
+                <a class="nav-item" onclick="logout()">
+                    <span class="nav-icon">🚪</span>
+                    <span>Logout</span>
+                </a>
+            </nav>
+        </aside>
+
+        <!-- Main Content -->
+        <main class="main-content">
+            <!-- Overview Tab -->
+            <section class="content-section active" id="overview">
+                <div class="page-header">
+                    <h1 class="page-title">Welcome back, <span id="welcomeName">John</span>! 👋</h1>
+                    <p class="page-subtitle">Here's what's happening with your bookings</p>
+                </div>
+
+                <!-- Stats -->
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-value">12</div>
+                        <div class="stat-label">Total Meetings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="upcomingCount">2</div>
+                        <div class="stat-label">Upcoming Meetings</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value" id="savedCount">8</div>
+                        <div class="stat-label">Saved Celebrities</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-value">$24,500</div>
+                        <div class="stat-label">Total Spent</div>
+                    </div>
+                </div>
+
+                <!-- Next Meeting -->
+                <div class="next-meeting-card" id="nextMeetingCard">
+                    <h2 style="margin-bottom: 1.5rem; font-weight: 600;">Your Next Meeting</h2>
+                    <div class="next-meeting-header">
+                        <div class="meeting-celeb-photo" id="nextMeetingPhoto" style="background: linear-gradient(135deg, #667eea, #764ba2);">EW</div>
+                        <div class="meeting-info">
+                            <h3 class="meeting-celeb-name" id="nextMeetingName">Emma Watson</h3>
+                            <p class="meeting-type" id="nextMeetingType">Standard Session • 30 minutes</p>
+                            <span class="countdown" id="nextMeetingCountdown">In 3 days</span>
+                        </div>
+                    </div>
+                    <div class="meeting-details">
+                        <div class="detail-item">
+                            <span class="detail-icon">📅</span>
+                            <div class="detail-text">
+                                <strong id="nextMeetingDate">March 15, 2025</strong>
+                                <span id="nextMeetingTime">2:00 PM</span>
+                            </div>
+                        </div>
+                        <div class="detail-item">
+                            <span class="detail-icon">📍</span>
+                            <div class="detail-text">
+                                <strong id="nextMeetingLocation">London, UK</strong>
+                                <span>Premium Hotel Suite</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="meeting-actions">
+                        <button class="btn btn-primary">View Details</button>
+                        <button class="btn btn-outline">Get Directions</button>
+                    </div>
+                </div>
+
+                <!-- Recommended Celebrities -->
+                <div class="section">
+                    <h2 class="section-title">Celebrities You Might Like</h2>
+                    <div class="celebrity-grid" id="recommendedCelebrities">
+                        <!-- Loaded by JS -->
+                    </div>
+                </div>
+
+                <!-- Recent Activity -->
+                <div class="section">
+                    <h2 class="section-title">Your Recent Activity</h2>
+                    <div id="activityFeed">
+                        <!-- Loaded by JS -->
+                    </div>
+                </div>
+            </section>
+
+            <!-- Upcoming Meetings Tab -->
+            <section class="content-section" id="upcoming-meetings">
+                <div class="page-header">
+                    <h1 class="page-title">Upcoming Meetings</h1>
+                    <p class="page-subtitle">Manage your scheduled meetings</p>
+                </div>
+
+                <div id="upcomingMeetingsList">
+                    <!-- Loaded by JS -->
+                </div>
+            </section>
+
+            <!-- Past Meetings Tab -->
+            <section class="content-section" id="past-meetings">
+                <div class="page-header">
+                    <h1 class="page-title">Past Meetings</h1>
+                    <p class="page-subtitle">View your completed meetings</p>
+                </div>
+
+                <div id="pastMeetingsList">
+                    <!-- Loaded by JS -->
+                </div>
+            </section>
+
+            <!-- Saved Celebrities Tab -->
+            <section class="content-section" id="saved-celebrities">
+                <div class="page-header" style="display: flex; justify-content: space-between; align-items: center;">
+                    <div>
+                        <h1 class="page-title">Saved Celebrities</h1>
+                        <p class="page-subtitle">Your favorite celebrities</p>
+                    </div>
+                    <button class="btn btn-secondary" onclick="clearAllSaved()">Clear All</button>
+                </div>
+
+                <div class="celebrity-grid" id="savedCelebritiesList">
+                    <!-- Loaded by JS -->
+                </div>
+            </section>
+
+            <!-- Messages Tab -->
+            <section class="content-section" id="messages">
+                <div class="page-header">
+                    <h1 class="page-title">Messages</h1>
+                    <p class="page-subtitle">Communicate with celebrity teams</p>
+                </div>
+
+                <div class="messages-layout">
+                    <div class="chat-list" id="chatList">
+                        <!-- Loaded by JS -->
+                    </div>
+                    <div class="message-thread">
+                        <div class="thread-header" id="threadHeader">Select a conversation</div>
+                        <div class="messages-container" id="messagesContainer">
+                            <div class="empty-state">
+                                <div class="empty-icon">💬</div>
+                                <div class="empty-title">No messages yet</div>
+                                <div class="empty-text">Messages with celebrity teams will appear here after booking</div>
+                            </div>
+                        </div>
+                        <div class="message-input-container hidden" id="messageInputContainer">
+                            <input type="text" class="message-input" id="messageInput" placeholder="Type your message...">
+                            <button class="btn btn-primary" onclick="sendMessage()">Send</button>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Account Settings Tab -->
+            <section class="content-section" id="account-settings">
+                <div class="page-header">
+                    <h1 class="page-title">Account Settings</h1>
+                    <p class="page-subtitle">Manage your account preferences</p>
+                </div>
+
+                <!-- Profile Information -->
+                <div class="settings-section">
+                    <h3 class="settings-title">Profile Information</h3>
+                    <div class="form-group">
+                        <label class="form-label">Full Name</label>
+                        <input type="text" class="form-input" id="settingsName" value="John Smith">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Email Address</label>
+                        <input type="email" class="form-input" id="settingsEmail" value="john@example.com">
+                    </div>
+                    <div class="form-group">
+                        <label class="form-label">Phone Number</label>
+                        <input type="tel" class="form-input" id="settingsPhone" value="+1 (555) 123-4567">
+                    </div>
+                    <button class="btn btn-primary" onclick="saveSettings()">Save Changes</button>
+                </div>
+
+                <!-- Email Preferences -->
+                <div class="settings-section">
+                    <h3 class="settings-title">Email Preferences</h3>
+                    <div class="checkbox-group">
+                        <input type="checkbox" class="checkbox" id="emailBookings" checked>
+                        <label for="emailBookings">Booking confirmations</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" class="checkbox" id="emailAvailability" checked>
+                        <label for="emailAvailability">Celebrity availability notifications</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" class="checkbox" id="emailOffers">
+                        <label for="emailOffers">Special offers & promotions</label>
+                    </div>
+                    <div class="checkbox-group">
+                        <input type="checkbox" class="checkbox" id="emailReminders" checked>
+                        <label for="emailReminders">Meeting reminders</label>
+                    </div>
+                    <button class="btn btn-primary" onclick="updatePreferences()">Update Preferences</button>
+                </div>
+
+                <!-- Payment Methods -->
+                <div class="settings-section">
+                    <h3 class="settings-title">Payment Methods</h3>
+                    <div class="saved-card">
+                        <div class="card-info">
+                            <span class="card-icon">💳</span>
+                            <div>
+                                <div style="font-weight: 600;">Visa ending in 4242</div>
+                                <div style="color: var(--gray-600); font-size: 0.9rem;">Expires 12/25</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button class="btn btn-secondary" style="padding: 0.5rem 1rem; font-size: 0.9rem;">Remove</button>
+                        </div>
+                    </div>
+                    <button class="btn btn-outline">+ Add New Card</button>
+                </div>
+
+                <!-- Privacy & Security -->
+                <div class="settings-section">
+                    <h3 class="settings-title">Privacy & Security</h3>
+                    <button class="btn btn-secondary" style="margin-bottom: 1rem;">Change Password</button>
+                    <button class="btn btn-secondary" style="margin-bottom: 1rem;">Download My Data</button>
+                    <button class="btn" style="background: var(--red); color: white;">Delete Account</button>
+                </div>
+            </section>
+        </main>
+    </div>
+
+    <!-- Review Modal -->
+    <div class="modal" id="reviewModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 class="modal-title">Leave a Review</h2>
+                <span class="close-modal" onclick="closeReviewModal()">×</span>
+            </div>
+
+            <div style="text-align: center; margin-bottom: 2rem;">
+                <div class="meeting-celeb-photo" id="reviewCelebPhoto" style="width: 80px; height: 80px; font-size: 2rem; margin: 0 auto 1rem;"></div>
+                <h3 id="reviewCelebName">Celebrity Name</h3>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">How would you rate your experience?</label>
+                <div class="star-rating" id="starRating">
+                    <span class="star" data-rating="1" onclick="setRating(1)">★</span>
+                    <span class="star" data-rating="2" onclick="setRating(2)">★</span>
+                    <span class="star" data-rating="3" onclick="setRating(3)">★</span>
+                    <span class="star" data-rating="4" onclick="setRating(4)">★</span>
+                    <span class="star" data-rating="5" onclick="setRating(5)">★</span>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="form-label">Share your experience</label>
+                <textarea class="form-input" id="reviewText" rows="5" placeholder="Tell us about your meeting..." style="resize: vertical; padding: 1rem;"></textarea>
+                <div style="text-align: right; font-size: 0.85rem; color: var(--gray-500); margin-top: 0.3rem;">
+                    <span id="reviewCharCount">0</span> / 500 characters (min 50)
+                </div>
+            </div>
+
+            <button class="btn btn-primary" style="width: 100%;" onclick="submitReview()">Submit Review</button>
+        </div>
+    </div>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-container">
+            <div class="footer-section">
+                <h3>StarryMeet</h3>
+                <ul>
+                    <li><a href="about.html">About Us</a></li>
+                    <li><a href="how-it-works.html">How It Works</a></li>
+                    <li><a href="for-celebrities.html">For Celebrities</a></li>
+                    <li><a href="contact.html">Contact</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Support</h3>
+                <ul>
+                    <li><a href="faq.html">FAQ</a></li>
+                    <li><a href="contact.html">Help Center</a></li>
+                    <li><a href="terms.html">Terms of Service</a></li>
+                    <li><a href="privacy.html">Privacy Policy</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Discover</h3>
+                <ul>
+                    <li><a href="browse.html">Browse Celebrities</a></li>
+                    <li><a href="browse.html?category=Hollywood">Hollywood Stars</a></li>
+                    <li><a href="browse.html?category=Musicians">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes">Athletes</a></li>
+                </ul>
+            </div>
+            <div class="footer-section">
+                <h3>Connect</h3>
+                <ul>
+                    <li><a href="https://instagram.com/starrymeet" target="_blank" rel="noopener">Instagram</a></li>
+                    <li><a href="https://twitter.com/starrymeet" target="_blank" rel="noopener">Twitter</a></li>
+                    <li><a href="https://facebook.com/starrymeet" target="_blank" rel="noopener">Facebook</a></li>
+                    <li><a href="https://linkedin.com/company/starrymeet" target="_blank" rel="noopener">LinkedIn</a></li>
+                </ul>
+            </div>
+        </div>
+        <div class="footer-bottom">
+            <p>&copy; 2025 StarryMeet. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Celebrity data
+        const celebrities = [
+            { name: "Emma Watson", category: "Hollywood", location: "London • Mar 15", city: "London", country: "UK", price: 5000, verified: true, trending: true },
+            { name: "Chris Hemsworth", category: "Hollywood", location: "Sydney • Mar 20", city: "Sydney", country: "Australia", price: 7500, verified: true, trending: true },
+            { name: "Zendaya", category: "Hollywood", location: "Los Angeles • Mar 18", city: "Los Angeles", country: "USA", price: 6000, verified: true, trending: true },
+            { name: "Tom Holland", category: "Hollywood", location: "New York • Mar 22", city: "New York", country: "USA", price: 5500, verified: true, trending: false },
+            { name: "Park Seo-joon", category: "K-Drama", location: "Seoul • Mar 16", city: "Seoul", country: "South Korea", price: 4000, verified: true, trending: true },
+            { name: "Taylor Swift", category: "Musicians", location: "Nashville • Mar 20", city: "Nashville", country: "USA", price: 20000, verified: true, trending: true },
+            { name: "Margot Robbie", category: "Hollywood", location: "Sydney • Apr 5", city: "Sydney", country: "Australia", price: 6500, verified: true, trending: true },
+            { name: "Cristiano Ronaldo", category: "Athletes", location: "Riyadh • Mar 31", city: "Riyadh", country: "Saudi Arabia", price: 25000, verified: true, trending: true }
+        ];
+
+        const colorPalettes = [
+            'linear-gradient(135deg, #667eea, #764ba2)',
+            'linear-gradient(135deg, #f093fb, #f5576c)',
+            'linear-gradient(135deg, #4facfe, #00f2fe)',
+            'linear-gradient(135deg, #43e97b, #38f9d7)',
+            'linear-gradient(135deg, #fa709a, #fee140)',
+            'linear-gradient(135deg, #30cfd0, #330867)',
+            'linear-gradient(135deg, #a8edea, #fed6e3)',
+            'linear-gradient(135deg, #ff9a9e, #fecfef)'
+        ];
+
+        // Mock user data
+        const userData = {
+            name: "John Smith",
+            initials: "JS",
+            upcomingMeetings: [
+                {
+                    celebrity: "Emma Watson",
+                    type: "Standard Session",
+                    duration: "30 minutes",
+                    date: "2025-03-15",
+                    time: "2:00 PM",
+                    location: "London, UK",
+                    status: "confirmed",
+                    daysUntil: 3
+                },
+                {
+                    celebrity: "Taylor Swift",
+                    type: "Premium Experience",
+                    duration: "60 minutes",
+                    date: "2025-03-20",
+                    time: "4:00 PM",
+                    location: "Nashville, USA",
+                    status: "pending",
+                    daysUntil: 8
+                }
+            ],
+            pastMeetings: [
+                {
+                    celebrity: "Chris Hemsworth",
+                    type: "Quick Meet",
+                    duration: "15 minutes",
+                    date: "2025-02-10",
+                    location: "Sydney, Australia",
+                    reviewed: true,
+                    rating: 5
+                },
+                {
+                    celebrity: "Zendaya",
+                    type: "Standard Session",
+                    duration: "30 minutes",
+                    date: "2025-01-25",
+                    location: "Los Angeles, USA",
+                    reviewed: false
+                },
+                {
+                    celebrity: "Park Seo-joon",
+                    type: "Standard Session",
+                    duration: "30 minutes",
+                    date: "2025-01-10",
+                    location: "Seoul, South Korea",
+                    reviewed: true,
+                    rating: 5
+                }
+            ],
+            savedCelebrities: ["Emma Watson", "Taylor Swift", "Chris Hemsworth", "Zendaya", "Tom Holland", "Park Seo-joon", "Margot Robbie", "Cristiano Ronaldo"],
+            messages: [
+                {
+                    celebrity: "Emma Watson",
+                    lastMessage: "Looking forward to meeting you!",
+                    time: "2 hours ago",
+                    unread: 2,
+                    messages: [
+                        { text: "Hi! Your booking has been confirmed.", sent: false, time: "10:30 AM" },
+                        { text: "Thank you! I'm excited!", sent: true, time: "10:45 AM" },
+                        { text: "Looking forward to meeting you!", sent: false, time: "11:00 AM" }
+                    ]
+                },
+                {
+                    celebrity: "Taylor Swift",
+                    lastMessage: "Please arrive 15 minutes early",
+                    time: "1 day ago",
+                    unread: 1,
+                    messages: [
+                        { text: "Your meeting is pending approval", sent: false, time: "Yesterday" },
+                        { text: "Please arrive 15 minutes early", sent: false, time: "Yesterday" }
+                    ]
+                },
+                {
+                    celebrity: "Chris Hemsworth",
+                    lastMessage: "Thanks for coming!",
+                    time: "1 week ago",
+                    unread: 0,
+                    messages: [
+                        { text: "Great meeting you today!", sent: false, time: "Feb 10" },
+                        { text: "Thanks for coming!", sent: false, time: "Feb 10" }
+                    ]
+                }
+            ],
+            recentActivity: [
+                { text: "Booked meeting with Emma Watson", icon: "📅", time: "2 days ago" },
+                { text: "Saved Chris Hemsworth to watchlist", icon: "❤️", time: "3 days ago" },
+                { text: "Completed meeting with Taylor Swift", icon: "✅", time: "1 week ago" },
+                { text: "Updated profile information", icon: "⚙️", time: "2 weeks ago" },
+                { text: "Left review for Zendaya", icon: "⭐", time: "3 weeks ago" }
+            ]
+        };
+
+        let currentRating = 0;
+        let currentReviewCelebrity = null;
+        let activeConversation = null;
+
+        // Utility functions
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+        }
+
+        function getColorForCelebrity(name) {
+            const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+            return colorPalettes[index % colorPalettes.length];
+        }
+
+        function getCelebrity(name) {
+            return celebrities.find(c => c.name === name);
+        }
+
+        // Tab switching
+        function switchTab(tabName) {
+            // Update URL hash
+            window.location.hash = tabName;
+
+            // Hide all sections
+            document.querySelectorAll('.content-section').forEach(section => {
+                section.classList.remove('active');
+            });
+
+            // Show selected section
+            document.getElementById(tabName).classList.add('active');
+
+            // Update nav items
+            document.querySelectorAll('.nav-item').forEach(item => {
+                item.classList.remove('active');
+            });
+
+            const activeNav = document.querySelector(`[data-tab="${tabName}"]`);
+            if (activeNav) activeNav.classList.add('active');
+
+            // Hide mobile sidebar and overlay
+            if (window.innerWidth <= 768) {
+                document.getElementById('sidebar').classList.remove('show');
+                document.getElementById('sidebarOverlay').classList.remove('show');
+                document.getElementById('sidebarToggle').textContent = '☰';
+            }
+
+            // Load tab data
+            if (tabName === 'upcoming-meetings') loadUpcomingMeetings();
+            if (tabName === 'past-meetings') loadPastMeetings();
+            if (tabName === 'saved-celebrities') loadSavedCelebrities();
+            if (tabName === 'messages') loadMessages();
+        }
+
+        // Initialize page
+        function initializePage() {
+            // Set user info
+            document.getElementById('userName').textContent = userData.name;
+            document.getElementById('welcomeName').textContent = userData.name.split(' ')[0];
+            document.getElementById('userAvatar').textContent = userData.initials;
+
+            // Update counts
+            document.getElementById('upcomingCount').textContent = userData.upcomingMeetings.length;
+            document.getElementById('savedCount').textContent = userData.savedCelebrities.length;
+
+            // Load next meeting
+            loadNextMeeting();
+
+            // Load recommended celebrities
+            loadRecommendedCelebrities();
+
+            // Load activity feed
+            loadActivityFeed();
+
+            // Check URL hash
+            const hash = window.location.hash.substring(1);
+            if (hash) {
+                switchTab(hash);
+            }
+
+            // Update review textarea counter
+            document.getElementById('reviewText').addEventListener('input', function() {
+                document.getElementById('reviewCharCount').textContent = this.value.length;
+            });
+        }
+
+        function loadNextMeeting() {
+            if (userData.upcomingMeetings.length === 0) {
+                document.getElementById('nextMeetingCard').innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📅</div>
+                        <div class="empty-title">No upcoming meetings</div>
+                        <div class="empty-text">Book your first meeting with a celebrity!</div>
+                        <button class="btn btn-primary" onclick="window.location.href='browse.html'">Browse Celebrities</button>
+                    </div>
+                `;
+                return;
+            }
+
+            const meeting = userData.upcomingMeetings[0];
+            const celeb = getCelebrity(meeting.celebrity);
+            const color = getColorForCelebrity(meeting.celebrity);
+            const initials = getInitials(meeting.celebrity);
+
+            document.getElementById('nextMeetingPhoto').style.background = color;
+            document.getElementById('nextMeetingPhoto').textContent = initials;
+            document.getElementById('nextMeetingName').textContent = meeting.celebrity;
+            document.getElementById('nextMeetingType').textContent = `${meeting.type} • ${meeting.duration}`;
+            document.getElementById('nextMeetingCountdown').textContent = `In ${meeting.daysUntil} days`;
+            document.getElementById('nextMeetingDate').textContent = new Date(meeting.date).toLocaleDateString('en-US', { month: 'long', day: 'numeric', year: 'numeric' });
+            document.getElementById('nextMeetingTime').textContent = meeting.time;
+            document.getElementById('nextMeetingLocation').textContent = meeting.location;
+        }
+
+        function loadRecommendedCelebrities() {
+            const recommended = celebrities.slice(0, 4);
+            const container = document.getElementById('recommendedCelebrities');
+
+            container.innerHTML = recommended.map(celeb => {
+                const color = getColorForCelebrity(celeb.name);
+                const initials = getInitials(celeb.name);
+                return `
+                    <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                        <div class="celeb-image" style="background: ${color}">
+                            <div class="celeb-initials">${initials}</div>
+                        </div>
+                        <div class="celeb-info">
+                            <div class="celeb-name">${celeb.name}</div>
+                            <div class="celeb-category">${celeb.category}</div>
+                            <div class="celeb-price">From $${celeb.price.toLocaleString()}</div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadActivityFeed() {
+            const container = document.getElementById('activityFeed');
+            container.innerHTML = userData.recentActivity.map(activity => `
+                <div class="activity-item">
+                    <div class="activity-icon">${activity.icon}</div>
+                    <div class="activity-content">
+                        <div class="activity-text">${activity.text}</div>
+                        <div class="activity-time">${activity.time}</div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        function loadUpcomingMeetings() {
+            const container = document.getElementById('upcomingMeetingsList');
+
+            if (userData.upcomingMeetings.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">📅</div>
+                        <div class="empty-title">No upcoming meetings</div>
+                        <div class="empty-text">Browse celebrities and book your next meeting!</div>
+                        <button class="btn btn-primary" onclick="window.location.href='browse.html'">Explore Celebrities</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = userData.upcomingMeetings.map(meeting => {
+                const celeb = getCelebrity(meeting.celebrity);
+                const color = getColorForCelebrity(meeting.celebrity);
+                const initials = getInitials(meeting.celebrity);
+                const statusClass = meeting.status === 'confirmed' ? 'status-confirmed' : 'status-pending';
+                const statusText = meeting.status === 'confirmed' ? 'Confirmed' : 'Pending Approval';
+
+                return `
+                    <div class="meeting-card">
+                        <div class="meeting-photo" style="background: ${color}">${initials}</div>
+                        <div class="meeting-content">
+                            <div class="meeting-header">
+                                <div>
+                                    <div class="meeting-name">${meeting.celebrity}</div>
+                                    <div style="color: var(--gray-600);">${celeb ? celeb.category : 'Celebrity'}</div>
+                                </div>
+                                <span class="status-badge ${statusClass}">${statusText}</span>
+                            </div>
+                            <div class="meeting-meta">
+                                <span><strong>${meeting.type}</strong> • ${meeting.duration}</span>
+                                <span>📅 ${new Date(meeting.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })} at ${meeting.time}</span>
+                                <span>📍 ${meeting.location}</span>
+                            </div>
+                            <div class="meeting-card-actions">
+                                <button class="btn btn-outline">View Details</button>
+                                <button class="btn btn-secondary">Reschedule</button>
+                                <button class="btn" style="background: none; color: var(--red); padding: 0.8rem 1rem;">Cancel</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadPastMeetings() {
+            const container = document.getElementById('pastMeetingsList');
+
+            container.innerHTML = userData.pastMeetings.map(meeting => {
+                const celeb = getCelebrity(meeting.celebrity);
+                const color = getColorForCelebrity(meeting.celebrity);
+                const initials = getInitials(meeting.celebrity);
+                const stars = meeting.reviewed ? '⭐'.repeat(meeting.rating) : '';
+
+                return `
+                    <div class="meeting-card">
+                        <div class="meeting-photo" style="background: ${color}">${initials}</div>
+                        <div class="meeting-content">
+                            <div class="meeting-header">
+                                <div>
+                                    <div class="meeting-name">${meeting.celebrity}</div>
+                                    <div style="color: var(--gray-600);">${celeb ? celeb.category : 'Celebrity'}</div>
+                                    ${meeting.reviewed ? `<div style="color: var(--gold); margin-top: 0.3rem;">${stars}</div>` : ''}
+                                </div>
+                                <span class="status-badge status-completed">Completed</span>
+                            </div>
+                            <div class="meeting-meta">
+                                <span><strong>${meeting.type}</strong> • ${meeting.duration}</span>
+                                <span>📅 ${new Date(meeting.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric', year: 'numeric' })}</span>
+                                <span>📍 ${meeting.location}</span>
+                            </div>
+                            <div class="meeting-card-actions">
+                                ${meeting.reviewed ?
+                                    '<button class="btn btn-outline">View Review</button>' :
+                                    `<button class="btn btn-primary" onclick="openReviewModal('${meeting.celebrity}')">Leave Review</button>`
+                                }
+                                <button class="btn btn-outline" onclick="window.location.href='booking.html?celebrity=${encodeURIComponent(meeting.celebrity)}'">Book Again</button>
+                            </div>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadSavedCelebrities() {
+            const container = document.getElementById('savedCelebritiesList');
+
+            if (userData.savedCelebrities.length === 0) {
+                container.innerHTML = `
+                    <div class="empty-state">
+                        <div class="empty-icon">❤️</div>
+                        <div class="empty-title">No saved celebrities yet</div>
+                        <div class="empty-text">Browse celebrities and save your favorites!</div>
+                        <button class="btn btn-primary" onclick="window.location.href='browse.html'">Browse Celebrities</button>
+                    </div>
+                `;
+                return;
+            }
+
+            container.innerHTML = userData.savedCelebrities.map(name => {
+                const celeb = getCelebrity(name);
+                if (!celeb) return '';
+
+                const color = getColorForCelebrity(name);
+                const initials = getInitials(name);
+
+                return `
+                    <div class="celebrity-card">
+                        <div class="celeb-image" style="background: ${color}">
+                            <span class="heart-icon" onclick="event.stopPropagation(); removeSaved('${name}')">❤️</span>
+                            <div class="celeb-initials">${initials}</div>
+                        </div>
+                        <div class="celeb-info">
+                            <div class="celeb-name">${celeb.name}</div>
+                            <div class="celeb-category">${celeb.category}</div>
+                            <div style="margin: 0.5rem 0; font-size: 0.9rem; color: var(--gray-600);">${celeb.location}</div>
+                            <div class="celeb-price">From $${celeb.price.toLocaleString()}</div>
+                            <button class="btn btn-primary" style="width: 100%; margin-top: 0.8rem;" onclick="window.location.href='booking.html?celebrity=${encodeURIComponent(celeb.name)}'">Book Now</button>
+                        </div>
+                    </div>
+                `;
+            }).join('');
+        }
+
+        function loadMessages() {
+            const chatList = document.getElementById('chatList');
+
+            chatList.innerHTML = userData.messages.map((chat, index) => {
+                const celeb = getCelebrity(chat.celebrity);
+                const color = getColorForCelebrity(chat.celebrity);
+                const initials = getInitials(chat.celebrity);
+
+                return `
+                    <div class="chat-item ${index === 0 ? 'active' : ''}" onclick="openConversation(${index})">
+                        <div class="chat-header">
+                            <div class="chat-avatar" style="background: ${color}">${initials}</div>
+                            <div class="chat-preview">
+                                <div class="chat-name">${chat.celebrity} Team</div>
+                                <div class="chat-last-message">${chat.lastMessage}</div>
+                                <div style="font-size: 0.75rem; color: var(--gray-500); margin-top: 0.2rem;">${chat.time}</div>
+                            </div>
+                            ${chat.unread > 0 ? `<span class="badge">${chat.unread}</span>` : ''}
+                        </div>
+                    </div>
+                `;
+            }).join('');
+
+            // Open first conversation by default
+            if (userData.messages.length > 0) {
+                openConversation(0);
+            }
+        }
+
+        function openConversation(index) {
+            activeConversation = index;
+            const chat = userData.messages[index];
+
+            // Update chat list active state
+            document.querySelectorAll('.chat-item').forEach((item, i) => {
+                item.classList.toggle('active', i === index);
+            });
+
+            // Update thread
+            document.getElementById('threadHeader').textContent = `${chat.celebrity} Team`;
+
+            const messagesContainer = document.getElementById('messagesContainer');
+            messagesContainer.innerHTML = chat.messages.map(msg => `
+                <div class="message-bubble ${msg.sent ? 'sent' : 'received'}">
+                    <div>${msg.text}</div>
+                    <div class="message-time">${msg.time}</div>
+                </div>
+            `).join('');
+
+            // Show input
+            document.getElementById('messageInputContainer').classList.remove('hidden');
+
+            // Scroll to bottom
+            messagesContainer.scrollTop = messagesContainer.scrollHeight;
+        }
+
+        function sendMessage() {
+            const input = document.getElementById('messageInput');
+            const text = input.value.trim();
+
+            if (!text || activeConversation === null) return;
+
+            const now = new Date();
+            const time = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit' });
+
+            // Add message to data
+            userData.messages[activeConversation].messages.push({
+                text: text,
+                sent: true,
+                time: time
+            });
+
+            // Refresh conversation
+            openConversation(activeConversation);
+
+            // Clear input
+            input.value = '';
+        }
+
+        // Review modal
+        function openReviewModal(celebrity) {
+            currentReviewCelebrity = celebrity;
+            const celeb = getCelebrity(celebrity);
+            const color = getColorForCelebrity(celebrity);
+            const initials = getInitials(celebrity);
+
+            document.getElementById('reviewCelebPhoto').style.background = color;
+            document.getElementById('reviewCelebPhoto').textContent = initials;
+            document.getElementById('reviewCelebName').textContent = celebrity;
+
+            // Reset form
+            currentRating = 0;
+            document.querySelectorAll('.star').forEach(star => star.classList.remove('active'));
+            document.getElementById('reviewText').value = '';
+            document.getElementById('reviewCharCount').textContent = '0';
+
+            document.getElementById('reviewModal').classList.add('show');
+        }
+
+        function closeReviewModal() {
+            document.getElementById('reviewModal').classList.remove('show');
+        }
+
+        function setRating(rating) {
+            currentRating = rating;
+            document.querySelectorAll('.star').forEach((star, index) => {
+                star.classList.toggle('active', index < rating);
+            });
+        }
+
+        function submitReview() {
+            const text = document.getElementById('reviewText').value.trim();
+
+            if (currentRating === 0) {
+                alert('Please select a rating');
+                return;
+            }
+
+            if (text.length < 50) {
+                alert('Please write at least 50 characters');
+                return;
+            }
+
+            // Update meeting as reviewed
+            const meeting = userData.pastMeetings.find(m => m.celebrity === currentReviewCelebrity);
+            if (meeting) {
+                meeting.reviewed = true;
+                meeting.rating = currentRating;
+            }
+
+            // Close modal
+            closeReviewModal();
+
+            // Show success
+            alert('Review submitted successfully!');
+
+            // Reload past meetings
+            loadPastMeetings();
+        }
+
+        // Settings
+        function saveSettings() {
+            const name = document.getElementById('settingsName').value;
+            const email = document.getElementById('settingsEmail').value;
+            const phone = document.getElementById('settingsPhone').value;
+
+            userData.name = name;
+            document.getElementById('userName').textContent = name;
+            document.getElementById('welcomeName').textContent = name.split(' ')[0];
+
+            alert('Settings saved successfully!');
+        }
+
+        function updatePreferences() {
+            alert('Email preferences updated!');
+        }
+
+        // Other functions
+        function removeSaved(celebrity) {
+            if (confirm(`Remove ${celebrity} from saved celebrities?`)) {
+                userData.savedCelebrities = userData.savedCelebrities.filter(c => c !== celebrity);
+                document.getElementById('savedCount').textContent = userData.savedCelebrities.length;
+                loadSavedCelebrities();
+            }
+        }
+
+        function clearAllSaved() {
+            if (confirm('Are you sure you want to remove all saved celebrities?')) {
+                userData.savedCelebrities = [];
+                document.getElementById('savedCount').textContent = '0';
+                loadSavedCelebrities();
+            }
+        }
+
+        function toggleSidebar() {
+            const sidebar = document.getElementById('sidebar');
+            const toggleBtn = document.getElementById('sidebarToggle');
+            const overlay = document.getElementById('sidebarOverlay');
+
+            sidebar.classList.toggle('show');
+            overlay.classList.toggle('show');
+
+            // Update button icon
+            if (sidebar.classList.contains('show')) {
+                toggleBtn.textContent = '✕';
+            } else {
+                toggleBtn.textContent = '☰';
+            }
+        }
+
+        function logout() {
+            if (confirm('Are you sure you want to logout?')) {
+                localStorage.clear();
+                window.location.href = 'index.html';
+            }
+        }
+
+        // Initialize
+        initializePage();
+    </script>
+</body>
+</html>
