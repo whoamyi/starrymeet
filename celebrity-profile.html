@@ -1278,7 +1278,7 @@
                     <div class="price-display" id="selectedPrice">$1,500</div>
                     <div class="price-note">per meeting</div>
 
-                    <button class="btn-book" onclick="window.location.href='booking.html'">Request to Meet</button>
+                    <button class="btn-book" onclick="proceedToBooking()">Request to Meet</button>
                     <button class="btn-secondary" onclick="alert('Added to favorites!')">Save to Favorites</button>
 
                     <div class="booking-info">
@@ -1340,7 +1340,7 @@
     </div>
 
     <!-- Sticky Request Button (Mobile Only) -->
-    <button class="sticky-request-btn" id="stickyRequestBtn" onclick="window.location.href='booking.html'">
+    <button class="sticky-request-btn" id="stickyRequestBtn" onclick="proceedToBooking()">
         Request <span id="stickyPrice">$1,500</span>
     </button>
 
@@ -1414,11 +1414,46 @@
         let currentReview = 0;
         const totalReviews = 5;
 
+        // Global booking state - stores all user selections
+        // Initialize with default values from page
+        const bookingState = {
+            celebrityName: 'Taylor Swift',
+            meetingType: 'Standard Meet',
+            price: 1500,
+            duration: '30 minutes',
+            location: 'Los Angeles, CA',
+            date: 'January 15, 2026',
+            timeSlot: null
+        };
+
+        // Initialize booking state on page load
+        document.addEventListener('DOMContentLoaded', function() {
+            // Set initial celebrity name from page
+            const celebrityNameElement = document.querySelector('.celebrity-name');
+            if (celebrityNameElement) {
+                bookingState.celebrityName = celebrityNameElement.textContent.trim();
+            }
+
+            // Set initial location
+            const locationSelect = document.getElementById('locationSelect');
+            if (locationSelect) {
+                bookingState.location = locationSelect.options[locationSelect.selectedIndex].textContent;
+            }
+
+            // Set initial date
+            const dateSelect = document.getElementById('dateSelect');
+            if (dateSelect) {
+                bookingState.date = dateSelect.options[dateSelect.selectedIndex].textContent;
+            }
+        });
+
         function selectOption(element, price) {
             document.querySelectorAll('.meeting-option').forEach(opt => {
                 opt.classList.remove('selected');
             });
             element.classList.add('selected');
+
+            // Update displayed price
             document.getElementById('selectedPrice').textContent = '$' + price.toLocaleString();
 
             // Update sticky button price
@@ -1426,6 +1461,13 @@
             if (stickyPrice) {
                 stickyPrice.textContent = '$' + price.toLocaleString();
             }
+
+            // Store meeting details in booking state
+            bookingState.price = price;
+            const meetingName = element.querySelector('.option-name').textContent;
+            const duration = element.querySelector('.option-duration').textContent;
+            bookingState.meetingType = meetingName;
+            bookingState.duration = duration;
         }
 
         function selectSlot(element) {
@@ -1434,16 +1476,46 @@
                 btn.classList.remove('selected');
             });
             element.classList.add('selected');
+
+            // Store time slot in booking state
+            bookingState.timeSlot = element.textContent.trim();
         }
 
         function updateAvailability() {
+            // Update location in booking state
+            const locationSelect = document.getElementById('locationSelect');
+            const selectedOption = locationSelect.options[locationSelect.selectedIndex];
+            bookingState.location = selectedOption.textContent;
+
             // In a real app, this would fetch availability from the server
             console.log('Location changed, updating availability...');
         }
 
         function updateTimeSlots() {
+            // Update date in booking state
+            const dateSelect = document.getElementById('dateSelect');
+            const selectedOption = dateSelect.options[dateSelect.selectedIndex];
+            bookingState.date = selectedOption.textContent;
+
             // In a real app, this would fetch time slots for the selected date
             console.log('Date changed, updating time slots...');
+        }
+
+        // Proceed to booking with all collected data
+        function proceedToBooking() {
+            // Build URL with all booking parameters
+            const params = new URLSearchParams({
+                celebrity: bookingState.celebrityName,
+                meetingType: bookingState.meetingType,
+                price: bookingState.price,
+                duration: bookingState.duration,
+                location: bookingState.location,
+                date: bookingState.date,
+                timeSlot: bookingState.timeSlot || ''
+            });
+
+            // Navigate to booking page with all selections
+            window.location.href = 'booking.html?' + params.toString();
         }
 
         function goToReview(index) {
