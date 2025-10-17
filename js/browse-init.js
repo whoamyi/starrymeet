@@ -162,10 +162,15 @@ function displayCelebrities(celebrities) {
         const rating = celeb.rating || 4.9;
         const reviews = celeb.reviews || 127;
 
+        // Use image if available, otherwise show colored initials
+        const avatarStyle = celeb.imageUrl
+            ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
+            : `background: ${color};`;
+
         return `
             <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
-                <div class="celebrity-avatar" style="width: 100%; aspect-ratio: 1; background: ${color}; border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white; margin-bottom: 16px; position: relative;">
-                    ${initials}
+                <div class="celebrity-avatar" style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white; margin-bottom: 16px; position: relative;">
+                    ${celeb.imageUrl ? '' : initials}
                     ${celeb.verified ? '<span style="position: absolute; top: 8px; right: 8px; background: gold; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">✓</span>' : ''}
                     ${celeb.trending ? '<span style="position: absolute; top: 8px; left: 8px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">TRENDING</span>' : ''}
                 </div>
