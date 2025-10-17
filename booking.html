@@ -47,6 +47,10 @@
         .time-slot.unavailable{opacity:0.3;cursor:not-allowed;}
         .time-slot.unavailable:hover{border-color:rgba(255,255,255,0.15);background:#000000;}
 
+        .time-slot-mini{padding:10px;background:#000000;border:1px solid rgba(255,255,255,0.15);border-radius:8px;text-align:center;cursor:pointer;font-size:0.85rem;transition:all 0.2s;color:#ffffff;font-family:inherit;}
+        .time-slot-mini:hover{border-color:rgba(255,255,255,0.4);background:rgba(255,255,255,0.05);}
+        .time-slot-mini.selected{background:#ffffff;color:#000000;border-color:#ffffff;font-weight:600;}
+
         .package-options{display:grid;gap:16px;margin-top:16px;}
         .package-option{background:#000000;border:2px solid rgba(255,255,255,0.15);border-radius:16px;padding:20px;cursor:pointer;transition:all 0.2s;}
         .package-option:hover{border-color:rgba(255,255,255,0.4);}
@@ -175,7 +179,68 @@
             <div class="booking-main">
                 <!-- Step 1: Choose Package -->
                 <div class="step-section active" id="step1">
-                    <h2>Choose your meeting package</h2>
+                    <h2>Review your selection</h2>
+
+                    <!-- Pre-selected Details Confirmation -->
+                    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:16px;padding:20px;margin-bottom:32px;">
+                        <div style="display:flex;justify-content:space-between;align-items:center;margin-bottom:16px;">
+                            <h3 style="font-size:1.1rem;font-weight:600;margin:0;">Meeting Details</h3>
+                            <button onclick="toggleEditMode()" style="background:transparent;border:1px solid rgba(255,255,255,0.2);padding:8px 16px;border-radius:8px;color:#ffffff;font-size:0.875rem;cursor:pointer;transition:all 0.2s;" onmouseover="this.style.borderColor='rgba(255,255,255,0.4)'" onmouseout="this.style.borderColor='rgba(255,255,255,0.2)'">
+                                <span id="editBtnText">✏️ Edit</span>
+                            </button>
+                        </div>
+
+                        <div id="confirmView">
+                            <div style="display:grid;gap:12px;">
+                                <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+                                    <span style="opacity:0.6;">📍 Location</span>
+                                    <span id="displayLocation" style="font-weight:500;">Los Angeles, CA</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;padding:10px 0;border-bottom:1px solid rgba(255,255,255,0.06);">
+                                    <span style="opacity:0.6;">📅 Date</span>
+                                    <span id="displayDate" style="font-weight:500;">January 15, 2026</span>
+                                </div>
+                                <div style="display:flex;justify-content:space-between;padding:10px 0;">
+                                    <span style="opacity:0.6;">🕐 Time</span>
+                                    <span id="displayTime" style="font-weight:500;">Not selected</span>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div id="editView" style="display:none;">
+                            <div class="form-group" style="margin-bottom:16px;">
+                                <label style="font-size:0.875rem;">Location</label>
+                                <select id="editLocation" onchange="updateDisplayValues()" style="background:#000;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 12px;color:#fff;width:100%;font-size:0.9rem;">
+                                    <option value="Los Angeles, CA">Los Angeles, CA</option>
+                                    <option value="New York, NY">New York, NY</option>
+                                    <option value="Nashville, TN">Nashville, TN</option>
+                                    <option value="London, UK">London, UK</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom:16px;">
+                                <label style="font-size:0.875rem;">Date</label>
+                                <select id="editDate" onchange="updateDisplayValues()" style="background:#000;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:10px 12px;color:#fff;width:100%;font-size:0.9rem;">
+                                    <option value="January 15, 2026">January 15, 2026</option>
+                                    <option value="January 22, 2026">January 22, 2026</option>
+                                    <option value="February 5, 2026">February 5, 2026</option>
+                                    <option value="February 12, 2026">February 12, 2026</option>
+                                </select>
+                            </div>
+                            <div class="form-group" style="margin-bottom:0;">
+                                <label style="font-size:0.875rem;">Time Slot</label>
+                                <div style="display:grid;grid-template-columns:repeat(3,1fr);gap:8px;">
+                                    <button class="time-slot-mini" onclick="selectTimeMini(this, '10:00 AM')">10:00 AM</button>
+                                    <button class="time-slot-mini" onclick="selectTimeMini(this, '11:00 AM')">11:00 AM</button>
+                                    <button class="time-slot-mini" onclick="selectTimeMini(this, '2:00 PM')">2:00 PM</button>
+                                    <button class="time-slot-mini" onclick="selectTimeMini(this, '3:30 PM')">3:30 PM</button>
+                                    <button class="time-slot-mini" onclick="selectTimeMini(this, '5:00 PM')">5:00 PM</button>
+                                    <button class="time-slot-mini" onclick="selectTimeMini(this, '6:00 PM')">6:00 PM</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <h3 style="font-size:1.1rem;font-weight:600;margin-bottom:16px;">Choose your meeting package</h3>
                     <div class="package-options">
                         <div class="package-option" onclick="selectPackage(this, 'Quick Meet', 500, 15)">
                             <div class="package-header">
@@ -214,11 +279,11 @@
                             </div>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="nextStep()" style="margin-top:32px;">Continue to Date Selection</button>
+                    <button class="btn-primary" onclick="nextStep()" style="margin-top:32px;">Continue to Your Details</button>
                 </div>
 
-                <!-- Step 2: Date & Time -->
-                <div class="step-section" id="step2">
+                <!-- Step 2: Date & Time (DEPRECATED - Now in Step 1) -->
+                <div class="step-section" id="step2" style="display:none!important;">
                     <h2>Select date and time</h2>
                     <div class="form-group">
                         <label>Choose a date</label>
@@ -382,6 +447,90 @@
         let selectedPackage = {name: 'Standard Meet', price: 1500, duration: 30};
         let selectedDate = null;
         let selectedTime = null;
+        let selectedLocation = 'Los Angeles, CA';
+        let isEditMode = false;
+
+        // Initialize with URL parameters if coming from celebrity profile
+        window.addEventListener('DOMContentLoaded', function() {
+            const params = new URLSearchParams(window.location.search);
+
+            if (params.has('location')) {
+                selectedLocation = params.get('location');
+                document.getElementById('displayLocation').textContent = selectedLocation;
+                document.getElementById('editLocation').value = selectedLocation;
+            }
+
+            if (params.has('date')) {
+                selectedDate = params.get('date');
+                document.getElementById('displayDate').textContent = selectedDate;
+                document.getElementById('editDate').value = selectedDate;
+                document.getElementById('summaryDate').textContent = selectedDate;
+            }
+
+            if (params.has('timeSlot') && params.get('timeSlot')) {
+                selectedTime = params.get('timeSlot');
+                document.getElementById('displayTime').textContent = selectedTime;
+                document.getElementById('summaryTime').textContent = selectedTime;
+            }
+
+            if (params.has('meetingType') && params.has('price')) {
+                const meetingType = params.get('meetingType');
+                const price = parseInt(params.get('price'));
+                const duration = parseInt(params.get('duration').replace(' minutes', ''));
+
+                selectedPackage = {name: meetingType, price, duration};
+                document.getElementById('summaryPackage').textContent = meetingType;
+                document.getElementById('summaryDuration').textContent = duration + ' minutes';
+                document.getElementById('summaryTotal').textContent = '$' + price.toLocaleString();
+
+                // Select the right package option
+                document.querySelectorAll('.package-option').forEach(opt => {
+                    const optName = opt.querySelector('.package-name').textContent;
+                    if (optName === meetingType) {
+                        opt.classList.add('selected');
+                    } else {
+                        opt.classList.remove('selected');
+                    }
+                });
+            }
+        });
+
+        // Toggle edit mode for meeting details
+        function toggleEditMode() {
+            isEditMode = !isEditMode;
+            const confirmView = document.getElementById('confirmView');
+            const editView = document.getElementById('editView');
+            const editBtnText = document.getElementById('editBtnText');
+
+            if (isEditMode) {
+                confirmView.style.display = 'none';
+                editView.style.display = 'block';
+                editBtnText.textContent = '✓ Done';
+            } else {
+                confirmView.style.display = 'block';
+                editView.style.display = 'none';
+                editBtnText.textContent = '✏️ Edit';
+            }
+        }
+
+        // Update display values when editing
+        function updateDisplayValues() {
+            selectedLocation = document.getElementById('editLocation').value;
+            selectedDate = document.getElementById('editDate').value;
+
+            document.getElementById('displayLocation').textContent = selectedLocation;
+            document.getElementById('displayDate').textContent = selectedDate;
+            document.getElementById('summaryDate').textContent = selectedDate;
+        }
+
+        // Select time slot in mini view
+        function selectTimeMini(element, time) {
+            document.querySelectorAll('.time-slot-mini').forEach(el => el.classList.remove('selected'));
+            element.classList.add('selected');
+            selectedTime = time;
+            document.getElementById('displayTime').textContent = time;
+            document.getElementById('summaryTime').textContent = time;
+        }
 
         // Generate calendar
         function generateCalendar() {
@@ -436,6 +585,12 @@
             if (currentStep < 5) {
                 document.getElementById('step' + currentStep).classList.remove('active');
                 currentStep++;
+
+                // Skip step 2 (deprecated date/time step)
+                if (currentStep === 2) {
+                    currentStep = 3;
+                }
+
                 document.getElementById('step' + currentStep).classList.add('active');
                 updateProgress();
                 window.scrollTo({top: 0, behavior: 'smooth'});
@@ -446,6 +601,12 @@
             if (currentStep > 1) {
                 document.getElementById('step' + currentStep).classList.remove('active');
                 currentStep--;
+
+                // Skip step 2 (deprecated date/time step)
+                if (currentStep === 2) {
+                    currentStep = 1;
+                }
+
                 document.getElementById('step' + currentStep).classList.add('active');
                 updateProgress();
                 window.scrollTo({top: 0, behavior: 'smooth'});
