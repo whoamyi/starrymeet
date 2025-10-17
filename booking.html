@@ -306,28 +306,96 @@
                     </div>
                 </div>
 
-                <!-- Step 3: Your Details -->
+                <!-- Step 3: Your Details & Application -->
                 <div class="step-section" id="step3">
-                    <h2>Your contact details</h2>
-                    <div class="form-group">
-                        <label>Full Name</label>
-                        <input type="text" id="fullName" placeholder="John Doe" required>
+                    <div style="text-align:center;margin-bottom:32px;padding-bottom:24px;border-bottom:1px solid rgba(255,255,255,0.08);">
+                        <h2 style="margin-bottom:12px;">Tell us about yourself</h2>
+                        <p style="opacity:0.7;font-size:0.9375rem;line-height:1.6;max-width:600px;margin:0 auto;">
+                            Each meeting request is personally reviewed. Share your story to help us understand why this meeting would be meaningful to you.
+                        </p>
+                    </div>
+
+                    <!-- Contact Information -->
+                    <h3 style="font-size:1.125rem;font-weight:600;margin-bottom:20px;display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:1.25rem;">👤</span> Contact Information
+                    </h3>
+                    <div style="display:grid;grid-template-columns:1fr 1fr;gap:16px;margin-bottom:32px;">
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label>First Name <span style="color:#ff6b6b;">*</span></label>
+                            <input type="text" id="firstName" placeholder="John" required>
+                        </div>
+                        <div class="form-group" style="margin-bottom:0;">
+                            <label>Last Name <span style="color:#ff6b6b;">*</span></label>
+                            <input type="text" id="lastName" placeholder="Doe" required>
+                        </div>
                     </div>
                     <div class="form-group">
-                        <label>Email Address</label>
+                        <label>Email Address <span style="color:#ff6b6b;">*</span></label>
                         <input type="email" id="email" placeholder="john@example.com" required>
                     </div>
                     <div class="form-group">
-                        <label>Phone Number</label>
+                        <label>Phone Number <span style="color:#ff6b6b;">*</span></label>
                         <input type="tel" id="phone" placeholder="+1 (555) 123-4567" required>
                     </div>
+
+                    <!-- About You -->
+                    <h3 style="font-size:1.125rem;font-weight:600;margin:32px 0 20px;display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:1.25rem;">✨</span> About You
+                    </h3>
                     <div class="form-group">
-                        <label>Special Requests (Optional)</label>
-                        <textarea id="requests" placeholder="Any special requests or things the celebrity should know..."></textarea>
+                        <label>What do you do? <span style="color:#ff6b6b;">*</span></label>
+                        <input type="text" id="occupation" placeholder="e.g., Software Engineer, Student, Entrepreneur..." required>
+                        <small style="opacity:0.6;font-size:0.8125rem;display:block;margin-top:6px;">Your profession or current role</small>
                     </div>
+                    <div class="form-group">
+                        <label>Where are you from? <span style="color:#ff6b6b;">*</span></label>
+                        <input type="text" id="hometown" placeholder="City, Country" required>
+                    </div>
+
+                    <!-- The Important Part -->
+                    <h3 style="font-size:1.125rem;font-weight:600;margin:32px 0 20px;display:flex;align-items:center;gap:8px;">
+                        <span style="font-size:1.25rem;">💭</span> Your Story
+                    </h3>
+                    <div class="form-group">
+                        <label>Why do you want to meet <span id="celebrityNameInForm">this celebrity</span>? <span style="color:#ff6b6b;">*</span></label>
+                        <textarea id="meetingReason" placeholder="Share your story... What inspires you about them? How have they impacted your life? What would this meeting mean to you?" required style="min-height:120px;"></textarea>
+                        <small style="opacity:0.6;font-size:0.8125rem;display:block;margin-top:6px;">Minimum 50 characters - be genuine and thoughtful</small>
+                    </div>
+                    <div class="form-group">
+                        <label>What would you like to talk about during the meeting? <span style="color:#ff6b6b;">*</span></label>
+                        <textarea id="discussionTopics" placeholder="e.g., Career advice, their creative process, specific projects, life lessons..." required style="min-height:100px;"></textarea>
+                        <small style="opacity:0.6;font-size:0.8125rem;display:block;margin-top:6px;">This helps us prepare for a meaningful conversation</small>
+                    </div>
+                    <div class="form-group">
+                        <label>Is this meeting for a special occasion? <span style="opacity:0.6;">(Optional)</span></label>
+                        <select id="occasion" style="background:#000;border:1px solid rgba(255,255,255,0.15);border-radius:12px;padding:14px 16px;color:#fff;width:100%;font-size:1rem;">
+                            <option value="">Select if applicable...</option>
+                            <option value="birthday">Birthday celebration</option>
+                            <option value="graduation">Graduation gift</option>
+                            <option value="anniversary">Anniversary</option>
+                            <option value="achievement">Personal achievement/milestone</option>
+                            <option value="inspiration">Seeking inspiration/guidance</option>
+                            <option value="other">Other special reason</option>
+                        </select>
+                    </div>
+                    <div class="form-group">
+                        <label>Anything else you'd like to share? <span style="opacity:0.6;">(Optional)</span></label>
+                        <textarea id="additionalInfo" placeholder="Share any other relevant information, special requests, or context that would help make this meeting special..." style="min-height:80px;"></textarea>
+                    </div>
+
+                    <!-- Agreement -->
+                    <div style="background:rgba(255,215,0,0.05);border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:20px;margin-top:32px;">
+                        <label style="display:flex;align-items:start;gap:12px;cursor:pointer;font-size:0.9375rem;line-height:1.6;">
+                            <input type="checkbox" id="agreementCheck" required style="margin-top:4px;width:18px;height:18px;accent-color:#FFD700;cursor:pointer;">
+                            <span>
+                                I understand that this is a meeting request and <strong>approval is not guaranteed</strong>. The celebrity or their team will review my application and respond within 48 hours. <span style="color:#ff6b6b;">*</span>
+                            </span>
+                        </label>
+                    </div>
+
                     <div style="display:flex;gap:12px;margin-top:32px;">
                         <button class="btn-secondary" onclick="prevStep()">Back</button>
-                        <button class="btn-primary" onclick="nextStep()">Continue to Payment</button>
+                        <button class="btn-primary" onclick="validateAndProceed()">Submit Application</button>
                     </div>
                 </div>
 
@@ -362,19 +430,34 @@
                             <input type="text" id="cvv" placeholder="123" required>
                         </div>
                     </div>
+                    <div style="background:rgba(255,255,255,0.03);border:1px solid rgba(255,255,255,0.08);border-radius:12px;padding:20px;margin-top:24px;">
+                        <p style="font-size:0.875rem;opacity:0.8;margin:0;line-height:1.6;">
+                            💳 Your payment will be held securely and only processed if your meeting request is approved. You'll receive a full refund if not approved.
+                        </p>
+                    </div>
                     <div style="display:flex;gap:12px;margin-top:32px;">
                         <button class="btn-secondary" onclick="prevStep()">Back</button>
-                        <button class="btn-primary" onclick="completeBooking()">Complete Booking</button>
+                        <button class="btn-primary" onclick="completeBooking()">Submit Request & Payment</button>
                     </div>
                 </div>
 
                 <!-- Step 5: Success -->
                 <div class="step-section" id="step5">
                     <div class="success-message">
-                        <div class="success-icon">✓</div>
-                        <h2>Booking confirmed!</h2>
-                        <p>Your meeting is confirmed and you'll receive a confirmation email shortly.</p>
-                        <p style="opacity:0.5;margin-top:24px;">Booking reference: #SM-2025-10-<span id="bookingRef"></span></span></p>
+                        <div class="success-icon">⏳</div>
+                        <h2>Request submitted!</h2>
+                        <p style="line-height:1.8;">Your meeting request has been submitted and is now under review. You'll receive an email within <strong>48 hours</strong> with the decision.</p>
+                        <div style="background:rgba(255,215,0,0.08);border:1px solid rgba(255,215,0,0.2);border-radius:12px;padding:16px;margin-top:24px;text-align:left;">
+                            <p style="margin:0;font-size:0.9375rem;line-height:1.6;opacity:0.9;">
+                                <strong>What happens next?</strong><br>
+                                • Your application will be personally reviewed<br>
+                                • Payment is held securely (not charged yet)<br>
+                                • You'll be notified of the decision via email<br>
+                                • If approved, payment will be processed<br>
+                                • If not approved, you'll receive a full refund
+                            </p>
+                        </div>
+                        <p style="opacity:0.5;margin-top:24px;font-size:0.875rem;">Request reference: #SM-2025-<span id="bookingRef"></span></p>
                     </div>
                     <div class="booking-details">
                         <div class="booking-details-row">
@@ -398,12 +481,12 @@
                             <span style="font-weight:600;">Beverly Hills, CA</span>
                         </div>
                         <div class="booking-details-row">
-                            <span style="opacity:0.6;">Total Paid</span>
+                            <span style="opacity:0.6;">Amount (Pending)</span>
                             <span style="font-weight:700;font-size:1.25rem;" id="confirmedPrice">$1,500</span>
                         </div>
                     </div>
-                    <button class="btn-primary" onclick="window.location.href='dashboard.html'">View in Dashboard</button>
-                    <button class="btn-secondary" onclick="window.location.href='browse.html'">Book Another Meeting</button>
+                    <button class="btn-primary" onclick="window.location.href='dashboard.html'">View Request Status</button>
+                    <button class="btn-secondary" onclick="window.location.href='browse.html'">Browse More Celebrities</button>
                 </div>
             </div>
 
@@ -453,6 +536,12 @@
         // Initialize with URL parameters if coming from celebrity profile
         window.addEventListener('DOMContentLoaded', function() {
             const params = new URLSearchParams(window.location.search);
+
+            // Set celebrity name in form
+            if (params.has('celebrity')) {
+                const celebrityName = params.get('celebrity');
+                document.getElementById('celebrityNameInForm').textContent = celebrityName;
+            }
 
             if (params.has('location')) {
                 selectedLocation = params.get('location');
@@ -628,6 +717,64 @@
 
             const progressPercentage = ((currentStep - 1) / 4) * 100;
             document.getElementById('progressLine').style.width = progressPercentage + '%';
+        }
+
+        // Validate application form before proceeding
+        function validateAndProceed() {
+            // Get all required fields
+            const firstName = document.getElementById('firstName').value.trim();
+            const lastName = document.getElementById('lastName').value.trim();
+            const email = document.getElementById('email').value.trim();
+            const phone = document.getElementById('phone').value.trim();
+            const occupation = document.getElementById('occupation').value.trim();
+            const hometown = document.getElementById('hometown').value.trim();
+            const meetingReason = document.getElementById('meetingReason').value.trim();
+            const discussionTopics = document.getElementById('discussionTopics').value.trim();
+            const agreementCheck = document.getElementById('agreementCheck').checked;
+
+            // Validation
+            if (!firstName || !lastName) {
+                alert('Please provide your full name.');
+                return;
+            }
+
+            if (!email || !email.includes('@')) {
+                alert('Please provide a valid email address.');
+                return;
+            }
+
+            if (!phone) {
+                alert('Please provide your phone number.');
+                return;
+            }
+
+            if (!occupation) {
+                alert('Please tell us what you do.');
+                return;
+            }
+
+            if (!hometown) {
+                alert('Please tell us where you\'re from.');
+                return;
+            }
+
+            if (!meetingReason || meetingReason.length < 50) {
+                alert('Please share why you want to meet (minimum 50 characters). Be thoughtful and genuine.');
+                return;
+            }
+
+            if (!discussionTopics || discussionTopics.length < 20) {
+                alert('Please tell us what you\'d like to discuss during the meeting (minimum 20 characters).');
+                return;
+            }
+
+            if (!agreementCheck) {
+                alert('Please acknowledge that approval is not guaranteed and your request will be reviewed.');
+                return;
+            }
+
+            // If all validations pass, proceed to payment
+            nextStep();
         }
 
         function completeBooking() {
