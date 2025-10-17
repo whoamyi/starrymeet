@@ -84,6 +84,9 @@ if (!celebrityName) {
                 stickyPrice.textContent = formatPrice(celebrity.price);
             }
 
+            // Generate dynamic meeting options based on celebrity price
+            generateMeetingOptions(celebrity.price);
+
             // Generate and display testimonials
             const testimonials = generateTestimonialsForCelebrity(celebrity.name);
             const testimonialsContainer = document.getElementById('testimonialsContainer');
@@ -183,9 +186,80 @@ if (!celebrityName) {
             favoriteBtn.style.color = isFav ? 'var(--primary)' : 'inherit';
         }
 
+        // Generate dynamic meeting options based on celebrity's base price
+        function generateMeetingOptions(basePrice) {
+            const meetingOptionsContainer = document.querySelector('.meeting-options');
+            if (!meetingOptionsContainer) return;
+
+            // Calculate tier prices based on celebrity's base price
+            // Quick Meet: 30-40% of base price
+            // Standard Meet: Base price (100%)
+            // Premium Experience: 200-250% of base price
+            const quickPrice = Math.round(basePrice * 0.35);
+            const standardPrice = basePrice;
+            const premiumPrice = Math.round(basePrice * 2.2);
+
+            meetingOptionsContainer.innerHTML = `
+                <div class="meeting-option" onclick="selectOption(this, ${quickPrice})">
+                    <div class="option-left">
+                        <div class="option-name">Quick Meet</div>
+                        <div class="option-duration">15 minutes</div>
+                        <div class="option-features">
+                            <span class="feature-tag">Quick chat</span>
+                            <span class="feature-tag">1-2 photos</span>
+                            <span class="feature-tag">Autograph</span>
+                        </div>
+                    </div>
+                    <div class="option-right">
+                        <div class="option-price">${formatPrice(quickPrice)}</div>
+                    </div>
+                </div>
+
+                <div class="meeting-option selected" onclick="selectOption(this, ${standardPrice})">
+                    <div class="option-left">
+                        <div class="option-name">Standard Meet</div>
+                        <div class="option-duration">30 minutes</div>
+                        <div class="option-features">
+                            <span class="feature-tag">Extended Q&A</span>
+                            <span class="feature-tag">Multiple photos</span>
+                            <span class="feature-tag">Signed memorabilia</span>
+                            <span class="feature-tag">Personal message</span>
+                        </div>
+                    </div>
+                    <div class="option-right">
+                        <div class="option-price">${formatPrice(standardPrice)}</div>
+                    </div>
+                </div>
+
+                <div class="meeting-option" onclick="selectOption(this, ${premiumPrice})">
+                    <div class="option-left">
+                        <div class="option-name">Premium Experience</div>
+                        <div class="option-duration">60 minutes</div>
+                        <div class="option-features">
+                            <span class="feature-tag">In-depth conversation</span>
+                            <span class="feature-tag">Professional photos</span>
+                            <span class="feature-tag">Exclusive merchandise</span>
+                            <span class="feature-tag">Behind-the-scenes access</span>
+                            <span class="feature-tag">Video message</span>
+                        </div>
+                    </div>
+                    <div class="option-right">
+                        <div class="option-price">${formatPrice(premiumPrice)}</div>
+                    </div>
+                </div>
+            `;
+
+            // Update the sidebar price to show standard price by default
+            const priceDisplay = document.getElementById('selectedPrice');
+            if (priceDisplay) {
+                priceDisplay.textContent = formatPrice(standardPrice);
+            }
+        }
+
         // Make functions globally available
         window.handleRequestBooking = handleRequestBooking;
         window.handleAddToFavorites = handleAddToFavorites;
+        window.generateMeetingOptions = generateMeetingOptions;
     }
 }
 
