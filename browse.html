@@ -82,152 +82,62 @@
 
     <!-- Main Container -->
     <div class="main-container">
-        <!-- Filter Sidebar -->
+        <!-- Filter Sidebar - Minimalist Design -->
         <aside class="filter-sidebar" id="filterSidebar">
-            <!-- Close Button (X top right) -->
             <button class="filter-close-btn" onclick="toggleFilters()" aria-label="Close filters">×</button>
 
-            <div class="filter-content" id="filterContent">
-                <!-- Clear All at top right -->
-                <div class="filter-header-minimal">
-                    <h2>Filters</h2>
-                    <a href="#" class="clear-all-link" onclick="event.preventDefault(); clearAllFilters();">Clear all</a>
+            <div class="filter-content">
+                <!-- Category -->
+                <div class="filter-group">
+                    <label class="filter-label">Category</label>
+                    <div class="filter-options" id="categoryFilters"></div>
                 </div>
 
-            <!-- Category Filter -->
-            <div class="filter-section">
-                <button class="filter-section-toggle" onclick="toggleFilterSection('categories')">
-                    <h3>Category</h3>
-                    <span class="toggle-arrow">›</span>
-                </button>
-                <div class="checkbox-group collapsible" id="categories">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-hollywood" value="Hollywood" onchange="applyFilters()">
-                        <label for="cat-hollywood">
-                            <span>Hollywood</span>
-                            <span class="checkbox-count">15</span>
-                        </label>
+                <!-- Price Range -->
+                <div class="filter-group">
+                    <label class="filter-label">
+                        <span>Price</span>
+                        <span class="filter-value" id="priceValue">Any</span>
+                    </label>
+                    <input type="range"
+                           min="0"
+                           max="60000"
+                           step="1000"
+                           value="60000"
+                           class="filter-slider"
+                           id="priceSlider">
+                    <div class="filter-range-labels">
+                        <span>$0</span>
+                        <span>$60K+</span>
                     </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-kdrama" value="K-Drama" onchange="applyFilters()">
-                        <label for="cat-kdrama">
-                            <span>K-Drama</span>
-                            <span class="checkbox-count">5</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="cat-business" value="Business" onchange="applyFilters()">
-                        <label for="cat-business">
-                            <span>Business</span>
-                            <span class="checkbox-count">5</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="cat-athletes" value="Athletes" onchange="applyFilters()">
-                        <label for="cat-athletes">
-                            <span>Athletes</span>
-                            <span class="checkbox-count">5</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="cat-musicians" value="Musicians" onchange="applyFilters()">
-                        <label for="cat-musicians">
-                            <span>Musicians</span>
-                            <span class="checkbox-count">5</span>
-                        </label>
-                    </div>
-                    <button class="show-more-btn" onclick="toggleShowMore('categories')">Show more</button>
                 </div>
-            </div>
 
-            <!-- Location Filter -->
-            <div class="filter-section">
-                <button class="filter-section-toggle" onclick="toggleFilterSection('locations')">
-                    <h3>Location</h3>
-                    <span class="toggle-arrow">›</span>
-                </button>
-                <div class="checkbox-group collapsible" id="locations">
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="loc-usa" value="USA" onchange="applyFilters()">
-                        <label for="loc-usa">
-                            <span>United States</span>
-                            <span class="checkbox-count">17</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="loc-uk" value="UK" onchange="applyFilters()">
-                        <label for="loc-uk">
-                            <span>United Kingdom</span>
-                            <span class="checkbox-count">3</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item">
-                        <input type="checkbox" id="loc-korea" value="South Korea" onchange="applyFilters()">
-                        <label for="loc-korea">
-                            <span>South Korea</span>
-                            <span class="checkbox-count">6</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="loc-france" value="France" onchange="applyFilters()">
-                        <label for="loc-france">
-                            <span>France</span>
-                            <span class="checkbox-count">1</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="loc-australia" value="Australia" onchange="applyFilters()">
-                        <label for="loc-australia">
-                            <span>Australia</span>
-                            <span class="checkbox-count">2</span>
-                        </label>
-                    </div>
-                    <div class="checkbox-item hidden-initially">
-                        <input type="checkbox" id="loc-canada" value="Canada" onchange="applyFilters()">
-                        <label for="loc-canada">
-                            <span>Canada</span>
-                            <span class="checkbox-count">1</span>
-                        </label>
-                    </div>
-                    <button class="show-more-btn" onclick="toggleShowMore('locations')">Show more</button>
+                <!-- Location -->
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <div class="filter-options" id="locationFilters"></div>
                 </div>
-            </div>
 
-            <!-- Date Range -->
-            <div class="filter-section">
-                <h3>Date Range</h3>
-                <div class="date-inputs">
-                    <input type="date" class="date-input" id="startDate" onchange="applyFilters()">
-                    <input type="date" class="date-input" id="endDate" onchange="applyFilters()">
-                </div>
-            </div>
-
-            <!-- Price Range -->
-            <div class="filter-section">
-                <h3>Price Range</h3>
-                <div class="price-slider-container">
-                    <div class="price-values">
-                        <span id="minPriceDisplay">$0</span>
-                        <span id="maxPriceDisplay">$60,000</span>
-                    </div>
-                    <input type="range" min="0" max="60000" value="60000" class="price-slider" id="maxPriceSlider" oninput="updatePriceDisplay()" onchange="applyFilters()">
-                </div>
-            </div>
-
-            <!-- Trending Now -->
-            <div class="filter-section">
-                <div class="toggle-container">
-                    <h3>Trending Now</h3>
-                    <label class="toggle-switch">
-                        <input type="checkbox" id="trendingToggle" onchange="applyFilters()">
-                        <span class="toggle-slider"></span>
+                <!-- Availability -->
+                <div class="filter-group filter-group-compact">
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="trendingFilter">
+                        <span>Trending now</span>
+                    </label>
+                    <label class="filter-checkbox">
+                        <input type="checkbox" id="verifiedFilter">
+                        <span>Verified only</span>
                     </label>
                 </div>
+
+                <!-- Active Filters Badge -->
+                <div class="active-filters" id="activeFiltersBadge" style="display: none;">
+                    <span id="activeFiltersCount">0</span>
+                    <button onclick="clearAllFilters()" class="clear-filters-btn">Clear all</button>
+                </div>
             </div>
 
-            <!-- Apply Button -->
-            <button class="apply-filters-btn" onclick="toggleFilters()">Apply filters</button>
-            </div>
+            <button class="apply-filters-btn" onclick="toggleFilters()">Done</button>
         </aside>
 
         <!-- Filter Overlay (Mobile) -->
@@ -431,17 +341,44 @@
             renderCelebrities();
         }
 
+        // Toggle category filter pill
+        window.toggleCategoryFilter = function(pill, category) {
+            pill.classList.toggle('active');
+            applyFilters();
+        };
+
+        // Toggle location filter pill
+        window.toggleLocationFilter = function(pill, location) {
+            pill.classList.toggle('active');
+            applyFilters();
+        };
+
         // Clear all filters
         window.clearAllFilters = function() {
-            document.getElementById('searchInput').value = '';
-            document.querySelectorAll('.checkbox-item input').forEach(cb => cb.checked = false);
-            document.getElementById('countryFilter').value = '';
-            document.getElementById('cityFilter').value = '';
-            document.getElementById('startDate').value = '';
-            document.getElementById('endDate').value = '';
-            document.getElementById('maxPriceSlider').value = 60000;
-            document.getElementById('trendingToggle').checked = false;
-            updatePriceDisplay();
+            // Clear search
+            const searchInput = document.getElementById('searchInput');
+            if (searchInput) searchInput.value = '';
+
+            // Clear category pills
+            document.querySelectorAll('[data-category]').forEach(pill => pill.classList.remove('active'));
+
+            // Clear location pills
+            document.querySelectorAll('[data-location]').forEach(pill => pill.classList.remove('active'));
+
+            // Reset price slider
+            const priceSlider = document.getElementById('priceSlider');
+            if (priceSlider) {
+                priceSlider.value = 60000;
+                document.getElementById('priceValue').textContent = 'Any';
+            }
+
+            // Clear checkboxes
+            document.getElementById('trendingFilter').checked = false;
+            document.getElementById('verifiedFilter').checked = false;
+
+            // Hide active filters badge
+            document.getElementById('activeFiltersBadge').style.display = 'none';
+
             applyFilters();
         };
 
@@ -581,16 +518,74 @@
         }
 
         // Initialize
+        // Initialize dynamic filters
+        function initializeFilters() {
+            // Get unique categories and locations from celebrities
+            const categories = {};
+            const locations = {};
+
+            celebrities.forEach(celeb => {
+                const cat = celeb.mainCategory || celeb.category;
+                if (cat) {
+                    categories[cat] = (categories[cat] || 0) + 1;
+                }
+
+                const loc = celeb.country;
+                if (loc) {
+                    locations[loc] = (locations[loc] || 0) + 1;
+                }
+            });
+
+            // Populate category pills
+            const categoryContainer = document.getElementById('categoryFilters');
+            categoryContainer.innerHTML = Object.entries(categories)
+                .sort((a, b) => b[1] - a[1]) // Sort by count
+                .slice(0, 8) // Show top 8
+                .map(([name, count]) => `
+                    <div class="filter-pill" data-category="${name}" onclick="toggleCategoryFilter(this, '${name}')">
+                        ${name}
+                    </div>
+                `).join('');
+
+            // Populate location pills
+            const locationContainer = document.getElementById('locationFilters');
+            locationContainer.innerHTML = Object.entries(locations)
+                .sort((a, b) => b[1] - a[1]) // Sort by count
+                .slice(0, 6) // Show top 6
+                .map(([name, count]) => `
+                    <div class="filter-pill" data-location="${name}" onclick="toggleLocationFilter(this, '${name}')">
+                        ${name}
+                    </div>
+                `).join('');
+
+            // Price slider handler
+            document.getElementById('priceSlider').addEventListener('input', function() {
+                const value = parseInt(this.value);
+                const display = document.getElementById('priceValue');
+                if (value >= 60000) {
+                    display.textContent = 'Any';
+                } else {
+                    display.textContent = '$' + (value / 1000).toFixed(0) + 'K';
+                }
+            });
+
+            document.getElementById('priceSlider').addEventListener('change', applyFilters);
+            document.getElementById('trendingFilter').addEventListener('change', applyFilters);
+            document.getElementById('verifiedFilter').addEventListener('change', applyFilters);
+        }
+
         function initializePage() {
+            initializeFilters();
+
             // Check for category parameter in URL
             const urlParams = new URLSearchParams(window.location.search);
             const category = urlParams.get('category');
 
             if (category) {
-                // Check the corresponding category checkbox
-                const checkbox = document.getElementById('cat-' + category.toLowerCase().replace('-', ''));
-                if (checkbox) {
-                    checkbox.checked = true;
+                // Activate the corresponding category pill
+                const pill = document.querySelector(`[data-category="${category}"]`);
+                if (pill) {
+                    pill.classList.add('active');
                 }
             }
 
