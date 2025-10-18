@@ -88,25 +88,28 @@ body {
     width: 280px;
     background: #000000;
     padding: 0;
-    height: 100vh;
-    max-height: 100vh;
-    position: fixed;
-    left: 0;
-    top: 0;
-    box-shadow: 2px 0 20px rgba(0, 0, 0, 0.5);
+    height: fit-content;
+    max-height: calc(100vh - var(--nav-height) - 48px);
+    position: sticky;
+    top: calc(var(--nav-height) + 24px);
     border-right: 1px solid rgba(255, 255, 255, 0.08);
-    transition: left 0.3s ease;
     overflow-y: auto;
-    z-index: 1000;
     display: flex;
     flex-direction: column;
+    flex-shrink: 0;
 }
 
 .filter-sidebar.active {
-    left: 0;
+    /* Active state for desktop does nothing - always visible */
+}
+
+/* Hide filter toggle button on desktop */
+#filterBtn {
+    display: none;
 }
 
 .filter-close-btn {
+    display: none; /* Hidden on desktop */
     position: absolute;
     top: 16px;
     right: 16px;
@@ -416,6 +419,7 @@ body {
 
 /* Apply Button */
 .apply-filters-btn {
+    display: none; /* Hidden on desktop */
     width: calc(100% - 48px);
     background: transparent;
     border: none;
@@ -959,6 +963,20 @@ input:checked + .toggle-slider:before {
 
     .filter-content {
         padding: 60px 24px 24px;
+    }
+
+    /* Show filter toggle button on mobile */
+    #filterBtn {
+        display: flex;
+    }
+
+    /* Show close and apply buttons on mobile */
+    .filter-close-btn {
+        display: block;
+    }
+
+    .apply-filters-btn {
+        display: block;
     }
 
     .main-container {

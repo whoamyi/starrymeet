@@ -603,22 +603,28 @@
         let currentPage = 1;
         const perPage = 12;
 
-        // Toggle filters (unified for mobile and desktop)
+        // Toggle filters (only works on mobile, desktop filters always visible)
         window.toggleFilters = function() {
-            const sidebar = document.getElementById('filterSidebar');
-            const overlay = document.getElementById('filterOverlay');
-            const wasActive = sidebar.classList.contains('active');
+            // Check if we're on mobile (window width < 768px)
+            const isMobile = window.innerWidth < 768;
 
-            sidebar.classList.toggle('active');
-            overlay.classList.toggle('active');
+            if (isMobile) {
+                const sidebar = document.getElementById('filterSidebar');
+                const overlay = document.getElementById('filterOverlay');
+                const wasActive = sidebar.classList.contains('active');
 
-            // Prevent body scroll when filters open
-            document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+                sidebar.classList.toggle('active');
+                overlay.classList.toggle('active');
 
-            // Auto-apply filters when closing
-            if (wasActive) {
-                applyFilters();
+                // Prevent body scroll when filters open on mobile
+                document.body.style.overflow = sidebar.classList.contains('active') ? 'hidden' : '';
+
+                // Auto-apply filters when closing
+                if (wasActive) {
+                    applyFilters();
+                }
             }
+            // On desktop, do nothing - filters are always visible
         };
 
         // Toggle filter section (collapsible categories/locations)
