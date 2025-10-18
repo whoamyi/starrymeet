@@ -621,6 +621,9 @@
             }
         }
 
+        // Make toggleFilters globally accessible
+        window.toggleFilters = toggleFilters;
+
         // Toggle filter section (collapsible categories/locations)
         function toggleFilterSection(sectionId) {
             const section = document.getElementById(sectionId);
@@ -773,6 +776,17 @@
                 toggle.classList.remove('expanded');
             });
         });
+
+        // Expose functions globally for inline onclick handlers
+        window.toggleFilterSection = toggleFilterSection;
+        window.toggleShowMore = toggleShowMore;
+        window.clearAllFilters = clearAllFilters;
+        window.switchView = switchView;
+        window.changePage = changePage;
+        window.toggleWatchlist = toggleWatchlist;
+        window.removeFilterChip = removeFilterChip;
+        window.goToPage = goToPage;
+        window.toggleMobileFilters = toggleFilters; // Alias for mobile
 
     </script>
 
