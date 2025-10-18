@@ -40,7 +40,7 @@ function switchToLogin() {
 }
 
 // Email/Password Login
-function handleEmailLogin(event) {
+async function handleEmailLogin(event) {
     event.preventDefault();
 
     const email = document.getElementById('loginEmail').value;
@@ -58,33 +58,37 @@ function handleEmailLogin(event) {
         return;
     }
 
-    // Authenticate user
+    // Authenticate user with backend API
     showLoading('loginBtn');
 
-    setTimeout(() => {
-        const user = loginUser(email, password);
+    try {
+        const response = await window.api.login(email, password);
 
-        if (!user) {
+        if (response.success) {
+            closeAuthModal();
+            showSuccessMessage(`Welcome back, ${response.data.user.first_name}!`);
+
+            const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
+            sessionStorage.removeItem('authReturnUrl');
+            setTimeout(() => {
+                window.location.href = returnUrl;
+            }, 1000);
+        } else {
             document.getElementById('loginBtn').disabled = false;
             document.getElementById('loginBtn').style.opacity = '1';
             document.getElementById('loginBtn').innerHTML = 'Log in';
-            showError(errorDiv, 'Invalid email or password');
-            return;
+            showError(errorDiv, response.error?.message || 'Login failed');
         }
-
-        closeAuthModal();
-        showSuccessMessage(`Welcome back, ${user.name}!`);
-
-        const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
-        sessionStorage.removeItem('authReturnUrl');
-        setTimeout(() => {
-            window.location.href = returnUrl;
-        }, 1000);
-    }, 500);
+    } catch (error) {
+        document.getElementById('loginBtn').disabled = false;
+        document.getElementById('loginBtn').style.opacity = '1';
+        document.getElementById('loginBtn').innerHTML = 'Log in';
+        showError(errorDiv, error.message || 'Login failed. Please try again.');
+    }
 }
 
 // Email/Password Signup
-function handleEmailSignup(event) {
+async function handleEmailSignup(event) {
     event.preventDefault();
 
     const name = document.getElementById('signupName').value;
@@ -114,17 +118,23 @@ function handleEmailSignup(event) {
         return;
     }
 
-    // Create user account
+    // Create user account with backend API
     showLoading('signupBtn');
 
-    setTimeout(() => {
-        try {
-            const user = createUser({
-                name: name,
-                email: email,
-                password: password
-            });
+    try {
+        // Split name into first_name and last_name
+        const nameParts = name.trim().split(' ');
+        const first_name = nameParts[0];
+        const last_name = nameParts.slice(1).join(' ') || nameParts[0];
 
+        const response = await window.api.register({
+            email: email,
+            password: password,
+            first_name: first_name,
+            last_name: last_name
+        });
+
+        if (response.success) {
             closeAuthModal();
             showSuccessMessage('Account created successfully!');
 
@@ -134,13 +144,18 @@ function handleEmailSignup(event) {
             setTimeout(() => {
                 window.location.href = returnUrl;
             }, 1000);
-        } catch (error) {
+        } else {
             document.getElementById('signupBtn').disabled = false;
             document.getElementById('signupBtn').style.opacity = '1';
             document.getElementById('signupBtn').innerHTML = 'Create account';
-            showError(errorDiv, error.message);
+            showError(errorDiv, response.error?.message || 'Registration failed');
         }
-    }, 500);
+    } catch (error) {
+        document.getElementById('signupBtn').disabled = false;
+        document.getElementById('signupBtn').style.opacity = '1';
+        document.getElementById('signupBtn').innerHTML = 'Create account';
+        showError(errorDiv, error.message || 'Registration failed. Please try again.');
+    }
 }
 
 // OAuth Handlers (Google, Apple, Facebook)
