@@ -594,6 +594,59 @@
 
         initializePage();
 
+        // Mobile: Swipe-to-dismiss for filter bottom sheet
+        (function initSwipeToDismiss() {
+            const filterSidebar = document.getElementById('filterSidebar');
+            const filterOverlay = document.getElementById('filterOverlay');
+            let startY = 0;
+            let currentY = 0;
+            let isDragging = false;
+
+            filterSidebar.addEventListener('touchstart', function(e) {
+                if (window.innerWidth >= 768) return; // Desktop only
+                startY = e.touches[0].clientY;
+                isDragging = true;
+            }, { passive: true });
+
+            filterSidebar.addEventListener('touchmove', function(e) {
+                if (!isDragging || window.innerWidth >= 768) return;
+
+                currentY = e.touches[0].clientY;
+                const diff = currentY - startY;
+
+                // Only allow downward swipes
+                if (diff > 0) {
+                    filterSidebar.style.transform = `translateY(${diff}px)`;
+                }
+            }, { passive: true });
+
+            filterSidebar.addEventListener('touchend', function(e) {
+                if (!isDragging || window.innerWidth >= 768) return;
+
+                const diff = currentY - startY;
+
+                // If swiped down more than 100px, close it
+                if (diff > 100) {
+                    filterSidebar.classList.remove('active');
+                    filterOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+
+                // Reset transform
+                filterSidebar.style.transform = '';
+                isDragging = false;
+            });
+
+            // Tap overlay to close
+            filterOverlay.addEventListener('click', function() {
+                if (window.innerWidth < 768) {
+                    filterSidebar.classList.remove('active');
+                    filterOverlay.classList.remove('active');
+                    document.body.style.overflow = '';
+                }
+            });
+        })();
+
         // Pagination state
         let currentPage = 1;
         const perPage = 12;

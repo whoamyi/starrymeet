@@ -174,19 +174,28 @@ body {
 .filter-options {
     display: flex;
     flex-wrap: wrap;
-    gap: 6px;
+    gap: 8px;
 }
 
 .filter-pill {
-    padding: 6px 12px;
-    border-radius: 20px;
-    border: 1px solid rgba(255, 255, 255, 0.15);
+    padding: 12px 20px;
+    min-height: 48px;
+    border-radius: 24px;
+    border: 1.5px solid rgba(255, 255, 255, 0.15);
     background: transparent;
     color: rgba(255, 255, 255, 0.7);
-    font-size: 13px;
+    font-size: 15px;
     cursor: pointer;
     transition: all 0.2s ease;
     user-select: none;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.filter-pill:active {
+    transform: scale(0.95);
 }
 
 .filter-pill:hover {
@@ -195,9 +204,10 @@ body {
 }
 
 .filter-pill.active {
-    background: rgba(255, 255, 255, 0.1);
-    border-color: rgba(255, 255, 255, 0.3);
+    background: rgba(255, 255, 255, 0.15);
+    border-color: rgba(255, 255, 255, 0.4);
     color: #ffffff;
+    font-weight: 500;
 }
 
 /* Price Slider */
@@ -823,6 +833,34 @@ body {
 
     .filter-content {
         padding: 32px 20px 100px;
+        gap: 36px;
+    }
+
+    /* Mobile: Larger spacing for touch */
+    .filter-group {
+        gap: 16px;
+    }
+
+    .filter-options {
+        gap: 10px;
+    }
+
+    /* Mobile: Even larger touch targets */
+    .filter-pill {
+        padding: 14px 24px;
+        font-size: 16px;
+        min-height: 52px;
+    }
+
+    /* Mobile: Larger checkboxes */
+    .filter-checkbox {
+        padding: 12px 0;
+        font-size: 16px;
+    }
+
+    .filter-checkbox input[type="checkbox"] {
+        width: 20px;
+        height: 20px;
     }
 
     /* Drag handle for bottom sheet */
