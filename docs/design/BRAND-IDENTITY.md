@@ -1,9 +1,9 @@
 # StarryMeet Brand Identity
 *The Definitive Brand Foundation*
 
-Version: 1.0.0
+Version: 1.1.0
 Status: Foundational Document
-Last Updated: 2025-10-11
+Last Updated: 2025-10-18
 
 ---
 
@@ -19,8 +19,11 @@ This is StarryMeet's **permanent brand foundation**—the unchanging principles,
 
 **This document does NOT include:**
 - Implementation steps (see DESIGN-IMPLEMENTATION-PLAN.md)
-- Technical specifications (see design system files)
+- Technical specifications (see DESIGN-SYSTEM-CURRENT.md)
 - Tactical execution details (see project documentation)
+
+**⚠️ For Current Design Implementation:**
+See `/docs/design/DESIGN-SYSTEM-CURRENT.md` for actual design specs as implemented.
 
 ---
 
@@ -409,18 +412,19 @@ Our color system is built on confidence through restraint:
 - **Accents enhance** - Used strategically, never decoratively
 - **White space breathes** - Negative space = sophistication
 
-### The "90/10 Rule"
-**Cameo uses 80/20. We use 90/10.**
+### The "95/5 Rule" (Updated from 90/10)
+**Cameo uses 80/20. We started with 90/10. We now use 95/5.**
 
-**Why:** Physical meetings are more premium than videos. More restraint = more luxury.
+**Why:** Our design has evolved to be MORE minimal than Cameo. Near-monochrome = ultimate sophistication.
 
-- **90%** - Black, white, subtle grays
-- **10%** - Color accents (pink, purple, cyan, gold)
+- **95%** - Black (#0c0d0e), white, subtle grays
+- **5%** - Color accents (purple for CTAs, semantic colors for states)
 
 **Application:**
-- Any given screen should be mostly black with white text
-- Color appears in specific, intentional moments
-- Gradients used even more sparingly than solid colors
+- Any given screen is almost entirely black/white/gray
+- Color appears RARELY and meaningfully
+- Purple gradient used ONLY for primary CTA button
+- No gradient cards, no gradient badges (removed in v3.0)
 
 ---
 
@@ -428,11 +432,12 @@ Our color system is built on confidence through restraint:
 
 ### Foundation Colors
 
-#### Pure Black
-- **HEX:** #000000
-- **Usage:** Primary background (90% of all backgrounds)
+#### Cameo Dark Paper (NOT Pure Black)
+- **HEX:** #0c0d0e (rgb(12, 13, 14))
+- **Usage:** Primary background (95% of all backgrounds)
 - **Psychology:** Sophistication, premium, timeless, focus
-- **Why:** Creates theater-like environment—attention on the star
+- **Why:** Cameo's exact "A4 dark paper" color - creates theater-like environment with subtle warmth
+- **Changed:** Oct 15, 2025 - from #000000 to #0c0d0e for exact Cameo match
 
 #### Pure White
 - **HEX:** #FFFFFF
@@ -579,13 +584,12 @@ Typography creates hierarchy, communicates personality, and ensures readability.
 ### Font Families
 
 #### Primary: Inter (Sans-Serif)
-**Usage:** 95% of all text
-**Weights:** 400 (Regular), 500 (Medium), 600 (Semibold), 700 (Bold), 800 (Extrabold)
+**Usage:** 100% of all text (Playfair Display removed in v3.0)
+**Weights:** 400 (Regular), 600 (Semibold), 700 (Bold for buttons/logo only)
 
 **Why Inter:**
 - Designed for screens (exceptional readability at all sizes)
 - Modern and sophisticated without being trendy
-- Extensive weight range allows subtle hierarchy
 - Works beautifully at both display and body sizes
 - Open-source and web-optimized
 - Neutral enough to let content shine
@@ -596,120 +600,92 @@ Typography creates hierarchy, communicates personality, and ensures readability.
 - Distinctive but not quirky
 - Professional without being corporate
 
-#### Secondary: Playfair Display (Serif)
-**Usage:** <5% of text—decorative moments only
-**Weights:** 400 (Regular), 700 (Bold)
-
-**Why Playfair Display:**
-- Elegant and sophisticated for special moments
-- High contrast (visual interest)
-- Pairs beautifully with Inter
-- Reserved for high-impact headlines or quotes
-
-**When to Use:**
-- Optional for major homepage headline
-- Optional for about page hero text
-- Sparingly in editorial content
-- Never for UI elements, buttons, or functional text
-
-**When NOT to Use:**
-- Body copy (hard to read at length)
-- Small text (loses clarity)
-- Functional UI (too decorative)
-- Any text under 24px
+**Removed:** Playfair Display (serif font) was removed October 13, 2025 for complete design consistency.
 
 ---
 
-### Type Scale
+### Type Scale (Current Implementation)
 
 #### Philosophy
-**Restrained sizing with clear hierarchy.**
+**EXTREME restraint. Smaller than Cameo.**
 
-Smaller than typical modern web design = sophistication and confidence.
+We use essentially FOUR text sizes. No text larger than 24px anywhere.
 
 ```
---text-xs:   12px  (0.75rem)   - Captions, legal, meta
---text-sm:   14px  (0.875rem)  - Secondary text, labels
---text-base: 16px  (1rem)      - Body copy (default)
---text-lg:   18px  (1.125rem)  - Emphasized body, large labels
---text-xl:   20px  (1.25rem)   - Subheadings, callouts
---text-2xl:  24px  (1.5rem)    - Small headlines, pricing
---text-3xl:  30px  (1.875rem)  - Section headlines
---text-4xl:  36px  (2.25rem)   - Page headlines
---text-5xl:  48px  (3rem)      - Hero headlines (desktop)
---text-6xl:  60px  (3.75rem)   - Rare - homepage hero only
+--text-xs:   12px  (0.75rem)   - Tiny labels, captions
+--text-sm:   14px  (0.875rem)  - Small text, secondary labels
+--text-base: 16px  (1rem)      - ALL BODY TEXT (standard)
+--text-lg:   18px  (1.125rem)  - Emphasized text, small headings
+--text-xl:   18px  (1.125rem)  - Subheadings (REDUCED from 20px)
+--text-2xl:  24px  (1.5rem)    - Main headings (h2, h3)
+--text-3xl:  24px  (1.5rem)    - Page titles (h1) MAX SIZE
+--text-4xl:  24px  (1.5rem)    - NOT USED (capped at 24px)
+--text-5xl:  24px  (1.5rem)    - NOT USED
+--text-6xl:  24px  (1.5rem)    - NOT USED
 ```
+
+**Changed Oct 13, 2025:** Dramatically reduced from v2.0 (h1 was 48px, now 24px max)
 
 ---
 
 ### Heading Hierarchy
 
-#### H1 (Hero Headline)
-- **Size:** 48px (desktop), 36px (tablet), 30px (mobile)
-- **Font:** Inter, weight 800 (Extrabold)
-- **Line-height:** 1.1 (tight, dramatic)
-- **Letter-spacing:** -0.02em (tighten for impact)
+#### H1 (Hero Headline) - CURRENT
+- **Size:** 24px (desktop), 20px (mobile) - MAX SIZE
+- **Font:** Inter, weight 600 (Semibold, NOT Extrabold)
+- **Line-height:** 1.3
+- **Letter-spacing:** -0.01em (subtle tightening)
 - **Color:** Pure white (#FFFFFF)
 - **Usage:** Once per page maximum, hero sections only
 
 **Why This Style:**
-- Large but not overwhelming
-- Tight line-height creates modern, editorial feel
-- Slight negative letter-spacing improves large text readability
-- Extrabold weight commands attention without needing size
+- Extremely restrained (24px max, not 48px)
+- Semibold weight (600) for elegance
+- Smaller = more sophisticated, less shouty
 
-#### H2 (Page Headline)
-- **Size:** 36px (desktop), 30px (tablet), 24px (mobile)
-- **Font:** Inter, weight 700 (Bold)
-- **Line-height:** 1.2
+#### H2 (Page Headline) - CURRENT
+- **Size:** 24px (desktop), 18px (mobile)
+- **Font:** Inter, weight 600 (Semibold)
+- **Line-height:** 1.3
 - **Letter-spacing:** -0.01em
 - **Color:** Pure white (#FFFFFF)
 - **Usage:** Major section headlines
 
-#### H3 (Section Headline)
-- **Size:** 30px (desktop), 24px (tablet), 20px (mobile)
-- **Font:** Inter, weight 700 (Bold)
-- **Line-height:** 1.2
+#### H3 (Section Headline) - CURRENT
+- **Size:** 18px (desktop), 16px (mobile)
+- **Font:** Inter, weight 600 (Semibold)
+- **Line-height:** 1.3
 - **Letter-spacing:** Normal
 - **Color:** Pure white (#FFFFFF)
 - **Usage:** Section starts, card headers
 
-#### H4 (Subsection Headline)
-- **Size:** 24px (desktop/tablet), 18px (mobile)
-- **Font:** Inter, weight 600 (Semibold)
-- **Line-height:** 1.3
-- **Color:** Pure white (#FFFFFF)
-- **Usage:** Subsections, emphasized content blocks
-
-#### H5 (Component Headline)
-- **Size:** 20px
+#### H4-H6 (Component Headlines) - CURRENT
+- **Size:** 18px to 14px
 - **Font:** Inter, weight 600 (Semibold)
 - **Line-height:** 1.4
 - **Color:** Pure white (#FFFFFF)
-- **Usage:** Component headers, cards, small sections
+- **Usage:** Component headers, labels, small sections
 
-#### H6 (Label Headline)
-- **Size:** 18px
-- **Font:** Inter, weight 600 (Semibold)
-- **Line-height:** 1.4
-- **Color:** Pure white or Medium Gray (#B0B0B0)
-- **Usage:** Labels, categories, small headers
+**Changed Oct 13, 2025:** All heading sizes dramatically reduced for true minimal aesthetic.
 
 ---
 
 ### Body Text
 
-#### Primary Body
-- **Size:** 16px
+#### Primary Body - CURRENT
+- **Size:** 16px (ALWAYS - no exceptions)
 - **Font:** Inter, weight 400 (Regular)
-- **Line-height:** 1.6 (comfortable reading)
-- **Color:** Medium Gray (#B0B0B0)
+- **Line-height:** 1.5 (comfortable reading, reduced from 1.6)
+- **Color:** Medium Gray (#C0C0C0) - increased from #B0B0B0 for accessibility
 - **Max-width:** 65ch (optimal readability)
 
-**Why 1.6 line-height:**
-- Comfortable for reading multiple lines
-- Creates breathing room without feeling loose
-- Accessible for dyslexic readers
+**Why 1.5 line-height:**
+- Tighter, more elegant feel than 1.6
+- Prevents layout issues and column overlap
+- Still comfortable for reading
+- More premium aesthetic
+
+**Changed Oct 18, 2025:** Line-height reduced 1.6 → 1.5 for better grid alignment and elegance
 
 #### Secondary Body
 - **Size:** 14px
@@ -729,29 +705,32 @@ Smaller than typical modern web design = sophistication and confidence.
 
 ### Special Text Treatments
 
-#### Price Display
-- **Size:** 24px (desktop), 20px (mobile)
-- **Font:** Inter, weight 700 (Bold)
+#### Price Display - CURRENT
+- **Size:** 14px (subtle, not large)
+- **Font:** Inter, weight 600 (Semibold, NOT Bold)
 - **Color:** Pure white (#FFFFFF)
-- **Letter-spacing:** -0.02em
+- **Letter-spacing:** -0.01em (subtle)
 - **Format:** "$500" or "$500/hour"
 
 **Why:**
-- Bold weight shows confidence in value
+- Smaller size (14px) = understated confidence
+- Semibold (600) = elegant, not aggressive
 - White color (not gold) = honest, not flashy
-- Negative letter-spacing tightens numbers for impact
+- Let the celebrity shine, not the price
 
-#### Quotes / Testimonials
-- **Size:** 20px (desktop), 18px (mobile)
-- **Font:** Inter, weight 500 (Medium) OR Playfair Display 400 (optional)
+**Changed Oct 13, 2025:** Prices reduced from 24px bold → 14px semibold for subtlety
+
+#### Quotes / Testimonials - CURRENT
+- **Size:** 18px (all screens)
+- **Font:** Inter, weight 500 (Medium)
 - **Line-height:** 1.5
 - **Color:** Pure white (#FFFFFF)
-- **Style:** Italic (if using Inter)
+- **Style:** Italic
 
 **Why:**
 - Larger than body = emphasis
 - Italic differentiates from regular content
-- Playfair optional for extra elegance
+- Inter only (Playfair removed)
 
 #### Labels / Tags
 - **Size:** 12px
@@ -1646,7 +1625,33 @@ We don't book meetings. We create the moments that define lives.
 
 ---
 
-*Version: 1.0.0*
-*Last Updated: 2025-10-11*
+# Appendix: Design Evolution Log
+
+## Version 1.1.0 (October 18, 2025)
+**Updated to reflect current implementation (v3.0 design system)**
+
+### Major Updates:
+- Updated background color specs (#000000 → #0c0d0e Cameo exact)
+- Updated typography to reflect extreme size restraint (24px max)
+- Removed all references to Playfair Display (serif font removed)
+- Updated color usage rule (90/10 → 95/5 near-monochrome)
+- Updated heading sizes to match current implementation
+- Updated body text line-height (1.6 → 1.5)
+- Updated price display specs (24px bold → 14px semibold)
+- Noted removal of gradient cards and badges
+
+### Key Realizations:
+- Current implementation is MORE minimal than documented v2.0
+- Typography is significantly smaller than planned
+- Color usage is more restrained than original vision
+- Mobile design is more app-like and compact
+
+### Cross-Reference:
+For complete technical specifications, see `/docs/design/DESIGN-SYSTEM-CURRENT.md`
+
+---
+
+*Version: 1.1.0*
+*Last Updated: 2025-10-18*
 *Status: Foundational Document*
 *Next Review: Annual (unless strategic shift occurs)*
