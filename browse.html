@@ -621,9 +621,6 @@
             }
         }
 
-        // Make toggleFilters globally accessible
-        window.toggleFilters = toggleFilters;
-
         // Toggle filter section (collapsible categories/locations)
         function toggleFilterSection(sectionId) {
             const section = document.getElementById(sectionId);
@@ -778,6 +775,7 @@
         });
 
         // Expose functions globally for inline onclick handlers
+        window.toggleFilters = toggleFilters;
         window.toggleFilterSection = toggleFilterSection;
         window.toggleShowMore = toggleShowMore;
         window.clearAllFilters = clearAllFilters;
