@@ -84,63 +84,88 @@ function setupEventListeners() {
 }
 
 /**
- * Apply all filters (checkboxes, search, price, etc.)
+ * Apply all filters (pills, search, price, checkboxes)
  */
 function applyAllFilters() {
     const searchTerm = document.getElementById('searchInput')?.value?.toLowerCase() || '';
 
-    // Get selected categories from checkboxes
-    const selectedCategories = Array.from(document.querySelectorAll('.checkbox-item input[type="checkbox"]:checked'))
-        .map(cb => cb.value);
+    // Get selected category pills
+    const selectedCategories = Array.from(document.querySelectorAll('[data-category].active'))
+        .map(pill => pill.getAttribute('data-category'));
+
+    // Get selected location pills
+    const selectedLocations = Array.from(document.querySelectorAll('[data-location].active'))
+        .map(pill => pill.getAttribute('data-location'));
 
     // Get price filter
-    const maxPriceSlider = document.getElementById('maxPriceSlider');
-    const maxPrice = maxPriceSlider ? parseInt(maxPriceSlider.value) : 60000;
+    const priceSlider = document.getElementById('priceSlider');
+    const maxPrice = priceSlider ? parseInt(priceSlider.value) : 60000;
 
-    // Get trending filter
-    const trendingToggle = document.getElementById('trendingToggle');
-    const trendingOnly = trendingToggle ? trendingToggle.checked : false;
+    // Get checkboxes
+    const trendingFilter = document.getElementById('trendingFilter');
+    const verifiedFilter = document.getElementById('verifiedFilter');
+    const trendingOnly = trendingFilter ? trendingFilter.checked : false;
+    const verifiedOnly = verifiedFilter ? verifiedFilter.checked : false;
 
-    // Start with all celebrities
+    // Count active filters
+    let activeFilterCount = 0;
+    if (selectedCategories.length > 0) activeFilterCount += selectedCategories.length;
+    if (selectedLocations.length > 0) activeFilterCount += selectedLocations.length;
+    if (maxPrice < 60000) activeFilterCount++;
+    if (trendingOnly) activeFilterCount++;
+    if (verifiedOnly) activeFilterCount++;
+
+    // Update active filters badge
+    const badge = document.getElementById('activeFiltersBadge');
+    const countEl = document.getElementById('activeFiltersCount');
+    if (activeFilterCount > 0) {
+        badge.style.display = 'flex';
+        countEl.textContent = `${activeFilterCount} filter${activeFilterCount > 1 ? 's' : ''} active`;
+    } else {
+        badge.style.display = 'none';
+    }
+
+    // Filter celebrities
     filteredCelebrities = allCelebrities.filter(celeb => {
-        // Search filter - search in name, main category, subcategory, and location
+        // Search filter
         if (searchTerm) {
             const matchesSearch =
                 celeb.name.toLowerCase().includes(searchTerm) ||
                 (celeb.mainCategory && celeb.mainCategory.toLowerCase().includes(searchTerm)) ||
                 (celeb.subCategory && celeb.subCategory.toLowerCase().includes(searchTerm)) ||
-                (celeb.category && celeb.category.toLowerCase().includes(searchTerm)) || // Legacy support
+                (celeb.category && celeb.category.toLowerCase().includes(searchTerm)) ||
                 celeb.location.toLowerCase().includes(searchTerm);
-
             if (!matchesSearch) return false;
         }
 
-        // Category filter - check both mainCategory and subCategory
+        // Category filter
         if (selectedCategories.length > 0) {
             const matchesCategory = selectedCategories.some(selectedCat =>
                 celeb.mainCategory === selectedCat ||
                 celeb.subCategory === selectedCat ||
-                celeb.category === selectedCat  // Legacy support
+                celeb.category === selectedCat
             );
             if (!matchesCategory) return false;
         }
 
-        // Price filter
-        if (celeb.price > maxPrice) {
-            return false;
+        // Location filter
+        if (selectedLocations.length > 0) {
+            if (!selectedLocations.includes(celeb.country)) return false;
         }
 
+        // Price filter
+        if (celeb.price > maxPrice) return false;
+
         // Trending filter
-        if (trendingOnly && !celeb.trending) {
-            return false;
-        }
+        if (trendingOnly && !celeb.trending) return false;
+
+        // Verified filter
+        if (verifiedOnly && !celeb.verified) return false;
 
         return true;
     });
 
     displayCelebrities(filteredCelebrities);
-
-    // Update global reference for inline scripts
     window.filteredCelebrities = filteredCelebrities;
 }
 
