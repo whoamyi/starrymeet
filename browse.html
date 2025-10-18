@@ -37,11 +37,11 @@
                 <li class="nav-item-categories">
                     <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
                     <div class="categories-dropdown" id="categoriesDropdown">
-                        <a href="browse.html?category=Hollywood">Hollywood</a>
+                        <a href="browse.html?category=Actors & Actresses">Actors & Actresses</a>
                         <a href="browse.html?category=Musicians">Musicians</a>
                         <a href="browse.html?category=Athletes">Athletes</a>
-                        <a href="browse.html?category=K-Drama">K-Drama</a>
-                        <a href="browse.html?category=Business">Business</a>
+                        <a href="browse.html?category=K-Drama & K-Pop">K-Drama & K-Pop</a>
+                        <a href="browse.html?category=Business & Entrepreneurs">Business & Entrepreneurs</a>
                         <a href="browse.html">View all</a>
                     </div>
                 </li>
@@ -65,9 +65,9 @@
             <li class="mobile-menu-categories">
                 <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
                 <ul class="mobile-submenu" id="mobileSubmenu">
-                    <li><a href="browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
-                    <li><a href="browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
-                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
+                    <li><a href="browse.html?category=Actors & Actresses" onclick="closeMobileMenu()">Actors & Actresses</a></li>
+                    <li><a href="browse.html?category=K-Drama & K-Pop" onclick="closeMobileMenu()">K-Drama & K-Pop</a></li>
+                    <li><a href="browse.html?category=Business & Entrepreneurs" onclick="closeMobileMenu()">Business & Entrepreneurs</a></li>
                     <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
                     <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
                 </ul>
@@ -87,10 +87,16 @@
             <button class="filter-close-btn" onclick="toggleFilters()" aria-label="Close filters">×</button>
 
             <div class="filter-content">
-                <!-- Category -->
+                <!-- Category Tree -->
                 <div class="filter-group">
                     <label class="filter-label">Category</label>
-                    <div class="filter-options" id="categoryFilters"></div>
+                    <div class="filter-tree" id="categoryTree"></div>
+                </div>
+
+                <!-- Location Tree -->
+                <div class="filter-group">
+                    <label class="filter-label">Location</label>
+                    <div class="filter-tree" id="locationTree"></div>
                 </div>
 
                 <!-- Price Range -->
@@ -112,12 +118,6 @@
                     </div>
                 </div>
 
-                <!-- Location -->
-                <div class="filter-group">
-                    <label class="filter-label">Location</label>
-                    <div class="filter-options" id="locationFilters"></div>
-                </div>
-
                 <!-- Availability -->
                 <div class="filter-group filter-group-compact">
                     <label class="filter-checkbox">
@@ -136,8 +136,6 @@
                     <button onclick="clearAllFilters()" class="clear-filters-btn">Clear all</button>
                 </div>
             </div>
-
-            <button class="apply-filters-btn" onclick="toggleFilters()">Done</button>
         </aside>
 
         <!-- Filter Overlay (Mobile) -->
@@ -260,9 +258,11 @@
         ];
 
         // State
-        let filteredCelebrities = [...celebrities];
+        // Note: filteredCelebrities is managed by browse-init.js via window.filteredCelebrities
         let currentView = 'grid';
         let watchlist = new Set();
+        let currentPage = 1;
+        const perPage = 12;
 
         // Get initials
         function getInitials(name) {
@@ -305,33 +305,78 @@
             // Use the function from browse-init.js if available
             if (window.applyAllFilters) {
                 window.applyAllFilters();
+
+                // Reset to page 1 and render
+                currentPage = 1;
+                renderCelebrities();
             }
         }
 
-        // Render celebrities - delegates to browse-init.js
+        // Render celebrities with pagination
         function renderCelebrities() {
-            // Use the function from browse-init.js if available
-            if (window.displayCelebrities && window.filteredCelebrities) {
-                window.displayCelebrities(window.filteredCelebrities);
+            // DO NOT delegate to browse-init.js - we handle our own rendering with pagination
+            if (!window.filteredCelebrities) return;
+
+            const start = (currentPage - 1) * perPage;
+            const end = start + perPage;
+            const paginatedCelebrities = window.filteredCelebrities.slice(start, end);
+
+            const gridContainer = document.getElementById('celebritiesGrid');
+            const listContainer = document.getElementById('celebritiesList');
+            const noResults = document.getElementById('noResults');
+            const resultsCount = document.getElementById('resultsCount');
+
+            if (!gridContainer || !listContainer) return;
+
+            gridContainer.innerHTML = '';
+            listContainer.innerHTML = '';
+
+            resultsCount.textContent = `Showing ${start + 1}-${Math.min(end, window.filteredCelebrities.length)} of ${window.filteredCelebrities.length} celebrities`;
+
+            if (window.filteredCelebrities.length === 0) {
+                noResults.classList.remove('hidden');
+                gridContainer.classList.add('hidden');
+                listContainer.classList.add('hidden');
+                return;
             }
+
+            noResults.classList.add('hidden');
+
+            if (currentView === 'grid') {
+                gridContainer.classList.remove('hidden');
+                listContainer.classList.remove('active');
+                paginatedCelebrities.forEach(celeb => {
+                    gridContainer.innerHTML += createGridCard(celeb);
+                });
+            } else {
+                gridContainer.classList.add('hidden');
+                listContainer.classList.add('active');
+                paginatedCelebrities.forEach(celeb => {
+                    listContainer.innerHTML += createListCard(celeb);
+                });
+            }
+
+            renderPagination();
         }
 
         // Apply sorting
         function applySorting() {
+            if (!window.filteredCelebrities) return;
+
             const sortValue = document.getElementById('sortDropdown').value;
 
             switch(sortValue) {
                 case 'price-low':
-                    filteredCelebrities.sort((a, b) => a.price - b.price);
+                    window.filteredCelebrities.sort((a, b) => a.price - b.price);
                     break;
                 case 'price-high':
-                    filteredCelebrities.sort((a, b) => b.price - a.price);
+                    window.filteredCelebrities.sort((a, b) => b.price - a.price);
                     break;
                 case 'name':
-                    filteredCelebrities.sort((a, b) => a.name.localeCompare(b.name));
+                    window.filteredCelebrities.sort((a, b) => a.name.localeCompare(b.name));
                     break;
                 case 'availability':
-                    filteredCelebrities.sort((a, b) => a.location.localeCompare(b.location));
+                    window.filteredCelebrities.sort((a, b) => a.location.localeCompare(b.location));
                     break;
                 default:
                     // Popular - keep original order
@@ -341,15 +386,17 @@
             renderCelebrities();
         }
 
-        // Toggle category filter pill
-        window.toggleCategoryFilter = function(pill, category) {
-            pill.classList.toggle('active');
+        // Toggle subcategory filter
+        window.toggleSubCategoryFilter = function(childEl, mainCat, subCat) {
+            event.stopPropagation(); // Prevent parent click
+            childEl.classList.toggle('active');
             applyFilters();
         };
 
-        // Toggle location filter pill
-        window.toggleLocationFilter = function(pill, location) {
-            pill.classList.toggle('active');
+        // Toggle city filter
+        window.toggleCityFilter = function(childEl, country, city) {
+            event.stopPropagation(); // Prevent parent click
+            childEl.classList.toggle('active');
             applyFilters();
         };
 
@@ -359,11 +406,11 @@
             const searchInput = document.getElementById('searchInput');
             if (searchInput) searchInput.value = '';
 
-            // Clear category pills
-            document.querySelectorAll('[data-category]').forEach(pill => pill.classList.remove('active'));
+            // Clear category tree selections
+            document.querySelectorAll('#categoryTree .filter-tree-child.active').forEach(el => el.classList.remove('active'));
 
-            // Clear location pills
-            document.querySelectorAll('[data-location]').forEach(pill => pill.classList.remove('active'));
+            // Clear location tree selections
+            document.querySelectorAll('#locationTree .filter-tree-child.active').forEach(el => el.classList.remove('active'));
 
             // Reset price slider
             const priceSlider = document.getElementById('priceSlider');
@@ -405,48 +452,6 @@
             document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
             renderCelebrities();
         };
-
-        // Render celebrities with pagination
-        function renderCelebrities() {
-            const start = (currentPage - 1) * perPage;
-            const end = start + perPage;
-            const paginatedCelebrities = filteredCelebrities.slice(start, end);
-
-            const gridContainer = document.getElementById('celebritiesGrid');
-            const listContainer = document.getElementById('celebritiesList');
-            const noResults = document.getElementById('noResults');
-            const resultsCount = document.getElementById('resultsCount');
-
-            gridContainer.innerHTML = '';
-            listContainer.innerHTML = '';
-
-            resultsCount.textContent = `Showing ${start + 1}-${Math.min(end, filteredCelebrities.length)} of ${filteredCelebrities.length} celebrities`;
-
-            if (filteredCelebrities.length === 0) {
-                noResults.classList.remove('hidden');
-                gridContainer.classList.add('hidden');
-                listContainer.classList.add('hidden');
-                return;
-            }
-
-            noResults.classList.add('hidden');
-
-            if (currentView === 'grid') {
-                gridContainer.classList.remove('hidden');
-                listContainer.classList.remove('active');
-                paginatedCelebrities.forEach(celeb => {
-                    gridContainer.innerHTML += createGridCard(celeb);
-                });
-            } else {
-                gridContainer.classList.add('hidden');
-                listContainer.classList.add('active');
-                paginatedCelebrities.forEach(celeb => {
-                    listContainer.innerHTML += createListCard(celeb);
-                });
-            }
-
-            renderPagination();
-        }
 
         // Create grid card
         function createGridCard(celeb) {
@@ -518,45 +523,13 @@
         }
 
         // Initialize
-        // Initialize dynamic filters
+        // Initialize dynamic filters with collapsible tree structure
         function initializeFilters() {
-            // Get unique categories and locations from celebrities
-            const categories = {};
-            const locations = {};
+            // Build category tree
+            buildCategoryTree();
 
-            celebrities.forEach(celeb => {
-                const cat = celeb.mainCategory || celeb.category;
-                if (cat) {
-                    categories[cat] = (categories[cat] || 0) + 1;
-                }
-
-                const loc = celeb.country;
-                if (loc) {
-                    locations[loc] = (locations[loc] || 0) + 1;
-                }
-            });
-
-            // Populate category pills
-            const categoryContainer = document.getElementById('categoryFilters');
-            categoryContainer.innerHTML = Object.entries(categories)
-                .sort((a, b) => b[1] - a[1]) // Sort by count
-                .slice(0, 8) // Show top 8
-                .map(([name, count]) => `
-                    <div class="filter-pill" data-category="${name}" onclick="toggleCategoryFilter(this, '${name}')">
-                        ${name}
-                    </div>
-                `).join('');
-
-            // Populate location pills
-            const locationContainer = document.getElementById('locationFilters');
-            locationContainer.innerHTML = Object.entries(locations)
-                .sort((a, b) => b[1] - a[1]) // Sort by count
-                .slice(0, 6) // Show top 6
-                .map(([name, count]) => `
-                    <div class="filter-pill" data-location="${name}" onclick="toggleLocationFilter(this, '${name}')">
-                        ${name}
-                    </div>
-                `).join('');
+            // Build location tree
+            buildLocationTree();
 
             // Price slider handler
             document.getElementById('priceSlider').addEventListener('input', function() {
@@ -574,6 +547,121 @@
             document.getElementById('verifiedFilter').addEventListener('change', applyFilters);
         }
 
+        // Build category tree structure
+        function buildCategoryTree() {
+            const categoryTree = {};
+
+            // Build the hierarchy
+            celebrities.forEach(celeb => {
+                const main = celeb.mainCategory || celeb.category;
+                const sub = celeb.subCategory;
+
+                if (!main) return;
+
+                if (!categoryTree[main]) {
+                    categoryTree[main] = { count: 0, children: {} };
+                }
+                categoryTree[main].count++;
+
+                if (sub) {
+                    if (!categoryTree[main].children[sub]) {
+                        categoryTree[main].children[sub] = 0;
+                    }
+                    categoryTree[main].children[sub]++;
+                }
+            });
+
+            // Render the tree
+            const container = document.getElementById('categoryTree');
+            container.innerHTML = Object.entries(categoryTree)
+                .sort((a, b) => b[1].count - a[1].count) // Sort by count
+                .map(([mainCat, data]) => {
+                    const hasChildren = Object.keys(data.children).length > 0;
+                    const childrenHtml = hasChildren ? Object.entries(data.children)
+                        .sort((a, b) => b[1] - a[1])
+                        .map(([subCat, count]) => `
+                            <div class="filter-tree-child" data-category="${mainCat}" data-subcategory="${subCat}" onclick="toggleSubCategoryFilter(this, '${mainCat}', '${subCat}')">
+                                <span class="filter-tree-child-label">${subCat}</span>
+                                <span class="filter-tree-child-count">${count}</span>
+                            </div>
+                        `).join('') : '';
+
+                    return `
+                        <div class="filter-tree-item">
+                            <div class="filter-tree-parent" onclick="toggleTreeNode(this)">
+                                ${hasChildren ? '<span class="filter-tree-toggle">▸</span>' : '<span class="filter-tree-toggle" style="opacity: 0;">▸</span>'}
+                                <span class="filter-tree-label">${mainCat}</span>
+                                <span class="filter-tree-count">${data.count}</span>
+                            </div>
+                            ${hasChildren ? `<div class="filter-tree-children">${childrenHtml}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+        }
+
+        // Build location tree structure
+        function buildLocationTree() {
+            const locationTree = {};
+
+            // Build the hierarchy
+            celebrities.forEach(celeb => {
+                const country = celeb.country;
+                const city = celeb.city;
+
+                if (!country) return;
+
+                if (!locationTree[country]) {
+                    locationTree[country] = { count: 0, children: {} };
+                }
+                locationTree[country].count++;
+
+                if (city) {
+                    if (!locationTree[country].children[city]) {
+                        locationTree[country].children[city] = 0;
+                    }
+                    locationTree[country].children[city]++;
+                }
+            });
+
+            // Render the tree
+            const container = document.getElementById('locationTree');
+            container.innerHTML = Object.entries(locationTree)
+                .sort((a, b) => b[1].count - a[1].count) // Sort by count
+                .map(([country, data]) => {
+                    const hasChildren = Object.keys(data.children).length > 0;
+                    const childrenHtml = hasChildren ? Object.entries(data.children)
+                        .sort((a, b) => b[1] - a[1])
+                        .map(([city, count]) => `
+                            <div class="filter-tree-child" data-country="${country}" data-city="${city}" onclick="toggleCityFilter(this, '${country}', '${city}')">
+                                <span class="filter-tree-child-label">${city}</span>
+                                <span class="filter-tree-child-count">${count}</span>
+                            </div>
+                        `).join('') : '';
+
+                    return `
+                        <div class="filter-tree-item">
+                            <div class="filter-tree-parent" onclick="toggleTreeNode(this)">
+                                ${hasChildren ? '<span class="filter-tree-toggle">▸</span>' : '<span class="filter-tree-toggle" style="opacity: 0;">▸</span>'}
+                                <span class="filter-tree-label">${country}</span>
+                                <span class="filter-tree-count">${data.count}</span>
+                            </div>
+                            ${hasChildren ? `<div class="filter-tree-children">${childrenHtml}</div>` : ''}
+                        </div>
+                    `;
+                }).join('');
+        }
+
+        // Toggle tree node expand/collapse
+        window.toggleTreeNode = function(parentEl) {
+            const toggle = parentEl.querySelector('.filter-tree-toggle');
+            const children = parentEl.nextElementSibling;
+
+            if (toggle && children && children.classList.contains('filter-tree-children')) {
+                toggle.classList.toggle('expanded');
+                children.classList.toggle('expanded');
+            }
+        };
+
         function initializePage() {
             initializeFilters();
 
@@ -582,22 +670,55 @@
             const category = urlParams.get('category');
 
             if (category) {
-                // Activate the corresponding category pill
-                const pill = document.querySelector(`[data-category="${category}"]`);
-                if (pill) {
-                    pill.classList.add('active');
-                }
+                // Find and expand the main category in the tree
+                const treeItems = document.querySelectorAll('#categoryTree .filter-tree-item');
+                treeItems.forEach(item => {
+                    const label = item.querySelector('.filter-tree-label');
+                    if (label && label.textContent.trim() === category) {
+                        // This is a main category - expand it and select all children
+                        const parent = item.querySelector('.filter-tree-parent');
+                        const children = item.querySelector('.filter-tree-children');
+                        const toggle = item.querySelector('.filter-tree-toggle');
+
+                        if (parent && children && toggle) {
+                            toggle.classList.add('expanded');
+                            children.classList.add('expanded');
+
+                            // Activate all subcategories under this main category
+                            const childElements = children.querySelectorAll('.filter-tree-child');
+                            childElements.forEach(child => child.classList.add('active'));
+                        }
+                    }
+                });
+
+                // Also check if it's a subcategory match
+                const subCategoryElements = document.querySelectorAll('#categoryTree .filter-tree-child');
+                subCategoryElements.forEach(el => {
+                    const subCat = el.getAttribute('data-subcategory');
+                    if (subCat === category) {
+                        el.classList.add('active');
+                        // Expand parent
+                        const parent = el.closest('.filter-tree-item').querySelector('.filter-tree-parent');
+                        const toggle = parent?.querySelector('.filter-tree-toggle');
+                        const children = el.closest('.filter-tree-children');
+                        if (toggle && children) {
+                            toggle.classList.add('expanded');
+                            children.classList.add('expanded');
+                        }
+                    }
+                });
             }
 
             applyFilters();
         }
 
-        initializePage();
-
         // Mobile: Swipe-to-dismiss for filter bottom sheet
-        (function initSwipeToDismiss() {
+        function initSwipeToDismiss() {
             const filterSidebar = document.getElementById('filterSidebar');
             const filterOverlay = document.getElementById('filterOverlay');
+
+            if (!filterSidebar || !filterOverlay) return;
+
             let startY = 0;
             let currentY = 0;
             let isDragging = false;
@@ -645,11 +766,18 @@
                     document.body.style.overflow = '';
                 }
             });
-        })();
+        }
 
-        // Pagination state
-        let currentPage = 1;
-        const perPage = 12;
+        // Wait for DOM to be ready before initializing
+        if (document.readyState === 'loading') {
+            document.addEventListener('DOMContentLoaded', function() {
+                initializePage();
+                initSwipeToDismiss();
+            });
+        } else {
+            initializePage();
+            initSwipeToDismiss();
+        }
 
         // Toggle filters (only works on mobile, desktop filters always visible)
         window.toggleFilters = function() {
@@ -753,7 +881,8 @@
 
         // Pagination functions
         window.changePage = function(delta) {
-            const totalPages = Math.ceil(filteredCelebrities.length / perPage);
+            if (!window.filteredCelebrities) return;
+            const totalPages = Math.ceil(window.filteredCelebrities.length / perPage);
             currentPage = Math.max(1, Math.min(totalPages, currentPage + delta));
             renderCelebrities();
             renderPagination();
@@ -768,7 +897,8 @@
         };
 
         function renderPagination() {
-            const totalPages = Math.ceil(filteredCelebrities.length / perPage);
+            if (!window.filteredCelebrities) return;
+            const totalPages = Math.ceil(window.filteredCelebrities.length / perPage);
             const pagination = document.getElementById('pagination');
             const numbersContainer = document.getElementById('paginationNumbers');
             const prevBtn = document.getElementById('prevBtn');

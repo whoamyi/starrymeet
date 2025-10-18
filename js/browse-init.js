@@ -8,11 +8,19 @@ let filteredCelebrities = [];
 let currentCategory = null;
 let currentSearch = null;
 
-// Initialize browse page
-document.addEventListener('DOMContentLoaded', function() {
-    // Load all celebrities from shared.js
+// Load celebrities immediately (not waiting for DOMContentLoaded)
+if (typeof getAllCelebrities !== 'undefined') {
     allCelebrities = getAllCelebrities();
     filteredCelebrities = [...allCelebrities];
+}
+
+// Initialize browse page
+document.addEventListener('DOMContentLoaded', function() {
+    // Ensure celebrities are loaded
+    if (allCelebrities.length === 0 && typeof getAllCelebrities !== 'undefined') {
+        allCelebrities = getAllCelebrities();
+        filteredCelebrities = [...allCelebrities];
+    }
 
     // Handle URL parameters
     const urlParams = new URLSearchParams(window.location.search);
@@ -89,13 +97,19 @@ function setupEventListeners() {
 function applyAllFilters() {
     const searchTerm = document.getElementById('searchInput')?.value?.toLowerCase() || '';
 
-    // Get selected category pills
-    const selectedCategories = Array.from(document.querySelectorAll('[data-category].active'))
-        .map(pill => pill.getAttribute('data-category'));
+    // Get selected subcategories from tree
+    const selectedSubCategories = Array.from(document.querySelectorAll('#categoryTree .filter-tree-child.active'))
+        .map(el => ({
+            main: el.getAttribute('data-category'),
+            sub: el.getAttribute('data-subcategory')
+        }));
 
-    // Get selected location pills
-    const selectedLocations = Array.from(document.querySelectorAll('[data-location].active'))
-        .map(pill => pill.getAttribute('data-location'));
+    // Get selected cities from tree
+    const selectedCities = Array.from(document.querySelectorAll('#locationTree .filter-tree-child.active'))
+        .map(el => ({
+            country: el.getAttribute('data-country'),
+            city: el.getAttribute('data-city')
+        }));
 
     // Get price filter
     const priceSlider = document.getElementById('priceSlider');
@@ -109,8 +123,8 @@ function applyAllFilters() {
 
     // Count active filters
     let activeFilterCount = 0;
-    if (selectedCategories.length > 0) activeFilterCount += selectedCategories.length;
-    if (selectedLocations.length > 0) activeFilterCount += selectedLocations.length;
+    if (selectedSubCategories.length > 0) activeFilterCount += selectedSubCategories.length;
+    if (selectedCities.length > 0) activeFilterCount += selectedCities.length;
     if (maxPrice < 60000) activeFilterCount++;
     if (trendingOnly) activeFilterCount++;
     if (verifiedOnly) activeFilterCount++;
@@ -138,19 +152,20 @@ function applyAllFilters() {
             if (!matchesSearch) return false;
         }
 
-        // Category filter
-        if (selectedCategories.length > 0) {
-            const matchesCategory = selectedCategories.some(selectedCat =>
-                celeb.mainCategory === selectedCat ||
-                celeb.subCategory === selectedCat ||
-                celeb.category === selectedCat
+        // Subcategory filter (hierarchical)
+        if (selectedSubCategories.length > 0) {
+            const matchesCategory = selectedSubCategories.some(selected =>
+                celeb.mainCategory === selected.main && celeb.subCategory === selected.sub
             );
             if (!matchesCategory) return false;
         }
 
-        // Location filter
-        if (selectedLocations.length > 0) {
-            if (!selectedLocations.includes(celeb.country)) return false;
+        // City filter (hierarchical)
+        if (selectedCities.length > 0) {
+            const matchesLocation = selectedCities.some(selected =>
+                celeb.country === selected.country && celeb.city === selected.city
+            );
+            if (!matchesLocation) return false;
         }
 
         // Price filter
@@ -165,7 +180,8 @@ function applyAllFilters() {
         return true;
     });
 
-    displayCelebrities(filteredCelebrities);
+    // Export filtered results to global scope
+    // Let browse.html handle the actual rendering with pagination
     window.filteredCelebrities = filteredCelebrities;
 }
 
