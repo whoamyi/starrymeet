@@ -72,6 +72,18 @@ if (!celebrityName) {
                 ratingElement.textContent = `${celebrity.rating || 4.9} (${celebrity.reviews || 127} reviews)`;
             }
 
+            // Update quick stats
+            const statsContainer = document.querySelector('.quick-stats');
+            if (statsContainer && celebrity.meetings) {
+                const statValues = statsContainer.querySelectorAll('.stat-value');
+                if (statValues.length >= 2) {
+                    // Update meetings count
+                    statValues[0].textContent = `${celebrity.meetings}+`;
+                    // Update rating value
+                    statValues[1].textContent = `${celebrity.rating || 4.9}★`;
+                }
+            }
+
             // Update pricing
             const priceElements = document.querySelectorAll('.price-display, #selectedPrice');
             priceElements.forEach(el => {
