@@ -29,7 +29,7 @@ html {
 
 body {
     font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-    line-height: 1.6;
+    line-height: 1.5;  /* Reduced from 1.6 for tighter, more elegant feel and better grid alignment */
     color: var(--white);
     background: var(--bg-primary);  /* Modern dark mode: #0f0f0f */
     overflow-x: hidden;
@@ -364,13 +364,21 @@ header.scrolled,
     border: 1px solid rgba(255, 255, 255, 0.1);
     border-radius: 8px;
     padding: 8px 0;
-    min-width: 180px;
+    min-width: 200px;
     margin-top: 8px;
     z-index: 1000;
+    opacity: 0;
+    transform: translateY(-10px);
+    transition: opacity 0.2s ease, transform 0.2s ease;
+    pointer-events: none;
 }
 
-.categories-dropdown.active {
+.categories-dropdown.active,
+.nav-item-categories:hover .categories-dropdown {
     display: block;
+    opacity: 1;
+    transform: translateY(0);
+    pointer-events: auto;
 }
 
 .categories-dropdown a {

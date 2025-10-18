@@ -496,6 +496,7 @@ body {
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
     gap: 16px !important;
     width: 100%;
+    line-height: 1.4; /* Tighter line-height for grid to prevent overlap */
 }
 
 /* Mobile: 2 columns */
@@ -531,6 +532,7 @@ body {
     display: flex;
     flex-direction: column;
     aspect-ratio: 200 / 300; /* Fixed aspect ratio for equal heights */
+    line-height: 1.4; /* Consistent line-height to prevent overlap */
 }
 
 .celebrity-card:hover {
@@ -607,11 +609,12 @@ body {
 }
 
 .celebrity-info {
-    padding: 12px;
+    padding: 12px 12px 16px 12px; /* Increased bottom padding for breathing room */
     flex: 1;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
+    line-height: 1.4; /* Consistent line-height to prevent overflow */
 }
 
 .celebrity-name {
@@ -645,7 +648,8 @@ body {
 
 .celebrity-price {
     padding-top: 8px;
-    margin-top: 8px;
+    margin-top: auto; /* Push to bottom with spacing */
+    padding-bottom: 4px; /* Extra breathing room at bottom */
     border-top: 1px solid rgba(255, 255, 255, 0.1);
     display: flex;
     justify-content: space-between;
@@ -1277,5 +1281,329 @@ footer::before {
         height: 36px;
         padding: 6px 10px;
         font-size: 13px;
+    }
+}
+/* Filter Group */
+.filter-group {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+}
+
+.filter-group-compact {
+    gap: 8px;
+}
+
+/* Filter Label */
+.filter-label {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255, 255, 255, 0.5);
+    text-transform: uppercase;
+    letter-spacing: 0.5px;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.filter-value {
+    font-size: 12px;
+    color: rgba(255, 255, 255, 0.4);
+    text-transform: none;
+    font-weight: 400;
+}
+
+/* Filter Options (Pills) */
+.filter-options {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 6px;
+}
+
+.filter-pill {
+    padding: 6px 12px;
+    border-radius: 20px;
+    border: 1px solid rgba(255, 255, 255, 0.15);
+    background: transparent;
+    color: rgba(255, 255, 255, 0.7);
+    font-size: 13px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+    user-select: none;
+}
+
+.filter-pill:hover {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: rgba(255, 255, 255, 0.9);
+}
+
+.filter-pill.active {
+    background: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.3);
+    color: #ffffff;
+}
+
+/* Price Slider */
+.filter-slider {
+    -webkit-appearance: none;
+    width: 100%;
+    height: 2px;
+    background: rgba(255, 255, 255, 0.1);
+    outline: none;
+    border-radius: 1px;
+}
+
+.filter-slider::-webkit-slider-thumb {
+    -webkit-appearance: none;
+    appearance: none;
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+    transition: transform 0.1s ease;
+}
+
+.filter-slider::-webkit-slider-thumb:hover {
+    transform: scale(1.15);
+}
+
+.filter-slider::-moz-range-thumb {
+    width: 14px;
+    height: 14px;
+    background: #ffffff;
+    cursor: pointer;
+    border-radius: 50%;
+    border: none;
+    transition: transform 0.1s ease;
+}
+
+.filter-slider::-moz-range-thumb:hover {
+    transform: scale(1.15);
+}
+
+.filter-range-labels {
+    display: flex;
+    justify-content: space-between;
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    margin-top: 4px;
+}
+
+/* Filter Checkbox */
+.filter-checkbox {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    cursor: pointer;
+    padding: 8px 0;
+    user-select: none;
+}
+
+.filter-checkbox input[type="checkbox"] {
+    width: 16px;
+    height: 16px;
+    cursor: pointer;
+    appearance: none;
+    border: 1.5px solid rgba(255, 255, 255, 0.3);
+    border-radius: 3px;
+    background: transparent;
+    position: relative;
+    transition: all 0.2s ease;
+}
+
+.filter-checkbox input[type="checkbox"]:hover {
+    border-color: rgba(255, 255, 255, 0.5);
+}
+
+.filter-checkbox input[type="checkbox"]:checked {
+    background: #ffffff;
+    border-color: #ffffff;
+}
+
+.filter-checkbox input[type="checkbox"]:checked::after {
+    content: '✓';
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    color: #000000;
+    font-size: 11px;
+    font-weight: 700;
+}
+
+.filter-checkbox:hover {
+    color: rgba(255, 255, 255, 1);
+}
+
+/* Active Filters Badge */
+.active-filters {
+    margin-top: 8px;
+    padding: 12px;
+    background: rgba(255, 255, 255, 0.05);
+    border-radius: 8px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    font-size: 13px;
+}
+
+.active-filters span {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.clear-filters-btn {
+    background: transparent;
+    border: none;
+    color: rgba(255, 255, 255, 0.5);
+    font-size: 12px;
+    cursor: pointer;
+    padding: 0;
+    text-decoration: underline;
+    transition: color 0.2s ease;
+}
+
+.clear-filters-btn:hover {
+    color: rgba(255, 255, 255, 0.9);
+}
+
+/* Collapsible Tree Structure */
+.filter-tree {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+}
+
+.filter-tree-item {
+    display: flex;
+    flex-direction: column;
+}
+
+.filter-tree-parent {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    padding: 8px 4px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: background 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.filter-tree-parent:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-tree-parent:active {
+    transform: scale(0.98);
+}
+
+.filter-tree-toggle {
+    width: 16px;
+    height: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 10px;
+    color: rgba(255, 255, 255, 0.5);
+    transition: transform 0.2s ease;
+}
+
+.filter-tree-toggle.expanded {
+    transform: rotate(90deg);
+}
+
+.filter-tree-label {
+    flex: 1;
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.8);
+    font-weight: 500;
+}
+
+.filter-tree-count {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+    font-weight: 400;
+}
+
+.filter-tree-children {
+    display: none;
+    flex-direction: column;
+    gap: 2px;
+    padding-left: 24px;
+    margin-top: 2px;
+}
+
+.filter-tree-children.expanded {
+    display: flex;
+}
+
+.filter-tree-child {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    padding: 6px 8px;
+    cursor: pointer;
+    border-radius: 6px;
+    transition: all 0.2s ease;
+    user-select: none;
+    -webkit-tap-highlight-color: transparent;
+}
+
+.filter-tree-child:hover {
+    background: rgba(255, 255, 255, 0.05);
+}
+
+.filter-tree-child:active {
+    transform: scale(0.98);
+}
+
+.filter-tree-child.active {
+    background: rgba(255, 255, 255, 0.1);
+    color: #ffffff;
+}
+
+.filter-tree-child-label {
+    font-size: 13px;
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.filter-tree-child.active .filter-tree-child-label {
+    color: #ffffff;
+    font-weight: 500;
+}
+
+.filter-tree-child-count {
+    font-size: 11px;
+    color: rgba(255, 255, 255, 0.4);
+}
+
+/* Mobile: Larger touch targets */
+@media (max-width: 768px) {
+    .filter-tree-parent {
+        padding: 12px 8px;
+        min-height: 48px;
+    }
+
+    .filter-tree-child {
+        padding: 10px 12px;
+        min-height: 44px;
+    }
+
+    .filter-tree-label {
+        font-size: 16px;
+    }
+
+    .filter-tree-child-label {
+        font-size: 15px;
+    }
+
+    .filter-tree-toggle {
+        width: 20px;
+        height: 20px;
+        font-size: 12px;
     }
 }
