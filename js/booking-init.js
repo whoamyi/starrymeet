@@ -38,7 +38,7 @@ function initializeBooking() {
         if (celebrity) {
             currentBookingData = {
                 celebrityName: celebrity.name,
-                category: celebrity.category,
+                category: celebrity.mainCategory,
                 price: celebrity.price,
                 location: celebrity.city,
                 country: celebrity.country

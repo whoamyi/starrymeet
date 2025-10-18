@@ -94,12 +94,50 @@
 
         @media(max-width:768px){
             body{padding-top:60px;}
-            .container{padding:24px 16px;}
+            .container{padding:24px 16px;max-width:100%;}
             .progress-bar{margin-bottom:32px;}
             .progress-step-label{font-size:0.75rem;}
+            .progress-step-circle{width:36px;height:36px;font-size:0.875rem;}
             .booking-layout{grid-template-columns:1fr;gap:24px;}
-            .booking-sidebar{position:static;}
-            .time-slots{grid-template-columns:repeat(2,1fr);}
+            .booking-sidebar{position:static;order:2;}
+            .booking-main{order:1;}
+            .step-section{padding:24px;}
+            .step-section h2{font-size:1.25rem;}
+            .time-slots{grid-template-columns:repeat(2,1fr);gap:8px;}
+            .calendar-container{gap:4px;}
+            .package-options{gap:12px;}
+            .package-option{padding:16px;}
+            .summary-card{padding:20px;}
+            h1{font-size:2rem !important;}
+        }
+
+        @media(max-width:480px){
+            .container{padding:20px 12px;}
+            .progress-bar{margin-bottom:24px;padding:0 8px;}
+            .progress-step-label{font-size:0.7rem;display:none;}
+            .progress-step-circle{width:32px;height:32px;font-size:0.75rem;}
+            .step-section{padding:20px;border-radius:16px;}
+            .step-section h2{font-size:1.125rem;margin-bottom:20px;}
+            .form-group{margin-bottom:20px;}
+            .form-group input,.form-group select,.form-group textarea{padding:12px 14px;font-size:0.9375rem;border-radius:10px;}
+            .time-slots{grid-template-columns:1fr;gap:8px;}
+            .calendar-day{font-size:0.8125rem;}
+            .package-header{flex-direction:column;align-items:flex-start;gap:8px;}
+            .package-name{font-size:1rem;}
+            .package-price{font-size:1.125rem;}
+            .summary-card{padding:16px;border-radius:16px;}
+            .summary-item{padding:12px 0;font-size:0.9375rem;}
+            .summary-total{font-size:1.25rem;}
+            .btn-primary,.btn-secondary{padding:14px;font-size:0.9375rem;}
+            h1{font-size:1.75rem !important;margin-bottom:8px !important;}
+            p{font-size:1rem !important;}
+        }
+
+        @media(max-width:360px){
+            .container{padding:16px 8px;}
+            .step-section{padding:16px;border-radius:12px;}
+            .progress-step-circle{width:28px;height:28px;font-size:0.7rem;}
+            h1{font-size:1.5rem !important;}
         }
     </style>
 </head>
