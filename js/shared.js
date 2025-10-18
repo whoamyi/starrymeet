@@ -1264,7 +1264,10 @@ function createUser(userData) {
     
     users.push(newUser);
     localStorage.setItem(STORAGE_KEYS.USERS, JSON.stringify(users));
-    
+
+    // Set session (auto-login after signup)
+    setSession(newUser.id);
+
     // Return user without password
     const { password, ...userWithoutPassword } = newUser;
     return userWithoutPassword;
@@ -1394,12 +1397,35 @@ function isAuthenticated() {
 }
 
 /**
- * Require authentication - redirect to homepage if not logged in
+ * Require authentication - show modal or redirect based on page
  */
 function requireAuth() {
     if (!isAuthenticated()) {
-        window.location.href = 'index.html';
-        return false;
+        // Get current page
+        const currentPage = window.location.pathname.split('/').pop();
+
+        // On booking/dashboard pages, show auth modal instead of redirecting
+        if (currentPage === 'booking.html' || currentPage === 'dashboard.html') {
+            // Save return URL
+            sessionStorage.setItem('authReturnUrl', window.location.href);
+
+            // Show auth modal after a short delay to ensure it's loaded
+            setTimeout(() => {
+                if (typeof openAuthModal === 'function') {
+                    openAuthModal('login');
+                } else {
+                    // Fallback if modal not loaded yet
+                    alert('Please log in to continue');
+                    window.location.href = 'index.html';
+                }
+            }, 100);
+
+            return false;
+        } else {
+            // On other pages, redirect to homepage
+            window.location.href = 'index.html';
+            return false;
+        }
     }
     return true;
 }
