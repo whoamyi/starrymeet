@@ -432,7 +432,7 @@
         }
 
         // Clear all filters
-        function clearAllFilters() {
+        window.clearAllFilters = function() {
             document.getElementById('searchInput').value = '';
             document.querySelectorAll('.checkbox-item input').forEach(cb => cb.checked = false);
             document.getElementById('countryFilter').value = '';
@@ -443,10 +443,10 @@
             document.getElementById('trendingToggle').checked = false;
             updatePriceDisplay();
             applyFilters();
-        }
+        };
 
         // Toggle watchlist
-        function toggleWatchlist(event, name) {
+        window.toggleWatchlist = function(event, name) {
             event.stopPropagation();
             const btn = event.currentTarget;
 
@@ -459,15 +459,15 @@
                 btn.classList.add('active');
                 btn.innerHTML = '❤️';
             }
-        }
+        };
 
         // Switch view
-        function switchView(view) {
+        window.switchView = function(view) {
             currentView = view;
             document.getElementById('gridViewBtn').classList.toggle('active', view === 'grid');
             document.getElementById('listViewBtn').classList.toggle('active', view === 'list');
             renderCelebrities();
-        }
+        };
 
         // Render celebrities with pagination
         function renderCelebrities() {
@@ -604,7 +604,7 @@
         const perPage = 12;
 
         // Toggle filters (unified for mobile and desktop)
-        function toggleFilters() {
+        window.toggleFilters = function() {
             const sidebar = document.getElementById('filterSidebar');
             const overlay = document.getElementById('filterOverlay');
             const wasActive = sidebar.classList.contains('active');
@@ -619,19 +619,19 @@
             if (wasActive) {
                 applyFilters();
             }
-        }
+        };
 
         // Toggle filter section (collapsible categories/locations)
-        function toggleFilterSection(sectionId) {
+        window.toggleFilterSection = function(sectionId) {
             const section = document.getElementById(sectionId);
             const toggle = section.previousElementSibling;
 
             section.classList.toggle('expanded');
             toggle.classList.toggle('expanded');
-        }
+        };
 
         // Show more items in filter section
-        function toggleShowMore(sectionId) {
+        window.toggleShowMore = function(sectionId) {
             const section = document.getElementById(sectionId);
             const hiddenItems = section.querySelectorAll('.hidden-initially');
             const button = section.querySelector('.show-more-btn');
@@ -643,7 +643,7 @@
             });
 
             button.textContent = isExpanded ? 'Show more' : 'Show less';
-        }
+        };
 
         // Render filter chips
         function renderFilterChips() {
@@ -680,7 +680,7 @@
         }
 
         // Remove filter chip
-        function removeFilterChip(type, value) {
+        window.removeFilterChip = function(type, value) {
             if (type === 'category') {
                 const checkbox = Array.from(document.querySelectorAll('.checkbox-item input')).find(cb => cb.value === value);
                 if (checkbox) checkbox.checked = false;
@@ -695,23 +695,23 @@
                 document.getElementById('trendingToggle').checked = false;
             }
             applyFilters();
-        }
+        };
 
         // Pagination functions
-        function changePage(delta) {
+        window.changePage = function(delta) {
             const totalPages = Math.ceil(filteredCelebrities.length / perPage);
             currentPage = Math.max(1, Math.min(totalPages, currentPage + delta));
             renderCelebrities();
             renderPagination();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        };
 
-        function goToPage(page) {
+        window.goToPage = function(page) {
             currentPage = page;
             renderCelebrities();
             renderPagination();
             window.scrollTo({ top: 0, behavior: 'smooth' });
-        }
+        };
 
         function renderPagination() {
             const totalPages = Math.ceil(filteredCelebrities.length / perPage);
@@ -774,17 +774,8 @@
             });
         });
 
-        // Expose functions globally for inline onclick handlers
-        window.toggleFilters = toggleFilters;
-        window.toggleFilterSection = toggleFilterSection;
-        window.toggleShowMore = toggleShowMore;
-        window.clearAllFilters = clearAllFilters;
-        window.switchView = switchView;
-        window.changePage = changePage;
-        window.toggleWatchlist = toggleWatchlist;
-        window.removeFilterChip = removeFilterChip;
-        window.goToPage = goToPage;
-        window.toggleMobileFilters = toggleFilters; // Alias for mobile
+        // Alias for mobile overlay
+        window.toggleMobileFilters = window.toggleFilters;
 
     </script>
 
