@@ -39,11 +39,42 @@
                 <li class="nav-item-categories">
                     <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
                     <div class="categories-dropdown" id="categoriesDropdown">
-                        <a href="browse.html?category=Actors & Actresses">Actors & Actresses</a>
-                        <a href="browse.html?category=Musicians">Musicians</a>
-                        <a href="browse.html?category=Athletes">Athletes</a>
-                        <a href="browse.html?category=K-Drama & K-Pop">K-Drama & K-Pop</a>
-                        <a href="browse.html?category=Business & Entrepreneurs">Business & Entrepreneurs</a>
+                        <div class="category-parent">
+                            <span>Actors</span>
+                            <div class="category-submenu">
+                                <a href="browse.html?category=Actors">All Actors</a>
+                                <a href="browse.html?category=Actors&subcategory=Hollywood">Hollywood</a>
+                                <a href="browse.html?category=Actors&subcategory=K-Drama">K-Drama</a>
+                            </div>
+                        </div>
+                        <div class="category-parent">
+                            <span>Musicians</span>
+                            <div class="category-submenu">
+                                <a href="browse.html?category=Musicians">All Musicians</a>
+                                <a href="browse.html?category=Musicians&subcategory=Pop">Pop</a>
+                                <a href="browse.html?category=Musicians&subcategory=R&B">R&B</a>
+                                <a href="browse.html?category=Musicians&subcategory=K-Pop">K-Pop</a>
+                                <a href="browse.html?category=Musicians&subcategory=K-Pop Groups">K-Pop Groups</a>
+                            </div>
+                        </div>
+                        <div class="category-parent">
+                            <span>Athletes</span>
+                            <div class="category-submenu">
+                                <a href="browse.html?category=Athletes">All Athletes</a>
+                                <a href="browse.html?category=Athletes&subcategory=Football/Soccer">Football/Soccer</a>
+                                <a href="browse.html?category=Athletes&subcategory=Basketball">Basketball</a>
+                                <a href="browse.html?category=Athletes&subcategory=Tennis">Tennis</a>
+                                <a href="browse.html?category=Athletes&subcategory=American Football">American Football</a>
+                            </div>
+                        </div>
+                        <div class="category-parent">
+                            <span>Business</span>
+                            <div class="category-submenu">
+                                <a href="browse.html?category=Business">All Business</a>
+                                <a href="browse.html?category=Business&subcategory=Tech CEOs">Tech CEOs</a>
+                                <a href="browse.html?category=Business&subcategory=Motivational Speakers">Motivational Speakers</a>
+                            </div>
+                        </div>
                         <a href="browse.html">View all</a>
                     </div>
                 </li>
@@ -67,11 +98,10 @@
             <li class="mobile-menu-categories">
                 <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
                 <ul class="mobile-submenu" id="mobileSubmenu">
-                    <li><a href="browse.html?category=Actors & Actresses" onclick="closeMobileMenu()">Actors & Actresses</a></li>
-                    <li><a href="browse.html?category=K-Drama & K-Pop" onclick="closeMobileMenu()">K-Drama & K-Pop</a></li>
-                    <li><a href="browse.html?category=Business & Entrepreneurs" onclick="closeMobileMenu()">Business & Entrepreneurs</a></li>
-                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
+                    <li><a href="browse.html?category=Actors" onclick="closeMobileMenu()">Actors</a></li>
                     <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
+                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
+                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
                 </ul>
             </li>
             <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
@@ -95,11 +125,11 @@
     <section class="categories-section">
         <h2 class="sr-only">Browse by category</h2>
         <div class="categories-container">
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Actors & Actresses'">
+            <div class="category-bubble" onclick="window.location.href='browse.html?category=Actors'">
                 <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
                     <div class="category-overlay"></div>
                 </div>
-                <p class="category-label">Actors & Actresses</p>
+                <p class="category-label">Actors</p>
             </div>
             <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians'">
                 <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
@@ -113,29 +143,23 @@
                 </div>
                 <p class="category-label">Athletes</p>
             </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=K-Drama & K-Pop'">
+            <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians&subcategory=K-Pop'">
                 <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
                     <div class="category-overlay"></div>
                 </div>
-                <p class="category-label">K-Drama & K-Pop</p>
+                <p class="category-label">K-Pop</p>
             </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Entrepreneurs'">
+            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business'">
                 <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
                     <div class="category-overlay"></div>
                 </div>
-                <p class="category-label">Business & Entrepreneurs</p>
+                <p class="category-label">Business</p>
             </div>
             <div class="category-bubble" onclick="window.location.href='browse.html?category=Creators'">
                 <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
                     <div class="category-initials">CR</div>
                 </div>
                 <p class="category-label">Creators</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Entrepreneurs'">
-                <div class="category-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                    <div class="category-initials">BE</div>
-                </div>
-                <p class="category-label">Business & Entrepreneurs</p>
             </div>
             <div class="category-bubble" onclick="window.location.href='browse.html'">
                 <div class="category-image view-all">
@@ -278,46 +302,40 @@
         <h2>Categories</h2>
         <div class="categories-container">
             <div class="category-bubble" onclick="window.location.href='browse.html?category=Actors'">
-                <div class="category-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
-                    <div class="category-initials">AC</div>
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                    <div class="category-overlay"></div>
                 </div>
                 <p class="category-label">Actors</p>
             </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Reality TV'">
-                <div class="category-image" style="background: linear-gradient(135deg, #f093fb 0%, #f5576c 100%);">
-                    <div class="category-initials">RT</div>
+            <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians'">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                    <div class="category-overlay"></div>
                 </div>
-                <p class="category-label">Reality TV</p>
+                <p class="category-label">Musicians</p>
             </div>
             <div class="category-bubble" onclick="window.location.href='browse.html?category=Athletes'">
-                <div class="category-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
-                    <div class="category-initials">AT</div>
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                    <div class="category-overlay"></div>
                 </div>
                 <p class="category-label">Athletes</p>
             </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Comedians'">
-                <div class="category-image" style="background: linear-gradient(135deg, #43e97b 0%, #38f9d7 100%);">
-                    <div class="category-initials">CO</div>
+            <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians&subcategory=K-Pop'">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                    <div class="category-overlay"></div>
                 </div>
-                <p class="category-label">Comedians</p>
+                <p class="category-label">K-Pop</p>
+            </div>
+            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business'">
+                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                    <div class="category-overlay"></div>
+                </div>
+                <p class="category-label">Business</p>
             </div>
             <div class="category-bubble" onclick="window.location.href='browse.html?category=Creators'">
                 <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
                     <div class="category-initials">CR</div>
                 </div>
                 <p class="category-label">Creators</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Wrestlers'">
-                <div class="category-image" style="background: linear-gradient(135deg, #30cfd0 0%, #330867 100%);">
-                    <div class="category-initials">WR</div>
-                </div>
-                <p class="category-label">Wrestlers</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Entrepreneurs'">
-                <div class="category-image" style="background: linear-gradient(135deg, #a8edea 0%, #fed6e3 100%);">
-                    <div class="category-initials">BE</div>
-                </div>
-                <p class="category-label">Business & Entrepreneurs</p>
             </div>
             <div class="category-bubble" onclick="window.location.href='browse.html'">
                 <div class="category-image view-all">
@@ -451,9 +469,9 @@
                     </div>
                     <div class="top-ten-info">
                         <h3 class="top-ten-name">${celeb.name}</h3>
-                        <p class="top-ten-category">${celeb.category}</p>
+                        <p class="top-ten-category">${celeb.subCategory || celeb.mainCategory || celeb.category || ''}</p>
                         <div class="top-ten-meta">
-                            <span class="top-ten-price">$${celeb.price}+</span>
+                            <span class="top-ten-price">from $${celeb.price.toLocaleString()}</span>
                             <span class="top-ten-rating">
                                 <span class="star">★</span> ${celeb.rating}
                             </span>

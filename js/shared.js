@@ -8,10 +8,10 @@
 // If imageUrl is not provided, the app will display colored initials as a fallback
 // Structure: mainCategory is the primary grouping, subCategory is the specific type
 const CELEBRITIES = [
-    // Actors & Actresses
+    // Actors
     {
         name: "Emma Watson",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "London • Mar 15",
         city: "London",
@@ -27,7 +27,7 @@ const CELEBRITIES = [
     },
     {
         name: "Chris Hemsworth",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Sydney • Mar 20",
         city: "Sydney",
@@ -43,7 +43,7 @@ const CELEBRITIES = [
     },
     {
         name: "Zendaya",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Los Angeles • Mar 18",
         city: "Los Angeles",
@@ -59,7 +59,7 @@ const CELEBRITIES = [
     },
     {
         name: "Tom Holland",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "New York • Mar 22",
         city: "New York",
@@ -75,7 +75,7 @@ const CELEBRITIES = [
     },
     {
         name: "Margot Robbie",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Sydney • Apr 5",
         city: "Sydney",
@@ -91,7 +91,7 @@ const CELEBRITIES = [
     },
     {
         name: "Ryan Reynolds",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Vancouver • Mar 25",
         city: "Vancouver",
@@ -107,7 +107,7 @@ const CELEBRITIES = [
     },
     {
         name: "Scarlett Johansson",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "New York • Apr 1",
         city: "New York",
@@ -123,7 +123,7 @@ const CELEBRITIES = [
     },
     {
         name: "Timothée Chalamet",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Paris • Mar 28",
         city: "Paris",
@@ -139,7 +139,7 @@ const CELEBRITIES = [
     },
     {
         name: "Florence Pugh",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "London • Apr 3",
         city: "London",
@@ -155,7 +155,7 @@ const CELEBRITIES = [
     },
     {
         name: "Michael B. Jordan",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Atlanta • Mar 30",
         city: "Atlanta",
@@ -171,7 +171,7 @@ const CELEBRITIES = [
     },
     {
         name: "Dwayne Johnson",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Miami • Apr 10",
         city: "Miami",
@@ -187,7 +187,7 @@ const CELEBRITIES = [
     },
     {
         name: "Gal Gadot",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Tel Aviv • Apr 8",
         city: "Tel Aviv",
@@ -203,7 +203,7 @@ const CELEBRITIES = [
     },
     {
         name: "Robert Downey Jr.",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Los Angeles • Apr 12",
         city: "Los Angeles",
@@ -219,7 +219,7 @@ const CELEBRITIES = [
     },
     {
         name: "Jennifer Lawrence",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "New York • Apr 6",
         city: "New York",
@@ -235,7 +235,7 @@ const CELEBRITIES = [
     },
     {
         name: "Brad Pitt",
-        mainCategory: "Actors & Actresses",
+        mainCategory: "Actors",
         subCategory: "Hollywood",
         location: "Los Angeles • Apr 15",
         city: "Los Angeles",
@@ -250,11 +250,11 @@ const CELEBRITIES = [
         meetings: 315
     },
 
-    // K-Drama & K-Pop
+    // K-Drama actors (under Actors category)
     {
         name: "Park Seo-joon",
-        mainCategory: "K-Drama & K-Pop",
-        subCategory: "K-Drama Actors",
+        mainCategory: "Actors",
+        subCategory: "K-Drama",
         location: "Seoul • Mar 16",
         city: "Seoul",
         country: "South Korea",
@@ -269,8 +269,8 @@ const CELEBRITIES = [
     },
     {
         name: "Song Hye-kyo",
-        mainCategory: "K-Drama & K-Pop",
-        subCategory: "K-Drama Actors",
+        mainCategory: "Actors",
+        subCategory: "K-Drama",
         location: "Seoul • Mar 19",
         city: "Seoul",
         country: "South Korea",
@@ -285,8 +285,8 @@ const CELEBRITIES = [
     },
     {
         name: "Lee Min-ho",
-        mainCategory: "K-Drama & K-Pop",
-        subCategory: "K-Drama Actors",
+        mainCategory: "Actors",
+        subCategory: "K-Drama",
         location: "Seoul • Mar 21",
         city: "Seoul",
         country: "South Korea",
@@ -299,10 +299,11 @@ const CELEBRITIES = [
         reviews: 176,
         meetings: 200
     },
+    // K-Pop artists (under Musicians category)
     {
         name: "IU (Lee Ji-eun)",
-        mainCategory: "K-Drama & K-Pop",
-        subCategory: "K-Pop Idols",
+        mainCategory: "Musicians",
+        subCategory: "K-Pop",
         location: "Seoul • Mar 24",
         city: "Seoul",
         country: "South Korea",
@@ -317,8 +318,8 @@ const CELEBRITIES = [
     },
     {
         name: "Kim Soo-hyun",
-        mainCategory: "K-Drama & K-Pop",
-        subCategory: "K-Drama Actors",
+        mainCategory: "Actors",
+        subCategory: "K-Drama",
         location: "Seoul • Apr 2",
         city: "Seoul",
         country: "South Korea",
@@ -333,7 +334,7 @@ const CELEBRITIES = [
     },
     {
         name: "BTS (Group)",
-        mainCategory: "K-Drama & K-Pop",
+        mainCategory: "Musicians",
         subCategory: "K-Pop Groups",
         location: "Seoul • Apr 26",
         city: "Seoul",
@@ -348,10 +349,10 @@ const CELEBRITIES = [
         meetings: 520
     },
 
-    // Business & Entrepreneurs
+    // Business
     {
         name: "Elon Musk",
-        mainCategory: "Business & Entrepreneurs",
+        mainCategory: "Business",
         subCategory: "Tech CEOs",
         location: "San Francisco • Mar 17",
         city: "San Francisco",
@@ -367,7 +368,7 @@ const CELEBRITIES = [
     },
     {
         name: "Jeff Bezos",
-        mainCategory: "Business & Entrepreneurs",
+        mainCategory: "Business",
         subCategory: "Tech CEOs",
         location: "Seattle • Mar 29",
         city: "Seattle",
@@ -383,7 +384,7 @@ const CELEBRITIES = [
     },
     {
         name: "Bill Gates",
-        mainCategory: "Business & Entrepreneurs",
+        mainCategory: "Business",
         subCategory: "Tech CEOs",
         location: "Seattle • Apr 4",
         city: "Seattle",
@@ -399,7 +400,7 @@ const CELEBRITIES = [
     },
     {
         name: "Mark Zuckerberg",
-        mainCategory: "Business & Entrepreneurs",
+        mainCategory: "Business",
         subCategory: "Tech CEOs",
         location: "Palo Alto • Mar 26",
         city: "Palo Alto",
@@ -415,7 +416,7 @@ const CELEBRITIES = [
     },
     {
         name: "Oprah Winfrey",
-        mainCategory: "Business & Entrepreneurs",
+        mainCategory: "Business",
         subCategory: "Motivational Speakers",
         location: "Chicago • Apr 9",
         city: "Chicago",
