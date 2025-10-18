@@ -77,8 +77,69 @@ function displayCelebrityInfo() {
         el.textContent = formatPrice(currentBookingData.price);
     });
 
+    // Update celebrity category
+    const categoryElement = document.getElementById('celebrityCategory');
+    if (categoryElement) {
+        categoryElement.textContent = currentBookingData.category;
+    }
+
+    // Update celebrity initials
+    const initialsElement = document.getElementById('celebrityInitials');
+    if (initialsElement && currentBookingData.celebrityName) {
+        const initials = currentBookingData.celebrityName
+            .split(' ')
+            .map(word => word[0])
+            .join('')
+            .toUpperCase()
+            .substring(0, 2);
+        initialsElement.textContent = initials;
+    }
+
+    // Update location in confirmation
+    const locationElement = document.getElementById('confirmedLocation');
+    if (locationElement) {
+        locationElement.textContent = `${currentBookingData.location}, ${currentBookingData.country}`;
+    }
+
+    // Update package options with celebrity price
+    updatePackageOptions();
+
     // Set page title
     document.title = `Book ${currentBookingData.celebrityName} - StarryMeet`;
+}
+
+/**
+ * Update package options with celebrity-specific pricing
+ */
+function updatePackageOptions() {
+    if (!currentBookingData || !currentBookingData.price) return;
+
+    const basePrice = currentBookingData.price;
+
+    // Update package options
+    const packages = [
+        { selector: '.package-option:nth-child(1)', name: 'Quick Meet', price: Math.round(basePrice * 0.5), duration: 15 },
+        { selector: '.package-option:nth-child(2)', name: 'Standard Meet', price: basePrice, duration: 30 },
+        { selector: '.package-option:nth-child(3)', name: 'Extended Meet', price: Math.round(basePrice * 1.5), duration: 60 }
+    ];
+
+    packages.forEach(pkg => {
+        const element = document.querySelector(pkg.selector);
+        if (element) {
+            const priceElement = element.querySelector('.package-price');
+            if (priceElement) {
+                priceElement.textContent = formatPrice(pkg.price);
+            }
+            // Update onclick handler
+            element.setAttribute('onclick', `selectPackage(this, '${pkg.name}', ${pkg.price}, ${pkg.duration})`);
+        }
+    });
+
+    // Update summary total with base price (standard package)
+    const summaryTotal = document.getElementById('summaryTotal');
+    if (summaryTotal) {
+        summaryTotal.textContent = formatPrice(basePrice);
+    }
 }
 
 /**

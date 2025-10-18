@@ -494,7 +494,7 @@ body {
 .celebrities-grid {
     display: grid !important;
     grid-template-columns: repeat(auto-fill, minmax(180px, 1fr));
-    gap: 16px !important;
+    gap: 20px !important;
     width: 100%;
     line-height: 1.4; /* Tighter line-height for grid to prevent overlap */
 }
@@ -503,6 +503,7 @@ body {
 @media (max-width: 767px) {
     .celebrities-grid {
         grid-template-columns: repeat(2, 1fr) !important;
+        gap: 16px !important;
     }
 }
 
@@ -510,6 +511,7 @@ body {
 @media (min-width: 768px) and (max-width: 1023px) {
     .celebrities-grid {
         grid-template-columns: repeat(3, 1fr) !important;
+        gap: 18px !important;
     }
 }
 
@@ -517,6 +519,8 @@ body {
 @media (min-width: 1024px) {
     .celebrities-grid {
         grid-template-columns: repeat(4, 1fr) !important;
+        gap: 24px !important;
+        row-gap: 32px !important;
     }
 }
 
@@ -610,12 +614,13 @@ body {
 
 .celebrity-info {
     padding: 12px 12px 16px 12px; /* Increased bottom padding for breathing room */
-    flex: 1;
+    flex: 1 1 auto;
     display: flex;
     flex-direction: column;
     justify-content: space-between;
     line-height: 1.4; /* Consistent line-height to prevent overflow */
     overflow: hidden; /* Prevent content from overflowing card */
+    min-height: 0; /* Allow flex item to shrink below content size if needed */
 }
 
 .celebrity-name {
