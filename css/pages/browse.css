@@ -163,6 +163,25 @@ body {
     align-items: center;
 }
 
+.filter-label-collapsible {
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.filter-label-collapsible:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.filter-section-toggle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
 .filter-value {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
@@ -1390,6 +1409,25 @@ footer::before {
     align-items: center;
 }
 
+.filter-label-collapsible {
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 0;
+    border-radius: 4px;
+    transition: all 0.2s ease;
+}
+
+.filter-label-collapsible:hover {
+    color: rgba(255, 255, 255, 0.7);
+}
+
+.filter-section-toggle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: transform 0.2s ease, color 0.2s ease;
+    display: inline-block;
+}
+
 .filter-value {
     font-size: 12px;
     color: rgba(255, 255, 255, 0.4);
@@ -1558,6 +1596,22 @@ footer::before {
     display: flex;
     flex-direction: column;
     gap: 2px;
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.filter-tree.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filter-tree.expanded {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
 }
 
 .filter-tree-item {
