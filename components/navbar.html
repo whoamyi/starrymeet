@@ -1,0 +1,63 @@
+<!-- Navigation -->
+<nav role="navigation" aria-label="Main navigation" id="navbar">
+    <div class="nav-container">
+        <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+        <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
+        <ul class="nav-links">
+            <li class="nav-item-categories">
+                <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                <div class="categories-dropdown" id="categoriesDropdown">
+                    <div class="category-parent">
+                        <span>Music</span>
+                        <div class="category-submenu">
+                            <a href="browse.html?category=Music">All Music</a>
+                            <a href="browse.html?category=Music&subcategory=K-Pop">K-Pop</a>
+                            <a href="browse.html?category=Music&subcategory=Pop">Pop</a>
+                            <a href="browse.html?category=Music&subcategory=Hip-Hop & Rap">Hip-Hop & Rap</a>
+                            <a href="browse.html?category=Music&subcategory=Rock">Rock</a>
+                        </div>
+                    </div>
+                    <div class="category-parent">
+                        <span>Sports</span>
+                        <div class="category-submenu">
+                            <a href="browse.html?category=Sports">All Sports</a>
+                            <a href="browse.html?category=Sports&subcategory=Football/Soccer">Football/Soccer</a>
+                            <a href="browse.html?category=Sports&subcategory=Basketball">Basketball</a>
+                            <a href="browse.html?category=Sports&subcategory=Olympics & Athletics">Olympics</a>
+                        </div>
+                    </div>
+                    <div class="category-parent">
+                        <span>Film & TV</span>
+                        <div class="category-submenu">
+                            <a href="browse.html?category=Film & Television">All Film & TV</a>
+                            <a href="browse.html?category=Film & Television&subcategory=Hollywood">Hollywood</a>
+                            <a href="browse.html?category=Film & Television&subcategory=TV Series">TV Series</a>
+                            <a href="browse.html?category=Film & Television&subcategory=International Cinema">International</a>
+                        </div>
+                    </div>
+                    <div class="category-parent">
+                        <span>Digital Creators</span>
+                        <div class="category-submenu">
+                            <a href="browse.html?category=Digital Creators">All Creators</a>
+                            <a href="browse.html?category=Digital Creators&subcategory=YouTube">YouTube</a>
+                            <a href="browse.html?category=Digital Creators&subcategory=TikTok">TikTok</a>
+                            <a href="browse.html?category=Digital Creators&subcategory=Gaming & Esports">Gaming</a>
+                        </div>
+                    </div>
+                    <div class="category-parent">
+                        <span>Business & Tech</span>
+                        <div class="category-submenu">
+                            <a href="browse.html?category=Business & Tech">All Business</a>
+                            <a href="browse.html?category=Business & Tech&subcategory=Tech Leaders">Tech Leaders</a>
+                            <a href="browse.html?category=Business & Tech&subcategory=Entrepreneurs">Entrepreneurs</a>
+                        </div>
+                    </div>
+                    <a href="browse.html">View all</a>
+                </div>
+            </li>
+            <li><a href="how-it-works.html">How it works</a></li>
+            <li><a href="for-celebrities.html">Join as star</a></li>
+            <li><a href="#" onclick="openAuthModal('login'); return false;">Log in</a></li>
+        </ul>
+    </div>
+</nav>

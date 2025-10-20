@@ -1,0 +1,26 @@
+<!-- Mobile Menu Overlay -->
+<div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
+
+<!-- Mobile Menu -->
+<div class="mobile-menu" id="mobileMenu">
+    <div class="mobile-menu-header">
+        <a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
+        <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
+    </div>
+    <ul class="mobile-menu-links">
+        <li class="mobile-menu-categories">
+            <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
+            <ul class="mobile-submenu" id="mobileSubmenu">
+                <li><a href="browse.html?category=Music" onclick="closeMobileMenu()">Music</a></li>
+                <li><a href="browse.html?category=Sports" onclick="closeMobileMenu()">Sports</a></li>
+                <li><a href="browse.html?category=Film & Television" onclick="closeMobileMenu()">Film & TV</a></li>
+                <li><a href="browse.html?category=Digital Creators" onclick="closeMobileMenu()">Digital Creators</a></li>
+                <li><a href="browse.html?category=Business & Tech" onclick="closeMobileMenu()">Business & Tech</a></li>
+            </ul>
+        </li>
+        <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
+        <li><a href="for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
+        <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
+        <li class="mobile-menu-login-item"><a href="#" onclick="openAuthModal('login'); closeMobileMenu(); return false;" class="mobile-menu-login">Log in</a></li>
+    </ul>
+</div>

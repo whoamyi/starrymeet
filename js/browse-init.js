@@ -45,6 +45,52 @@ async function loadCelebritiesFromAPI() {
     try {
         isLoading = true;
 
+        // Cache configuration
+        const CACHE_KEY = 'starrymeet_celebrities_cache_v1';
+        const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+        // Try loading from localStorage cache first
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (cached) {
+            try {
+                const { data, timestamp } = JSON.parse(cached);
+                if (Date.now() - timestamp < CACHE_DURATION) {
+                    console.log('✅ Loaded from cache:', data.length, 'celebrities');
+
+                    // Use cached data
+                    allCelebrities = data;
+                    filteredCelebrities = [...allCelebrities];
+                    window.celebrities = allCelebrities;
+                    window.filteredCelebrities = filteredCelebrities;
+
+                    // Rebuild filter trees with cached data
+                    if (typeof window.buildCategoryTree === 'function') {
+                        window.buildCategoryTree();
+                    }
+                    if (typeof window.buildLocationTree === 'function') {
+                        window.buildLocationTree();
+                    }
+                    if (typeof window.renderCelebrities === 'function') {
+                        window.renderCelebrities();
+                    }
+
+                    // Hide loading state early since we have data
+                    hideLoadingState();
+                    isLoading = false;
+
+                    // Optionally refresh cache in background (silent update)
+                    setTimeout(() => refreshCacheInBackground(), 5000);
+
+                    return;
+                }
+            } catch (e) {
+                console.warn('⚠️ Cache invalid, loading from API:', e.message);
+                localStorage.removeItem(CACHE_KEY);
+            }
+        }
+
+        console.log('📥 No valid cache, loading from API...');
+
         // First, get total count
         const initialResponse = await window.api.getCelebrities({
             limit: 1000,
@@ -96,6 +142,28 @@ async function loadCelebritiesFromAPI() {
 
         console.log(`🎉 Loaded ALL ${allCelebrities.length} celebrities from database!`);
 
+        // Save to localStorage cache
+        try {
+            const CACHE_KEY = 'starrymeet_celebrities_cache_v1';
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                data: allCelebrities,
+                timestamp: Date.now()
+            }));
+            console.log('💾 Cached', allCelebrities.length, 'celebrities for faster future loads');
+        } catch (e) {
+            console.warn('⚠️ Could not cache data (localStorage may be full):', e.message);
+            // If localStorage is full, try to clear old cache and retry
+            try {
+                localStorage.removeItem('starrymeet_celebrities_cache_v1');
+                localStorage.setItem('starrymeet_celebrities_cache_v1', JSON.stringify({
+                    data: allCelebrities,
+                    timestamp: Date.now()
+                }));
+            } catch (retryError) {
+                console.warn('⚠️ Cache retry failed. Continuing without cache.');
+            }
+        }
+
         // Rebuild category and location trees with new data
         if (typeof window.buildCategoryTree === 'function') {
             window.buildCategoryTree();
@@ -115,6 +183,54 @@ async function loadCelebritiesFromAPI() {
     } finally {
         isLoading = false;
         hideLoadingState();
+    }
+}
+
+/**
+ * Refresh cache in background without blocking UI
+ * Silently updates cache while user browses
+ */
+async function refreshCacheInBackground() {
+    try {
+        console.log('🔄 Refreshing cache in background...');
+
+        const CACHE_KEY = 'starrymeet_celebrities_cache_v1';
+        let freshData = [];
+
+        // Load all celebrities from API (same logic as loadCelebritiesFromAPI but without UI updates)
+        const initialResponse = await window.api.getCelebrities({ limit: 1000, offset: 0 });
+
+        if (!initialResponse.success || !initialResponse.data) {
+            console.warn('Background cache refresh failed');
+            return;
+        }
+
+        freshData = initialResponse.data.celebrities.map(transformCelebrity);
+        const total = initialResponse.data.pagination.total;
+        const batchSize = 1000;
+        const totalBatches = Math.ceil(total / batchSize);
+
+        for (let batch = 1; batch < totalBatches; batch++) {
+            const batchResponse = await window.api.getCelebrities({
+                limit: batchSize,
+                offset: batch * batchSize
+            });
+
+            if (batchResponse.success && batchResponse.data) {
+                const batchData = batchResponse.data.celebrities.map(transformCelebrity);
+                freshData = freshData.concat(batchData);
+            }
+        }
+
+        // Update cache with fresh data
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+            data: freshData,
+            timestamp: Date.now()
+        }));
+
+        console.log('✅ Cache refreshed in background:', freshData.length, 'celebrities');
+    } catch (error) {
+        console.warn('Background cache refresh error:', error);
     }
 }
 

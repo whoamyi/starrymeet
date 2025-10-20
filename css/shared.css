@@ -368,8 +368,9 @@ header.scrolled,
     margin-top: 8px;
     z-index: 1000;
     opacity: 0;
-    transform: translateY(-10px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateY(-10px) scale(0.95);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
 }
 
@@ -377,7 +378,7 @@ header.scrolled,
 .nav-item-categories:hover .categories-dropdown {
     display: block;
     opacity: 1;
-    transform: translateY(0);
+    transform: translateY(0) scale(1);
     pointer-events: auto;
 }
 
@@ -388,11 +389,14 @@ header.scrolled,
     font-size: 14px;
     font-weight: 400;
     text-decoration: none;
-    transition: background 0.2s ease;
+    transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                padding-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .categories-dropdown a:hover {
     background: rgba(139, 92, 246, 0.1);
+    padding-left: 24px;
 }
 
 .categories-dropdown a:last-child {
@@ -412,7 +416,8 @@ header.scrolled,
     font-weight: 500;
     text-decoration: none;
     cursor: pointer;
-    transition: background 0.2s ease;
+    transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.25s cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .category-parent:hover {
@@ -441,16 +446,35 @@ header.scrolled,
     min-width: 180px;
     margin-left: 4px;
     opacity: 0;
-    transform: translateX(-10px);
-    transition: opacity 0.2s ease, transform 0.2s ease;
+    transform: translateX(-10px) scale(0.95);
+    transition: opacity 0.3s cubic-bezier(0.4, 0, 0.2, 1),
+                transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
 }
 
 .category-parent:hover .category-submenu {
     display: block;
     opacity: 1;
-    transform: translateX(0);
+    transform: translateX(0) scale(1);
     pointer-events: auto;
+}
+
+.category-submenu a {
+    display: block;
+    padding: 10px 20px;
+    color: #ffffff;
+    font-size: 14px;
+    font-weight: 400;
+    text-decoration: none;
+    transition: background 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                color 0.25s cubic-bezier(0.4, 0, 0.2, 1),
+                padding-left 0.25s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.category-submenu a:hover {
+    background: rgba(139, 92, 246, 0.15);
+    padding-left: 24px;
+    color: #8B5CF6;
 }
 
 .btn-signin {

@@ -744,16 +744,70 @@
                 tree.classList.toggle('expanded');
 
                 // Update toggle arrow
-                if (tree.classList.contains('expanded')) {
-                    toggle.textContent = '▾';
-                } else {
-                    toggle.textContent = '▸';
+                const isExpanded = tree.classList.contains('expanded');
+                toggle.textContent = isExpanded ? '▾' : '▸';
+
+                // Save state to localStorage
+                try {
+                    const filterStates = JSON.parse(localStorage.getItem('starrymeet_filter_states') || '{}');
+                    filterStates[sectionName] = isExpanded;
+                    localStorage.setItem('starrymeet_filter_states', JSON.stringify(filterStates));
+                } catch (e) {
+                    console.warn('Could not save filter state:', e);
                 }
+            }
+        };
+
+        // Restore filter section states from localStorage
+        window.restoreFilterStates = function() {
+            try {
+                const filterStates = JSON.parse(localStorage.getItem('starrymeet_filter_states') || '{}');
+
+                // Restore category section state
+                if (filterStates.hasOwnProperty('categorySection')) {
+                    const categoryTree = document.querySelector('[data-section="categorySection"]');
+                    const categoryToggle = document.getElementById('categoryToggle');
+
+                    if (categoryTree && categoryToggle) {
+                        if (filterStates.categorySection) {
+                            categoryTree.classList.add('expanded');
+                            categoryTree.classList.remove('collapsed');
+                            categoryToggle.textContent = '▾';
+                        } else {
+                            categoryTree.classList.add('collapsed');
+                            categoryTree.classList.remove('expanded');
+                            categoryToggle.textContent = '▸';
+                        }
+                    }
+                }
+
+                // Restore location section state
+                if (filterStates.hasOwnProperty('locationSection')) {
+                    const locationTree = document.querySelector('[data-section="locationSection"]');
+                    const locationToggle = document.getElementById('locationToggle');
+
+                    if (locationTree && locationToggle) {
+                        if (filterStates.locationSection) {
+                            locationTree.classList.add('expanded');
+                            locationTree.classList.remove('collapsed');
+                            locationToggle.textContent = '▾';
+                        } else {
+                            locationTree.classList.add('collapsed');
+                            locationTree.classList.remove('expanded');
+                            locationToggle.textContent = '▸';
+                        }
+                    }
+                }
+            } catch (e) {
+                console.warn('Could not restore filter states:', e);
             }
         };
 
         function initializePage() {
             initializeFilters();
+
+            // Restore saved filter section states (collapsed/expanded)
+            setTimeout(() => restoreFilterStates(), 100);
 
             // Check for category parameter in URL
             const urlParams = new URLSearchParams(window.location.search);
