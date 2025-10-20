@@ -672,7 +672,201 @@ renderCelebrities() → Display 12 per page
 
 ---
 
+## 2025-10-20 - UI Improvements (Issue #78)
+
+**Summary**: Made filters collapsible and updated category structure sitewide
+**Severity**: Medium
+**Commit**: UI and category structure updates
+
+---
+
+### Issue #78: `[UX]` `[Filters]` Category and location filters too long by default
+
+**Severity**: Medium
+**Location**: browse.html:122-138, css/pages/browse.css:1595-1615
+
+**Problem**:
+- Category tree with 10 main categories and 52 subcategories displayed expanded by default
+- Location tree with 48+ countries and 100+ cities always visible
+- Filter sidebar very long, requiring excessive scrolling
+- Users couldn't see all filter options without scrolling
+
+**Solution - Collapsible Filter Sections** (browse.html:122-138):
+```html
+<div class="filter-group">
+    <label class="filter-label filter-label-collapsible" onclick="toggleFilterSection('categorySection')">
+        <span>Category</span>
+        <span class="filter-section-toggle" id="categoryToggle">▸</span>
+    </label>
+    <div class="filter-tree collapsed" id="categoryTree" data-section="categorySection"></div>
+</div>
+
+<div class="filter-group">
+    <label class="filter-label filter-label-collapsible" onclick="toggleFilterSection('locationSection')">
+        <span>Location</span>
+        <span class="filter-section-toggle" id="locationToggle">▸</span>
+    </label>
+    <div class="filter-tree collapsed" id="locationTree" data-section="locationSection"></div>
+</div>
+```
+
+**JavaScript Toggle Function** (browse.html:728-744):
+```javascript
+window.toggleFilterSection = function(sectionName) {
+    const tree = document.querySelector(`[data-section="${sectionName}"]`);
+    const toggle = document.getElementById(sectionName === 'categorySection' ? 'categoryToggle' : 'locationToggle');
+
+    if (tree && toggle) {
+        tree.classList.toggle('collapsed');
+        tree.classList.toggle('expanded');
+
+        // Update toggle arrow
+        if (tree.classList.contains('expanded')) {
+            toggle.textContent = '▾';
+        } else {
+            toggle.textContent = '▸';
+        }
+    }
+};
+```
+
+**CSS Animations** (css/pages/browse.css:1605-1615):
+```css
+.filter-tree {
+    max-height: 500px;
+    overflow: hidden;
+    transition: max-height 0.3s ease, opacity 0.3s ease;
+    opacity: 1;
+}
+
+.filter-tree.collapsed {
+    max-height: 0;
+    opacity: 0;
+    pointer-events: none;
+}
+
+.filter-tree.expanded {
+    max-height: 500px;
+    opacity: 1;
+    pointer-events: auto;
+}
+
+.filter-label-collapsible {
+    cursor: pointer;
+    user-select: none;
+    padding: 4px 0;
+    transition: all 0.2s ease;
+}
+
+.filter-section-toggle {
+    font-size: 14px;
+    color: rgba(255, 255, 255, 0.6);
+    transition: transform 0.2s ease;
+}
+```
+
+**Result**:
+- ✅ Filters start collapsed by default (cleaner UI)
+- ✅ Click label to expand/collapse each section
+- ✅ Arrow indicator (▸ collapsed, ▾ expanded)
+- ✅ Smooth transitions (300ms)
+- ✅ Reduced default sidebar length by ~70%
+
+**Status**: ✅ Fixed
+**Date Fixed**: 2025-10-20
+
+---
+
+## 2025-10-20 - Category Structure Updates (Issue #79)
+
+**Summary**: Updated all category references to match new database structure
+**Severity**: Medium
+**Commit**: Sitewide category structure standardization
+
+---
+
+### Issue #79: `[Content]` Outdated category names across site
+
+**Severity**: Medium
+**Location**: index.html, all nav bars
+
+**Problem**:
+- Homepage categories showed old names (Actors, Musicians, Athletes)
+- Navbar dropdowns had outdated category structure
+- Categories didn't match actual database categories
+- Inconsistent between homepage, navbar, and browse filters
+
+**Database Categories** (from 21,580 celebrities):
+- Music (3,900 celebrities)
+- Sports (3,120)
+- Film & Television (3,900)
+- Digital Creators (2,470)
+- Business & Tech (1,690)
+- Comedy & Entertainment (1,040)
+- Fashion & Beauty (1,560)
+- Reality TV & Lifestyle (910)
+- Authors & Intellectuals (1,560)
+- Activism & Leadership (650)
+
+**Solution - Homepage Categories** (index.html:128-163):
+```html
+<div class="category-bubble" onclick="window.location.href='browse.html?category=Music'">
+    <p class="category-label">Music</p>
+</div>
+<div class="category-bubble" onclick="window.location.href='browse.html?category=Sports'">
+    <p class="category-label">Sports</p>
+</div>
+<div class="category-bubble" onclick="window.location.href='browse.html?category=Film & Television'">
+    <p class="category-label">Film & TV</p>
+</div>
+<div class="category-bubble" onclick="window.location.href='browse.html?category=Digital Creators'">
+    <p class="category-label">Creators</p>
+</div>
+<div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Tech'">
+    <p class="category-label">Business</p>
+</div>
+<div class="category-bubble" onclick="window.location.href='browse.html?category=Comedy & Entertainment'">
+    <p class="category-label">Comedy</p>
+</div>
+```
+
+**Solution - Navbar Dropdowns** (Updated across 14 HTML files):
+```html
+<li class="nav-item-categories">
+    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+    <div class="categories-dropdown" id="categoriesDropdown">
+        <div class="category-parent">
+            <span>Music</span>
+            <div class="category-submenu">
+                <a href="browse.html?category=Music">All Music</a>
+                <a href="browse.html?category=Music&subcategory=K-Pop">K-Pop</a>
+                <a href="browse.html?category=Music&subcategory=Pop">Pop</a>
+                <a href="browse.html?category=Music&subcategory=Hip-Hop & Rap">Hip-Hop & Rap</a>
+                <a href="browse.html?category=Music&subcategory=Rock">Rock</a>
+            </div>
+        </div>
+        <!-- Repeat for Sports, Film & TV, Digital Creators, Business & Tech -->
+    </div>
+</li>
+```
+
+**Files Updated**:
+- Homepage: index.html
+- All HTML files with navbar: browse.html, booking.html, celebrity-profile.html, dashboard.html, for-celebrities.html, how-it-works.html, faq.html, about.html, terms.html, privacy.html, team.html, jobs.html, contact.html
+
+**Result**:
+- ✅ All categories match database structure
+- ✅ Consistent naming across entire site
+- ✅ Subcategories reflect actual data (K-Pop, YouTube, etc.)
+- ✅ All links work with browse page filters
+- ✅ 14 HTML files updated with Python automation
+
+**Status**: ✅ Fixed
+**Date Fixed**: 2025-10-20
+
+---
+
 **Last Updated**: 2025-10-20
-**Total Issues Logged**: 4
-**Total Issues Fixed**: 4
-**Page Status**: ✅ Fully functional with 21,580 celebrity database integration
+**Total Issues Logged**: 6
+**Total Issues Fixed**: 6
+**Page Status**: ✅ Fully functional with collapsible filters and updated categories
