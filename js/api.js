@@ -3,12 +3,26 @@
  * Handles all communication with the backend API
  */
 
-const API_BASE_URL = 'http://localhost:3000/api';
+// Environment-aware API URL configuration
+const getAPIBaseURL = () => {
+    // Check if we're in development (localhost)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+        return 'http://localhost:3000/api';
+    }
+
+    // Production (GitHub Pages or deployed domain)
+    // TODO: Update this with your actual deployed backend URL
+    // For now, we'll try to use localhost as fallback
+    return 'http://localhost:3000/api';
+};
+
+const API_BASE_URL = getAPIBaseURL();
 
 class APIClient {
     constructor() {
         this.baseURL = API_BASE_URL;
         this.token = localStorage.getItem('starryMeetToken');
+        this.mockMode = false; // Flag for mock data mode
     }
 
     /**
@@ -32,6 +46,18 @@ class APIClient {
 
         try {
             const response = await fetch(`${this.baseURL}${endpoint}`, config);
+
+            // Check if response is ok (status 200-299)
+            if (!response.ok && response.status !== 401) {
+                // Try to parse error message
+                try {
+                    const errorData = await response.json();
+                    throw new Error(errorData.error?.message || `HTTP ${response.status}: ${response.statusText}`);
+                } catch (parseError) {
+                    throw new Error(`HTTP ${response.status}: ${response.statusText}`);
+                }
+            }
+
             const data = await response.json();
 
             // Handle unauthorized - clear token and redirect to login
@@ -47,6 +73,18 @@ class APIClient {
 
             return data;
         } catch (error) {
+            // Enhanced error handling with better messages
+            if (error.name === 'TypeError' && error.message === 'Failed to fetch') {
+                console.error('❌ Backend server is not running or not accessible');
+                console.error('   → Make sure the backend server is started at', this.baseURL);
+                console.error('   → Run: cd backend && npm run dev');
+
+                // Create a more user-friendly error
+                const backendError = new Error('Backend server is not available. Please start the server or contact support.');
+                backendError.code = 'BACKEND_UNAVAILABLE';
+                throw backendError;
+            }
+
             console.error('API Error:', error);
             throw error;
         }

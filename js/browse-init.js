@@ -179,10 +179,42 @@ async function loadCelebritiesFromAPI() {
 
     } catch (error) {
         console.error('Error loading celebrities:', error);
-        showErrorState();
+
+        // If backend is unavailable but we have no cached data, show helpful error
+        if (error.code === 'BACKEND_UNAVAILABLE') {
+            showBackendUnavailableError();
+        } else {
+            showErrorState();
+        }
     } finally {
         isLoading = false;
         hideLoadingState();
+    }
+}
+
+/**
+ * Show backend unavailable error with helpful instructions
+ */
+function showBackendUnavailableError() {
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (resultsGrid) {
+        resultsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #9CA3AF;">
+                <div style="font-size: 48px; margin-bottom: 16px;">🔌</div>
+                <div style="font-size: 18px; margin-bottom: 8px; color: #EF4444;">Backend Server Unavailable</div>
+                <div style="font-size: 14px; opacity: 0.7; margin-bottom: 20px; max-width: 500px; margin-left: auto; margin-right: auto;">
+                    The API server is not running or not accessible.<br><br>
+                    <strong>For developers:</strong><br>
+                    Start the backend server by running:<br>
+                    <code style="background: rgba(255,255,255,0.1); padding: 8px 12px; border-radius: 6px; display: inline-block; margin-top: 8px;">
+                        cd backend && npm run dev
+                    </code>
+                </div>
+                <button onclick="location.reload()" style="background: #8B5CF6; color: white; border: none; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-size: 14px;">
+                    Retry
+                </button>
+            </div>
+        `;
     }
 }
 
