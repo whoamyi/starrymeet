@@ -1,33 +1,28 @@
 /**
  * Browse Page Initialization
- * Implements real filtering and search with CELEBRITIES array
+ * Fetches celebrities from API and implements filtering
  */
 
 let allCelebrities = [];
 let filteredCelebrities = [];
 let currentCategory = null;
 let currentSearch = null;
-
-// Load celebrities immediately (not waiting for DOMContentLoaded)
-if (typeof getAllCelebrities !== 'undefined') {
-    allCelebrities = getAllCelebrities();
-    filteredCelebrities = [...allCelebrities];
-}
+let isLoading = false;
 
 // Initialize browse page
-document.addEventListener('DOMContentLoaded', function() {
-    // Ensure celebrities are loaded
-    if (allCelebrities.length === 0 && typeof getAllCelebrities !== 'undefined') {
-        allCelebrities = getAllCelebrities();
-        filteredCelebrities = [...allCelebrities];
-    }
+document.addEventListener('DOMContentLoaded', async function() {
+    // Show loading state
+    showLoadingState();
+
+    // Load celebrities from API
+    await loadCelebritiesFromAPI();
 
     // Handle URL parameters
     const urlParams = new URLSearchParams(window.location.search);
     currentCategory = urlParams.get('category');
     currentSearch = urlParams.get('search');
 
-    // Apply filters
+    // Apply filters after data loads
     if (currentCategory) {
         filterByCategory(currentCategory);
     } else if (currentSearch) {
@@ -37,8 +32,6 @@ document.addEventListener('DOMContentLoaded', function() {
         if (searchInput) {
             searchInput.value = currentSearch;
         }
-    } else {
-        displayCelebrities(allCelebrities);
     }
 
     // Set up event listeners
@@ -46,49 +39,163 @@ document.addEventListener('DOMContentLoaded', function() {
 });
 
 /**
+ * Load celebrities from API - loads ALL celebrities in batches
+ */
+async function loadCelebritiesFromAPI() {
+    try {
+        isLoading = true;
+
+        // First, get total count
+        const initialResponse = await window.api.getCelebrities({
+            limit: 1000,
+            offset: 0
+        });
+
+        if (!initialResponse.success || !initialResponse.data) {
+            console.error('Failed to load celebrities:', initialResponse);
+            showErrorState();
+            return;
+        }
+
+        // Transform first batch
+        let allCelebsData = initialResponse.data.celebrities.map(transformCelebrity);
+
+        const total = initialResponse.data.pagination.total;
+        console.log(`📊 Total celebrities in database: ${total}`);
+        console.log(`✅ Loaded batch 1: ${allCelebsData.length} celebrities`);
+
+        // Load remaining celebrities in batches
+        const batchSize = 1000;
+        const totalBatches = Math.ceil(total / batchSize);
+
+        for (let batch = 1; batch < totalBatches; batch++) {
+            const offset = batch * batchSize;
+            console.log(`📥 Loading batch ${batch + 1}/${totalBatches} (offset: ${offset})...`);
+
+            const batchResponse = await window.api.getCelebrities({
+                limit: batchSize,
+                offset: offset
+            });
+
+            if (batchResponse.success && batchResponse.data) {
+                const batchData = batchResponse.data.celebrities.map(transformCelebrity);
+                allCelebsData = allCelebsData.concat(batchData);
+                console.log(`✅ Loaded batch ${batch + 1}: ${batchData.length} celebrities (Total: ${allCelebsData.length})`);
+            }
+        }
+
+        // Set all celebrities
+        allCelebrities = allCelebsData;
+        filteredCelebrities = [...allCelebrities];
+
+        // Update global celebrities variable for browse.html functions
+        if (typeof window !== 'undefined') {
+            window.celebrities = allCelebrities;
+            window.filteredCelebrities = filteredCelebrities;
+        }
+
+        console.log(`🎉 Loaded ALL ${allCelebrities.length} celebrities from database!`);
+
+        // Rebuild category and location trees with new data
+        if (typeof window.buildCategoryTree === 'function') {
+            window.buildCategoryTree();
+        }
+        if (typeof window.buildLocationTree === 'function') {
+            window.buildLocationTree();
+        }
+
+        // Render celebrities after data is loaded
+        if (typeof window.renderCelebrities === 'function') {
+            window.renderCelebrities();
+        }
+
+    } catch (error) {
+        console.error('Error loading celebrities:', error);
+        showErrorState();
+    } finally {
+        isLoading = false;
+        hideLoadingState();
+    }
+}
+
+/**
+ * Transform celebrity data from API format to frontend format
+ */
+function transformCelebrity(celeb) {
+    return {
+        name: celeb.display_name,
+        username: celeb.username,
+        mainCategory: celeb.category,
+        subCategory: celeb.subcategory || celeb.category,
+        category: celeb.category, // Add for compatibility
+        subcategory: celeb.subcategory,
+        niche_category: celeb.niche_category,
+        location: celeb.location,
+        city: celeb.location ? celeb.location.split(',')[0].trim() : '',
+        country: celeb.location ? celeb.location.split(',')[1]?.trim() : '',
+        price: Math.round(celeb.standard_meet_price_cents / 100),
+        verified: celeb.is_verified,
+        trending: celeb.is_featured,
+        imageUrl: celeb.avatar_url,
+        bio: celeb.bio,
+        rating: parseFloat(celeb.average_rating),
+        reviews: celeb.total_reviews,
+        meetings: celeb.total_bookings,
+        response_time: celeb.response_time_hours
+    };
+}
+
+/**
+ * Show loading state
+ */
+function showLoadingState() {
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (resultsGrid) {
+        resultsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #9CA3AF;">
+                <div style="font-size: 48px; margin-bottom: 16px;">⏳</div>
+                <div style="font-size: 18px; margin-bottom: 8px;">Loading celebrities...</div>
+                <div style="font-size: 14px; opacity: 0.7;">Fetching profiles from database</div>
+            </div>
+        `;
+    }
+}
+
+/**
+ * Hide loading state
+ */
+function hideLoadingState() {
+    // Handled by displayCelebrities()
+}
+
+/**
+ * Show error state
+ */
+function showErrorState() {
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (resultsGrid) {
+        resultsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #9CA3AF;">
+                <div style="font-size: 48px; margin-bottom: 16px;">⚠️</div>
+                <div style="font-size: 18px; margin-bottom: 8px; color: #EF4444;">Failed to load celebrities</div>
+                <div style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Please check your connection and try again</div>
+                <button onclick="location.reload()" style="background: #8B5CF6; color: white; border: none; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-size: 14px;">
+                    Reload Page
+                </button>
+            </div>
+        `;
+    }
+}
+
+/**
  * Set up event listeners
+ * Note: Most event listeners are handled by browse.html
+ * This is just for legacy support and initialization
  */
 function setupEventListeners() {
-    // Search input
-    const searchInput = document.getElementById('searchInput');
-    if (searchInput) {
-        searchInput.addEventListener('input', function(e) {
-            applyAllFilters();
-        });
-    }
-
-    // Category checkboxes
-    const categoryCheckboxes = document.querySelectorAll('.checkbox-item input[type="checkbox"]');
-    categoryCheckboxes.forEach(checkbox => {
-        checkbox.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    });
-
-    // Price slider
-    const priceSlider = document.getElementById('maxPriceSlider');
-    if (priceSlider) {
-        priceSlider.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    }
-
-    // Trending toggle
-    const trendingToggle = document.getElementById('trendingToggle');
-    if (trendingToggle) {
-        trendingToggle.addEventListener('change', function() {
-            applyAllFilters();
-        });
-    }
-
-    // Category filter buttons (legacy support)
-    const filterButtons = document.querySelectorAll('.filter-btn, [data-filter-category]');
-    filterButtons.forEach(btn => {
-        btn.addEventListener('click', function() {
-            const category = this.getAttribute('data-filter-category') || this.textContent.trim();
-            filterByCategory(category);
-        });
-    });
+    // Event listeners are now handled in browse.html's initializeFilters()
+    // This function is kept for backward compatibility
+    console.log('✅ Browse-init event listeners ready');
 }
 
 /**

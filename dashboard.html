@@ -706,7 +706,7 @@
 
     <!-- Mobile Hamburger Button with User Avatar -->
     <button class="mobile-hamburger" onclick="toggleSidebar()">
-        <div class="hamburger-avatar">JD</div>
+        <div class="hamburger-avatar" data-user-avatar></div>
     </button>
 
     <!-- Desktop Sidebar -->
@@ -721,9 +721,9 @@
         </a>
 
         <div class="user-section">
-            <div class="user-avatar">JD</div>
-            <div class="user-name">John Doe</div>
-            <div class="user-email">john@example.com</div>
+            <div class="user-avatar" data-user-avatar></div>
+            <div class="user-name" data-user-name>Loading...</div>
+            <div class="user-email" data-user-email></div>
         </div>
 
         <nav class="nav-menu">
@@ -754,38 +754,38 @@
     <main class="main-content">
         <!-- Mobile User Profile (shown only on mobile) -->
         <div class="mobile-user-profile">
-            <div class="user-avatar">JD</div>
-            <div class="user-name">John Doe</div>
-            <div class="user-email">john@example.com</div>
+            <div class="user-avatar" data-user-avatar></div>
+            <div class="user-name" data-user-name>Loading...</div>
+            <div class="user-email" data-user-email></div>
         </div>
 
         <!-- Overview Section -->
         <div id="overview-section">
             <div class="page-header">
                 <h1 class="page-title">Overview</h1>
-                <p class="page-subtitle">Welcome back, John</p>
+                <p class="page-subtitle">Welcome back, <span data-user-name>there</span></p>
             </div>
 
             <!-- Stats Grid -->
             <div class="stats-grid">
                 <div class="stat-card">
                     <div class="stat-label">Total Meetings</div>
-                    <div class="stat-value">12</div>
-                    <div class="stat-change">+3 this month</div>
+                    <div class="stat-value" id="stat-total-meetings">0</div>
+                    <div class="stat-change" id="stat-meetings-change">All time</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Upcoming</div>
-                    <div class="stat-value">2</div>
-                    <div class="stat-change">Next: Dec 25</div>
+                    <div class="stat-value" id="stat-upcoming">0</div>
+                    <div class="stat-change" id="stat-upcoming-next">No upcoming meetings</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Total Spent</div>
-                    <div class="stat-value">$3,240</div>
+                    <div class="stat-value" id="stat-total-spent">$0</div>
                     <div class="stat-change">Lifetime</div>
                 </div>
                 <div class="stat-card">
                     <div class="stat-label">Favorites</div>
-                    <div class="stat-value">8</div>
+                    <div class="stat-value" id="stat-favorites">0</div>
                     <div class="stat-change">Celebrities saved</div>
                 </div>
             </div>
@@ -797,39 +797,12 @@
                     <button class="btn-text" onclick="showSection('bookings')">View all →</button>
                 </div>
 
-                <div class="bookings-grid">
-                    <div class="booking-card">
-                        <div class="booking-avatar">TS</div>
-                        <div class="booking-info">
-                            <h3>Taylor Swift</h3>
-                            <div class="booking-meta">
-                                <span>📅 Dec 25, 2025</span>
-                                <span>⏰ 2:00 PM</span>
-                                <span>📍 Los Angeles, CA</span>
-                            </div>
-                            <span class="booking-status confirmed">Confirmed</span>
-                        </div>
-                        <div class="booking-actions">
-                            <button class="btn-primary-small">View Details</button>
-                            <button class="btn-small">Message</button>
-                        </div>
-                    </div>
-
-                    <div class="booking-card">
-                        <div class="booking-avatar">RD</div>
-                        <div class="booking-info">
-                            <h3>Robert Downey Jr.</h3>
-                            <div class="booking-meta">
-                                <span>📅 Jan 15, 2026</span>
-                                <span>⏰ 3:30 PM</span>
-                                <span>📍 New York, NY</span>
-                            </div>
-                            <span class="booking-status pending">Pending Approval</span>
-                        </div>
-                        <div class="booking-actions">
-                            <button class="btn-primary-small">View Details</button>
-                            <button class="btn-small">Cancel</button>
-                        </div>
+                <div class="bookings-grid" id="upcoming-bookings-container">
+                    <div class="empty-state">
+                        <div class="empty-state-icon">📅</div>
+                        <h3>No upcoming meetings</h3>
+                        <p>Book your first celebrity meeting to get started</p>
+                        <a href="browse.html" class="btn-primary-small">Browse Celebrities</a>
                     </div>
                 </div>
             </div>

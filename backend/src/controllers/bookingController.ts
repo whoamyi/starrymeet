@@ -7,35 +7,69 @@ export const createBooking = async (req: AuthRequest, res: Response) => {
   try {
     const {
       celebrity_id,
+      celebrity_name,
       meeting_type,
       booking_date,
       time_slot,
       contact_name,
       contact_email,
       contact_phone,
-      special_requests
+      special_requests,
+      price
     } = req.body;
 
-    // Validate celebrity exists
-    const celebrity = await Celebrity.findByPk(celebrity_id);
-    if (!celebrity || !celebrity.is_active) {
-      throw new AppError('Celebrity not found or inactive', 404);
+    // Find or create celebrity
+    let celebrity;
+
+    if (celebrity_id) {
+      // Look up by ID
+      celebrity = await Celebrity.findByPk(celebrity_id);
+      if (!celebrity || !celebrity.is_active) {
+        throw new AppError('Celebrity not found or inactive', 404);
+      }
+    } else if (celebrity_name) {
+      // Look up by display_name
+      celebrity = await Celebrity.findOne({
+        where: { display_name: celebrity_name }
+      });
+
+      // If not found, create a temporary celebrity entry
+      if (!celebrity) {
+        const priceInCents = price ? Math.round(price * 100) : 150000; // Default $1,500
+
+        celebrity = await Celebrity.create({
+          username: celebrity_name.toLowerCase().replace(/\s+/g, '_'),
+          display_name: celebrity_name,
+          category: 'Celebrity',
+          bio: 'Auto-created celebrity profile',
+          quick_meet_price_cents: Math.round(priceInCents * 0.5),
+          standard_meet_price_cents: priceInCents,
+          premium_meet_price_cents: Math.round(priceInCents * 1.5),
+          is_active: true,
+          is_verified: false
+        });
+      }
+    } else {
+      throw new AppError('Either celebrity_id or celebrity_name is required', 400);
     }
 
     // Get pricing based on meeting type
     let subtotal_cents = 0;
-    switch (meeting_type) {
-      case 'quick':
-        subtotal_cents = celebrity.quick_meet_price_cents || 0;
-        break;
-      case 'standard':
-        subtotal_cents = celebrity.standard_meet_price_cents || 0;
-        break;
-      case 'premium':
-        subtotal_cents = celebrity.premium_meet_price_cents || 0;
-        break;
-      default:
-        throw new AppError('Invalid meeting type', 400);
+    const meetingTypeLower = meeting_type.toLowerCase();
+
+    if (meetingTypeLower.includes('quick')) {
+      subtotal_cents = celebrity.quick_meet_price_cents || 0;
+    } else if (meetingTypeLower.includes('standard')) {
+      subtotal_cents = celebrity.standard_meet_price_cents || 0;
+    } else if (meetingTypeLower.includes('premium') || meetingTypeLower.includes('extended')) {
+      subtotal_cents = celebrity.premium_meet_price_cents || 0;
+    } else {
+      // Fallback: use custom price if provided
+      if (price) {
+        subtotal_cents = Math.round(price * 100);
+      } else {
+        throw new AppError('Invalid meeting type or price not provided', 400);
+      }
     }
 
     if (subtotal_cents === 0) {

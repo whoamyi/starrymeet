@@ -1,410 +1,581 @@
 /**
- * Booking Flow Initialization
- * Manages celebrity context and data persistence throughout booking process
+ * Booking Flow - Sequential 4-Step Implementation
+ * Step 1: Review Selection (date, time, package, location)
+ * Step 2: Your Details & Application Form
+ * Step 3: Payment
+ * Step 4: Confirmation
  */
 
 // Global booking state
-let currentBookingData = null;
 let currentStep = 1;
+let selectedPackage = null;
+let selectedDate = null;
+let selectedTime = null;
+let selectedLocation = null;
+let isEditMode = false;
+let currentCelebrity = null;
 
 // Initialize booking flow on page load
-document.addEventListener('DOMContentLoaded', function() {
+document.addEventListener('DOMContentLoaded', async function() {
     // Require authentication
     if (!requireAuth()) {
         return;
     }
 
-    // Load celebrity context
-    initializeBooking();
-
-    // Set up event listeners
-    setupEventListeners();
-});
-
-/**
- * Initialize booking with celebrity context
- */
-function initializeBooking() {
-    // Get celebrity from URL parameter or localStorage
+    // Load celebrity from URL or sessionStorage
     const urlParams = new URLSearchParams(window.location.search);
-    const celebrityNameFromUrl = urlParams.get('celebrity');
+    const username = urlParams.get('username') || sessionStorage.getItem('celebrityUsername');
+    const packageType = urlParams.get('package') || sessionStorage.getItem('selectedPackage');
 
-    // Try to load existing booking in progress
-    currentBookingData = getCurrentBooking();
-
-    // If URL has celebrity, load that celebrity's data
-    if (celebrityNameFromUrl) {
-        const celebrity = getCelebrityByName(celebrityNameFromUrl);
-        if (celebrity) {
-            currentBookingData = {
-                celebrityName: celebrity.name,
-                category: celebrity.mainCategory,
-                price: celebrity.price,
-                location: celebrity.city,
-                country: celebrity.country
-            };
-            saveCurrentBooking(currentBookingData);
-        }
-    }
-
-    // If no celebrity context, redirect to browse
-    if (!currentBookingData || !currentBookingData.celebrityName) {
-        alert('Please select a celebrity first');
+    if (!username) {
+        alert('Please select a celebrity from the browse page first');
         window.location.href = 'browse.html';
         return;
     }
 
-    // Display celebrity info in booking header
-    displayCelebrityInfo();
+    // Load celebrity data from API
+    await loadCelebrityData(username, packageType);
 
-    // Initialize step 1
-    updateStepDisplay();
+    // Initialize UI with celebrity-specific data
+    initializeBookingUI();
+
+    console.log('Booking initialized for:', username, 'Package:', packageType);
+});
+
+/**
+ * Load celebrity data from API
+ */
+async function loadCelebrityData(username, packageType = 'standard-meet') {
+    try {
+        // Fetch celebrity from API
+        const response = await window.api.getCelebrity(username);
+
+        if (!response.success || !response.data || !response.data.celebrity) {
+            throw new Error('Celebrity not found');
+        }
+
+        const celebrity = response.data.celebrity;
+
+        // Transform API response to frontend format
+        currentCelebrity = {
+            name: celebrity.display_name,
+            username: celebrity.username,
+            category: celebrity.category,
+            mainCategory: celebrity.category,
+            subCategory: celebrity.subcategory,
+            niche_category: celebrity.niche_category,
+            bio: celebrity.bio,
+            location: celebrity.location,
+            city: celebrity.location ? celebrity.location.split(',')[0].trim() : 'Los Angeles',
+            country: celebrity.location ? celebrity.location.split(',')[1]?.trim() : 'USA',
+            verified: celebrity.is_verified,
+            trending: celebrity.is_featured,
+            rating: parseFloat(celebrity.average_rating || 4.9),
+            reviews: celebrity.total_reviews || 0,
+            meetings: celebrity.total_bookings || 0,
+            response_time: celebrity.response_time_hours || 24,
+            prices: {
+                quick: Math.round(celebrity.quick_meet_price_cents / 100),
+                standard: Math.round(celebrity.standard_meet_price_cents / 100),
+                premium: Math.round(celebrity.premium_meet_price_cents / 100)
+            },
+            price: Math.round(celebrity.standard_meet_price_cents / 100) // Default to standard price
+        };
+
+        // Set selected package based on URL parameter or sessionStorage
+        const packageMap = {
+            'quick-meet': {
+                name: 'Quick Meet',
+                price: currentCelebrity.prices.quick,
+                duration: 20
+            },
+            'standard-meet': {
+                name: 'Standard Meet',
+                price: currentCelebrity.prices.standard,
+                duration: 45
+            },
+            'premium-experience': {
+                name: 'Premium Experience',
+                price: currentCelebrity.prices.premium,
+                duration: 90
+            }
+        };
+
+        selectedPackage = packageMap[packageType] || packageMap['standard-meet'];
+        selectedLocation = currentCelebrity.location;
+
+        console.log('✅ Celebrity data loaded from API:', currentCelebrity.name);
+
+    } catch (error) {
+        console.error('Error loading celebrity from API:', error);
+        alert('Failed to load celebrity data. Please try again.');
+        window.location.href = 'browse.html';
+    }
 }
 
 /**
- * Display celebrity information throughout booking
+ * Initialize booking UI with celebrity-specific data
  */
-function displayCelebrityInfo() {
-    // Update header with celebrity name
-    const headerElements = document.querySelectorAll('[data-celebrity-name]');
-    headerElements.forEach(el => {
-        el.textContent = currentBookingData.celebrityName;
+function initializeBookingUI() {
+    if (!currentCelebrity) return;
+
+    // Update celebrity name throughout
+    const nameElements = document.querySelectorAll('[data-celebrity-name], #celebrityNameInForm');
+    nameElements.forEach(el => {
+        if (el) el.textContent = currentCelebrity.name;
     });
 
-    // Update price displays
-    const priceElements = document.querySelectorAll('[data-celebrity-price]');
-    priceElements.forEach(el => {
-        el.textContent = formatPrice(currentBookingData.price);
-    });
+    // Update location displays
+    updateLocationDisplay();
 
-    // Update celebrity category
-    const categoryElement = document.getElementById('celebrityCategory');
-    if (categoryElement) {
-        categoryElement.textContent = currentBookingData.category;
+    // Generate celebrity-specific meeting packages
+    generateMeetingPackages();
+
+    // Set default date/time if coming from profile
+    const urlParams = new URLSearchParams(window.location.search);
+    if (urlParams.get('date')) {
+        selectedDate = urlParams.get('date');
+        document.getElementById('displayDate').textContent = selectedDate;
+    }
+    if (urlParams.get('timeSlot')) {
+        selectedTime = urlParams.get('timeSlot');
+        document.getElementById('displayTime').textContent = selectedTime;
     }
 
-    // Update celebrity initials
-    const initialsElement = document.getElementById('celebrityInitials');
-    if (initialsElement && currentBookingData.celebrityName) {
-        const initials = currentBookingData.celebrityName
-            .split(' ')
-            .map(word => word[0])
-            .join('')
-            .toUpperCase()
-            .substring(0, 2);
-        initialsElement.textContent = initials;
-    }
+    // Update progress bar for 3 steps
+    updateProgress();
 
-    // Update location in confirmation
-    const locationElement = document.getElementById('confirmedLocation');
-    if (locationElement) {
-        locationElement.textContent = `${currentBookingData.location}, ${currentBookingData.country}`;
-    }
-
-    // Update package options with celebrity price
-    updatePackageOptions();
-
-    // Set page title
-    document.title = `Book ${currentBookingData.celebrityName} - StarryMeet`;
+    // Initialize summary
+    updateSummary();
 }
 
 /**
- * Update package options with celebrity-specific pricing
+ * Generate meeting packages based on celebrity pricing
  */
-function updatePackageOptions() {
-    if (!currentBookingData || !currentBookingData.price) return;
+function generateMeetingPackages() {
+    if (!currentCelebrity) return;
 
-    const basePrice = currentBookingData.price;
+    const basePrice = currentCelebrity.price || 1500;
 
-    // Update package options
     const packages = [
-        { selector: '.package-option:nth-child(1)', name: 'Quick Meet', price: Math.round(basePrice * 0.5), duration: 15 },
-        { selector: '.package-option:nth-child(2)', name: 'Standard Meet', price: basePrice, duration: 30 },
-        { selector: '.package-option:nth-child(3)', name: 'Extended Meet', price: Math.round(basePrice * 1.5), duration: 60 }
+        {
+            name: 'Quick Meet',
+            price: Math.round(basePrice * 0.5),
+            duration: 15,
+            description: 'Brief in-person meeting'
+        },
+        {
+            name: 'Standard Meet',
+            price: basePrice,
+            duration: 30,
+            description: 'Standard meet & greet'
+        },
+        {
+            name: 'Extended Meet',
+            price: Math.round(basePrice * 1.5),
+            duration: 60,
+            description: 'Extended one-on-one time'
+        }
     ];
 
-    packages.forEach(pkg => {
-        const element = document.querySelector(pkg.selector);
-        if (element) {
-            const priceElement = element.querySelector('.package-price');
-            if (priceElement) {
-                priceElement.textContent = formatPrice(pkg.price);
+    // Update package options in the HTML if they exist
+    const packageContainer = document.querySelector('.package-options');
+    if (packageContainer) {
+        packageContainer.innerHTML = packages.map(pkg => `
+            <div class="package-option ${pkg.name === 'Standard Meet' ? 'selected' : ''}"
+                 onclick="selectPackage(this, '${pkg.name}', ${pkg.price}, ${pkg.duration})">
+                <div class="package-header">
+                    <div class="package-name">${pkg.name}</div>
+                    <div class="package-price">$${pkg.price.toLocaleString()}</div>
+                </div>
+                <div class="package-duration">${pkg.duration} minutes</div>
+                <div class="package-description" style="opacity: 0.6; font-size: 0.875rem;">${pkg.description}</div>
+            </div>
+        `).join('');
+    }
+
+    // Set default to Standard Meet
+    if (!selectedPackage) {
+        selectedPackage = packages[1];
+    }
+}
+
+/**
+ * Update location display with celebrity locations
+ */
+function updateLocationDisplay() {
+    if (!selectedLocation) {
+        selectedLocation = `${currentCelebrity.city || 'Los Angeles'}, ${currentCelebrity.country || 'USA'}`;
+    }
+
+    // Update all location displays
+    const locationElements = ['displayLocation', 'editLocation', 'confirmedLocation'];
+    locationElements.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) {
+            if (el.tagName === 'INPUT' || el.tagName === 'SELECT') {
+                el.value = selectedLocation;
+            } else {
+                el.textContent = selectedLocation;
             }
-            // Update onclick handler
-            element.setAttribute('onclick', `selectPackage(this, '${pkg.name}', ${pkg.price}, ${pkg.duration})`);
         }
     });
 
-    // Update summary total with base price (standard package)
-    const summaryTotal = document.getElementById('summaryTotal');
-    if (summaryTotal) {
-        summaryTotal.textContent = formatPrice(basePrice);
+    // Add available locations dropdown if exists
+    const locationSelect = document.getElementById('editLocation');
+    if (locationSelect && locationSelect.tagName === 'SELECT') {
+        const locations = generateLocationOptions();
+        locationSelect.innerHTML = locations.map(loc =>
+            `<option value="${loc}" ${loc === selectedLocation ? 'selected' : ''}>${loc}</option>`
+        ).join('');
     }
 }
 
 /**
- * Set up form event listeners
+ * Generate location options based on celebrity
  */
-function setupEventListeners() {
-    // Date input validation
-    const dateInput = document.getElementById('meetingDate');
-    if (dateInput) {
-        // Set min date to tomorrow
-        const tomorrow = new Date();
-        tomorrow.setDate(tomorrow.getDate() + 1);
-        dateInput.min = tomorrow.toISOString().split('T')[0];
+function generateLocationOptions() {
+    const baseCity = currentCelebrity.city || 'Los Angeles';
+    const country = currentCelebrity.country || 'USA';
+
+    return [
+        `${baseCity}, ${country}`,
+        `New York, USA`,
+        `London, UK`,
+        `Virtual Meeting`
+    ];
+}
+
+/**
+ * Select a meeting package
+ */
+function selectPackage(element, name, price, duration) {
+    document.querySelectorAll('.package-option').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+
+    selectedPackage = { name, price, duration };
+    updateSummary();
+}
+
+/**
+ * Select time slot in mini view
+ */
+function selectTimeMini(element, time) {
+    document.querySelectorAll('.time-slot-mini').forEach(el => el.classList.remove('selected'));
+    element.classList.add('selected');
+
+    selectedTime = time;
+    document.getElementById('displayTime').textContent = time;
+    updateSummary();
+}
+
+/**
+ * Toggle edit mode for meeting details
+ */
+function toggleEditMode() {
+    isEditMode = !isEditMode;
+
+    const confirmView = document.getElementById('confirmView');
+    const editView = document.getElementById('editView');
+    const editBtnText = document.getElementById('editBtnText');
+
+    if (confirmView && editView) {
+        if (isEditMode) {
+            confirmView.style.display = 'none';
+            editView.style.display = 'block';
+            if (editBtnText) editBtnText.textContent = '✓ Done';
+        } else {
+            confirmView.style.display = 'block';
+            editView.style.display = 'none';
+            if (editBtnText) editBtnText.textContent = '✏️ Edit';
+            updateDisplayValues();
+        }
     }
 }
 
 /**
- * Navigate to next step (called by existing nextStep function)
+ * Update display values when editing
  */
-function saveStepData(step) {
-    const updates = {};
+function updateDisplayValues() {
+    const editLocationEl = document.getElementById('editLocation');
+    const editDateEl = document.getElementById('editDate');
 
-    if (step === 1) {
-        // Save date/time/location from Step 1
-        const dateInput = document.getElementById('meetingDate');
-        const timeInput = document.getElementById('meetingTime');
-        const locationInput = document.getElementById('meetingLocation');
-
-        if (dateInput) updates.date = dateInput.value;
-        if (timeInput) updates.time = timeInput.value;
-        if (locationInput) updates.location = locationInput.value || currentBookingData.location;
-
-        // Validate
-        if (!updates.date || !updates.time) {
-            alert('Please select a date and time');
-            return false;
-        }
+    if (editLocationEl) {
+        selectedLocation = editLocationEl.value;
+        const displayLocationEl = document.getElementById('displayLocation');
+        if (displayLocationEl) displayLocationEl.textContent = selectedLocation;
     }
 
-    if (step === 3) {
-        // Save application data from Step 3
-        const occupationInput = document.getElementById('occupation');
-        const hometownInput = document.getElementById('hometown');
-        const whyMeetInput = document.getElementById('whyMeet');
-        const topicsInput = document.getElementById('topics');
-        const agreeCheckbox = document.getElementById('agreeTerms');
-
-        if (occupationInput) updates.occupation = occupationInput.value;
-        if (hometownInput) updates.hometown = hometownInput.value;
-        if (whyMeetInput) updates.whyMeet = whyMeetInput.value;
-        if (topicsInput) updates.topics = topicsInput.value;
-
-        // Validate
-        if (!updates.occupation || !updates.hometown || !updates.whyMeet || !updates.topics) {
-            alert('Please fill in all required fields');
-            return false;
-        }
-
-        if (updates.whyMeet.length < 50) {
-            alert('Please provide at least 50 characters explaining why you want to meet this celebrity');
-            return false;
-        }
-
-        if (updates.topics.length < 20) {
-            alert('Please provide at least 20 characters describing what you\'d like to discuss');
-            return false;
-        }
-
-        if (agreeCheckbox && !agreeCheckbox.checked) {
-            alert('Please agree to the terms to continue');
-            return false;
-        }
+    if (editDateEl) {
+        selectedDate = editDateEl.value;
+        const displayDateEl = document.getElementById('displayDate');
+        if (displayDateEl) displayDateEl.textContent = selectedDate;
     }
 
-    // Save updates to booking data
-    if (Object.keys(updates).length > 0) {
-        currentBookingData = { ...currentBookingData, ...updates };
-        saveCurrentBooking(currentBookingData);
-    }
-
-    return true;
+    updateSummary();
 }
 
 /**
- * Update step display (called by existing updateStepDisplay)
+ * Update summary sidebar
  */
-function populateStepData(step) {
-    // Populate form fields with existing data
-    if (!currentBookingData) return;
+function updateSummary() {
+    if (!selectedPackage) return;
 
-    if (step === 1 && currentBookingData.date) {
-        const dateInput = document.getElementById('meetingDate');
-        const timeInput = document.getElementById('meetingTime');
-        const locationInput = document.getElementById('meetingLocation');
+    const summaryEls = {
+        package: document.getElementById('summaryPackage'),
+        duration: document.getElementById('summaryDuration'),
+        date: document.getElementById('summaryDate'),
+        time: document.getElementById('summaryTime'),
+        location: document.getElementById('summaryLocation'),
+        total: document.getElementById('summaryTotal')
+    };
 
-        if (dateInput && currentBookingData.date) dateInput.value = currentBookingData.date;
-        if (timeInput && currentBookingData.time) timeInput.value = currentBookingData.time;
-        if (locationInput && currentBookingData.location) locationInput.value = currentBookingData.location;
-    }
+    if (summaryEls.package) summaryEls.package.textContent = selectedPackage.name;
+    if (summaryEls.duration) summaryEls.duration.textContent = selectedPackage.duration + ' minutes';
+    if (summaryEls.date && selectedDate) summaryEls.date.textContent = selectedDate;
+    if (summaryEls.time && selectedTime) summaryEls.time.textContent = selectedTime;
+    if (summaryEls.location && selectedLocation) summaryEls.location.textContent = selectedLocation;
+    if (summaryEls.total) summaryEls.total.textContent = '$' + selectedPackage.price.toLocaleString();
+}
 
-    if (step === 3) {
-        const occupationInput = document.getElementById('occupation');
-        const hometownInput = document.getElementById('hometown');
-        const whyMeetInput = document.getElementById('whyMeet');
-        const topicsInput = document.getElementById('topics');
+/**
+ * Navigate to next step
+ */
+function nextStep() {
+    // Sequential flow: 1 (Review) -> 2 (Form) -> 3 (Payment) -> 4 (Confirmation)
+    if (currentStep < 4) {
+        const currentStepEl = document.getElementById('step' + currentStep);
+        if (currentStepEl) currentStepEl.classList.remove('active');
 
-        if (occupationInput && currentBookingData.occupation) occupationInput.value = currentBookingData.occupation;
-        if (hometownInput && currentBookingData.hometown) hometownInput.value = currentBookingData.hometown;
-        if (whyMeetInput && currentBookingData.whyMeet) whyMeetInput.value = currentBookingData.whyMeet;
-        if (topicsInput && currentBookingData.topics) topicsInput.value = currentBookingData.topics;
-    }
+        currentStep++;
 
-    if (step === 4) {
-        // Review step - display all booking data
-        displayReviewData();
+        const nextStepEl = document.getElementById('step' + currentStep);
+        if (nextStepEl) nextStepEl.classList.add('active');
+
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 }
 
 /**
- * Display booking data in review step
+ * Navigate to previous step
  */
-function displayReviewData() {
-    const reviewContainer = document.getElementById('reviewContainer');
-    if (!reviewContainer) return;
+function prevStep() {
+    // Sequential flow: 4 (Confirmation) -> 3 (Payment) -> 2 (Form) -> 1 (Review)
+    if (currentStep > 1) {
+        const currentStepEl = document.getElementById('step' + currentStep);
+        if (currentStepEl) currentStepEl.classList.remove('active');
 
-    const reviewHTML = `
-        <div class="review-section">
-            <h3>Celebrity</h3>
-            <p><strong>${currentBookingData.celebrityName}</strong></p>
-            <p>${currentBookingData.category}</p>
-        </div>
+        currentStep--;
 
-        <div class="review-section">
-            <h3>Meeting Details</h3>
-            <p><strong>Date:</strong> ${formatDate(currentBookingData.date)}</p>
-            <p><strong>Time:</strong> ${currentBookingData.time}</p>
-            <p><strong>Location:</strong> ${currentBookingData.location}</p>
-        </div>
+        const prevStepEl = document.getElementById('step' + currentStep);
+        if (prevStepEl) prevStepEl.classList.add('active');
 
-        <div class="review-section">
-            <h3>Your Information</h3>
-            <p><strong>Occupation:</strong> ${currentBookingData.occupation}</p>
-            <p><strong>Hometown:</strong> ${currentBookingData.hometown}</p>
-        </div>
-
-        <div class="review-section">
-            <h3>About This Meeting</h3>
-            <p><strong>Why you want to meet:</strong></p>
-            <p>${currentBookingData.whyMeet}</p>
-            <p><strong>Topics to discuss:</strong></p>
-            <p>${currentBookingData.topics}</p>
-        </div>
-
-        <div class="review-section">
-            <h3>Total Price</h3>
-            <p class="review-price">${formatPrice(currentBookingData.price)}</p>
-        </div>
-    `;
-
-    reviewContainer.innerHTML = reviewHTML;
+        updateProgress();
+        window.scrollTo({ top: 0, behavior: 'smooth' });
+    }
 }
 
 /**
- * Submit final booking
+ * Update progress bar (3 main steps + confirmation)
  */
-function submitBooking() {
+function updateProgress() {
+    // Step 1 = Review Selection (Progress 1)
+    // Step 2 = Application Form (Progress 2)
+    // Step 3 = Payment (Progress 3)
+    // Step 4 = Confirmation (Complete)
+
+    document.querySelectorAll('.progress-step').forEach((step, index) => {
+        if (index < currentStep) {
+            step.classList.add('completed');
+            step.classList.remove('active');
+        } else if (index === currentStep - 1) {
+            step.classList.add('active');
+            step.classList.remove('completed');
+        } else {
+            step.classList.remove('active', 'completed');
+        }
+    });
+
+    const progressPercentage = ((currentStep - 1) / 4) * 100;
+    const progressLine = document.getElementById('progressLine');
+    if (progressLine) {
+        progressLine.style.width = progressPercentage + '%';
+    }
+}
+
+/**
+ * Validate application form and proceed
+ */
+function validateAndProceed() {
+    const firstName = document.getElementById('firstName')?.value.trim();
+    const lastName = document.getElementById('lastName')?.value.trim();
+    const email = document.getElementById('email')?.value.trim();
+    const phone = document.getElementById('phone')?.value.trim();
+    const occupation = document.getElementById('occupation')?.value.trim();
+    const hometown = document.getElementById('hometown')?.value.trim();
+    const meetingReason = document.getElementById('meetingReason')?.value.trim();
+    const discussionTopics = document.getElementById('discussionTopics')?.value.trim();
+    const agreementCheck = document.getElementById('agreementCheck')?.checked;
+
+    // Validation
+    if (!firstName || !lastName) {
+        alert('Please provide your full name.');
+        return;
+    }
+
+    if (!email || !email.includes('@')) {
+        alert('Please provide a valid email address.');
+        return;
+    }
+
+    if (!phone) {
+        alert('Please provide your phone number.');
+        return;
+    }
+
+    if (!occupation) {
+        alert('Please tell us what you do.');
+        return;
+    }
+
+    if (!hometown) {
+        alert('Please tell us where you\'re from.');
+        return;
+    }
+
+    if (!meetingReason || meetingReason.length < 50) {
+        alert('Please share why you want to meet (minimum 50 characters). Be thoughtful and genuine.');
+        return;
+    }
+
+    if (!discussionTopics || discussionTopics.length < 20) {
+        alert('Please tell us what you\'d like to discuss during the meeting (minimum 20 characters).');
+        return;
+    }
+
+    if (!agreementCheck) {
+        alert('Please acknowledge that approval is not guaranteed and your request will be reviewed.');
+        return;
+    }
+
+    // Store form data for submission
+    window.bookingFormData = {
+        firstName,
+        lastName,
+        email,
+        phone,
+        occupation,
+        hometown,
+        meetingReason,
+        discussionTopics
+    };
+
+    // Proceed to payment step
+    nextStep();
+}
+
+/**
+ * Complete booking and submit to backend
+ */
+async function completeBooking() {
     try {
         // Validate we have all required data
-        if (!currentBookingData.celebrityName || !currentBookingData.date || !currentBookingData.time) {
-            throw new Error('Missing required booking information');
+        if (!currentCelebrity || !selectedDate || !selectedTime || !selectedPackage) {
+            alert('Missing booking information. Please go back and complete all fields.');
+            return;
         }
 
-        if (!currentBookingData.occupation || !currentBookingData.hometown || !currentBookingData.whyMeet) {
-            throw new Error('Missing required application information');
+        if (!window.bookingFormData) {
+            alert('Missing application information. Please go back and complete the form.');
+            return;
         }
 
-        // Create the booking
-        const booking = createBooking({
-            celebrityName: currentBookingData.celebrityName,
-            date: currentBookingData.date,
-            time: currentBookingData.time,
-            location: currentBookingData.location,
-            price: currentBookingData.price,
-            meetingType: 'Private Meet & Greet',
-            duration: '30 minutes',
-            occupation: currentBookingData.occupation,
-            hometown: currentBookingData.hometown,
-            whyMeet: currentBookingData.whyMeet,
-            topics: currentBookingData.topics
-        });
+        // Get current user
+        const currentUser = getCurrentUser();
+        if (!currentUser) {
+            alert('Please log in to complete booking');
+            window.location.href = 'index.html';
+            return;
+        }
 
-        // Clear temporary booking data
-        clearCurrentBooking();
+        // Prepare booking data for backend API
+        const bookingData = {
+            celebrity_name: currentCelebrity.name,
+            booking_date: convertDateToISO(selectedDate),
+            time_slot: selectedTime,
+            meeting_type: selectedPackage.name,
+            contact_name: `${window.bookingFormData.firstName} ${window.bookingFormData.lastName}`,
+            contact_email: window.bookingFormData.email,
+            contact_phone: window.bookingFormData.phone,
+            special_requests: `Occupation: ${window.bookingFormData.occupation}\nHometown: ${window.bookingFormData.hometown}\n\nWhy: ${window.bookingFormData.meetingReason}\n\nTopics: ${window.bookingFormData.discussionTopics}`,
+            location: selectedLocation,
+            price: selectedPackage.price
+        };
 
-        // Show success message
-        showSuccessMessage('Booking request submitted successfully!');
+        console.log('Submitting booking:', bookingData);
 
-        // Redirect to dashboard after short delay
-        setTimeout(() => {
-            window.location.href = 'dashboard.html?tab=bookings&status=pending';
-        }, 1500);
+        // Submit to backend API
+        const response = await window.api.createBooking(bookingData);
+
+        if (response.success) {
+            // Show success step
+            nextStep();
+
+            // Update confirmation details
+            const confirmedPackageEl = document.getElementById('confirmedPackage');
+            const confirmedDurationEl = document.getElementById('confirmedDuration');
+            const confirmedPriceEl = document.getElementById('confirmedPrice');
+            const confirmedDateTimeEl = document.getElementById('confirmedDateTime');
+            const bookingRefEl = document.getElementById('bookingRef');
+
+            if (confirmedPackageEl) confirmedPackageEl.textContent = selectedPackage.name;
+            if (confirmedDurationEl) confirmedDurationEl.textContent = selectedPackage.duration + ' minutes';
+            if (confirmedPriceEl) confirmedPriceEl.textContent = '$' + selectedPackage.price.toLocaleString();
+            if (confirmedDateTimeEl) confirmedDateTimeEl.textContent = selectedDate + ' at ' + selectedTime;
+            if (bookingRefEl) bookingRefEl.textContent = response.data?.booking?.booking_number || 'Pending';
+
+            // Redirect to dashboard after 3 seconds
+            setTimeout(() => {
+                window.location.href = 'dashboard.html';
+            }, 3000);
+
+        } else {
+            alert('Booking failed: ' + (response.error?.message || 'Unknown error'));
+        }
 
     } catch (error) {
         console.error('Booking submission error:', error);
-        alert('Error submitting booking: ' + error.message);
+        alert('Failed to submit booking. Please try again or contact support.');
     }
 }
 
 /**
- * Override existing nextStep function to save data
+ * Helper: Convert date string to ISO format
  */
-const originalNextStep = window.nextStep;
-window.nextStep = function() {
-    // Save current step data
-    if (!saveStepData(currentStep)) {
-        return; // Validation failed
-    }
+function convertDateToISO(dateStr) {
+    if (!dateStr) return null;
 
-    // Call original function
-    if (typeof originalNextStep === 'function') {
-        originalNextStep();
-    } else {
-        // Fallback if original doesn't exist
-        if (currentStep < 5) {
-            currentStep++;
-            updateStepDisplay();
+    try {
+        if (dateStr.includes('-')) return dateStr;
+
+        const date = new Date(dateStr);
+        if (!isNaN(date.getTime())) {
+            return date.toISOString().split('T')[0];
         }
+
+        return dateStr;
+    } catch (e) {
+        return dateStr;
     }
-
-    // Populate next step with saved data
-    populateStepData(currentStep);
-};
-
-/**
- * Override existing prevStep function
- */
-const originalPrevStep = window.prevStep;
-window.prevStep = function() {
-    // Call original function
-    if (typeof originalPrevStep === 'function') {
-        originalPrevStep();
-    } else {
-        // Fallback if original doesn't exist
-        if (currentStep > 1) {
-            currentStep--;
-            updateStepDisplay();
-        }
-    }
-
-    // Populate previous step with saved data
-    populateStepData(currentStep);
-};
-
-/**
- * Override existing submitBooking if it exists
- */
-if (typeof window.submitBooking === 'undefined') {
-    window.submitBooking = submitBooking;
 }
 
-/**
- * Make functions globally available
- */
-window.saveStepData = saveStepData;
-window.populateStepData = populateStepData;
-window.displayReviewData = displayReviewData;
-
-console.log('Booking flow initialized for:', currentBookingData?.celebrityName);
+// Make functions globally available
+window.selectPackage = selectPackage;
+window.selectTimeMini = selectTimeMini;
+window.toggleEditMode = toggleEditMode;
+window.updateDisplayValues = updateDisplayValues;
+window.nextStep = nextStep;
+window.prevStep = prevStep;
+window.validateAndProceed = validateAndProceed;
+window.completeBooking = completeBooking;

@@ -1313,18 +1313,40 @@ function logoutUser() {
  * @returns {object|null} User object or null
  */
 function getCurrentUser() {
+    // First check for API-authenticated user (new backend auth)
+    const apiUser = localStorage.getItem('starryMeetUser');
+    if (apiUser) {
+        try {
+            const user = JSON.parse(apiUser);
+            // Transform backend user format to match expected format
+            return {
+                id: user.id,
+                name: `${user.first_name} ${user.last_name}`.trim(),
+                first_name: user.first_name,
+                last_name: user.last_name,
+                email: user.email,
+                phone: user.phone || '',
+                avatar: user.avatar_url || null,
+                role: user.role || 'user'
+            };
+        } catch (e) {
+            console.error('Error parsing user data:', e);
+        }
+    }
+
+    // Fallback to legacy localStorage authentication
     const session = getSession();
     if (!session || !session.userId) {
         return null;
     }
-    
+
     const users = JSON.parse(localStorage.getItem(STORAGE_KEYS.USERS) || '[]');
     const user = users.find(u => u.id === session.userId);
-    
+
     if (!user) {
         return null;
     }
-    
+
     const { password, ...userWithoutPassword } = user;
     return userWithoutPassword;
 }
@@ -1392,6 +1414,13 @@ function clearSession() {
  * @returns {boolean} True if authenticated
  */
 function isAuthenticated() {
+    // Check for backend API authentication first
+    const apiToken = localStorage.getItem('starryMeetToken');
+    if (apiToken) {
+        return true;
+    }
+
+    // Fallback to legacy session-based authentication
     const session = getSession();
     return session && session.isAuthenticated === true;
 }

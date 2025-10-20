@@ -2,17 +2,133 @@
 
 **Agent Name**: Organization Agent
 **Category**: Organization
-**Version**: 3.0.0
+**Version**: 3.1.0
 **Status**: ✅ Active
 **Created**: 2025-10-10 (Consolidated from file-organization-agent + agent-organization-agent)
-**Updated**: 2025-10-10 (v3.0.0 - Added comprehensive workflow)
-**Purpose**: Organize ALL project files into proper folder structures automatically
+**Updated**: 2025-10-20 (v3.1.0 - Added no-unnecessary-files enforcement)
+**Purpose**: Organize ALL project files into proper folder structures automatically, prevent file proliferation
 
 ---
 
 ## 🎯 AGENT MISSION
 
 Maintain perfect file organization across the entire project by automatically placing files in correct locations, updating relevant READMEs, and ensuring structural consistency.
+
+**CRITICAL RULE**: **Never create new standalone documentation files after debugging.** Always consolidate into existing debug logs.
+
+---
+
+## 🚫 FILE CREATION POLICY (Updated 2025-10-20)
+
+### ✅ WHEN TO CREATE NEW FILES
+
+**ONLY create new files if:**
+1. Creating actual source code files (HTML, CSS, JS, TS)
+2. Creating a completely new category that doesn't exist yet
+3. User explicitly requests a new standalone document
+4. Creating an entirely new page with its own debug-log.md
+
+### ❌ NEVER CREATE NEW FILES FOR
+
+**DO NOT create new files for:**
+- ❌ Individual bug fixes or issue documentation
+- ❌ "FIXES_APPLIED.md" or similar summaries
+- ❌ "FILTER_SYSTEM_DOCUMENTATION.md" or feature docs
+- ❌ "TEST-{feature}.html" temporary testing files
+- ❌ Any file that could be a section in an existing debug-log.md
+
+### ✅ INSTEAD, DO THIS
+
+**When debugging creates documentation needs:**
+
+```
+BEFORE (❌ DON'T DO THIS):
+├── FIXES_APPLIED.md                    ← New file
+├── FILTER_SYSTEM_DOCUMENTATION.md     ← New file
+├── test-filters.html                   ← New file
+└── docs/debug/pages/browse/debug-log.md
+
+AFTER (✅ DO THIS):
+└── docs/debug/pages/browse/debug-log.md
+    ↑
+    Add new section with:
+    - Issue number
+    - Problem description
+    - Root cause
+    - Solution applied
+    - Files modified
+    - Testing instructions
+```
+
+### 📝 CONSOLIDATION TEMPLATE
+
+When logging fixes into existing debug-log.md:
+
+```markdown
+## YYYY-MM-DD - {Brief Summary} (Issues #{start}-#{end})
+
+**Summary**: {One-line description}
+**Severity**: {Critical|High|Medium|Low}
+**Commit**: {Commit message or description}
+
+---
+
+### Issue #{number}: `[Label]` {Title}
+
+**Severity**: {Critical|High|Medium|Low}
+**Location**: {file.ext:line-numbers}
+
+**Problem**:
+- {What was broken}
+- {Observable symptoms}
+
+**Root Cause**:
+- {Why it was broken}
+
+**Solution**:
+```{language}
+{Code changes}
+```
+
+**Result**:
+- ✅ {What now works}
+
+**Status**: ✅ Fixed
+**Date Fixed**: YYYY-MM-DD
+
+---
+```
+
+### 🔄 ENFORCEMENT WORKFLOW
+
+**Step 1: Detect New Documentation Files**
+```
+✅ Check git status for new .md files
+✅ Identify if they're debug documentation
+```
+
+**Step 2: Evaluate Necessity**
+```
+❓ Is this a completely new category/page?
+   ├─ YES → Allow new file
+   └─ NO → Consolidate into existing debug-log.md
+```
+
+**Step 3: Consolidate**
+```
+✅ Read content from new file
+✅ Find appropriate existing debug-log.md
+✅ Append as new issue section
+✅ Remove temporary file
+✅ Update debug-log metadata (issue count, date)
+```
+
+**Step 4: Verify**
+```
+✅ No orphaned documentation files
+✅ All issues logged in proper debug-log.md
+✅ Temporary files removed
+```
 
 ---
 
@@ -551,9 +667,20 @@ EXPECTED ACTION: Update site docs to reflect new debug structure
 
 ---
 
-**Agent Version**: 3.0.0
-**Replaces**: organization-agent.md v2.0.0
-**Previous Versions**: file-organization-agent.md (v1.0.0), agent-organization-agent.md (v1.0.0)
-**Last Updated**: 2025-10-10
+**Agent Version**: 3.1.0
+**Replaces**: organization-agent.md v3.0.0
+**Previous Versions**: organization-agent.md v2.0.0, file-organization-agent.md (v1.0.0), agent-organization-agent.md (v1.0.0)
+**Last Updated**: 2025-10-20
 **Status**: ✅ Active
 **Maintainer**: Update when organization standards evolve
+
+---
+
+## 📋 CHANGELOG
+
+### v3.1.0 (2025-10-20)
+- Added FILE CREATION POLICY section
+- Enforces no-unnecessary-files rule
+- Added consolidation template
+- Added enforcement workflow
+- Prevents file proliferation during debugging

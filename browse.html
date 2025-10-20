@@ -24,6 +24,7 @@
     <title>Browse Celebrities - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/pages/browse.css">
+    <script src="js/api.js"></script>
     <script src="js/shared.js"></script>
     <script src="js/browse-init.js"></script>
 </head>
@@ -246,8 +247,8 @@
     </div>
 
     <script>
-        // Use shared celebrity data from shared.js
-        const celebrities = CELEBRITIES;
+        // Use shared celebrity data from shared.js (will be replaced by API data)
+        let celebrities = [];
         const cityByCountry = {
             "USA": ["Los Angeles", "New York", "Miami", "Atlanta", "San Francisco", "Seattle", "Chicago", "Boston", "Las Vegas", "Nashville", "Dallas", "Houston", "Phoenix", "Tampa", "Palo Alto", "Cupertino", "Mountain View", "Omaha", "Honolulu"],
             "UK": ["London"],
@@ -343,6 +344,9 @@
             }
         }
 
+        // Expose globally for inline event handlers
+        window.applyFilters = applyFilters;
+
         // Render celebrities with pagination
         function renderCelebrities() {
             // DO NOT delegate to browse-init.js - we handle our own rendering with pagination
@@ -389,6 +393,9 @@
 
             renderPagination();
         }
+
+        // Expose renderCelebrities globally
+        window.renderCelebrities = renderCelebrities;
 
         // Apply sorting
         function applySorting() {
@@ -491,11 +498,15 @@
             const isInWatchlist = watchlist.has(celeb.name);
             const heartIcon = isInWatchlist ? '❤️' : '🤍';
             const watchlistClass = isInWatchlist ? 'active' : '';
+            const rating = celeb.rating || 4.95;
+            const reviews = celeb.reviews || 0;
+            const username = celeb.username || encodeURIComponent(celeb.name);
 
             return `
-                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?username=${username}'">
                     <div class="celebrity-image" style="background: ${color}">
                         ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
+                        ${celeb.trending ? '<div class="trending-badge">🔥 Trending</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
                         <div class="celebrity-initials">${initials}</div>
                     </div>
@@ -507,7 +518,8 @@
                             <span class="price">from $${celeb.price.toLocaleString()}</span>
                             <div class="celebrity-rating">
                                 <span class="rating-star">★</span>
-                                <span>4.95</span>
+                                <span>${rating.toFixed(2)}</span>
+                                <span class="reviews-count">(${reviews})</span>
                             </div>
                         </div>
                     </div>
@@ -522,9 +534,12 @@
             const isInWatchlist = watchlist.has(celeb.name);
             const heartIcon = isInWatchlist ? '❤️' : '🤍';
             const watchlistClass = isInWatchlist ? 'active' : '';
+            const rating = celeb.rating || 4.95;
+            const reviews = celeb.reviews || 0;
+            const username = celeb.username || encodeURIComponent(celeb.name);
 
             return `
-                <div class="celebrity-card-list" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                <div class="celebrity-card-list" onclick="window.location.href='celebrity-profile.html?username=${username}'">
                     <div class="celebrity-image-list" style="background: ${color}">
                         ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
@@ -545,7 +560,8 @@
                         <div class="celebrity-actions-list">
                             <div class="celebrity-rating">
                                 <span class="rating-star">★</span>
-                                <span>4.95</span>
+                                <span>${rating.toFixed(2)}</span>
+                                <span class="reviews-count">(${reviews})</span>
                             </div>
                         </div>
                     </div>
@@ -579,13 +595,18 @@
         }
 
         // Build category tree structure
-        function buildCategoryTree() {
+        window.buildCategoryTree = function buildCategoryTree() {
             const categoryTree = {};
 
+            // Use window.celebrities (loaded from API)
+            const celebList = window.celebrities || [];
+
+            console.log('Building category tree from', celebList.length, 'celebrities');
+
             // Build the hierarchy
-            celebrities.forEach(celeb => {
+            celebList.forEach(celeb => {
                 const main = celeb.mainCategory || celeb.category;
-                const sub = celeb.subCategory;
+                const sub = celeb.subCategory || celeb.subcategory;
 
                 if (!main) return;
 
@@ -631,11 +652,16 @@
         }
 
         // Build location tree structure
-        function buildLocationTree() {
+        window.buildLocationTree = function buildLocationTree() {
             const locationTree = {};
 
+            // Use window.celebrities (loaded from API)
+            const celebList = window.celebrities || [];
+
+            console.log('Building location tree from', celebList.length, 'celebrities');
+
             // Build the hierarchy
-            celebrities.forEach(celeb => {
+            celebList.forEach(celeb => {
                 const country = celeb.country;
                 const city = celeb.city;
 

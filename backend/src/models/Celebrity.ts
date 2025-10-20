@@ -6,7 +6,10 @@ interface CelebrityAttributes {
   user_id?: string;
   username: string;
   display_name: string;
+  celebrity_code?: string;
   category: string;
+  subcategory?: string;
+  niche_category?: string;
   bio?: string;
   location?: string;
   avatar_url?: string;
@@ -14,6 +17,7 @@ interface CelebrityAttributes {
   quick_meet_price_cents?: number;
   standard_meet_price_cents?: number;
   premium_meet_price_cents?: number;
+  response_time_hours?: number;
   average_rating: number;
   total_reviews: number;
   total_bookings: number;
@@ -32,7 +36,10 @@ class Celebrity extends Model<CelebrityAttributes, CelebrityCreationAttributes> 
   public user_id?: string;
   public username!: string;
   public display_name!: string;
+  public celebrity_code?: string;
   public category!: string;
+  public subcategory?: string;
+  public niche_category?: string;
   public bio?: string;
   public location?: string;
   public avatar_url?: string;
@@ -40,6 +47,7 @@ class Celebrity extends Model<CelebrityAttributes, CelebrityCreationAttributes> 
   public quick_meet_price_cents?: number;
   public standard_meet_price_cents?: number;
   public premium_meet_price_cents?: number;
+  public response_time_hours?: number;
   public average_rating!: number;
   public total_reviews!: number;
   public total_bookings!: number;
@@ -75,9 +83,22 @@ Celebrity.init(
       type: DataTypes.STRING(100),
       allowNull: false
     },
+    celebrity_code: {
+      type: DataTypes.STRING(50),
+      allowNull: true,
+      unique: true
+    },
     category: {
       type: DataTypes.STRING(50),
       allowNull: false
+    },
+    subcategory: {
+      type: DataTypes.STRING(100),
+      allowNull: true
+    },
+    niche_category: {
+      type: DataTypes.STRING(100),
+      allowNull: true
     },
     bio: {
       type: DataTypes.TEXT,
@@ -106,6 +127,11 @@ Celebrity.init(
     premium_meet_price_cents: {
       type: DataTypes.INTEGER,
       allowNull: true
+    },
+    response_time_hours: {
+      type: DataTypes.INTEGER,
+      allowNull: true,
+      defaultValue: 24
     },
     average_rating: {
       type: DataTypes.DECIMAL(3, 2),
