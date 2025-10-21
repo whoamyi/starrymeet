@@ -881,7 +881,7 @@
             let isDragging = false;
             let dragTarget = null;
 
-            // Only allow dragging from the top header area (60px)
+            // Only allow dragging from the top header area (56px)
             filterSidebar.addEventListener('touchstart', function(e) {
                 if (window.innerWidth >= 768) return;
 
@@ -889,8 +889,8 @@
                 const rect = filterSidebar.getBoundingClientRect();
                 const relativeY = touchY - rect.top;
 
-                // Only allow drag from top 60px header area
-                if (relativeY <= 60) {
+                // Only allow drag from top 56px header area
+                if (relativeY <= 56) {
                     startY = touchY;
                     isDragging = true;
                     dragTarget = e.target;
