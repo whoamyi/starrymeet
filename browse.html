@@ -192,6 +192,11 @@
 
         <!-- Main Content -->
         <main class="main-content">
+            <!-- Hero Section -->
+            <div class="hero-section" id="heroSection">
+                <h1 class="hero-text">Make your dream come true</h1>
+            </div>
+
             <!-- Expandable Search (hidden by default) -->
             <div class="expandable-search" id="expandableSearch">
                 <div class="search-bar">
@@ -983,22 +988,23 @@
             }
         });
 
-        // Toolbar scroll effect
+        // Toolbar becomes sticky when hero scrolls out of view
         function initToolbarScroll() {
             const toolbar = document.getElementById('resultsToolbar');
-            let lastScrollY = window.scrollY;
+            const hero = document.getElementById('heroSection');
+
+            if (!toolbar || !hero) return;
 
             window.addEventListener('scroll', function() {
-                const scrollY = window.scrollY;
+                const heroRect = hero.getBoundingClientRect();
+                const navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64;
 
-                // Add scrolled class when scrolled down
-                if (scrollY > 50) {
-                    toolbar?.classList.add('scrolled');
+                // When hero's bottom reaches the navbar (scrolled out of view)
+                if (heroRect.bottom <= navHeight) {
+                    toolbar.classList.add('sticky');
                 } else {
-                    toolbar?.classList.remove('scrolled');
+                    toolbar.classList.remove('sticky');
                 }
-
-                lastScrollY = scrollY;
             }, { passive: true });
         }
 

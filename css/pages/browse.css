@@ -419,7 +419,7 @@ body {
     color: #6B7280;
 }
 
-/* Results Toolbar - Sticky & Expandable Search */
+/* Results Toolbar - Becomes Sticky After Hero */
 .results-toolbar {
     background: #0c0d0e;
     padding: 16px 0;
@@ -429,14 +429,16 @@ body {
     align-items: center;
     flex-wrap: wrap;
     gap: 12px;
-    position: sticky;
-    top: var(--nav-height);
-    z-index: 90;
+    position: relative; /* Not sticky by default */
     transition: all 0.3s ease;
     border-bottom: 1px solid transparent;
+    z-index: 90;
 }
 
-.results-toolbar.scrolled {
+/* Sticky state - activated by JavaScript when hero scrolls away */
+.results-toolbar.sticky {
+    position: sticky;
+    top: var(--nav-height);
     padding: 12px 0;
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
@@ -480,27 +482,25 @@ body {
     color: #8B5CF6;
 }
 
-/* Expandable Search Container */
+/* Expandable Search Container - NOT sticky, just expands in place */
 .expandable-search {
-    position: fixed;
-    top: var(--nav-height);
-    left: 0;
-    right: 0;
+    position: relative; /* Changed from fixed - expands in place */
     background: #0c0d0e;
-    padding: 16px 24px;
-    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
-    z-index: 95;
-    transform: translateY(-100%);
+    padding: 0 0 16px 0;
+    max-height: 0;
+    overflow: hidden;
     opacity: 0;
     transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
     pointer-events: none;
+    z-index: 95;
 }
 
 .expandable-search.active {
-    transform: translateY(0);
+    max-height: 100px;
+    padding: 16px 0;
     opacity: 1;
     pointer-events: all;
+    border-bottom: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .expandable-search .search-bar {
@@ -1050,22 +1050,34 @@ body {
         width: 100%;
     }
 
+    /* Hero section on mobile */
+    .hero-section {
+        padding: 24px 0 20px;
+    }
+
+    .hero-text {
+        font-size: 13px;
+    }
+
     /* Toolbar sticky on mobile */
     .results-toolbar {
         margin: 0 -16px 16px;
         padding: 12px 16px;
-        top: var(--nav-height);
     }
 
-    .results-toolbar.scrolled {
+    .results-toolbar.sticky {
+        margin: 0 -16px 16px;
+        padding: 12px 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     /* Expandable search on mobile */
     .expandable-search {
-        left: 0;
-        right: 0;
-        padding: 12px 16px;
+        padding: 0 16px;
+    }
+
+    .expandable-search.active {
+        padding: 16px;
     }
 
     .expandable-search .search-bar {
