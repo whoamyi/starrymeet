@@ -15,8 +15,7 @@ body {
 
 /* Main Container - Premium Layout */
 .main-container {
-    margin-top: 0; /* Remove gap - content starts immediately */
-    padding-top: var(--nav-height); /* Padding instead of margin */
+    margin-top: var(--nav-height); /* Space for fixed navbar */
     display: flex !important;
     max-width: 1400px;
     margin-left: auto;
@@ -389,7 +388,7 @@ body {
     margin: 0;
     text-transform: uppercase;
     letter-spacing: 1px;
-    opacity: 0.9;
+    opacity: 1; /* Pure white - no transparency */
 }
 
 /* Search Bar - Cameo Style */
@@ -976,7 +975,7 @@ body {
         pointer-events: none;
     }
 
-    /* Close X button in header */
+    /* Close X button in header - Plain white text */
     .filter-header-close {
         position: absolute;
         top: 50%;
@@ -984,24 +983,26 @@ body {
         transform: translateY(-50%);
         width: auto;
         height: auto;
-        background: none;
+        background: none !important;
         border: none;
         color: #ffffff;
-        font-size: 12px;
-        font-weight: 300;
+        font-size: 20px; /* Larger for better visibility */
+        font-weight: 200; /* Lighter weight for elegance */
         cursor: pointer;
-        opacity: 0.7;
-        transition: opacity 0.2s ease;
+        opacity: 1; /* Pure white, always visible */
+        transition: opacity 0.2s ease, transform 0.2s ease;
         padding: 8px;
         line-height: 1;
     }
 
     .filter-header-close:hover {
-        opacity: 1;
+        opacity: 0.8;
+        transform: translateY(-50%) scale(1.1);
     }
 
     .filter-header-close:active {
-        opacity: 0.5;
+        opacity: 0.6;
+        transform: translateY(-50%) scale(0.95);
     }
 
     .filter-content {
@@ -1093,7 +1094,7 @@ body {
     .main-container {
         flex-direction: column;
         padding: 16px;
-        padding-top: var(--nav-height);
+        margin-top: var(--nav-height);
     }
 
     .main-content {
