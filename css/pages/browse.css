@@ -900,8 +900,8 @@ body {
     }
 
     .filter-content {
-        padding: 64px 20px 120px; /* Top padding for header clearance */
-        gap: 36px;
+        padding: 56px 20px 120px; /* Reduced top padding - no gap */
+        gap: 32px;
         overflow-y: auto;
         overflow-x: hidden;
         flex: 1;
@@ -953,37 +953,9 @@ body {
         display: flex;
     }
 
-    /* Close button - Plain white X in top right corner of header */
+    /* Close button - Hidden on mobile (use drag handle instead) */
     .filter-close-btn {
-        display: none; /* Hidden by default */
-        position: absolute;
-        top: 18px;
-        right: 20px;
-        width: auto;
-        height: auto;
-        z-index: 1003;
-        background: none !important;
-        border: none;
-        color: #ffffff;
-        font-size: 26px;
-        line-height: 1;
-        cursor: pointer;
-        opacity: 0.8;
-        transition: opacity 0.2s ease;
-        padding: 0;
-        font-weight: 300;
-    }
-
-    .filter-sidebar.active .filter-close-btn {
-        display: block; /* Show when filter is active */
-    }
-
-    .filter-close-btn:hover {
-        opacity: 1;
-    }
-
-    .filter-close-btn:active {
-        opacity: 0.6;
+        display: none !important; /* Completely hidden on mobile */
     }
 
     /* Modern Apply/Done button */
@@ -1700,6 +1672,27 @@ footer::before {
     max-height: 500px;
     opacity: 1;
     pointer-events: auto;
+    overflow-y: auto; /* Enable internal scrolling when expanded */
+    overflow-x: hidden;
+    -webkit-overflow-scrolling: touch;
+}
+
+/* Scrollbar for tree containers */
+.filter-tree.expanded::-webkit-scrollbar {
+    width: 3px;
+}
+
+.filter-tree.expanded::-webkit-scrollbar-track {
+    background: transparent;
+}
+
+.filter-tree.expanded::-webkit-scrollbar-thumb {
+    background: rgba(255, 255, 255, 0.15);
+    border-radius: 2px;
+}
+
+.filter-tree.expanded::-webkit-scrollbar-thumb:hover {
+    background: rgba(255, 255, 255, 0.25);
 }
 
 .filter-tree-item {
@@ -1843,5 +1836,18 @@ footer::before {
     /* Make parent categories with children more prominent */
     .filter-tree-parent:has(+ .filter-tree-children) .filter-tree-label {
         font-weight: 600;
+    }
+
+    /* Better scrolling for trees on mobile */
+    .filter-tree.expanded {
+        max-height: 400px; /* Limit height on mobile */
+    }
+
+    .filter-tree.expanded::-webkit-scrollbar {
+        width: 4px; /* Slightly wider on mobile */
+    }
+
+    .filter-tree.expanded::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
     }
 }
