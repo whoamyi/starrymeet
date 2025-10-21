@@ -956,14 +956,8 @@
             // On desktop, do nothing - filters are always visible
         };
 
-        // Toggle filter section (collapsible categories/locations)
-        window.toggleFilterSection = function(sectionId) {
-            const section = document.getElementById(sectionId);
-            const toggle = section.previousElementSibling;
-
-            section.classList.toggle('expanded');
-            toggle.classList.toggle('expanded');
-        };
+        // Note: toggleFilterSection is defined earlier in the file (around line 742)
+        // Don't redefine it here to avoid conflicts
 
         // Show more items in filter section
         window.toggleShowMore = function(sectionId) {
