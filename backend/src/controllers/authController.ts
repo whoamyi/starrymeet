@@ -3,6 +3,7 @@ import { User } from '../models';
 import { generateToken } from '../utils/jwt';
 import { AppError } from '../middleware/errorHandler';
 import { AuthRequest } from '../middleware/auth';
+import { sendWelcomeEmail } from '../services/email.service';
 
 export const register = async (req: AuthRequest, res: Response) => {
   try {
@@ -30,6 +31,12 @@ export const register = async (req: AuthRequest, res: Response) => {
       userId: user.id,
       email: user.email,
       role: user.role
+    });
+
+    // Send welcome email (async, don't wait for it)
+    sendWelcomeEmail(user.email, user.first_name).catch(err => {
+      console.error('Failed to send welcome email:', err);
+      // Don't fail registration if email fails
     });
 
     res.status(201).json({

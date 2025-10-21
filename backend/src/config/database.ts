@@ -31,6 +31,12 @@ const sequelize = databaseUrl
         host: process.env.DB_HOST || 'localhost',
         port: parseInt(process.env.DB_PORT || '5432'),
         dialect: 'postgres',
+        dialectOptions: {
+          ssl: process.env.NODE_ENV === 'production' ? {
+            require: true,
+            rejectUnauthorized: false // Required for Neon and most cloud databases
+          } : undefined
+        },
         logging: process.env.NODE_ENV === 'development' ? console.log : false,
         pool: {
           max: 10,

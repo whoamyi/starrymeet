@@ -2,6 +2,11 @@
 backend/node_modules/
 backend/dist/
 backend/.env
+backend/.env.production
+backend/.env.*
+backend/*.sql
+backend/backups/
+backend/test-*.js
 
 # Logs
 *.log
