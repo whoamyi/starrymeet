@@ -868,21 +868,33 @@
             applyFilters();
         }
 
-        // Mobile: Swipe-to-dismiss for filter bottom sheet
+        // Mobile: Drag handle dismiss (only on handle, not content scroll)
         function initSwipeToDismiss() {
             const filterSidebar = document.getElementById('filterSidebar');
             const filterOverlay = document.getElementById('filterOverlay');
+            const filterContent = filterSidebar?.querySelector('.filter-content');
 
             if (!filterSidebar || !filterOverlay) return;
 
             let startY = 0;
             let currentY = 0;
             let isDragging = false;
+            let dragTarget = null;
 
+            // Only allow dragging from the top header area (60px)
             filterSidebar.addEventListener('touchstart', function(e) {
-                if (window.innerWidth >= 768) return; // Desktop only
-                startY = e.touches[0].clientY;
-                isDragging = true;
+                if (window.innerWidth >= 768) return;
+
+                const touchY = e.touches[0].clientY;
+                const rect = filterSidebar.getBoundingClientRect();
+                const relativeY = touchY - rect.top;
+
+                // Only allow drag from top 60px header area
+                if (relativeY <= 60) {
+                    startY = touchY;
+                    isDragging = true;
+                    dragTarget = e.target;
+                }
             }, { passive: true });
 
             filterSidebar.addEventListener('touchmove', function(e) {
@@ -912,7 +924,15 @@
                 // Reset transform
                 filterSidebar.style.transform = '';
                 isDragging = false;
+                dragTarget = null;
             });
+
+            // Prevent content scroll from dismissing
+            if (filterContent) {
+                filterContent.addEventListener('touchstart', function(e) {
+                    e.stopPropagation();
+                }, { passive: true });
+            }
 
             // Tap overlay to close
             filterOverlay.addEventListener('click', function() {

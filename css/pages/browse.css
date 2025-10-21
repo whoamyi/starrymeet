@@ -857,18 +857,67 @@ body {
         background: #000000;
         border-radius: 24px 24px 0 0;
         border: 1px solid rgba(255, 255, 255, 0.1);
-        overflow-y: auto;
+        overflow: hidden; /* Container doesn't scroll */
         transition: bottom 0.4s cubic-bezier(0.4, 0, 0.2, 1);
         box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+        display: flex;
+        flex-direction: column;
     }
 
     .filter-sidebar.active {
         bottom: 0;
     }
 
+    /* Sticky Header with Drag Handle */
+    .filter-sidebar::before {
+        content: '';
+        position: sticky;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 60px;
+        background: rgba(0, 0, 0, 0.95);
+        backdrop-filter: blur(10px);
+        z-index: 1001;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        flex-shrink: 0;
+    }
+
+    /* Drag Handle */
+    .filter-sidebar::after {
+        content: '';
+        position: absolute;
+        top: 16px;
+        left: 50%;
+        transform: translateX(-50%);
+        width: 40px;
+        height: 4px;
+        background: rgba(255, 255, 255, 0.3);
+        border-radius: 2px;
+        z-index: 1002;
+        pointer-events: none;
+    }
+
     .filter-content {
-        padding: 32px 20px 100px;
+        padding: 80px 20px 120px; /* Top padding for header clearance */
         gap: 36px;
+        overflow-y: auto;
+        overflow-x: hidden;
+        flex: 1;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    .filter-content::-webkit-scrollbar {
+        width: 4px;
+    }
+
+    .filter-content::-webkit-scrollbar-track {
+        background: transparent;
+    }
+
+    .filter-content::-webkit-scrollbar-thumb {
+        background: rgba(255, 255, 255, 0.2);
+        border-radius: 2px;
     }
 
     /* Mobile: Larger spacing for touch */
@@ -898,37 +947,41 @@ body {
         height: 20px;
     }
 
-    /* Drag handle for bottom sheet */
-    .filter-sidebar::before {
-        content: '';
-        position: absolute;
-        top: 12px;
-        left: 50%;
-        transform: translateX(-50%);
-        width: 40px;
-        height: 4px;
-        background: rgba(255, 255, 255, 0.3);
-        border-radius: 2px;
-    }
-
     /* Show filter toggle button on mobile */
     #filterBtn {
         display: flex;
     }
 
-    /* Show close button on mobile */
+    /* Show close button on mobile - Sticky in header */
     .filter-close-btn {
-        display: block;
+        display: none; /* Hidden by default */
         position: absolute;
-        top: 24px;
-        right: 24px;
-        width: 36px;
-        height: 36px;
-        z-index: 1000;
-        background: rgba(255, 255, 255, 0.1);
-        border-radius: 50%;
-        font-size: 24px;
+        top: 16px;
+        right: 20px;
+        width: 32px;
+        height: 32px;
+        z-index: 1003;
+        background: transparent;
+        border: none;
+        color: #ffffff;
+        font-size: 28px;
         line-height: 1;
+        cursor: pointer;
+        opacity: 0.9;
+        transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+
+    .filter-sidebar.active .filter-close-btn {
+        display: block; /* Show when filter is active */
+    }
+
+    .filter-close-btn:hover {
+        opacity: 1;
+        transform: scale(1.1);
+    }
+
+    .filter-close-btn:active {
+        transform: scale(0.95);
     }
 
     /* Modern Apply/Done button */
