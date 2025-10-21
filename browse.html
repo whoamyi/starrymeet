@@ -741,6 +741,9 @@
                 toggle.classList.toggle('expanded');
                 children.classList.toggle('expanded');
             }
+
+            // DON'T apply filters on parent click - let users explore subcategories
+            // Filters only apply when subcategory is clicked
         };
 
         // Toggle filter section collapse/expand (Category and Location)
@@ -921,16 +924,47 @@
             });
         }
 
+        // Progressive Sticky Scroll for Mobile
+        function initProgressiveSticky() {
+            if (window.innerWidth >= 768) return; // Desktop only
+
+            const searchSection = document.querySelector('.search-section');
+            const resultsToolbar = document.querySelector('.results-toolbar');
+            let lastScrollY = window.scrollY;
+
+            window.addEventListener('scroll', function() {
+                const scrollY = window.scrollY;
+
+                // Add sticky class when scrolled down
+                if (scrollY > 100) {
+                    searchSection?.classList.add('sticky');
+                    resultsToolbar?.classList.add('sticky');
+                } else {
+                    searchSection?.classList.remove('sticky');
+                    resultsToolbar?.classList.remove('sticky');
+                }
+
+                lastScrollY = scrollY;
+            }, { passive: true });
+        }
+
         // Wait for DOM to be ready before initializing
         if (document.readyState === 'loading') {
             document.addEventListener('DOMContentLoaded', function() {
                 initializePage();
                 initSwipeToDismiss();
+                initProgressiveSticky();
             });
         } else {
             initializePage();
             initSwipeToDismiss();
+            initProgressiveSticky();
         }
+
+        // Reinitialize on window resize
+        window.addEventListener('resize', function() {
+            initProgressiveSticky();
+        });
 
         // Toggle filters (only works on mobile, desktop filters always visible)
         window.toggleFilters = function() {
