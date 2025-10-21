@@ -1,0 +1,321 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Want to know when your favorite celebrity is coming to your city? Here's how to track tours, appearances, and never miss an opportunity to meet them.">
+    <title>How to Track Celebrity Tour Schedules and Appearances - StarryMeet</title>
+    <link rel="stylesheet" href="../css/shared.css">
+    <script src="../js/shared.js"></script>
+    <style>
+        body { background: var(--bg-primary); }
+        #navbar { position: sticky; top: 0; z-index: 1000; }
+        .blog-hero { padding: 140px 24px 80px; margin-top: var(--nav-height); text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
+        .blog-category { display: inline-block; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); padding: 8px 20px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.2); }
+        .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
+        .blog-content { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
+        .blog-content p { font-size: 1.125rem; line-height: 1.8; margin-bottom: 28px; opacity: 0.9; }
+        .blog-content h2 { font-size: 1.875rem; font-weight: 700; margin: 60px 0 24px; }
+        .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 40px 0 20px; }
+        .blog-content ul { margin: 24px 0; padding-left: 28px; }
+        .blog-content li { font-size: 1.125rem; line-height: 1.8; margin-bottom: 16px; opacity: 0.9; }
+        .blog-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(234, 18, 121, 0.3); }
+        .tool-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; margin: 32px 0; }
+        .tool-box h4 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; }
+        .cta-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0; }
+        .btn-cta { display: inline-block; background: rgba(255,255,255,0.1); color: white; padding: 16px 48px; border-radius: 50px; font-size: 1.125rem; font-weight: 600; text-decoration: none; border: 1px solid rgba(255,255,255,0.2); }
+    </style>
+</head>
+<body>
+    <nav role="navigation" aria-label="Main navigation" id="navbar">
+        <div class="nav-container">
+            <a href="../index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
+            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
+            <ul class="nav-links">
+                <li class="nav-item-categories"><a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
+                    <div class="categories-dropdown" id="categoriesDropdown">
+                        <a href="../browse.html?category=Hollywood">Hollywood</a>
+                        <a href="../browse.html?category=Musicians">Musicians</a>
+                        <a href="../browse.html">View all</a>
+                    </div>
+                </li>
+                <li><a href="../how-it-works.html">How it works</a></li>
+                <li><a href="#" onclick="openAuthModal('login'); return false;">Log in</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <div class="blog-hero">
+        <span class="blog-category">Planning & Tracking</span>
+        <h1>How to Track Celebrity Tour Schedules and Appearances</h1>
+    </div>
+
+    <article class="blog-content">
+        <p>Missing out on a celebrity appearance in your city because you didn't know about it? Never again.</p>
+        
+        <p>Here's how to stay informed about tours, conventions, and every opportunity to meet your favorites.</p>
+
+        <h2>The Multi-Layer Tracking System</h2>
+
+        <p>No single source captures everything. You need multiple layers:</p>
+
+        <h3>Layer 1: Official Sources (Most Reliable)</h3>
+
+        <div class="tool-box">
+            <h4>1. Celebrity's Official Website</h4>
+            <p style="opacity: 0.9;">Most have a "Tour" or "Appearances" page with dates, cities, venues.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Bookmark it</strong> and check weekly</li>
+                <li><strong>Look for "VIP packages"</strong> which often include meet and greets</li>
+                <li><strong>Sign up for mailing lists</strong> (they announce there first)</li>
+            </ul>
+        </div>
+
+        <div class="tool-box">
+            <h4>2. Verified Social Media Accounts</h4>
+            <p style="opacity: 0.9;">Instagram, Twitter/X, TikTok, Facebook—wherever they're most active.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Turn on post notifications</strong> (don't rely on algorithms)</li>
+                <li><strong>Check stories daily</strong> (tour announcements often appear there)</li>
+                <li><strong>Watch for "link in bio" updates</strong> signaling new dates</li>
+            </ul>
+        </div>
+
+        <div class="tool-box">
+            <h4>3. Fan Club / Newsletter</h4>
+            <p style="opacity: 0.9;">Many celebrities have official fan clubs or Patreon/membership sites.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Members often get early access</strong> to tickets</li>
+                <li><strong>Exclusive meet and greet opportunities</strong></li>
+                <li><strong>Presale codes</strong> before public announcement</li>
+            </ul>
+        </div>
+
+        <h3>Layer 2: Ticketing Platforms</h3>
+
+        <div class="tool-box">
+            <h4>Ticketmaster, Live Nation, AXS, etc.</h4>
+            <p style="opacity: 0.9;">Create an account and favorite your celebrity. You'll get alerts when new events are posted.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Set location preferences</strong> (your city + nearby cities)</li>
+                <li><strong>Enable email/push notifications</strong></li>
+                <li><strong>Check "similar artists"</strong> for related events</li>
+            </ul>
+        </div>
+
+        <h3>Layer 3: Convention & Event Trackers</h3>
+
+        <div class="tool-box">
+            <h4>Comic-Con, Fan Expo, Wizard World, etc.</h4>
+            <p style="opacity: 0.9;">For actors, voice actors, authors, and pop culture celebrities.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Follow major convention Twitter accounts</strong></li>
+                <li><strong>Check guest lists 2-3 months before events</strong></li>
+                <li><strong>Sign up for convention mailing lists in your area</strong></li>
+            </ul>
+        </div>
+
+        <h3>Layer 4: Aggregator Tools</h3>
+
+        <div class="tool-box">
+            <h4>Bandsintown (for musicians)</h4>
+            <p style="opacity: 0.9;">Tracks concerts and sends alerts when artists announce shows near you.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Free app, very accurate</strong></li>
+                <li><strong>Integrates with Spotify</strong></li>
+                <li><strong>Can set radius</strong> (50 miles, 100 miles, etc.)</li>
+            </ul>
+        </div>
+
+        <div class="tool-box">
+            <h4>Songkick (for musicians)</h4>
+            <p style="opacity: 0.9;">Similar to Bandsintown. Some artists are on one but not the other, so use both.</p>
+            <ul style="margin: 16px 0 0; padding-left: 24px; opacity: 0.9;">
+                <li><strong>Track unlimited artists</strong></li>
+                <li><strong>Get notifications weeks before tickets go on sale</strong></li>
+            </ul>
+        </div>
+
+        <div class="cta-box">
+            <h3>Direct Celebrity Access</h3>
+            <p>Skip the tour tracking. Browse verified celebrities offering video calls and meet-ups on your schedule.</p>
+            <a href="../browse.html" class="btn-cta">See Available Stars</a>
+        </div>
+
+        <h2>Advanced Tracking Strategies</h2>
+
+        <h3>1. Set Up Google Alerts</h3>
+        <p>Free tool that emails you when your celebrity is mentioned online.</p>
+        <ul>
+            <li>Go to google.com/alerts</li>
+            <li>Enter: <code>"[Celebrity Name]" tour</code></li>
+            <li>Set frequency: "as it happens" or "daily"</li>
+            <li>You'll get alerts when blogs, news sites, or venues announce appearances</li>
+        </ul>
+
+        <h3>2. Follow Venue Accounts</h3>
+        <p>If you live near major venues (arenas, theaters, stadiums), follow their social media.</p>
+        <ul>
+            <li>They announce lineups before ticketing platforms sometimes</li>
+            <li>You'll see patterns (certain celebrities always play certain venues)</li>
+        </ul>
+
+        <h3>3. Join Fan Communities</h3>
+        <p>Reddit, Discord, Facebook groups dedicated to the celebrity.</p>
+        <ul>
+            <li><strong>Fans share tour info FAST</strong> (often before official announcements)</li>
+            <li><strong>People post "spotted at airport"</strong> updates (hints about upcoming appearances)</li>
+            <li><strong>Group buys for tickets</strong> (split costs, coordinate travel)</li>
+        </ul>
+
+        <h3>4. Track Related Celebrities</h3>
+        <p>If your favorite is in a band, on a TV show, or part of a franchise:</p>
+        <ul>
+            <li>Track the whole group—they often tour together</li>
+            <li>Follow cast reunion events</li>
+            <li>Watch for anniversary tours (10-year, 20-year album/show anniversaries)</li>
+        </ul>
+
+        <h2>How to Get Early Access</h2>
+
+        <p>Being first to know = better tickets + cheaper prices.</p>
+
+        <h3>Presale Strategies:</h3>
+        <ul>
+            <li><strong>Credit card presales:</strong> Amex, Citi, Chase often have 24-48 hour early access</li>
+            <li><strong>Spotify presales:</strong> If you're a top listener, you sometimes get codes</li>
+            <li><strong>Fan club presales:</strong> Worth the membership fee if you're serious</li>
+            <li><strong>Venue presales:</strong> Sign up for the venue's mailing list</li>
+            <li><strong>Radio station presales:</strong> Local radio gives codes to listeners</li>
+        </ul>
+
+        <h3>How to Find Presale Codes:</h3>
+        <ul>
+            <li>Check the celebrity's social media (they often post hints)</li>
+            <li>Search Twitter for <code>"[Celebrity Name] presale code"</code></li>
+            <li>Fan forums and Reddit threads share codes</li>
+            <li>Sign up for Ticketmaster emails (they send codes to subscribers)</li>
+        </ul>
+
+        <h2>Tracking Different Celebrity Types</h2>
+
+        <h3>Musicians</h3>
+        <ul>
+            <li><strong>Best tools:</strong> Bandsintown, Songkick, official website</li>
+            <li><strong>Timing:</strong> Tours announced 2-6 months before</li>
+            <li><strong>Meet opportunities:</strong> VIP packages, backstage passes, after-show meetups</li>
+        </ul>
+
+        <h3>Actors</h3>
+        <ul>
+            <li><strong>Best tools:</strong> Convention trackers, film festival schedules</li>
+            <li><strong>Timing:</strong> Conventions announce guests 1-4 months before</li>
+            <li><strong>Meet opportunities:</strong> Photo ops, autograph sessions, panel Q&As</li>
+        </ul>
+
+        <h3>Athletes</h3>
+        <ul>
+            <li><strong>Best tools:</strong> Team schedules, sports card shows, charity events</li>
+            <li><strong>Timing:</strong> Regular season schedules are public, appearances vary</li>
+            <li><strong>Meet opportunities:</strong> Autograph signings, charity galas, sports expos</li>
+        </ul>
+
+        <h3>Authors</h3>
+        <ul>
+            <li><strong>Best tools:</strong> Publisher websites, bookstore event calendars</li>
+            <li><strong>Timing:</strong> Book release tours announced 1-3 months before</li>
+            <li><strong>Meet opportunities:</strong> Signings, readings, literary festivals</li>
+        </ul>
+
+        <h2>The Calendar System</h2>
+
+        <p>Once you find dates, <strong>organize them</strong>:</p>
+
+        <ol>
+            <li><strong>Create a dedicated calendar</strong> (Google Calendar, Apple Calendar)</li>
+            <li><strong>Add events as soon as announced</strong> with:</li>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>→ Date, time, venue</li>
+                <li>→ Ticket on-sale date</li>
+                <li>→ Presale codes (if you have them)</li>
+                <li>→ Link to purchase</li>
+            </ul>
+            <li><strong>Set multiple reminders:</strong></li>
+            <ul style="list-style: none; padding-left: 0;">
+                <li>→ 1 week before on-sale</li>
+                <li>→ 1 day before on-sale</li>
+                <li>→ 1 hour before on-sale</li>
+            </ul>
+        </ol>
+
+        <h2>When They're NOT Touring</h2>
+
+        <p>Your favorite isn't on tour? You still have options:</p>
+
+        <ul>
+            <li><strong>Virtual meet and greets:</strong> Many celebrities offer these year-round</li>
+            <li><strong>Cameo-style videos:</strong> Available anytime, no tour needed</li>
+            <li><strong>Private bookings:</strong> Platforms like <a href="../browse.html">StarryMeet</a> connect you directly</li>
+            <li><strong>Charity events:</strong> Check their social media for fundraiser appearances</li>
+            <li><strong>Film premieres:</strong> If they have a movie coming out, track premiere locations</li>
+        </ul>
+
+        <h2>Budget & Planning Tips</h2>
+
+        <h3>Start a "Celebrity Fund"</h3>
+        <ul>
+            <li>Set aside $20-50/month</li>
+            <li>When opportunity arises, you're ready</li>
+            <li>No scrambling or going into debt</li>
+        </ul>
+
+        <h3>Track Multiple Options</h3>
+        <ul>
+            <li>Don't fixate on one date/city</li>
+            <li>Track all nearby dates</li>
+            <li>Sometimes driving 2 hours = way cheaper tickets</li>
+        </ul>
+
+        <h3>Book Early (But Not Too Early)</h3>
+        <ul>
+            <li>Tickets: Book during presale for best seats</li>
+            <li>Travel: Wait 24-48 hours to ensure show isn't canceled</li>
+            <li>Hotels: Use free cancellation options</li>
+        </ul>
+
+        <h2>Red Flags & Scams</h2>
+
+        <p>When tracking appearances, watch for:</p>
+        <ul>
+            <li>🚩 <strong>"Secret shows" requiring payment to learn location</strong> (usually scams)</li>
+            <li>🚩 <strong>Third-party sites selling "guaranteed meet and greet"</strong> (verify with official sources)</li>
+            <li>🚩 <strong>Fake social media accounts</strong> announcing tours (check verification)</li>
+            <li>🚩 <strong>Suspiciously cheap tickets</strong> from random sellers (use official platforms)</li>
+        </ul>
+
+        <h2>The Bottom Line</h2>
+
+        <p>Tracking celebrity schedules requires:</p>
+        <ol>
+            <li><strong>Multiple sources</strong> (official + aggregators + fans)</li>
+            <li><strong>Notifications enabled</strong> everywhere</li>
+            <li><strong>Organization</strong> (calendar, reminders, alerts)</li>
+            <li><strong>Patience</strong> (tours are announced when they're announced)</li>
+        </ol>
+
+        <p>Set up your system once, maintain it weekly, and you'll never miss an opportunity again.</p>
+
+        <div style="margin: 80px 0 40px; padding-top: 40px; border-top: 1px solid rgba(255,255,255,0.1);">
+            <p style="font-size: 1rem; margin-bottom: 12px;">→ <a href="how-to-meet-your-favorite-celebrity.html">How to Meet Your Favorite Celebrity</a></p>
+            <p style="font-size: 1rem; margin-bottom: 12px;">→ <a href="meet-celebrities-on-a-budget.html">How to Meet Celebrities on a Budget</a></p>
+            <p style="font-size: 1rem;">→ <a href="virtual-vs-in-person-celebrity-meetings.html">Virtual vs In-Person Celebrity Meetings</a></p>
+        </div>
+    </article>
+
+    <footer>
+        <div class="footer-bottom">
+            <p class="footer-copyright">© 2025 StarryMeet</p>
+        </div>
+    </footer>
+</body>
+</html>
