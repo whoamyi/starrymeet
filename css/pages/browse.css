@@ -371,6 +371,22 @@ body {
     min-width: 0;
 }
 
+/* Hero Section */
+.hero-section {
+    padding: 32px 0 24px;
+    text-align: center;
+}
+
+.hero-text {
+    font-size: 14px;
+    font-weight: 400;
+    color: #ffffff;
+    margin: 0;
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    opacity: 0.9;
+}
+
 /* Search Bar - Cameo Style */
 .search-section {
     background: transparent;
