@@ -456,11 +456,13 @@ body {
 
 /* Sticky state - activated by JavaScript when hero scrolls away */
 .results-toolbar.sticky {
-    position: sticky;
-    top: var(--nav-height);
+    position: sticky !important;
+    top: var(--nav-height) !important;
     padding: 12px 0;
     border-bottom-color: rgba(255, 255, 255, 0.1);
     box-shadow: 0 4px 12px rgba(0, 0, 0, 0.2);
+    background: #0c0d0e !important;
+    z-index: 95 !important;
 }
 
 .toolbar-left {
@@ -1118,9 +1120,13 @@ body {
     }
 
     .results-toolbar.sticky {
+        position: sticky !important;
+        top: var(--nav-height) !important;
         margin: 0 -16px 16px;
         padding: 12px 16px;
         box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+        background: #0c0d0e !important;
+        z-index: 95 !important;
     }
 
     /* Expandable search on mobile */

@@ -988,17 +988,28 @@
             const toolbar = document.getElementById('resultsToolbar');
             const hero = document.getElementById('heroSection');
 
-            if (!toolbar || !hero) return;
+            if (!toolbar || !hero) {
+                console.error('❌ Toolbar or Hero not found!', { toolbar, hero });
+                return;
+            }
+
+            console.log('✅ Toolbar sticky initialized');
 
             window.addEventListener('scroll', function() {
                 const heroRect = hero.getBoundingClientRect();
-                const navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 64;
+                const navHeight = parseFloat(getComputedStyle(document.documentElement).getPropertyValue('--nav-height')) || 80;
 
                 // When hero's bottom reaches the navbar (scrolled out of view)
                 if (heroRect.bottom <= navHeight) {
-                    toolbar.classList.add('sticky');
+                    if (!toolbar.classList.contains('sticky')) {
+                        toolbar.classList.add('sticky');
+                        console.log('🔒 Toolbar is now sticky');
+                    }
                 } else {
-                    toolbar.classList.remove('sticky');
+                    if (toolbar.classList.contains('sticky')) {
+                        toolbar.classList.remove('sticky');
+                        console.log('🔓 Toolbar is no longer sticky');
+                    }
                 }
             }, { passive: true });
         }
