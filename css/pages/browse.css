@@ -105,6 +105,11 @@ body {
     flex-shrink: 0;
 }
 
+/* Hide filter header on desktop */
+.filter-header {
+    display: none;
+}
+
 .filter-sidebar::-webkit-scrollbar {
     width: 4px;
 }
@@ -944,35 +949,59 @@ body {
         bottom: 0;
     }
 
-    /* Transparent Header - Real element for drag handle and close */
-    .filter-sidebar::before {
-        content: '';
-        position: absolute;
-        top: 0;
-        left: 0;
-        right: 0;
+    /* Filter Header - Draggable area with close button */
+    .filter-header {
+        position: relative;
         height: 56px;
-        background: transparent;
-        z-index: 1001;
+        flex-shrink: 0;
         display: flex;
         align-items: center;
         justify-content: center;
-        pointer-events: none; /* Allow clicks to pass through except for children */
+        background: transparent;
+        border-bottom: 1px solid rgba(255, 255, 255, 0.05);
+        cursor: grab;
+        user-select: none;
+    }
+
+    .filter-header:active {
+        cursor: grabbing;
     }
 
     /* Drag Handle - Centered in header */
-    .filter-sidebar::after {
-        content: '';
-        position: absolute;
-        top: 20px;
-        left: 50%;
-        transform: translateX(-50%);
+    .filter-drag-handle {
         width: 40px;
         height: 4px;
         background: rgba(255, 255, 255, 0.3);
         border-radius: 2px;
-        z-index: 1002;
-        pointer-events: all; /* Allow dragging */
+        pointer-events: none;
+    }
+
+    /* Close X button in header */
+    .filter-header-close {
+        position: absolute;
+        top: 50%;
+        right: 20px;
+        transform: translateY(-50%);
+        width: auto;
+        height: auto;
+        background: none;
+        border: none;
+        color: #ffffff;
+        font-size: 12px;
+        font-weight: 300;
+        cursor: pointer;
+        opacity: 0.7;
+        transition: opacity 0.2s ease;
+        padding: 8px;
+        line-height: 1;
+    }
+
+    .filter-header-close:hover {
+        opacity: 1;
+    }
+
+    .filter-header-close:active {
+        opacity: 0.5;
     }
 
     .filter-content {
@@ -1029,9 +1058,14 @@ body {
         display: flex;
     }
 
-    /* Close button - Hidden on mobile (use drag handle instead) */
+    /* Hide desktop close button on mobile */
     .filter-close-btn {
-        display: none !important; /* Completely hidden on mobile */
+        display: none !important;
+    }
+
+    /* Show header on mobile */
+    .filter-header {
+        display: flex !important;
     }
 
     /* Modern Apply/Done button */
