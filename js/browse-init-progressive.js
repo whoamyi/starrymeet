@@ -1,0 +1,365 @@
+/**
+ * Progressive Browse Page Loading
+ * Loads first batch quickly, displays with skeletons, then loads rest in background
+ */
+
+let allCelebrities = [];
+let filteredCelebrities = [];
+let currentCategory = null;
+let currentSearch = null;
+let isLoading = false;
+let isLoadingMore = false;
+
+const INITIAL_LOAD = 50; // Load this many first - FAST
+const BATCH_SIZE = 200;  // Then load rest in batches
+const CACHE_KEY = 'starrymeet_celebrities_cache_v2';
+const CACHE_DURATION = 24 * 60 * 60 * 1000; // 24 hours
+
+// Initialize browse page
+document.addEventListener('DOMContentLoaded', async function() {
+    // Show skeleton loaders immediately
+    showSkeletonLoaders(12);
+
+    // Load first batch FAST
+    await loadInitialBatch();
+
+    // Handle URL parameters
+    const urlParams = new URLSearchParams(window.location.search);
+    currentCategory = urlParams.get('category');
+    currentSearch = urlParams.get('search');
+
+    // Apply filters
+    if (currentCategory) {
+        filterByCategory(currentCategory);
+    } else if (currentSearch) {
+        searchCelebrities(currentSearch);
+        const searchInput = document.getElementById('searchInput');
+        if (searchInput) searchInput.value = currentSearch;
+    }
+
+    // Set up event listeners
+    setupEventListeners();
+
+    // Continue loading rest in background
+    loadRemainingBatches();
+});
+
+/**
+ * Show skeleton loaders
+ */
+function showSkeletonLoaders(count = 12) {
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (!resultsGrid) return;
+
+    const skeletons = Array(count).fill(0).map(() => `
+        <div class="skeleton-card">
+            <div class="skeleton-image skeleton"></div>
+            <div class="skeleton-content">
+                <div class="skeleton skeleton-title"></div>
+                <div class="skeleton skeleton-text"></div>
+                <div class="skeleton skeleton-text short"></div>
+                <div style="margin-top: 12px;">
+                    <div class="skeleton skeleton-badge"></div>
+                    <div class="skeleton skeleton-badge"></div>
+                </div>
+                <div class="skeleton skeleton-price"></div>
+            </div>
+        </div>
+    `).join('');
+
+    resultsGrid.innerHTML = skeletons;
+}
+
+/**
+ * Load initial batch quickly (50 celebrities)
+ */
+async function loadInitialBatch() {
+    try {
+        isLoading = true;
+
+        // Try cache first
+        const cached = tryLoadFromCache();
+        if (cached) {
+            allCelebrities = cached;
+            filteredCelebrities = [...allCelebrities];
+            updateGlobalState();
+            renderCurrentView();
+            isLoading = false;
+
+            // Refresh cache in background
+            setTimeout(() => refreshCacheInBackground(), 5000);
+            return;
+        }
+
+        console.log('📥 Loading initial batch...');
+
+        // Load first 50 FAST
+        const response = await window.api.getCelebrities({
+            limit: INITIAL_LOAD,
+            offset: 0
+        });
+
+        if (!response.success || !response.data) {
+            showErrorState();
+            return;
+        }
+
+        // Transform and display immediately
+        allCelebrities = response.data.celebrities.map(transformCelebrity);
+        filteredCelebrities = [...allCelebrities];
+
+        console.log(`✅ Loaded ${allCelebrities.length} celebrities - displaying now!`);
+
+        updateGlobalState();
+        renderCurrentView();
+
+    } catch (error) {
+        console.error('Error loading initial batch:', error);
+        showErrorState();
+    } finally {
+        isLoading = false;
+    }
+}
+
+/**
+ * Load remaining celebrities in background
+ */
+async function loadRemainingBatches() {
+    try {
+        // Get total count
+        const initialResponse = await window.api.getCelebrities({
+            limit: 1,
+            offset: 0
+        });
+
+        if (!initialResponse.success) return;
+
+        const total = initialResponse.data.pagination.total;
+        const remaining = total - INITIAL_LOAD;
+
+        if (remaining <= 0) {
+            saveToCache();
+            return;
+        }
+
+        console.log(`📊 Loading remaining ${remaining} celebrities in background...`);
+
+        // Show "loading more" indicator
+        showLoadingMoreIndicator();
+
+        // Load in batches
+        const batches = Math.ceil(remaining / BATCH_SIZE);
+
+        for (let i = 0; i < batches; i++) {
+            const offset = INITIAL_LOAD + (i * BATCH_SIZE);
+
+            const response = await window.api.getCelebrities({
+                limit: BATCH_SIZE,
+                offset: offset
+            });
+
+            if (response.success && response.data) {
+                const newCelebs = response.data.celebrities.map(transformCelebrity);
+                allCelebrities = allCelebrities.concat(newCelebs);
+
+                // Update every few batches to show progress
+                if ((i + 1) % 5 === 0 || i === batches - 1) {
+                    filteredCelebrities = [...allCelebrities];
+                    updateGlobalState();
+                    console.log(`✅ Progress: ${allCelebrities.length}/${total} celebrities`);
+                }
+            }
+
+            // Small delay to not overwhelm backend
+            await new Promise(resolve => setTimeout(resolve, 100));
+        }
+
+        // Final update
+        filteredCelebrities = [...allCelebrities];
+        updateGlobalState();
+        hideLoadingMoreIndicator();
+
+        console.log(`🎉 Loaded all ${allCelebrities.length} celebrities!`);
+
+        // Save to cache
+        saveToCache();
+
+    } catch (error) {
+        console.error('Error loading remaining batches:', error);
+        hideLoadingMoreIndicator();
+    }
+}
+
+/**
+ * Try to load from cache
+ */
+function tryLoadFromCache() {
+    try {
+        const cached = localStorage.getItem(CACHE_KEY);
+        if (!cached) return null;
+
+        const { data, timestamp } = JSON.parse(cached);
+        if (Date.now() - timestamp > CACHE_DURATION) {
+            localStorage.removeItem(CACHE_KEY);
+            return null;
+        }
+
+        console.log('✅ Loaded from cache:', data.length, 'celebrities');
+        return data;
+    } catch (e) {
+        console.warn('⚠️ Cache error:', e.message);
+        localStorage.removeItem(CACHE_KEY);
+        return null;
+    }
+}
+
+/**
+ * Save to cache
+ */
+function saveToCache() {
+    try {
+        localStorage.setItem(CACHE_KEY, JSON.stringify({
+            data: allCelebrities,
+            timestamp: Date.now()
+        }));
+        console.log('💾 Cached', allCelebrities.length, 'celebrities');
+    } catch (e) {
+        console.warn('⚠️ Could not cache:', e.message);
+    }
+}
+
+/**
+ * Update global state
+ */
+function updateGlobalState() {
+    window.celebrities = allCelebrities;
+    window.filteredCelebrities = filteredCelebrities;
+
+    // Rebuild filters
+    if (typeof window.buildCategoryTree === 'function') {
+        window.buildCategoryTree();
+    }
+    if (typeof window.buildLocationTree === 'function') {
+        window.buildLocationTree();
+    }
+}
+
+/**
+ * Render current view
+ */
+function renderCurrentView() {
+    if (typeof window.renderCelebrities === 'function') {
+        window.renderCelebrities();
+    }
+}
+
+/**
+ * Show loading more indicator
+ */
+function showLoadingMoreIndicator() {
+    const container = document.querySelector('.browse-container');
+    if (!container) return;
+
+    let indicator = document.getElementById('loadingMoreIndicator');
+    if (!indicator) {
+        indicator = document.createElement('div');
+        indicator.id = 'loadingMoreIndicator';
+        indicator.className = 'loading-more';
+        indicator.innerHTML = `
+            <div class="spinner"></div>
+            <div>Loading more celebrities...</div>
+        `;
+        container.appendChild(indicator);
+    }
+}
+
+/**
+ * Hide loading more indicator
+ */
+function hideLoadingMoreIndicator() {
+    const indicator = document.getElementById('loadingMoreIndicator');
+    if (indicator) {
+        indicator.remove();
+    }
+}
+
+/**
+ * Show error state
+ */
+function showErrorState() {
+    const resultsGrid = document.getElementById('resultsGrid');
+    if (resultsGrid) {
+        resultsGrid.innerHTML = `
+            <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #9CA3AF;">
+                <div style="font-size: 48px; margin-bottom: 16px;">⚠️</div>
+                <div style="font-size: 18px; margin-bottom: 8px; color: #EF4444;">Failed to load celebrities</div>
+                <div style="font-size: 14px; opacity: 0.7; margin-bottom: 20px;">Please check your connection and try again</div>
+                <button onclick="location.reload()" style="background: #8B5CF6; color: white; border: none; padding: 10px 24px; border-radius: 8px; cursor: pointer; font-size: 14px;">
+                    Reload Page
+                </button>
+            </div>
+        `;
+    }
+}
+
+/**
+ * Transform celebrity data
+ */
+function transformCelebrity(celeb) {
+    return {
+        id: celeb.id,
+        name: celeb.display_name,
+        username: celeb.username,
+        category: celeb.category,
+        subcategory: celeb.subcategory,
+        niche: celeb.niche_category,
+        bio: celeb.bio,
+        location: celeb.location,
+        price: celeb.standard_meet_price_cents ? (celeb.standard_meet_price_cents / 100) : 0,
+        rating: parseFloat(celeb.average_rating) || 0,
+        reviews: celeb.total_reviews || 0,
+        verified: celeb.is_verified || false,
+        featured: celeb.is_featured || false,
+        responseTime: celeb.response_time_hours || 24
+    };
+}
+
+/**
+ * Refresh cache in background
+ */
+async function refreshCacheInBackground() {
+    console.log('🔄 Refreshing cache in background...');
+    // Silently reload data without showing UI updates
+    try {
+        const response = await window.api.getCelebrities({ limit: 10000, offset: 0 });
+        if (response.success && response.data) {
+            const freshData = response.data.celebrities.map(transformCelebrity);
+            localStorage.setItem(CACHE_KEY, JSON.stringify({
+                data: freshData,
+                timestamp: Date.now()
+            }));
+            console.log('✅ Cache refreshed');
+        }
+    } catch (e) {
+        console.warn('⚠️ Background refresh failed:', e.message);
+    }
+}
+
+/**
+ * Filter and search functions (delegate to browse.html)
+ */
+function filterByCategory(category) {
+    if (typeof window.filterByCategory === 'function') {
+        window.filterByCategory(category);
+    }
+}
+
+function searchCelebrities(query) {
+    if (typeof window.searchCelebrities === 'function') {
+        window.searchCelebrities(query);
+    }
+}
+
+function setupEventListeners() {
+    // Handled by browse.html
+}
