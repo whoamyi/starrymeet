@@ -80,6 +80,7 @@ async function loadInitialBatch() {
         // Try cache first
         const cached = tryLoadFromCache();
         if (cached) {
+            console.log('✅ Using cached data:', cached.length, 'celebrities');
             allCelebrities = cached;
             filteredCelebrities = [...allCelebrities];
             updateGlobalState();
@@ -91,7 +92,8 @@ async function loadInitialBatch() {
             return;
         }
 
-        console.log('📥 Loading initial batch...');
+        console.log('📥 Loading initial batch from API...');
+        console.log('📍 API URL:', window.api.baseURL);
 
         // Load first 50 FAST
         const response = await window.api.getCelebrities({
@@ -99,7 +101,10 @@ async function loadInitialBatch() {
             offset: 0
         });
 
+        console.log('📦 API Response:', response);
+
         if (!response.success || !response.data) {
+            console.error('❌ API response failed:', response);
             showErrorState();
             return;
         }
@@ -109,12 +114,14 @@ async function loadInitialBatch() {
         filteredCelebrities = [...allCelebrities];
 
         console.log(`✅ Loaded ${allCelebrities.length} celebrities - displaying now!`);
+        console.log('📊 Sample celebrity data:', allCelebrities[0]);
 
         updateGlobalState();
         renderCurrentView();
 
     } catch (error) {
-        console.error('Error loading initial batch:', error);
+        console.error('❌ Error loading initial batch:', error);
+        console.error('Error details:', error.message, error.code);
         showErrorState();
     } finally {
         isLoading = false;
@@ -235,12 +242,21 @@ function updateGlobalState() {
     window.celebrities = allCelebrities;
     window.filteredCelebrities = filteredCelebrities;
 
+    console.log('🔄 Updating global state with', allCelebrities.length, 'celebrities');
+
     // Rebuild filters
     if (typeof window.buildCategoryTree === 'function') {
+        console.log('📋 Calling buildCategoryTree...');
         window.buildCategoryTree();
+    } else {
+        console.warn('⚠️ buildCategoryTree function not found');
     }
+
     if (typeof window.buildLocationTree === 'function') {
+        console.log('📍 Calling buildLocationTree...');
         window.buildLocationTree();
+    } else {
+        console.warn('⚠️ buildLocationTree function not found');
     }
 }
 
