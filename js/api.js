@@ -10,10 +10,8 @@ const getAPIBaseURL = () => {
         return 'http://localhost:3000/api';
     }
 
-    // Production (GitHub Pages or deployed domain)
-    // TODO: Update this with your actual deployed backend URL
-    // For now, we'll try to use localhost as fallback
-    return 'http://localhost:3000/api';
+    // Production - Render backend URL
+    return 'https://starrymeet-backend.onrender.com/api';
 };
 
 const API_BASE_URL = getAPIBaseURL();
