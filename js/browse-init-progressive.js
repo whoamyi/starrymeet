@@ -346,19 +346,109 @@ async function refreshCacheInBackground() {
 }
 
 /**
- * Filter and search functions (delegate to browse.html)
+ * Apply all filters
+ */
+window.applyAllFilters = function() {
+    if (!window.celebrities || window.celebrities.length === 0) return;
+
+    let filtered = [...window.celebrities];
+
+    // Category filters
+    const activeCategories = document.querySelectorAll('#categoryTree .filter-tree-child.active');
+    if (activeCategories.length > 0) {
+        const selectedSubcategories = new Set();
+        activeCategories.forEach(el => {
+            const subcat = el.dataset.subcategory;
+            if (subcat) selectedSubcategories.add(subcat);
+        });
+
+        if (selectedSubcategories.size > 0) {
+            filtered = filtered.filter(celeb =>
+                selectedSubcategories.has(celeb.subcategory)
+            );
+        }
+    }
+
+    // Location filters
+    const activeCities = document.querySelectorAll('#locationTree .filter-tree-child.active');
+    if (activeCities.length > 0) {
+        const selectedCities = new Set();
+        activeCities.forEach(el => {
+            const city = el.dataset.city;
+            if (city) selectedCities.add(city);
+        });
+
+        if (selectedCities.size > 0) {
+            filtered = filtered.filter(celeb => {
+                const celebCity = celeb.location ? celeb.location.split(',')[0].trim() : '';
+                return selectedCities.has(celebCity);
+            });
+        }
+    }
+
+    // Price filter
+    const priceSlider = document.getElementById('priceSlider');
+    if (priceSlider) {
+        const maxPrice = parseInt(priceSlider.value);
+        if (maxPrice < 60000) {
+            filtered = filtered.filter(celeb => celeb.price <= maxPrice);
+        }
+    }
+
+    // Verified filter
+    const verifiedFilter = document.getElementById('verifiedFilter');
+    if (verifiedFilter && verifiedFilter.checked) {
+        filtered = filtered.filter(celeb => celeb.verified === true);
+    }
+
+    // Trending/Featured filter
+    const trendingFilter = document.getElementById('trendingFilter');
+    if (trendingFilter && trendingFilter.checked) {
+        filtered = filtered.filter(celeb => celeb.featured === true);
+    }
+
+    window.filteredCelebrities = filtered;
+
+    // Update UI
+    if (typeof window.renderCelebrities === 'function') {
+        window.renderCelebrities();
+    }
+};
+
+/**
+ * Filter by category
  */
 function filterByCategory(category) {
-    if (typeof window.filterByCategory === 'function') {
-        window.filterByCategory(category);
+    // Handled by applyAllFilters now
+}
+
+/**
+ * Search celebrities
+ */
+function searchCelebrities(query) {
+    if (!query || !window.celebrities) {
+        window.filteredCelebrities = [...window.celebrities];
+        if (typeof window.renderCelebrities === 'function') {
+            window.renderCelebrities();
+        }
+        return;
+    }
+
+    const searchTerm = query.toLowerCase();
+    window.filteredCelebrities = window.celebrities.filter(celeb => {
+        return celeb.name.toLowerCase().includes(searchTerm) ||
+               (celeb.category && celeb.category.toLowerCase().includes(searchTerm)) ||
+               (celeb.subcategory && celeb.subcategory.toLowerCase().includes(searchTerm)) ||
+               (celeb.niche && celeb.niche.toLowerCase().includes(searchTerm)) ||
+               (celeb.location && celeb.location.toLowerCase().includes(searchTerm));
+    });
+
+    if (typeof window.renderCelebrities === 'function') {
+        window.renderCelebrities();
     }
 }
 
-function searchCelebrities(query) {
-    if (typeof window.searchCelebrities === 'function') {
-        window.searchCelebrities(query);
-    }
-}
+window.searchCelebrities = searchCelebrities;
 
 function setupEventListeners() {
     // Handled by browse.html

@@ -24,6 +24,7 @@
     <title>Browse Celebrities - StarryMeet</title>
     <link rel="stylesheet" href="css/shared.css">
     <link rel="stylesheet" href="css/pages/browse.css">
+    <link rel="stylesheet" href="css/celebrity-cards-modern.css">
     <link rel="stylesheet" href="css/skeleton-loader.css">
     <script src="js/api.js"></script>
     <script src="js/shared.js"></script>
@@ -517,26 +518,29 @@
             const rating = celeb.rating || 4.95;
             const reviews = celeb.reviews || 0;
             const username = celeb.username || encodeURIComponent(celeb.name);
+            const subcategory = celeb.subcategory || celeb.subCategory || '';
+            const niche = celeb.niche || '';
+            const displayCategory = niche || subcategory || celeb.category || '';
 
             return `
-                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?username=${username}'">
+                <div class="celebrity-card fade-in" onclick="window.location.href='celebrity-profile.html?username=${username}'">
                     <div class="celebrity-image" style="background: ${color}">
-                        ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
-                        ${celeb.trending ? '<div class="trending-badge">🔥 Trending</div>' : ''}
+                        ${celeb.verified ? '<div class="verified-badge">✓</div>' : ''}
+                        ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
                         <div class="celebrity-initials">${initials}</div>
                     </div>
                     <div class="celebrity-info">
-                        <div class="celebrity-name">${celeb.name}</div>
-                        <div class="celebrity-category">${celeb.subCategory || celeb.mainCategory || celeb.category || ''}</div>
-                        <div class="celebrity-location">📍 ${celeb.location}</div>
-                        <div class="celebrity-price">
-                            <span class="price">from $${celeb.price.toLocaleString()}</span>
+                        <h3 class="celebrity-name">${celeb.name}</h3>
+                        <p class="celebrity-category">${displayCategory}</p>
+                        <p class="celebrity-location">📍 ${celeb.location}</p>
+                        <div class="celebrity-footer">
                             <div class="celebrity-rating">
                                 <span class="rating-star">★</span>
-                                <span>${rating.toFixed(2)}</span>
+                                <span class="rating-value">${rating.toFixed(1)}</span>
                                 <span class="reviews-count">(${reviews})</span>
                             </div>
+                            <div class="celebrity-price">$${celeb.price.toLocaleString()}+</div>
                         </div>
                     </div>
                 </div>
@@ -553,32 +557,31 @@
             const rating = celeb.rating || 4.95;
             const reviews = celeb.reviews || 0;
             const username = celeb.username || encodeURIComponent(celeb.name);
+            const subcategory = celeb.subcategory || celeb.subCategory || '';
+            const niche = celeb.niche || '';
+            const displayCategory = niche || subcategory || celeb.category || '';
 
             return `
-                <div class="celebrity-card-list" onclick="window.location.href='celebrity-profile.html?username=${username}'">
+                <div class="celebrity-card-list fade-in" onclick="window.location.href='celebrity-profile.html?username=${username}'">
                     <div class="celebrity-image-list" style="background: ${color}">
-                        ${celeb.verified ? '<div class="verified-badge">✓ Verified</div>' : ''}
+                        ${celeb.verified ? '<div class="verified-badge">✓</div>' : ''}
+                        ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
                         <div class="celebrity-initials">${initials}</div>
                     </div>
                     <div class="celebrity-info-list">
                         <div class="celebrity-header-list">
                             <div class="celebrity-details-list">
-                                <div class="celebrity-name-list">${celeb.name}</div>
-                                <div class="celebrity-category">${celeb.subCategory || celeb.mainCategory || celeb.category || ''}</div>
+                                <h3 class="celebrity-name-list">${celeb.name}</h3>
+                                <p class="celebrity-category">${displayCategory}</p>
                                 <div class="celebrity-meta">
-                                    <div class="meta-item">📍 ${celeb.location}</div>
-                                    <div class="meta-item">💰 from $${celeb.price.toLocaleString()}</div>
-                                    ${celeb.trending ? '<div class="meta-item trending-indicator">🔥 Trending</div>' : ''}
+                                    <span class="meta-item">📍 ${celeb.location}</span>
+                                    <span class="meta-item">★ ${rating.toFixed(1)} (${reviews})</span>
                                 </div>
                             </div>
                         </div>
                         <div class="celebrity-actions-list">
-                            <div class="celebrity-rating">
-                                <span class="rating-star">★</span>
-                                <span>${rating.toFixed(2)}</span>
-                                <span class="reviews-count">(${reviews})</span>
-                            </div>
+                            <div class="celebrity-price-list">$${celeb.price.toLocaleString()}+</div>
                         </div>
                     </div>
                 </div>
