@@ -525,7 +525,6 @@
             return `
                 <div class="celebrity-card fade-in" onclick="window.location.href='celebrity-profile.html?username=${username}'">
                     <div class="celebrity-image" style="background: ${color}">
-                        ${celeb.verified ? '<div class="verified-badge">✓</div>' : ''}
                         ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
                         <div class="celebrity-initials">${initials}</div>
@@ -564,7 +563,6 @@
             return `
                 <div class="celebrity-card-list fade-in" onclick="window.location.href='celebrity-profile.html?username=${username}'">
                     <div class="celebrity-image-list" style="background: ${color}">
-                        ${celeb.verified ? '<div class="verified-badge">✓</div>' : ''}
                         ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
                         <div class="celebrity-initials">${initials}</div>
@@ -591,11 +589,8 @@
         // Initialize
         // Initialize dynamic filters with collapsible tree structure
         function initializeFilters() {
-            // Build category tree
-            buildCategoryTree();
-
-            // Build location tree
-            buildLocationTree();
+            // Note: buildCategoryTree and buildLocationTree are called by browse-init-progressive.js
+            // after data is loaded via updateGlobalState()
 
             // Price slider handler
             document.getElementById('priceSlider').addEventListener('input', function() {
@@ -620,12 +615,17 @@
             // Use window.celebrities (loaded from API)
             const celebList = window.celebrities || [];
 
-            console.log('Building category tree from', celebList.length, 'celebrities');
+            console.log('🏗️ Building category tree from', celebList.length, 'celebrities');
+
+            if (celebList.length === 0) {
+                console.warn('⚠️ No celebrities data available to build category tree');
+                return;
+            }
 
             // Build the hierarchy
             celebList.forEach(celeb => {
-                const main = celeb.mainCategory || celeb.category;
-                const sub = celeb.subCategory || celeb.subcategory;
+                const main = celeb.category;
+                const sub = celeb.subcategory;
 
                 if (!main) return;
 
@@ -677,7 +677,12 @@
             // Use window.celebrities (loaded from API)
             const celebList = window.celebrities || [];
 
-            console.log('Building location tree from', celebList.length, 'celebrities');
+            console.log('🏗️ Building location tree from', celebList.length, 'celebrities');
+
+            if (celebList.length === 0) {
+                console.warn('⚠️ No celebrities data available to build location tree');
+                return;
+            }
 
             // Build the hierarchy
             celebList.forEach(celeb => {
