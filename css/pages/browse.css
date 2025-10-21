@@ -15,7 +15,6 @@ body {
 
 /* Main Container - Premium Layout */
 .main-container {
-    margin-top: var(--nav-height); /* Space for fixed navbar */
     display: flex !important;
     max-width: 1400px;
     margin-left: auto;
@@ -382,7 +381,7 @@ body {
 }
 
 .hero-text {
-    font-size: 14px;
+    font-size: 24px;
     font-weight: 400;
     color: #ffffff;
     margin: 0;
@@ -1093,7 +1092,9 @@ body {
 
     .main-container {
         flex-direction: column;
-        padding: 16px;
+        padding-left: 16px;
+        padding-right: 16px;
+        padding-bottom: 16px;
         margin-top: var(--nav-height);
     }
 
@@ -1107,7 +1108,7 @@ body {
     }
 
     .hero-text {
-        font-size: 13px;
+        font-size: 18px;
     }
 
     /* Toolbar sticky on mobile */
