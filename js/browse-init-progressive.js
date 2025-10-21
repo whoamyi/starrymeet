@@ -48,7 +48,7 @@ document.addEventListener('DOMContentLoaded', async function() {
  * Show skeleton loaders
  */
 function showSkeletonLoaders(count = 12) {
-    const resultsGrid = document.getElementById('resultsGrid');
+    const resultsGrid = document.getElementById('celebritiesGrid');
     if (!resultsGrid) return;
 
     const skeletons = Array(count).fill(0).map(() => `
@@ -287,7 +287,7 @@ function hideLoadingMoreIndicator() {
  * Show error state
  */
 function showErrorState() {
-    const resultsGrid = document.getElementById('resultsGrid');
+    const resultsGrid = document.getElementById('celebritiesGrid');
     if (resultsGrid) {
         resultsGrid.innerHTML = `
             <div style="grid-column: 1/-1; text-align: center; padding: 60px 20px; color: #9CA3AF;">
@@ -306,6 +306,19 @@ function showErrorState() {
  * Transform celebrity data
  */
 function transformCelebrity(celeb) {
+    // Parse location into city and country
+    let city = '';
+    let country = '';
+    if (celeb.location) {
+        const parts = celeb.location.split(',').map(p => p.trim());
+        if (parts.length >= 2) {
+            city = parts[0]; // First part is city
+            country = parts[parts.length - 1]; // Last part is country
+        } else if (parts.length === 1) {
+            city = parts[0];
+        }
+    }
+
     return {
         id: celeb.id,
         name: celeb.display_name,
@@ -315,6 +328,8 @@ function transformCelebrity(celeb) {
         niche: celeb.niche_category,
         bio: celeb.bio,
         location: celeb.location,
+        city: city,
+        country: country,
         price: celeb.standard_meet_price_cents ? (celeb.standard_meet_price_cents / 100) : 0,
         rating: parseFloat(celeb.average_rating) || 0,
         reviews: celeb.total_reviews || 0,
