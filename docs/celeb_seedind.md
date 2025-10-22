@@ -109,29 +109,21 @@ No minors, heads of state, sanctioned individuals.
 No Wikipedia dumps in bios >2 lines.
 Only verified official images.
 
-Cloudinary infos"
-API environment variable" CLOUDINARY_URL=cloudinary://<your_api_key>:<your_api_secret>@dd0ou581d
-API KEY: 331969854289545
-API secret:irAFHME5wEYftKj0aN849RaL3Hk
+Cloudinary infos:
+- API credentials configured in backend/.env (not tracked in git)
+- Free tier limits:
+  - Upload API: Unlimited hourly requests
+  - Admin API: 500 hourly requests
+  - Max image file size: 10 MB
+  - Max video file size: 100 MB
+  - Max online manipulation: 100 MB
+  - Max raw file size: 10 MB
+  - Max image megapixels: 25 MP
+  - Max total megapixels in all frames: 50 MP
 
-cloudinary Usage Limits
-Upload API - Hourly requests
-Unlimited
-Admin API - Hourly requests
-500
-Maximum number of users
-3
-Maximum number of product environments
-1
-Maximum image file size
-10 MB
-Maximum video file size
-100 MB
-Maximum online image manipulation size
-100 MB
-Maximum raw file size
-10 MB
-Maximum image megapixels
-25 MP
-Maximum total number of megapixels in all frames
-50 MP
+External API Keys:
+- All API keys configured in backend/.env (not tracked in git)
+- TMDB (The Movie Database): Get free key at https://www.themoviedb.org/settings/api
+- Google/YouTube API: Get free key at https://console.cloud.google.com/apis/credentials
+- Spotify: Get free credentials at https://developer.spotify.com/dashboard
+- See backend/.env.example for configuration template

@@ -12,16 +12,16 @@ dotenv.config();
 // ============================================
 
 export const TARGET_DISTRIBUTION: TierDistribution = {
-  'Exclusive': 500,     // A+ tier
-  'Elite': 2000,        // A tier
-  'High': 3000,         // B tier
-  'Mid': 4000,          // C tier
-  'Emerging': 3000      // D tier
+  'Exclusive': 600,     // A+ tier (increased from 500)
+  'Elite': 2400,        // A tier (increased from 2000)
+  'High': 3600,         // B tier (increased from 3000)
+  'Mid': 4800,          // C tier (increased from 4000)
+  'Emerging': 3600      // D tier (increased from 3000)
 };
 
-export const TOTAL_TARGET = Object.values(TARGET_DISTRIBUTION).reduce((sum, val) => sum + val, 0);
+export const TOTAL_TARGET = Object.values(TARGET_DISTRIBUTION).reduce((sum, val) => sum + val, 0); // Now 15,000
 
-// Ensure ≥30% non-US profiles
+// Ensure ≥30% non-US profiles for global inclusivity
 export const MIN_NON_US_PERCENTAGE = 0.30;
 
 // ============================================
@@ -256,17 +256,17 @@ export const DEFAULT_BOOKING_CONFIG = {
 };
 
 // ============================================
-// REGIONS & COUNTRIES
+// REGIONS & COUNTRIES (Inclusive & Diverse)
 // ============================================
 
 export const REGIONS = {
   'North America': ['USA', 'Canada', 'Mexico'],
-  'Latin America': ['Brazil', 'Argentina', 'Colombia', 'Chile', 'Peru'],
-  'Europe': ['UK', 'France', 'Germany', 'Spain', 'Italy', 'Netherlands', 'Sweden', 'Switzerland'],
-  'Asia': ['Japan', 'South Korea', 'China', 'India', 'Singapore', 'Thailand', 'Philippines'],
-  'Middle East': ['UAE', 'Saudi Arabia', 'Israel', 'Turkey'],
-  'Africa': ['South Africa', 'Nigeria', 'Kenya', 'Ghana'],
-  'Oceania': ['Australia', 'New Zealand']
+  'Latin America': ['Brazil', 'Argentina', 'Colombia', 'Chile', 'Peru', 'Venezuela', 'Ecuador', 'Uruguay', 'Bolivia', 'Paraguay'],
+  'Europe': ['UK', 'France', 'Germany', 'Spain', 'Italy', 'Netherlands', 'Sweden', 'Switzerland', 'Poland', 'Belgium', 'Austria', 'Denmark', 'Norway', 'Finland', 'Ireland', 'Portugal', 'Greece', 'Czech Republic', 'Romania', 'Hungary'],
+  'Asia': ['Japan', 'South Korea', 'China', 'India', 'Singapore', 'Thailand', 'Philippines', 'Indonesia', 'Malaysia', 'Vietnam', 'Pakistan', 'Bangladesh', 'Taiwan', 'Hong Kong', 'Cambodia', 'Nepal', 'Sri Lanka'],
+  'Middle East': ['UAE', 'Saudi Arabia', 'Israel', 'Turkey', 'Egypt', 'Lebanon', 'Jordan', 'Qatar', 'Kuwait', 'Bahrain', 'Oman'],
+  'Africa': ['South Africa', 'Nigeria', 'Kenya', 'Ghana', 'Ethiopia', 'Egypt', 'Morocco', 'Algeria', 'Tunisia', 'Senegal', 'Uganda', 'Tanzania', 'Ivory Coast', 'Cameroon', 'Zimbabwe'],
+  'Oceania': ['Australia', 'New Zealand', 'Fiji', 'Papua New Guinea']
 };
 
 export default API_CONFIG;

@@ -40,17 +40,26 @@ export function generatePlaceholderGradient(name: string): string {
 }
 
 /**
- * Download image from URL
+ * Download image from URL with size validation
  */
 async function downloadImage(url: string): Promise<Buffer> {
   try {
     const response = await axios.get(url, {
       responseType: 'arraybuffer',
       timeout: 30000,
-      maxContentLength: 10 * 1024 * 1024 // 10MB max (Cloudinary free tier limit)
+      maxContentLength: 10 * 1024 * 1024, // 10MB max (Cloudinary free tier limit)
+      maxBodyLength: 10 * 1024 * 1024
     });
 
-    return Buffer.from(response.data);
+    const buffer = Buffer.from(response.data);
+    const sizeInMB = buffer.length / 1024 / 1024;
+
+    // Extra validation - reject if over 10MB
+    if (sizeInMB > 10) {
+      throw new Error(`Image too large: ${sizeInMB.toFixed(2)}MB (max 10MB)`);
+    }
+
+    return buffer;
 
   } catch (error: any) {
     console.error(`❌ Image download error for ${url}:`, error.message);
