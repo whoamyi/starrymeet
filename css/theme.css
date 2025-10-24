@@ -1,0 +1,353 @@
+/**
+ * StarryMeet Global Design Token System
+ *
+ * Luxury dark-mode design system with muted gold accents
+ * 90/10 rule: 90% deep neutral darks, 10% muted gold/platinum accents
+ *
+ * Philosophy:
+ * - Depth over brightness
+ * - Motion over static color
+ * - Tactile glass instead of flat gradients
+ * - Accents are emotional, not decorative
+ *
+ * DO NOT use inline colors or custom hex codes in components.
+ * ALL styling must derive from these tokens.
+ */
+
+:root {
+  /* ========================================
+     BASE SURFACES
+     ======================================== */
+  --bg-page: #0D0D0F;
+  --bg-panel: #151516;
+  --surface-weak: rgba(255,255,255,0.02);
+  --surface-strong: rgba(255,255,255,0.04);
+
+  /* ========================================
+     TYPOGRAPHY
+     ======================================== */
+  --text-primary: rgba(237,237,237,0.95);
+  --text-secondary: rgba(165,165,165,0.9);
+  --muted: rgba(165,165,165,0.6);
+
+  /* ========================================
+     ACCENT SYSTEM (Muted Gold Family)
+     Mirage-like experience - felt, not named
+     ======================================== */
+  --accent-base: #C5A873;
+  --accent-cta: #D7B972;
+  --accent-hint: rgba(197,168,115,0.09);
+  --accent-glow: rgba(215,185,114,0.14);
+
+  /* ========================================
+     BORDERS & SHADOWS
+     ======================================== */
+  --border-weak: rgba(255,255,255,0.04);
+  --border-strong: rgba(255,255,255,0.06);
+  --shadow-1: 0 8px 20px rgba(0,0,0,0.55);
+  --shadow-accent: 0 10px 28px rgba(197,168,115,0.08);
+
+  /* ========================================
+     MOTION & ANIMATION
+     ======================================== */
+  --motion-curve: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration: 0.3s;
+
+  /* ========================================
+     SPACING & RADII
+     ======================================== */
+  --pad-sm: 8px;
+  --pad: 16px;
+  --pad-lg: 24px;
+  --pad-xl: 32px;
+  --gap-sm: 6px;
+  --gap: 12px;
+  --gap-lg: 24px;
+
+  --radius-sm: 10px;
+  --radius: 12px;
+  --radius-card: 22px;
+  --radius-btn: 12px;
+
+  /* ========================================
+     TYPOGRAPHY SCALE
+     ======================================== */
+  --font-sans: "Inter", "SF Pro Display", -apple-system, BlinkMacSystemFont, sans-serif;
+
+  --text-xs: 12px;
+  --text-sm: 13px;
+  --text-base: 14px;
+  --text-md: 16px;
+  --text-lg: 18px;
+  --text-xl: 20px;
+  --text-2xl: 24px;
+  --text-3xl: 28px;
+  --text-4xl: 36px;
+
+  /* ========================================
+     LAYOUT CONSTRAINTS (A4-like pages)
+     ======================================== */
+  --page-max-width: 1280px;
+  --content-max-width: 980px;
+  --section-padding: 80px;
+  --section-padding-mobile: 40px;
+
+  /* ========================================
+     BREAKPOINTS (for JS queries)
+     ======================================== */
+  --breakpoint-mobile: 640px;
+  --breakpoint-tablet: 768px;
+  --breakpoint-desktop: 1024px;
+  --breakpoint-wide: 1280px;
+}
+
+/* ========================================
+   GLOBAL RESET & BASE STYLES
+   ======================================== */
+
+*,
+*::before,
+*::after {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  font-size: 16px;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: var(--font-sans);
+  background: var(--bg-page);
+  color: var(--text-primary);
+  line-height: 1.5;
+  overflow-x: hidden;
+}
+
+/* ========================================
+   TYPOGRAPHY UTILITIES
+   ======================================== */
+
+.text-title {
+  font-size: var(--text-2xl);
+  font-weight: 600;
+  color: var(--text-primary);
+  letter-spacing: -0.02em;
+}
+
+.text-heading {
+  font-size: var(--text-lg);
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.text-body {
+  font-size: var(--text-base);
+  color: var(--text-secondary);
+}
+
+.text-secondary {
+  font-size: var(--text-sm);
+  color: var(--text-secondary);
+}
+
+.text-muted {
+  font-size: var(--text-sm);
+  color: var(--muted);
+}
+
+.text-price {
+  font-size: var(--text-md);
+  font-weight: 600;
+  color: var(--accent-base);
+}
+
+/* ========================================
+   BUTTON UTILITIES
+   ======================================== */
+
+.btn {
+  padding: 12px 24px;
+  border-radius: var(--radius-btn);
+  font-size: var(--text-base);
+  font-weight: 500;
+  font-family: var(--font-sans);
+  border: none;
+  cursor: pointer;
+  transition: all var(--motion-duration) var(--motion-curve);
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+}
+
+.btn-primary {
+  background: var(--accent-cta);
+  color: rgba(0,0,0,0.9);
+  box-shadow: 0 4px 12px rgba(197,168,115,0.2);
+}
+
+.btn-primary:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 16px rgba(197,168,115,0.3);
+}
+
+.btn-primary:active {
+  transform: scale(0.97);
+}
+
+.btn-secondary {
+  background: var(--surface-strong);
+  color: var(--text-primary);
+  border: 1px solid var(--border-weak);
+}
+
+.btn-secondary:hover {
+  background: var(--surface-weak);
+  border-color: var(--border-strong);
+  transform: translateY(-2px);
+}
+
+.btn-ghost {
+  background: transparent;
+  color: var(--text-secondary);
+  border: 1px solid var(--border-weak);
+}
+
+.btn-ghost:hover {
+  color: var(--text-primary);
+  border-color: var(--accent-hint);
+  background: var(--accent-hint);
+}
+
+/* ========================================
+   CONTAINER UTILITIES
+   ======================================== */
+
+.container {
+  width: 100%;
+  max-width: var(--page-max-width);
+  margin: 0 auto;
+  padding: 0 var(--pad-lg);
+}
+
+.content-container {
+  width: 100%;
+  max-width: var(--content-max-width);
+  margin: 0 auto;
+}
+
+/* ========================================
+   CARD BASE (Shared across all cards)
+   ======================================== */
+
+.card-base {
+  background: var(--surface-weak);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-weak);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(8px);
+  transition: transform var(--motion-duration) var(--motion-curve),
+              box-shadow var(--motion-duration) var(--motion-curve);
+}
+
+.card-base:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-1), var(--shadow-accent);
+}
+
+/* ========================================
+   GLASS EFFECT (Fallback support)
+   ======================================== */
+
+@supports not (backdrop-filter: blur(8px)) {
+  .card-base,
+  .glass {
+    background: var(--surface-strong);
+  }
+}
+
+/* ========================================
+   RESPONSIVE UTILITIES
+   ======================================== */
+
+@media (max-width: 768px) {
+  :root {
+    --section-padding: var(--section-padding-mobile);
+  }
+
+  .container {
+    padding: 0 var(--pad);
+  }
+
+  .text-title {
+    font-size: var(--text-xl);
+  }
+}
+
+/* ========================================
+   ACCESSIBILITY
+   ======================================== */
+
+.sr-only {
+  position: absolute;
+  width: 1px;
+  height: 1px;
+  padding: 0;
+  margin: -1px;
+  overflow: hidden;
+  clip: rect(0, 0, 0, 0);
+  white-space: nowrap;
+  border-width: 0;
+}
+
+/* Focus states */
+:focus-visible {
+  outline: 2px solid var(--accent-base);
+  outline-offset: 2px;
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--accent-base);
+  outline-offset: 4px;
+}
+
+/* ========================================
+   SCROLLBAR STYLING
+   ======================================== */
+
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-panel);
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--surface-strong);
+  border-radius: 4px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255,255,255,0.08);
+}
+
+/* ========================================
+   SELECTION STYLING
+   ======================================== */
+
+::selection {
+  background: var(--accent-hint);
+  color: var(--text-primary);
+}
+
+::-moz-selection {
+  background: var(--accent-hint);
+  color: var(--text-primary);
+}

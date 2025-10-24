@@ -1,0 +1,442 @@
+
+Claude, read carefully — this isn’t a suggestion; it’s a directive. You are being tasked to restructure and restyle the StarryMeet website so that it feels unified, premium, and consistent across every page, starting with the product card redesign and a global color and accent system update.
+
+The goal is to make StarryMeet’s interface feel like a luxury dark-mode mobile app — sleek, tactile, and emotionally subtle. No improvisation. You follow structure, consistency, and hierarchy exactly as described.
+
+
+---
+
+1. Objective
+
+Rebuild the product card component and update the global design system.
+You must:
+
+Replace every existing accent system with a new, three-tier gold accent system (hint, glow, CTA).
+
+Create shared UI components (header, footer, navbar, body, background, and card container) that are globally consistent.
+
+Ensure that every page inherits these base tokens and layout rules. Individual pages can vary in shade or composition, but structure, spacing, and motion must remain identical.
+
+Implement a mirage-like accent experience — the user feels color presence but cannot name it.
+
+Replace the term “slot” with the 🎟️ ticket icon for all user-facing availability references (only use the word "slot" in backend or admin contexts).
+
+
+
+---
+
+2. Visual Philosophy
+
+90/10 rule: 90% deep neutral darks, 10% muted gold/platinum accents.
+
+Luxury logic: depth over brightness; motion over static color; tactile glass instead of flat gradients.
+
+Accents are emotional, not decorative. They exist in hints, not in saturation.
+
+Typography hierarchy defines readability; spacing defines trust; motion defines quality.
+
+
+
+---
+
+3. Global Structure Rules
+
+Treat the site like a set of A4 pages — same size, same margin and padding, only content changes.
+
+Shared components (header, footer, navbar, body, background) must be extracted as global includes or React components (depending on architecture).
+
+Global spacing tokens must govern all layout gaps, paddings, and margins.
+
+No page should declare independent background or spacing values.
+
+All CTAs, borders, and shadows use the same token references.
+
+Maintain responsive consistency — mobile-first grid, unified breakpoints.
+
+
+
+---
+
+4. Global Token System
+
+Use these tokens as the single source of truth across all files.
+No inline colors, no custom hex codes in components.
+
+:root {
+  /* Base surfaces */
+  --bg-page: #0D0D0F;
+  --bg-panel: #151516;
+  --surface-weak: rgba(255,255,255,0.02);
+  --surface-strong: rgba(255,255,255,0.04);
+
+  /* Typography */
+  --text-primary: rgba(237,237,237,0.95);
+  --text-secondary: rgba(165,165,165,0.9);
+  --muted: rgba(165,165,165,0.6);
+
+  /* Accent system (muted gold family) */
+  --accent-base: #C5A873;
+  --accent-cta: #D7B972;
+  --accent-hint: rgba(197,168,115,0.09);
+  --accent-glow: rgba(215,185,114,0.14);
+
+  /* Borders & shadows */
+  --border-weak: rgba(255,255,255,0.04);
+  --border-strong: rgba(255,255,255,0.06);
+  --shadow-1: 0 8px 20px rgba(0,0,0,0.55);
+  --shadow-accent: 0 10px 28px rgba(197,168,115,0.08);
+
+  /* Motion */
+  --motion-curve: cubic-bezier(0.22, 1, 0.36, 1);
+  --motion-duration: 0.3s;
+
+  /* Spacing and radii */
+  --pad-sm: 8px;
+  --pad: 16px;
+  --pad-lg: 24px;
+  --radius-card: 22px;
+  --radius-btn: 12px;
+
+  /* Typography */
+  --font-sans: "Inter", "SF Pro Display", sans-serif;
+}
+
+All colors, borders, shadows, and highlights must derive from these tokens.
+
+
+---
+
+5. Product Card Redesign
+
+Purpose
+
+The product card acts as a teaser to the celebrity profile — minimal information, strong emotion.
+It must convey exclusivity and hint at interactivity without overwhelming the user.
+
+
+---
+
+Design and Layout
+
+Structure:
+
++------------------------------------+
+|  [ Portrait or Initials Area ]     |
+|   🎟️  Favorite Icon (top right)    |
+|------------------------------------|
+|  Name                              |
+|  Profession                        |
+|  Availability Line (📍 + 🎟️ count) |
+|  Price Badge                       |
++------------------------------------+
+
+Do not display the celebrity’s country of origin.
+
+Display only meeting location or meeting type (physical/virtual).
+
+Profession replaces the “Other” field — it reflects the user’s category from the database.
+
+Use the 🎟️ icon before ticket count for all references to availability.
+
+The ticket icon replaces the word “slot” throughout the UI.
+
+
+
+---
+
+Styling and Behavior
+
+Use this as CSS reference for implementation:
+
+.card {
+  width: 46%;
+  margin: 2%;
+  background: var(--surface-weak);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-weak);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(8px);
+  transition: transform var(--motion-duration) var(--motion-curve),
+              box-shadow var(--motion-duration) var(--motion-curve);
+  display: flex;
+  flex-direction: column;
+}
+
+.card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-1), var(--shadow-accent);
+}
+
+.card__hero {
+  flex: 0 0 58%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+.card__initials {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+}
+
+.card__fav {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+}
+
+.card__info {
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+}
+
+.card__name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+}
+
+.card__profession {
+  font-size: 14px;
+  color: var(--text-secondary);
+}
+
+.card__availability {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+.card__availability span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.card__price {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-base);
+  background: rgba(197,168,115,0.03);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(197,168,115,0.06);
+}
+
+
+---
+
+Example Card Markup
+
+<article class="card">
+  <div class="card__hero">
+    <div class="card__initials">KB</div>
+    <button class="card__fav" title="Favorite">
+      <!-- heart icon -->
+    </button>
+  </div>
+
+  <div class="card__info">
+    <div class="card__name">Kate Bush</div>
+    <div class="card__profession">Singer</div>
+    <div class="card__availability">
+      <span>📍 Paris</span>
+      <span>🎟️ 3</span>
+    </div>
+    <div class="card__price">$40,435+</div>
+  </div>
+</article>
+
+
+---
+
+6. Interaction and Motion
+
+Use 0.3s ease-out motion for all animations (var(--motion-curve)).
+
+On hover: raise card 6px, add shadow accent.
+
+On tap: compress slightly (scale(0.97)).
+
+Favorite icons glow softly on activation with var(--accent-glow).
+
+CTAs use var(--accent-cta) for backgrounds and var(--accent-base) for text.
+
+
+
+---
+
+7. Implementation Strategy
+
+To avoid styling inconsistencies and hallucinations:
+
+1. Extract all color values from every stylesheet → replace with token variables.
+
+
+2. Create a global _theme.css or theme.ts file that defines all shared variables.
+
+
+3. Centralize layout templates: header, footer, navbar, and background should be imported across every page.
+
+
+4. Reference global card and CTA classes — no page-level overrides unless scoped under .page__custom.
+
+
+5. Audit gradient usage — delete rainbow backgrounds and replace with tokenized subtle gradients.
+
+
+6. Batch update icons — every “slot” icon becomes 🎟️; adjust spacing in line height to match.
+
+
+7. Refactor text hierarchy: all typography uses Inter with shared class utilities (e.g., .text-title, .text-secondary, .text-price).
+
+
+
+
+---
+
+8. Testing and Rollout
+
+Run color contrast audits (WCAG 2.1 AA minimum).
+
+Test mobile responsiveness on 360px–420px widths.
+
+Verify glass and blur fallback (rgba base instead of backdrop-filter where unsupported).
+
+Confirm all components pull their spacing, corner, and motion values from tokens.
+
+Once complete, export a before/after design diff for review.
+ 
+
+#celebrity profile design
+ Here is a multi-layer collapsible structure for Profile page:
+
+
+---
+
+# Profile Page (Full Experience)
+
+Goal: make the user feel like they’re unlocking layers of exclusivity — each click a little deeper into access.
+
+
+---
+
+1. Header section
+
+Hero banner or high-quality portrait.
+
+Name, role, short bio (2–3 lines max).
+
+Key highlights: short badges like “UN Ambassador”, “Award-winning”, “Mentor”, etc.
+
+Maybe a discreet “Follow” or “Add to wishlist” icon.
+
+
+
+---
+
+2. Availability Section – New Multi-Layer Structure
+
+Level 1: Primary View (Collapsed)
+
+This is what users see at first glance:
+
+📍 Paris ............ 3 🎟️available
+💻 Virtual .......... 2 🎟️ available
+
+No price. No dates. Just the promise of possibility.
+
+
+---
+
+Level 2: Slot Units (Expands from clicking a line)
+
+When the user taps “Paris – 3 slots available”, it expands into:
+
+May 24 • 10: 00 AM • 30 min  ⬇️
+May 25 • 3: 00 PM • 45 min  ⬇️
+May 26 • 5: 00 PM • 20 min  ⬇️
+
+Still no prices. Still elegant restraint.
+
+
+---
+
+Level 3: Price & CTA (Expands per slot)
+
+Clicking one of those reveals:
+
+$1, 200
+[Request Meeting]
+
+If slot unavailable → show subtle “Fully Booked” in muted grey instead of any number.
+If virtual → same concept, but instead of location, the top line is Date + #slots.
+
+Example:
+
+💻 May 27 .......... 2 slots
+    2: 00 PM • 30 min  ⬇️
+         $450 [Request]
+    6: 00 PM • 45 min  ⬇️
+         $600 [Request]
+
+
+---
+
+3. Visual Language
+
+Every expansion should feel like peeling a card layer — gentle lift animation, maybe frosted glass background.
+
+Prices fade in subtly, not pop up like a sales tag.
+
+The “Request” button should look like an invitation, not a checkout.
+
+Use whitespace and spacing to make it breathe — premium design hates clutter.
+
+
+
+---
+
+4. Section Below
+
+“Highlights” carousel (press, projects, awards) — quick, visual, swipeable.
+
+Testimonials or “Memorable moments” with fans (if you want social proof without cheapening exclusivity).
+
+#Tone and Result
+
+When done correctly:
+
+The interface feels cinematic, expensive, and calm.
+
+The accent color exists as a presence, not a hue.
+
+Buttons and CTAs guide, not distract.
+
+The browse cards and profile pages look like different scenes of one film — same mood, different focus.
+
+
+
+---
+
+That is the directive.
+Do not deviate, overcomplicate, or reinterpret design logic.
+Unify first. Polish second. Maintain hierarchy and restraint.

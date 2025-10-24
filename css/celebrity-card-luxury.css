@@ -1,0 +1,547 @@
+/**
+ * StarryMeet Luxury Celebrity Cards
+ *
+ * Design Philosophy:
+ * - Depth over brightness
+ * - Motion over static color
+ * - Tactile glass instead of flat gradients
+ * - Accents are emotional, not decorative
+ *
+ * DO NOT use inline colors. ALL styling derives from theme.css tokens.
+ */
+
+/* ========================================
+   GRID CARD - LUXURY DESIGN
+   ======================================== */
+
+.celebrity-card {
+  width: 100%;
+  background: var(--surface-weak);
+  border-radius: var(--radius-card);
+  border: 1px solid var(--border-weak);
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(8px);
+  transition: transform var(--motion-duration) var(--motion-curve),
+              box-shadow var(--motion-duration) var(--motion-curve);
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  cursor: pointer;
+  height: 100%;
+}
+
+.celebrity-card:hover {
+  transform: translateY(-6px);
+  box-shadow: var(--shadow-1), var(--shadow-accent);
+}
+
+.celebrity-card:active {
+  transform: scale(0.97);
+}
+
+/* Fallback for browsers without backdrop-filter support */
+@supports not (backdrop-filter: blur(8px)) {
+  .celebrity-card {
+    background: var(--surface-strong);
+  }
+}
+
+/* ========================================
+   CARD HERO AREA (58% height)
+   ======================================== */
+
+.celebrity-image {
+  flex: 0 0 58%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  overflow: hidden;
+}
+
+/* Celebrity initials when no image */
+.celebrity-initials {
+  font-size: 28px;
+  font-weight: 600;
+  color: var(--text-primary);
+  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  letter-spacing: -0.01em;
+}
+
+/* Avatar image (when available) */
+.celebrity-avatar-img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  transition: transform var(--motion-duration) var(--motion-curve);
+}
+
+.celebrity-card:hover .celebrity-avatar-img {
+  transform: scale(1.05);
+}
+
+/* ========================================
+   FAVORITE BUTTON (TOP RIGHT)
+   ======================================== */
+
+.watchlist-btn {
+  position: absolute;
+  right: 12px;
+  top: 12px;
+  width: 38px;
+  height: 38px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.04);
+  backdrop-filter: blur(8px);
+  cursor: pointer;
+  z-index: 2;
+  transition: all var(--motion-duration) var(--motion-curve);
+  font-size: 16px;
+  padding: 0;
+}
+
+.watchlist-btn:hover {
+  background: rgba(255,255,255,0.06);
+  border-color: rgba(255,255,255,0.08);
+  transform: scale(1.1);
+}
+
+.watchlist-btn.active {
+  background: var(--accent-hint);
+  border-color: rgba(197,168,115,0.12);
+  box-shadow: 0 0 20px var(--accent-glow);
+}
+
+@supports not (backdrop-filter: blur(8px)) {
+  .watchlist-btn {
+    background: rgba(255,255,255,0.06);
+  }
+}
+
+/* ========================================
+   FEATURED BADGE (GOLD STAR)
+   ======================================== */
+
+.featured-badge {
+  position: absolute;
+  top: 12px;
+  left: 12px;
+  background: var(--accent-hint);
+  border: 1px solid rgba(197,168,115,0.12);
+  backdrop-filter: blur(8px);
+  color: var(--accent-base);
+  padding: 6px 10px;
+  border-radius: 10px;
+  font-size: 14px;
+  font-weight: 600;
+  z-index: 2;
+  box-shadow: 0 2px 8px var(--accent-glow);
+}
+
+@supports not (backdrop-filter: blur(8px)) {
+  .featured-badge {
+    background: rgba(197,168,115,0.06);
+  }
+}
+
+/* ========================================
+   CARD INFO AREA (42% height)
+   ======================================== */
+
+.celebrity-info {
+  padding: var(--pad);
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  flex: 1;
+}
+
+/* ========================================
+   NAME & PROFESSION
+   ======================================== */
+
+.celebrity-name {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+.celebrity-category {
+  font-size: 14px;
+  color: var(--text-secondary);
+  margin: 0;
+  line-height: 1.2;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  font-family: var(--font-sans);
+}
+
+/* ========================================
+   AVAILABILITY LINE (📍 + 🎟️)
+   ======================================== */
+
+.celebrity-location,
+.celebrity-availability {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: 4px;
+  font-size: 13px;
+  color: var(--text-secondary);
+  gap: 6px;
+  line-height: 1.2;
+}
+
+.celebrity-location span,
+.celebrity-availability span {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.availability-location {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.availability-tickets {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  white-space: nowrap;
+  flex-shrink: 0;
+}
+
+/* ========================================
+   PRICE BADGE
+   ======================================== */
+
+.celebrity-footer {
+  margin-top: auto;
+  padding-top: 8px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 8px;
+}
+
+.celebrity-price {
+  font-size: 16px;
+  font-weight: 600;
+  color: var(--accent-base);
+  background: rgba(197,168,115,0.03);
+  padding: 6px 10px;
+  border-radius: 10px;
+  border: 1px solid rgba(197,168,115,0.06);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+/* Rating (optional, can be removed if not needed) */
+.celebrity-rating {
+  display: flex;
+  align-items: center;
+  gap: 3px;
+  font-size: 12px;
+  color: var(--muted);
+}
+
+.rating-star {
+  color: var(--accent-base);
+  font-size: 14px;
+}
+
+.rating-value {
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+.reviews-count {
+  color: var(--muted);
+  font-size: 11px;
+}
+
+/* ========================================
+   LIST VIEW - LUXURY DESIGN
+   ======================================== */
+
+.celebrity-card-list {
+  display: flex;
+  background: var(--surface-weak);
+  border: 1px solid var(--border-weak);
+  border-radius: var(--radius-card);
+  overflow: hidden;
+  box-shadow: var(--shadow-1);
+  backdrop-filter: blur(8px);
+  transition: all var(--motion-duration) var(--motion-curve);
+  cursor: pointer;
+}
+
+.celebrity-card-list:hover {
+  box-shadow: var(--shadow-1), var(--shadow-accent);
+  transform: translateX(4px);
+}
+
+.celebrity-card-list:active {
+  transform: scale(0.98);
+}
+
+@supports not (backdrop-filter: blur(8px)) {
+  .celebrity-card-list {
+    background: var(--surface-strong);
+  }
+}
+
+.celebrity-image-list {
+  width: 160px;
+  flex-shrink: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  position: relative;
+  background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+}
+
+.celebrity-info-list {
+  flex: 1;
+  padding: var(--pad-lg);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--pad);
+  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+}
+
+.celebrity-header-list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.celebrity-details-list {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.celebrity-name-list {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0;
+  line-height: 1.2;
+  font-family: var(--font-sans);
+  letter-spacing: -0.01em;
+}
+
+.celebrity-meta {
+  display: flex;
+  gap: var(--pad);
+  margin-top: 8px;
+}
+
+.meta-item {
+  color: var(--text-secondary);
+  font-size: 13px;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+}
+
+.celebrity-actions-list {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-end;
+  gap: 12px;
+}
+
+.celebrity-price-list {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--accent-base);
+  white-space: nowrap;
+  font-family: var(--font-sans);
+  letter-spacing: -0.02em;
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE FIRST
+   ======================================== */
+
+@media (max-width: 768px) {
+  .celebrity-card {
+    aspect-ratio: auto;
+  }
+
+  .celebrity-image {
+    flex: 0 0 55%;
+  }
+
+  .celebrity-initials {
+    font-size: 24px;
+  }
+
+  .celebrity-info {
+    padding: 12px;
+    gap: 5px;
+  }
+
+  .celebrity-name {
+    font-size: 15px;
+  }
+
+  .celebrity-category {
+    font-size: 12px;
+  }
+
+  .celebrity-location,
+  .celebrity-availability {
+    font-size: 11px;
+  }
+
+  .celebrity-price {
+    font-size: 14px;
+    padding: 5px 8px;
+  }
+
+  .celebrity-rating {
+    font-size: 10px;
+  }
+
+  .rating-star {
+    font-size: 12px;
+  }
+
+  .reviews-count {
+    display: none;
+  }
+
+  .celebrity-footer {
+    padding-top: 6px;
+    gap: 6px;
+  }
+
+  .watchlist-btn {
+    width: 34px;
+    height: 34px;
+    right: 10px;
+    top: 10px;
+    font-size: 14px;
+  }
+
+  .featured-badge {
+    font-size: 12px;
+    padding: 4px 8px;
+  }
+
+  /* List view mobile adjustments */
+  .celebrity-card-list {
+    flex-direction: column;
+  }
+
+  .celebrity-image-list {
+    width: 100%;
+    min-height: 180px;
+  }
+
+  .celebrity-info-list {
+    flex-direction: column;
+    align-items: flex-start;
+    padding: var(--pad);
+    gap: 12px;
+  }
+
+  .celebrity-name-list {
+    font-size: 16px;
+  }
+
+  .celebrity-meta {
+    flex-wrap: wrap;
+    gap: 12px;
+  }
+
+  .celebrity-actions-list {
+    align-items: flex-start;
+    width: 100%;
+  }
+
+  .celebrity-price-list {
+    font-size: 18px;
+  }
+}
+
+@media (max-width: 480px) {
+  .celebrity-name {
+    font-size: 14px;
+  }
+
+  .celebrity-category {
+    font-size: 11px;
+  }
+
+  .celebrity-location,
+  .celebrity-availability {
+    font-size: 10px;
+  }
+
+  .celebrity-price {
+    font-size: 13px;
+  }
+
+  .celebrity-initials {
+    font-size: 20px;
+  }
+}
+
+/* ========================================
+   ANIMATIONS & TRANSITIONS
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s var(--motion-curve) forwards;
+}
+
+/* Staggered animation for grid items */
+.celebrity-card:nth-child(1) { animation-delay: 0ms; }
+.celebrity-card:nth-child(2) { animation-delay: 50ms; }
+.celebrity-card:nth-child(3) { animation-delay: 100ms; }
+.celebrity-card:nth-child(4) { animation-delay: 150ms; }
+.celebrity-card:nth-child(5) { animation-delay: 200ms; }
+.celebrity-card:nth-child(6) { animation-delay: 250ms; }
+.celebrity-card:nth-child(7) { animation-delay: 300ms; }
+.celebrity-card:nth-child(8) { animation-delay: 350ms; }
+.celebrity-card:nth-child(9) { animation-delay: 400ms; }
+.celebrity-card:nth-child(10) { animation-delay: 450ms; }
+.celebrity-card:nth-child(11) { animation-delay: 500ms; }
+.celebrity-card:nth-child(12) { animation-delay: 550ms; }

@@ -6,6 +6,12 @@
  */
 
 /* ========================================
+   GLOBAL IMPORTS - SHARED COMPONENTS
+   ======================================== */
+@import url('./theme.css');
+@import url('./footer.css');
+
+/* ========================================
    GOOGLE FONTS IMPORT - INTER ONLY (CAMEO STYLE) - OPTIMIZED
    ======================================== */
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700&display=swap');

@@ -383,95 +383,7 @@
 </head>
 <body>
     <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation" id="navbar">
-        <div class="nav-container">
-            <a href="index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
-            <ul class="nav-links">
-                                <li class="nav-item-categories">
-                    <a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
-                    <div class="categories-dropdown" id="categoriesDropdown">
-                        <div class="category-parent">
-                            <span>Music</span>
-                            <div class="category-submenu">
-                                <a href="browse.html?category=Music">All Music</a>
-                                <a href="browse.html?category=Music&subcategory=K-Pop">K-Pop</a>
-                                <a href="browse.html?category=Music&subcategory=Pop">Pop</a>
-                                <a href="browse.html?category=Music&subcategory=Hip-Hop & Rap">Hip-Hop & Rap</a>
-                                <a href="browse.html?category=Music&subcategory=Rock">Rock</a>
-                            </div>
-                        </div>
-                        <div class="category-parent">
-                            <span>Sports</span>
-                            <div class="category-submenu">
-                                <a href="browse.html?category=Sports">All Sports</a>
-                                <a href="browse.html?category=Sports&subcategory=Football/Soccer">Football/Soccer</a>
-                                <a href="browse.html?category=Sports&subcategory=Basketball">Basketball</a>
-                                <a href="browse.html?category=Sports&subcategory=Olympics & Athletics">Olympics</a>
-                            </div>
-                        </div>
-                        <div class="category-parent">
-                            <span>Film & TV</span>
-                            <div class="category-submenu">
-                                <a href="browse.html?category=Film & Television">All Film & TV</a>
-                                <a href="browse.html?category=Film & Television&subcategory=Hollywood">Hollywood</a>
-                                <a href="browse.html?category=Film & Television&subcategory=TV Series">TV Series</a>
-                                <a href="browse.html?category=Film & Television&subcategory=International Cinema">International</a>
-                            </div>
-                        </div>
-                        <div class="category-parent">
-                            <span>Digital Creators</span>
-                            <div class="category-submenu">
-                                <a href="browse.html?category=Digital Creators">All Creators</a>
-                                <a href="browse.html?category=Digital Creators&subcategory=YouTube">YouTube</a>
-                                <a href="browse.html?category=Digital Creators&subcategory=TikTok">TikTok</a>
-                                <a href="browse.html?category=Digital Creators&subcategory=Gaming & Esports">Gaming</a>
-                            </div>
-                        </div>
-                        <div class="category-parent">
-                            <span>Business & Tech</span>
-                            <div class="category-submenu">
-                                <a href="browse.html?category=Business & Tech">All Business</a>
-                                <a href="browse.html?category=Business & Tech&subcategory=Tech Leaders">Tech Leaders</a>
-                                <a href="browse.html?category=Business & Tech&subcategory=Entrepreneurs">Entrepreneurs</a>
-                            </div>
-                        </div>
-                        <a href="browse.html">View all</a>
-                    </div>
-                </li>
-                <li><a href="how-it-works.html">How it works</a></li>
-                <li><a href="for-celebrities.html">Join as star</a></li>
-                <li><a href="#" onclick="openAuthModal('login'); return false;">Log in</a></li>
-            </ul>
-        </div>
-    </nav>
-
-    <!-- Mobile Menu Overlay -->
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
-
-    <!-- Mobile Menu -->
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <a href="index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
-            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
-        </div>
-        <ul class="mobile-menu-links">
-            <li class="mobile-menu-categories">
-                <a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
-                <ul class="mobile-submenu" id="mobileSubmenu">
-                    <li><a href="browse.html?category=Actors" onclick="closeMobileMenu()">Actors</a></li>
-                    
-                    <li><a href="browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
-                    <li><a href="browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
-                    <li><a href="browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
-                </ul>
-            </li>
-            <li><a href="how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
-            <li><a href="for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
-            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
-            <li class="mobile-menu-login-item"><a href="#" onclick="openAuthModal('login'); closeMobileMenu(); return false;" class="mobile-menu-login">Log in</a></li>
-        </ul>
-    </div>
+    <nav></nav>
 
     <!-- Hero Section -->
     <section class="hero">
@@ -637,74 +549,9 @@
     </div>
 
     <!-- Footer -->
-    <footer>
-        <div class="footer-main">
-            <div class="footer-newsletter">
-                <h3>Join our mailing list</h3>
-                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit" class="btn btn-primary">→</button>
-                </form>
-                <p class="privacy-note">Emails subject to <a href="privacy.html">privacy policy</a></p>
-                <div class="footer-cta-buttons">
-                    <a href="for-celebrities.html" class="btn btn-primary">Join as talent</a>
-                    <a href="contact.html" class="btn btn-outline">Become a partner</a>
-                </div>
-            </div>
-        </div>
+    <footer></footer>
 
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="about.html">About</a></li>
-                    <li><a href="team.html">Team</a></li>
-                    <li><a href="jobs.html">Jobs</a></li>
-                    <li><a href="blog/index.html">Blog</a></li>
-                    <li><a href="contact.html">Press</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="faq.html">Help</a></li>
-                    <li><a href="contact.html">Accessibility</a></li>
-                    <li><a href="terms.html">Refunds & Returns</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Shop</h4>
-                <ul>
-                    <li><a href="browse.html">Gift Cards</a></li>
-                    <li><a href="for-celebrities.html">For business</a></li>
-                    <li><a href="browse.html">For kids</a></li>
-                </ul>
-            </div>
-        </div>
-
-        <div class="footer-bottom">
-            <div class="footer-social">
-                <a href="#" aria-label="Download on App Store">App Store</a>
-                <a href="#" aria-label="Get it on Google Play">Google Play</a>
-                <a href="#" aria-label="Instagram">IG</a>
-                <a href="#" aria-label="TikTok">TT</a>
-                <a href="#" aria-label="Twitter/X">X</a>
-                <a href="#" aria-label="Threads">TH</a>
-                <a href="#" aria-label="Email">EM</a>
-            </div>
-            <p class="footer-copyright">© 2025 StarryMeet</p>
-            <div class="footer-legal">
-                <a href="terms.html">Terms of Service</a>
-                <a href="privacy.html">Privacy Policy</a>
-                <a href="contact.html">Do Not Sell My Personal Information</a>
-            </div>
-            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
-                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
-            </div>
-        </div>
-    </footer>
-
+    <script src="js/inject-layout.js"></script>
     <script>
         function calculateEarnings() {
             const meetings = parseInt(document.getElementById('meetingsInput').value) || 0;

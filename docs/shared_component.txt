@@ -1,0 +1,300 @@
+Claude — here are your precise implementation instructions. Follow them exactly.
+This directive restructures the footer, and generalizes header + footer + navbar + background into shared components that automatically apply across all pages of the StarryMeet website. The purpose is to create a single source of truth for every global UI element so no individual page ever duplicates code.
+
+
+---
+
+1. Objective
+
+You must:
+
+Remove all individually coded footers and headers from every HTML page.
+
+Replace them with shared components imported globally.
+
+Ensure every page automatically updates when these components are changed.
+
+Implement the new compact responsive footer layout optimized for mobile.
+
+Apply the same background, padding, and spacing logic site-wide so visual consistency is never broken.
+
+
+This is mandatory. No inline overrides or per-page CSS.
+
+
+---
+
+2. File and Folder Structure
+
+Refactor the project to include a shared includes directory.
+Example:
+
+/starrymeet/
+│
+├── /assets/
+│    ├── css/
+│    │    ├── theme.css
+│    │    ├── global.css
+│    │    ├── header.css
+│    │    └── footer.css
+│    └── js/
+│         ├── inject-layout.js
+│
+├── /components/
+│    ├── header.html
+│    ├── footer.html
+│    └── navbar.html
+│
+├── browse.html
+├── index.html
+├── profile.html
+├── booking.html
+└── etc...
+
+All HTML pages will import inject-layout.js, which dynamically injects the shared header, footer, and navbar.
+
+
+---
+
+3. Injection System
+
+Create this script: /assets/js/inject-layout.js
+
+async function injectComponent(selector, filePath) {
+  try {
+    const response = await fetch(filePath);
+    const html = await response.text();
+    document.querySelector(selector).innerHTML = html;
+  } catch (error) {
+    console.error(`Failed to load ${filePath}:`, error);
+  }
+}
+
+document.addEventListener("DOMContentLoaded", () => {
+  injectComponent("header", "/components/header.html");
+  injectComponent("footer", "/components/footer.html");
+  injectComponent("nav", "/components/navbar.html");
+});
+
+Then in each page HTML:
+
+<body>
+  <header></header>
+  <nav></nav>
+
+  <main>
+    <!-- Page content -->
+  </main>
+
+  <footer></footer>
+  <script src="/assets/js/inject-layout.js"></script>
+</body>
+
+This ensures all pages automatically load the same shared header, navbar, and footer from /components/.
+
+
+---
+
+4. New Footer Component
+
+Replace the old footer code with this new shared layout at /components/footer.html:
+
+<footer class="footer">
+  <div class="footer__social">
+    <a href="#">App Store</a>
+    <a href="#">Google Play</a>
+    <a href="#">IG</a>
+    <a href="#">TT</a>
+    <a href="#">X</a>
+  </div>
+
+  <div class="footer__menu">
+    <details>
+      <summary>Company</summary>
+      <a href="#">About</a>
+      <a href="#">Careers</a>
+      <a href="#">Press</a>
+    </details>
+    <details>
+      <summary>Support</summary>
+      <a href="#">Help Center</a>
+      <a href="#">Contact</a>
+    </details>
+    <details>
+      <summary>Shop</summary>
+      <a href="#">Gift Cards</a>
+      <a href="#">For Business</a>
+      <a href="#">For Kids</a>
+    </details>
+  </div>
+
+  <div class="footer__selector">
+    <button class="footer__lang">🌐 EN | United States | $ USD</button>
+  </div>
+
+  <div class="footer__legal">
+    <span>© 2025 StarryMeet</span>
+    <a href="#">Terms</a>
+    <a href="#">Privacy</a>
+  </div>
+</footer>
+
+
+---
+
+5. Footer Styling
+
+Store the following in /assets/css/footer.css:
+
+.footer {
+  background: var(--bg-panel);
+  padding: 24px 12px 40px;
+  border-top: 1px solid var(--border-weak);
+  font-family: var(--font-sans);
+  color: var(--text-secondary);
+  font-size: 13px;
+}
+
+/* Social icons row */
+.footer__social {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 12px;
+  margin-bottom: 16px;
+}
+
+.footer__social a {
+  color: var(--text-secondary);
+  opacity: 0.8;
+  transition: opacity 0.2s ease;
+}
+.footer__social a:hover {
+  opacity: 1;
+  color: var(--accent-base);
+}
+
+/* Compact menu groups */
+.footer__menu {
+  display: flex;
+  justify-content: center;
+  gap: 14px;
+  flex-wrap: wrap;
+  margin-bottom: 12px;
+}
+
+.footer__menu details {
+  background: rgba(255,255,255,0.02);
+  border-radius: 10px;
+  border: 1px solid var(--border-weak);
+  padding: 6px 10px;
+  min-width: 90px;
+}
+
+.footer__menu summary {
+  color: var(--text-primary);
+  font-weight: 500;
+  cursor: pointer;
+}
+
+.footer__menu a {
+  display: block;
+  color: var(--text-secondary);
+  padding: 4px 0;
+  font-size: 12px;
+}
+
+/* Selector */
+.footer__selector {
+  display: flex;
+  justify-content: center;
+  margin: 12px 0;
+}
+
+.footer__lang {
+  background: rgba(255,255,255,0.03);
+  border: 1px solid var(--border-strong);
+  border-radius: 18px;
+  padding: 6px 12px;
+  font-size: 13px;
+  color: var(--text-secondary);
+}
+
+/* Legal */
+.footer__legal {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: 8px;
+  color: var(--muted);
+  font-size: 12px;
+  margin-top: 8px;
+}
+.footer__legal a {
+  color: var(--text-secondary);
+  text-decoration: none;
+}
+.footer__legal a:hover {
+  color: var(--accent-base);
+}
+
+
+---
+
+6. Global Application
+
+In /assets/css/global.css (imported on all pages):
+
+@import url('./theme.css');
+@import url('./footer.css');
+@import url('./header.css');
+
+This ensures all global tokens, spacing, and colors apply to the footer automatically.
+
+
+---
+
+7. Header Unification
+
+Apply the same strategy:
+
+Move header markup into /components/header.html.
+
+Move navbar into /components/navbar.html.
+
+Style them with /assets/css/header.css and /assets/css/nav.css.
+
+Keep inject-layout.js as the loader for all shared files.
+
+
+
+---
+
+8. Automation Summary
+
+After these steps:
+
+You will delete existing <header> and <footer> code from every page.
+
+Every page will automatically load the same shared layout on page load.
+
+Updates to /components/footer.html or /components/header.html propagate to every page instantly.
+
+This guarantees one consistent layout, spacing, and accent system sitewide.
+
+
+
+---
+
+9. End State
+
+Once complete:
+
+The footer appears compact, elegant, and visible in one glance on mobile.
+
+No more inconsistent padding, duplicate markup, or independent edits.
+
+The website feels unified — one structure, one voice, one visual rhythm.
+
+
+No improvisation. Execute this precisely.

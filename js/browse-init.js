@@ -469,16 +469,19 @@ function displayCelebrities(celebrities) {
     container.innerHTML = celebrities.map(celeb => {
         const initials = getInitials(celeb.name);
         const color = getColorForCelebrity(celeb.name);
-        const rating = celeb.rating || 4.9;
-        const reviews = celeb.reviews || 127;
+        const rating = celeb.rating || 0;
+        const reviews = celeb.reviews || 0;
 
         // Use image if available, otherwise show colored initials
         const avatarStyle = celeb.imageUrl
             ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
             : `background: ${color};`;
 
+        // Determine location signal (city if 1, countries if multiple)
+        const locationSignal = celeb.city || celeb.location || 'Location TBD';
+
         return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
+            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?username=${encodeURIComponent(celeb.username)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
                 <div class="celebrity-avatar" style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white; margin-bottom: 16px; position: relative;">
                     ${celeb.imageUrl ? '' : initials}
                     ${celeb.verified ? '<span style="position: absolute; top: 8px; right: 8px; background: gold; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">✓</span>' : ''}
@@ -488,10 +491,14 @@ function displayCelebrities(celebrities) {
                     <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${celeb.name}</h3>
                     <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.mainCategory || celeb.category || ''}</p>
                     <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
-                        <span style="color: gold; font-size: 0.875rem;">★</span>
-                        <span style="opacity: 0.8; font-size: 0.875rem;">${rating} (${reviews})</span>
+                        <span style="opacity: 0.5; font-size: 0.875rem;">📍 ${locationSignal}</span>
                     </div>
-                    <p style="opacity: 0.5; font-size: 0.875rem; margin-bottom: 8px;">${celeb.location}</p>
+                    ${rating > 0 ? `
+                    <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
+                        <span style="color: gold; font-size: 0.875rem;">★</span>
+                        <span style="opacity: 0.8; font-size: 0.875rem;">${rating.toFixed(1)} (${reviews})</span>
+                    </div>
+                    ` : ''}
                     <p style="opacity: 0.6; font-size: 0.875rem; margin: 0;">From ${formatPrice(celeb.price)}</p>
                 </div>
             </div>
