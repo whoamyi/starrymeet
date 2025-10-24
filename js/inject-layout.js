@@ -57,14 +57,21 @@ async function injectNavbarWithMobileMenu() {
 function initializeMobileMenu() {
   const menu = document.querySelector('.mobile-menu');
   const openBtn = document.querySelector('.menu-toggle');
-  const closeBtn = document.querySelector('.menu-close');
+  const closeBtn = document.querySelector('.mobile-menu-close');
 
   if (openBtn && menu) {
-    openBtn.addEventListener('click', () => menu.classList.add('active'));
+    openBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      menu.classList.add('active');
+    });
   }
 
   if (closeBtn && menu) {
-    closeBtn.addEventListener('click', () => menu.classList.remove('active'));
+    closeBtn.addEventListener('click', (e) => {
+      e.preventDefault();
+      e.stopPropagation();
+      menu.classList.remove('active');
+    });
   }
 
   // Close menu when clicking on links
