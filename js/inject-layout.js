@@ -24,10 +24,10 @@ async function injectComponent(selector, filePath) {
 
 // Initialize layout components when DOM is ready
 document.addEventListener('DOMContentLoaded', async () => {
-  // Load components in parallel for better performance
+  // Use relative paths for GitHub Pages compatibility
   await Promise.all([
-    injectComponent('nav', '/components/navbar.html'),
-    injectComponent('footer', '/components/footer.html')
+    injectComponent('nav', 'components/navbar.html'),
+    injectComponent('footer', 'components/footer.html')
   ]);
 
   // Re-initialize any interactive elements after injection
