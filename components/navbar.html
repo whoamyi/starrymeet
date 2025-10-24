@@ -81,26 +81,3 @@
         <li class="mobile-menu-login-item"><a href="#" onclick="openAuthModal('login'); return false;" class="mobile-menu-login">Log in</a></li>
     </ul>
 </div>
-
-<script>
-// Mobile menu toggle logic
-document.addEventListener('DOMContentLoaded', function() {
-    const menu = document.querySelector('.mobile-menu');
-    const openBtn = document.querySelector('.menu-toggle');
-    const closeBtn = document.querySelector('.menu-close');
-
-    if (openBtn && menu) {
-        openBtn.addEventListener('click', () => menu.classList.add('active'));
-    }
-
-    if (closeBtn && menu) {
-        closeBtn.addEventListener('click', () => menu.classList.remove('active'));
-    }
-
-    // Close menu when clicking on links
-    const menuLinks = menu.querySelectorAll('a:not([onclick*="preventDefault"])');
-    menuLinks.forEach(link => {
-        link.addEventListener('click', () => menu.classList.remove('active'));
-    });
-});
-</script>
