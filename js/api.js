@@ -177,7 +177,7 @@ class APIClient {
     // ==========================================
 
     /**
-     * Get all celebrities with optional filters
+     * Get all celebrities with optional filters (OLD - for backward compatibility)
      */
     async getCelebrities(filters = {}) {
         const params = new URLSearchParams(filters);
@@ -185,7 +185,7 @@ class APIClient {
     }
 
     /**
-     * Get single celebrity by ID or username
+     * Get single celebrity by ID or username (OLD - for backward compatibility)
      */
     async getCelebrity(id) {
         return this.request(`/celebrities/${id}`);
@@ -196,6 +196,32 @@ class APIClient {
      */
     async getCelebrityReviews(id, limit = 10, offset = 0) {
         return this.request(`/celebrities/${id}/reviews?limit=${limit}&offset=${offset}`);
+    }
+
+    // ==========================================
+    // CELEBRITY PROFILES (NEW - celebrities_new table)
+    // ==========================================
+
+    /**
+     * Get celebrity cards for browse grid (minimal data)
+     */
+    async getCelebrityCards(filters = {}) {
+        const params = new URLSearchParams(filters);
+        return this.request(`/celebrity-profiles?${params.toString()}`);
+    }
+
+    /**
+     * Get full celebrity profile by slug
+     */
+    async getCelebrityProfile(slug) {
+        return this.request(`/celebrity-profiles/${slug}`);
+    }
+
+    /**
+     * Get featured celebrities for homepage
+     */
+    async getFeaturedCelebrities(limit = 12) {
+        return this.request(`/celebrity-profiles/featured?limit=${limit}`);
     }
 
     // ==========================================

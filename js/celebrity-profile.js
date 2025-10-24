@@ -28,32 +28,36 @@ document.addEventListener('DOMContentLoaded', async () => {
  */
 async function loadCelebrityProfile() {
     const urlParams = new URLSearchParams(window.location.search);
-    const username = urlParams.get('username');
+    const slug = urlParams.get('slug');
 
-    if (!username) {
-        console.error('No username provided');
+    if (!slug) {
+        console.error('No slug provided');
         window.location.href = 'browse.html';
         return;
     }
 
     try {
-        // Load celebrity data by username (slug)
-        const response = await fetchAPI(`/api/celebrities/username/${username}`);
+        // Load celebrity profile by slug using new API
+        const response = await window.api.getCelebrityProfile(slug);
 
-        if (!response.success || !response.data || !response.data.celebrity) {
+        if (!response.success || !response.data || !response.data.profile) {
             throw new Error('Celebrity not found');
         }
 
-        state.celebrity = response.data.celebrity;
+        state.celebrity = response.data.profile;
+
+        // Store availability from API response
+        if (state.celebrity.availability) {
+            state.availability.physical = state.celebrity.availability.physical || [];
+            state.availability.virtual = state.celebrity.availability.virtual || [];
+        }
 
         // Populate static section
         populateStaticSection(state.celebrity);
 
-        // Load availability for both meeting types
-        await Promise.all([
-            loadAvailability('physical'),
-            loadAvailability('virtual')
-        ]);
+        // Render availability panels
+        renderAvailability('physical');
+        renderAvailability('virtual');
 
     } catch (error) {
         console.error('Error loading profile:', error);
@@ -67,38 +71,60 @@ async function loadCelebrityProfile() {
 function populateStaticSection(celebrity) {
     // Profile image
     const profileImage = document.getElementById('profile-image');
-    profileImage.src = celebrity.avatar_url || 'images/default-avatar.jpg';
-    profileImage.alt = celebrity.display_name;
+    if (profileImage) {
+        profileImage.src = celebrity.picture_url || celebrity.avatar_url || 'images/default-avatar.jpg';
+        profileImage.alt = celebrity.name;
+    }
 
     // Name
-    document.getElementById('celebrity-name').textContent = celebrity.display_name;
+    const nameEl = document.getElementById('celebrity-name');
+    if (nameEl) {
+        nameEl.textContent = celebrity.name;
+    }
 
     // Verified badge
-    if (celebrity.is_verified) {
-        document.getElementById('verified-badge').style.display = 'inline-block';
+    const verifiedBadge = document.getElementById('verified-badge');
+    if (verifiedBadge && celebrity.verified) {
+        verifiedBadge.style.display = 'inline-block';
     }
 
     // Location
-    document.getElementById('location').textContent = celebrity.location || 'Location not specified';
+    const locationEl = document.getElementById('location');
+    if (locationEl) {
+        locationEl.textContent = celebrity.country || 'Location not specified';
+    }
 
     // Category
-    document.getElementById('category').textContent = celebrity.category || 'Celebrity';
+    const categoryEl = document.getElementById('category');
+    if (categoryEl) {
+        categoryEl.textContent = celebrity.category || 'Celebrity';
+    }
 
     // Bio
-    document.getElementById('bio').textContent = celebrity.bio || `Book an exclusive meeting with ${celebrity.display_name}. Choose between in-person and virtual options at select locations worldwide.`;
+    const bioEl = document.getElementById('bio');
+    if (bioEl) {
+        bioEl.textContent = celebrity.bio || `Book an exclusive meeting with ${celebrity.name}. Choose between in-person and virtual options at select locations worldwide.`;
+    }
 
     // Stats
-    document.getElementById('rating-value').textContent = celebrity.average_rating > 0
-        ? `${celebrity.average_rating.toFixed(1)} ⭐`
-        : 'New';
-    document.getElementById('bookings-value').textContent = celebrity.total_bookings || 0;
-    document.getElementById('reviews-value').textContent = celebrity.total_reviews || 0;
+    const ratingEl = document.getElementById('rating-value');
+    if (ratingEl) {
+        ratingEl.textContent = celebrity.review_rate > 0
+            ? `${parseFloat(celebrity.review_rate).toFixed(1)} ⭐`
+            : 'New';
+    }
+
+    const reviewsEl = document.getElementById('reviews-value');
+    if (reviewsEl) {
+        reviewsEl.textContent = celebrity.review_count || 0;
+    }
 
     // Tier badge
-    const tier = determineTier(celebrity);
     const tierBadge = document.getElementById('tier-badge');
-    tierBadge.textContent = `Tier ${tier}`;
-    tierBadge.className = `tier-badge tier-${tier.toLowerCase()}`;
+    if (tierBadge && celebrity.tier) {
+        tierBadge.textContent = `Tier ${celebrity.tier}`;
+        tierBadge.className = `tier-badge tier-${celebrity.tier.toLowerCase()}`;
+    }
 }
 
 /**
@@ -375,7 +401,7 @@ function proceedToBooking(meetingType) {
     // Store booking data in sessionStorage
     sessionStorage.setItem('bookingData', JSON.stringify({
         celebrity_id: state.celebrity.id,
-        celebrity_name: state.celebrity.display_name,
+        celebrity_name: state.celebrity.name,
         meeting_type: meetingType,
         slot_id: selection.slot.id,
         city: selection.slot.city,

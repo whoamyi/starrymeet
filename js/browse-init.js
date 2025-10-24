@@ -91,8 +91,8 @@ async function loadCelebritiesFromAPI() {
 
         console.log('📥 No valid cache, loading from API...');
 
-        // First, get total count
-        const initialResponse = await window.api.getCelebrities({
+        // First, get total count (using new celebrity-profiles endpoint)
+        const initialResponse = await window.api.getCelebrityCards({
             limit: 1000,
             offset: 0
         });
@@ -118,7 +118,7 @@ async function loadCelebritiesFromAPI() {
             const offset = batch * batchSize;
             console.log(`📥 Loading batch ${batch + 1}/${totalBatches} (offset: ${offset})...`);
 
-            const batchResponse = await window.api.getCelebrities({
+            const batchResponse = await window.api.getCelebrityCards({
                 limit: batchSize,
                 offset: offset
             });
@@ -230,7 +230,7 @@ async function refreshCacheInBackground() {
         let freshData = [];
 
         // Load all celebrities from API (same logic as loadCelebritiesFromAPI but without UI updates)
-        const initialResponse = await window.api.getCelebrities({ limit: 1000, offset: 0 });
+        const initialResponse = await window.api.getCelebrityCards({ limit: 1000, offset: 0 });
 
         if (!initialResponse.success || !initialResponse.data) {
             console.warn('Background cache refresh failed');
@@ -243,7 +243,7 @@ async function refreshCacheInBackground() {
         const totalBatches = Math.ceil(total / batchSize);
 
         for (let batch = 1; batch < totalBatches; batch++) {
-            const batchResponse = await window.api.getCelebrities({
+            const batchResponse = await window.api.getCelebrityCards({
                 limit: batchSize,
                 offset: batch * batchSize
             });
@@ -481,7 +481,7 @@ function displayCelebrities(celebrities) {
         const locationSignal = celeb.city || celeb.location || 'Location TBD';
 
         return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?username=${encodeURIComponent(celeb.username)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
+            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
                 <div class="celebrity-avatar" style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white; margin-bottom: 16px; position: relative;">
                     ${celeb.imageUrl ? '' : initials}
                     ${celeb.verified ? '<span style="position: absolute; top: 8px; right: 8px; background: gold; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">✓</span>' : ''}

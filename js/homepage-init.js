@@ -36,7 +36,7 @@ function loadTopTen() {
             : `background: ${color};`;
 
         return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer;">
+            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug || celeb.name.toLowerCase().replace(/\s+/g, '-'))}'" style="cursor: pointer;">
                 <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px; position: relative;">
                     ${celeb.imageUrl ? '' : initials}
                     ${celeb.verified ? '<span style="position: absolute; top: 6px; right: 6px; background: gold; color: black; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">✓</span>' : ''}
@@ -69,7 +69,7 @@ function loadQuickMeets() {
             : `background: ${color};`;
 
         return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'" style="cursor: pointer;">
+            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug || celeb.name.toLowerCase().replace(/\s+/g, '-'))}'" style="cursor: pointer;">
                 <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px;">
                     ${celeb.imageUrl ? '' : initials}
                 </div>
