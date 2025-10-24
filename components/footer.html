@@ -7,24 +7,44 @@
 </div>
 
 <div class="footer__menu">
-  <details>
+  <details class="footer__menu-item">
     <summary>Company</summary>
     <a href="about.html">About</a>
+    <a href="team.html">Team</a>
     <a href="jobs.html">Careers</a>
+    <a href="blog/index.html">Blog</a>
     <a href="contact.html">Press</a>
   </details>
-  <details>
+  <details class="footer__menu-item">
     <summary>Support</summary>
     <a href="faq.html">Help Center</a>
     <a href="contact.html">Contact</a>
   </details>
-  <details>
+  <details class="footer__menu-item">
     <summary>Shop</summary>
     <a href="browse.html">Gift Cards</a>
     <a href="for-celebrities.html">For Business</a>
     <a href="browse.html">For Kids</a>
   </details>
 </div>
+
+<script>
+// Synchronized collapse behavior for footer menu
+document.addEventListener('DOMContentLoaded', function() {
+  const footerMenuItems = document.querySelectorAll('.footer__menu-item');
+
+  footerMenuItems.forEach(function(item) {
+    item.addEventListener('toggle', function(e) {
+      const isOpening = e.target.open;
+
+      // If opening, open all; if closing, close all
+      footerMenuItems.forEach(function(otherItem) {
+        otherItem.open = isOpening;
+      });
+    });
+  });
+});
+</script>
 
 <div class="footer__selector">
   <button class="footer__lang" onclick="openLocaleModal()">🌐 EN | United States | $ USD</button>

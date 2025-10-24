@@ -10,7 +10,7 @@ const sequelize = databaseUrl
   ? new Sequelize(databaseUrl, {
       dialect: 'postgres',
       dialectOptions: {
-        ssl: process.env.NODE_ENV === 'production' ? {
+        ssl: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') ? {
           require: true,
           rejectUnauthorized: false // Required for Neon and most cloud databases
         } : undefined
@@ -32,7 +32,7 @@ const sequelize = databaseUrl
         port: parseInt(process.env.DB_PORT || '5432'),
         dialect: 'postgres',
         dialectOptions: {
-          ssl: process.env.NODE_ENV === 'production' ? {
+          ssl: (process.env.NODE_ENV === 'production' || process.env.NODE_ENV === 'staging') ? {
             require: true,
             rejectUnauthorized: false // Required for Neon and most cloud databases
           } : undefined

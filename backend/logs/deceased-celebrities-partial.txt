@@ -1,0 +1,17 @@
+# Deceased Celebrities (From Running Classification)
+# Extracted: 2025-10-23T12:09:50Z
+
+Abdul Hassan
+Abe Frajndlich
+Achim John
+Adam Baumann
+Ailo Gaup
+Alan Miller
+Aleksandr Borisov
+Aleksandr Liber
+Abd al-Malik (possible - need to verify from output)
+Abu Hudhaifah ibn al-Mughirah (possible - need to verify)
+Abulfaz Babayev (possible - need to verify)
+
+Note: This is a partial list. Complete list will be generated when classification finishes.
+File will be automatically saved to: backend/logs/deceased-celebrities.txt

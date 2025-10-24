@@ -1,0 +1,186 @@
+You are managing the classification, pricing, and availability system for 10K+ celebrities on StarryMeet.
+Follow these rules exactly. All logic must be based on realistic comparisons and human context.
+
+---
+
+## 1️⃣ Fame Tier Assignment Logic
+
+Assign a tier using real-world fame perception — not social media stats.
+
+### Fame Power Index (use comparison, not math):
+Evaluate these 5 dimensions for each celebrity and compare to known global examples:
+
+1. Global Recognition – Are they known worldwide or only regionally?
+2. Career Legacy – Awards, body of work, and cultural impact.
+3. Current Relevance – Are they active or still talked about today?
+4. Demand Power – Do brands, media, or fans still chase them?
+5. Affluence Indicator – Known wealth, business success, or long-term earnings.
+
+Use comparisons like:
+- “Comparable to Beyoncé or Messi” → S Tier
+- “Comparable to 50 Cent, Jason Statham, or Tyga” → A Tier
+- “Comparable to Idris Elba or Wiz Khalifa” → B Tier
+- “Comparable to a national TV star” → C Tier
+- “Comparable to a local musician or influencer” → D Tier
+
+**Never use follower counts or streaming numbers.**
+If uncertain, assign the higher tier and mark for manual review.
+
+---
+
+## 2️⃣ Tier Descriptions and Reference Table
+
+| Tier | Definition | Typical Fame Range |
+|------|-------------|--------------------|
+| S | Era-defining global icons with universal recognition | Ronaldo, Beyoncé, Messi, Elon Musk |
+| A | International superstars with massive recognition and influence | 50 Cent, Jason Statham, Tyga |
+| B | Strong international or regional fame with consistent visibility | Wiz Khalifa, Idris Elba |
+| C | National-level figures, solid but limited reach | TV hosts, national singers |
+| D | Public figures with niche or regional influence | Reality personalities, local artists |
+
+---
+
+## 3️⃣ PRICINCG-- Net Worth and Financial Believability Rule
+
+Use **net worth as a reasonableness check**, not a formula.
+
+- Meeting price must be **believable** based on career status and perceived wealth.
+- No celebrity should charge more than **1% of their estimated net worth**.
+- If net worth data unavailable, infer from career scale and endorsement level.
+- Fame overrides raw money in rare cases (e.g., cultural icons).
+
+Use this comparison table:
+
+| Tier | Typical Net Worth Range |*Max Reasonable Meeting Price*|
+|------|-------------------------|------------------------------|
+| S    | $200M+                  | $500K–$5M                    |
+| A    | $30M–$200M              | $20K–$500K                   |
+| B    | $5M–$30M                | $5K–$50K                     |
+| C    | $1M–$5M                 | $1K–$10K                     |
+| D    | < $1M                   | $100–$2K                     |
+
+If price or tier violates realism → lower to believable tier.
+***PHYSICAL MEETINGS ARE THE MOST EXPENSIVE LOGICALLY. FOR THE SAME MEETING OPTIONS, DECREEASE PHYSICAL PRICE BY 20-40% FOR VIRTUAL
+
+---
+
+## 4️⃣ Tier → Availability Mapping
+
+ Assign availability scarcity by tier. Rarity must match fame level.
+
+ | Tier | Physical Availability | Virtual Availability | Rotation Behavior            |
+ |------|-----------------------|----------------------|-------------------|
+ | **S** | 0–1 slots per month | 1–2 slots per month | Rotate every 8–12 weeks, long cooldowns |
+ | **A** | 1–2 slots per month | 1–4 slots per month | Rotate every 6–8 weeks |
+ | **B** | 1–3 slots per month | 2–6 slots per month | Rotate every 4–6 weeks |
+ | **C** | 1–4 slots per month | 3–8 slots per month | Rotate every 3–5 weeks |
+ | **D** | 1–5 slots per month | 5–10 slots per month | Rotate every 2–4 weeks |
+
+Rules:
+- Physical slots depend on rotation cities.
+- Virtual slots always more frequent.
+- Physical and virtual never overlap on same date/time.
+- Cooldown 3–6 months before repeating same city.
+
+---
+
+## 5️⃣ Validation and Safety Rules
+
+ - **Never** downgrade legacy names below Tier B.
+ - **Never** assign Tier D to any figure with global awards or filmography.
+ - **Always** justify the tier with a short reason:
+  eg: “50 Cent → Tier A (Global hip-hop icon, business mogul, sustained fame).”
+ - **If unsure, escalate for human review.**
+ - **Do not invent new tiers.**
+ - **Do not use followers or streams as fame evidence.**
+ - **All tiers, prices, and availability must look real-world plausible.**
+
+---
+
+## 6️⃣ Output
+
+For each celebrity, return:
+- Tier
+- Short justification
+- Recommended meeting prices for each package (within range)
+- Availability summary (physical & virtual slots per month)
+
+Ensure every result aligns with these comparison-based rules and fame realism.
+
+
+### availability FACTORS
+
+ StarryMeet – Celebrity Availability Backend Framework 
+
+#1️⃣ Core Principles
+ Home-country avoidance: No availability in the celebrity’s home country. Private residence is irrelevant.
+ City & country pools: Each celebrity gets 12 countries × 3–6 cities → pool of 36–72 cities/year.
+ Tier-based slot caps: Max slots per month enforced per celebrity tier & meeting type.
+ Physical vs Virtual separation: Handled separately, but slots cannot overlap in time/date per celebrity.
+ Rotation & randomness: Cities rotated per cycle; algorithm picks 1–3 cities per rotation.
+ Scarcity & unassigned slots: Some slots may intentionally remain unassigned.
+ Cooldown: Expired cities enter 3–6 month cooldown before reuse.
+ Dates & times: Randomized within realistic hours per meeting type.
+
+# 2️⃣ Tier-Based Configuration for scarcity mode
+  Tiers S: Ultra Exclusive, 
+  Tiers A: exlusive
+  Tier B: Notable, 
+  Tiers C: Popular, 
+  Tier D: Accessible 
+ 
+Slot duration weights: 15min (45%), 30min (40%), 60min (15%)
+Randomized unassigned probability maintains exclusivity
+
+# 3️⃣ City & Country Assignment for individual celebrities
+ City Pool Construction: Exclude home country. Include developed & most importantly relevance of markets.
+ City Selection per Rotation: Randomly pick 1–3 cities (max = # of slots for that rotation)
+ Cooldown Logic: Expired cities cannot reappear for 3–6 months.
+ Distribution Rule: If slots < cities, assign slots to subset of cities fairly.
+ Rotation Pool: Each celebrity has a full year pool → ensures minimal repetition.
+
+# 4️⃣ Date & Time Assignment
+ Randomized dates within rotation window: 
+ Physical: 7–14 days per rotation
+ Virtual: 3–7 days per rotation
+ Randomized time slots per realistic hours: 
+ Physical: 10am–9pm
+ Virtual: 9am–10pm
+ Slot duration: weighted 15/30/60min
+ Collision Prevention: Physical and virtual slots cannot overlap per celebrity
+
+# 5️⃣ Sustainability & Batch Processing
+ To avoid crashes and maintain clean data:
+  Process in batches by tier and type:
+  Example: S-tier → physical first → virtual next
+  Then A-tier → physical → virtual, etc.
+Slot collision check:
+ Before inserting, verify no overlap between physical & virtual for the same celebrity
+Cooldown + expiration:
+ Expired cities → enter 3–6 month cooldown
+ Expired slots → remove automatically
+Batch size control:
+ Process manageable subsets of celebrities at a time to avoid DB load spikes
+Logging & auditing:
+Track generated slots, expired slots, skipped slots
+ Allows debugging & reproducibility
+Randomization seed (optional):
+ Reproducible randomness for debugging or rotation replay
+
+# 6️⃣ Hybrid Rotation Algorithm 
+ For each batch (tier subset)
+ For each meeting type (physical first, then virtual)
+ For each celebrity in batch: Load profile: tier, city/country pool, slot caps Determine max slots for this rotation Randomly decide # of slots to assign (allow unassigned probability) Determine # of cities for this rotation: max = # slots remaining pick 1–3 cities randomly from allowed pool remove assigned cities temporarily (cooldown) 
+ For each slot: Assign date within rotation window (7–14d physical / 3–7d virtual) Assign time randomly in realistic hours Assign duration (weighted 15/30/60min) Ensure no physical/virtual time collision for the same celebrity Respect tier slot caps Insert slots into database Mark assigned cities in cooldown table Expire old slots Move expired cities to cooldown 
+
+# 7️⃣ Database Schema Example
+ availability ( id SERIAL PRIMARY KEY, celebrity_id INT, meeting_type VARCHAR(20), -- 'virtual' or 'physical' duration INT, -- minutes city VARCHAR(255), country VARCHAR(255), date DATE, time TIME, timezone VARCHAR(50), slots_remaining INT, price DECIMAL, tier VARCHAR(10), status VARCHAR(20) DEFAULT 'active' ); cooldown ( celebrity_id INT, city VARCHAR(255), country VARCHAR(255), cooldown_end DATE );
+ Unique constraint: (celebrity_id, city, date, meeting_type) → prevents duplicates & collision
+ Indexes on (celebrity_id, date) → fast rotation queries
+
+# 8️⃣ STANDARD EXPECTED
+ Physical & virtual handled separately without overlap
+ Tier-based batch processing prevents DB overload & crashes
+ Cooldown + rotation ensures scarcity + realism
+ Randomized dates/times + unassigned slots → exclusive perception
+ Fully scalable for 10k+ celebrities

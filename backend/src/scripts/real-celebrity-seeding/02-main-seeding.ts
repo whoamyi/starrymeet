@@ -68,9 +68,9 @@ async function insertCandidatesInBatches(
           location: candidate.location || `${candidate.city || ''}, ${candidate.country || ''}`.trim(),
           avatar_url: candidate.thumbnail_url,
           cover_photo_url: candidate.hero_image_url,
-          quick_meet_price_cents: null, // Not applicable for this seeding
+          quick_meet_price_cents: undefined, // Not applicable for this seeding
           standard_meet_price_cents: candidate.base_price_cents,
-          premium_meet_price_cents: null, // Not applicable for this seeding
+          premium_meet_price_cents: undefined, // Not applicable for this seeding
           response_time_hours: 24,
           average_rating: 0,
           total_reviews: 0,

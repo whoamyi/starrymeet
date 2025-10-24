@@ -28,7 +28,7 @@ export interface WikidataEntity {
   occupation: string[];
   country?: string;
   imdbId?: string;
-  tmdbId?: string;
+  tmdbId?: number;
   musicbrainzId?: string;
   spotifyId?: string;
   youtubeChannelId?: string;
@@ -73,7 +73,7 @@ export interface MusicBrainzArtist {
 export interface SpotifyArtist {
   id: string;
   name: string;
-  followers: number;
+  followers: { total: number };
   popularity: number;
   genres: string[];
   images: Array<{ url: string; height: number; width: number }>;

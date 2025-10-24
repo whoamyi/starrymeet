@@ -2,6 +2,7 @@ import { Request, Response } from 'express';
 import { Celebrity, Review } from '../models';
 import { AppError } from '../middleware/errorHandler';
 import { Op } from 'sequelize';
+import sequelize from '../config/database';
 
 export const listCelebrities = async (req: Request, res: Response) => {
   try {
@@ -98,6 +99,96 @@ export const getCelebrity = async (req: Request, res: Response) => {
     res.json({
       success: true,
       data: { celebrity }
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCelebrityByUsername = async (req: Request, res: Response) => {
+  try {
+    const { username } = req.params;
+
+    const celebrity = await Celebrity.findOne({
+      where: { username }
+    });
+
+    if (!celebrity) {
+      throw new AppError('Celebrity not found', 404);
+    }
+
+    res.json({
+      success: true,
+      data: { celebrity }
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+export const getCelebrityAvailability = async (req: Request, res: Response) => {
+  try {
+    const { id } = req.params;
+    const { meeting_type, start_date, end_date } = req.query;
+
+    // Verify celebrity exists
+    const celebrity = await Celebrity.findByPk(id);
+    if (!celebrity) {
+      throw new AppError('Celebrity not found', 404);
+    }
+
+    // Build query for availability slots
+    const where: any = {
+      celebrity_id: id,
+      status: 'active',
+      slots_remaining: { [Op.gt]: 0 }
+    };
+
+    if (meeting_type) {
+      where.meeting_type = meeting_type;
+    }
+
+    if (start_date) {
+      where.date = { [Op.gte]: start_date };
+    }
+
+    if (end_date) {
+      if (where.date) {
+        where.date = { [Op.between]: [start_date, end_date] };
+      } else {
+        where.date = { [Op.lte]: end_date };
+      }
+    }
+
+    // Fetch availability slots
+    const slots = await sequelize.models.availability.findAll({
+      where,
+      order: [
+        ['date', 'ASC'],
+        ['time', 'ASC']
+      ],
+      attributes: [
+        'id',
+        'celebrity_id',
+        'meeting_type',
+        'duration',
+        'city',
+        'country',
+        'date',
+        'time',
+        'timezone',
+        'slots_remaining',
+        'price_cents',
+        'tier'
+      ]
+    });
+
+    res.json({
+      success: true,
+      data: {
+        slots,
+        total: slots.length
+      }
     });
   } catch (error) {
     throw error;

@@ -47,16 +47,8 @@
 }
 
 .footer__menu details {
-  background: rgba(255,255,255,0.02);
-  border-radius: 10px;
-  border: 1px solid var(--border-weak);
   padding: 6px 10px;
   min-width: 90px;
-  transition: border-color var(--motion-duration) var(--motion-curve);
-}
-
-.footer__menu details:hover {
-  border-color: var(--border-strong);
 }
 
 .footer__menu summary {

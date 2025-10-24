@@ -46,54 +46,157 @@ function mapOccupationToTaxonomy(occupations: string[]): {
   universalCategory: UniversalCategory;
   professionalClass: string;
 } {
-  const occupation = occupations[0]?.toLowerCase() || '';
+  // Join all occupations for comprehensive matching
+  const allOccupations = occupations.join(' ').toLowerCase();
 
-  // Entertainer
-  if (occupation.includes('actor') || occupation.includes('actress')) {
+  // ENTERTAINER CATEGORY
+  // Film & TV
+  if (allOccupations.match(/\b(actor|actress|film actor|television actor|character actor)\b/)) {
     return { universalCategory: 'Entertainer', professionalClass: 'Actor' };
   }
-  if (occupation.includes('singer') || occupation.includes('musician')) {
-    return { universalCategory: 'Entertainer', professionalClass: 'Musician' };
-  }
-  if (occupation.includes('comedian')) {
-    return { universalCategory: 'Entertainer', professionalClass: 'Comedian' };
-  }
-  if (occupation.includes('director')) {
+  if (allOccupations.match(/\b(film director|movie director|television director|filmmaker)\b/)) {
     return { universalCategory: 'Entertainer', professionalClass: 'Film Director' };
   }
+  if (allOccupations.match(/\b(screenwriter|script writer|playwright)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Screenwriter' };
+  }
+  if (allOccupations.match(/\b(film producer|television producer|movie producer)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Producer' };
+  }
 
-  // Athlete
-  if (occupation.includes('football') || occupation.includes('soccer')) {
+  // Music
+  if (allOccupations.match(/\b(singer|vocalist|pop singer|rock singer|jazz singer|opera singer)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Singer' };
+  }
+  if (allOccupations.match(/\b(rapper|hip hop|mc)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Rapper' };
+  }
+  if (allOccupations.match(/\b(musician|guitarist|pianist|drummer|bass player|instrumentalist)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Musician' };
+  }
+  if (allOccupations.match(/\b(composer|music composer|songwriter)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Composer' };
+  }
+  if (allOccupations.match(/\b(dj|disc jockey|music producer|record producer)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'DJ/Producer' };
+  }
+
+  // Performance
+  if (allOccupations.match(/\b(comedian|stand-up comedian|comic)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Comedian' };
+  }
+  if (allOccupations.match(/\b(dancer|choreographer|ballet dancer)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Dancer' };
+  }
+  if (allOccupations.match(/\b(magician|illusionist)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Magician' };
+  }
+  if (allOccupations.match(/\b(model|fashion model|supermodel)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Model' };
+  }
+
+  // ATHLETE CATEGORY
+  if (allOccupations.match(/\b(association football|soccer|football player|footballer)\b/)) {
     return { universalCategory: 'Athlete', professionalClass: 'Soccer Player' };
   }
-  if (occupation.includes('basketball')) {
+  if (allOccupations.match(/\b(basketball|basketball player)\b/)) {
     return { universalCategory: 'Athlete', professionalClass: 'Basketball Player' };
   }
-  if (occupation.includes('tennis')) {
+  if (allOccupations.match(/\b(tennis|tennis player)\b/)) {
     return { universalCategory: 'Athlete', professionalClass: 'Tennis Player' };
   }
-  if (occupation.includes('boxer') || occupation.includes('fighter')) {
-    return { universalCategory: 'Athlete', professionalClass: 'Fighter' };
+  if (allOccupations.match(/\b(american football|nfl|football)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'American Football Player' };
+  }
+  if (allOccupations.match(/\b(baseball|baseball player)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Baseball Player' };
+  }
+  if (allOccupations.match(/\b(boxer|boxing)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Boxer' };
+  }
+  if (allOccupations.match(/\b(mixed martial arts|mma|fighter|ufc)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'MMA Fighter' };
+  }
+  if (allOccupations.match(/\b(golfer|golf)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Golfer' };
+  }
+  if (allOccupations.match(/\b(racing driver|formula one|nascar|race car)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Racing Driver' };
+  }
+  if (allOccupations.match(/\b(swimmer|swimming)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Swimmer' };
+  }
+  if (allOccupations.match(/\b(runner|track and field|sprinter|marathon)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Track & Field Athlete' };
+  }
+  if (allOccupations.match(/\b(gymnast|gymnastics)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Gymnast' };
+  }
+  if (allOccupations.match(/\b(skier|skiing)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Skier' };
+  }
+  if (allOccupations.match(/\b(wrestler|wrestling|wwe)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Wrestler' };
   }
 
-  // Creator
-  if (occupation.includes('youtuber') || occupation.includes('content creator')) {
+  // CREATOR CATEGORY
+  if (allOccupations.match(/\b(youtuber|youtube|video creator)\b/)) {
     return { universalCategory: 'Creator', professionalClass: 'YouTuber' };
   }
-  if (occupation.includes('influencer')) {
-    return { universalCategory: 'Creator', professionalClass: 'Instagram Influencer' };
+  if (allOccupations.match(/\b(influencer|social media|instagram|tiktok)\b/)) {
+    return { universalCategory: 'Creator', professionalClass: 'Social Media Influencer' };
+  }
+  if (allOccupations.match(/\b(podcaster|podcast host)\b/)) {
+    return { universalCategory: 'Creator', professionalClass: 'Podcaster' };
+  }
+  if (allOccupations.match(/\b(photographer|photojournalist)\b/)) {
+    return { universalCategory: 'Creator', professionalClass: 'Photographer' };
+  }
+  if (allOccupations.match(/\b(artist|painter|sculptor|visual artist)\b/)) {
+    return { universalCategory: 'Creator', professionalClass: 'Visual Artist' };
   }
 
-  // Business
-  if (occupation.includes('entrepreneur') || occupation.includes('businessperson')) {
+  // BUSINESS CATEGORY
+  if (allOccupations.match(/\b(entrepreneur|businessperson|business executive|ceo|founder)\b/)) {
     return { universalCategory: 'Business', professionalClass: 'Entrepreneur' };
   }
-  if (occupation.includes('author') || occupation.includes('writer')) {
+  if (allOccupations.match(/\b(author|writer|novelist)\b/)) {
     return { universalCategory: 'Business', professionalClass: 'Author' };
   }
+  if (allOccupations.match(/\b(journalist|reporter|correspondent)\b/)) {
+    return { universalCategory: 'Business', professionalClass: 'Journalist' };
+  }
+  if (allOccupations.match(/\b(chef|cook|culinary)\b/)) {
+    return { universalCategory: 'Business', professionalClass: 'Chef' };
+  }
 
-  // Default
-  return { universalCategory: 'Other', professionalClass: 'Other' };
+  // PUBLIC FIGURE CATEGORY
+  if (allOccupations.match(/\b(politician|president|senator|governor|minister|mayor)\b/)) {
+    return { universalCategory: 'PublicFigure', professionalClass: 'Politician' };
+  }
+  if (allOccupations.match(/\b(activist|human rights|social activist)\b/)) {
+    return { universalCategory: 'PublicFigure', professionalClass: 'Activist' };
+  }
+  if (allOccupations.match(/\b(television presenter|tv host|talk show host|presenter)\b/)) {
+    return { universalCategory: 'PublicFigure', professionalClass: 'TV Host' };
+  }
+  if (allOccupations.match(/\b(radio personality|radio host)\b/)) {
+    return { universalCategory: 'PublicFigure', professionalClass: 'Radio Host' };
+  }
+
+  // Fallback - try to categorize based on partial matches
+  if (allOccupations.match(/\b(music|band|concert|album)\b/)) {
+    return { universalCategory: 'Entertainer', professionalClass: 'Musician' };
+  }
+  if (allOccupations.match(/\b(sport|athlete|player|olympic)\b/)) {
+    return { universalCategory: 'Athlete', professionalClass: 'Athlete' };
+  }
+  if (allOccupations.match(/\b(create|content|digital|online)\b/)) {
+    return { universalCategory: 'Creator', professionalClass: 'Content Creator' };
+  }
+
+  // Default - assign to PublicFigure instead of Other
+  return { universalCategory: 'PublicFigure', professionalClass: occupations[0] || 'Public Figure' };
 }
 
 /**
