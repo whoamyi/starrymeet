@@ -22,6 +22,37 @@ async function injectComponent(selector, filePath) {
   }
 }
 
+async function injectNavbarWithMobileMenu() {
+  try {
+    const response = await fetch('components/navbar.html');
+    if (!response.ok) {
+      throw new Error(`HTTP error! status: ${response.status}`);
+    }
+    const html = await response.text();
+
+    // Create a temporary container to parse the HTML
+    const temp = document.createElement('div');
+    temp.innerHTML = html;
+
+    // Extract the nav content (everything except mobile menu)
+    const navContent = temp.querySelector('.nav-container');
+    const mobileMenu = temp.querySelector('.mobile-menu');
+
+    // Inject nav content into nav element
+    const navElement = document.querySelector('nav');
+    if (navElement && navContent) {
+      navElement.innerHTML = navContent.outerHTML;
+    }
+
+    // Inject mobile menu into body (at the end)
+    if (mobileMenu) {
+      document.body.appendChild(mobileMenu);
+    }
+  } catch (error) {
+    console.error('Failed to load navbar:', error);
+  }
+}
+
 // Initialize mobile menu functionality
 function initializeMobileMenu() {
   const menu = document.querySelector('.mobile-menu');
@@ -49,7 +80,7 @@ function initializeMobileMenu() {
 document.addEventListener('DOMContentLoaded', async () => {
   // Use relative paths for GitHub Pages compatibility
   await Promise.all([
-    injectComponent('nav', 'components/navbar.html'),
+    injectNavbarWithMobileMenu(),
     injectComponent('footer', 'components/footer.html')
   ]);
 
