@@ -96,7 +96,7 @@ async function loadInitialBatch() {
         console.log('📍 API URL:', window.api.baseURL);
 
         // Load first 50 FAST
-        const response = await window.api.getCelebrities({
+        const response = await window.api.getCelebrityCards({
             limit: INITIAL_LOAD,
             offset: 0
         });
@@ -134,7 +134,7 @@ async function loadInitialBatch() {
 async function loadRemainingBatches() {
     try {
         // Get total count
-        const initialResponse = await window.api.getCelebrities({
+        const initialResponse = await window.api.getCelebrityCards({
             limit: 1,
             offset: 0
         });
@@ -160,7 +160,7 @@ async function loadRemainingBatches() {
         for (let i = 0; i < batches; i++) {
             const offset = INITIAL_LOAD + (i * BATCH_SIZE);
 
-            const response = await window.api.getCelebrities({
+            const response = await window.api.getCelebrityCards({
                 limit: BATCH_SIZE,
                 offset: offset
             });
@@ -362,7 +362,7 @@ async function refreshCacheInBackground() {
     console.log('🔄 Refreshing cache in background...');
     // Silently reload data without showing UI updates
     try {
-        const response = await window.api.getCelebrities({ limit: 10000, offset: 0 });
+        const response = await window.api.getCelebrityCards({ limit: 10000, offset: 0 });
         if (response.success && response.data) {
             const freshData = response.data.celebrities.map(transformCelebrity);
             localStorage.setItem(CACHE_KEY, JSON.stringify({

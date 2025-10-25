@@ -34,10 +34,19 @@ app.use(helmet({
   crossOriginEmbedderPolicy: false,
 }));
 
+// CORS configuration - allow multiple origins
+const allowedOrigins = [
+  'http://localhost:5500',
+  'http://localhost:3001',
+  'http://127.0.0.1:5500',
+  'https://whoamyi.github.io',
+  process.env.FRONTEND_URL || ''
+].filter(origin => origin !== '');
+
 app.use(cors({
-  origin: process.env.FRONTEND_URL || 'http://localhost:5500',
+  origin: allowedOrigins,
   credentials: true,
-  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH'],
+  methods: ['GET', 'POST', 'PUT', 'DELETE', 'PATCH', 'OPTIONS'],
   allowedHeaders: ['Content-Type', 'Authorization']
 }));
 
