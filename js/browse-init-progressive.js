@@ -348,7 +348,7 @@ function transformCelebrity(celeb) {
         location: celeb.location || country,
         city: city,
         country: country,
-        price: celeb.min_price ? (parseFloat(celeb.min_price) * 100) : 0,
+        price: celeb.min_price ? parseFloat(celeb.min_price) : 0,
         rating: parseFloat(celeb.review_rate) || 0,
         reviews: celeb.review_count || 0,
         verified: celeb.verified || false,
