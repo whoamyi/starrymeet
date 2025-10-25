@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Clear StarryMeet Cache</title>
+    <style>
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+            max-width: 600px;
+            margin: 100px auto;
+            padding: 20px;
+            text-align: center;
+        }
+        .btn {
+            background: #8B5CF6;
+            color: white;
+            border: none;
+            padding: 16px 32px;
+            border-radius: 8px;
+            font-size: 16px;
+            cursor: pointer;
+            margin: 10px;
+        }
+        .btn:hover {
+            background: #7C3AED;
+        }
+        .success {
+            color: #10B981;
+            font-size: 18px;
+            margin-top: 20px;
+        }
+        .info {
+            background: #F3F4F6;
+            padding: 20px;
+            border-radius: 8px;
+            margin: 20px 0;
+            text-align: left;
+        }
+        .info h3 {
+            margin-top: 0;
+        }
+        .cache-item {
+            padding: 8px;
+            border-bottom: 1px solid #E5E7EB;
+        }
+    </style>
+</head>
+<body>
+    <h1>🧹 Clear StarryMeet Cache</h1>
+    <p>This will remove all cached celebrity data and force a fresh reload.</p>
+
+    <div class="info">
+        <h3>Current Cache Status:</h3>
+        <div id="cacheStatus"></div>
+    </div>
+
+    <button class="btn" onclick="clearAllCache()">Clear All Cache</button>
+    <button class="btn" onclick="window.location.href='index.html'" style="background: #6B7280;">Back to Home</button>
+
+    <div id="result"></div>
+
+    <script>
+        // Display current cache
+        function displayCacheStatus() {
+            const status = document.getElementById('cacheStatus');
+            const cacheKeys = [
+                'starrymeet_celebrities_cache_v2',
+                'starrymeet_celebrities_cache',
+                'starryMeetWatchlist',
+                'starryMeetToken',
+                'starryMeetUser'
+            ];
+
+            let html = '';
+            let totalSize = 0;
+
+            cacheKeys.forEach(key => {
+                const value = localStorage.getItem(key);
+                if (value) {
+                    const size = new Blob([value]).size;
+                    totalSize += size;
+                    html += `<div class="cache-item">
+                        ✓ <strong>${key}</strong>: ${(size / 1024).toFixed(2)} KB
+                    </div>`;
+                } else {
+                    html += `<div class="cache-item" style="color: #9CA3AF;">
+                        ✗ ${key}: Not found
+                    </div>`;
+                }
+            });
+
+            html += `<div class="cache-item" style="margin-top: 10px; font-weight: bold;">
+                Total Cache Size: ${(totalSize / 1024).toFixed(2)} KB
+            </div>`;
+
+            status.innerHTML = html;
+        }
+
+        // Clear all cache
+        function clearAllCache() {
+            const cacheKeys = [
+                'starrymeet_celebrities_cache_v2',
+                'starrymeet_celebrities_cache',
+                'starryMeetWatchlist'
+            ];
+
+            let cleared = 0;
+            cacheKeys.forEach(key => {
+                if (localStorage.getItem(key)) {
+                    localStorage.removeItem(key);
+                    cleared++;
+                }
+            });
+
+            const result = document.getElementById('result');
+            result.innerHTML = `<div class="success">
+                ✅ Cleared ${cleared} cache item(s)!<br>
+                <small>Page will reload in 2 seconds...</small>
+            </div>`;
+
+            setTimeout(() => {
+                location.reload();
+            }, 2000);
+        }
+
+        // Initial display
+        displayCacheStatus();
+    </script>
+</body>
+</html>
