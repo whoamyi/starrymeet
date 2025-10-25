@@ -4,6 +4,7 @@
  */
 
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import {
   CelebrityTier,
   MeetingType,
@@ -64,15 +65,15 @@ export class AvailabilityService {
   static async getCitiesInCooldown(celebrityId: string): Promise<Set<string>> {
     const now = new Date();
 
-    const cooldowns = await sequelize.query<CityCooldown>(`
+    const cooldowns = await sequelize.query(`
       SELECT city, country
       FROM city_cooldown
       WHERE celebrity_id = :celebrityId
         AND cooldown_end > :now
     `, {
       replacements: { celebrityId, now: now.toISOString() },
-      type: 'SELECT'
-    });
+      type: QueryTypes.SELECT
+    }) as CityCooldown[];
 
     return new Set(cooldowns.map(c => `${c.city}, ${c.country}`));
   }
@@ -158,7 +159,7 @@ export class AvailabilityService {
     const endMinutes = startMinutes + duration;
 
     // Check for overlapping slots
-    const existing = await sequelize.query<AvailabilitySlot>(`
+    const existing = await sequelize.query(`
       SELECT time, duration
       FROM availability
       WHERE celebrity_id = :celebrityId
@@ -166,8 +167,8 @@ export class AvailabilityService {
         AND status = 'active'
     `, {
       replacements: { celebrityId, date: dateStr },
-      type: 'SELECT'
-    });
+      type: QueryTypes.SELECT
+    }) as AvailabilitySlot[];
 
     for (const slot of existing) {
       const [slotHours, slotMinutes] = slot.time.split(':').map(Number);

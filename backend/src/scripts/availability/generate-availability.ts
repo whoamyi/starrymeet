@@ -4,6 +4,7 @@
  */
 
 import sequelize from '../../config/database';
+import { QueryTypes } from 'sequelize';
 import { AvailabilityService } from '../../services/availability/availability.service';
 import { TIER_CONFIG, BATCH_CONFIG } from '../../services/availability/config';
 import { CelebrityProfile, CelebrityTier, BatchGenerationResult, GenerationResult } from '../../services/availability/types';
@@ -24,7 +25,7 @@ async function fetchCelebritiesByTier(tier: CelebrityTier): Promise<CelebrityPro
   const range = priceRanges[tier];
   const maxCondition = range.max ? `AND standard_meet_price_cents <= ${range.max}` : '';
 
-  const celebrities = await sequelize.query<CelebrityProfile>(`
+  const celebrities = await sequelize.query(`
     SELECT
       id, username, display_name, location,
       standard_meet_price_cents,
@@ -37,7 +38,7 @@ async function fetchCelebritiesByTier(tier: CelebrityTier): Promise<CelebrityPro
     WHERE standard_meet_price_cents >= ${range.min} ${maxCondition}
       AND is_active = true
     ORDER BY standard_meet_price_cents DESC
-  `, { type: 'SELECT' });
+  `, { type: QueryTypes.SELECT }) as CelebrityProfile[];
 
   return celebrities.map(c => ({ ...c, tier }));
 }
