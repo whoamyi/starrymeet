@@ -324,7 +324,7 @@ function showErrorState() {
 function transformCelebrity(celeb) {
     // Parse location into city and country
     let city = '';
-    let country = '';
+    let country = celeb.country || '';
     if (celeb.location) {
         const parts = celeb.location.split(',').map(p => p.trim());
         if (parts.length >= 2) {
@@ -337,20 +337,24 @@ function transformCelebrity(celeb) {
 
     return {
         id: celeb.id,
-        name: celeb.display_name,
-        username: celeb.username,
+        name: celeb.name,
+        slug: celeb.slug,
+        username: celeb.username || celeb.slug,
         category: celeb.category,
         subcategory: celeb.subcategory,
         niche: celeb.niche_category,
         bio: celeb.bio,
-        location: celeb.location,
+        imageUrl: celeb.picture_url,
+        location: celeb.location || country,
         city: city,
         country: country,
-        price: celeb.standard_meet_price_cents ? (celeb.standard_meet_price_cents / 100) : 0,
-        rating: parseFloat(celeb.average_rating) || 0,
-        reviews: celeb.total_reviews || 0,
-        verified: celeb.is_verified || false,
+        price: celeb.min_price ? (parseFloat(celeb.min_price) * 100) : 0,
+        rating: parseFloat(celeb.review_rate) || 0,
+        reviews: celeb.review_count || 0,
+        verified: celeb.verified || false,
         featured: celeb.is_featured || false,
+        virtualAvailable: celeb.virtual_available || false,
+        physicalAvailable: celeb.physical_available || false,
         responseTime: celeb.response_time_hours || 24
     };
 }

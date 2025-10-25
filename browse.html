@@ -263,11 +263,13 @@
 
         // Get initials
         function getInitials(name) {
-            return name.split(' ').map(n => n[0]).join('').substring(0, 2);
+            if (!name) return '??';
+            return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
         }
 
         // Get color for celebrity
         function getColorForCelebrity(name) {
+            if (!name) return colorPalettes[0];
             const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
             return colorPalettes[index % colorPalettes.length];
         }
