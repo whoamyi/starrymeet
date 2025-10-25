@@ -1,116 +1,141 @@
 /**
  * Homepage Initialization
- * Populates carousels with real celebrity data from CELEBRITIES array
+ * Loads celebrities from API and populates carousels
  */
 
 // Initialize homepage
-document.addEventListener('DOMContentLoaded', function() {
-    loadTopTen();
-    loadQuickMeets();
+document.addEventListener('DOMContentLoaded', async function() {
+    await loadSharedComponents();
+    await loadTopTen();
+    await loadQuickMeets();
     loadReviews();
     setupSearch();
 });
 
 /**
- * Load top 10 trending celebrities
+ * Load top 10 featured celebrities
  */
-function loadTopTen() {
+async function loadTopTen() {
     const container = document.getElementById('topTenCarousel');
     if (!container) return;
 
-    // Get trending celebrities
-    const trending = CELEBRITIES.filter(c => c.trending).slice(0, 10);
+    try {
+        const response = await window.api.getFeaturedCelebrities(10);
 
-    if (trending.length === 0) {
-        // Fallback to first 10
-        trending.push(...CELEBRITIES.slice(0, 10));
-    }
+        if (!response.success || !response.data || !response.data.celebrities) {
+            throw new Error('Failed to load featured celebrities');
+        }
 
-    container.innerHTML = trending.map(celeb => {
-        const initials = getInitials(celeb.name);
-        const color = getColorForCelebrity(celeb.name);
+        const celebrities = response.data.celebrities;
 
-        // Use image if available, otherwise show colored initials
-        const avatarStyle = celeb.imageUrl
-            ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
-            : `background: ${color};`;
+        container.innerHTML = celebrities.map(celeb => {
+            const initials = getInitials(celeb.name);
+            const color = getColorForCelebrity(celeb.name);
 
-        return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug || celeb.name.toLowerCase().replace(/\s+/g, '-'))}'" style="cursor: pointer;">
-                <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px; position: relative;">
-                    ${celeb.imageUrl ? '' : initials}
-                    ${celeb.verified ? '<span style="position: absolute; top: 6px; right: 6px; background: gold; color: black; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">✓</span>' : ''}
+            // Use image if available, otherwise show colored initials
+            const avatarStyle = celeb.picture_url
+                ? `background-image: url('${celeb.picture_url}'); background-size: cover; background-position: center;`
+                : `background: ${color};`;
+
+            const price = celeb.min_price ? parseFloat(celeb.min_price) * 100 : 0;
+
+            return `
+                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug)}'" style="cursor: pointer;">
+                    <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px; position: relative;">
+                        ${celeb.picture_url ? '' : initials}
+                        ${celeb.verified ? '<span style="position: absolute; top: 6px; right: 6px; background: gold; color: black; width: 20px; height: 20px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 12px;">✓</span>' : ''}
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${celeb.name}</h4>
+                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.category || 'Celebrity'}</p>
+                    <p style="opacity: 0.6; font-size: 0.875rem;">From ${formatPrice(price)}</p>
                 </div>
-                <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${celeb.name}</h4>
-                <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.mainCategory || celeb.category || ''}</p>
-                <p style="opacity: 0.6; font-size: 0.875rem;">From ${formatPrice(celeb.price)}</p>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error('Error loading featured celebrities:', error);
+        container.innerHTML = '<p style="opacity: 0.6; padding: 24px; text-align: center;">Unable to load celebrities</p>';
+    }
 }
 
 /**
- * Load quick meets / stars near you
+ * Load quick meets / more celebrities
  */
-function loadQuickMeets() {
+async function loadQuickMeets() {
     const container = document.getElementById('quickMeetsCarousel');
     if (!container) return;
 
-    // Get a mix of celebrities (different from trending)
-    const quickMeets = CELEBRITIES.slice(10, 18);
+    try {
+        // Get different set of celebrities (offset 10, limit 8)
+        const response = await window.api.getCelebrityCards({ limit: 8, offset: 10 });
 
-    container.innerHTML = quickMeets.map(celeb => {
-        const initials = getInitials(celeb.name);
-        const color = getColorForCelebrity(celeb.name);
+        if (!response.success || !response.data || !response.data.celebrities) {
+            throw new Error('Failed to load celebrities');
+        }
 
-        // Use image if available, otherwise show colored initials
-        const avatarStyle = celeb.imageUrl
-            ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
-            : `background: ${color};`;
+        const celebrities = response.data.celebrities;
 
-        return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug || celeb.name.toLowerCase().replace(/\s+/g, '-'))}'" style="cursor: pointer;">
-                <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px;">
-                    ${celeb.imageUrl ? '' : initials}
+        container.innerHTML = celebrities.map(celeb => {
+            const initials = getInitials(celeb.name);
+            const color = getColorForCelebrity(celeb.name);
+
+            // Use image if available, otherwise show colored initials
+            const avatarStyle = celeb.picture_url
+                ? `background-image: url('${celeb.picture_url}'); background-size: cover; background-position: center;`
+                : `background: ${color};`;
+
+            const price = celeb.min_price ? parseFloat(celeb.min_price) * 100 : 0;
+
+            return `
+                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug)}'" style="cursor: pointer;">
+                    <div style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 2.5rem; font-weight: 700; color: white; margin-bottom: 12px;">
+                        ${celeb.picture_url ? '' : initials}
+                    </div>
+                    <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${celeb.name}</h4>
+                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.country || ''}</p>
+                    <p style="opacity: 0.6; font-size: 0.875rem;">From ${formatPrice(price)}</p>
                 </div>
-                <h4 style="font-size: 1.1rem; font-weight: 600; margin-bottom: 6px; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">${celeb.name}</h4>
-                <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.location}</p>
-                <p style="opacity: 0.6; font-size: 0.875rem;">From ${formatPrice(celeb.price)}</p>
-            </div>
-        `;
-    }).join('');
+            `;
+        }).join('');
+
+    } catch (error) {
+        console.error('Error loading quick meets:', error);
+        container.innerHTML = '<p style="opacity: 0.6; padding: 24px; text-align: center;">Unable to load celebrities</p>';
+    }
 }
 
 /**
- * Load recent reviews
+ * Load recent reviews (placeholder until we have real reviews)
  */
 function loadReviews() {
     const container = document.getElementById('reviewsCarousel');
     if (!container) return;
 
-    // Generate sample reviews from celebrities
-    const reviewCelebrities = CELEBRITIES.slice(0, 4);
+    // Sample reviews for now
+    const reviews = [
+        { name: 'Sarah M.', celebrity: 'Featured Celebrity', rating: 5, text: 'Amazing experience! Worth every penny. So professional and friendly.', date: '2 days ago', initials: 'SM', color: '#EA1279' },
+        { name: 'John D.', celebrity: 'Featured Celebrity', rating: 5, text: 'Dream come true! Can\'t believe I got to meet them in person.', date: '5 days ago', initials: 'JD', color: '#9333EA' },
+        { name: 'Emma L.', celebrity: 'Featured Celebrity', rating: 5, text: 'The best birthday gift ever! They were so kind and took time to chat.', date: '1 week ago', initials: 'EL', color: '#06B6D4' },
+        { name: 'Mike R.', celebrity: 'Featured Celebrity', rating: 5, text: 'Incredible! They made my day. Highly recommend booking through StarryMeet.', date: '2 weeks ago', initials: 'MR', color: '#F59E0B' }
+    ];
 
-    container.innerHTML = reviewCelebrities.map(celeb => {
-        const testimonials = generateTestimonialsForCelebrity(celeb.name);
-        const testimonial = testimonials[0]; // Get first testimonial
-
+    container.innerHTML = reviews.map(review => {
         return `
             <div class="review-card" style="background: rgba(234, 18, 121, 0.05); border: 1px solid rgba(234, 18, 121, 0.2); border-radius: 16px; padding: 24px; min-width: 300px;">
                 <div style="display: flex; align-items: center; margin-bottom: 16px;">
-                    <div style="width: 48px; height: 48px; background: ${testimonial.color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; color: white; margin-right: 12px;">
-                        ${testimonial.initials}
+                    <div style="width: 48px; height: 48px; background: ${review.color}; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 1.25rem; font-weight: 700; color: white; margin-right: 12px;">
+                        ${review.initials}
                     </div>
                     <div style="flex: 1;">
-                        <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 4px;">${testimonial.name}</h4>
-                        <p style="opacity: 0.6; font-size: 0.875rem;">Met ${celeb.name}</p>
+                        <h4 style="font-size: 1rem; font-weight: 600; margin-bottom: 4px;">${review.name}</h4>
+                        <p style="opacity: 0.6; font-size: 0.875rem;">Met ${review.celebrity}</p>
                     </div>
                     <div style="color: gold; font-size: 1rem;">
-                        ${'★'.repeat(testimonial.rating)}
+                        ${'★'.repeat(review.rating)}
                     </div>
                 </div>
-                <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 12px;">${testimonial.text}</p>
-                <p style="opacity: 0.5; font-size: 0.875rem;">${testimonial.date}</p>
+                <p style="opacity: 0.9; line-height: 1.6; margin-bottom: 12px;">${review.text}</p>
+                <p style="opacity: 0.5; font-size: 0.875rem;">${review.date}</p>
             </div>
         `;
     }).join('');
@@ -133,5 +158,3 @@ function setupSearch() {
         });
     }
 }
-
-console.log('Homepage initialized with', CELEBRITIES.length, 'celebrities');

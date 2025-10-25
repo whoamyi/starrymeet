@@ -469,27 +469,29 @@ function displayCelebrities(celebrities) {
     container.innerHTML = celebrities.map(celeb => {
         const initials = getInitials(celeb.name);
         const color = getColorForCelebrity(celeb.name);
-        const rating = celeb.rating || 0;
-        const reviews = celeb.reviews || 0;
+        const rating = celeb.review_rate ? parseFloat(celeb.review_rate) : 0;
+        const reviews = celeb.review_count || 0;
 
         // Use image if available, otherwise show colored initials
-        const avatarStyle = celeb.imageUrl
-            ? `background-image: url('${celeb.imageUrl}'); background-size: cover; background-position: center;`
+        const avatarStyle = celeb.picture_url
+            ? `background-image: url('${celeb.picture_url}'); background-size: cover; background-position: center;`
             : `background: ${color};`;
 
-        // Determine location signal (city if 1, countries if multiple)
-        const locationSignal = celeb.city || celeb.location || 'Location TBD';
+        // Get location from country
+        const locationSignal = celeb.country || 'Location TBD';
+
+        // Convert min_price from dollars to cents for formatPrice
+        const price = celeb.min_price ? parseFloat(celeb.min_price) * 100 : 0;
 
         return `
             <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
                 <div class="celebrity-avatar" style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white; margin-bottom: 16px; position: relative;">
-                    ${celeb.imageUrl ? '' : initials}
+                    ${celeb.picture_url ? '' : initials}
                     ${celeb.verified ? '<span style="position: absolute; top: 8px; right: 8px; background: gold; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">✓</span>' : ''}
-                    ${celeb.trending ? '<span style="position: absolute; top: 8px; left: 8px; background: var(--primary); color: white; padding: 4px 8px; border-radius: 12px; font-size: 0.75rem; font-weight: 600;">TRENDING</span>' : ''}
                 </div>
                 <div class="celebrity-info" style="padding: 0 8px;">
                     <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${celeb.name}</h3>
-                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.mainCategory || celeb.category || ''}</p>
+                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.category || 'Celebrity'}</p>
                     <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
                         <span style="opacity: 0.5; font-size: 0.875rem;">📍 ${locationSignal}</span>
                     </div>
@@ -499,7 +501,7 @@ function displayCelebrities(celebrities) {
                         <span style="opacity: 0.8; font-size: 0.875rem;">${rating.toFixed(1)} (${reviews})</span>
                     </div>
                     ` : ''}
-                    <p style="opacity: 0.6; font-size: 0.875rem; margin: 0;">From ${formatPrice(celeb.price)}</p>
+                    <p style="opacity: 0.6; font-size: 0.875rem; margin: 0;">From ${formatPrice(price)}</p>
                 </div>
             </div>
         `;

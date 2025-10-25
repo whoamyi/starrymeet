@@ -128,48 +128,28 @@ function populateStaticSection(celebrity) {
 }
 
 /**
- * Determine celebrity tier based on pricing
+ * Render availability panel for meeting type
  */
-function determineTier(celebrity) {
-    const price = celebrity.standard_meet_price_cents || 0;
-    if (price >= 50000000) return 'S';
-    if (price >= 10000000) return 'A';
-    if (price >= 2000000) return 'B';
-    if (price >= 500000) return 'C';
-    return 'D';
-}
-
-/**
- * Load availability for meeting type
- */
-async function loadAvailability(meetingType) {
+function renderAvailability(meetingType) {
     const content = document.getElementById(`${meetingType}-content`);
 
-    try {
-        // Fetch availability from backend
-        const startDate = new Date().toISOString().split('T')[0];
-        const endDate = new Date(Date.now() + 90 * 24 * 60 * 60 * 1000).toISOString().split('T')[0];
-
-        const response = await fetchAPI(
-            `/api/celebrities/${state.celebrity.id}/availability?meeting_type=${meetingType}&start_date=${startDate}&end_date=${endDate}`
-        );
-
-        if (!response.success || !response.data) {
-            throw new Error('Failed to load availability');
-        }
-
-        state.availability[meetingType] = response.data.slots || [];
-
-        // Group by city
-        const citiesData = groupByCities(state.availability[meetingType]);
-
-        // Render cities grid
-        renderCitiesGrid(meetingType, citiesData);
-
-    } catch (error) {
-        console.error(`Error loading ${meetingType} availability:`, error);
-        renderEmptyState(content, meetingType);
+    if (!content) {
+        console.warn(`Content element not found for ${meetingType}`);
+        return;
     }
+
+    const slots = state.availability[meetingType] || [];
+
+    if (slots.length === 0) {
+        renderEmptyState(content, meetingType);
+        return;
+    }
+
+    // Group by cities
+    const citiesData = groupByCities(slots);
+
+    // Render cities grid
+    renderCitiesGrid(meetingType, citiesData);
 }
 
 /**

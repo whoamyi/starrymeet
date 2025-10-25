@@ -937,20 +937,28 @@ async function updateCelebrity(celebrity: any, data: CelebrityData): Promise<voi
     const slotsRange = TIER_MAX_SLOTS[data.tier];
     const maxMonthlySlots = randomInRange(slotsRange.min, slotsRange.max);
 
-    // Update celebrity_settings table (tier + max_monthly_slots)
+    // Update celebrity_settings table (tier + max_monthly_slots) - UPSERT
     await sequelize.query(
-      `UPDATE celebrity_settings
-       SET tier = :tier,
-           max_monthly_slots = :max_monthly_slots,
-           updated_at = NOW()
-       WHERE celebrity_id = :celeb_id`,
+      `INSERT INTO celebrity_settings (
+         celebrity_id, tier, max_monthly_slots, allow_virtual, allow_physical,
+         timezone, created_at, updated_at
+       )
+       VALUES (
+         :celeb_id, :tier, :max_monthly_slots, true, true,
+         'America/New_York', NOW(), NOW()
+       )
+       ON CONFLICT (celebrity_id)
+       DO UPDATE SET
+         tier = EXCLUDED.tier,
+         max_monthly_slots = EXCLUDED.max_monthly_slots,
+         updated_at = NOW()`,
       {
         replacements: {
           tier: data.tier,
           max_monthly_slots: maxMonthlySlots,
           celeb_id: celebrity.id
         },
-        type: QueryTypes.UPDATE,
+        type: QueryTypes.INSERT,
         transaction
       }
     );
@@ -1028,16 +1036,33 @@ async function main() {
     // Get ALL celebrities (or use SAMPLE_SIZE env var for testing)
     const SAMPLE_SIZE = process.env.SAMPLE_SIZE ? parseInt(process.env.SAMPLE_SIZE) : null;
     const DATE_FILTER = process.env.CLASSIFY_DATE_FILTER || null;
+    const UNCLASSIFIED_ONLY = process.env.UNCLASSIFIED_ONLY === 'true';
 
     // Get celebrities
-    let query = `SELECT id, name, slug, country, bio, avatar_url
-                 FROM celebrities_new`;
+    let query = `SELECT c.id, c.name, c.slug, c.country, c.bio, c.avatar_url
+                 FROM celebrities_new c`;
 
-    if (DATE_FILTER) {
-      query += ` WHERE created_at > :dateFilter::date`;
+    // Add LEFT JOIN to check for existing classification
+    if (UNCLASSIFIED_ONLY) {
+      query += ` LEFT JOIN celebrity_settings cs ON c.id = cs.celebrity_id`;
     }
 
-    query += ` ORDER BY name`;
+    const whereConditions: string[] = [];
+
+    if (DATE_FILTER) {
+      whereConditions.push(`c.created_at > :dateFilter::date`);
+    }
+
+    if (UNCLASSIFIED_ONLY) {
+      whereConditions.push(`cs.tier IS NULL`);
+      whereConditions.push(`c.status = 'active'`);
+    }
+
+    if (whereConditions.length > 0) {
+      query += ` WHERE ` + whereConditions.join(' AND ');
+    }
+
+    query += ` ORDER BY c.name`;
 
     if (SAMPLE_SIZE) {
       query += ` LIMIT :limit`;
