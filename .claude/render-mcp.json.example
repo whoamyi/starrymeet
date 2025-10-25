@@ -1,0 +1,12 @@
+{
+  "mcpServers": {
+    "render": {
+      "command": "node",
+      "args": [".claude/auto-deploy.js"],
+      "env": {
+        "RENDER_API_KEY": "your_render_api_key_here",
+        "RENDER_SERVICE_ID": "srv-xxxxxxxxxxxxx"
+      }
+    }
+  }
+}
