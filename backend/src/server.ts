@@ -8,7 +8,6 @@ import { errorHandler } from './middleware/errorHandler';
 
 // Import routes
 import authRoutes from './routes/auth';
-import celebrityRoutes from './routes/celebrities';
 import celebrityProfileRoutes from './routes/celebrityProfiles';
 import bookingRoutes from './routes/bookings';
 import paymentRoutes from './routes/payments';
@@ -71,7 +70,6 @@ app.get('/health', (req: Request, res: Response) => {
 
 // API Routes
 app.use('/api/auth', authRoutes);
-app.use('/api/celebrities', celebrityRoutes);
 app.use('/api/celebrity-profiles', celebrityProfileRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
