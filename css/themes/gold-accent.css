@@ -1,0 +1,171 @@
+/* ===================================
+   Gold Accent Theme
+   Applies Gold to Interactive Elements
+   =================================== */
+
+/* ========================================
+   LINKS & INTERACTIVE TEXT
+   ======================================== */
+
+a:hover {
+  color: var(--color-primary);
+}
+
+.link-gold {
+  color: var(--color-primary);
+}
+
+.link-gold:hover {
+  color: var(--color-primary-light);
+}
+
+/* ========================================
+   HIGHLIGHTS & ACCENTS
+   ======================================== */
+
+.highlight {
+  color: var(--color-primary);
+}
+
+.text-accent {
+  color: var(--color-primary);
+}
+
+.bg-accent {
+  background-color: rgba(198, 163, 79, 0.1);
+  color: var(--color-primary);
+}
+
+/* ========================================
+   BADGES
+   ======================================== */
+
+.verified-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+  color: var(--color-primary);
+  font-size: 14px;
+  font-weight: var(--font-weight-semibold);
+}
+
+.badge-gold {
+  background: rgba(198, 163, 79, 0.1);
+  color: var(--color-primary);
+  border: 1px solid rgba(198, 163, 79, 0.2);
+  padding: 4px 10px;
+  border-radius: 6px;
+  font-size: 12px;
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ========================================
+   PAGINATION & FILTERS
+   ======================================== */
+
+.pagination-btn.active,
+.filter-chip.active {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  border-color: var(--color-primary);
+}
+
+.pagination-btn:hover:not(.active),
+.filter-chip:hover:not(.active) {
+  border-color: var(--color-primary);
+  color: var(--color-primary);
+}
+
+/* ========================================
+   SELECTED STATES
+   ======================================== */
+
+.selected,
+.active-item {
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 1px var(--color-primary);
+}
+
+/* ========================================
+   ICONS & SPECIAL ELEMENTS
+   ======================================== */
+
+.icon-gold {
+  color: var(--color-primary);
+}
+
+.icon-gold:hover {
+  color: var(--color-primary-light);
+}
+
+/* Star ratings */
+.star-filled {
+  color: var(--color-primary);
+}
+
+.star-empty {
+  color: rgba(198, 163, 79, 0.3);
+}
+
+/* ========================================
+   BORDERS & DIVIDERS
+   ======================================== */
+
+.border-gold {
+  border-color: var(--color-primary);
+}
+
+.divider-gold {
+  border-top: 1px solid rgba(198, 163, 79, 0.2);
+}
+
+/* ========================================
+   HOVER EFFECTS
+   ======================================== */
+
+.hover-gold:hover {
+  color: var(--color-primary);
+}
+
+.hover-bg-gold:hover {
+  background-color: rgba(198, 163, 79, 0.1);
+}
+
+/* ========================================
+   PRICE HIGHLIGHTS
+   ======================================== */
+
+.price-tag,
+.price-highlight {
+  color: var(--color-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+/* ========================================
+   PROGRESS & LOADING
+   ======================================== */
+
+.progress-bar {
+  background-color: rgba(198, 163, 79, 0.2);
+}
+
+.progress-fill {
+  background-color: var(--color-primary);
+}
+
+/* ========================================
+   SPECIAL ANIMATIONS
+   ======================================== */
+
+@keyframes goldPulse {
+  0%, 100% {
+    box-shadow: 0 0 0 0 rgba(198, 163, 79, 0.4);
+  }
+  50% {
+    box-shadow: 0 0 0 8px rgba(198, 163, 79, 0);
+  }
+}
+
+.pulse-gold {
+  animation: goldPulse 2s infinite;
+}

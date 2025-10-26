@@ -1,28 +1,21 @@
-/**
- * StarryMeet Luxury Celebrity Cards
- *
- * Design Philosophy:
- * - Depth over brightness
- * - Motion over static color
- * - Tactile glass instead of flat gradients
- * - Accents are emotional, not decorative
- *
- * DO NOT use inline colors. ALL styling derives from theme.css tokens.
- */
+/* ===================================
+   Celebrity Card Components
+   Unified Grid & List View Design
+   =================================== */
 
 /* ========================================
-   GRID CARD - LUXURY DESIGN
+   GRID CARD VIEW
    ======================================== */
 
 .celebrity-card {
   width: 100%;
-  background: var(--surface-weak);
-  border-radius: var(--radius-card);
-  border: 1px solid var(--border-weak);
-  box-shadow: var(--shadow-1);
-  backdrop-filter: blur(8px);
-  transition: transform var(--motion-duration) var(--motion-curve),
-              box-shadow var(--motion-duration) var(--motion-curve);
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(20px);
+  transition: transform var(--transition-normal),
+              box-shadow var(--transition-normal);
   display: flex;
   flex-direction: column;
   overflow: hidden;
@@ -31,23 +24,17 @@
 }
 
 .celebrity-card:hover {
-  transform: translateY(-6px);
-  box-shadow: var(--shadow-1), var(--shadow-accent);
+  transform: scale(1.02);
+  box-shadow: var(--shadow-elevated);
+  border-color: rgba(198, 163, 79, 0.15);
 }
 
 .celebrity-card:active {
-  transform: scale(0.97);
-}
-
-/* Fallback for browsers without backdrop-filter support */
-@supports not (backdrop-filter: blur(8px)) {
-  .celebrity-card {
-    background: var(--surface-strong);
-  }
+  transform: scale(0.98);
 }
 
 /* ========================================
-   CARD HERO AREA (58% height)
+   CARD IMAGE AREA
    ======================================== */
 
 .celebrity-image {
@@ -56,25 +43,23 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
   overflow: hidden;
 }
 
-/* Celebrity initials when no image */
 .celebrity-initials {
   font-size: 28px;
-  font-weight: 600;
-  color: var(--text-primary);
-  text-shadow: 0 2px 12px rgba(0,0,0,0.6);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);
   letter-spacing: -0.01em;
 }
 
-/* Avatar image (when available) */
 .celebrity-avatar-img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform var(--motion-duration) var(--motion-curve);
+  transition: transform var(--transition-normal);
 }
 
 .celebrity-card:hover .celebrity-avatar-img {
@@ -82,7 +67,7 @@
 }
 
 /* ========================================
-   FAVORITE BUTTON (TOP RIGHT)
+   WATCHLIST BUTTON (TOP RIGHT)
    ======================================== */
 
 .watchlist-btn {
@@ -95,103 +80,87 @@
   display: flex;
   align-items: center;
   justify-content: center;
-  background: rgba(255,255,255,0.03);
-  border: 1px solid rgba(255,255,255,0.04);
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.04);
   backdrop-filter: blur(8px);
   cursor: pointer;
   z-index: 2;
-  transition: all var(--motion-duration) var(--motion-curve);
+  transition: all var(--transition-fast);
   font-size: 16px;
   padding: 0;
+  color: var(--color-text-primary);
 }
 
 .watchlist-btn:hover {
-  background: rgba(255,255,255,0.06);
-  border-color: rgba(255,255,255,0.08);
+  background: rgba(255, 255, 255, 0.06);
+  border-color: rgba(255, 255, 255, 0.08);
   transform: scale(1.1);
 }
 
 .watchlist-btn.active {
-  background: var(--accent-hint);
-  border-color: rgba(197,168,115,0.12);
-  box-shadow: 0 0 20px var(--accent-glow);
-}
-
-@supports not (backdrop-filter: blur(8px)) {
-  .watchlist-btn {
-    background: rgba(255,255,255,0.06);
-  }
+  background: rgba(198, 163, 79, 0.1);
+  border-color: rgba(198, 163, 79, 0.2);
+  color: var(--color-primary);
+  box-shadow: 0 0 20px rgba(198, 163, 79, 0.2);
 }
 
 /* ========================================
-   FEATURED BADGE (GOLD STAR)
+   FEATURED BADGE
    ======================================== */
 
 .featured-badge {
   position: absolute;
   top: 12px;
   left: 12px;
-  background: var(--accent-hint);
-  border: 1px solid rgba(197,168,115,0.12);
+  background: rgba(198, 163, 79, 0.1);
+  border: 1px solid rgba(198, 163, 79, 0.2);
   backdrop-filter: blur(8px);
-  color: var(--accent-base);
+  color: var(--color-primary);
   padding: 6px 10px;
   border-radius: 10px;
   font-size: 14px;
-  font-weight: 600;
+  font-weight: var(--font-weight-semibold);
   z-index: 2;
-  box-shadow: 0 2px 8px var(--accent-glow);
-}
-
-@supports not (backdrop-filter: blur(8px)) {
-  .featured-badge {
-    background: rgba(197,168,115,0.06);
-  }
+  box-shadow: 0 2px 8px rgba(198, 163, 79, 0.15);
 }
 
 /* ========================================
-   CARD INFO AREA (42% height)
+   CARD INFO AREA
    ======================================== */
 
 .celebrity-info {
-  padding: var(--pad);
+  padding: calc(var(--space-unit) * 2);
   display: flex;
   flex-direction: column;
   gap: 6px;
-  background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  background: linear-gradient(180deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.015));
   flex: 1;
 }
 
-/* ========================================
-   NAME & PROFESSION
-   ======================================== */
-
 .celebrity-name {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
   margin: 0;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: var(--font-sans);
   letter-spacing: -0.01em;
 }
 
 .celebrity-category {
   font-size: 14px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   margin: 0;
   line-height: 1.2;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
-  font-family: var(--font-sans);
 }
 
 /* ========================================
-   AVAILABILITY LINE (📍 + 🎟️)
+   LOCATION & AVAILABILITY
    ======================================== */
 
 .celebrity-location,
@@ -201,7 +170,7 @@
   justify-content: space-between;
   margin-top: 4px;
   font-size: 13px;
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   gap: 6px;
   line-height: 1.2;
 }
@@ -231,84 +200,77 @@
 }
 
 /* ========================================
-   PRICE BADGE
+   PRICE & RATING
    ======================================== */
 
 .celebrity-footer {
   margin-top: auto;
-  padding-top: 8px;
+  padding-top: calc(var(--space-unit) * 1);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: 8px;
+  gap: calc(var(--space-unit) * 1);
 }
 
 .celebrity-price {
   font-size: 16px;
-  font-weight: 600;
-  color: var(--accent-base);
-  background: rgba(197,168,115,0.03);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
   padding: 6px 10px;
   border-radius: 10px;
-  border: 1px solid rgba(197,168,115,0.06);
+  border: 1px solid rgba(198, 163, 79, 0.1);
   white-space: nowrap;
-  font-family: var(--font-sans);
   letter-spacing: -0.01em;
 }
 
-/* Rating (optional, can be removed if not needed) */
 .celebrity-rating {
   display: flex;
   align-items: center;
   gap: 3px;
   font-size: 12px;
-  color: var(--muted);
+  color: var(--color-text-muted);
 }
 
 .rating-star {
-  color: var(--accent-base);
+  color: var(--color-primary);
   font-size: 14px;
 }
 
 .rating-value {
-  font-weight: 600;
-  color: var(--text-secondary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-secondary);
 }
 
 .reviews-count {
-  color: var(--muted);
+  color: var(--color-text-muted);
   font-size: 11px;
 }
 
 /* ========================================
-   LIST VIEW - LUXURY DESIGN
+   LIST VIEW
    ======================================== */
 
 .celebrity-card-list {
   display: flex;
-  background: var(--surface-weak);
-  border: 1px solid var(--border-weak);
-  border-radius: var(--radius-card);
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
   overflow: hidden;
-  box-shadow: var(--shadow-1);
-  backdrop-filter: blur(8px);
-  transition: all var(--motion-duration) var(--motion-curve);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(20px);
+  transition: all var(--transition-normal);
   cursor: pointer;
 }
 
 .celebrity-card-list:hover {
-  box-shadow: var(--shadow-1), var(--shadow-accent);
+  box-shadow: var(--shadow-elevated);
   transform: translateX(4px);
+  border-color: rgba(198, 163, 79, 0.15);
 }
 
 .celebrity-card-list:active {
   transform: scale(0.98);
-}
-
-@supports not (backdrop-filter: blur(8px)) {
-  .celebrity-card-list {
-    background: var(--surface-strong);
-  }
 }
 
 .celebrity-image-list {
@@ -318,24 +280,24 @@
   align-items: center;
   justify-content: center;
   position: relative;
-  background: linear-gradient(145deg, rgba(255,255,255,0.02), rgba(255,255,255,0.01));
+  background: linear-gradient(145deg, rgba(255, 255, 255, 0.02), rgba(255, 255, 255, 0.01));
 }
 
 .celebrity-info-list {
   flex: 1;
-  padding: var(--pad-lg);
+  padding: calc(var(--space-unit) * 2.5);
   display: flex;
   justify-content: space-between;
   align-items: center;
-  gap: var(--pad);
-  background: linear-gradient(90deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
+  gap: calc(var(--space-unit) * 2);
+  background: linear-gradient(90deg, rgba(255, 255, 255, 0.01), rgba(255, 255, 255, 0.015));
 }
 
 .celebrity-header-list {
   flex: 1;
   display: flex;
   flex-direction: column;
-  gap: 8px;
+  gap: calc(var(--space-unit) * 1);
 }
 
 .celebrity-details-list {
@@ -346,22 +308,21 @@
 
 .celebrity-name-list {
   font-size: 18px;
-  font-weight: 600;
-  color: var(--text-primary);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
   margin: 0;
   line-height: 1.2;
-  font-family: var(--font-sans);
   letter-spacing: -0.01em;
 }
 
 .celebrity-meta {
   display: flex;
-  gap: var(--pad);
-  margin-top: 8px;
+  gap: calc(var(--space-unit) * 2);
+  margin-top: calc(var(--space-unit) * 1);
 }
 
 .meta-item {
-  color: var(--text-secondary);
+  color: var(--color-text-secondary);
   font-size: 13px;
   display: inline-flex;
   align-items: center;
@@ -377,12 +338,40 @@
 
 .celebrity-price-list {
   font-size: 20px;
-  font-weight: 700;
-  color: var(--accent-base);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
   white-space: nowrap;
-  font-family: var(--font-sans);
   letter-spacing: -0.02em;
 }
+
+/* ========================================
+   ANIMATIONS
+   ======================================== */
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.fade-in {
+  animation: fadeIn 0.4s cubic-bezier(0.4, 0, 0.2, 1) forwards;
+}
+
+/* Staggered animation for grid items */
+.celebrity-card:nth-child(1) { animation-delay: 0ms; }
+.celebrity-card:nth-child(2) { animation-delay: 50ms; }
+.celebrity-card:nth-child(3) { animation-delay: 100ms; }
+.celebrity-card:nth-child(4) { animation-delay: 150ms; }
+.celebrity-card:nth-child(5) { animation-delay: 200ms; }
+.celebrity-card:nth-child(6) { animation-delay: 250ms; }
+.celebrity-card:nth-child(7) { animation-delay: 300ms; }
+.celebrity-card:nth-child(8) { animation-delay: 350ms; }
 
 /* ========================================
    RESPONSIVE - MOBILE FIRST
@@ -454,7 +443,7 @@
     padding: 4px 8px;
   }
 
-  /* List view mobile adjustments */
+  /* List view mobile */
   .celebrity-card-list {
     flex-direction: column;
   }
@@ -467,7 +456,7 @@
   .celebrity-info-list {
     flex-direction: column;
     align-items: flex-start;
-    padding: var(--pad);
+    padding: calc(var(--space-unit) * 2);
     gap: 12px;
   }
 
@@ -512,36 +501,3 @@
     font-size: 20px;
   }
 }
-
-/* ========================================
-   ANIMATIONS & TRANSITIONS
-   ======================================== */
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.fade-in {
-  animation: fadeIn 0.4s var(--motion-curve) forwards;
-}
-
-/* Staggered animation for grid items */
-.celebrity-card:nth-child(1) { animation-delay: 0ms; }
-.celebrity-card:nth-child(2) { animation-delay: 50ms; }
-.celebrity-card:nth-child(3) { animation-delay: 100ms; }
-.celebrity-card:nth-child(4) { animation-delay: 150ms; }
-.celebrity-card:nth-child(5) { animation-delay: 200ms; }
-.celebrity-card:nth-child(6) { animation-delay: 250ms; }
-.celebrity-card:nth-child(7) { animation-delay: 300ms; }
-.celebrity-card:nth-child(8) { animation-delay: 350ms; }
-.celebrity-card:nth-child(9) { animation-delay: 400ms; }
-.celebrity-card:nth-child(10) { animation-delay: 450ms; }
-.celebrity-card:nth-child(11) { animation-delay: 500ms; }
-.celebrity-card:nth-child(12) { animation-delay: 550ms; }

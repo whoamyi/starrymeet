@@ -1,0 +1,197 @@
+/* ===================================
+   Footer Component
+   Responsive Grid Layout
+   =================================== */
+
+.footer {
+  background: var(--color-bg-secondary);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  padding: calc(var(--space-unit) * 8) 0 calc(var(--space-unit) * 4);
+  margin-top: auto;
+}
+
+.footer-container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 calc(var(--space-unit) * 3);
+}
+
+/* ========================================
+   FOOTER GRID
+   ======================================== */
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 1fr;
+  gap: calc(var(--space-unit) * 6);
+  margin-bottom: calc(var(--space-unit) * 6);
+}
+
+@media (min-width: 768px) {
+  .footer-grid {
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: calc(var(--space-unit) * 4);
+  }
+}
+
+/* ========================================
+   FOOTER BRAND SECTION
+   ======================================== */
+
+.footer-brand {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.footer-logo {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 1);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  text-decoration: none;
+}
+
+.footer-logo-icon {
+  font-size: 1.75rem;
+}
+
+.footer-description {
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  line-height: 1.6;
+  max-width: 300px;
+}
+
+/* ========================================
+   FOOTER SOCIAL LINKS
+   ======================================== */
+
+.footer-social {
+  display: flex;
+  gap: calc(var(--space-unit) * 2);
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.footer-social-link {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: rgba(255, 255, 255, 0.03);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--color-text-secondary);
+  font-size: 18px;
+  transition: all var(--transition-fast);
+  text-decoration: none;
+}
+
+.footer-social-link:hover {
+  background: rgba(198, 163, 79, 0.1);
+  border-color: rgba(198, 163, 79, 0.3);
+  color: var(--color-primary);
+  transform: translateY(-2px);
+}
+
+/* ========================================
+   FOOTER COLUMN
+   ======================================== */
+
+.footer-column {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.footer-column-title {
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0;
+}
+
+.footer-links {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 1.5);
+}
+
+.footer-link {
+  color: var(--color-text-secondary);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color var(--transition-fast);
+  display: inline-block;
+}
+
+.footer-link:hover {
+  color: var(--color-primary);
+}
+
+/* ========================================
+   FOOTER BOTTOM
+   ======================================== */
+
+.footer-bottom {
+  padding-top: calc(var(--space-unit) * 4);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.footer-copyright {
+  color: var(--color-text-muted);
+  font-size: 14px;
+}
+
+.footer-legal-links {
+  display: flex;
+  gap: calc(var(--space-unit) * 3);
+}
+
+.footer-legal-link {
+  color: var(--color-text-muted);
+  text-decoration: none;
+  font-size: 14px;
+  transition: color var(--transition-fast);
+}
+
+.footer-legal-link:hover {
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .footer {
+    padding: calc(var(--space-unit) * 6) 0 calc(var(--space-unit) * 3);
+  }
+
+  .footer-container {
+    padding: 0 calc(var(--space-unit) * 2);
+  }
+
+  .footer-grid {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-unit) * 4);
+  }
+
+  .footer-bottom {
+    flex-direction: column;
+    text-align: center;
+  }
+
+  .footer-legal-links {
+    flex-direction: column;
+    gap: calc(var(--space-unit) * 1.5);
+  }
+}

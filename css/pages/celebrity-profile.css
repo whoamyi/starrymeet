@@ -1,915 +1,373 @@
+/* ===================================
+   Celebrity Profile Page Layout
+   Profile Header, Content, and Booking
+   =================================== */
+
+.profile-page {
+  padding: calc(var(--space-unit) * 3) 0;
+  min-height: 100vh;
+}
+
 /* ========================================
-   CELEBRITY-PROFILE.HTML - PAGE-SPECIFIC STYLES
-   v2.1.0 - Museum-Quality Design Standards
+   PROFILE HEADER
    ======================================== */
 
-body {
-    background: var(--bg-secondary);
+.profile-header {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 4);
+  margin-bottom: calc(var(--space-unit) * 4);
 }
 
-/* Back Button - Premium */
-.back-button {
-    margin-top: calc(var(--nav-height) + var(--space-4));
-    max-width: 1400px;
-    margin-left: auto;
-    margin-right: auto;
-    padding: 0 var(--space-4) var(--space-3);
+.profile-hero {
+  display: grid;
+  grid-template-columns: auto 1fr auto;
+  gap: calc(var(--space-unit) * 4);
+  align-items: start;
 }
 
-.back-btn {
-    display: inline-flex;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--text-primary);
-    text-decoration: none;
-    font-weight: 700;
-    font-family: var(--font-body);
-    transition: var(--transition-base);
-    padding: var(--space-2) var(--space-3);
-    border-radius: var(--radius-lg);
+.profile-avatar {
+  width: 180px;
+  height: 180px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 3px solid rgba(198, 163, 79, 0.2);
+  box-shadow: var(--shadow-card);
 }
 
-.back-btn:hover {
-    color: var(--primary);
-    background: var(--bg-tertiary);
+.profile-info {
+  flex: 1;
 }
 
-/* Main Container - Premium */
-.main-container {
-    max-width: 1400px;
-    margin: 0 auto;
-    padding: 0 var(--space-6) var(--space-12);
-    display: flex;
-    gap: var(--space-8);
+.profile-name {
+  font-size: clamp(2rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 1);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 1.5);
 }
 
-.content-area {
-    flex: 1;
-    min-width: 0;
+.verified-badge {
+  color: var(--color-primary);
+  font-size: 1.5rem;
 }
 
-/* Hero Section - Premium */
-.hero-profile {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-3xl);
-    overflow: hidden;
-    box-shadow: var(--shadow-2xl);
-    margin-bottom: var(--space-8);
-    border: 1px solid var(--border-light);
+.profile-category {
+  font-size: 1.125rem;
+  color: var(--color-text-secondary);
+  margin-bottom: calc(var(--space-unit) * 2);
 }
 
-.hero-image {
-    height: 450px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    background: var(--primary-gradient);
+.profile-meta {
+  display: flex;
+  gap: calc(var(--space-unit) * 3);
+  flex-wrap: wrap;
+  margin-bottom: calc(var(--space-unit) * 3);
 }
 
-.hero-image::after {
-    content: '';
-    position: absolute;
-    bottom: 0;
-    left: 0;
-    right: 0;
-    height: 70%;
-    background: linear-gradient(to bottom, transparent, rgba(0, 0, 0, 0.6));
+.meta-item {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 1);
+  color: var(--color-text-secondary);
+  font-size: 14px;
 }
 
-.hero-initials {
-    font-family: var(--font-display);
-    font-size: clamp(5rem, 12vw, 9rem);
-    font-weight: 700;  /* v2.1.0: Reduced from 900 for refinement */
-    color: var(--white);
-    z-index: 2;  /* v2.1.0: Above texture overlay */
-    text-shadow: 0 8px 30px rgba(0, 0, 0, 0.4);
-    letter-spacing: 0.05em;  /* v2.1.0: Added spacing */
+.meta-icon {
+  color: var(--color-primary);
+  font-size: 18px;
 }
 
-/* v2.1.0: Texture overlay for hero image */
-.hero-image::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.1) 0%, transparent 50%);
-    mix-blend-mode: overlay;
-    z-index: 1;
+.profile-bio {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  max-width: 700px;
 }
 
-.hero-actions {
-    position: absolute;
-    top: var(--space-5);
-    right: var(--space-5);
-    z-index: 2;
-    display: flex;
-    gap: var(--space-3);
+.profile-actions {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 1.5);
+  align-items: flex-end;
 }
 
-.action-btn {
-    width: 50px;
-    height: 50px;
-    background: rgba(26, 26, 26, 0.9);
-    border-radius: var(--radius-full);
-    border: none;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    cursor: pointer;
-    font-size: var(--text-xl);
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-lg);
+.profile-price {
+  font-size: 2rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
 
-.action-btn:hover {
-    transform: scale(1.15);
-    box-shadow: var(--shadow-xl);
+.profile-price-label {
+  font-size: 14px;
+  color: var(--color-text-muted);
+  margin-bottom: 4px;
 }
 
-.action-btn.active {
-    background: var(--primary);
-    color: var(--white);
+/* ========================================
+   PROFILE CONTENT
+   ======================================== */
+
+.profile-content {
+  display: grid;
+  grid-template-columns: 2fr 1fr;
+  gap: calc(var(--space-unit) * 4);
 }
 
-.hero-info {
-    padding: var(--space-6);
+.profile-main {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 4);
 }
 
-.hero-header {
-    display: flex;
-    align-items: center;
-    gap: var(--space-3);
-    margin-bottom: var(--space-3);
-    flex-wrap: wrap;
+.profile-sidebar {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 3);
 }
 
-.celebrity-name-hero {
-    font-family: var(--font-display);
-    font-size: clamp(1.5rem, 4vw, 1.5rem);  /* v2.1.0: 24px max for consistency */
-    font-weight: 600;  /* v2.1.0: Reduced from 900 */
-    color: var(--text-primary);
+/* ========================================
+   PROFILE SECTIONS
+   ======================================== */
+
+.profile-section {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 3);
 }
 
-/* v2.1.0: Minimal gray badges */
-.verified-badge-hero {
-    background: transparent !important;
-    color: var(--text-secondary) !important;
-    border: 1px solid var(--border-medium);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-full);
-    font-size: var(--text-sm);
-    font-weight: 600;  /* v2.1.0: Reduced from 800 */
-    display: flex;
-    align-items: center;
-    gap: var(--space-1-5);
-    box-shadow: none;
-}
-
-.category-badge {
-    background: transparent !important;
-    color: var(--text-secondary) !important;
-    border: 1px solid var(--border-medium);
-    padding: var(--space-2) var(--space-4);
-    border-radius: var(--radius-full);
-    font-size: var(--text-sm);
-    font-weight: 600;  /* v2.1.0: Reduced from 700 */
-}
-
-.rating-section {
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    font-size: var(--text-lg);
-    color: var(--text-primary);
-    font-weight: 600;
-}
-
-.stars {
-    color: var(--accent);
-    font-size: var(--text-2xl);
-}
-
-/* Section Styles - Premium */
-.section {
-    background: transparent;
-    border-radius: var(--radius-3xl);
-    padding: var(--space-8);
-    margin-bottom: var(--space-8);
-}
-
-/* v2.1.0: Consistent typography */
 .section-title {
-    font-family: var(--font-display);
-    font-size: var(--text-3xl);  /* 24px */
-    font-weight: 600;  /* v2.1.0: Reduced from 900 */
-    margin-bottom: var(--space-5);
-    color: var(--text-primary);
+  font-size: 1.5rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: calc(var(--space-unit) * 2);
 }
 
-/* About Section */
-.bio {
-    font-size: 1rem;  /* v2.1.0: Standard base size */
-    line-height: 1.5;  /* v2.1.0: Reduced from 1.8 for consistency */
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
+.section-subtitle {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: calc(var(--space-unit) * 1.5);
+  color: var(--color-text-primary);
 }
 
-.achievements {
-    list-style: none;
-    display: flex;
-    flex-direction: column;
-    gap: 1rem;
-    margin-bottom: 2rem;
+/* ========================================
+   STATS GRID
+   ======================================== */
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: calc(var(--space-unit) * 2);
 }
 
-.achievement-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    font-size: 1rem;  /* v2.1.0: Standard base size */
-    color: var(--text-primary);
+.stat-card {
+  background: var(--color-bg-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 2);
+  text-align: center;
 }
 
-.achievement-icon {
-    color: var(--primary);
-    font-size: 1.5rem;
+.stat-value {
+  font-size: 1.75rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: calc(var(--space-unit) * 0.5);
 }
 
-.social-links {
-    display: flex;
-    gap: 1rem;
+.stat-label {
+  font-size: 13px;
+  color: var(--color-text-secondary);
 }
 
-.social-btn {
-    width: 50px;
-    height: 50px;
-    background: var(--bg-tertiary);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    text-decoration: none;
-    font-size: 1.5rem;
-    transition: all 0.3s;
-}
-
-.social-btn:hover {
-    background: var(--primary);
-    color: white;
-    transform: translateY(-3px);
-}
-
-/* Availability Cards - Carousel */
-.availability-carousel {
-    display: flex;
-    gap: var(--space-6);
-}
-
-.availability-carousel .availability-card {
-    min-width: 300px;
-    flex-shrink: 0;
-}
-
-.availability-card {
-    background: var(--bg-tertiary);
-    border-radius: 15px;
-    padding: 1.5rem;
-    border: 2px solid var(--border-medium);
-    transition: all 0.3s;
-}
-
-.availability-card:hover {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-glow-sm);
-}
-
-.city-name {
-    font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
-    font-weight: 600;  /* v2.1.0: Consistent weight */
-    margin-bottom: 0.5rem;
-    display: flex;
-    align-items: center;
-    gap: 0.5rem;
-    color: var(--text-primary);
-}
-
-.date-range {
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.venue {
-    color: var(--text-secondary);
-    margin-bottom: 1rem;
-    font-size: 0.95rem;
-}
-
-.slots-info {
-    color: var(--primary);
-    font-weight: 600;
-    margin-bottom: 1rem;
-    font-size: 0.9rem;
-}
-
-.book-btn-card {
-    width: 100%;
-    padding: var(--space-3);
-    background: var(--primary-gradient);
-    color: var(--white);
-    border: none;
-    border-radius: var(--radius-lg);
-    font-weight: 700;
-    font-family: var(--font-body);
-    cursor: pointer;
-    transition: var(--transition-base);
-    box-shadow: var(--shadow-sm);
-}
-
-.book-btn-card:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow-md);
-}
-
-/* Pricing Cards - Carousel */
-.pricing-carousel {
-    display: flex;
-    gap: var(--space-8);
-}
-
-.pricing-carousel .pricing-card {
-    min-width: 320px;
-    flex-shrink: 0;
-}
-
-.pricing-card {
-    background: var(--bg-secondary);
-    border-radius: var(--radius-2xl);
-    padding: var(--space-8);
-    border: 2px solid var(--border-medium);
-    transition: var(--transition-slow);
-    position: relative;
-}
-
-.pricing-card.popular {
-    border-color: var(--primary);
-    box-shadow: var(--shadow-glow-lg);
-    transform: scale(1.05);
-}
-
-.pricing-card.popular::before {
-    content: 'Most Popular';
-    position: absolute;
-    top: calc(var(--space-4) * -1);
-    left: 50%;
-    transform: translateX(-50%);
-    background: var(--primary-gradient);
-    color: var(--white);
-    padding: var(--space-2) var(--space-5);
-    border-radius: var(--radius-full);
-    font-size: var(--text-xs);
-    font-weight: 800;
-    box-shadow: var(--shadow-md);
-}
-
-.pricing-icon {
-    font-size: 3.5rem;
-    margin-bottom: var(--space-3);
-    filter: drop-shadow(0 2px 4px rgba(0, 0, 0, 0.1));
-}
-
-.pricing-title {
-    font-family: var(--font-display);
-    font-size: var(--text-xl);  /* v2.1.0: 18px for consistency */
-    font-weight: 600;  /* v2.1.0: Reduced from 800 */
-    margin-bottom: var(--space-2);
-    color: var(--text-primary);
-}
-
-.pricing-duration {
-    color: var(--text-secondary);
-    margin-bottom: var(--space-3);
-    font-size: var(--text-sm);
-}
-
-.pricing-amount {
-    font-family: var(--font-display);
-    font-size: 0.875rem !important;  /* v2.1.0: 14px as user requested */
-    font-weight: 600 !important;  /* v2.1.0: Consistent with design */
-    color: #FFFFFF !important;  /* v2.1.0: White text */
-    margin-bottom: var(--space-3);
-}
-
-.pricing-description {
-    color: var(--text-secondary);
-    margin-bottom: var(--space-4);
-    font-size: var(--text-base);
-    line-height: 1.6;
-}
-
-.pricing-includes {
-    list-style: none;
-    margin-bottom: var(--space-6);
-}
-
-.pricing-includes li {
-    padding: var(--space-2) 0;
-    display: flex;
-    align-items: center;
-    gap: var(--space-2);
-    color: var(--text-primary);
-    font-weight: 500;
-}
-
-.pricing-includes li::before {
-    content: '✓';
-    color: var(--primary);
-    font-weight: 800;
-    font-size: var(--text-lg);
-}
-
-.select-btn {
-    width: 100%;
-    padding: var(--space-4);
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    border-radius: var(--radius-lg);
-    font-weight: 700;
-    font-family: var(--font-body);
-    cursor: pointer;
-    transition: var(--transition-base);
-}
-
-.select-btn:hover, .pricing-card.popular .select-btn {
-    background: var(--primary-gradient);
-    color: var(--white);
-    border-color: transparent;
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow-md);
-}
-
-/* Guidelines */
-.guidelines-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
-    gap: 1.5rem;
-}
-
-.guideline-item {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    padding: 1rem;
-    background: var(--bg-tertiary);
-    border-radius: 10px;
-    color: var(--text-primary);
-}
-
-.guideline-icon {
-    font-size: 1.8rem;
-}
-
-.guideline-icon.check {
-    color: var(--primary);
-}
-
-.guideline-icon.cross {
-    color: #EF4444;
-}
-
-/* Reviews */
-.rating-breakdown {
-    margin-bottom: 2rem;
-}
-
-.rating-row {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 0.8rem;
-}
-
-.rating-label {
-    width: 60px;
-    font-weight: 600;
-    color: var(--text-primary);
-}
-
-.rating-bar {
-    flex: 1;
-    height: 10px;
-    background: var(--bg-tertiary);
-    border-radius: 5px;
-    overflow: hidden;
-}
-
-.rating-fill {
-    height: 100%;
-    background: var(--gold);
-}
-
-.rating-percentage {
-    width: 50px;
-    text-align: right;
-    color: var(--text-secondary);
-}
+/* ========================================
+   REVIEWS
+   ======================================== */
 
 .reviews-list {
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem;
-    margin-bottom: 2rem;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 2);
 }
 
 .review-card {
-    padding: 1.5rem;
-    background: var(--bg-tertiary);
-    border-radius: 15px;
+  background: var(--color-bg-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 2);
 }
 
 .review-header {
-    display: flex;
-    align-items: center;
-    gap: 1rem;
-    margin-bottom: 1rem;
-}
-
-.review-avatar {
-    width: 50px;
-    height: 50px;
-    background: var(--primary-gradient);
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    color: white;
-    font-weight: 700;
-    font-size: 1.2rem;
-}
-
-.review-meta {
-    flex: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--space-unit) * 1);
 }
 
 .review-author {
-    font-weight: 600;  /* v2.1.0: Consistent weight */
-    margin-bottom: 0.2rem;
-    color: var(--text-primary);
-}
-
-.review-date {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
 }
 
 .review-rating {
-    color: var(--gold);
+  display: flex;
+  gap: 2px;
+  color: var(--color-primary);
 }
 
 .review-text {
-    color: var(--text-secondary);
-    line-height: 1.7;
-    margin-bottom: 1rem;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  font-size: 14px;
 }
 
-.helpful-btn {
-    background: var(--bg-secondary);
-    border: 1px solid var(--border-medium);
-    padding: 0.5rem 1rem;
-    border-radius: 50px;
-    cursor: pointer;
-    font-size: 0.9rem;
-    color: var(--text-primary);
-    transition: all 0.3s;
+.review-date {
+  font-size: 12px;
+  color: var(--color-text-muted);
+  margin-top: calc(var(--space-unit) * 1);
 }
 
-.helpful-btn:hover {
-    border-color: var(--primary);
-    color: var(--primary);
+/* ========================================
+   BOOKING WIDGET (SIDEBAR)
+   ======================================== */
+
+.booking-widget {
+  background: var(--color-bg-secondary);
+  border: 1px solid rgba(198, 163, 79, 0.2);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 3);
+  position: sticky;
+  top: calc(var(--space-unit) * 3);
 }
 
-.load-more-btn {
-    width: 100%;
-    padding: 1rem;
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
+.booking-title {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: calc(var(--space-unit) * 2);
 }
 
-.load-more-btn:hover {
-    background: var(--primary);
-    color: white;
+.booking-options {
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 2);
+  margin-bottom: calc(var(--space-unit) * 3);
 }
 
-/* Similar Celebrities - Carousel (v2.1.0: Match homepage design) */
-.similar-carousel {
-    display: flex;
-    gap: var(--space-6);
+.booking-option {
+  background: var(--color-bg-tertiary);
+  border: 2px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 2);
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-.similar-carousel .celebrity-card {
-    min-width: 200px;  /* v2.1.0: MATCH HOMEPAGE SIZE */
-    width: 200px;
-    flex-shrink: 0;
+.booking-option:hover {
+  border-color: rgba(198, 163, 79, 0.3);
 }
 
-.celebrity-card {
-    background: transparent;  /* v2.1.0: Transparent background */
-    border-radius: var(--radius-lg);
-    overflow: hidden;
-    box-shadow: none;
-    border: none;  /* v2.1.0: No border */
-    border-bottom: 1px solid rgba(139, 92, 246, 0.25);  /* v2.1.0: Only bottom border */
-    transition: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);  /* v2.1.0: Apple easing */
-    cursor: pointer;
+.booking-option.selected {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
 }
 
-.celebrity-card:hover {
-    transform: translateY(-4px);  /* v2.1.0: Consistent -4px lift */
-    box-shadow: var(--shadow-glow-sm);
-    border-color: rgba(139, 92, 246, 0.5);
+.option-name {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin-bottom: 4px;
 }
 
-.celebrity-image-card {
-    height: 200px;
-    position: relative;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    border-radius: var(--radius-lg);
-    overflow: hidden;
+.option-price {
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
 }
 
-/* v2.1.0: Texture overlay for celebrity cards */
-.celebrity-image-card::before {
-    content: '';
-    position: absolute;
-    inset: 0;
-    background:
-        radial-gradient(circle at 30% 20%, rgba(255,255,255,0.1) 0%, transparent 50%),
-        radial-gradient(circle at 70% 80%, rgba(0,0,0,0.1) 0%, transparent 50%);
-    mix-blend-mode: overlay;
-    z-index: 1;
+.option-duration {
+  font-size: 13px;
+  color: var(--color-text-muted);
 }
 
-.celebrity-initials-card {
-    font-size: 4rem;  /* v2.1.0: Increased from 3rem to match homepage */
-    font-weight: 700;  /* v2.1.0: Reduced from 900 */
-    color: white;
-    z-index: 2;  /* v2.1.0: Above texture overlay */
-    letter-spacing: 0.05em;  /* v2.1.0: Added spacing */
+/* ========================================
+   AVAILABILITY CALENDAR
+   ======================================== */
+
+.availability-section {
+  background: var(--color-bg-secondary);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 3);
 }
 
-.celebrity-info-card {
-    padding: var(--space-3);  /* v2.1.0: Reduced padding */
+.calendar {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: calc(var(--space-unit) * 1);
+  margin-top: calc(var(--space-unit) * 2);
 }
 
-.celebrity-name-card {
-    font-family: var(--font-body);
-    font-size: var(--text-base);
-    font-weight: 600;  /* v2.1.0: Increased from 400 */
-    margin-bottom: var(--space-2);
-    color: var(--text-primary);  /* v2.1.0: Changed from white */
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--color-bg-tertiary);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  font-size: 14px;
+  cursor: pointer;
+  transition: all var(--transition-fast);
 }
 
-.celebrity-category-card {
-    color: var(--text-secondary);  /* v2.1.0: Changed from primary */
-    font-size: var(--text-sm);
-    margin-bottom: var(--space-2);
-    font-weight: 500;
+.calendar-day:hover:not(.disabled) {
+  border-color: rgba(198, 163, 79, 0.3);
+  transform: scale(1.05);
 }
 
-.celebrity-price-card {
-    font-family: var(--font-body);
-    padding-top: var(--space-4);
-    margin-top: var(--space-3);
-    border-top: 1px solid rgba(139, 92, 246, 0.1);  /* v2.1.0: Purple border-top */
+.calendar-day.selected {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  border-color: var(--color-primary);
 }
 
-.celebrity-price-card .price {
-    font-size: 0.875rem !important;  /* v2.1.0: 14px as user requested */
-    font-weight: 600 !important;
-    color: #FFFFFF !important;  /* v2.1.0: White */
+.calendar-day.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
 }
 
-.celebrity-rating {
-    display: flex;
-    align-items: center;
-    gap: var(--space-1);
-    font-size: var(--text-sm);
-    color: var(--text-secondary);
-}
+/* ========================================
+   RESPONSIVE
+   ======================================== */
 
-.rating-star {
-    color: #F59E0B;
-    font-size: var(--text-sm);
-}
-
-/* Sticky Sidebar */
-.booking-sidebar {
-    width: 350px;
-    position: sticky;
-    top: 100px;
-    height: fit-content;
-}
-
-.booking-card {
-    background: var(--bg-secondary);
-    border-radius: 20px;
-    padding: 2rem;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
-}
-
-.booking-header {
-    display: flex;
-    gap: 1rem;
-    margin-bottom: 1.5rem;
-    padding-bottom: 1.5rem;
-    border-bottom: 1px solid var(--border-medium);
-}
-
-.booking-photo {
-    width: 80px;
-    height: 80px;
-    border-radius: 50%;
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    font-size: 2rem;
-    font-weight: 900;
-    color: white;
-}
-
-.booking-info {
-    flex: 1;
-}
-
-.booking-name {
-    font-weight: 600;  /* v2.1.0: Consistent weight */
-    font-size: var(--text-xl);  /* v2.1.0: 18px */
-    margin-bottom: 0.3rem;
-    color: var(--text-primary);
-}
-
-.next-available {
-    color: var(--text-secondary);
-    font-size: 0.9rem;
-}
-
-.starting-price {
-    font-size: 0.9rem;
-    color: var(--text-secondary);
-    margin-bottom: 0.5rem;
-}
-
-.price-display {
-    font-size: 0.875rem;  /* v2.1.0: 14px as user requested */
-    font-weight: 600;  /* v2.1.0: Consistent weight */
-    color: #FFFFFF;  /* v2.1.0: White */
-    margin-bottom: 1.5rem;
-}
-
-.booking-dropdown {
-    width: 100%;
-    padding: 1rem;
-    border: 2px solid var(--border-medium);
-    border-radius: 10px;
-    font-size: 1rem;
-    margin-bottom: 1rem;
-    outline: none;
-    cursor: pointer;
-    background: var(--bg-tertiary);
-    color: var(--text-primary);
-}
-
-.booking-dropdown:focus {
-    border-color: var(--primary);
-}
-
-.book-now-btn {
-    width: 100%;
-    padding: 1.2rem;
-    background: var(--primary-gradient);
-    color: white;
-    border: none;
-    border-radius: 10px;
-    font-weight: 700;
-    font-size: 1.1rem;
-    cursor: pointer;
-    margin-bottom: 1rem;
-    transition: all 0.3s;
-}
-
-.book-now-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow-md);
-}
-
-.message-btn {
-    width: 100%;
-    padding: 1rem;
-    background: transparent;
-    color: var(--primary);
-    border: 2px solid var(--primary);
-    border-radius: 10px;
-    font-weight: 700;
-    cursor: pointer;
-    transition: all 0.3s;
-}
-
-.message-btn:hover {
-    background: var(--primary);
-    color: white;
-}
-
-/* Error Page */
-.error-page {
-    max-width: 600px;
-    margin: 150px auto;
-    text-align: center;
-    padding: 3rem;
-    background: var(--bg-secondary);
-    border-radius: 20px;
-    box-shadow: var(--shadow-lg);
-    border: 1px solid var(--border-light);
-}
-
-.error-page h1 {
-    font-size: 3rem;
-    color: var(--text-primary);
-    margin-bottom: 1rem;
-}
-
-.error-page p {
-    font-size: 1.2rem;
-    color: var(--text-secondary);
-    margin-bottom: 2rem;
-}
-
-.error-btn {
-    padding: 1rem 2.5rem;
-    background: var(--primary-gradient);
-    color: white;
-    text-decoration: none;
-    border-radius: 50px;
-    font-weight: 700;
-    display: inline-block;
-    transition: all 0.3s;
-}
-
-.error-btn:hover {
-    transform: translateY(-2px);
-    box-shadow: var(--shadow-glow-md);
-}
-
-/* Responsive */
 @media (max-width: 1024px) {
-    .main-container {
-        flex-direction: column;
-    }
+  .profile-content {
+    grid-template-columns: 1fr;
+  }
 
-    .booking-sidebar {
-        width: 100%;
-        position: relative;
-        top: 0;
-        order: -1;
-    }
+  .booking-widget {
+    position: static;
+  }
 }
 
-/* v2.1.0: Mobile responsiveness */
 @media (max-width: 768px) {
-    .celebrity-name-hero {
-        font-size: 1.125rem;  /* v2.1.0: 18px mobile */
-    }
+  .profile-hero {
+    grid-template-columns: 1fr;
+    text-align: center;
+  }
 
-    .hero-image {
-        height: 300px;
-    }
+  .profile-avatar {
+    width: 140px;
+    height: 140px;
+    margin: 0 auto;
+  }
 
-    .hero-initials {
-        font-size: 5rem;
-    }
+  .profile-actions {
+    align-items: center;
+  }
 
-    .pricing-grid, .availability-grid, .similar-grid {
-        grid-template-columns: 1fr;
-    }
+  .profile-meta {
+    justify-content: center;
+  }
 
-    .section {
-        padding: var(--space-4);
-    }
-
-    .section-title {
-        font-size: 1.125rem;  /* v2.1.0: 18px mobile for consistency */
-    }
-}
-
-.hidden {
-    display: none;
+  .stats-grid {
+    grid-template-columns: repeat(2, 1fr);
+  }
 }

@@ -1,0 +1,96 @@
+/* ===================================
+   Button Components
+   =================================== */
+
+.btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  padding: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 3);
+  border-radius: var(--radius);
+  font-weight: var(--font-weight-semibold);
+  font-size: 1rem;
+  line-height: 1.5;
+  text-align: center;
+  transition: all var(--transition-fast);
+  cursor: pointer;
+  border: 2px solid transparent;
+  white-space: nowrap;
+}
+
+.btn:disabled {
+  opacity: 0.5;
+  cursor: not-allowed;
+}
+
+/* === Primary Button (Solid Gold) === */
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+}
+
+.btn-primary:hover:not(:disabled) {
+  background: var(--color-primary-dark);
+  transform: translateY(-1px);
+}
+
+.btn-primary:active:not(:disabled) {
+  transform: translateY(0);
+}
+
+/* === Outline Button (Transparent with Gold Border) === */
+.btn-outline {
+  background: transparent;
+  color: var(--color-primary);
+  border-color: var(--color-primary);
+}
+
+.btn-outline:hover:not(:disabled) {
+  background: rgba(198, 163, 79, 0.1);
+  border-color: var(--color-primary-light);
+  color: var(--color-primary-light);
+}
+
+/* === Ghost Button (White Text, Opacity Hover) === */
+.btn-ghost {
+  background: transparent;
+  color: var(--color-text-primary);
+}
+
+.btn-ghost:hover:not(:disabled) {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+/* === Button Sizes === */
+.btn-sm {
+  padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 2);
+  font-size: 0.875rem;
+}
+
+.btn-lg {
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 4);
+  font-size: 1.125rem;
+}
+
+/* === Full Width Button === */
+.btn-block {
+  width: 100%;
+  display: flex;
+}
+
+/* === Button Groups === */
+.btn-group {
+  display: flex;
+  gap: calc(var(--space-unit) * 1);
+}
+
+.btn-group .btn {
+  flex: 1;
+}
+
+/* === Icon Buttons === */
+.btn-icon {
+  padding: calc(var(--space-unit) * 1.5);
+  aspect-ratio: 1;
+}

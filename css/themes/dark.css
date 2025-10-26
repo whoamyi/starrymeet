@@ -1,0 +1,39 @@
+/* ===================================
+   Dark Theme
+   Default Black Background Theme
+   =================================== */
+
+body {
+  background-color: var(--color-bg-primary);
+  color: var(--color-text-primary);
+}
+
+/* Override any light theme remnants */
+* {
+  color-scheme: dark;
+}
+
+/* Ensure all sections use dark background */
+section {
+  background-color: var(--color-bg-primary);
+}
+
+/* Hero sections can use secondary background for subtle contrast */
+.hero-section,
+.featured-section {
+  background-color: var(--color-bg-secondary);
+}
+
+/* Cards already inherit from variables, no override needed */
+
+/* Ensure proper text contrast on dark backgrounds */
+.text-on-dark {
+  color: var(--color-text-primary);
+}
+
+/* Dark mode specific animations */
+@media (prefers-reduced-motion: no-preference) {
+  * {
+    scroll-behavior: smooth;
+  }
+}
