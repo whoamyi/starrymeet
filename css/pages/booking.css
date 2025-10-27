@@ -1,0 +1,728 @@
+/* ===================================
+   Booking Page
+   Black-White-Gold Design System
+   Mobile-First Responsive
+   =================================== */
+
+/* ========================================
+   BASE LAYOUT
+   ======================================== */
+
+body {
+  background: var(--color-bg-primary);
+  color: var(--color-text-primary);
+  padding-top: 80px;
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+
+.container {
+  max-width: 1000px;
+  margin: 0 auto;
+  padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 3);
+}
+
+/* ========================================
+   PROGRESS BAR
+   ======================================== */
+
+.progress-bar {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: calc(var(--space-unit) * 7.5);
+  position: relative;
+}
+
+.progress-bar::before {
+  content: '';
+  position: absolute;
+  top: 20px;
+  left: 0;
+  right: 0;
+  height: 2px;
+  background: rgba(198, 163, 79, 0.15);
+  z-index: 0;
+}
+
+.progress-line {
+  position: absolute;
+  top: 20px;
+  left: 0;
+  height: 2px;
+  background: var(--color-primary);
+  z-index: 1;
+  transition: width 0.3s;
+}
+
+.progress-step {
+  position: relative;
+  z-index: 2;
+  text-align: center;
+  flex: 1;
+}
+
+.progress-step-circle {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  background: var(--color-bg-primary);
+  border: 2px solid rgba(198, 163, 79, 0.2);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin: 0 auto calc(var(--space-unit) * 1.5);
+  font-weight: var(--font-weight-semibold);
+  transition: all var(--transition-fast);
+}
+
+.progress-step.active .progress-step-circle {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.1);
+}
+
+.progress-step.completed .progress-step-circle {
+  border-color: var(--color-primary);
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+}
+
+.progress-step-label {
+  font-size: clamp(0.75rem, 2vw, 0.875rem);
+  color: var(--color-text-muted);
+}
+
+.progress-step.active .progress-step-label {
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   BOOKING LAYOUT
+   ======================================== */
+
+.booking-layout {
+  display: grid;
+  grid-template-columns: 1fr 380px;
+  gap: calc(var(--space-unit) * 4);
+  margin-top: calc(var(--space-unit) * 5);
+}
+
+.booking-sidebar {
+  position: sticky;
+  top: 100px;
+  height: fit-content;
+}
+
+/* ========================================
+   STEP SECTIONS
+   ======================================== */
+
+.step-section {
+  background: rgba(198, 163, 79, 0.03);
+  border: 1px solid rgba(198, 163, 79, 0.1);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 4);
+  margin-bottom: calc(var(--space-unit) * 3);
+  display: none;
+}
+
+.step-section.active {
+  display: block;
+}
+
+.step-section h2 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: calc(var(--space-unit) * 3);
+  color: var(--color-text-primary);
+}
+
+.step-section h3 {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   FORMS
+   ======================================== */
+
+.form-group {
+  margin-bottom: calc(var(--space-unit) * 3);
+}
+
+.form-group label {
+  display: block;
+  font-weight: var(--font-weight-medium);
+  margin-bottom: calc(var(--space-unit) * 1);
+  color: var(--color-text-primary);
+  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+}
+
+.form-group input,
+.form-group select,
+.form-group textarea {
+  width: 100%;
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(198, 163, 79, 0.2);
+  border-radius: calc(var(--radius) - 2px);
+  padding: calc(var(--space-unit) * 1.75) calc(var(--space-unit) * 2);
+  color: var(--color-text-primary);
+  font-size: clamp(0.9375rem, 2vw, 1rem);
+  font-family: inherit;
+  transition: all var(--transition-fast);
+}
+
+.form-group input:focus,
+.form-group select:focus,
+.form-group textarea:focus {
+  outline: none;
+  border-color: var(--color-primary);
+  box-shadow: 0 0 0 3px rgba(198, 163, 79, 0.1);
+}
+
+.form-group textarea {
+  resize: vertical;
+  min-height: 100px;
+}
+
+.form-group small {
+  display: block;
+  margin-top: calc(var(--space-unit) * 0.75);
+  font-size: 0.8125rem;
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   TIME SLOTS & CALENDAR
+   ======================================== */
+
+.time-slots {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  gap: calc(var(--space-unit) * 1.5);
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.time-slot,
+.time-slot-mini {
+  padding: calc(var(--space-unit) * 1.75);
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(198, 163, 79, 0.2);
+  border-radius: calc(var(--radius) - 2px);
+  text-align: center;
+  cursor: pointer;
+  font-size: clamp(0.85rem, 2vw, 0.9rem);
+  transition: all var(--transition-fast);
+  color: var(--color-text-primary);
+  font-family: inherit;
+}
+
+.time-slot:hover,
+.time-slot-mini:hover {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
+}
+
+.time-slot.selected,
+.time-slot-mini.selected {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  border-color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.time-slot.unavailable,
+.time-slot-mini.unavailable {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.time-slot.unavailable:hover,
+.time-slot-mini.unavailable:hover {
+  border-color: rgba(198, 163, 79, 0.2);
+  background: var(--color-bg-primary);
+}
+
+.time-slot-mini {
+  padding: calc(var(--space-unit) * 1.25);
+  font-size: 0.85rem;
+}
+
+.calendar-container {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: calc(var(--space-unit) * 1);
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.calendar-day {
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(198, 163, 79, 0.1);
+  border-radius: calc(var(--radius) - 2px);
+  cursor: pointer;
+  font-size: 0.875rem;
+  transition: all var(--transition-fast);
+}
+
+.calendar-day:hover {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
+}
+
+.calendar-day.selected {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  border-color: var(--color-primary);
+}
+
+.calendar-day.disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+.calendar-day.disabled:hover {
+  border-color: rgba(198, 163, 79, 0.1);
+  background: transparent;
+}
+
+/* ========================================
+   PACKAGE OPTIONS
+   ======================================== */
+
+.package-options {
+  display: grid;
+  gap: calc(var(--space-unit) * 2);
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.package-option {
+  background: var(--color-bg-primary);
+  border: 2px solid rgba(198, 163, 79, 0.2);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 2.5);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.package-option:hover {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.03);
+}
+
+.package-option.selected {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
+}
+
+.package-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: calc(var(--space-unit) * 1.5);
+}
+
+.package-name {
+  font-weight: var(--font-weight-semibold);
+  font-size: clamp(1rem, 2.5vw, 1.1rem);
+  color: var(--color-text-primary);
+}
+
+.package-price {
+  font-size: clamp(1.125rem, 3vw, 1.25rem);
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+}
+
+.package-duration {
+  color: var(--color-text-muted);
+  font-size: 0.875rem;
+  margin-bottom: calc(var(--space-unit) * 1);
+}
+
+.package-features {
+  display: flex;
+  gap: calc(var(--space-unit) * 1);
+  flex-wrap: wrap;
+}
+
+.feature-tag {
+  background: rgba(198, 163, 79, 0.15);
+  padding: calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1.5);
+  border-radius: 20px;
+  font-size: 0.75rem;
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   SUMMARY CARD
+   ======================================== */
+
+.summary-card {
+  background: rgba(198, 163, 79, 0.03);
+  border: 1px solid rgba(198, 163, 79, 0.1);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 3);
+}
+
+.summary-item {
+  display: flex;
+  justify-content: space-between;
+  padding: calc(var(--space-unit) * 2) 0;
+  border-bottom: 1px solid rgba(198, 163, 79, 0.1);
+}
+
+.summary-item:last-child {
+  border-bottom: none;
+}
+
+.summary-label {
+  color: var(--color-text-muted);
+  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+}
+
+.summary-value {
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+}
+
+.summary-total {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  margin-top: calc(var(--space-unit) * 1.5);
+  padding-top: calc(var(--space-unit) * 2.5);
+  border-top: 2px solid rgba(198, 163, 79, 0.2);
+}
+
+.summary-total .summary-label {
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   BUTTONS
+   ======================================== */
+
+.btn-primary,
+.btn-secondary {
+  width: 100%;
+  padding: calc(var(--space-unit) * 2);
+  border-radius: calc(var(--radius) - 2px);
+  font-size: clamp(0.9375rem, 2vw, 1rem);
+  font-weight: var(--font-weight-semibold);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  border: none;
+  font-family: inherit;
+}
+
+.btn-primary {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  margin-bottom: calc(var(--space-unit) * 1.5);
+  box-shadow: 0 4px 16px rgba(198, 163, 79, 0.2);
+}
+
+.btn-primary:hover {
+  background: var(--color-primary-light);
+  box-shadow: 0 6px 24px rgba(198, 163, 79, 0.3);
+  transform: translateY(-1px);
+}
+
+.btn-secondary {
+  background: transparent;
+  color: var(--color-text-primary);
+  border: 1px solid rgba(198, 163, 79, 0.2);
+}
+
+.btn-secondary:hover {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
+}
+
+/* ========================================
+   PAYMENT METHODS
+   ======================================== */
+
+.payment-methods {
+  display: grid;
+  gap: calc(var(--space-unit) * 1.5);
+  margin-top: calc(var(--space-unit) * 2);
+}
+
+.payment-method {
+  background: var(--color-bg-primary);
+  border: 2px solid rgba(198, 163, 79, 0.2);
+  border-radius: calc(var(--radius) - 2px);
+  padding: calc(var(--space-unit) * 2);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 2);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+}
+
+.payment-method:hover {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.03);
+}
+
+.payment-method.selected {
+  border-color: var(--color-primary);
+  background: rgba(198, 163, 79, 0.05);
+}
+
+.payment-icon {
+  width: 40px;
+  height: 40px;
+  background: rgba(198, 163, 79, 0.15);
+  border-radius: calc(var(--radius) - 6px);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.2rem;
+}
+
+.payment-label {
+  font-weight: var(--font-weight-medium);
+  color: var(--color-text-primary);
+}
+
+/* ========================================
+   SUCCESS MESSAGE
+   ======================================== */
+
+.success-icon {
+  width: 80px;
+  height: 80px;
+  background: rgba(198, 163, 79, 0.15);
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  margin: 0 auto calc(var(--space-unit) * 3);
+}
+
+.success-message {
+  text-align: center;
+}
+
+.success-message h2 {
+  font-size: clamp(1.625rem, 4vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 2);
+  color: var(--color-text-primary);
+}
+
+.success-message p {
+  color: var(--color-text-secondary);
+  margin-bottom: calc(var(--space-unit) * 1);
+  line-height: 1.8;
+}
+
+.booking-details {
+  background: var(--color-bg-primary);
+  border: 1px solid rgba(198, 163, 79, 0.2);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 3);
+  margin: calc(var(--space-unit) * 4) 0;
+  text-align: left;
+}
+
+.booking-details-row {
+  display: flex;
+  justify-content: space-between;
+  padding: calc(var(--space-unit) * 1.5) 0;
+  border-bottom: 1px solid rgba(198, 163, 79, 0.1);
+}
+
+.booking-details-row:last-child {
+  border-bottom: none;
+}
+
+/* ========================================
+   RESPONSIVE - TABLET
+   ======================================== */
+
+@media (max-width: 768px) {
+  body {
+    padding-top: 60px;
+  }
+
+  .container {
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2);
+  }
+
+  .progress-bar {
+    margin-bottom: calc(var(--space-unit) * 4);
+  }
+
+  .progress-step-label {
+    font-size: 0.75rem;
+  }
+
+  .progress-step-circle {
+    width: 36px;
+    height: 36px;
+    font-size: 0.875rem;
+  }
+
+  .booking-layout {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-unit) * 3);
+  }
+
+  .booking-sidebar {
+    position: static;
+    order: 2;
+  }
+
+  .booking-main {
+    order: 1;
+  }
+
+  .step-section {
+    padding: calc(var(--space-unit) * 3);
+  }
+
+  .step-section h2 {
+    font-size: 1.25rem;
+  }
+
+  .time-slots {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--space-unit) * 1);
+  }
+
+  .calendar-container {
+    gap: calc(var(--space-unit) * 0.5);
+  }
+
+  .package-options {
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  .package-option {
+    padding: calc(var(--space-unit) * 2);
+  }
+
+  .summary-card {
+    padding: calc(var(--space-unit) * 2.5);
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE SMALL
+   ======================================== */
+
+@media (max-width: 480px) {
+  .container {
+    padding: calc(var(--space-unit) * 2.5) calc(var(--space-unit) * 1.5);
+  }
+
+  .progress-bar {
+    margin-bottom: calc(var(--space-unit) * 3);
+    padding: 0 calc(var(--space-unit) * 1);
+  }
+
+  .progress-step-label {
+    font-size: 0.7rem;
+    display: none;
+  }
+
+  .progress-step-circle {
+    width: 32px;
+    height: 32px;
+    font-size: 0.75rem;
+  }
+
+  .step-section {
+    padding: calc(var(--space-unit) * 2.5);
+    border-radius: calc(var(--radius) - 4px);
+  }
+
+  .step-section h2 {
+    font-size: 1.125rem;
+    margin-bottom: calc(var(--space-unit) * 2.5);
+  }
+
+  .form-group {
+    margin-bottom: calc(var(--space-unit) * 2.5);
+  }
+
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    padding: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 1.75);
+    font-size: 0.9375rem;
+    border-radius: calc(var(--radius) - 4px);
+  }
+
+  .time-slots {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-unit) * 1);
+  }
+
+  .calendar-day {
+    font-size: 0.8125rem;
+  }
+
+  .package-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: calc(var(--space-unit) * 1);
+  }
+
+  .package-name {
+    font-size: 1rem;
+  }
+
+  .package-price {
+    font-size: 1.125rem;
+  }
+
+  .summary-card {
+    padding: calc(var(--space-unit) * 2);
+    border-radius: calc(var(--radius) - 4px);
+  }
+
+  .summary-item {
+    padding: calc(var(--space-unit) * 1.5) 0;
+    font-size: 0.9375rem;
+  }
+
+  .summary-total {
+    font-size: 1.25rem;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: calc(var(--space-unit) * 1.75);
+    font-size: 0.9375rem;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE EXTRA SMALL
+   ======================================== */
+
+@media (max-width: 360px) {
+  .container {
+    padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 1);
+  }
+
+  .step-section {
+    padding: calc(var(--space-unit) * 2);
+    border-radius: calc(var(--radius) - 6px);
+  }
+
+  .progress-step-circle {
+    width: 28px;
+    height: 28px;
+    font-size: 0.7rem;
+  }
+}

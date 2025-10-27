@@ -1,0 +1,253 @@
+/* ===================================
+   Team Page
+   Black-White-Gold Design System
+   Mobile-First Responsive
+   =================================== */
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero {
+  background: var(--color-bg-primary);
+  text-align: center;
+  padding: calc(var(--space-unit) * 12.5) calc(var(--space-unit) * 3) calc(var(--space-unit) * 7.5);
+  margin-top: var(--nav-height);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 6vw, 4rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 3);
+  line-height: 1.1;
+  color: var(--color-text-primary);
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.25rem);
+  color: var(--color-text-secondary);
+  max-width: 700px;
+  margin: 0 auto;
+  line-height: 1.6;
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+
+.container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 calc(var(--space-unit) * 3) calc(var(--space-unit) * 12.5);
+}
+
+/* ========================================
+   SECTION TITLES
+   ======================================== */
+
+.section-title {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  font-weight: var(--font-weight-bold);
+  margin: calc(var(--space-unit) * 7.5) 0 calc(var(--space-unit) * 5);
+  text-align: center;
+  position: relative;
+  color: var(--color-text-primary);
+}
+
+.section-title:first-child {
+  margin-top: 0;
+}
+
+.section-title::after {
+  content: '';
+  display: block;
+  width: 60px;
+  height: 4px;
+  background: var(--color-primary);
+  margin: calc(var(--space-unit) * 2) auto 0;
+  border-radius: 2px;
+}
+
+/* ========================================
+   TEAM GRID
+   ======================================== */
+
+.team-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+  gap: calc(var(--space-unit) * 4);
+  margin-bottom: calc(var(--space-unit) * 7.5);
+}
+
+/* ========================================
+   TEAM MEMBER CARDS
+   ======================================== */
+
+.team-member {
+  background: rgba(198, 163, 79, 0.05);
+  border: 1px solid rgba(198, 163, 79, 0.15);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 4);
+  text-align: center;
+  transition: all var(--transition-fast);
+}
+
+.team-member:hover {
+  transform: translateY(-4px);
+  border-color: rgba(198, 163, 79, 0.3);
+  background: rgba(198, 163, 79, 0.08);
+  box-shadow: 0 12px 32px rgba(198, 163, 79, 0.2);
+}
+
+.member-avatar {
+  width: 100px;
+  height: 100px;
+  background: linear-gradient(135deg, rgba(198, 163, 79, 0.3), rgba(198, 163, 79, 0.6));
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 2.5rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-text-primary);
+  margin: 0 auto calc(var(--space-unit) * 2.5);
+}
+
+.member-name {
+  font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 1);
+  color: var(--color-text-primary);
+}
+
+.member-role {
+  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: calc(var(--space-unit) * 2);
+}
+
+.member-bio {
+  font-size: clamp(0.875rem, 2vw, 0.9375rem);
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   JOIN TEAM CTA
+   ======================================== */
+
+.join-team {
+  background: linear-gradient(135deg, rgba(198, 163, 79, 0.08), rgba(198, 163, 79, 0.04));
+  border: 2px solid rgba(198, 163, 79, 0.2);
+  border-radius: calc(var(--radius) + 4px);
+  padding: calc(var(--space-unit) * 7.5) calc(var(--space-unit) * 5);
+  text-align: center;
+  margin-top: calc(var(--space-unit) * 10);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.1);
+}
+
+.join-team h2 {
+  font-size: clamp(1.625rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 2.5);
+  color: var(--color-text-primary);
+}
+
+.join-team p {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-secondary);
+  margin-bottom: calc(var(--space-unit) * 4);
+  line-height: 1.6;
+}
+
+.btn-join {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+  border-radius: 50px;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(198, 163, 79, 0.2);
+}
+
+.btn-join:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(198, 163, 79, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: calc(var(--space-unit) * 10) calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+  }
+
+  .container {
+    padding: 0 calc(var(--space-unit) * 2) calc(var(--space-unit) * 10);
+  }
+
+  .section-title {
+    margin: calc(var(--space-unit) * 6) 0 calc(var(--space-unit) * 3.5);
+  }
+
+  .section-title::after {
+    width: 40px;
+    height: 3px;
+  }
+
+  .team-grid {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-unit) * 2.5);
+  }
+
+  .team-member {
+    padding: calc(var(--space-unit) * 3);
+  }
+
+  .team-member:hover {
+    transform: none;
+  }
+
+  .member-avatar {
+    margin-bottom: calc(var(--space-unit) * 2);
+  }
+
+  .join-team {
+    padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 2.5);
+    margin-top: calc(var(--space-unit) * 7.5);
+  }
+
+  .btn-join {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE SMALL
+   ======================================== */
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 2) calc(var(--space-unit) * 5);
+  }
+
+  .container {
+    padding: 0 calc(var(--space-unit) * 2) calc(var(--space-unit) * 8);
+  }
+
+  .team-member {
+    padding: calc(var(--space-unit) * 2.5);
+  }
+
+  .join-team {
+    padding: calc(var(--space-unit) * 3.5) calc(var(--space-unit) * 2);
+    margin-top: calc(var(--space-unit) * 6);
+  }
+}
