@@ -430,7 +430,7 @@
             const isInWatchlist = watchlist.has(celeb.name);
             const heartIcon = isInWatchlist ? '❤️' : '🤍';
             const watchlistClass = isInWatchlist ? 'active' : '';
-            const username = celeb.username || encodeURIComponent(celeb.name);
+            const slug = celeb.slug || encodeURIComponent(celeb.name.toLowerCase().replace(/\s+/g, '-'));
 
             // Profession = main category (not subcategory)
             const profession = celeb.category || 'Celebrity';
@@ -442,7 +442,7 @@
             const availableTickets = celeb.availableSlots || celeb.tickets || 0;
 
             return `
-                <div class="celebrity-card fade-in" onclick="window.location.href='celebrity-profile.html?username=${username}'">
+                <div class="celebrity-card fade-in" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'" style="cursor: pointer;">
                     <div class="celebrity-image" style="background: ${color}">
                         ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
@@ -470,7 +470,7 @@
             const isInWatchlist = watchlist.has(celeb.name);
             const heartIcon = isInWatchlist ? '❤️' : '🤍';
             const watchlistClass = isInWatchlist ? 'active' : '';
-            const username = celeb.username || encodeURIComponent(celeb.name);
+            const slug = celeb.slug || encodeURIComponent(celeb.name.toLowerCase().replace(/\s+/g, '-'));
 
             // Profession = main category (not subcategory)
             const profession = celeb.category || 'Celebrity';
@@ -482,7 +482,7 @@
             const availableTickets = celeb.availableSlots || celeb.tickets || 0;
 
             return `
-                <div class="celebrity-card-list fade-in" onclick="window.location.href='celebrity-profile.html?username=${username}'">
+                <div class="celebrity-card-list fade-in" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'" style="cursor: pointer;">
                     <div class="celebrity-image-list" style="background: ${color}">
                         ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
                         <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
