@@ -110,11 +110,6 @@ async function loadCelebrityProfile() {
         console.log('💰 Populating pricing packages...');
         populatePricingPackages(state.celebrity);
 
-        // Render availability panels
-        console.log('📊 Rendering availability panels...');
-        renderAvailability('physical');
-        renderAvailability('virtual');
-
         console.log('✅ Profile fully loaded!');
 
     } catch (error) {
@@ -224,7 +219,7 @@ function populatePricingPackages(celebrity) {
     if (virtualPricingContainer) {
         if (celebrity.pricing.virtual && celebrity.pricing.virtual.length > 0) {
             virtualPricingContainer.innerHTML = celebrity.pricing.virtual.map(pkg => `
-                <div class="pricing-package" onclick="scrollToBookingPanel('virtual')">
+                <div class="pricing-package" onclick="proceedToBooking('virtual', ${pkg.duration}, ${pkg.price})">
                     <div class="pricing-package-header">
                         <div class="pricing-duration">${pkg.duration} minutes</div>
                         <div class="pricing-price">$${pkg.price.toLocaleString()}</div>
@@ -243,7 +238,7 @@ function populatePricingPackages(celebrity) {
     if (physicalPricingContainer) {
         if (celebrity.pricing.physical && celebrity.pricing.physical.length > 0) {
             physicalPricingContainer.innerHTML = celebrity.pricing.physical.map(pkg => `
-                <div class="pricing-package" onclick="scrollToBookingPanel('physical')">
+                <div class="pricing-package" onclick="proceedToBooking('physical', ${pkg.duration}, ${pkg.price})">
                     <div class="pricing-package-header">
                         <div class="pricing-duration">${pkg.duration} minutes</div>
                         <div class="pricing-price">$${pkg.price.toLocaleString()}</div>
@@ -260,25 +255,35 @@ function populatePricingPackages(celebrity) {
 }
 
 /**
- * Scroll to booking panel and expand it
+ * Proceed directly to booking with selected package
  */
-function scrollToBookingPanel(meetingType) {
-    const panel = document.querySelector(`[data-panel="${meetingType}"]`);
-    if (!panel) return;
+function proceedToBooking(meetingType, duration, price) {
+    if (!state.celebrity) return;
 
-    // Expand panel if not already expanded
-    if (!panel.classList.contains('expanded')) {
-        panel.click();
-    }
+    // Store booking data in sessionStorage
+    sessionStorage.setItem('bookingData', JSON.stringify({
+        celebrity_id: state.celebrity.id,
+        celebrity_name: state.celebrity.name,
+        celebrity_slug: state.celebrity.slug,
+        meeting_type: meetingType,
+        duration: duration,
+        price_cents: price * 100, // Convert to cents
+        price: price
+    }));
 
-    // Scroll to panel with smooth behavior
-    setTimeout(() => {
-        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
-    }, 100);
+    console.log('📦 Booking data stored:', {
+        celebrity: state.celebrity.name,
+        type: meetingType,
+        duration: duration,
+        price: price
+    });
+
+    // Redirect to booking page
+    window.location.href = 'booking.html';
 }
 
 // Make function global for onclick handlers
-window.scrollToBookingPanel = scrollToBookingPanel;
+window.proceedToBooking = proceedToBooking;
 
 /**
  * Render availability panel for meeting type
@@ -607,8 +612,3 @@ function formatPrice(cents) {
 function showError(message) {
     alert(message);
 }
-
-// Make functions global for onclick handlers
-window.backToCities = backToCities;
-window.selectSlot = selectSlot;
-window.proceedToBooking = proceedToBooking;

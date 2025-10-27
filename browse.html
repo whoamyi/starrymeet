@@ -427,36 +427,42 @@
         function createGridCard(celeb) {
             const initials = getInitials(celeb.name);
             const color = getColorForCelebrity(celeb.name);
-            const isInWatchlist = watchlist.has(celeb.name);
-            const heartIcon = isInWatchlist ? '❤️' : '🤍';
-            const watchlistClass = isInWatchlist ? 'active' : '';
             const slug = celeb.slug || encodeURIComponent(celeb.name.toLowerCase().replace(/\s+/g, '-'));
 
-            // Profession = main category (not subcategory)
-            const profession = celeb.category || 'Celebrity';
-
-            // Location (city or meeting type)
-            const location = celeb.location || celeb.city || 'Various locations';
-
-            // Availability tickets (use 🎟️ icon, not "slot")
-            const availableTickets = celeb.availableSlots || celeb.tickets || 0;
+            // Get data
+            const category = celeb.category || 'Celebrity';
+            const location = celeb.country || celeb.location || 'Various locations';
+            const rating = parseFloat(celeb.rating) || 0;
+            const reviews = celeb.reviews || 0;
+            const tier = celeb.tier || '';
 
             return `
-                <div class="celebrity-card fade-in" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'" style="cursor: pointer;">
-                    <div class="celebrity-image" style="background: ${color}">
-                        ${celeb.featured ? '<div class="featured-badge">★</div>' : ''}
-                        <button class="watchlist-btn ${watchlistClass}" onclick="toggleWatchlist(event, '${celeb.name}')">${heartIcon}</button>
-                        <div class="celebrity-initials">${initials}</div>
-                    </div>
-                    <div class="celebrity-info">
-                        <h3 class="celebrity-name">${celeb.name}</h3>
-                        <p class="celebrity-category">${profession}</p>
-                        <div class="celebrity-availability">
-                            <span class="availability-location">📍 ${location}</span>
-                            <span class="availability-tickets">🎟️ ${availableTickets}</span>
+                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'">
+                    <div class="celebrity-card-image-container">
+                        <div class="celebrity-card-image" style="background: ${color};">
+                            ${celeb.imageUrl ? `<img src="${celeb.imageUrl}" alt="${celeb.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">` : `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white;">${initials}</div>`}
                         </div>
-                        <div class="celebrity-footer">
-                            <div class="celebrity-price">$${celeb.price.toLocaleString()}+</div>
+                        ${tier ? `<div class="celebrity-card-tier">S-TIER</div>` : ''}
+                        ${celeb.verified ? '<div class="celebrity-card-verified">✓</div>' : ''}
+                    </div>
+                    <div class="celebrity-card-content">
+                        <h3 class="celebrity-card-name">${celeb.name}</h3>
+                        <div class="celebrity-card-category">${category}</div>
+                        <div class="celebrity-card-location">
+                            <span>📍</span>
+                            <span>${location}</span>
+                        </div>
+                        ${rating > 0 ? `
+                        <div class="celebrity-card-rating">
+                            <span class="celebrity-card-star">★</span>
+                            <span class="celebrity-card-rating-text">${rating.toFixed(1)} (${reviews} reviews)</span>
+                        </div>
+                        ` : ''}
+                    </div>
+                    <div class="celebrity-card-footer">
+                        <div class="celebrity-card-price">
+                            <span>Starting from</span>
+                            <span class="celebrity-card-price-value">$${(celeb.price || 0).toLocaleString()}</span>
                         </div>
                     </div>
                 </div>
