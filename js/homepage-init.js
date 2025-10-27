@@ -5,7 +5,6 @@
 
 // Initialize homepage
 document.addEventListener('DOMContentLoaded', async function() {
-    await loadSharedComponents();
     await loadTopTen();
     await loadQuickMeets();
     loadReviews();

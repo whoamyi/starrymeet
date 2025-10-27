@@ -198,12 +198,41 @@
   max-height: 300px;
   overflow-y: auto;
   transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 1);
 }
 
 .filter-tree.collapsed {
   max-height: 0;
   overflow: hidden;
   padding: 0;
+}
+
+.filter-tree-item {
+  display: block;
+}
+
+.filter-tree-label {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  flex: 1;
+  min-width: 0;
+}
+
+.filter-tree-label > span:first-child {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.filter-tree-count {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  margin-left: calc(var(--space-unit) * 1);
+  flex-shrink: 0;
 }
 
 .filter-slider {
@@ -391,7 +420,8 @@
   background: rgba(255, 255, 255, 0.05);
 }
 
-.view-btn.active {
+.view-btn.active,
+.search-toggle-btn.active {
   background: rgba(198, 163, 79, 0.15);
   border-color: rgba(198, 163, 79, 0.4);
   color: var(--color-primary);

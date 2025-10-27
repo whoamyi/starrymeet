@@ -621,9 +621,15 @@ function updateResultsCount(count) {
 function toggleSearch() {
     const searchContainer = document.getElementById('expandableSearch');
     const searchInput = document.getElementById('searchInput');
+    const searchBtn = document.getElementById('searchBtn');
 
     if (searchContainer) {
         searchContainer.classList.toggle('hidden');
+
+        // Update button active state
+        if (searchBtn) {
+            searchBtn.classList.toggle('active');
+        }
 
         // Focus input when showing search
         if (!searchContainer.classList.contains('hidden') && searchInput) {
@@ -633,11 +639,126 @@ function toggleSearch() {
 }
 
 /**
+ * Toggle filter sidebar (mobile)
+ */
+function toggleFilters() {
+    const sidebar = document.getElementById('filterSidebar');
+    const overlay = document.getElementById('filterOverlay');
+    const filterBtn = document.getElementById('filterBtn');
+
+    if (sidebar) {
+        sidebar.classList.toggle('active');
+    }
+
+    if (overlay) {
+        overlay.classList.toggle('active');
+    }
+
+    if (filterBtn) {
+        filterBtn.classList.toggle('active');
+    }
+}
+
+/**
+ * Toggle filter section (collapsible)
+ */
+function toggleFilterSection(sectionId) {
+    const section = document.querySelector(`[data-section="${sectionId}"]`);
+    const toggle = document.getElementById(sectionId.replace('Section', 'Toggle'));
+
+    if (section) {
+        section.classList.toggle('collapsed');
+    }
+
+    if (toggle) {
+        toggle.classList.toggle('expanded');
+    }
+}
+
+/**
+ * Build category tree filter
+ */
+function buildCategoryTree() {
+    const container = document.getElementById('categoryTree');
+    if (!container || !allCelebrities.length) return;
+
+    // Extract unique categories
+    const categories = {};
+    allCelebrities.forEach(celeb => {
+        const cat = celeb.category || 'Other';
+        if (!categories[cat]) {
+            categories[cat] = 0;
+        }
+        categories[cat]++;
+    });
+
+    // Sort by count
+    const sortedCategories = Object.entries(categories)
+        .sort((a, b) => b[1] - a[1]);
+
+    // Build HTML
+    const html = sortedCategories.map(([category, count]) => `
+        <div class="filter-tree-item">
+            <label class="filter-checkbox">
+                <input type="checkbox" value="${category}" onchange="filterByCategory('${category}')">
+                <span class="filter-tree-label">
+                    <span>${category}</span>
+                    <span class="filter-tree-count">${count}</span>
+                </span>
+            </label>
+        </div>
+    `).join('');
+
+    container.innerHTML = html;
+}
+
+/**
+ * Build location tree filter
+ */
+function buildLocationTree() {
+    const container = document.getElementById('locationTree');
+    if (!container || !allCelebrities.length) return;
+
+    // Extract unique countries
+    const countries = {};
+    allCelebrities.forEach(celeb => {
+        const country = celeb.country || 'International';
+        if (!countries[country]) {
+            countries[country] = 0;
+        }
+        countries[country]++;
+    });
+
+    // Sort by count
+    const sortedCountries = Object.entries(countries)
+        .sort((a, b) => b[1] - a[1]);
+
+    // Build HTML
+    const html = sortedCountries.map(([country, count]) => `
+        <div class="filter-tree-item">
+            <label class="filter-checkbox">
+                <input type="checkbox" value="${country}">
+                <span class="filter-tree-label">
+                    <span>${country}</span>
+                    <span class="filter-tree-count">${count}</span>
+                </span>
+            </label>
+        </div>
+    `).join('');
+
+    container.innerHTML = html;
+}
+
+/**
  * Make functions globally available
  */
 window.filterByCategory = filterByCategory;
 window.searchCelebrities = searchCelebrities;
 window.displayCelebrities = displayCelebrities;
 window.toggleSearch = toggleSearch;
+window.toggleFilters = toggleFilters;
+window.toggleFilterSection = toggleFilterSection;
+window.buildCategoryTree = buildCategoryTree;
+window.buildLocationTree = buildLocationTree;
 
 console.log('Browse page initialized with', allCelebrities.length, 'celebrities');

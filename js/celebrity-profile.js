@@ -18,7 +18,6 @@ const state = {
 
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async () => {
-    await loadSharedComponents();
     await loadCelebrityProfile();
     setupPanelToggles();
 });
