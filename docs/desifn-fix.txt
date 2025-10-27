@@ -1,0 +1,68 @@
+StarryMeet Layout Fix
+
+Context:
+After we applied the new black–white–gold base theme and removed all overwriting CSS, the site lost its structure. The frontend now stacks HTML elements vertically without spacing or hierarchy. This is expected — the styling skeleton got wiped. You already know how to fix it, but here’s where and what to rebuild, step by step, so the site regains its clean layout while staying consistent with the new theme system.
+
+1. Project context
+Header, footer, and mobile nav are shared resources injected by JS, not inside individual HTML files.
+All pages now have only their main content blocks.
+The layout collapsed because global containers and spacing rules were removed with the old CSS.
+You’ll restore order by updating layout rules, not component visuals.
+
+2. Where to work
+The only files that should be touched for structure are in: 
+/base/_layout.css (for global containers, grids, spacing)
+/components/nav.css, /components/footer.css, /components/cards.css (to restore alignment of injected/shared elements and main card grids)
+/js/load-shared.js (only if header/footer placeholders need adjustment before injection)
+Do not touch /themes/ or /base/_variables.css — the color system is correct.
+
+3. What the visual outcome must be
+When done, every page should feel balanced, clean, and proportionate, like a professional high-end directory. The structure must look like this:
+Global hierarchy:
+HEADER (sticky, translucent) ↓ MAIN CONTENT (grid of cards, filters, sections) ↓ FOOTER (centered, minimal, dark block) 
+Visually:
+Everything sits on a dark near-black canvas with white text.
+Content sections have generous breathing room — no crowding.
+Header always stays visible while scrolling.
+Footer is fixed at the bottom or naturally settles when the page ends.
+Cards auto-distribute in 2 columns on mobile, 3–4 on desktop.
+No visual lines between blocks, only spacing and shadows.
+The overall site feels minimalist, elegant, and cinematic — like a luxury booking experience.
+
+4. Technical goals
+Claude, here’s your job scope:
+A. Global Containers
+Recreate structural containers for header, main, and footer so nothing stacks raw.
+Make sure <main> has proper top and bottom padding to account for injected header/footer heights.
+Implement a flex-column body structure that stretches the main content to fill the viewport.
+B. Grid & Alignment
+Rebuild the base grid system (cards, filters, pagination).
+Ensure .cards-grid is responsive — 2 per row on mobile, up to 4 per row on large screens.
+Center grids horizontally inside .container with even gaps.
+C. Spacing Rhythm
+Reintroduce consistent section margins (top/bottom).
+Every section should have equal breathing space, roughly 4× the base spacing unit.
+No element should touch the viewport edges.
+D. Shared Components
+The header and footer are injected via JS — verify they load before layout calculations to prevent reflow.
+Each should define its own internal layout (logo, nav links, search bar) but not interfere with global padding or z-index.
+The mobile nav overlay should sit above everything else (highest z-index).
+E. Transitions and Load Behavior
+Once shared components are injected, fade in the main content to avoid flashes or jumping layouts.
+Use the .layout-ready body class to handle this visual smoothness.
+
+5. Expected look when complete
+The site returns to a well-spaced, grid-based, fluid layout.
+Cards line up neatly with uniform spacing.
+Header/footer feel anchored and consistent across every page.
+There are no overlapping elements or vertical stacking chaos.
+The black-white-gold palette remains untouched.
+The overall experience feels like a refined marketplace, not a blog feed.
+
+6. Success confirmation
+When Claude previews the build:
+If every page scrolls naturally and looks balanced without inline adjustments — success.
+If sections still collapse or overlap, check /base/_layout.css first.
+Once structure is solid, we’ll reintroduce motion effects and filters later.
+
+In short: Claude, don’t rewrite; restructure. Work mainly inside /base/_layout.css and ensure the injected header/footer flow correctly with the new dark minimalist system. The goal is an elegant, breathing layout that feels intentionally spaced — not stacked chaos.

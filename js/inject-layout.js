@@ -102,4 +102,12 @@ document.addEventListener('DOMContentLoaded', async () => {
   if (typeof initializeFooter === 'function') {
     initializeFooter();
   }
+
+  // Add layout-ready class to enable smooth transitions
+  // Small delay to ensure layout calculations are complete
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      document.body.classList.add('layout-ready');
+    });
+  });
 });
