@@ -7,36 +7,87 @@
     <meta property="og:title" content="How to Actually Meet Your Favorite Celebrity (The Real Way)">
     <meta property="og:description" content="Tired of fake advice? Here's how to actually meet your favorite celebrity in person—verified methods that work, from someone who's seen it happen hundreds of times.">
     <title>How to Actually Meet Your Favorite Celebrity (The Real Way) - StarryMeet</title>
-    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/blog.css">
     <script src="../js/shared.js"></script>
     <style>
-        body { background: var(--bg-primary); }
-        #navbar { position: sticky; top: 0; z-index: 1000; }
-        .blog-hero { padding: 140px 24px 80px; margin-top: var(--nav-height); text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .blog-category { display: inline-block; background: linear-gradient(135deg, #EA1279, #A434E5); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; }
-        .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
-        .blog-meta { font-size: 0.9375rem; opacity: 0.7; margin-bottom: 40px; }
-        .blog-content { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
-        .blog-content p { font-size: 1.125rem; line-height: 1.8; margin-bottom: 28px; opacity: 0.9; }
-        .blog-content h2 { font-size: 1.875rem; font-weight: 700; margin: 60px 0 24px; }
-        .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 40px 0 20px; color: var(--primary); }
-        .blog-content ul, .blog-content ol { margin: 24px 0; padding-left: 28px; }
-        .blog-content li { font-size: 1.125rem; line-height: 1.8; margin-bottom: 16px; opacity: 0.9; }
-        .blog-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(234, 18, 121, 0.3); transition: all 0.3s ease; }
-        .blog-content a:hover { border-bottom-color: var(--primary); }
-        .method-box { background: rgba(234, 18, 121, 0.05); border: 1px solid rgba(234, 18, 121, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; }
-        .method-box h4 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; color: var(--primary); }
-        .success-rate { display: inline-block; background: rgba(234, 18, 121, 0.15); color: var(--primary); padding: 6px 16px; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; }
-        .callout { background: linear-gradient(135deg, rgba(234, 18, 121, 0.08), rgba(164, 52, 229, 0.08)); border-left: 4px solid var(--primary); padding: 24px 28px; margin: 40px 0; border-radius: 8px; }
-        .callout p { margin-bottom: 0; font-style: italic; }
-        .cta-box { background: linear-gradient(135deg, rgba(234, 18, 121, 0.1), rgba(164, 52, 229, 0.1)); border: 2px solid rgba(234, 18, 121, 0.3); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0; }
-        .cta-box h3 { font-size: 2rem; margin-bottom: 16px; }
-        .cta-box p { font-size: 1.125rem; margin-bottom: 32px; }
-        .btn-cta { display: inline-block; background: linear-gradient(135deg, #EA1279, #A434E5); color: white; padding: 16px 48px; border-radius: 50px; font-size: 1.125rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
-        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(234, 18, 121, 0.4); }
-        .warning-box { background: rgba(255, 59, 48, 0.1); border: 1px solid rgba(255, 59, 48, 0.3); border-radius: 16px; padding: 24px; margin: 32px 0; }
-        .warning-box strong { color: #ff3b30; }
-        @media (max-width: 768px) { .blog-hero { padding: 100px 20px 60px; } .blog-content { padding: 0 20px 80px; } .blog-content h2 { font-size: 1.5rem; } .blog-content h3 { font-size: 1.25rem; } .method-box { padding: 24px; } .cta-box { padding: 32px 24px; } }
+        /* Page-specific custom styling - inline as these are unique to this post */
+        .method-box {
+            background: rgba(198, 163, 79, 0.08);
+            border: 1px solid rgba(198, 163, 79, 0.25);
+            border-radius: var(--radius);
+            padding: calc(var(--space-unit) * 4);
+            margin: calc(var(--space-unit) * 5) 0;
+        }
+        .method-box h4 {
+            font-size: clamp(1.125rem, 2.5vw, 1.25rem);
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: calc(var(--space-unit) * 2);
+            color: var(--color-primary);
+        }
+        .success-rate {
+            display: inline-block;
+            background: rgba(198, 163, 79, 0.2);
+            color: var(--color-primary);
+            padding: calc(var(--space-unit) * 0.75) calc(var(--space-unit) * 2);
+            border-radius: 20px;
+            font-size: 0.875rem;
+            font-weight: var(--font-weight-semibold);
+            margin-bottom: calc(var(--space-unit) * 1.5);
+        }
+        .cta-box {
+            background: linear-gradient(135deg, rgba(198, 163, 79, 0.15), rgba(198, 163, 79, 0.08));
+            border: 2px solid rgba(198, 163, 79, 0.3);
+            border-radius: var(--radius);
+            padding: calc(var(--space-unit) * 6);
+            text-align: center;
+            margin: calc(var(--space-unit) * 7.5) 0;
+        }
+        .cta-box h3 {
+            font-size: clamp(1.5rem, 4vw, 2rem);
+            margin-bottom: calc(var(--space-unit) * 2);
+            color: var(--color-text-primary);
+        }
+        .cta-box p {
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            margin-bottom: calc(var(--space-unit) * 4);
+            color: var(--color-text-secondary);
+        }
+        .btn-cta {
+            display: inline-block;
+            background: var(--color-primary);
+            color: var(--color-bg-primary);
+            padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+            border-radius: 50px;
+            font-size: clamp(1rem, 2.5vw, 1.125rem);
+            font-weight: var(--font-weight-semibold);
+            text-decoration: none;
+            transition: all var(--transition-fast);
+            box-shadow: 0 4px 16px rgba(198, 163, 79, 0.2);
+        }
+        .btn-cta:hover {
+            transform: translateY(-2px);
+            box-shadow: 0 6px 24px rgba(198, 163, 79, 0.3);
+        }
+        .warning-box {
+            background: rgba(255, 59, 48, 0.1);
+            border: 1px solid rgba(255, 59, 48, 0.3);
+            border-left: 4px solid #ff3b30;
+            border-radius: var(--radius);
+            padding: calc(var(--space-unit) * 3);
+            margin: calc(var(--space-unit) * 4) 0;
+        }
+        .warning-box strong {
+            color: #ff3b30;
+        }
+        @media (max-width: 480px) {
+            .method-box {
+                padding: calc(var(--space-unit) * 3);
+            }
+            .cta-box {
+                padding: calc(var(--space-unit) * 4);
+            }
+        }
     </style>
 </head>
 <body>

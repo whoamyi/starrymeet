@@ -7,116 +7,23 @@
     <meta property="og:title" content="StarryMeet Blog - Your Guide to Meeting Celebrities">
     <meta property="og:description" content="Everything you need to know about meeting celebrities—from costs and logistics to what to say and how to stand out. Real advice from people who've made it happen.">
     <title>Blog - StarryMeet</title>
-    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/blog.css">
     <script src="../js/shared.js"></script>
     <style>
-        body { background: var(--bg-primary); }
-        #navbar { position: sticky; top: 0; z-index: 1000; }
-
-        .blog-hero {
-            padding: 140px 24px 80px;
-            margin-top: var(--nav-height);
-            text-align: center;
-            max-width: 900px;
-            margin-left: auto;
-            margin-right: auto;
-        }
-
-        .blog-hero h1 {
-            font-size: clamp(2.5rem, 6vw, 4rem);
-            font-weight: 700;
-            margin-bottom: 20px;
-            line-height: 1.1;
-        }
-
-        .blog-hero p {
-            font-size: 1.25rem;
-            opacity: 0.8;
-            max-width: 600px;
-            margin: 0 auto;
-            line-height: 1.6;
-        }
-
-        .blog-container {
-            max-width: 1200px;
-            margin: 0 auto;
-            padding: 0 24px 100px;
-        }
-
-        .blog-grid {
-            display: grid;
-            grid-template-columns: repeat(auto-fill, minmax(350px, 1fr));
-            gap: 32px;
-            margin-top: 60px;
-        }
-
-        .blog-card {
-            background: rgba(234, 18, 121, 0.03);
-            border: 1px solid rgba(234, 18, 121, 0.1);
-            border-radius: 20px;
-            padding: 32px;
-            transition: all 0.3s ease;
-            text-decoration: none;
-            display: block;
-        }
-
-        .blog-card:hover {
-            transform: translateY(-4px);
-            border-color: rgba(234, 18, 121, 0.3);
-            background: rgba(234, 18, 121, 0.05);
-            box-shadow: 0 12px 32px rgba(234, 18, 121, 0.3);
-        }
-
-        .blog-card-category {
-            display: inline-block;
-            background: rgba(234, 18, 121, 0.15);
-            color: var(--primary);
-            padding: 6px 16px;
-            border-radius: 20px;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            margin-bottom: 16px;
-        }
-
-        .blog-card h2 {
-            font-size: 1.5rem;
-            font-weight: 700;
-            margin-bottom: 12px;
-            line-height: 1.3;
-            color: #ffffff;
-        }
-
-        .blog-card-excerpt {
-            font-size: 1rem;
-            line-height: 1.6;
-            opacity: 0.8;
-            margin-bottom: 20px;
-        }
-
-        .blog-card-meta {
-            display: flex;
-            align-items: center;
-            gap: 16px;
-            font-size: 0.875rem;
-            opacity: 0.6;
-        }
-
+        /* Featured post specific styling - inline as it's unique to index */
         .featured-post {
             grid-column: 1 / -1;
-            background: linear-gradient(135deg, rgba(234, 18, 121, 0.08), rgba(164, 52, 229, 0.08));
-            border: 2px solid rgba(234, 18, 121, 0.3);
+            background: linear-gradient(135deg, rgba(198, 163, 79, 0.12), rgba(198, 163, 79, 0.06));
+            border: 2px solid rgba(198, 163, 79, 0.3);
         }
 
         .featured-post h2 {
-            font-size: 2rem;
+            font-size: clamp(1.5rem, 4vw, 2rem);
         }
 
         @media (max-width: 768px) {
-            .blog-hero { padding: 100px 20px 60px; }
-            .blog-container { padding: 0 20px 80px; }
-            .blog-grid { grid-template-columns: 1fr; gap: 24px; }
             .featured-post { grid-column: 1; }
-            .blog-card { padding: 24px; }
         }
     </style>
 </head>

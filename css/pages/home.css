@@ -853,3 +853,149 @@ html, body {
     font-size: 2.5rem;
   }
 }
+
+/* ========================================
+   RESPONSIVE - MOBILE SMALL
+   ======================================== */
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 2) calc(var(--space-unit) * 3);
+    min-height: 40vh;
+  }
+
+  .hero h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    margin-bottom: calc(var(--space-unit) * 3);
+  }
+
+  .search-input {
+    padding: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 2.5);
+    font-size: 15px;
+  }
+
+  .categories-section,
+  .bottom-categories-section {
+    padding: calc(var(--space-unit) * 3) 0 calc(var(--space-unit) * 6);
+  }
+
+  .categories-section h2,
+  .bottom-categories-section h2,
+  .section-header h2 {
+    font-size: clamp(1.5rem, 6vw, 2rem);
+    margin-bottom: calc(var(--space-unit) * 4);
+  }
+
+  .categories-nav,
+  .occasions-nav,
+  .steps-nav,
+  .carousel-nav {
+    padding: 0 calc(var(--space-unit) * 1.5);
+  }
+
+  .category-bubble {
+    flex: 0 0 100px;
+  }
+
+  .category-image {
+    width: 100px;
+    height: 100px;
+  }
+
+  .category-name {
+    font-size: 12px;
+  }
+
+  .occasion-card {
+    flex: 0 0 240px;
+    padding: calc(var(--space-unit) * 2.5);
+  }
+
+  .occasion-icon {
+    font-size: 2rem;
+  }
+
+  .occasion-title {
+    font-size: 1rem;
+  }
+
+  .occasion-description {
+    font-size: 13px;
+  }
+
+  .step-card {
+    flex: 0 0 220px;
+    padding: calc(var(--space-unit) * 2.5);
+  }
+
+  .step-number {
+    font-size: 2rem;
+  }
+
+  .step-title {
+    font-size: 1rem;
+  }
+
+  .step-description {
+    font-size: 13px;
+  }
+
+  .top-ten-card,
+  .quick-meet-card {
+    flex: 0 0 200px;
+    padding: calc(var(--space-unit) * 1.5);
+  }
+
+  .review-card {
+    flex: 0 0 300px;
+    padding: calc(var(--space-unit) * 2.5);
+  }
+
+  .review-avatar {
+    width: 40px;
+    height: 40px;
+    font-size: 1rem;
+  }
+
+  .review-reviewer {
+    font-size: 0.9375rem;
+  }
+
+  .review-title {
+    font-size: 1rem;
+  }
+
+  .review-text {
+    font-size: 0.875rem;
+  }
+
+  .carousel-arrow,
+  .categories-arrow,
+  .occasions-arrow,
+  .steps-arrow {
+    width: 36px;
+    height: 36px;
+    font-size: 18px;
+  }
+
+  .features-grid {
+    gap: calc(var(--space-unit) * 2.5);
+  }
+
+  .feature-card {
+    padding: calc(var(--space-unit) * 3);
+  }
+
+  .feature-icon {
+    font-size: 2rem;
+    margin-bottom: calc(var(--space-unit) * 2);
+  }
+
+  .feature-title {
+    font-size: 1.125rem;
+  }
+
+  .feature-description {
+    font-size: 0.875rem;
+  }
+}

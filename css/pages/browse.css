@@ -571,3 +571,73 @@
     font-size: 13px;
   }
 }
+
+/* ========================================
+   RESPONSIVE - MOBILE SMALL
+   ======================================== */
+
+@media (max-width: 480px) {
+  .main-container {
+    padding: 0 calc(var(--space-unit) * 1.5);
+  }
+
+  .hero-section {
+    margin: 0 calc(var(--space-unit) * -1.5) calc(var(--space-unit) * 2.5);
+    padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 1.5);
+  }
+
+  .hero-section h1 {
+    font-size: clamp(1.75rem, 8vw, 2.5rem);
+    margin-bottom: calc(var(--space-unit) * 2);
+  }
+
+  .hero-section p {
+    font-size: 0.9375rem;
+    margin-bottom: calc(var(--space-unit) * 2.5);
+  }
+
+  .celebrities-grid {
+    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  .filters-container {
+    padding: calc(var(--space-unit) * 1.5);
+  }
+
+  .filter-group h3 {
+    font-size: 0.9375rem;
+  }
+
+  .filter-checkbox-label {
+    font-size: 0.875rem;
+  }
+
+  .results-bar {
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  .results-count {
+    font-size: 13px;
+  }
+
+  .view-btn {
+    width: 36px;
+    height: 36px;
+  }
+
+  .sort-dropdown {
+    font-size: 13px;
+  }
+
+  .pagination {
+    gap: calc(var(--space-unit) * 0.5);
+  }
+
+  .pagination-btn {
+    min-width: 32px;
+    height: 32px;
+    font-size: 12px;
+    padding: 0 calc(var(--space-unit) * 1);
+  }
+}
