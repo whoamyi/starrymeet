@@ -774,59 +774,88 @@
    ======================================== */
 
 @media (max-width: 768px) {
-  .main-container {
-    flex-direction: column;
-    padding: 0 calc(var(--space-unit) * 2);
+  /* ========================================
+     MOBILE TABLET LAYOUT (768px)
+     Touch-optimized, bottom sheet filters
+     ======================================== */
+
+  body {
+    padding-bottom: calc(var(--space-unit) * 8);
   }
 
+  .main-container {
+    flex-direction: column;
+    padding: 0;
+    gap: 0;
+  }
+
+  /* ===== FILTER SIDEBAR - BOTTOM SHEET STYLE ===== */
   .filter-sidebar {
     position: fixed;
-    top: 0;
+    top: auto;
     left: 0;
     bottom: 0;
-    width: 85vw;
-    max-width: 320px;
+    right: 0;
+    width: 100%;
+    max-width: 100%;
+    max-height: 80vh;
     z-index: 3000;
-    transform: translateX(-100%);
-    transition: transform 0.3s ease;
-    max-height: 100vh;
-    border-radius: 0;
+    transform: translateY(100%);
+    transition: transform 0.35s cubic-bezier(0.4, 0, 0.2, 1);
+    border-radius: calc(var(--radius) * 2) calc(var(--radius) * 2) 0 0;
     border: none;
-    border-right: 1px solid rgba(255, 255, 255, 0.06);
+    border-top: 2px solid var(--color-primary);
+    box-shadow: 0 -8px 32px rgba(0, 0, 0, 0.6);
+    overflow-y: auto;
   }
 
   .filter-sidebar.active {
-    transform: translateX(0);
+    transform: translateY(0);
   }
 
   .filter-header {
+    position: sticky;
+    top: 0;
+    z-index: 10;
     display: flex;
-    justify-content: space-between;
+    flex-direction: column;
     align-items: center;
     padding: calc(var(--space-unit) * 2);
-    margin: calc(var(--space-unit) * -3) calc(var(--space-unit) * -3) calc(var(--space-unit) * 2);
+    margin: 0;
+    background: var(--color-bg-secondary);
     border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   }
 
   .filter-drag-handle {
-    width: 40px;
-    height: 4px;
-    background: rgba(255, 255, 255, 0.2);
-    border-radius: 2px;
+    width: 48px;
+    height: 5px;
+    background: rgba(255, 255, 255, 0.3);
+    border-radius: 999px;
+    margin-bottom: calc(var(--space-unit) * 2);
+    cursor: grab;
   }
 
   .filter-header-close {
-    background: transparent;
-    border: none;
+    position: absolute;
+    top: calc(var(--space-unit) * 2);
+    right: calc(var(--space-unit) * 2);
+    background: rgba(255, 255, 255, 0.05);
+    border: 1px solid rgba(255, 255, 255, 0.1);
+    border-radius: 50%;
     color: var(--color-text-primary);
-    font-size: 32px;
+    font-size: 24px;
     cursor: pointer;
-    padding: 0;
-    width: 32px;
-    height: 32px;
+    width: 44px;
+    height: 44px;
     display: flex;
     align-items: center;
     justify-content: center;
+    transition: all 0.2s ease;
+  }
+
+  .filter-header-close:active {
+    background: rgba(255, 255, 255, 0.1);
+    transform: scale(0.95);
   }
 
   .filter-overlay {
@@ -836,182 +865,267 @@
     left: 0;
     right: 0;
     bottom: 0;
-    background: rgba(0, 0, 0, 0.7);
+    background: rgba(0, 0, 0, 0.75);
     z-index: 2999;
+    backdrop-filter: blur(4px);
   }
 
   .filter-overlay.active {
     display: block;
   }
 
-  .hero-section {
-    margin: 0 calc(var(--space-unit) * -2) calc(var(--space-unit) * 3);
-    padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 2);
+  .filters-container {
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
   }
 
-  .filters-container {
+  /* ===== RESULTS TOOLBAR - STICKY ===== */
+  .results-toolbar {
+    position: sticky;
+    top: 0;
+    z-index: 100;
+    padding: calc(var(--space-unit) * 2);
+    gap: calc(var(--space-unit) * 2);
+    background: var(--color-bg-primary);
+    border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+    flex-wrap: wrap;
+    margin: 0;
+  }
+
+  .toolbar-left {
+    flex: 1 1 100%;
+    order: 1;
+    justify-content: space-between;
+    align-items: center;
+  }
+
+  .results-count {
+    font-size: 0.9375rem;
+    font-weight: 600;
+  }
+
+  .toolbar-controls {
+    flex: 1 1 100%;
+    order: 2;
+    gap: calc(var(--space-unit) * 1.5);
+  }
+
+  /* Touch-friendly buttons (min 44px) */
+  .view-btn,
+  .search-toggle-btn,
+  .filter-toggle-btn {
+    min-width: 44px;
+    min-height: 44px;
+    width: 44px;
+    height: 44px;
+    font-size: 18px;
+    border-radius: calc(var(--radius) * 0.75);
+    transition: all 0.2s ease;
+  }
+
+  .view-btn:active,
+  .search-toggle-btn:active,
+  .filter-toggle-btn:active {
+    transform: scale(0.95);
+  }
+
+  .sort-dropdown,
+  .map-btn {
+    flex: 1;
+    min-height: 44px;
+    padding: 0 calc(var(--space-unit) * 2);
+    font-size: 0.9375rem;
+    border-radius: calc(var(--radius) * 0.75);
+  }
+
+  /* ===== SEARCH BAR - FULL WIDTH ===== */
+  .expandable-search {
+    margin: 0 calc(var(--space-unit) * 2) calc(var(--space-unit) * 2);
+  }
+
+  .search-bar {
+    padding: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 2);
+    border-radius: calc(var(--radius) * 1);
+  }
+
+  .search-bar input {
+    font-size: 1rem;
+  }
+
+  /* ===== CELEBRITY GRID - 2 COLUMN ===== */
+  .celebrities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--space-unit) * 2);
     padding: calc(var(--space-unit) * 2);
   }
 
-  .filters-grid {
-    grid-template-columns: 1fr;
+  /* ===== CELEBRITY CARDS - MOBILE OPTIMIZED ===== */
+  .celebrity-card {
+    padding: calc(var(--space-unit) * 2);
+    border-radius: calc(var(--radius) * 1);
+    transition: all 0.2s ease;
+    -webkit-tap-highlight-color: transparent;
   }
 
-  .results-bar {
-    flex-direction: column;
-    align-items: flex-start;
+  .celebrity-card:active {
+    transform: scale(0.98);
   }
 
-  .celebrities-grid {
-    grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
-    gap: calc(var(--space-unit) * 2);
+  .celebrity-card-image-container {
+    margin-bottom: calc(var(--space-unit) * 2);
+    aspect-ratio: 1;
   }
 
-  /* Toolbar mobile adjustments */
+  .celebrity-card-image {
+    font-size: 3rem;
+  }
+
+  .celebrity-card-tier {
+    font-size: 11px;
+    padding: 4px 10px;
+    top: 10px;
+    left: 10px;
+  }
+
+  .celebrity-card-verified {
+    width: 28px;
+    height: 28px;
+    font-size: 14px;
+    top: 10px;
+    right: 10px;
+  }
+
+  .celebrity-card-content {
+    gap: calc(var(--space-unit) * 1);
+  }
+
+  .celebrity-card-name {
+    font-size: 1.125rem;
+    line-height: 1.3;
+  }
+
+  .celebrity-card-category,
+  .celebrity-card-location {
+    font-size: 0.875rem;
+  }
+
+  .celebrity-card-rating {
+    font-size: 0.8125rem;
+  }
+
+  .celebrity-card-footer {
+    margin-top: calc(var(--space-unit) * 1.5);
+    padding-top: calc(var(--space-unit) * 1.5);
+  }
+
+  .celebrity-card-price span:first-child {
+    font-size: 0.8125rem;
+  }
+
+  .celebrity-card-price-value {
+    font-size: 1.125rem;
+  }
+
+  /* ===== PAGINATION - MOBILE FRIENDLY ===== */
+  .pagination {
+    padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2);
+    gap: calc(var(--space-unit) * 1);
+  }
+
+  .pagination-btn {
+    min-width: 44px;
+    height: 44px;
+    font-size: 0.9375rem;
+  }
+
+  .pagination-numbers {
+    gap: calc(var(--space-unit) * 0.75);
+  }
+
+  /* ===== NO RESULTS ===== */
+  .no-results {
+    padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 2);
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE SMALL (480px)
+   Single column, thumb-optimized
+   ======================================== */
+
+@media (max-width: 480px) {
+  /* ===== LAYOUT - SINGLE COLUMN ===== */
+  .main-container {
+    padding: 0;
+  }
+
+  /* ===== TOOLBAR - COMPACT ===== */
   .results-toolbar {
     padding: calc(var(--space-unit) * 1.5);
     gap: calc(var(--space-unit) * 1.5);
   }
 
   .toolbar-left {
-    flex: 1;
-    min-width: 100%;
-    justify-content: space-between;
-  }
-
-  .toolbar-controls {
-    flex: 1;
-    min-width: 100%;
-    justify-content: space-between;
-  }
-
-  .sort-dropdown {
-    flex: 1;
-    min-width: auto;
-    padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 1.5);
-  }
-
-  .map-btn {
-    flex: 1;
-    justify-content: center;
-    padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 1.5);
-  }
-
-  .results-count {
-    font-size: 13px;
-  }
-
-  .view-btn,
-  .search-toggle-btn {
-    width: 36px;
-    height: 36px;
-    font-size: 16px;
-  }
-
-  /* Celebrity card mobile adjustments */
-  .celebrity-card {
-    padding: calc(var(--space-unit) * 1.5);
-  }
-
-  .celebrity-card-name {
-    font-size: 1.125rem;
-  }
-
-  .celebrity-card-category,
-  .celebrity-card-location,
-  .celebrity-card-rating {
-    font-size: 0.8125rem;
-  }
-
-  .celebrity-card-price {
-    font-size: 0.8125rem;
-  }
-
-  .celebrity-card-price-value {
-    font-size: 1rem;
-  }
-
-  .celebrity-card-tier {
-    font-size: 10px;
-    padding: 3px 8px;
-  }
-
-  .celebrity-card-verified {
-    width: 24px;
-    height: 24px;
-    font-size: 12px;
-  }
-
-  .pagination {
-    gap: calc(var(--space-unit) * 0.5);
-  }
-
-  .pagination-btn {
-    min-width: 36px;
-    height: 36px;
-    font-size: 13px;
-  }
-}
-
-/* ========================================
-   RESPONSIVE - MOBILE SMALL
-   ======================================== */
-
-@media (max-width: 480px) {
-  .main-container {
-    padding: 0 calc(var(--space-unit) * 1.5);
-  }
-
-  .hero-section {
-    margin: 0 calc(var(--space-unit) * -1.5) calc(var(--space-unit) * 2.5);
-    padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 1.5);
-  }
-
-  .hero-section h1 {
-    font-size: clamp(1.75rem, 8vw, 2.5rem);
-    margin-bottom: calc(var(--space-unit) * 2);
-  }
-
-  .hero-section p {
-    font-size: 0.9375rem;
-    margin-bottom: calc(var(--space-unit) * 2.5);
-  }
-
-  .celebrities-grid {
-    grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
     gap: calc(var(--space-unit) * 1.5);
   }
 
-  /* Toolbar extra small mobile */
-  .results-toolbar {
-    padding: calc(var(--space-unit) * 1.25);
+  .results-count {
+    font-size: 0.875rem;
   }
 
-  .toolbar-left,
   .toolbar-controls {
-    gap: calc(var(--space-unit) * 1);
+    gap: calc(var(--space-unit) * 1.25);
   }
 
   .view-btn,
-  .search-toggle-btn {
-    width: 32px;
-    height: 32px;
-    font-size: 14px;
+  .search-toggle-btn,
+  .filter-toggle-btn {
+    min-width: 40px;
+    min-height: 40px;
+    width: 40px;
+    height: 40px;
+    font-size: 16px;
   }
 
-  .sort-dropdown {
-    font-size: 13px;
-    padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 1.25);
-  }
-
+  .sort-dropdown,
   .map-btn {
-    font-size: 13px;
-    padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 1.25);
+    font-size: 0.875rem;
+    padding: 0 calc(var(--space-unit) * 1.5);
   }
 
-  /* Celebrity card extra small mobile */
+  /* ===== SEARCH BAR ===== */
+  .expandable-search {
+    margin: 0 calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 1.5);
+  }
+
+  .search-bar {
+    padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 1.5);
+  }
+
+  .search-bar input {
+    font-size: 0.9375rem;
+  }
+
+  /* ===== CELEBRITY GRID - RESPONSIVE COLUMNS ===== */
+  .celebrities-grid {
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--space-unit) * 1.5);
+    padding: calc(var(--space-unit) * 1.5);
+  }
+
+  /* For very small screens, use single column */
+  @supports (width: 100dvw) {
+    @media (max-width: 380px) {
+      .celebrities-grid {
+        grid-template-columns: 1fr;
+        max-width: 340px;
+        margin: 0 auto;
+      }
+    }
+  }
+
+  /* ===== CELEBRITY CARDS - COMPACT ===== */
   .celebrity-card {
-    padding: calc(var(--space-unit) * 1.25);
+    padding: calc(var(--space-unit) * 1.5);
   }
 
   .celebrity-card-image-container {
@@ -1019,38 +1133,102 @@
   }
 
   .celebrity-card-image {
-    font-size: 2.5rem;
+    font-size: 2.75rem;
+  }
+
+  .celebrity-card-tier {
+    font-size: 10px;
+    padding: 3px 8px;
+    top: 8px;
+    left: 8px;
+  }
+
+  .celebrity-card-verified {
+    width: 24px;
+    height: 24px;
+    font-size: 12px;
+    top: 8px;
+    right: 8px;
   }
 
   .celebrity-card-name {
     font-size: 1rem;
+    margin-bottom: calc(var(--space-unit) * 0.75);
   }
 
   .celebrity-card-category,
-  .celebrity-card-location,
+  .celebrity-card-location {
+    font-size: 0.8125rem;
+  }
+
   .celebrity-card-rating {
     font-size: 0.75rem;
   }
 
-  .celebrity-card-price {
+  .celebrity-card-footer {
+    margin-top: calc(var(--space-unit) * 1.25);
+    padding-top: calc(var(--space-unit) * 1.25);
+  }
+
+  .celebrity-card-price span:first-child {
     font-size: 0.75rem;
   }
 
   .celebrity-card-price-value {
+    font-size: 1rem;
+    font-weight: 700;
+  }
+
+  /* ===== PAGINATION - COMPACT ===== */
+  .pagination {
+    padding: calc(var(--space-unit) * 2.5) calc(var(--space-unit) * 1.5);
+    gap: calc(var(--space-unit) * 0.75);
+  }
+
+  .pagination-btn {
+    min-width: 40px;
+    height: 40px;
+    font-size: 0.875rem;
+  }
+
+  .pagination-numbers {
+    gap: calc(var(--space-unit) * 0.5);
+  }
+
+  /* ===== FILTER SIDEBAR - FULL SCREEN ON SMALL MOBILE ===== */
+  .filter-sidebar {
+    max-height: 85vh;
+  }
+
+  .filters-container {
+    padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 4);
+  }
+
+  .filter-group {
+    margin-bottom: calc(var(--space-unit) * 2.5);
+  }
+
+  .filter-header-close {
+    width: 40px;
+    height: 40px;
+    font-size: 20px;
+  }
+
+  /* ===== NO RESULTS ===== */
+  .no-results {
+    padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 2);
+  }
+
+  .no-results-icon {
+    font-size: 3rem;
+  }
+
+  .no-results h3 {
+    font-size: 1.25rem;
+  }
+
+  .no-results p {
     font-size: 0.9375rem;
-  }
-
-  .celebrity-card-tier {
-    font-size: 9px;
-    padding: 2px 6px;
-  }
-
-  .celebrity-card-verified {
-    width: 20px;
-    height: 20px;
-    font-size: 10px;
-    top: 8px;
-    right: 8px;
   }
 
   .celebrity-card-footer {

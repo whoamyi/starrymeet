@@ -966,62 +966,627 @@ body {
     to { transform: rotate(360deg); }
 }
 
-/* Responsive */
+/* ========================================
+   MOBILE TABLET (768px)
+   Stack layout, horizontal pricing scroll
+   ======================================== */
 @media (max-width: 768px) {
+    body {
+        padding-bottom: calc(var(--space-unit) * 10);
+    }
+
+    .container {
+        padding: calc(var(--space-unit) * 2) 0 calc(var(--space-unit) * 8);
+    }
+
+    /* ===== PROFILE HERO - STACKED LAYOUT ===== */
     .profile-hero {
-        grid-template-columns: 1fr;
-        gap: calc(var(--space-unit) * 4);
-    }
-
-    .profile-image, .profile-initials {
-        width: 100%;
-        height: auto;
-        aspect-ratio: 1;
-    }
-
-    .meeting-panels {
-        grid-template-columns: 1fr;
-    }
-
-    .pricing-grid {
-        grid-template-columns: 1fr;
+        display: flex;
+        flex-direction: column;
         gap: calc(var(--space-unit) * 3);
+        padding: calc(var(--space-unit) * 3);
+        background: linear-gradient(180deg, var(--color-bg-secondary) 0%, var(--color-bg-primary) 100%);
+        margin: 0 0 calc(var(--space-unit) * 3);
+        border-radius: 0;
+    }
+
+    .profile-image-container {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        position: relative;
+    }
+
+    .profile-image,
+    .profile-initials {
+        width: 200px;
+        height: 200px;
+        border-radius: calc(var(--radius) * 1.5);
+    }
+
+    .profile-initials {
+        font-size: 4.5rem;
+    }
+
+    .tier-badge {
+        top: calc(var(--space-unit) * 1.5);
+        right: calc(var(--space-unit) * 1.5);
+        padding: calc(var(--space-unit) * 0.75) calc(var(--space-unit) * 1.5);
+        font-size: 0.8125rem;
+    }
+
+    /* ===== PROFILE INFO - CENTERED ===== */
+    .profile-info {
+        text-align: center;
+        align-items: center;
+    }
+
+    .profile-header {
+        flex-direction: column;
+        align-items: center;
+        gap: calc(var(--space-unit) * 1.5);
+        margin-bottom: calc(var(--space-unit) * 2);
     }
 
     .celebrity-name {
         font-size: 2rem;
+        line-height: 1.2;
+        text-align: center;
+    }
+
+    .verified-badge {
+        font-size: 0.875rem;
+        padding: calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1.5);
+    }
+
+    .meta-row {
+        flex-wrap: wrap;
+        justify-content: center;
+        gap: calc(var(--space-unit) * 2);
+        margin-bottom: calc(var(--space-unit) * 2);
+    }
+
+    .meta-item {
+        font-size: 0.9375rem;
+    }
+
+    .bio {
+        font-size: 0.9375rem;
+        line-height: 1.6;
+        text-align: center;
+        margin-bottom: calc(var(--space-unit) * 3);
+    }
+
+    /* ===== SOCIAL PROOF - MOBILE GRID ===== */
+    .social-proof {
+        display: grid;
+        grid-template-columns: repeat(3, 1fr);
+        gap: calc(var(--space-unit) * 2);
+        padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 2);
+        margin: 0 calc(var(--space-unit) * 2);
+        background: rgba(255, 255, 255, 0.02);
+        border: 1px solid rgba(255, 255, 255, 0.06);
+        border-radius: calc(var(--radius) * 1);
+    }
+
+    .stat {
+        text-align: center;
+    }
+
+    .stat-value {
+        font-size: 1.5rem;
+        margin-bottom: calc(var(--space-unit) * 0.75);
+    }
+
+    .stat-label {
+        font-size: 0.8125rem;
+    }
+
+    /* ===== PRICING SECTION - HORIZONTAL SCROLL ===== */
+    .pricing-section {
+        margin: calc(var(--space-unit) * 4) 0;
+        padding: 0 calc(var(--space-unit) * 2);
+    }
+
+    .section-title {
+        font-size: 1.5rem;
+        margin-bottom: calc(var(--space-unit) * 3);
+        padding: 0 calc(var(--space-unit) * 1);
+    }
+
+    .pricing-grid {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--space-unit) * 3);
+    }
+
+    .pricing-category {
+        padding: calc(var(--space-unit) * 2.5);
+    }
+
+    .pricing-category-title {
+        font-size: 1.25rem;
+        margin-bottom: calc(var(--space-unit) * 2);
+    }
+
+    .pricing-packages {
+        display: flex;
+        gap: calc(var(--space-unit) * 2);
+        overflow-x: auto;
+        overflow-y: hidden;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        padding-bottom: calc(var(--space-unit) * 1);
+        margin: 0 calc(var(--space-unit) * -2.5);
+        padding-left: calc(var(--space-unit) * 2.5);
+        padding-right: calc(var(--space-unit) * 2.5);
+    }
+
+    .pricing-packages::-webkit-scrollbar {
+        height: 6px;
+    }
+
+    .pricing-packages::-webkit-scrollbar-track {
+        background: rgba(255, 255, 255, 0.05);
+        border-radius: 3px;
+    }
+
+    .pricing-packages::-webkit-scrollbar-thumb {
+        background: var(--color-primary);
+        border-radius: 3px;
+    }
+
+    .pricing-package {
+        flex: 0 0 85%;
+        scroll-snap-align: start;
+        min-width: 280px;
+        padding: calc(var(--space-unit) * 2.5);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .pricing-package:active {
+        transform: scale(0.98);
+    }
+
+    .pricing-duration {
+        font-size: 1.125rem;
+    }
+
+    .pricing-price {
+        font-size: 1.5rem;
+    }
+
+    /* ===== AVAILABILITY SECTION ===== */
+    .availability-section {
+        padding: 0 calc(var(--space-unit) * 2);
+    }
+
+    .meeting-panels {
+        display: flex;
+        flex-direction: column;
+        gap: calc(var(--space-unit) * 2);
+    }
+
+    .meeting-panel {
+        border-radius: calc(var(--radius) * 1);
+    }
+
+    /* ===== PANEL HEADERS - LARGER TOUCH TARGETS ===== */
+    .panel-header {
+        padding: calc(var(--space-unit) * 2.5);
+        cursor: pointer;
+        -webkit-tap-highlight-color: transparent;
+        min-height: 64px;
+    }
+
+    .panel-header:active {
+        background: rgba(255, 255, 255, 0.04);
+    }
+
+    .panel-icon {
+        width: 48px;
+        height: 48px;
+        font-size: 1.5rem;
+    }
+
+    .panel-title {
+        font-size: 1.125rem;
+    }
+
+    .panel-subtitle {
+        font-size: 0.875rem;
+    }
+
+    .expand-icon {
+        font-size: 1.25rem;
+    }
+
+    /* ===== PANEL CONTENT ===== */
+    .panel-content {
+        padding: calc(var(--space-unit) * 2);
+    }
+
+    .cities-grid {
+        grid-template-columns: repeat(auto-fill, minmax(140px, 1fr));
+        gap: calc(var(--space-unit) * 1.5);
+    }
+
+    .city-card {
+        padding: calc(var(--space-unit) * 2);
+        min-height: 100px;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .city-card:active {
+        transform: scale(0.97);
+    }
+
+    .city-name {
+        font-size: 1rem;
+    }
+
+    .city-country {
+        font-size: 0.8125rem;
+    }
+
+    /* ===== DATE SLOTS ===== */
+    .dates-section {
+        padding: calc(var(--space-unit) * 2);
+    }
+
+    .back-btn {
+        min-height: 44px;
+        padding: calc(var(--space-unit) * 1.25) calc(var(--space-unit) * 2);
+        font-size: 0.9375rem;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .back-btn:active {
+        transform: scale(0.98);
+    }
+
+    .date-slot-card {
+        padding: calc(var(--space-unit) * 2);
+    }
+
+    .time-slots {
+        gap: calc(var(--space-unit) * 1.5);
+    }
+
+    .time-slot {
+        padding: calc(var(--space-unit) * 2);
+        min-height: 80px;
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .time-slot:active {
+        transform: scale(0.98);
+    }
+
+    .time-label {
+        font-size: 1rem;
+    }
+
+    .duration-label {
+        font-size: 0.8125rem;
+    }
+
+    .price-label {
+        font-size: 1.125rem;
+    }
+
+    /* ===== BOOKING BUTTON - STICKY BOTTOM ===== */
+    .booking-action {
+        position: fixed;
+        bottom: 0;
+        left: 0;
+        right: 0;
+        padding: calc(var(--space-unit) * 2);
+        background: var(--color-bg-secondary);
+        border-top: 1px solid rgba(255, 255, 255, 0.06);
+        z-index: 200;
+        box-shadow: 0 -4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .book-btn {
+        width: 100%;
+        min-height: 56px;
+        padding: calc(var(--space-unit) * 2);
+        font-size: 1.063rem;
+        border-radius: calc(var(--radius) * 1);
+        -webkit-tap-highlight-color: transparent;
+    }
+
+    .book-btn:active {
+        transform: scale(0.98);
+    }
+
+    /* ===== EMPTY STATES ===== */
+    .empty-state {
+        padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 2);
+    }
+
+    .empty-state-icon {
+        font-size: 4rem;
+        margin-bottom: calc(var(--space-unit) * 2);
+    }
+
+    .empty-state-text {
+        font-size: 0.9375rem;
     }
 }
 
 /* ========================================
-   RESPONSIVE - MOBILE SMALL
+   MOBILE SMALL (480px)
+   Compact single-column layout
    ======================================== */
 
 @media (max-width: 480px) {
     .container {
-        padding: calc(var(--space-unit) * 3) calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 8);
+        padding: calc(var(--space-unit) * 1.5) 0 calc(var(--space-unit) * 8);
     }
 
+    /* ===== PROFILE HERO - COMPACT ===== */
     .profile-hero {
-        gap: calc(var(--space-unit) * 3);
+        padding: calc(var(--space-unit) * 2.5);
+        gap: calc(var(--space-unit) * 2.5);
     }
 
+    .profile-image,
+    .profile-initials {
+        width: 160px;
+        height: 160px;
+        border-radius: calc(var(--radius) * 1.25);
+    }
+
+    .profile-initials {
+        font-size: 3.5rem;
+    }
+
+    .tier-badge {
+        top: calc(var(--space-unit) * 1);
+        right: calc(var(--space-unit) * 1);
+        padding: calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1.25);
+        font-size: 0.75rem;
+    }
+
+    /* ===== PROFILE INFO ===== */
     .celebrity-name {
-        font-size: clamp(1.75rem, 8vw, 2rem);
+        font-size: clamp(1.5rem, 7vw, 1.875rem);
+        line-height: 1.2;
     }
 
     .verified-badge {
         font-size: 0.75rem;
-        padding: calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1.25);
+        padding: calc(var(--space-unit) * 0.4) calc(var(--space-unit) * 1.25);
     }
 
     .meta-row {
+        gap: calc(var(--space-unit) * 1.5);
         flex-direction: column;
-        align-items: flex-start;
-        gap: calc(var(--space-unit) * 1);
+        align-items: center;
     }
 
     .meta-item {
+        font-size: 0.875rem;
+    }
+
+    .bio {
+        font-size: 0.875rem;
+        line-height: 1.6;
+    }
+
+    /* ===== SOCIAL PROOF - STACKED ===== */
+    .social-proof {
+        grid-template-columns: repeat(3, 1fr);
+        gap: calc(var(--space-unit) * 1.5);
+        padding: calc(var(--space-unit) * 2.5) calc(var(--space-unit) * 1.5);
+        margin: 0 calc(var(--space-unit) * 1.5);
+    }
+
+    .stat-value {
+        font-size: 1.25rem;
+        margin-bottom: calc(var(--space-unit) * 0.5);
+    }
+
+    .stat-label {
+        font-size: 0.75rem;
+    }
+
+    /* ===== PRICING SECTION - FULL WIDTH SCROLL ===== */
+    .pricing-section {
+        margin: calc(var(--space-unit) * 3) 0;
+        padding: 0 calc(var(--space-unit) * 1.5);
+    }
+
+    .section-title {
+        font-size: 1.25rem;
+        margin-bottom: calc(var(--space-unit) * 2.5);
+        padding: 0;
+    }
+
+    .pricing-category {
+        padding: calc(var(--space-unit) * 2);
+    }
+
+    .pricing-category-title {
+        font-size: 1.125rem;
+        margin-bottom: calc(var(--space-unit) * 2);
+    }
+
+    .pricing-packages {
+        margin: 0 calc(var(--space-unit) * -2);
+        padding-left: calc(var(--space-unit) * 2);
+        padding-right: calc(var(--space-unit) * 2);
+    }
+
+    .pricing-package {
+        flex: 0 0 90%;
+        min-width: 260px;
+        padding: calc(var(--space-unit) * 2);
+    }
+
+    .pricing-duration {
+        font-size: 1.063rem;
+    }
+
+    .pricing-price {
+        font-size: 1.375rem;
+    }
+
+    .pricing-description {
+        font-size: 0.8125rem;
+    }
+
+    /* ===== AVAILABILITY SECTION ===== */
+    .availability-section {
+        padding: 0 calc(var(--space-unit) * 1.5);
+    }
+
+    .meeting-panels {
+        gap: calc(var(--space-unit) * 1.5);
+    }
+
+    /* ===== PANEL HEADERS - COMPACT TOUCH TARGETS ===== */
+    .panel-header {
+        padding: calc(var(--space-unit) * 2);
+        min-height: 60px;
+    }
+
+    .panel-header-content {
+        gap: calc(var(--space-unit) * 1.5);
+    }
+
+    .panel-icon {
+        width: 44px;
+        height: 44px;
+        font-size: 1.375rem;
+    }
+
+    .panel-title {
+        font-size: 1.063rem;
+    }
+
+    .panel-subtitle {
+        font-size: 0.8125rem;
+    }
+
+    .expand-icon {
+        font-size: 1.125rem;
+    }
+
+    /* ===== PANEL CONTENT ===== */
+    .panel-content {
+        padding: calc(var(--space-unit) * 1.5);
+    }
+
+    .cities-grid {
+        grid-template-columns: repeat(2, 1fr);
+        gap: calc(var(--space-unit) * 1.25);
+    }
+
+    .city-card {
+        padding: calc(var(--space-unit) * 1.75);
+        min-height: 90px;
+    }
+
+    .city-name {
+        font-size: 0.9375rem;
+    }
+
+    .city-country {
+        font-size: 0.75rem;
+    }
+
+    .slots-indicator {
+        font-size: 0.75rem;
+    }
+
+    /* ===== DATE SLOTS ===== */
+    .dates-section {
+        padding: calc(var(--space-unit) * 1.5);
+    }
+
+    .dates-header {
+        margin-bottom: calc(var(--space-unit) * 2);
+    }
+
+    .selected-city-label {
+        font-size: 0.9375rem;
+    }
+
+    .back-btn {
+        min-height: 40px;
+        padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 1.75);
+        font-size: 0.875rem;
+    }
+
+    .date-slot-card {
+        padding: calc(var(--space-unit) * 1.75);
+        margin-bottom: calc(var(--space-unit) * 1.5);
+    }
+
+    .date-label {
+        font-size: 0.9375rem;
+    }
+
+    .time-slots {
+        gap: calc(var(--space-unit) * 1.25);
+    }
+
+    .time-slot {
+        padding: calc(var(--space-unit) * 1.75);
+        min-height: 72px;
+    }
+
+    .time-label {
+        font-size: 0.9375rem;
+    }
+
+    .duration-label {
+        font-size: 0.75rem;
+    }
+
+    .price-label {
+        font-size: 1.063rem;
+    }
+
+    /* ===== BOOKING BUTTON - FULL WIDTH ===== */
+    .booking-action {
+        padding: calc(var(--space-unit) * 1.75) calc(var(--space-unit) * 1.5);
+    }
+
+    .book-btn {
+        min-height: 52px;
+        padding: calc(var(--space-unit) * 1.75);
+        font-size: 1rem;
+    }
+
+    /* ===== EMPTY STATES ===== */
+    .empty-state {
+        padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 2);
+    }
+
+    .empty-state-icon {
+        font-size: 3.5rem;
+        margin-bottom: calc(var(--space-unit) * 1.5);
+    }
+
+    .empty-state-text {
+        font-size: 0.875rem;
+    }
+
+    /* ===== SINGLE COLUMN FOR VERY SMALL SCREENS ===== */
+    @media (max-width: 380px) {
+        .cities-grid {
+            grid-template-columns: 1fr;
+        }
+
+        .pricing-package {
+            flex: 0 0 95%;
+        }
+
+        .meta-item {
         font-size: 0.875rem;
     }
 
