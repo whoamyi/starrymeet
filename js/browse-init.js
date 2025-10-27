@@ -483,25 +483,37 @@ function displayCelebrities(celebrities) {
         // Convert min_price from dollars to cents for formatPrice
         const price = celeb.min_price ? parseFloat(celeb.min_price) * 100 : 0;
 
+        // Get tier from celebrity data (default to empty if not available)
+        const tier = celeb.tier || '';
+
         return `
-            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug)}'" style="cursor: pointer; transition: transform 0.3s, box-shadow 0.3s;">
-                <div class="celebrity-avatar" style="width: 100%; aspect-ratio: 1; ${avatarStyle} border-radius: 12px; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white; margin-bottom: 16px; position: relative;">
-                    ${celeb.picture_url ? '' : initials}
-                    ${celeb.verified ? '<span style="position: absolute; top: 8px; right: 8px; background: gold; color: black; width: 24px; height: 24px; border-radius: 50%; display: flex; align-items: center; justify-content: center; font-size: 14px;">✓</span>' : ''}
+            <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(celeb.slug)}'">
+                <div class="celebrity-card-image-container">
+                    <div class="celebrity-card-image" style="${avatarStyle}">
+                        ${celeb.picture_url ? '' : initials}
+                    </div>
+                    ${tier ? `<div class="celebrity-card-tier">S-TIER</div>` : ''}
+                    ${celeb.verified ? '<div class="celebrity-card-verified">✓</div>' : ''}
                 </div>
-                <div class="celebrity-info" style="padding: 0 8px;">
-                    <h3 style="font-size: 1.25rem; font-weight: 600; margin-bottom: 8px; overflow: hidden; text-overflow: ellipsis; white-space: nowrap;">${celeb.name}</h3>
-                    <p style="opacity: 0.6; font-size: 0.875rem; margin-bottom: 4px;">${celeb.category || 'Celebrity'}</p>
-                    <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
-                        <span style="opacity: 0.5; font-size: 0.875rem;">📍 ${locationSignal}</span>
+                <div class="celebrity-card-content">
+                    <h3 class="celebrity-card-name">${celeb.name}</h3>
+                    <div class="celebrity-card-category">${celeb.category || 'Celebrity'}</div>
+                    <div class="celebrity-card-location">
+                        <span>📍</span>
+                        <span>${locationSignal}</span>
                     </div>
                     ${rating > 0 ? `
-                    <div style="display: flex; align-items: center; gap: 4px; margin-bottom: 8px;">
-                        <span style="color: gold; font-size: 0.875rem;">★</span>
-                        <span style="opacity: 0.8; font-size: 0.875rem;">${rating.toFixed(1)} (${reviews})</span>
+                    <div class="celebrity-card-rating">
+                        <span class="celebrity-card-star">★</span>
+                        <span class="celebrity-card-rating-text">${rating.toFixed(1)} (${reviews} reviews)</span>
                     </div>
                     ` : ''}
-                    <p style="opacity: 0.6; font-size: 0.875rem; margin: 0;">From ${formatPrice(price)}</p>
+                </div>
+                <div class="celebrity-card-footer">
+                    <div class="celebrity-card-price">
+                        <span>Starting from</span>
+                        <span class="celebrity-card-price-value">${formatPrice(price)}</span>
+                    </div>
                 </div>
             </div>
         `;
