@@ -87,7 +87,8 @@ export const getCelebrityCards = async (req: Request, res: Response) => {
         c.review_count,
         cs.allow_virtual as virtual_available,
         cs.allow_physical as physical_available,
-        c.country
+        c.country,
+        cs.tier
       FROM celebrities_new c
       LEFT JOIN categories cat ON c.category_id = cat.id
       LEFT JOIN celebrity_settings cs ON c.id = cs.celebrity_id

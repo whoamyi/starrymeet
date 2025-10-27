@@ -616,10 +616,28 @@ function updateResultsCount(count) {
 }
 
 /**
+ * Toggle search bar visibility
+ */
+function toggleSearch() {
+    const searchContainer = document.getElementById('expandableSearch');
+    const searchInput = document.getElementById('searchInput');
+
+    if (searchContainer) {
+        searchContainer.classList.toggle('hidden');
+
+        // Focus input when showing search
+        if (!searchContainer.classList.contains('hidden') && searchInput) {
+            setTimeout(() => searchInput.focus(), 100);
+        }
+    }
+}
+
+/**
  * Make functions globally available
  */
 window.filterByCategory = filterByCategory;
 window.searchCelebrities = searchCelebrities;
 window.displayCelebrities = displayCelebrities;
+window.toggleSearch = toggleSearch;
 
 console.log('Browse page initialized with', allCelebrities.length, 'celebrities');
