@@ -37,10 +37,10 @@
     <div class="main-container">
         <!-- Filter Sidebar - Minimalist Design -->
         <aside class="filter-sidebar" id="filterSidebar">
-            <!-- Mobile Header with Drag Handle and Close -->
+            <!-- Mobile Header with Drag Handle -->
             <div class="filter-header" id="filterHeader">
                 <div class="filter-drag-handle"></div>
-                <button class="filter-header-close" onclick="toggleFilters()" aria-label="Close filters">×</button>
+                <h3 class="filter-header-title">Filters</h3>
             </div>
 
             <div class="filter-content">
@@ -266,14 +266,21 @@
 
         // Apply all filters - delegates to browse-init.js
         function applyFilters() {
-            // Use the function from browse-init.js if available
-            if (window.applyAllFilters) {
-                window.applyAllFilters();
+            // Get search input value
+            const searchInput = document.getElementById('searchInput');
+            const searchQuery = searchInput ? searchInput.value.trim() : '';
 
-                // Reset to page 1 and render
-                currentPage = 1;
-                renderCelebrities();
+            // Apply search if there's a query
+            if (searchQuery && window.searchCelebrities) {
+                window.searchCelebrities(searchQuery);
+            } else if (window.applyAllFilters) {
+                // Otherwise apply other filters
+                window.applyAllFilters();
             }
+
+            // Reset to page 1 and render
+            currentPage = 1;
+            renderCelebrities();
         }
 
         // Expose globally for inline event handlers
@@ -874,6 +881,18 @@
             // Focus input when opening
             if (expandableSearch.classList.contains('active')) {
                 setTimeout(() => searchInput.focus(), 300);
+            }
+        };
+
+        window.toggleFilterSection = function(sectionName) {
+            const filterTree = document.querySelector(`[data-section="${sectionName}"]`);
+            const toggleIcon = document.getElementById(sectionName.replace('Section', 'Toggle'));
+
+            if (filterTree) {
+                filterTree.classList.toggle('collapsed');
+                if (toggleIcon) {
+                    toggleIcon.classList.toggle('expanded');
+                }
             }
         };
 
