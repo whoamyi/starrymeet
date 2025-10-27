@@ -5,21 +5,21 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="description" content="Want to be memorable when you meet a celebrity? Here's what actually works—from what to say to what they remember years later.">
     <title>How to Make a Lasting Impression on a Celebrity - StarryMeet</title>
-    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/blog.css">
     <script src="../js/shared.js"></script>
     <style>
-        body { background: var(--bg-primary); }
-        #navbar { position: sticky; top: 0; z-index: 1000; }
-        .blog-hero { padding: 140px 24px 80px; margin-top: var(--nav-height); text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
+        
+        
         .blog-category { display: inline-block; background: rgba(255,255,255,0.1); color: rgba(255,255,255,0.9); padding: 8px 20px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; border: 1px solid rgba(255,255,255,0.2); }
         .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
-        .blog-content { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
-        .blog-content p { font-size: 1.125rem; line-height: 1.8; margin-bottom: 28px; opacity: 0.9; }
-        .blog-content h2 { font-size: 1.875rem; font-weight: 700; margin: 60px 0 24px; }
-        .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 40px 0 20px; }
-        .blog-content ul { margin: 24px 0; padding-left: 28px; }
-        .blog-content li { font-size: 1.125rem; line-height: 1.8; margin-bottom: 16px; opacity: 0.9; }
-        .blog-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(234, 18, 121, 0.3); }
+        
+        
+        
+        
+        
+        
+        
         .quote-box { background: rgba(255,255,255,0.03); border-left: 3px solid rgba(255,255,255,0.2); padding: 24px; margin: 32px 0; font-style: italic; }
         .tip-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.1); border-radius: 16px; padding: 32px; margin: 32px 0; }
         .cta-box { background: rgba(255,255,255,0.03); border: 1px solid rgba(255,255,255,0.15); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0; }
@@ -27,23 +27,7 @@
     </style>
 </head>
 <body>
-    <nav role="navigation" aria-label="Main navigation" id="navbar">
-        <div class="nav-container">
-            <a href="../index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()">☰</button>
-            <ul class="nav-links">
-                <li class="nav-item-categories"><a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
-                    <div class="categories-dropdown" id="categoriesDropdown">
-                        <a href="../browse.html?category=Hollywood">Hollywood</a>
-                        <a href="../browse.html?category=Musicians">Musicians</a>
-                        <a href="../browse.html">View all</a>
-                    </div>
-                </li>
-                <li><a href="../how-it-works.html">How it works</a></li>
-                <li><a href="#" onclick="openAuthModal('login'); return false;">Log in</a></li>
-            </ul>
-        </div>
-    </nav>
+    <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
 
     <div class="blog-hero">
         <span class="blog-category">Fan Strategy</span>
@@ -267,10 +251,7 @@
         </div>
     </article>
 
-    <footer>
-        <div class="footer-bottom">
-            <p class="footer-copyright">© 2025 StarryMeet</p>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
+    <script src="../js/inject-layout.js"></script>
 </body>
 </html>

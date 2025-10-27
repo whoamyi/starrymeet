@@ -320,6 +320,58 @@
 }
 
 /* ========================================
+   BLOG POST - CTA BOXES
+   ======================================== */
+
+.blog-content .cta-box {
+  background: var(--color-bg-primary);
+  border: 2px solid rgba(198, 163, 79, 0.3);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 6);
+  text-align: center;
+  margin: calc(var(--space-unit) * 7.5) 0;
+  box-shadow: 0 4px 20px rgba(198, 163, 79, 0.15);
+}
+
+.blog-content .cta-box h3 {
+  font-size: clamp(1.5rem, 4vw, 2rem);
+  margin: 0 0 calc(var(--space-unit) * 2);
+  color: var(--color-text-primary);
+  font-weight: var(--font-weight-bold);
+}
+
+.blog-content .cta-box p {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  margin-bottom: calc(var(--space-unit) * 4);
+  color: var(--color-text-secondary);
+}
+
+.blog-content .btn-cta {
+  display: inline-block;
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+  border-radius: 50px;
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(198, 163, 79, 0.2);
+  border: none;
+}
+
+.blog-content .btn-cta:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(198, 163, 79, 0.3);
+}
+
+@media (max-width: 480px) {
+  .blog-content .cta-box {
+    padding: calc(var(--space-unit) * 4);
+  }
+}
+
+/* ========================================
    BACK TO BLOG BUTTON
    ======================================== */
 

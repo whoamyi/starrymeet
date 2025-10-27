@@ -7,82 +7,40 @@
     <meta property="og:title" content="Are Celebrity Meet and Greets Worth It? An Honest Answer">
     <meta property="og:description" content="Spent $500 on a 30-second meet & greet and wondering if you got scammed? Here's the brutally honest truth about what's worth your money—and what isn't.">
     <title>Are Celebrity Meet and Greets Worth It? An Honest Answer - StarryMeet</title>
-    <link rel="stylesheet" href="../css/shared.css">
+    <link rel="stylesheet" href="../css/main.css">
+    <link rel="stylesheet" href="../css/pages/blog.css">
     <script src="../js/shared.js"></script>
     <style>
-        body { background: var(--bg-primary); }
-        #navbar { position: sticky; top: 0; z-index: 1000; }
-        .blog-hero { padding: 140px 24px 80px; margin-top: var(--nav-height); text-align: center; max-width: 800px; margin-left: auto; margin-right: auto; }
-        .blog-category { display: inline-block; background: linear-gradient(135deg, #EA1279, #A434E5); color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; }
+        
+        
+        .blog-category { display: inline-block; background: var(--color-primary); color: var(--color-bg-primary); padding: 8px 20px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; } color: white; padding: 8px 20px; border-radius: 50px; font-size: 0.875rem; font-weight: 600; margin-bottom: 24px; }
         .blog-hero h1 { font-size: clamp(2rem, 5vw, 3rem); font-weight: 700; margin-bottom: 20px; line-height: 1.2; }
-        .blog-meta { font-size: 0.9375rem; opacity: 0.7; margin-bottom: 40px; }
-        .blog-content { max-width: 720px; margin: 0 auto; padding: 0 24px 100px; }
-        .blog-content p { font-size: 1.125rem; line-height: 1.8; margin-bottom: 28px; opacity: 0.9; }
-        .blog-content h2 { font-size: 1.875rem; font-weight: 700; margin: 60px 0 24px; }
-        .blog-content h3 { font-size: 1.5rem; font-weight: 600; margin: 40px 0 20px; color: var(--primary); }
-        .blog-content ul, .blog-content ol { margin: 24px 0; padding-left: 28px; }
-        .blog-content li { font-size: 1.125rem; line-height: 1.8; margin-bottom: 16px; opacity: 0.9; }
-        .blog-content a { color: var(--primary); text-decoration: none; border-bottom: 1px solid rgba(234, 18, 121, 0.3); transition: all 0.3s ease; }
-        .blog-content a:hover { border-bottom-color: var(--primary); }
-        .verdict-box { background: rgba(234, 18, 121, 0.05); border: 1px solid rgba(234, 18, 121, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; }
+        
+        
+        
+        
+        
+        
+        
+        
+        
+        .verdict-box { background: rgba(198, 163, 79, 0.05); border: 1px solid rgba(198, 163, 79, 0.2); border-radius: 16px; padding: 32px; margin: 40px 0; }
         .verdict-box h4 { font-size: 1.25rem; font-weight: 600; margin-bottom: 16px; color: var(--primary); }
         .worth-it { display: inline-block; background: rgba(52, 199, 89, 0.15); color: #34c759; padding: 8px 20px; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; }
         .not-worth { display: inline-block; background: rgba(255, 59, 48, 0.15); color: #ff3b30; padding: 8px 20px; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; }
         .maybe-worth { display: inline-block; background: rgba(255, 204, 0, 0.15); color: #ffcc00; padding: 8px 20px; border-radius: 20px; font-size: 0.875rem; font-weight: 600; margin-bottom: 12px; }
-        .callout { background: linear-gradient(135deg, rgba(234, 18, 121, 0.08), rgba(164, 52, 229, 0.08)); border-left: 4px solid var(--primary); padding: 24px 28px; margin: 40px 0; border-radius: 8px; }
+        .callout { background: linear-gradient(135deg, rgba(198, 163, 79, 0.08), rgba(164, 52, 229, 0.08)); border-left: 4px solid var(--primary); padding: 24px 28px; margin: 40px 0; border-radius: 8px; }
         .callout p { margin-bottom: 0; font-style: italic; }
-        .cta-box { background: linear-gradient(135deg, rgba(234, 18, 121, 0.1), rgba(164, 52, 229, 0.1)); border: 2px solid rgba(234, 18, 121, 0.3); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0; }
+        .cta-box { background: linear-gradient(135deg, rgba(198, 163, 79, 0.1), rgba(164, 52, 229, 0.1)); border: 2px solid rgba(198, 163, 79, 0.3); border-radius: 20px; padding: 48px; text-align: center; margin: 60px 0; }
         .cta-box h3 { font-size: 2rem; margin-bottom: 16px; }
         .cta-box p { font-size: 1.125rem; margin-bottom: 32px; }
-        .btn-cta { display: inline-block; background: linear-gradient(135deg, #EA1279, #A434E5); color: white; padding: 16px 48px; border-radius: 50px; font-size: 1.125rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
-        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(234, 18, 121, 0.4); }
-        @media (max-width: 768px) { .blog-hero { padding: 100px 20px 60px; } .blog-content { padding: 0 20px 80px; } .blog-content h2 { font-size: 1.5rem; } .blog-content h3 { font-size: 1.25rem; } .verdict-box { padding: 24px; } .cta-box { padding: 32px 24px; } }
+        .btn-cta { display: inline-block; background: linear-gradient(135deg, #C6A34F, #C6A34F); color: white; padding: 16px 48px; border-radius: 50px; font-size: 1.125rem; font-weight: 600; text-decoration: none; transition: all 0.3s ease; }
+        .btn-cta:hover { transform: translateY(-2px); box-shadow: 0 12px 32px rgba(198, 163, 79, 0.4); }
+        @media (max-width: 768px) {     .verdict-box { padding: 24px; } .cta-box { padding: 32px 24px; } }
     </style>
 </head>
 <body>
-    <nav role="navigation" aria-label="Main navigation" id="navbar">
-        <div class="nav-container">
-            <a href="../index.html" class="logo" style="color: #ffffff;">StarryMeet</a>
-            <button class="hamburger-btn" onclick="toggleMobileMenu()" aria-label="Toggle navigation menu">☰</button>
-            <ul class="nav-links">
-                <li class="nav-item-categories"><a href="#" onclick="event.preventDefault(); toggleCategoriesDropdown()">Categories ▾</a>
-                    <div class="categories-dropdown" id="categoriesDropdown">
-                        <a href="../browse.html?category=Hollywood">Hollywood</a>
-                        <a href="../browse.html?category=Musicians">Musicians</a>
-                        <a href="../browse.html?category=Athletes">Athletes</a>
-                        <a href="../browse.html?category=K-Drama">K-Drama</a>
-                        <a href="../browse.html?category=Business">Business</a>
-                        <a href="../browse.html">View all</a>
-                    </div>
-                </li>
-                <li><a href="../how-it-works.html">How it works</a></li>
-                <li><a href="../for-celebrities.html">Join as star</a></li>
-                <li><a href="#" onclick="openAuthModal('login'); return false;">Log in</a></li>
-            </ul>
-        </div>
-    </nav>
-    <div class="mobile-menu-overlay" id="mobileMenuOverlay" onclick="closeMobileMenu()"></div>
-    <div class="mobile-menu" id="mobileMenu">
-        <div class="mobile-menu-header">
-            <a href="../index.html" class="logo" onclick="closeMobileMenu()">StarryMeet</a>
-            <button class="mobile-menu-close" onclick="closeMobileMenu()">×</button>
-        </div>
-        <ul class="mobile-menu-links">
-            <li class="mobile-menu-categories"><a href="#" onclick="event.preventDefault(); toggleMobileCategoriesSubmenu()">Categories ›</a>
-                <ul class="mobile-submenu" id="mobileSubmenu">
-                    <li><a href="../browse.html?category=Hollywood" onclick="closeMobileMenu()">Hollywood</a></li>
-                    <li><a href="../browse.html?category=K-Drama" onclick="closeMobileMenu()">K-Drama</a></li>
-                    <li><a href="../browse.html?category=Business" onclick="closeMobileMenu()">Business</a></li>
-                    <li><a href="../browse.html?category=Athletes" onclick="closeMobileMenu()">Athletes</a></li>
-                    <li><a href="../browse.html?category=Musicians" onclick="closeMobileMenu()">Musicians</a></li>
-                </ul>
-            </li>
-            <li><a href="../how-it-works.html" onclick="closeMobileMenu()">How it works</a></li>
-            <li><a href="../for-celebrities.html" onclick="closeMobileMenu()">Join as star</a></li>
-            <li><button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="mobileLocaleText">EN | United States | $ USD</span></button></li>
-            <li class="mobile-menu-login-item"><a href="#" onclick="openAuthModal('login'); closeMobileMenu(); return false;" class="mobile-menu-login">Log in</a></li>
-        </ul>
-    </div>
+    <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
 
     <div class="blog-hero">
         <span class="blog-category">Celebrity Experiences</span>
@@ -257,70 +215,7 @@
         </div>
     </article>
 
-    <footer>
-        <div class="footer-main">
-            <div class="footer-newsletter">
-                <h3>Join our mailing list</h3>
-                <p>Be the first to know about the newest stars and best deals on StarryMeet</p>
-                <form class="newsletter-form" onsubmit="event.preventDefault(); alert('Newsletter signup coming soon!');">
-                    <input type="email" placeholder="Your email" required>
-                    <button type="submit" class="btn btn-primary">→</button>
-                </form>
-                <p class="privacy-note">Emails subject to <a href="../privacy.html">privacy policy</a></p>
-                <div class="footer-cta-buttons">
-                    <a href="../for-celebrities.html" class="btn btn-primary">Join as talent</a>
-                    <a href="../contact.html" class="btn btn-outline">Become a partner</a>
-                </div>
-            </div>
-        </div>
-        <div class="footer-columns">
-            <div class="footer-column">
-                <h4>Company</h4>
-                <ul>
-                    <li><a href="../about.html">About</a></li>
-                    <li><a href="../team.html">Team</a></li>
-                    <li><a href="../jobs.html">Jobs</a></li>
-                    <li><a href="index.html">Blog</a></li>
-                    <li><a href="../contact.html">Press</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Support</h4>
-                <ul>
-                    <li><a href="../faq.html">Help</a></li>
-                    <li><a href="../contact.html">Accessibility</a></li>
-                    <li><a href="../terms.html">Refunds & Returns</a></li>
-                </ul>
-            </div>
-            <div class="footer-column">
-                <h4>Shop</h4>
-                <ul>
-                    <li><a href="../browse.html">Gift Cards</a></li>
-                    <li><a href="../for-celebrities.html">For business</a></li>
-                    <li><a href="../browse.html">For kids</a></li>
-                </ul>
-            </div>
-        </div>
-        <div class="footer-bottom">
-            <div class="footer-social">
-                <a href="#" aria-label="Download on App Store">App Store</a>
-                <a href="#" aria-label="Get it on Google Play">Google Play</a>
-                <a href="#" aria-label="Instagram">IG</a>
-                <a href="#" aria-label="TikTok">TT</a>
-                <a href="#" aria-label="Twitter/X">X</a>
-                <a href="#" aria-label="Threads">TH</a>
-                <a href="#" aria-label="Email">EM</a>
-            </div>
-            <p class="footer-copyright">© 2025 StarryMeet</p>
-            <div class="footer-legal">
-                <a href="../terms.html">Terms of Service</a>
-                <a href="../privacy.html">Privacy Policy</a>
-                <a href="../contact.html">Do Not Sell My Personal Information</a>
-            </div>
-            <div class="footer-locale" style="text-align: center; margin-top: 32px;">
-                <button class="locale-btn" onclick="openLocaleModal()">🌐 <span id="footerLocaleText">EN | United States | $ USD</span></button>
-            </div>
-        </div>
-    </footer>
+    <footer class="footer"></footer>
+    <script src="../js/inject-layout.js"></script>
 </body>
 </html>
