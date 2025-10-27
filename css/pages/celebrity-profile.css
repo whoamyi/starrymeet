@@ -360,17 +360,21 @@ body {
 }
 
 .pricing-category {
-    background: var(--color-bg-secondary);
-    border-radius: var(--radius);
+    background: rgba(255, 255, 255, 0.02);
+    border-radius: 22px;
     padding: calc(var(--space-unit) * 3);
-    border: 1px solid rgba(198, 163, 79, 0.1);
+    border: 1px solid rgba(255, 255, 255, 0.04);
+    backdrop-filter: blur(8px);
 }
 
 .pricing-category-title {
-    font-size: 1.5rem;
-    font-weight: 700;
+    font-size: 1.125rem;
+    font-weight: 600;
     margin-bottom: calc(var(--space-unit) * 3);
-    color: var(--color-primary);
+    color: var(--color-text-primary);
+    display: flex;
+    align-items: center;
+    gap: calc(var(--space-unit) * 1);
 }
 
 .pricing-packages {
@@ -380,18 +384,22 @@ body {
 }
 
 .pricing-package {
-    background: rgba(255, 255, 255, 0.02);
+    background: linear-gradient(180deg, rgba(255,255,255,0.01), rgba(255,255,255,0.015));
     border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: calc(var(--radius) * 0.75);
-    padding: calc(var(--space-unit) * 3);
-    transition: all var(--transition-normal);
+    border-radius: 16px;
+    padding: 24px;
+    transition: transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+                border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
     cursor: pointer;
+    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .pricing-package:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: var(--color-primary);
-    transform: translateY(-2px);
+    background: linear-gradient(180deg, rgba(255,255,255,0.02), rgba(255,255,255,0.025));
+    border-color: rgba(197, 168, 115, 0.3);
+    transform: translateY(-4px);
+    box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4), 0 6px 20px rgba(197, 168, 115, 0.08);
 }
 
 .pricing-package-header {
@@ -402,20 +410,24 @@ body {
 }
 
 .pricing-duration {
-    font-size: 1.25rem;
-    font-weight: 700;
+    font-size: 18px;
+    font-weight: 600;
     color: var(--color-text-primary);
 }
 
 .pricing-price {
-    font-size: 1.75rem;
-    font-weight: 700;
-    color: var(--color-primary);
+    font-size: 24px;
+    font-weight: 600;
+    color: #C5A873;
+    background: rgba(197,168,115,0.08);
+    padding: 8px 16px;
+    border-radius: 12px;
+    border: 1px solid rgba(197,168,115,0.12);
 }
 
 .pricing-description {
     color: var(--color-text-secondary);
-    font-size: 0.875rem;
+    font-size: 14px;
     line-height: 1.5;
 }
 
@@ -971,10 +983,6 @@ body {
    Stack layout, horizontal pricing scroll
    ======================================== */
 @media (max-width: 768px) {
-    body {
-        padding-bottom: calc(var(--space-unit) * 10);
-    }
-
     .container {
         padding: calc(var(--space-unit) * 2) 0 calc(var(--space-unit) * 8);
     }

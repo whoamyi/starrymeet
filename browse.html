@@ -437,40 +437,36 @@
             const slug = celeb.slug || encodeURIComponent(celeb.name.toLowerCase().replace(/\s+/g, '-'));
 
             // Get data
-            const category = celeb.category || 'Celebrity';
-            const location = celeb.country || celeb.location || 'Various locations';
-            const rating = parseFloat(celeb.rating) || 0;
-            const reviews = celeb.reviews || 0;
+            const profession = celeb.category || 'Celebrity';
+            const location = celeb.location || celeb.city || 'Virtual';
+            const availableTickets = celeb.availableSlots || celeb.tickets || 0;
             const tier = celeb.tier || '';
+            const isInWatchlist = watchlist.has(celeb.name);
+            const heartIcon = isInWatchlist ? '❤️' : '🤍';
+            const watchlistClass = isInWatchlist ? 'active' : '';
 
             return `
                 <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'">
                     <div class="celebrity-card-image-container">
                         <div class="celebrity-card-image" style="background: ${color};">
-                            ${celeb.imageUrl ? `<img src="${celeb.imageUrl}" alt="${celeb.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: inherit;">` : `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 3rem; font-weight: 700; color: white;">${initials}</div>`}
+                            ${celeb.imageUrl ? `<img src="${celeb.imageUrl}" alt="${celeb.name}" style="width: 100%; height: 100%; object-fit: cover;">` : `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600; color: white; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);">${initials}</div>`}
                         </div>
                         ${tier ? `<div class="celebrity-card-tier">S-TIER</div>` : ''}
                         ${celeb.verified ? '<div class="celebrity-card-verified">✓</div>' : ''}
+                        <button class="celebrity-card-favorite ${watchlistClass}" onclick="event.stopPropagation(); toggleWatchlist('${celeb.name}', this);" title="Add to favorites">
+                            ${heartIcon}
+                        </button>
                     </div>
                     <div class="celebrity-card-content">
                         <h3 class="celebrity-card-name">${celeb.name}</h3>
-                        <div class="celebrity-card-category">${category}</div>
-                        <div class="celebrity-card-location">
-                            <span>📍</span>
-                            <span>${location}</span>
+                        <div class="celebrity-card-category">${profession}</div>
+                        <div class="celebrity-card-availability">
+                            <span>📍 ${location}</span>
+                            <span>🎟️ ${availableTickets}</span>
                         </div>
-                        ${rating > 0 ? `
-                        <div class="celebrity-card-rating">
-                            <span class="celebrity-card-star">★</span>
-                            <span class="celebrity-card-rating-text">${rating.toFixed(1)} (${reviews} reviews)</span>
-                        </div>
-                        ` : ''}
                     </div>
                     <div class="celebrity-card-footer">
-                        <div class="celebrity-card-price">
-                            <span>Starting from</span>
-                            <span class="celebrity-card-price-value">$${(celeb.price || 0).toLocaleString()}</span>
-                        </div>
+                        <div class="celebrity-card-price">$${(celeb.price || 0).toLocaleString()}+</div>
                     </div>
                 </div>
             `;
