@@ -74,48 +74,52 @@
     <!-- Categories Section -->
     <section class="categories-section">
         <h2 class="sr-only">Browse by category</h2>
-        <div class="categories-container">
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Music'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+        <div class="categories-nav">
+            <button class="categories-arrow categories-arrow-left">‹</button>
+            <button class="categories-arrow categories-arrow-right">›</button>
+            <div class="categories-container">
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Music'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Music</p>
                 </div>
-                <p class="category-label">Music</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Sports'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Sports'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Sports</p>
                 </div>
-                <p class="category-label">Sports</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Film & Television'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Film & Television'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Film & TV</p>
                 </div>
-                <p class="category-label">Film & TV</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Digital Creators'">
-                <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                    <div class="category-initials">DC</div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Digital Creators'">
+                    <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="category-initials">DC</div>
+                    </div>
+                    <p class="category-label">Creators</p>
                 </div>
-                <p class="category-label">Creators</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Tech'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Tech'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Business</p>
                 </div>
-                <p class="category-label">Business</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Comedy & Entertainment'">
-                <div class="category-image" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);">
-                    <div class="category-initials">CE</div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Comedy & Entertainment'">
+                    <div class="category-image" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);">
+                        <div class="category-initials">CE</div>
+                    </div>
+                    <p class="category-label">Comedy</p>
                 </div>
-                <p class="category-label">Comedy</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html'">
-                <div class="category-image view-all">
-                    <span class="view-all-text">View all</span>
+                <div class="category-bubble" onclick="window.location.href='browse.html'">
+                    <div class="category-image view-all">
+                        <span class="view-all-text">View all</span>
+                    </div>
+                    <p class="category-label">&nbsp;</p>
                 </div>
-                <p class="category-label">&nbsp;</p>
             </div>
         </div>
     </section>
@@ -123,33 +127,37 @@
     <!-- Occasions Section -->
     <section class="occasions-section">
         <h2>Meet face-to-face for every occasion</h2>
-        <div class="occasions-grid">
-            <div class="occasion-card" style="background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);" onclick="window.location.href='browse.html?occasion=birthday'">
-                <div class="occasion-content">
-                    <p class="occasion-subtitle">Face-to-face for</p>
-                    <h3>Birthdays</h3>
-                    <span class="occasion-emoji">🎂</span>
+        <div class="occasions-nav">
+            <button class="occasions-arrow occasions-arrow-left">‹</button>
+            <button class="occasions-arrow occasions-arrow-right">›</button>
+            <div class="occasions-grid">
+                <div class="occasion-card" style="background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);" onclick="window.location.href='browse.html?occasion=birthday'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Face-to-face for</p>
+                        <h3>Birthdays</h3>
+                        <span class="occasion-emoji">🎂</span>
+                    </div>
                 </div>
-            </div>
-            <div class="occasion-card" style="background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);" onclick="window.location.href='browse.html?occasion=celebration'">
-                <div class="occasion-content">
-                    <p class="occasion-subtitle">Celebrate with your hero</p>
-                    <h3>Life Milestones</h3>
-                    <span class="occasion-emoji">🏆</span>
+                <div class="occasion-card" style="background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);" onclick="window.location.href='browse.html?occasion=celebration'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Celebrate with your hero</p>
+                        <h3>Life Milestones</h3>
+                        <span class="occasion-emoji">🏆</span>
+                    </div>
                 </div>
-            </div>
-            <div class="occasion-card" style="background: linear-gradient(135deg, #FCA5A5 0%, #DC2626 100%);" onclick="window.location.href='browse.html?occasion=fans'">
-                <div class="occasion-content">
-                    <p class="occasion-subtitle">Meet your favorites</p>
-                    <h3>Fan Experiences</h3>
-                    <span class="occasion-emoji">🍂</span>
+                <div class="occasion-card" style="background: linear-gradient(135deg, #FCA5A5 0%, #DC2626 100%);" onclick="window.location.href='browse.html?occasion=fans'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Meet your favorites</p>
+                        <h3>Fan Experiences</h3>
+                        <span class="occasion-emoji">🍂</span>
+                    </div>
                 </div>
-            </div>
-            <div class="occasion-card" style="background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);" onclick="window.location.href='browse.html?occasion=idol'">
-                <div class="occasion-content">
-                    <p class="occasion-subtitle">Make it happen</p>
-                    <h3>Meet Your Idol</h3>
-                    <span class="occasion-emoji">🚀</span>
+                <div class="occasion-card" style="background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);" onclick="window.location.href='browse.html?occasion=idol'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Make it happen</p>
+                        <h3>Meet Your Idol</h3>
+                        <span class="occasion-emoji">🚀</span>
+                    </div>
                 </div>
             </div>
         </div>
@@ -189,46 +197,50 @@
     <section class="how-it-works-section">
         <h2>How StarryMeet works</h2>
         <p class="section-subtitle">Meet your hero in just four steps <a href="how-it-works.html" class="learn-more-link">Learn more</a></p>
-        <div class="steps-grid">
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"></circle>
-                        <path d="m21 21-4.35-4.35"></path>
-                    </svg>
+        <div class="steps-nav">
+            <button class="steps-arrow steps-arrow-left">‹</button>
+            <button class="steps-arrow steps-arrow-right">›</button>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                    <h3>Find your star</h3>
+                    <p>Browse thousands of celebrities offering personalized face-to-face meetings</p>
                 </div>
-                <h3>Find your star</h3>
-                <p>Browse thousands of celebrities offering personalized face-to-face meetings</p>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
-                        <polyline points="14 2 14 8 20 8"></polyline>
-                    </svg>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Book your meeting</h3>
+                    <p>Choose your preferred date, time, and location. Share what you'd like to discuss or celebrate</p>
                 </div>
-                <h3>Book your meeting</h3>
-                <p>Choose your preferred date, time, and location. Share what you'd like to discuss or celebrate</p>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
-                        <polyline points="17 2 12 7 7 2"></polyline>
-                    </svg>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                            <polyline points="17 2 12 7 7 2"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Meet in person</h3>
+                    <p>Connect face-to-face with your celebrity at the scheduled time and place. Create unforgettable memories</p>
                 </div>
-                <h3>Meet in person</h3>
-                <p>Connect face-to-face with your celebrity at the scheduled time and place. Create unforgettable memories</p>
-            </div>
-            <div class="step-card">
-                <div class="step-icon">
-                    <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
-                        <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
-                    </svg>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </div>
+                    <h3>Share your experience</h3>
+                    <p>Capture and share photos from your meeting. Leave a review to help others discover amazing experiences</p>
                 </div>
-                <h3>Share your experience</h3>
-                <p>Capture and share photos from your meeting. Leave a review to help others discover amazing experiences</p>
             </div>
         </div>
     </section>
@@ -250,48 +262,52 @@
     <!-- Bottom Categories -->
     <section class="bottom-categories-section">
         <h2>Categories</h2>
-        <div class="categories-container">
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Actors'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+        <div class="categories-nav">
+            <button class="categories-arrow categories-arrow-left">‹</button>
+            <button class="categories-arrow categories-arrow-right">›</button>
+            <div class="categories-container">
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Actors'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Actors</p>
                 </div>
-                <p class="category-label">Actors</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Musicians</p>
                 </div>
-                <p class="category-label">Musicians</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Athletes'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Athletes'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Athletes</p>
                 </div>
-                <p class="category-label">Athletes</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians&subcategory=K-Pop'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians&subcategory=K-Pop'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">K-Pop</p>
                 </div>
-                <p class="category-label">K-Pop</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Business'">
-                <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
-                    <div class="category-overlay"></div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Business'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Business</p>
                 </div>
-                <p class="category-label">Business</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html?category=Creators'">
-                <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
-                    <div class="category-initials">CR</div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Creators'">
+                    <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="category-initials">CR</div>
+                    </div>
+                    <p class="category-label">Creators</p>
                 </div>
-                <p class="category-label">Creators</p>
-            </div>
-            <div class="category-bubble" onclick="window.location.href='browse.html'">
-                <div class="category-image view-all">
-                    <span class="view-all-text">View all</span>
+                <div class="category-bubble" onclick="window.location.href='browse.html'">
+                    <div class="category-image view-all">
+                        <span class="view-all-text">View all</span>
+                    </div>
+                    <p class="category-label">&nbsp;</p>
                 </div>
-                <p class="category-label">&nbsp;</p>
             </div>
         </div>
     </section>
@@ -321,6 +337,7 @@
 
     <!-- Inject shared components -->
     <script src="js/inject-layout.js"></script>
+    <script src="js/carousel.js"></script>
 
     <script>
         // Celebrity data
