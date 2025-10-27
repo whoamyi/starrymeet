@@ -345,6 +345,88 @@ body {
 }
 
 /* ========================================
+   PRICING PACKAGES
+   ======================================== */
+
+.pricing-section {
+    margin: calc(var(--space-unit) * 6) 0;
+}
+
+.pricing-grid {
+    display: grid;
+    grid-template-columns: repeat(2, 1fr);
+    gap: calc(var(--space-unit) * 4);
+    margin-top: calc(var(--space-unit) * 3);
+}
+
+.pricing-category {
+    background: var(--color-bg-secondary);
+    border-radius: var(--radius);
+    padding: calc(var(--space-unit) * 3);
+    border: 1px solid rgba(198, 163, 79, 0.1);
+}
+
+.pricing-category-title {
+    font-size: 1.5rem;
+    font-weight: 700;
+    margin-bottom: calc(var(--space-unit) * 3);
+    color: var(--color-primary);
+}
+
+.pricing-packages {
+    display: flex;
+    flex-direction: column;
+    gap: calc(var(--space-unit) * 2);
+}
+
+.pricing-package {
+    background: rgba(255, 255, 255, 0.02);
+    border: 1px solid rgba(255, 255, 255, 0.06);
+    border-radius: calc(var(--radius) * 0.75);
+    padding: calc(var(--space-unit) * 3);
+    transition: all var(--transition-normal);
+    cursor: pointer;
+}
+
+.pricing-package:hover {
+    background: rgba(255, 255, 255, 0.04);
+    border-color: var(--color-primary);
+    transform: translateY(-2px);
+}
+
+.pricing-package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    margin-bottom: calc(var(--space-unit) * 2);
+}
+
+.pricing-duration {
+    font-size: 1.25rem;
+    font-weight: 700;
+    color: var(--color-text-primary);
+}
+
+.pricing-price {
+    font-size: 1.75rem;
+    font-weight: 700;
+    color: var(--color-primary);
+}
+
+.pricing-description {
+    color: var(--color-text-secondary);
+    font-size: 0.875rem;
+    line-height: 1.5;
+}
+
+.pricing-empty {
+    text-align: center;
+    padding: calc(var(--space-unit) * 4);
+    color: var(--color-text-muted);
+    font-size: 0.9375rem;
+}
+
+/* ========================================
    RESPONSIVE
    ======================================== */
 
@@ -403,6 +485,19 @@ body {
     border-radius: calc(var(--radius) * 1.15);
     object-fit: cover;
     background: var(--color-bg-secondary);
+}
+
+.profile-initials {
+    width: 280px;
+    height: 280px;
+    border-radius: calc(var(--radius) * 1.15);
+    display: none;
+    align-items: center;
+    justify-content: center;
+    font-size: 6rem;
+    font-weight: 700;
+    color: white;
+    text-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 .tier-badge {
@@ -878,7 +973,7 @@ body {
         gap: calc(var(--space-unit) * 4);
     }
 
-    .profile-image {
+    .profile-image, .profile-initials {
         width: 100%;
         height: auto;
         aspect-ratio: 1;
@@ -886,6 +981,11 @@ body {
 
     .meeting-panels {
         grid-template-columns: 1fr;
+    }
+
+    .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: calc(var(--space-unit) * 3);
     }
 
     .celebrity-name {

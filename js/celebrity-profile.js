@@ -16,6 +16,37 @@ const state = {
     }
 };
 
+// Color palettes for celebrity initials (same as browse page)
+const colorPalettes = [
+    'linear-gradient(135deg, #667eea, #764ba2)',
+    'linear-gradient(135deg, #f093fb, #f5576c)',
+    'linear-gradient(135deg, #4facfe, #00f2fe)',
+    'linear-gradient(135deg, #43e97b, #38f9d7)',
+    'linear-gradient(135deg, #fa709a, #fee140)',
+    'linear-gradient(135deg, #30cfd0, #330867)',
+    'linear-gradient(135deg, #a8edea, #fed6e3)',
+    'linear-gradient(135deg, #ff9a9e, #fecfef)',
+    'linear-gradient(135deg, #ffecd2, #fcb69f)',
+    'linear-gradient(135deg, #ff6e7f, #bfe9ff)'
+];
+
+/**
+ * Get initials from name
+ */
+function getInitials(name) {
+    if (!name) return '??';
+    return name.split(' ').map(n => n[0]).join('').substring(0, 2).toUpperCase();
+}
+
+/**
+ * Get color for celebrity based on name
+ */
+function getColorForCelebrity(name) {
+    if (!name) return colorPalettes[0];
+    const index = name.split('').reduce((acc, char) => acc + char.charCodeAt(0), 0);
+    return colorPalettes[index % colorPalettes.length];
+}
+
 // Initialize on page load
 document.addEventListener('DOMContentLoaded', async () => {
     await loadCelebrityProfile();
@@ -75,6 +106,10 @@ async function loadCelebrityProfile() {
         console.log('🎨 Populating profile section...');
         populateStaticSection(state.celebrity);
 
+        // Populate pricing packages
+        console.log('💰 Populating pricing packages...');
+        populatePricingPackages(state.celebrity);
+
         // Render availability panels
         console.log('📊 Rendering availability panels...');
         renderAvailability('physical');
@@ -94,9 +129,32 @@ async function loadCelebrityProfile() {
 function populateStaticSection(celebrity) {
     // Profile image
     const profileImage = document.getElementById('profile-image');
-    if (profileImage) {
-        profileImage.src = celebrity.picture_url || celebrity.avatar_url || 'images/default-avatar.jpg';
-        profileImage.alt = celebrity.name;
+    const profileImageContainer = document.querySelector('.profile-image-container');
+
+    if (profileImage && profileImageContainer) {
+        if (celebrity.picture_url || celebrity.avatar_url) {
+            // Has image - show img tag
+            profileImage.src = celebrity.picture_url || celebrity.avatar_url;
+            profileImage.alt = celebrity.name;
+            profileImage.style.display = 'block';
+        } else {
+            // No image - show initials with colored background
+            profileImage.style.display = 'none';
+            const initials = getInitials(celebrity.name);
+            const color = getColorForCelebrity(celebrity.name);
+
+            // Create initials div if it doesn't exist
+            let initialsDiv = profileImageContainer.querySelector('.profile-initials');
+            if (!initialsDiv) {
+                initialsDiv = document.createElement('div');
+                initialsDiv.className = 'profile-initials';
+                profileImageContainer.insertBefore(initialsDiv, profileImageContainer.firstChild);
+            }
+
+            initialsDiv.style.background = color;
+            initialsDiv.textContent = initials;
+            initialsDiv.style.display = 'flex';
+        }
     }
 
     // Name
@@ -149,6 +207,78 @@ function populateStaticSection(celebrity) {
         tierBadge.className = `tier-badge tier-${celebrity.tier.toLowerCase()}`;
     }
 }
+
+/**
+ * Populate pricing packages
+ */
+function populatePricingPackages(celebrity) {
+    const virtualPricingContainer = document.getElementById('virtual-pricing');
+    const physicalPricingContainer = document.getElementById('physical-pricing');
+
+    if (!celebrity.pricing) {
+        console.warn('⚠️ No pricing data available');
+        return;
+    }
+
+    // Populate Virtual Pricing
+    if (virtualPricingContainer) {
+        if (celebrity.pricing.virtual && celebrity.pricing.virtual.length > 0) {
+            virtualPricingContainer.innerHTML = celebrity.pricing.virtual.map(pkg => `
+                <div class="pricing-package" onclick="scrollToBookingPanel('virtual')">
+                    <div class="pricing-package-header">
+                        <div class="pricing-duration">${pkg.duration} minutes</div>
+                        <div class="pricing-price">$${pkg.price.toLocaleString()}</div>
+                    </div>
+                    <div class="pricing-description">
+                        Video call session with ${celebrity.name.split(' ')[0]}
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            virtualPricingContainer.innerHTML = '<div class="pricing-empty">No virtual packages available</div>';
+        }
+    }
+
+    // Populate Physical Pricing
+    if (physicalPricingContainer) {
+        if (celebrity.pricing.physical && celebrity.pricing.physical.length > 0) {
+            physicalPricingContainer.innerHTML = celebrity.pricing.physical.map(pkg => `
+                <div class="pricing-package" onclick="scrollToBookingPanel('physical')">
+                    <div class="pricing-package-header">
+                        <div class="pricing-duration">${pkg.duration} minutes</div>
+                        <div class="pricing-price">$${pkg.price.toLocaleString()}</div>
+                    </div>
+                    <div class="pricing-description">
+                        In-person meet & greet with ${celebrity.name.split(' ')[0]}
+                    </div>
+                </div>
+            `).join('');
+        } else {
+            physicalPricingContainer.innerHTML = '<div class="pricing-empty">No physical packages available</div>';
+        }
+    }
+}
+
+/**
+ * Scroll to booking panel and expand it
+ */
+function scrollToBookingPanel(meetingType) {
+    const panel = document.querySelector(`[data-panel="${meetingType}"]`);
+    if (!panel) return;
+
+    // Expand panel if not already expanded
+    if (!panel.classList.contains('expanded')) {
+        panel.click();
+    }
+
+    // Scroll to panel with smooth behavior
+    setTimeout(() => {
+        panel.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    }, 100);
+}
+
+// Make function global for onclick handlers
+window.scrollToBookingPanel = scrollToBookingPanel;
 
 /**
  * Render availability panel for meeting type
