@@ -29,38 +29,62 @@ async function loadCelebrityProfile() {
     const urlParams = new URLSearchParams(window.location.search);
     const slug = urlParams.get('slug');
 
+    console.log('🔍 Loading celebrity profile for slug:', slug);
+
     if (!slug) {
-        console.error('No slug provided');
-        window.location.href = 'browse.html';
+        console.error('❌ No slug provided in URL');
+        showError('No celebrity specified. Redirecting to browse page...');
+        setTimeout(() => {
+            window.location.href = 'browse.html';
+        }, 2000);
         return;
     }
 
     try {
+        console.log('📡 Fetching celebrity profile from API...');
+
+        // Check if API is available
+        if (!window.api || !window.api.getCelebrityProfile) {
+            throw new Error('API not initialized');
+        }
+
         // Load celebrity profile by slug using new API
         const response = await window.api.getCelebrityProfile(slug);
 
+        console.log('📥 API Response:', response);
+
         if (!response.success || !response.data || !response.data.profile) {
-            throw new Error('Celebrity not found');
+            throw new Error(response.error || 'Celebrity not found');
         }
 
         state.celebrity = response.data.profile;
+
+        console.log('✅ Celebrity loaded:', state.celebrity.name);
 
         // Store availability from API response
         if (state.celebrity.availability) {
             state.availability.physical = state.celebrity.availability.physical || [];
             state.availability.virtual = state.celebrity.availability.virtual || [];
+            console.log('📅 Availability loaded:', {
+                physical: state.availability.physical.length,
+                virtual: state.availability.virtual.length
+            });
         }
 
         // Populate static section
+        console.log('🎨 Populating profile section...');
         populateStaticSection(state.celebrity);
 
         // Render availability panels
+        console.log('📊 Rendering availability panels...');
         renderAvailability('physical');
         renderAvailability('virtual');
 
+        console.log('✅ Profile fully loaded!');
+
     } catch (error) {
-        console.error('Error loading profile:', error);
-        showError('Failed to load celebrity profile');
+        console.error('❌ Error loading profile:', error);
+        showError(`Failed to load celebrity profile: ${error.message}`);
     }
 }
 
