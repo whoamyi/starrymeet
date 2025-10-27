@@ -222,11 +222,11 @@ nav.scrolled {
   padding: 0;
   display: flex;
   flex-direction: column;
-  gap: 0;
+  gap: calc(var(--space-unit) * 1.5);
 }
 
 .mobile-menu-links li {
-  border-bottom: 1px solid rgba(255, 255, 255, 0.06);
+  /* No borders - using gap instead */
 }
 
 .mobile-menu-links li a,
@@ -249,6 +249,22 @@ nav.scrolled {
 .mobile-menu-links li button:hover {
   background: rgba(255, 255, 255, 0.02);
   color: var(--color-primary);
+}
+
+/* Locale button styling */
+.mobile-menu-links li button.locale-btn {
+  border: 1px solid rgba(255, 255, 255, 0.1);
+  border-radius: 50px;
+  padding: calc(var(--space-unit) * 1.5) calc(var(--space-unit) * 2);
+}
+
+.mobile-menu-links li button.locale-btn:hover {
+  border-color: rgba(198, 163, 79, 0.3);
+}
+
+/* Login item - extra spacing above */
+.mobile-menu-login-item {
+  margin-top: calc(var(--space-unit) * 4.5);
 }
 
 /* Mobile submenu */
