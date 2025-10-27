@@ -188,25 +188,29 @@ footer {
   /* Keep social links on one line */
   .footer__social {
     gap: calc(var(--space-unit) * 2);
+    flex-wrap: nowrap;
   }
 
   .footer__social a {
     font-size: 13px;
+    white-space: nowrap;
   }
 
   /* Keep legal on one line */
   .footer__legal {
-    gap: 0;
+    gap: calc(var(--space-unit) * 0.5);
     flex-wrap: nowrap;
     font-size: 11px;
   }
 
   .footer__legal span::after {
-    margin: 0 calc(var(--space-unit) * 1);
+    margin-left: calc(var(--space-unit) * 0.75);
+    margin-right: calc(var(--space-unit) * 0.75);
   }
 
   .footer__legal a + a::before {
-    margin-right: calc(var(--space-unit) * 1);
+    margin-left: calc(var(--space-unit) * 0.75);
+    margin-right: calc(var(--space-unit) * 0.75);
   }
 }
 
@@ -227,13 +231,26 @@ footer {
 
   .footer__social {
     gap: calc(var(--space-unit) * 1.5);
+    flex-wrap: nowrap;
   }
 
   .footer__social a {
     font-size: 12px;
+    white-space: nowrap;
   }
 
   .footer__legal {
     font-size: 10px;
+    flex-wrap: nowrap;
+  }
+
+  .footer__legal span::after {
+    margin-left: calc(var(--space-unit) * 0.5);
+    margin-right: calc(var(--space-unit) * 0.5);
+  }
+
+  .footer__legal a + a::before {
+    margin-left: calc(var(--space-unit) * 0.5);
+    margin-right: calc(var(--space-unit) * 0.5);
   }
 }

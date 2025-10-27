@@ -16,9 +16,9 @@ html, body {
 
 .hero {
   background: var(--color-bg-primary);
-  padding: calc(var(--space-unit) * 12) calc(var(--space-unit) * 3);
+  padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 3) calc(var(--space-unit) * 4);
   text-align: center;
-  min-height: 60vh;
+  min-height: 50vh;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -70,7 +70,7 @@ html, body {
 
 .categories-section,
 .bottom-categories-section {
-  padding: calc(var(--space-unit) * 8) 0;
+  padding: calc(var(--space-unit) * 4) 0 calc(var(--space-unit) * 8);
   position: relative;
 }
 
@@ -94,10 +94,13 @@ html, body {
   display: flex;
   gap: calc(var(--space-unit) * 3);
   overflow-x: auto;
+  overflow-y: visible;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: calc(var(--space-unit) * 2) 0;
+  touch-action: pan-x pan-y;
+  cursor: default;
 }
 
 .categories-container::-webkit-scrollbar {
@@ -193,10 +196,13 @@ html, body {
   display: flex;
   gap: calc(var(--space-unit) * 3);
   overflow-x: auto;
+  overflow-y: visible;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: calc(var(--space-unit) * 2) 0;
+  touch-action: pan-x pan-y;
+  cursor: default;
 }
 
 .occasions-grid::-webkit-scrollbar {
@@ -405,10 +411,13 @@ html, body {
   display: flex;
   gap: calc(var(--space-unit) * 4);
   overflow-x: auto;
+  overflow-y: visible;
   scroll-behavior: smooth;
   scrollbar-width: none;
   -ms-overflow-style: none;
   padding: calc(var(--space-unit) * 2) 0;
+  touch-action: pan-x pan-y;
+  cursor: default;
 }
 
 .steps-grid::-webkit-scrollbar {
@@ -418,7 +427,18 @@ html, body {
 .step-card {
   flex: 0 0 280px;
   text-align: center;
-  padding: calc(var(--space-unit) * 3);
+  padding: calc(var(--space-unit) * 4);
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.step-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .step-icon {
@@ -478,8 +498,19 @@ html, body {
 }
 
 .feature-card {
-  padding: calc(var(--space-unit) * 3);
+  padding: calc(var(--space-unit) * 4);
   text-align: center;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  box-shadow: 0 2px 12px rgba(0, 0, 0, 0.15);
+  transition: all var(--transition-fast);
+}
+
+.feature-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+  transform: translateY(-2px);
 }
 
 .feature-card h3 {

@@ -96,53 +96,8 @@ class Carousel {
   }
 
   setupTouchSupport() {
-    let startX = 0;
-    let scrollLeft = 0;
-    let isDragging = false;
-
-    this.container.addEventListener('touchstart', (e) => {
-      startX = e.touches[0].pageX - this.container.offsetLeft;
-      scrollLeft = this.container.scrollLeft;
-      isDragging = true;
-    });
-
-    this.container.addEventListener('touchmove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.touches[0].pageX - this.container.offsetLeft;
-      const walk = (x - startX) * 2;
-      this.container.scrollLeft = scrollLeft - walk;
-    });
-
-    this.container.addEventListener('touchend', () => {
-      isDragging = false;
-    });
-
-    // Also support mouse drag on desktop
-    this.container.addEventListener('mousedown', (e) => {
-      isDragging = true;
-      startX = e.pageX - this.container.offsetLeft;
-      scrollLeft = this.container.scrollLeft;
-      this.container.style.cursor = 'grabbing';
-    });
-
-    this.container.addEventListener('mousemove', (e) => {
-      if (!isDragging) return;
-      e.preventDefault();
-      const x = e.pageX - this.container.offsetLeft;
-      const walk = (x - startX) * 2;
-      this.container.scrollLeft = scrollLeft - walk;
-    });
-
-    this.container.addEventListener('mouseup', () => {
-      isDragging = false;
-      this.container.style.cursor = 'grab';
-    });
-
-    this.container.addEventListener('mouseleave', () => {
-      isDragging = false;
-      this.container.style.cursor = 'grab';
-    });
+    // Touch support is handled by native browser scrolling
+    // Removed custom touch/drag handlers to prevent scroll blocking
   }
 }
 
