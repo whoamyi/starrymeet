@@ -1,0 +1,270 @@
+/* ===================================
+   How It Works Page
+   Black-White-Gold Design System
+   =================================== */
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero {
+  background: var(--color-bg-primary);
+  text-align: center;
+  padding: calc(var(--space-unit) * 12) calc(var(--space-unit) * 3) calc(var(--space-unit) * 8);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 3);
+  line-height: 1.2;
+  color: var(--color-text-primary);
+}
+
+.hero p {
+  font-size: clamp(1.125rem, 2vw, 1.5rem);
+  color: var(--color-text-secondary);
+  max-width: 600px;
+  margin: 0 auto;
+  line-height: 1.5;
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+
+.container {
+  max-width: var(--max-width);
+  margin: 0 auto;
+  padding: 0 calc(var(--space-unit) * 3) calc(var(--space-unit) * 10);
+}
+
+/* ========================================
+   STEPS GRID
+   ======================================== */
+
+.steps-grid {
+  display: grid;
+  gap: calc(var(--space-unit) * 15);
+  margin: calc(var(--space-unit) * 10) 0;
+}
+
+.step {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: calc(var(--space-unit) * 10);
+  align-items: center;
+}
+
+.step:nth-child(even) {
+  direction: rtl;
+}
+
+.step:nth-child(even) > * {
+  direction: ltr;
+}
+
+.step-visual {
+  background: linear-gradient(135deg, rgba(198, 163, 79, 0.08), rgba(198, 163, 79, 0.04));
+  border-radius: var(--radius);
+  aspect-ratio: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgba(198, 163, 79, 0.2);
+  position: relative;
+  overflow: hidden;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.2);
+}
+
+.step-visual::before {
+  content: '';
+  position: absolute;
+  top: -50%;
+  left: -50%;
+  width: 200%;
+  height: 200%;
+  background: radial-gradient(circle, rgba(198, 163, 79, 0.15) 0%, transparent 70%);
+  animation: pulse 4s ease-in-out infinite;
+}
+
+@keyframes pulse {
+  0%, 100% {
+    transform: scale(1);
+    opacity: 0.5;
+  }
+  50% {
+    transform: scale(1.1);
+    opacity: 0.8;
+  }
+}
+
+.step-icon {
+  font-size: 120px;
+  position: relative;
+  z-index: 1;
+}
+
+.step-content h2 {
+  font-size: clamp(1.5rem, 3vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 2);
+  color: var(--color-primary);
+}
+
+.step-content p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--color-text-secondary);
+  margin-bottom: calc(var(--space-unit) * 3);
+}
+
+.features {
+  display: flex;
+  flex-wrap: wrap;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.feature-tag {
+  background: rgba(198, 163, 79, 0.1);
+  border: 1px solid rgba(198, 163, 79, 0.3);
+  padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 2);
+  border-radius: 20px;
+  font-size: 0.9rem;
+  font-weight: var(--font-weight-medium);
+  color: var(--color-primary);
+}
+
+/* ========================================
+   STATS SECTION
+   ======================================== */
+
+.stats-section {
+  background: linear-gradient(135deg, rgba(198, 163, 79, 0.05), rgba(198, 163, 79, 0.02));
+  border: 1px solid rgba(198, 163, 79, 0.15);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 5);
+  margin: calc(var(--space-unit) * 10) 0;
+  text-align: center;
+  box-shadow: 0 4px 20px rgba(0, 0, 0, 0.15);
+}
+
+.stats-section h2 {
+  font-size: 2rem;
+  color: var(--color-text-primary);
+  margin-bottom: calc(var(--space-unit) * 1);
+  font-weight: var(--font-weight-bold);
+}
+
+.stats-section > p {
+  color: var(--color-text-secondary);
+  margin-bottom: 0;
+}
+
+.stats-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  gap: calc(var(--space-unit) * 5);
+  margin-top: calc(var(--space-unit) * 5);
+}
+
+.stat {
+  padding: calc(var(--space-unit) * 2.5);
+}
+
+.stat-number {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-primary);
+  margin-bottom: calc(var(--space-unit) * 1);
+}
+
+.stat-label {
+  font-size: 1rem;
+  color: var(--color-text-secondary);
+}
+
+/* ========================================
+   CTA SECTION
+   ======================================== */
+
+.cta-section {
+  text-align: center;
+  padding: calc(var(--space-unit) * 10) calc(var(--space-unit) * 3);
+  background: linear-gradient(135deg, var(--color-primary), #8B7355);
+  border-radius: var(--radius);
+  margin: calc(var(--space-unit) * 10) 0;
+  box-shadow: 0 8px 32px rgba(198, 163, 79, 0.25);
+}
+
+.cta-section h2 {
+  font-size: clamp(1.5rem, 4vw, 2.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 2);
+  color: var(--color-bg-primary);
+}
+
+.cta-section p {
+  font-size: 1.125rem;
+  color: rgba(10, 10, 10, 0.9);
+  margin-bottom: calc(var(--space-unit) * 4);
+}
+
+.btn-large {
+  background: white;
+  color: var(--color-primary);
+  padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+  border-radius: 50px;
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  text-decoration: none;
+  display: inline-block;
+  transition: all var(--transition-fast);
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.2);
+}
+
+.btn-large:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
+}
+
+/* ========================================
+   RESPONSIVE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+  }
+
+  .step {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-unit) * 5);
+  }
+
+  .step:nth-child(even) {
+    direction: ltr;
+  }
+
+  .steps-grid {
+    gap: calc(var(--space-unit) * 10);
+  }
+
+  .stats-grid {
+    grid-template-columns: 1fr;
+    gap: calc(var(--space-unit) * 4);
+  }
+
+  .cta-section {
+    padding: calc(var(--space-unit) * 7.5) calc(var(--space-unit) * 3);
+  }
+
+  .stats-section {
+    padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 3);
+  }
+
+  .step-icon {
+    font-size: 80px;
+  }
+}

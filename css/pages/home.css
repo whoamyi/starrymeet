@@ -292,6 +292,268 @@ html, body {
   padding: calc(var(--space-unit) * 8) 0;
 }
 
+/* ========================================
+   TOP TEN CELEBRITY CARDS
+   ======================================== */
+
+.top-ten-card {
+  flex: 0 0 280px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 2);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  position: relative;
+  overflow: hidden;
+}
+
+.top-ten-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(198, 163, 79, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.rank-badge {
+  position: absolute;
+  top: calc(var(--space-unit) * 2);
+  right: calc(var(--space-unit) * 2);
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+  padding: calc(var(--space-unit) * 0.5) calc(var(--space-unit) * 1.5);
+  border-radius: 20px;
+  font-size: 12px;
+  font-weight: var(--font-weight-bold);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 0.5);
+}
+
+.rank-number {
+  font-size: 14px;
+}
+
+.rank-icon {
+  font-size: 16px;
+}
+
+.top-ten-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: calc(var(--space-unit) * 2);
+  overflow: hidden;
+}
+
+.celebrity-initials {
+  font-size: 3rem;
+  font-weight: var(--font-weight-bold);
+  color: white;
+  text-shadow: 0 2px 12px rgba(0, 0, 0, 0.3);
+}
+
+.top-ten-info {
+  text-align: center;
+}
+
+.top-ten-name {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 calc(var(--space-unit) * 0.5);
+}
+
+.top-ten-category {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0 0 calc(var(--space-unit) * 2);
+}
+
+.top-ten-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: calc(var(--space-unit) * 2);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.top-ten-price {
+  font-size: 14px;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+.top-ten-rating {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 0.5);
+}
+
+.top-ten-rating .star {
+  color: var(--color-primary);
+  font-size: 16px;
+}
+
+/* ========================================
+   QUICK MEETS CELEBRITY CARDS
+   ======================================== */
+
+.quick-meet-card {
+  flex: 0 0 280px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 2);
+  cursor: pointer;
+  transition: all var(--transition-fast);
+  overflow: hidden;
+}
+
+.quick-meet-card:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(198, 163, 79, 0.3);
+  transform: translateY(-4px);
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.3);
+}
+
+.quick-meet-image {
+  width: 100%;
+  aspect-ratio: 1;
+  border-radius: var(--radius);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: calc(var(--space-unit) * 2);
+  overflow: hidden;
+}
+
+.quick-meet-info {
+  text-align: center;
+}
+
+.quick-meet-name {
+  font-size: 1.125rem;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 calc(var(--space-unit) * 1);
+}
+
+.quick-meet-details {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+  margin: 0 0 calc(var(--space-unit) * 2);
+  line-height: 1.4;
+}
+
+.quick-meet-meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding-top: calc(var(--space-unit) * 2);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
+.quick-meet-rating {
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.quick-meet-price {
+  font-size: 14px;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+}
+
+/* ========================================
+   REVIEW CARDS
+   ======================================== */
+
+.review-card {
+  flex: 0 0 400px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 3);
+  box-shadow: 0 4px 16px rgba(198, 163, 79, 0.08);
+  transition: all var(--transition-fast);
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.review-card:hover {
+  background: rgba(255, 255, 255, 0.03);
+  box-shadow: 0 8px 24px rgba(198, 163, 79, 0.15);
+  transform: translateY(-2px);
+  border-color: rgba(198, 163, 79, 0.2);
+}
+
+.review-header {
+  display: flex;
+  align-items: center;
+  gap: calc(var(--space-unit) * 2);
+}
+
+.review-avatar {
+  width: 48px;
+  height: 48px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, var(--color-primary) 0%, #8B7355 100%);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 1.25rem;
+  font-weight: var(--font-weight-bold);
+  color: var(--color-bg-primary);
+  flex-shrink: 0;
+}
+
+.review-header-info {
+  flex: 1;
+}
+
+.review-reviewer {
+  font-size: 15px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  display: block;
+  margin-bottom: calc(var(--space-unit) * 0.5);
+}
+
+.review-stars {
+  color: var(--color-primary);
+  font-size: 14px;
+  letter-spacing: 2px;
+}
+
+.review-title {
+  font-size: 16px;
+  font-weight: var(--font-weight-semibold);
+  color: var(--color-text-primary);
+  margin: 0 0 calc(var(--space-unit) * 1);
+}
+
+.review-text {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin: 0;
+}
+
+.review-celebrity {
+  font-size: 13px;
+  color: var(--color-primary);
+  font-weight: var(--font-weight-semibold);
+  padding-top: calc(var(--space-unit) * 1.5);
+  border-top: 1px solid rgba(255, 255, 255, 0.06);
+}
+
 .carousel-nav {
   position: relative;
   max-width: var(--max-width);
@@ -576,5 +838,18 @@ html, body {
   .occasions-nav,
   .steps-nav {
     padding: 0 calc(var(--space-unit) * 2);
+  }
+
+  .top-ten-card,
+  .quick-meet-card {
+    flex: 0 0 240px;
+  }
+
+  .review-card {
+    flex: 0 0 340px;
+  }
+
+  .celebrity-initials {
+    font-size: 2.5rem;
   }
 }

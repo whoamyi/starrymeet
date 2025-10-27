@@ -419,11 +419,15 @@
             carousel.innerHTML = reviews.map(review => `
                 <div class="review-card">
                     <div class="review-header">
-                        <div class="review-stars">${'★'.repeat(review.rating)}</div>
-                        <span class="review-reviewer">${review.reviewer}</span>
+                        <div class="review-avatar">${review.reviewer.charAt(0)}</div>
+                        <div class="review-header-info">
+                            <span class="review-reviewer">${review.reviewer}</span>
+                            <div class="review-stars">${'★'.repeat(review.rating)}</div>
+                        </div>
                     </div>
                     <h4 class="review-title">${review.title}</h4>
                     <p class="review-text">${review.text}</p>
+                    <div class="review-celebrity">Meeting with ${review.celebrity}</div>
                 </div>
             `).join('');
         }
