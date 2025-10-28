@@ -1,16 +1,15 @@
 /* ===================================
    Navigation Component
-   Sticky Header with Backdrop Blur
+   Fixed Header (scrolls away, NOT sticky)
    =================================== */
 
 nav {
-  position: sticky;
-  top: 0;
+  position: relative;
   width: 100%;
   background: rgba(10, 10, 10, 0.9);
   backdrop-filter: blur(20px);
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
-  z-index: 1000;
+  z-index: 10;
   transition: all var(--transition-fast);
 }
 

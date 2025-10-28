@@ -1460,12 +1460,19 @@
 /* Toolbar Container - Sticky, Inline Controls */
 .browse-toolbar {
   position: sticky;
-  top: 60px; /* Adjust based on navbar height */
+  top: 0; /* Sticks to top of viewport */
   z-index: 100;
   background: var(--color-bg-primary);
+  backdrop-filter: blur(10px);
   padding: 12px 16px;
   border-bottom: 1px solid rgba(255, 255, 255, 0.06);
   margin-bottom: calc(var(--space-unit) * 3);
+  transition: box-shadow 0.3s ease;
+}
+
+/* Add shadow when scrolled */
+.browse-toolbar.is-scrolled {
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 }
 
 /* Toolbar Controls - All Inline */
@@ -1688,7 +1695,7 @@
   z-index: 2;
 }
 
-/* Follow Button (Replaces Heart) */
+/* Follow Button (Replaces Heart) - With Icon Toggle */
 .card__follow {
   position: absolute;
   top: 8px;
@@ -1703,7 +1710,7 @@
   align-items: center;
   justify-content: center;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: all 0.3s ease;
   z-index: 2;
   padding: 0;
 }
@@ -1714,19 +1721,55 @@
   transform: scale(1.1);
 }
 
-.card__follow.active {
-  background: rgba(212, 165, 116, 0.9);
-  border-color: #D4A574;
+.card__follow:active {
+  transform: scale(0.95);
 }
 
-.follow-icon {
+/* Icon Visibility - Default State */
+.follow-icon--default {
+  display: block;
   stroke: #ffffff;
-  width: 18px;
-  height: 18px;
 }
 
-.card__follow.active .follow-icon {
+.follow-icon--following {
+  display: none;
   stroke: #000000;
+}
+
+/* Following State - Background + Icon Toggle */
+.card__follow.active,
+.card__follow[data-following="true"] {
+  background: rgba(212, 165, 116, 0.95);
+  border-color: rgba(212, 165, 116, 0.5);
+}
+
+.card__follow.active .follow-icon--default,
+.card__follow[data-following="true"] .follow-icon--default {
+  display: none; /* Hide add icon */
+}
+
+.card__follow.active .follow-icon--following,
+.card__follow[data-following="true"] .follow-icon--following {
+  display: block; /* Show checkmark */
+}
+
+.card__follow.active:hover,
+.card__follow[data-following="true"]:hover {
+  background: rgba(212, 165, 116, 1);
+  border-color: rgba(212, 165, 116, 0.8);
+}
+
+/* Animation for follow action */
+@keyframes followPulse {
+  0% {
+    transform: scale(1);
+  }
+  50% {
+    transform: scale(1.2);
+  }
+  100% {
+    transform: scale(1);
+  }
 }
 
 /* Card Body */
@@ -1737,7 +1780,9 @@
   gap: 4px;
   justify-content: center;
   padding: 12px 12px 12px 0;
-  min-width: 0; /* Allow text truncation */
+  min-width: 0; /* CRITICAL: Allow text truncation */
+  overflow: hidden; /* CRITICAL: Prevent text overflow */
+  padding-right: 4px; /* Breathing room */
 }
 
 /* Name + Badge Row */
@@ -1746,6 +1791,7 @@
   align-items: center;
   gap: 6px;
   min-height: 20px; /* Prevent layout shift */
+  overflow: hidden; /* CRITICAL: Prevent overflow */
 }
 
 .card__name {
@@ -1753,7 +1799,7 @@
   font-weight: 600;
   color: var(--color-text-primary);
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.3; /* CRITICAL: Proper line height to prevent cutoff */
 
   /* CRITICAL: Truncate long names */
   white-space: nowrap;
@@ -1776,7 +1822,7 @@
   font-size: 13px;
   color: var(--color-text-secondary);
   margin: 0;
-  line-height: 1.2;
+  line-height: 1.3; /* CRITICAL: Proper line height to prevent cutoff */
 
   /* Truncate if too long */
   white-space: nowrap;
@@ -1784,24 +1830,58 @@
   text-overflow: ellipsis;
 }
 
-/* Meta Row (Location + Availability) */
+/* Meta Row (Location + Availability) - INLINE */
 .card__meta {
   display: flex;
   align-items: center;
-  gap: 6px;
+  gap: 8px;
   font-size: 12px;
   color: var(--color-text-secondary);
-  line-height: 1;
+  line-height: 1.2;
+  flex-wrap: nowrap; /* CRITICAL: Keep on same line */
   overflow: hidden;
-}
-
-.card__divider {
-  opacity: 0.5;
+  margin-top: 4px;
+  margin-bottom: 4px;
 }
 
 .card__location,
 .card__availability {
+  display: flex;
+  align-items: center;
+  gap: 4px;
   white-space: nowrap;
+}
+
+.card__location {
+  flex: 1;
+  min-width: 0; /* Allow truncation */
+  overflow: hidden;
+}
+
+.card__location .meta-text {
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+.card__availability {
+  flex-shrink: 0; /* CRITICAL: Never shrink */
+}
+
+.meta-icon {
+  font-size: 14px;
+  flex-shrink: 0;
+  line-height: 1;
+}
+
+.meta-text {
+  font-size: 12px;
+  line-height: 1;
+}
+
+.card__divider {
+  opacity: 0.5;
+  flex-shrink: 0;
 }
 
 /* Stats Row */
@@ -1810,7 +1890,9 @@
   align-items: center;
   justify-content: space-between;
   margin-top: auto; /* Push to bottom */
+  padding-top: 4px;
   gap: 8px;
+  line-height: 1.2; /* CRITICAL: Prevent cutoff */
 }
 
 .card__rating {
@@ -1821,12 +1903,14 @@
 
 .rating-icon {
   font-size: 14px;
+  line-height: 1;
 }
 
 .rating-value {
   font-size: 14px;
   font-weight: 600;
   color: var(--color-text-primary);
+  line-height: 1; /* Tight line height for numbers */
 }
 
 .card__price {
@@ -1839,6 +1923,7 @@
   font-size: 13px;
   font-weight: 600;
   color: #D4A574;
+  line-height: 1; /* Tight line height for numbers */
 }
 
 /* Desktop card optimizations */

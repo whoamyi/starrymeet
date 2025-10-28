@@ -505,11 +505,16 @@
                         ${celeb.imageUrl ? `<img src="${celeb.imageUrl}" alt="${celeb.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">` : `<div class="card__initials">${initials}</div>`}
                         ${tier ? `<span class="card__tier">${tier}</span>` : ''}
                         <button class="card__follow ${followingClass}" data-following="${isFollowing}" aria-pressed="${isFollowing}" onclick="event.stopPropagation(); toggleFollow('${celeb.name}', this);" title="${isFollowing ? 'Unfollow' : 'Follow'} ${celeb.name}">
-                            <svg class="follow-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <!-- Default Icon: Add Person -->
+                            <svg class="follow-icon follow-icon--default" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
                                 <path d="M16 21v-2a4 4 0 0 0-4-4H6a4 4 0 0 0-4 4v2"/>
                                 <circle cx="9" cy="7" r="4"/>
                                 <line x1="19" y1="8" x2="19" y2="14"/>
                                 <line x1="22" y1="11" x2="16" y2="11"/>
+                            </svg>
+                            <!-- Following Icon: Checkmark -->
+                            <svg class="follow-icon follow-icon--following" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                                <polyline points="20 6 9 17 4 12"/>
                             </svg>
                         </button>
                     </div>
@@ -520,9 +525,15 @@
                         </div>
                         <p class="card__category">${profession}</p>
                         <div class="card__meta">
-                            <span class="card__location">📍 ${location}</span>
+                            <span class="card__location">
+                                <span class="meta-icon">📍</span>
+                                <span class="meta-text">${location}</span>
+                            </span>
                             <span class="card__divider">•</span>
-                            <span class="card__availability">🎟️ ${availableTickets}</span>
+                            <span class="card__availability">
+                                <span class="meta-icon">🎟️</span>
+                                <span class="meta-text">${availableTickets}</span>
+                            </span>
                         </div>
                         <div class="card__stats">
                             ${rating > 0 ? `<div class="card__rating"><span class="rating-icon">⭐</span><span class="rating-value">${rating.toFixed(1)}</span></div>` : '<div class="card__rating"></div>'}
@@ -541,12 +552,20 @@
                 watchlist.delete(name);
                 btn.dataset.following = 'false';
                 btn.classList.remove('active');
+                btn.setAttribute('aria-pressed', 'false');
                 btn.title = `Follow ${name}`;
             } else {
                 watchlist.add(name);
                 btn.dataset.following = 'true';
                 btn.classList.add('active');
+                btn.setAttribute('aria-pressed', 'true');
                 btn.title = `Unfollow ${name}`;
+
+                // Add pulse animation
+                btn.style.animation = 'followPulse 0.3s ease';
+                setTimeout(() => {
+                    btn.style.animation = '';
+                }, 300);
             }
         };
 
