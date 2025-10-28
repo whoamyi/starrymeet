@@ -59,6 +59,13 @@ function checkBioLength() {
 
     if (!bio || !expandBtn) return;
 
+    // Only apply on mobile
+    if (window.innerWidth > 767) {
+        bio.classList.remove('collapsed');
+        expandBtn.style.display = 'none';
+        return;
+    }
+
     // Check if content is longer than 2 lines
     const lineHeight = parseFloat(window.getComputedStyle(bio).lineHeight);
     const maxHeight = lineHeight * 2;
@@ -67,7 +74,7 @@ function checkBioLength() {
     const scrollHeight = bio.scrollHeight;
 
     if (scrollHeight > maxHeight) {
-        expandBtn.style.display = 'block';
+        expandBtn.style.display = 'inline';
     } else {
         expandBtn.style.display = 'none';
         bio.classList.remove('collapsed');
