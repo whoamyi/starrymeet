@@ -7,7 +7,6 @@
     <title>Celebrity Profile - StarryMeet</title>
     <link rel="stylesheet" href="css/main.css">
     <link rel="stylesheet" href="css/pages/celebrity-profile.css">
-    <link rel="stylesheet" href="css/pages/celebrity-profile-instagram.css">
     <script src="js/api.js"></script>
     <script src="js/shared.js"></script>
 </head>
@@ -17,70 +16,45 @@
 
     <main>
     <div class="container">
-        <!-- Instagram-style Profile Header -->
-        <div class="profile-header">
-            <!-- Profile Photo Circle -->
-            <div class="profile-photo-container">
-                <img id="profile-image" class="profile-photo" alt="Celebrity" />
-                <div id="tier-badge" class="tier-badge-circle"></div>
+        <!-- Static Section -->
+        <div class="profile-hero">
+            <div class="profile-image-container">
+                <img id="profile-image" class="profile-image" alt="Celebrity" />
+                <div id="tier-badge" class="tier-badge"></div>
             </div>
 
-            <!-- Profile Info -->
             <div class="profile-info">
-                <div class="profile-name-row">
-                    <h1 id="celebrity-name" class="profile-name"></h1>
-                    <span id="verified-badge" class="verified" style="display:none" title="Verified">✓</span>
+                <div class="profile-header">
+                    <h1 id="celebrity-name" class="celebrity-name"></h1>
+                    <span id="verified-badge" class="verified-badge" style="display:none">✓ Verified</span>
                 </div>
 
-                <div id="category" class="profile-profession"></div>
-
-                <!-- Stats Row -->
-                <div class="profile-stats">
-                    <div class="profile-stat">
-                        <div id="bookings-value" class="profile-stat-value">0</div>
-                        <div class="profile-stat-label">meetings</div>
+                <div class="meta-row">
+                    <div class="meta-item">
+                        <span class="meta-icon">📍</span>
+                        <span id="location"></span>
                     </div>
-                    <div class="profile-stat">
-                        <div id="reviews-value" class="profile-stat-value">0</div>
-                        <div class="profile-stat-label">reviews</div>
-                    </div>
-                    <div class="profile-stat">
-                        <div id="rating-value" class="profile-stat-value">-</div>
-                        <div class="profile-stat-label">rating</div>
+                    <div class="meta-item">
+                        <span class="meta-icon">🎭</span>
+                        <span id="category"></span>
                     </div>
                 </div>
 
-                <!-- Action Buttons -->
-                <div class="profile-actions">
-                    <button class="btn-follow" id="follow-btn" onclick="toggleFollow()">
-                        <span class="btn-text">Follow</span>
-                    </button>
-                    <button class="btn-message" onclick="window.location.href='booking.html'">
-                        Message
-                    </button>
-                    <button class="btn-share" onclick="shareProfile()" aria-label="Share">
-                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <circle cx="18" cy="5" r="3"></circle>
-                            <circle cx="6" cy="12" r="3"></circle>
-                            <circle cx="18" cy="19" r="3"></circle>
-                            <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"></line>
-                            <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"></line>
-                        </svg>
-                    </button>
-                </div>
+                <p id="bio" class="bio"></p>
 
-                <!-- Bio Section -->
-                <div class="profile-bio-section">
-                    <div id="bio" class="profile-bio collapsed"></div>
-                    <button class="bio-expand-btn" id="bio-expand" onclick="toggleBio()" style="display:none">
-                        more
-                    </button>
-                </div>
-
-                <!-- Meta Info (Location) -->
-                <div class="profile-meta">
-                    <span class="meta-icon">📍</span>
-                    <span id="location"></span>
+                <div class="social-proof">
+                    <div class="stat">
+                        <div id="rating-value" class="stat-value">-</div>
+                        <div class="stat-label">Rating</div>
+                    </div>
+                    <div class="stat">
+                        <div id="bookings-value" class="stat-value">-</div>
+                        <div class="stat-label">Meetings</div>
+                    </div>
+                    <div class="stat">
+                        <div id="reviews-value" class="stat-value">-</div>
+                        <div class="stat-label">Reviews</div>
+                    </div>
                 </div>
             </div>
         </div>
@@ -120,7 +94,6 @@
     <!-- Inject shared components -->
     <script src="js/inject-layout.js"></script>
     <script src="js/celebrity-profile-availability.js"></script>
-    <script src="js/celebrity-profile-ui.js"></script>
     <script src="js/celebrity-profile.js"></script>
 </body>
 </html>
