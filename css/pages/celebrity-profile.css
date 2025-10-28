@@ -1807,6 +1807,7 @@ body {
 
 /* ========================================
    INSTAGRAM-STYLE PROFILE HEADER
+   Mobile-first, Desktop-optimized
    ======================================== */
 
 .profile-header-ig {
@@ -2141,9 +2142,11 @@ body {
 
 /* ========================================
    RESPONSIVE - INSTAGRAM STYLE
+   Mobile: Vertical centered
+   Desktop: Horizontal layout
    ======================================== */
 
-/* Mobile (360px-480px) */
+/* Mobile (360px-480px) - Extra compact */
 @media (max-width: 480px) {
     .profile-header-ig {
         padding: 16px 12px 12px;
@@ -2173,60 +2176,168 @@ body {
     }
 }
 
-/* Tablet (721px-1023px) */
-@media (min-width: 721px) and (max-width: 1023px) {
+/* Desktop (721px+) - Horizontal Layout */
+@media (min-width: 721px) {
     .profile-header-ig {
-        max-width: 600px;
+        display: grid;
+        grid-template-columns: 200px 1fr;
+        grid-template-areas:
+            "avatar identity"
+            "avatar category"
+            "avatar stats"
+            "avatar actions"
+            "avatar bio"
+            "avatar location";
+        gap: 0 32px;
+        align-items: start;
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 24px 24px 24px;
+        padding: 40px 32px 32px;
     }
 
+    /* Avatar section - left column */
     .profile-avatar-wrapper {
-        width: 128px;
-        height: 128px;
+        grid-area: avatar;
+        width: 180px;
+        height: 180px;
+        margin: 0;
     }
 
     .profile-avatar-ig {
-        width: 128px;
-        height: 128px;
+        width: 180px;
+        height: 180px;
     }
 
     .profile-initials-ig {
-        font-size: 48px;
+        font-size: 64px;
     }
 
+    /* Identity - right column, left aligned */
+    .profile-identity {
+        grid-area: identity;
+        justify-content: flex-start;
+        margin-bottom: 8px;
+    }
+
+    .profile-name-ig {
+        font-size: 28px;
+    }
+
+    .profile-verified {
+        width: 20px;
+        height: 20px;
+    }
+
+    /* Category - right column, left aligned */
+    .profile-category-ig {
+        grid-area: category;
+        text-align: left;
+        font-size: 16px;
+        margin-bottom: 20px;
+    }
+
+    /* Stats - right column, left aligned */
+    .profile-stats-ig {
+        grid-area: stats;
+        justify-content: flex-start;
+        gap: 40px;
+        border: none;
+        padding: 0;
+        margin-bottom: 20px;
+    }
+
+    .stat-ig {
+        flex-direction: row;
+        gap: 8px;
+        align-items: baseline;
+    }
+
+    .stat-value-ig {
+        font-size: 20px;
+    }
+
+    .stat-label-ig {
+        font-size: 14px;
+    }
+
+    /* Actions - right column */
+    .profile-actions-ig {
+        grid-area: actions;
+        max-width: 400px;
+        margin-bottom: 20px;
+    }
+
+    .btn-action-ig {
+        height: 40px;
+        font-size: 15px;
+    }
+
+    /* Bio - right column, left aligned */
+    .profile-bio-section-ig {
+        grid-area: bio;
+        margin-bottom: 16px;
+    }
+
+    .profile-bio-ig {
+        text-align: left;
+        font-size: 15px;
+        line-height: 1.6;
+    }
+
+    .profile-bio-ig[data-expanded="false"] {
+        max-height: 48px; /* 15px * 1.6 * 2 lines */
+    }
+
+    /* Location - right column, left aligned */
+    .profile-location-ig {
+        grid-area: location;
+        justify-content: flex-start;
+        font-size: 14px;
+        padding-bottom: 0;
+    }
+
+    /* Availability section */
     .availability-section {
-        max-width: 600px;
+        max-width: 1000px;
         margin: 0 auto;
-        padding: 0 24px 24px;
+        padding: 0 32px 40px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin-bottom: 20px;
     }
 }
 
-/* Desktop (1024px+) */
-@media (min-width: 1024px) {
+/* Large Desktop (1200px+) - Wider layout */
+@media (min-width: 1200px) {
     .profile-header-ig {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 32px 32px 32px;
+        grid-template-columns: 220px 1fr;
+        gap: 0 48px;
+        max-width: 1200px;
+        padding: 48px 48px 40px;
     }
 
     .profile-avatar-wrapper {
-        width: 144px;
-        height: 144px;
+        width: 200px;
+        height: 200px;
     }
 
     .profile-avatar-ig {
-        width: 144px;
-        height: 144px;
+        width: 200px;
+        height: 200px;
     }
 
     .profile-initials-ig {
-        font-size: 56px;
+        font-size: 72px;
+    }
+
+    .profile-name-ig {
+        font-size: 32px;
     }
 
     .availability-section {
-        max-width: 600px;
-        margin: 0 auto;
-        padding: 0 32px 24px;
+        max-width: 1200px;
+        padding: 0 48px 48px;
     }
 }
