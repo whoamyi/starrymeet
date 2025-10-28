@@ -430,7 +430,7 @@
             renderCelebrities();
         };
 
-        // Create grid card
+        // Create grid card - Social feed style (row layout on mobile)
         function createGridCard(celeb) {
             const initials = getInitials(celeb.name);
             const color = getColorForCelebrity(celeb.name);
@@ -441,34 +441,33 @@
             const location = celeb.location || celeb.city || 'Virtual';
             const availableTickets = celeb.availableSlots || celeb.tickets || 0;
             const tier = celeb.tier || '';
+            const rating = parseFloat(celeb.rating) || 0;
             const isInWatchlist = watchlist.has(celeb.name);
             const heartIcon = isInWatchlist ? '❤️' : '🤍';
             const watchlistClass = isInWatchlist ? 'active' : '';
+            const verifiedMark = celeb.verified ? '<span class="verified" title="Verified">✓</span>' : '';
 
             return `
-                <div class="celebrity-card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'">
-                    <div class="celebrity-card-image-container">
-                        <div class="celebrity-card-image" style="background: ${color};">
-                            ${celeb.imageUrl ? `<img src="${celeb.imageUrl}" alt="${celeb.name}" style="width: 100%; height: 100%; object-fit: cover;">` : `<div style="width: 100%; height: 100%; display: flex; align-items: center; justify-content: center; font-size: 28px; font-weight: 600; color: white; text-shadow: 0 2px 12px rgba(0, 0, 0, 0.6);">${initials}</div>`}
-                        </div>
-                        ${tier ? `<div class="celebrity-card-tier">S-TIER</div>` : ''}
-                        ${celeb.verified ? '<div class="celebrity-card-verified">✓</div>' : ''}
-                        <button class="celebrity-card-favorite ${watchlistClass}" onclick="event.stopPropagation(); toggleWatchlist('${celeb.name}', this);" title="Add to favorites">
+                <article class="card" onclick="window.location.href='celebrity-profile.html?slug=${encodeURIComponent(slug)}'">
+                    <div class="card__media" style="background: ${color};">
+                        ${celeb.imageUrl ? `<img src="${celeb.imageUrl}" alt="${celeb.name}" style="width: 100%; height: 100%; object-fit: cover; border-radius: 12px;">` : `<div class="card__initials">${initials}</div>`}
+                        ${tier ? `<span class="card__tier">${tier}</span>` : ''}
+                        <button class="card__fav ${watchlistClass}" aria-pressed="${isInWatchlist}" onclick="event.stopPropagation(); toggleWatchlist('${celeb.name}', this);" title="Add to favorites">
                             ${heartIcon}
                         </button>
                     </div>
-                    <div class="celebrity-card-content">
-                        <h3 class="celebrity-card-name">${celeb.name}</h3>
-                        <div class="celebrity-card-category">${profession}</div>
-                        <div class="celebrity-card-availability">
-                            <span>📍 ${location}</span>
-                            <span>🎟️ ${availableTickets}</span>
+                    <div class="card__body">
+                        <h3 class="card__name">${celeb.name}${verifiedMark}</h3>
+                        <div class="card__meta">
+                            <span class="card__profession">${profession}</span>
+                            <span class="card__availability-chip">📍 ${location} • 🎟️ ${availableTickets}</span>
+                        </div>
+                        <div class="card__stats">
+                            ${rating > 0 ? `<span class="card__rating">★ ${rating.toFixed(1)}</span>` : '<span class="card__rating"></span>'}
+                            <span class="card__price-badge" aria-hidden="true">$${(celeb.price || 0).toLocaleString()}+</span>
                         </div>
                     </div>
-                    <div class="celebrity-card-footer">
-                        <div class="celebrity-card-price">$${(celeb.price || 0).toLocaleString()}+</div>
-                    </div>
-                </div>
+                </article>
             `;
         }
 

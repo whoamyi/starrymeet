@@ -59,9 +59,17 @@
             </div>
         </div>
 
-        <!-- Pricing Packages Section -->
-        <div class="pricing-section">
+        <!-- 3-Layer Collapsible Availability -->
+        <div class="availability-section">
             <h2 class="section-title">Availability</h2>
+            <div id="availability-container">
+                <!-- Will be populated by JavaScript with 3-layer collapsible structure -->
+            </div>
+        </div>
+
+        <!-- Legacy Pricing Packages (Fallback) -->
+        <div class="pricing-section" style="display: none;">
+            <h2 class="section-title">Meeting Packages</h2>
             <div class="pricing-grid">
                 <div class="pricing-category">
                     <h3 class="pricing-category-title">🌐 Virtual Meetings</h3>
@@ -85,6 +93,7 @@
 
     <!-- Inject shared components -->
     <script src="js/inject-layout.js"></script>
+    <script src="js/celebrity-profile-availability.js"></script>
     <script src="js/celebrity-profile.js"></script>
 </body>
 </html>
