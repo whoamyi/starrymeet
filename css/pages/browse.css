@@ -702,11 +702,7 @@
   margin-top: 2px;
 }
 
-.card__meta {
-  display: flex;
-  flex-direction: column;
-  gap: 4px;
-}
+/* OLD .card__meta styles removed - see line 1834 for new inline styles */
 
 .card__profession {
   font-size: 12px;
@@ -1959,5 +1955,367 @@
 
   .card__category {
     font-size: 14px;
+  }
+}
+
+/* ========================================
+   ENHANCEMENTS - Phase 2
+   Active Filters, Price Quick Filters, Loading States
+   ======================================== */
+
+/* Active Filter Chips */
+.active-filter-chips {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px;
+  padding: 12px;
+  background: rgba(197, 168, 115, 0.05);
+  border: 1px solid rgba(197, 168, 115, 0.15);
+  border-radius: 12px;
+  margin-bottom: 16px;
+  animation: slideDown 0.3s ease;
+}
+
+@keyframes slideDown {
+  from {
+    opacity: 0;
+    transform: translateY(-10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.filter-chip {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 6px 12px;
+  background: rgba(255, 255, 255, 0.04);
+  border: 1px solid rgba(255, 255, 255, 0.08);
+  border-radius: 20px;
+  font-size: 13px;
+  color: var(--color-text-primary);
+  transition: all 0.2s ease;
+}
+
+.filter-chip__label {
+  line-height: 1;
+}
+
+.filter-chip__remove {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 16px;
+  line-height: 1;
+  cursor: pointer;
+  padding: 0;
+  width: 16px;
+  height: 16px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  transition: all 0.2s ease;
+}
+
+.filter-chip__remove:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+}
+
+.clear-all-chips-btn {
+  padding: 6px 12px;
+  background: transparent;
+  border: 1px solid rgba(197, 168, 115, 0.3);
+  border-radius: 20px;
+  color: #D4A574;
+  font-size: 13px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+}
+
+.clear-all-chips-btn:hover {
+  background: rgba(197, 168, 115, 0.1);
+  border-color: rgba(197, 168, 115, 0.5);
+}
+
+/* Price Quick Filters */
+.price-quick-filters {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 8px;
+  margin-top: 12px;
+}
+
+.price-quick-btn {
+  padding: 8px 12px;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.06);
+  border-radius: 8px;
+  color: var(--color-text-secondary);
+  font-size: 12px;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-family: inherit;
+  white-space: nowrap;
+}
+
+.price-quick-btn:hover {
+  background: rgba(255, 255, 255, 0.04);
+  border-color: rgba(255, 255, 255, 0.12);
+  color: var(--color-text-primary);
+}
+
+.price-quick-btn.active {
+  background: rgba(197, 168, 115, 0.15);
+  border-color: rgba(197, 168, 115, 0.3);
+  color: #D4A574;
+}
+
+/* Category Icons */
+.category-icon {
+  font-size: 14px;
+  margin-right: 6px;
+}
+
+.filter-tree-parent {
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  padding: 8px 12px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.2s ease;
+  user-select: none;
+}
+
+.filter-tree-parent:hover {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.filter-tree-toggle {
+  color: var(--color-text-secondary);
+  transition: transform 0.2s ease;
+  font-size: 12px;
+  width: 12px;
+  flex-shrink: 0;
+}
+
+.filter-tree-toggle.expanded {
+  transform: rotate(90deg);
+}
+
+.filter-tree-label {
+  flex: 1;
+  display: flex;
+  align-items: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-text-primary);
+  font-weight: 500;
+}
+
+.filter-tree-count {
+  color: var(--color-text-muted);
+  font-size: 12px;
+  margin-left: auto;
+  flex-shrink: 0;
+}
+
+/* Filter Tree Children */
+.filter-tree-children {
+  max-height: 0;
+  overflow: hidden;
+  transition: max-height 0.3s ease;
+  padding-left: 24px;
+}
+
+.filter-tree-children.expanded {
+  max-height: 500px;
+  padding-top: 4px;
+  padding-bottom: 4px;
+}
+
+.filter-tree-child {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 6px 12px;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  font-size: 13px;
+  color: var(--color-text-secondary);
+}
+
+.filter-tree-child:hover {
+  background: rgba(255, 255, 255, 0.02);
+  color: var(--color-text-primary);
+}
+
+.filter-tree-child.active {
+  background: rgba(197, 168, 115, 0.1);
+  color: #D4A574;
+  font-weight: 500;
+}
+
+.filter-tree-child-label {
+  flex: 1;
+}
+
+.filter-tree-child-count {
+  color: var(--color-text-muted);
+  font-size: 11px;
+}
+
+/* Loading Skeleton States */
+.skeleton-card {
+  display: flex;
+  gap: 12px;
+  padding: 0;
+  background: rgba(255, 255, 255, 0.02);
+  border: 1px solid rgba(255, 255, 255, 0.04);
+  border-radius: 16px;
+  height: 140px;
+  overflow: hidden;
+  position: relative;
+}
+
+.skeleton-card::after {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background: linear-gradient(
+    90deg,
+    transparent,
+    rgba(255, 255, 255, 0.05),
+    transparent
+  );
+  animation: shimmer 2s infinite;
+}
+
+@keyframes shimmer {
+  0% {
+    left: -100%;
+  }
+  100% {
+    left: 100%;
+  }
+}
+
+.skeleton-avatar {
+  flex: 0 0 33.33%;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 12px;
+}
+
+.skeleton-content {
+  flex: 1;
+  padding: 12px 12px 12px 0;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  justify-content: center;
+}
+
+.skeleton-line {
+  height: 12px;
+  background: rgba(255, 255, 255, 0.05);
+  border-radius: 4px;
+}
+
+.skeleton-line--title {
+  width: 70%;
+  height: 16px;
+}
+
+.skeleton-line--subtitle {
+  width: 50%;
+}
+
+.skeleton-line--short {
+  width: 40%;
+}
+
+/* Smooth Filter Panel Transitions */
+.filter-sidebar {
+  transition: transform 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+.filter-overlay {
+  transition: opacity 0.3s ease, visibility 0.3s ease;
+  opacity: 0;
+  visibility: hidden;
+}
+
+.filter-overlay.active {
+  opacity: 1;
+  visibility: visible;
+}
+
+.filter-tree {
+  transition: max-height 0.3s ease, padding 0.3s ease;
+}
+
+.filter-tree.collapsed {
+  max-height: 0;
+  padding: 0;
+  overflow: hidden;
+}
+
+.filter-tree.expanded {
+  max-height: 800px;
+  overflow-y: auto;
+}
+
+/* Fade-in animation for cards */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.card {
+  animation: fadeIn 0.3s ease;
+}
+
+/* Stagger animation for cards */
+.card:nth-child(1) { animation-delay: 0.05s; }
+.card:nth-child(2) { animation-delay: 0.1s; }
+.card:nth-child(3) { animation-delay: 0.15s; }
+.card:nth-child(4) { animation-delay: 0.2s; }
+.card:nth-child(5) { animation-delay: 0.25s; }
+.card:nth-child(6) { animation-delay: 0.3s; }
+
+/* Desktop skeleton adjustments */
+@media (min-width: 1024px) {
+  .skeleton-card {
+    flex-direction: column;
+    height: auto;
+    min-height: 320px;
+  }
+
+  .skeleton-avatar {
+    flex: 0 0 auto;
+    width: 100%;
+    aspect-ratio: 1;
+  }
+
+  .skeleton-content {
+    padding: 16px;
   }
 }
