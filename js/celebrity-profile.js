@@ -110,6 +110,16 @@ async function loadCelebrityProfile() {
         console.log('💰 Populating pricing packages...');
         populatePricingPackages(state.celebrity);
 
+        // Render availability section
+        if (window.renderAvailabilitySection && state.celebrity.availability) {
+            console.log('📅 Rendering availability section...');
+            const allAvailability = [
+                ...(state.celebrity.availability.physical || []),
+                ...(state.celebrity.availability.virtual || [])
+            ];
+            window.renderAvailabilitySection(allAvailability);
+        }
+
         console.log('✅ Profile fully loaded!');
 
     } catch (error) {

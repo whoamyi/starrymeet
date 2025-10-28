@@ -29185,3 +29185,1906 @@ response_time: 120h
 ==========================================
 B-TIER BATCH 15 COMPLETE (#1401-#1500)
 ==========================================
+#1501. PEDRO PASCAL
+slug: pedro-pascal-tlou
+name: Pedro Pascal
+profession: Actor
+category: Film & Television → Chilean-American → Leading Actor
+tier: B
+bio: The Last of Us Joel Miller and The Mandalorian Din Djarin. Chilean-American actor from Narcos to HBO. Four-decade character work to franchise leading man phenomenon.
+primary_country: Chile
+market_countries: Chile, United States, Latin America, Spain, Canada, United Kingdom, Australia, France, Germany, Italy
+instagram_followers: 12000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3400
+price_standard: 8000
+price_premium: 17000
+rating: 4.91
+review_count: 892
+response_time: 240h
+
+#1502. BELLA RAMSEY
+slug: bella-ramsey
+name: Bella Ramsey
+profession: Actor
+category: Film & Television → British → Young Actress
+tier: B
+bio: The Last of Us Ellie Williams and Game of Thrones Lyanna Mormont. British actress from Nottingham to HBO. Rising young talent fantasy to post-apocalyptic leading role.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 5600000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 645
+response_time: 120h
+
+#1503. ANNA TORV
+slug: anna-torv
+name: Anna Torv
+profession: Actor
+category: Film & Television → Australian → Actress
+tier: B
+bio: The Last of Us Tess Servopoulos and Fringe Olivia Dunham. Australian actress from Mindhunter to HBO. Four-decade sci-fi to post-apocalyptic transformation.
+primary_country: Australia
+market_countries: Australia, United States, United Kingdom, Canada, New Zealand, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.87
+review_count: 601
+response_time: 120h
+
+#1504. GABRIEL LUNA
+slug: gabriel-luna
+name: Gabriel Luna
+profession: Actor
+category: Film & Television → Mexican-American → Actor
+tier: B
+bio: The Last of Us Tommy Miller and Terminator Dark Fate Gabriel. Texas actor from Agents of S.H.I.E.L.D. to HBO. Rising talent genre franchise to prestige ensemble.
+primary_country: United States
+market_countries: United States, Mexico, Latin America, Spain, Canada, United Kingdom, Australia, France, Germany, Italy
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 534
+response_time: 120h
+
+#1505. MERLE DANDRIDGE
+slug: merle-dandridge
+name: Merle Dandridge
+profession: Actor
+category: Film & Television → Japanese-Korean-American → Actress
+tier: B
+bio: The Last of Us Marlene and video game voice original. Japanese-Korean-American actress from Broadway to HBO. Four-decade stage to screen franchise transformation.
+primary_country: United States
+market_countries: United States, Japan, South Korea, Canada, United Kingdom, Australia, Philippines, France, Germany, Italy
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1506. NIC PIZZOLATTO
+slug: nic-pizzolatto
+name: Nic Pizzolatto
+profession: Writer
+category: Film & Television → Hollywood → Writer-Producer
+tier: B
+bio: True Detective creator seasons 1-3 and Galveston writer. Louisiana writer-producer from literary to HBO. Rising talent anthology crime prestige television.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.88
+review_count: 623
+response_time: 168h
+
+#1507. CARY JOJI FUKUNAGA
+slug: cary-joji-fukunaga
+name: Cary Joji Fukunaga
+profession: Director
+category: Film & Television → Japanese-American → Director
+tier: B
+bio: True Detective director season one and No Time to Die Bond director. California director from Beasts of No Nation to HBO Emmy. Rising talent prestige to franchise.
+primary_country: United States
+market_countries: United States, Japan, United Kingdom, Canada, Australia, Mexico, France, Germany, Italy, Spain
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.90
+review_count: 734
+response_time: 168h
+
+#1508. MATTHEW MCCONAUGHEY
+slug: matthew-mcconaughey
+name: Matthew McConaughey
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: B
+bio: True Detective Rust Cohle and Dallas Buyers Club Ron Woodroof Oscar winner. Texas actor from rom-com to prestige resurrection. Four-decade career McConaissance legend.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Brazil
+instagram_followers: 7200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 8400
+price_premium: 18000
+rating: 4.91
+review_count: 892
+response_time: 240h
+
+#1509. WOODY HARRELSON
+slug: woody-harrelson-td
+name: Woody Harrelson
+profession: Actor
+category: Film & Television → Hollywood → Actor
+tier: B
+bio: True Detective Marty Hart and Cheers Woody Boyd. Texas actor from Three Billboards to HBO. Five-decade sitcom to prestige film career three Oscar noms.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.90
+review_count: 789
+response_time: 168h
+
+#1510. MICHELLE MONAGHAN
+slug: michelle-monaghan
+name: Michelle Monaghan
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: True Detective Maggie Hart and Mission Impossible Julia Meade. Iowa actress from Kiss Kiss Bang Bang to HBO. Four-decade franchise to prestige transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 1400000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1511. ALEXANDRA DADDARIO
+slug: alexandra-daddario
+name: Alexandra Daddario
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: True Detective Lisa Tragnetti and White Lotus Rachel. New York actress from Percy Jackson to HBO. Rising talent franchise to prestige Emmy breakout.
+primary_country: United States
+market_countries: United States, Italy, Ireland, United Kingdom, Canada, Australia, France, Germany, Spain, Japan
+instagram_followers: 24000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.86
+review_count: 623
+response_time: 120h
+
+#1512. MICHAEL POTTS
+slug: michael-potts
+name: Michael Potts
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: B
+bio: True Detective Maynard Gilbough and Ma Rainey's Black Bottom Slow Drag. Louisiana character actor from The Wire to HBO. Four-decade prestige character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, South Africa, Nigeria, France, Germany, Italy, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 489
+response_time: 120h
+
+#1513. TORY KITTLES
+slug: tory-kittles
+name: Tory Kittles
+profession: Actor
+category: Film & Television → Hollywood → Actor
+tier: B
+bio: True Detective Detective Thomas Papania and The Equalizer Marcus Dante. Florida actor from Sons of Anarchy to HBO. Four-decade character work specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, South Africa, Nigeria, France, Germany, Italy, Netherlands
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.83
+review_count: 467
+response_time: 120h
+
+#1514. COLIN FARRELL
+slug: colin-farrell
+name: Colin Farrell
+profession: Actor
+category: Film & Television → Irish → Leading Actor
+tier: B
+bio: True Detective Ray Velcoro and The Banshees of Inisherin Pádraic Oscar nominee. Irish actor from In Bruges to HBO. Four-decade heartthrob to prestige transformation.
+primary_country: Ireland
+market_countries: Ireland, United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 7500
+price_premium: 16000
+rating: 4.91
+review_count: 823
+response_time: 168h
+
+#1515. RACHEL MCADAMS
+slug: rachel-mcadams
+name: Rachel McAdams
+profession: Actor
+category: Film & Television → Canadian → Leading Actress
+tier: B
+bio: True Detective Ani Bezzerides and The Notebook Allie Hamilton. Canadian actress from Mean Girls to HBO. Four-decade rom-com to prestige transformation.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, Australia, France, Germany, Italy, Spain, Japan, Brazil
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.89
+review_count: 734
+response_time: 168h
+
+#1516. TAYLOR KITSCH
+slug: taylor-kitsch
+name: Taylor Kitsch
+profession: Actor
+category: Film & Television → Canadian → Actor
+tier: B
+bio: True Detective Paul Woodrugh and Friday Night Lights Tim Riggins. Canadian actor from John Carter to HBO. Four-decade franchise to prestige ensemble.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.85
+review_count: 556
+response_time: 120h
+
+#1517. VINCE VAUGHN
+slug: vince-vaughn
+name: Vince Vaughn
+profession: Actor
+category: Film & Television → Hollywood → Comedy Actor
+tier: B
+bio: True Detective Frank Semyon and Wedding Crashers Jeremy Grey. Minnesota actor from Swingers to HBO drama. Four-decade comedy to prestige dramatic transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Brazil
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.87
+review_count: 645
+response_time: 168h
+
+#1518. KELLY REILLY
+slug: kelly-reilly
+name: Kelly Reilly
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: True Detective Jordan Semyon and Yellowstone Beth Dutton. British actress from Sherlock Holmes to HBO Paramount. Four-decade prestige to franchise leading lady.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 2100000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 623
+response_time: 120h
+
+#1519. MAHERSHALA ALI
+slug: mahershala-ali
+name: Mahershala Ali
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: B
+bio: True Detective Wayne Hays and Moonlight Juan two-time Oscar winner. California actor from House of Cards to HBO. Four-decade prestige television film legend.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, South Africa, Nigeria, France, Germany, Italy, Japan
+instagram_followers: 3200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 7500
+price_premium: 16000
+rating: 4.92
+review_count: 892
+response_time: 168h
+
+#1520. CARMEN EJOGO
+slug: carmen-ejogo-td
+name: Carmen Ejogo
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: True Detective Amelia Reardon and Selma Coretta Scott King. British actress from Fantastic Beasts to HBO. Four-decade prestige ensemble specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, Nigeria, United States, Canada, Australia, South Africa, Scotland, France, Germany, Italy
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.86
+review_count: 556
+response_time: 120h
+
+#1521. JODIE FOSTER
+slug: jodie-foster
+name: Jodie Foster
+profession: Actor
+category: Film & Television → Hollywood → Leading Actress
+tier: B
+bio: True Detective Night Country Liz Danvers and The Silence of the Lambs Clarice Starling two-time Oscar winner. California actress-director from Taxi Driver to HBO. Six-decade career legend icon.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Canada, Australia, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 9800
+price_premium: 21000
+rating: 4.95
+review_count: 1123
+response_time: 240h
+
+#1522. KALI REIS
+slug: kali-reis
+name: Kali Reis
+profession: Actor
+category: Film & Television → Native American → Actress-Boxer
+tier: B
+bio: True Detective Night Country Evangeline Navarro and boxer champion. Native American Seaconke Wampanoag actress-boxer from Catch the Fair One to HBO. Rising talent boxing to acting prestige.
+primary_country: United States
+market_countries: United States, Canada, United Kingdom, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1523. FINN BENNETT
+slug: finn-bennett
+name: Finn Bennett
+profession: Actor
+category: Film & Television → British → Young Actor
+tier: B
+bio: True Detective Night Country Prior and British young actor. British young actor from True Detective to HBO. Rising young talent prestige ensemble.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.81
+review_count: 412
+response_time: 96h
+
+#1524. ANNA LAMBE
+slug: anna-lambe
+name: Anna Lambe
+profession: Actor
+category: Film & Television → Inuit-Canadian → Actress
+tier: B
+bio: True Detective Night Country Kayla and Inuit actress. Inuit Canadian actress from Nunavut to HBO. Rising talent indigenous representation breakthrough.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, Australia, Greenland, Denmark, Norway, Iceland, France, Germany
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.81
+review_count: 412
+response_time: 96h
+
+#1525. ISABELLA STAR LABLANC
+slug: isabella-star-lablanc
+name: Isabella Star LaBlanc
+profession: Actor
+category: Film & Television → Native American → Young Actress
+tier: B
+bio: True Detective Night Country Leah and young actress. Native American young actress from Alaska to HBO. Rising young talent indigenous representation.
+primary_country: United States
+market_countries: United States, Canada, United Kingdom, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 1900
+price_standard: 4500
+price_premium: 9500
+rating: 4.79
+review_count: 356
+response_time: 96h
+
+#1526. BILL NIGHY
+slug: bill-nighy
+name: Bill Nighy
+profession: Actor
+category: Film & Television → British → Character Actor
+tier: B
+bio: Living Rodney Williams and Love Actually Billy Mack. British actor from Pirates of the Caribbean to prestige. Five-decade character work to leading man late career.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.89
+review_count: 734
+response_time: 168h
+
+#1527. AIMEE LOU WOOD
+slug: aimee-lou-wood
+name: Aimee Lou Wood
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Living Emma and Sex Education Aimee Gibbs. British actress from Manchester to breakout. Rising talent comedy to drama transformation ensemble.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 1800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1528. ALEX SHARP
+slug: alex-sharp
+name: Alex Sharp
+profession: Actor
+category: Film & Television → British-American → Actor
+tier: B
+bio: Living Peter and The Curious Incident Broadway Tony winner. British-American actor from theatre to film. Rising talent stage to screen transformation.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.83
+review_count: 467
+response_time: 120h
+
+#1529. ADRIAN RAWLINS
+slug: adrian-rawlins
+name: Adrian Rawlins
+profession: Actor
+category: Film & Television → British → Character Actor
+tier: B
+bio: Living Jack and Harry Potter James Potter. British character actor from Chernobyl to ensemble. Four-decade supporting character specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.82
+review_count: 445
+response_time: 120h
+
+#1530. ANNE REID
+slug: anne-reid
+name: Anne Reid
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Living Margaret and Coronation Street Valerie Barlow. British actress from Last Tango in Halifax to legend. Six-decade television theatre film career.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1531. HUGH BONNEVILLE
+slug: hugh-bonneville
+name: Hugh Bonneville
+profession: Actor
+category: Film & Television → British → Actor
+tier: B
+bio: Downton Abbey Robert Crawley and Paddington Mr. Brown. British actor from Notting Hill to period drama. Four-decade character work to franchise leading man.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.88
+review_count: 645
+response_time: 120h
+
+#1532. ELIZABETH MCGOVERN
+slug: elizabeth-mcgovern
+name: Elizabeth McGovern
+profession: Actor
+category: Film & Television → American-British → Actress
+tier: B
+bio: Downton Abbey Cora Crawley and Ordinary People Jeannine Oscar nominee. Illinois actress from Ragtime to British period drama. Five-decade prestige career transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Ireland, France, Germany, Italy, Spain, Japan
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.87
+review_count: 601
+response_time: 120h
+
+#1533. MAGGIE SMITH
+slug: maggie-smith
+name: Maggie Smith
+profession: Actor
+category: Film & Television → British → Leading Actress
+tier: B
+bio: Downton Abbey Violet Crawley and Harry Potter Minerva McGonagall. British actress from The Prime of Miss Jean Brodie two-time Oscar winner. Seven-decade career living legend icon.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8900
+price_premium: 19000
+rating: 4.94
+review_count: 1023
+response_time: 240h
+
+#1534. MICHELLE DOCKERY
+slug: michelle-dockery
+name: Michelle Dockery
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Mary Crawley and Good Behavior Letty Raines. British actress from Essex to period drama icon. Four-decade theatre to franchise leading lady.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Japan
+instagram_followers: 1800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 623
+response_time: 120h
+
+#1535. DAN STEVENS
+slug: dan-stevens
+name: Dan Stevens
+profession: Actor
+category: Film & Television → British → Actor
+tier: B
+bio: Downton Abbey Matthew Crawley and Beauty and the Beast Beast. British actor from The Guest to Disney. Four-decade period drama to franchise transformation.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 1800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 623
+response_time: 120h
+
+#1536. JOANNE FROGGATT
+slug: joanne-froggatt
+name: Joanne Froggatt
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Anna Bates and Liar Laura Nielson. British actress from Coronation Street to Golden Globe. Four-decade British television prestige specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 556
+response_time: 120h
+
+#1537. JIM CARTER
+slug: jim-carter
+name: Jim Carter
+profession: Actor
+category: Film & Television → British → Character Actor
+tier: B
+bio: Downton Abbey Charles Carson and Shakespeare in Love Lord Wessex. British character actor from Cranford to period drama. Five-decade prestige character specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1538. PHYLLIS LOGAN
+slug: phyllis-logan
+name: Phyllis Logan
+profession: Actor
+category: Film & Television → Scottish → Actress
+tier: B
+bio: Downton Abbey Elsie Hughes and Lovejoy Lady Jane Felsham. Scottish actress from Secrets & Lies to period drama. Five-decade British television specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, Scotland, United States, Canada, Australia, Ireland, France, Germany, Italy, Netherlands
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1539. BRENDAN COYLE
+slug: brendan-coyle
+name: Brendan Coyle
+profession: Actor
+category: Film & Television → Irish-British → Actor
+tier: B
+bio: Downton Abbey John Bates and Lark Rise to Candleford Robert Timmins. Irish-British actor from The Weir to period drama. Four-decade theatre to television transformation.
+primary_country: Ireland
+market_countries: Ireland, United Kingdom, United States, Canada, Australia, France, Germany, Italy, Netherlands, Spain
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1540. LAURA CARMICHAEL
+slug: laura-carmichael
+name: Laura Carmichael
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Edith Crawley and The Spanish Princess Catherine of Aragon. British actress from Southampton to period drama. Rising talent franchise ensemble specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1541. ALLEN LEECH
+slug: allen-leech
+name: Allen Leech
+profession: Actor
+category: Film & Television → Irish → Actor
+tier: B
+bio: Downton Abbey Tom Branson and Bohemian Rhapsody Paul Prenter. Irish actor from Dublin to period drama. Four-decade theatre to franchise transformation.
+primary_country: Ireland
+market_countries: Ireland, United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 545
+response_time: 120h
+
+#1542. SOPHIE MCSHERA
+slug: sophie-mcshera
+name: Sophie McShera
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Daisy Mason and Cinderella Drizella. British actress from Bradford to period drama. Four-decade British television franchise specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.83
+review_count: 489
+response_time: 120h
+
+#1543. LESLEY NICOL
+slug: lesley-nicol
+name: Lesley Nicol
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Beryl Patmore and British character actress. British actress from Manchester to period drama. Five-decade British television character specialist.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1544. PENELOPE WILTON
+slug: penelope-wilton
+name: Penelope Wilton
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Isobel Crawley and The Best Exotic Marigold Hotel Jean Ainslie. British actress from Shaun of the Dead to period drama. Six-decade prestige career legend.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, India, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.87
+review_count: 601
+response_time: 120h
+
+#1545. MATTHEW GOODE
+slug: matthew-goode
+name: Matthew Goode
+profession: Actor
+category: Film & Television → British → Actor
+tier: B
+bio: Downton Abbey Henry Talbot and A Discovery of Witches Matthew Clairmont. British actor from The Imitation Game to period drama. Four-decade prestige franchise transformation.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1546. LILY JAMES
+slug: lily-james
+name: Lily James
+profession: Actor
+category: Film & Television → British → Actress
+tier: B
+bio: Downton Abbey Lady Rose MacClare and Cinderella title role. British actress from Baby Driver to Pam & Tommy. Rising talent period drama to franchise leading lady.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Brazil
+instagram_followers: 4200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 645
+response_time: 120h
+
+#1547. LILY COLLINS
+slug: lily-collins
+name: Lily Collins
+profession: Actor
+category: Film & Television → British-American → Actress
+tier: B
+bio: Emily in Paris Emily Cooper and The Blind Side Collins Tuohy. British-American actress Phil Collins daughter from Mirror Mirror to Netflix. Rising talent franchise leading lady.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, France, Canada, Australia, Germany, Italy, Spain, Japan, Brazil
+instagram_followers: 32000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 7500
+price_premium: 16000
+rating: 4.88
+review_count: 734
+response_time: 168h
+
+#1548. PHILIPPINE LEROY-BEAULIEU
+slug: philippine-leroy-beaulieu
+name: Philippine Leroy-Beaulieu
+profession: Actor
+category: Film & Television → French → Actress
+tier: B
+bio: Emily in Paris Sylvie Grateau and Call My Agent Arlette Azémar. French actress from Paris to Netflix international. Four-decade French cinema to streaming phenomenon.
+primary_country: France
+market_countries: France, United States, Belgium, Switzerland, Canada, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 2800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 589
+response_time: 120h
+
+#1549. ASHLEY PARK
+slug: ashley-park
+name: Ashley Park
+profession: Actor
+category: Film & Television → Korean-American → Actress-Singer
+tier: B
+bio: Emily in Paris Mindy Chen and Mean Girls Gretchen Wieners Broadway. California actress-singer from Broadway to Netflix. Rising talent musical theatre to streaming franchise.
+primary_country: United States
+market_countries: United States, South Korea, France, Canada, United Kingdom, Australia, China, Japan, Philippines, France
+instagram_followers: 4200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.85
+review_count: 567
+response_time: 120h
+
+#1550. LUCAS BRAVO
+slug: lucas-bravo
+name: Lucas Bravo
+profession: Actor
+category: Film & Television → French → Actor
+tier: B
+bio: Emily in Paris Gabriel and Mrs. Harris Goes to Paris André Fauvel. French actor from Paris to Netflix heartthrob. Rising talent French to international streaming star.
+primary_country: France
+market_countries: France, United States, Belgium, Switzerland, Canada, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 4800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.85
+review_count: 578
+response_time: 120h
+
+#1551. CAMILLE RAZAT
+slug: camille-razat
+name: Camille Razat
+profession: Actor
+category: Film & Television → French → Actress
+tier: B
+bio: Emily in Paris Camille and French actress Netflix. French actress from Toulouse to Netflix phenomenon. Rising talent French cinema to streaming franchise.
+primary_country: France
+market_countries: France, Belgium, Switzerland, United States, Canada, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 4600000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 534
+response_time: 120h
+
+#1552. SAMUEL ARNOLD
+slug: samuel-arnold
+name: Samuel Arnold
+profession: Actor
+category: Film & Television → French → Actor
+tier: B
+bio: Emily in Paris Julien and French actor Netflix. French actor from Paris to Netflix ensemble. Rising talent streaming franchise specialist.
+primary_country: France
+market_countries: France, Belgium, Switzerland, United States, Canada, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 1800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 467
+response_time: 96h
+
+#1553. BRUNO GOUERY
+slug: bruno-gouery
+name: Bruno Gouery
+profession: Actor
+category: Film & Television → French → Actor-Comedian
+tier: B
+bio: Emily in Paris Luc and French comedian actor. French actor-comedian from Paris to Netflix. Rising talent comedy ensemble specialist.
+primary_country: France
+market_countries: France, Belgium, Switzerland, United States, Canada, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 1200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 456
+response_time: 96h
+
+#1554. WILLIAM ABADIE
+slug: william-abadie
+name: William Abadie
+profession: Actor
+category: Film & Television → French-American → Actor
+tier: B
+bio: Emily in Paris Antoine Lambert and Gossip Girl Roman Garrel. French-American actor from Sex and the City to Netflix. Four-decade New York to streaming ensemble.
+primary_country: France
+market_countries: France, United States, Belgium, Canada, United Kingdom, Italy, Spain, Switzerland, Germany, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.83
+review_count: 489
+response_time: 120h
+
+#1555. KATE WALSH
+slug: kate-walsh
+name: Kate Walsh
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Emily in Paris Madeline and Grey's Anatomy Addison Montgomery. California actress from Private Practice to Netflix. Four-decade medical drama to streaming ensemble.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 1800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 589
+response_time: 120h
+
+#1556. ARNAUD BINARD
+slug: arnaud-binard
+name: Arnaud Binard
+profession: Actor
+category: Film & Television → French → Actor
+tier: B
+bio: Emily in Paris Laurent G and French character actor. French character actor from Paris to Netflix. Four-decade French television ensemble specialist.
+primary_country: France
+market_countries: France, Belgium, Switzerland, United States, Canada, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.80
+review_count: 389
+response_time: 120h
+
+#1557. PAUL FORMAN
+slug: paul-forman
+name: Paul Forman
+profession: Actor
+category: Film & Television → British → Actor-Model
+tier: B
+bio: Emily in Paris Nicolas de Léon and British model actor. British actor-model from London to Netflix. Rising talent modeling to streaming franchise.
+primary_country: United Kingdom
+market_countries: United Kingdom, France, United States, Canada, Australia, Italy, Spain, Germany, Belgium, Netherlands
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 445
+response_time: 96h
+
+#1558. LUCIEN LAVISCOUNT
+slug: lucien-laviscount
+name: Lucien Laviscount
+profession: Actor
+category: Film & Television → British → Actor
+tier: B
+bio: Emily in Paris Alfie and Waterloo Road Jonah Kirby. British actor from Scream Queens to Netflix. Rising talent British television to streaming franchise.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, France, Canada, Australia, Italy, Spain, Germany, Netherlands, Belgium
+instagram_followers: 3200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1559. EUGENIO FRANCESCHINI
+slug: eugenio-franceschini
+name: Eugenio Franceschini
+profession: Actor
+category: Film & Television → Italian → Actor
+tier: B
+bio: Emily in Paris Marcello and Italian actor Netflix. Italian actor from Rome to Netflix. Rising talent Italian television to streaming franchise.
+primary_country: Italy
+market_countries: Italy, France, United States, Spain, United Kingdom, Canada, Australia, Germany, Switzerland, Belgium
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 456
+response_time: 120h
+
+#1560. THALIA BESSON
+slug: thalia-besson
+name: Thalia Besson
+profession: Actor
+category: Film & Television → French-Canadian → Actress
+tier: B
+bio: Emily in Paris Genevieve and French-Canadian actress. French-Canadian actress from Paris to Netflix. Rising young talent streaming ensemble.
+primary_country: France
+market_countries: France, Canada, Belgium, Switzerland, United States, United Kingdom, Italy, Spain, Germany, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.81
+review_count: 412
+response_time: 96h
+
+#1561. RUPERT EVERETT
+slug: rupert-everett
+name: Rupert Everett
+profession: Actor
+category: Film & Television → British → Actor
+tier: B
+bio: Emily in Paris Giorgio and My Best Friend's Wedding George Downes. British actor from Another Country to Netflix. Five-decade prestige to streaming ensemble.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, France, Italy, Canada, Australia, Germany, Spain, Belgium, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1562. ANNA GALIENA
+slug: anna-galiena
+name: Anna Galiena
+profession: Actor
+category: Film & Television → Italian → Actress
+tier: B
+bio: Emily in Paris Antonia Muratori and Being Human Renata. Italian actress from Rome to Netflix. Four-decade Italian cinema to streaming ensemble.
+primary_country: Italy
+market_countries: Italy, France, Spain, United States, United Kingdom, Canada, Australia, Germany, Switzerland, Belgium
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 445
+response_time: 120h
+
+#1563. RAOUL BOVA
+slug: raoul-bova
+name: Raoul Bova
+profession: Actor
+category: Film & Television → Italian → Actor
+tier: B
+bio: Emily in Paris Giancarlo and Under the Tuscan Sun Marcello. Italian actor from Rome to Netflix. Four-decade Italian cinema heartthrob to streaming.
+primary_country: Italy
+market_countries: Italy, United States, France, Spain, United Kingdom, Canada, Australia, Germany, Switzerland, Argentina
+instagram_followers: 2800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.85
+review_count: 556
+response_time: 120h
+
+#1564. MELIA KREILING
+slug: melia-kreiling
+name: Melia Kreiling
+profession: Actor
+category: Film & Television → Swiss-American → Actress
+tier: B
+bio: Emily in Paris Sofia Sideris and The Last Tycoon Minna Davis. Swiss-American actress from Tyrant to Netflix. Rising talent international to streaming ensemble.
+primary_country: Switzerland
+market_countries: Switzerland, United States, United Kingdom, France, Greece, Germany, Italy, Canada, Australia, Austria
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 445
+response_time: 96h
+
+#1565. VALERIA SOLARINO
+slug: valeria-solarino
+name: Valeria Solarino
+profession: Actor
+category: Film & Television → Italian → Actress
+tier: B
+bio: Emily in Paris Sylvie's mother and Italian cinema actress. Italian actress from Sicily to Netflix. Four-decade Italian cinema to streaming ensemble.
+primary_country: Italy
+market_countries: Italy, France, Spain, United States, United Kingdom, Canada, Australia, Germany, Switzerland, Belgium
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.81
+review_count: 412
+response_time: 120h
+
+#1566. TIMOTHY SIMONS
+slug: timothy-simons
+name: Timothy Simons
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Veep Jonah Ryan and Candy Randy Woodfield. Maine actor-comedian from improv to HBO Emmy noms. Rising talent comedy character work specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1567. ANNA CHLUMSKY
+slug: anna-chlumsky
+name: Anna Chlumsky
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Veep Amy Brookheimer and My Girl Vada Sultenfuss. Illinois actress from child star to HBO Emmy noms. Four-decade resurrection prestige comedy transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1568. TONY HALE
+slug: tony-hale
+name: Tony Hale
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Veep Gary Walsh two Emmys and Arrested Development Buster Bluth. New York actor from Stranger Than Fiction to HBO. Four-decade comedy character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.87
+review_count: 601
+response_time: 120h
+
+#1569. MATT WALSH
+slug: matt-walsh-veep
+name: Matt Walsh
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Veep Mike McLintock and Upright Citizens Brigade founder. Chicago actor-comedian-improv from UCB to HBO. Four-decade comedy ensemble specialist.
+primary_country: United States
+market_countries: United States, Canada, United Kingdom, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1570. GARY COLE
+slug: gary-cole
+name: Gary Cole
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: B
+bio: Veep Kent Davison and Office Space Bill Lumbergh. Illinois character actor from The Brady Bunch Movie to HBO. Five-decade comedy character work specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1571. KEVIN DUNN
+slug: kevin-dunn
+name: Kevin Dunn
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: B
+bio: Veep Ben Cafferty and Transformers Ron Witwicky. Illinois character actor from Dave to HBO. Four-decade supporting character work specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 489
+response_time: 120h
+
+#1572. CLEA DUVALL
+slug: clea-duvall
+name: Clea DuVall
+profession: Actor
+category: Film & Television → Hollywood → Actress-Director
+tier: B
+bio: Veep Marjorie Palmiotti and The Faculty Stokely Mitchell. California actress-director from But I'm a Cheerleader to HBO. Four-decade indie to prestige transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1573. SUFE BRADSHAW
+slug: sufe-bradshaw
+name: Sufe Bradshaw
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Veep Sue Wilson and Vice Principals Ms. Snodgrass. Illinois actress from Chicago to HBO ensemble. Rising talent comedy character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, South Africa, Nigeria, France, Germany, Italy, Netherlands
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.82
+review_count: 445
+response_time: 96h
+
+#1574. SAM RICHARDSON
+slug: sam-richardson
+name: Sam Richardson
+profession: Actor
+category: Film & Television → American-Ghanaian → Actor-Comedian
+tier: B
+bio: Veep Richard Splett and Detroiters Sam Duvet. American-Ghanaian actor-comedian from Detroit to HBO. Rising talent improv to prestige comedy ensemble.
+primary_country: United States
+market_countries: United States, Ghana, United Kingdom, Canada, Australia, South Africa, Nigeria, France, Germany, Italy
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1575. SARAH SUTHERLAND
+slug: sarah-sutherland
+name: Sarah Sutherland
+profession: Actor
+category: Film & Television → Canadian-American → Actress
+tier: B
+bio: Veep Catherine Meyer and Kiefer Sutherland daughter. Canadian-American actress from Chronic to HBO. Rising talent nepotism to ensemble breakthrough.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 280000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 467
+response_time: 96h
+
+#1576. DIEDRICH BADER
+slug: diedrich-bader
+name: Diedrich Bader
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Veep Bill Ericsson and Office Space Peter Gibbons neighbor. Virginia actor from The Drew Carey Show to HBO. Four-decade comedy character voice specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 512
+response_time: 120h
+
+#1577. PETER MACNICOL
+slug: peter-macnicol
+name: Peter MacNicol
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: B
+bio: Veep Jeff Kane and Ally McBeal John Cage Emmy winner. Texas character actor from Ghostbusters II to HBO. Five-decade comedy character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.85
+review_count: 534
+response_time: 120h
+
+#1578. DAN BAKKEDAHL
+slug: dan-bakkedahl
+name: Dan Bakkedahl
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Veep Roger Furlong and Legit Steve Nugent. Minnesota actor-comedian from The Daily Show to HBO. Four-decade comedy character ensemble specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.82
+review_count: 445
+response_time: 120h
+
+#1579. NELSON FRANKLIN
+slug: nelson-franklin
+name: Nelson Franklin
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Veep Will and New Girl Robby McFerrin. Georgia actor-comedian from The Millers to HBO. Rising talent comedy ensemble specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.81
+review_count: 412
+response_time: 96h
+
+#1580. MARGARET COLIN
+slug: margaret-colin
+name: Margaret Colin
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Veep Jane McCabe and Independence Day Constance Spano. New York actress from Now and Again to HBO. Four-decade television character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.83
+review_count: 467
+response_time: 120h
+
+#1581. PHIL REEVES
+slug: phil-reeves
+name: Phil Reeves
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: B
+bio: Veep Andrew Meyer and Young Sheldon Mr. Lundy. South Dakota character actor from supporting ensemble. Four-decade comedy character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.81
+review_count: 389
+response_time: 120h
+
+#1582. JULIA LOUIS-DREYFUS
+slug: julia-louis-dreyfus
+name: Julia Louis-Dreyfus
+profession: Actor
+category: Film & Television → Hollywood → Leading Actress
+tier: B
+bio: Veep Selina Meyer record six Emmys and Seinfeld Elaine Benes. New York actress from SNL to HBO legend. Five-decade sitcom to prestige comedy icon career.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 4200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 8400
+price_premium: 18000
+rating: 4.93
+review_count: 1023
+response_time: 240h
+
+#1583. DAVE FRANCO
+slug: dave-franco
+name: Dave Franco
+profession: Actor
+category: Film & Television → Hollywood → Actor-Director
+tier: B
+bio: The Rental Alison director and 21 Jump Street Eric Molson. California actor-director James Franco brother from Neighbors to directing. Rising talent comedy to horror directing.
+primary_country: United States
+market_countries: United States, Portugal, Sweden, United Kingdom, Canada, Australia, France, Germany, Italy, Spain
+instagram_followers: 5200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.85
+review_count: 567
+response_time: 120h
+
+#1584. ALISON BRIE
+slug: alison-brie-rental
+name: Alison Brie
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: The Rental Michelle and Community Annie Edison. California actress from Mad Men to GLOW. Four-decade comedy to prestige transformation ensemble.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 5600000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 623
+response_time: 120h
+
+#1585. DAN STEVENS
+slug: dan-stevens-rental
+name: Dan Stevens
+profession: Actor
+category: Film & Television → British → Actor
+tier: B
+bio: The Rental Charlie and Downton Abbey Matthew Crawley. British actor from Legion to horror. Four-decade period drama to genre transformation.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 1800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.87
+review_count: 623
+response_time: 120h
+
+#1586. SHEILA VAND
+slug: sheila-vand
+name: Sheila Vand
+profession: Actor
+category: Film & Television → Iranian-American → Actress
+tier: B
+bio: The Rental Mina and A Girl Walks Home Alone at Night. California actress from vampire Western to horror. Rising talent indie to genre ensemble.
+primary_country: United States
+market_countries: United States, Iran, United Kingdom, Canada, Australia, UAE, Turkey, France, Germany, Italy
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.82
+review_count: 445
+response_time: 96h
+
+#1587. JEREMY ALLEN WHITE
+slug: jeremy-allen-white-rental
+name: Jeremy Allen White
+profession: Actor
+category: Film & Television → Hollywood → Actor
+tier: B
+bio: The Rental Josh and The Bear Carmen Berzatto Emmy winner. New York actor from Shameless to horror. Four-decade Showtime to prestige transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 4800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 7500
+price_premium: 16000
+rating: 4.91
+review_count: 823
+response_time: 168h
+
+#1588. TOBY HUSS
+slug: toby-huss
+name: Toby Huss
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: B
+bio: The Rental Taylor and Halt and Catch Fire John Bosworth. Iowa character actor from King of the Hill voice to prestige. Four-decade comedy character specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 489
+response_time: 120h
+
+#1589. JASON SCHWARTZMAN
+slug: jason-schwartzman
+name: Jason Schwartzman
+profession: Actor
+category: Film & Television → Hollywood → Actor-Musician
+tier: B
+bio: Bored to Death Jonathan Ames and Rushmore Max Fischer. California actor-musician from The Darjeeling Limited to Asteroid City. Four-decade Wes Anderson muse career.
+primary_country: United States
+market_countries: United States, Italy, United Kingdom, Canada, Australia, France, Germany, Spain, Japan, Netherlands
+instagram_followers: 780000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.86
+review_count: 601
+response_time: 120h
+
+#1590. ZAC GALIFIANAKIS
+slug: zac-galifianakis
+name: Zac Galifianakis
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Bored to Death Ray Hueston and The Hangover Alan Garner. North Carolina actor-comedian from Baskets to franchise. Four-decade indie to blockbuster transformation.
+primary_country: United States
+market_countries: United States, Greece, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.88
+review_count: 678
+response_time: 168h
+
+#1591. TED DANSON
+slug: ted-danson
+name: Ted Danson
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: B
+bio: Bored to Death George Christopher and Cheers Sam Malone. California actor from The Good Place to Curb. Six-decade sitcom to prestige legend career.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 1400000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 7500
+price_premium: 16000
+rating: 4.91
+review_count: 823
+response_time: 168h
+
+#1592. HEATHER BURNS
+slug: heather-burns
+name: Heather Burns
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Bored to Death Leah and Miss Congeniality Cheryl Frasier. Connecticut actress from 25th Hour to comedy. Four-decade supporting character ensemble specialist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 180000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2000
+price_standard: 4700
+price_premium: 10000
+rating: 4.82
+review_count: 445
+response_time: 96h
+
+#1593. OLIVIA THIRLBY
+slug: olivia-thirlby
+name: Olivia Thirlby
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Bored to Death Stella and Juno Leah. New York actress from Dredd to indie ensemble. Rising talent indie to genre transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.83
+review_count: 467
+response_time: 96h
+
+#1594. JOHN HODGMAN
+slug: john-hodgman
+name: John Hodgman
+profession: Actor
+category: Film & Television → Hollywood → Actor-Comedian
+tier: B
+bio: Bored to Death Jim Jarmusch and Daily Show PC Guy. Massachusetts actor-comedian-author from Apple ads to HBO. Four-decade comedy writing to acting ensemble.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2200
+price_standard: 5200
+price_premium: 11000
+rating: 4.84
+review_count: 489
+response_time: 120h
+
+#1595. KRISTEN WIIG
+slug: kristen-wiig
+name: Kristen Wiig
+profession: Actor
+category: Film & Television → Hollywood → Actress-Comedian
+tier: B
+bio: Bored to Death Zelda and Bridesmaids Annie Walker Oscar nominee. New York actress-comedian from SNL to franchise. Four-decade sketch to prestige transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 7000
+price_premium: 15000
+rating: 4.89
+review_count: 734
+response_time: 168h
+
+#1596. PARKER POSEY
+slug: parker-posey
+name: Parker Posey
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Bored to Death Priscilla and Party Girl Mary. Maryland actress from Dazed and Confused to indie queen. Five-decade independent cinema icon career.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1597. ISLA FISHER
+slug: isla-fisher
+name: Isla Fisher
+profession: Actor
+category: Film & Television → Australian → Actress
+tier: B
+bio: Bored to Death Sarah and Wedding Crashers Gloria Cleary. Australian actress from Confessions of a Shopaholic to comedy. Four-decade rom-com to ensemble transformation.
+primary_country: Australia
+market_countries: Australia, United States, United Kingdom, Canada, New Zealand, France, Germany, Italy, Spain, Netherlands
+instagram_followers: 5600000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.86
+review_count: 601
+response_time: 120h
+
+#1598. JONATHAN AMES
+slug: jonathan-ames
+name: Jonathan Ames
+profession: Writer
+category: Film & Television → Hollywood → Writer-Actor
+tier: B
+bio: Bored to Death creator-writer and author novelist. New York writer-author from literary to HBO. Four-decade fiction to television transformation.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2400
+price_standard: 5600
+price_premium: 12000
+rating: 4.84
+review_count: 489
+response_time: 168h
+
+#1599. GABY HOFFMANN
+slug: gaby-hoffmann
+name: Gaby Hoffmann
+profession: Actor
+category: Film & Television → Hollywood → Actress
+tier: B
+bio: Transparent Ali Pfefferman and Field of Dreams Karin Kinsella. New York actress from Now and Then to Emmy nomination. Four-decade child star to prestige renaissance.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 420000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2600
+price_standard: 6200
+price_premium: 13000
+rating: 4.86
+review_count: 578
+response_time: 120h
+
+#1600. JUDITH LIGHT
+slug: judith-light
+name: Judith Light
+profession: Actor
+category: Film & Television → Hollywood → Leading Actress
+tier: B
+bio: Transparent Shelly Pfefferman two Emmys and Who's the Boss Angela Bower. New Jersey actress from One Life to Live to Amazon. Six-decade soap to prestige icon.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Spain, Japan, Netherlands
+instagram_followers: 620000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 2800
+price_standard: 6500
+price_premium: 14000
+rating: 4.88
+review_count: 645
+response_time: 120h
+
+==========================================
+B-TIER BATCH 16 COMPLETE (#1501-#1600)
+==========================================

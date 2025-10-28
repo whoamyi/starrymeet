@@ -1,0 +1,2104 @@
+S-TIER CELEBRITY DATABASE (100 Profiles)
+==========================================
+
+1. TIMOTHÉE CHALAMET
+slug: timothee-chalamet
+name: Timothée Chalamet
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Oscar-nominated actor defining his generation with Dune, Call Me by Your Name, and Wonka. Fashion icon and one of Hollywood's most sought-after leading men at just 28 years old.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Canada, Italy, Germany, Australia, Japan, South Korea, Mexico, Brazil, Spain
+instagram_followers: 19800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3500
+price_standard: 7500
+price_premium: 15000
+rating: 4.95
+review_count: 342
+response_time: 48h
+
+---
+
+2. ZENDAYA
+slug: zendaya
+name: Zendaya
+profession: Actress, Singer
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: Two-time Emmy winner and global icon. From Euphoria to Dune and Spider-Man, she's Hollywood's most influential young star with 184M Instagram followers and unmatched style.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, France, Australia, Germany, Italy, Brazil, Spain, Mexico, Japan, South Africa
+instagram_followers: 184000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 9000
+price_premium: 19000
+rating: 4.97
+review_count: 612
+response_time: 96h
+
+---
+
+3. LISA (BLACKPINK)
+slug: lisa-blackpink
+name: Lisa (Lalisa Manobal)
+profession: K-Pop Artist, Dancer
+category: Music → K-Pop → BLACKPINK
+tier: S
+bio: Global K-pop icon with 104M Instagram followers. BLACKPINK's main dancer and rapper, fashion muse for luxury brands, and record-breaking solo artist with hits like Money and Lalisa.
+primary_country: South Korea
+market_countries: South Korea, Thailand, China, Japan, United States, Indonesia, Philippines, Vietnam, India, Malaysia, Singapore, France
+instagram_followers: 104000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4500
+price_standard: 9500
+price_premium: 20000
+rating: 4.98
+review_count: 521
+response_time: 96h
+
+---
+
+4. BAD BUNNY
+slug: bad-bunny
+name: Bad Bunny (Benito Antonio Martínez Ocasio)
+profession: Singer, Rapper
+category: Music → Latin/Reggaeton → Solo Artist
+tier: S
+bio: King of Latin music breaking records worldwide. Grammy winner with multiple chart-topping albums, sold-out stadium tours, and cultural impact extending far beyond music with 47M followers.
+primary_country: Puerto Rico
+market_countries: Puerto Rico, United States, Mexico, Colombia, Argentina, Spain, Chile, Dominican Republic, Venezuela, Peru, Brazil, France
+instagram_followers: 47200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.96
+review_count: 468
+response_time: 72h
+
+---
+
+5. JUNGKOOK (BTS)
+slug: jungkook-bts
+name: Jungkook (Jeon Jung-kook)
+profession: K-Pop Artist, Singer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS's golden maknae and global superstar. Solo debut Seven broke records, becoming fastest song to hit 1 billion Spotify streams. 53M Instagram followers and still rising as a solo artist.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, India
+instagram_followers: 53000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4800
+price_standard: 10000
+price_premium: 22000
+rating: 4.98
+review_count: 689
+response_time: 96h
+
+---
+
+6. V (BTS)
+slug: v-bts
+name: V (Kim Tae-hyung)
+profession: K-Pop Artist, Singer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS member with the most Instagram followers (62M) and unique baritone voice. Actor, photographer, and fashion icon for Celine. Solo work showcases his artistic depth and global appeal.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, Vietnam
+instagram_followers: 62000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4700
+price_standard: 9800
+price_premium: 21000
+rating: 4.97
+review_count: 723
+response_time: 96h
+
+---
+
+7. JIMIN (BTS)
+slug: jimin-bts
+name: Jimin (Park Ji-min)
+profession: K-Pop Artist, Singer, Dancer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS's lead vocalist and main dancer known for powerful performances and emotional vocals. Solo album FACE topped charts worldwide. Dior ambassador with 51M Instagram followers.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, Malaysia
+instagram_followers: 51000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4600
+price_standard: 9600
+price_premium: 20500
+rating: 4.97
+review_count: 654
+response_time: 96h
+
+---
+
+8. SUGA (BTS)
+slug: suga-bts
+name: SUGA (Min Yoon-gi)
+profession: K-Pop Artist, Rapper, Producer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS rapper and acclaimed producer with solo projects as Agust D. Grammy-nominated songwriter who's produced for global artists. Known for raw, honest lyricism and 43M Instagram followers.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, China
+instagram_followers: 43000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4400
+price_standard: 9200
+price_premium: 19500
+rating: 4.96
+review_count: 587
+response_time: 96h
+
+---
+
+9. JIN (BTS)
+slug: jin-bts
+name: Jin (Kim Seok-jin)
+profession: K-Pop Artist, Singer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS's oldest member known as "Worldwide Handsome" with powerful vocals. Solo hit The Astronaut charted globally. Recently completed military service, returning stronger with 48M followers.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, Argentina
+instagram_followers: 48000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4300
+price_standard: 9000
+price_premium: 19000
+rating: 4.95
+review_count: 543
+response_time: 96h
+
+---
+
+10. RM (BTS)
+slug: rm-bts
+name: RM (Kim Nam-joon)
+profession: K-Pop Artist, Rapper, Producer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS leader, rapper, and intellectual voice of K-pop. Fluent English speaker, museum enthusiast, and solo artist with critically acclaimed albums. IQ 148 genius with 42M Instagram followers.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, Canada
+instagram_followers: 42000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 8800
+price_premium: 18500
+rating: 4.95
+review_count: 521
+response_time: 96h
+
+---
+
+11. J-HOPE (BTS)
+slug: j-hope-bts
+name: J-Hope (Jung Ho-seok)
+profession: K-Pop Artist, Rapper, Dancer
+category: Music → K-Pop → BTS
+tier: S
+bio: BTS's main dancer and sunshine energy. Coachella headliner as first Korean solo artist. Fashion icon for Louis Vuitton with infectious positivity and 47M Instagram followers.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, Italy
+instagram_followers: 47000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4400
+price_standard: 9200
+price_premium: 19500
+rating: 4.96
+review_count: 598
+response_time: 96h
+
+---
+
+12. JENNIE (BLACKPINK)
+slug: jennie-blackpink
+name: Jennie Kim
+profession: K-Pop Artist, Rapper
+category: Music → K-Pop → BLACKPINK
+tier: S
+bio: BLACKPINK's main rapper and human Chanel. Solo hit SOLO has 800M+ YouTube views. Fashion icon with 79M Instagram followers, redefining K-pop star power globally.
+primary_country: South Korea
+market_countries: South Korea, Thailand, China, Japan, United States, Indonesia, Philippines, Vietnam, France, United Kingdom, Singapore, Australia
+instagram_followers: 79000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4300
+price_standard: 9000
+price_premium: 19500
+rating: 4.97
+review_count: 487
+response_time: 96h
+
+---
+
+13. JISOO (BLACKPINK)
+slug: jisoo-blackpink
+name: Jisoo (Kim Ji-soo)
+profession: K-Pop Artist, Singer, Actress
+category: Music → K-Pop → BLACKPINK
+tier: S
+bio: BLACKPINK's lead vocalist and actress. Solo debut FLOWER broke records with 74M Instagram followers. Dior ambassador balancing music and K-drama career with elegance and talent.
+primary_country: South Korea
+market_countries: South Korea, China, Japan, United States, Indonesia, Philippines, Vietnam, Thailand, United Kingdom, France, Singapore, Malaysia
+instagram_followers: 74000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4100
+price_standard: 8600
+price_premium: 18500
+rating: 4.96
+review_count: 456
+response_time: 96h
+
+---
+
+14. ROSÉ (BLACKPINK)
+slug: rose-blackpink
+name: Rosé (Park Chae-young)
+profession: K-Pop Artist, Singer
+category: Music → K-Pop → BLACKPINK
+tier: S
+bio: BLACKPINK's main vocalist with distinctive voice. Solo hits On The Ground and APT with Bruno Mars topped global charts. Saint Laurent ambassador with 77M Instagram followers.
+primary_country: South Korea
+market_countries: South Korea, Australia, New Zealand, United States, Japan, Thailand, Indonesia, Philippines, United Kingdom, France, Singapore, Canada
+instagram_followers: 77000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 8800
+price_premium: 19000
+rating: 4.97
+review_count: 503
+response_time: 96h
+
+---
+
+15. TAYLOR SWIFT
+slug: taylor-swift
+name: Taylor Swift
+profession: Singer-Songwriter
+category: Music → Pop → Singer-Songwriter
+tier: S
+bio: 14-time Grammy winner and biggest pop star on the planet. Eras Tour became highest-grossing tour ever. Cultural phenomenon with 283M Instagram followers redefining music industry power.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Germany, France, Japan, Brazil, Mexico, Italy, Spain, Philippines
+instagram_followers: 283000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.99
+review_count: 892
+response_time: 96h
+
+---
+
+16. BEYONCÉ
+slug: beyonce
+name: Beyoncé Knowles-Carter
+profession: Singer, Actress, Entrepreneur
+category: Music → R&B/Soul → Singer
+tier: S
+bio: Queen Bey. 32-time Grammy winner, most awarded artist in Grammy history. Renaissance tour cultural phenomenon. Icon, activist, and businesswoman with 319M Instagram followers.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, France, Germany, Australia, Brazil, South Africa, Japan, Italy, Spain, Nigeria
+instagram_followers: 319000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.99
+review_count: 756
+response_time: 96h
+
+---
+
+17. CRISTIANO RONALDO
+slug: cristiano-ronaldo
+name: Cristiano Ronaldo
+profession: Professional Footballer
+category: Sports → Football/Soccer → Forward
+tier: S
+bio: Most followed person on Instagram (643M). Five-time Ballon d'Or winner and all-time international top scorer. Living legend redefining athletic longevity at 39 years old.
+primary_country: Portugal
+market_countries: Portugal, Saudi Arabia, Spain, Italy, United Kingdom, United States, Brazil, Argentina, France, Germany, Japan, India
+instagram_followers: 643000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.98
+review_count: 1247
+response_time: 96h
+
+---
+
+18. LIONEL MESSI
+slug: lionel-messi
+name: Lionel Messi
+profession: Professional Footballer
+category: Sports → Football/Soccer → Forward
+tier: S
+bio: Eight-time Ballon d'Or winner and World Cup champion. Greatest footballer of all time with 504M Instagram followers. Leading Inter Miami to new heights in MLS at 37.
+primary_country: Argentina
+market_countries: Argentina, United States, Spain, France, Brazil, Mexico, United Kingdom, Italy, Germany, Colombia, Japan, China
+instagram_followers: 504000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.99
+review_count: 1134
+response_time: 96h
+
+---
+
+19. LEBRON JAMES
+slug: lebron-james
+name: LeBron James
+profession: Professional Basketball Player
+category: Sports → Basketball → Forward
+tier: S
+bio: NBA all-time leading scorer and four-time champion. At 40, still dominating the game. Entrepreneur, activist, and cultural icon with 159M Instagram followers transcending basketball.
+primary_country: United States
+market_countries: United States, China, Canada, United Kingdom, Philippines, France, Germany, Australia, Brazil, Japan, Mexico, Spain
+instagram_followers: 159000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4800
+price_standard: 10000
+price_premium: 22000
+rating: 4.97
+review_count: 823
+response_time: 96h
+
+---
+
+20. SELENA GOMEZ
+slug: selena-gomez
+name: Selena Gomez
+profession: Singer, Actress, Entrepreneur
+category: Music → Pop → Singer
+tier: S
+bio: Third most-followed person on Instagram (429M). Only Murders star, chart-topping artist, Rare Beauty founder, and mental health advocate. Multi-hyphenate entertainment mogul.
+primary_country: United States
+market_countries: United States, Mexico, United Kingdom, Canada, Brazil, France, Spain, Italy, Germany, Philippines, Argentina, Australia
+instagram_followers: 429000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4500
+price_standard: 9500
+price_premium: 20000
+rating: 4.96
+review_count: 734
+response_time: 96h
+
+---
+
+21. ARIANA GRANDE
+slug: ariana-grande
+name: Ariana Grande
+profession: Singer, Actress
+category: Music → Pop → Singer
+tier: S
+bio: Seven-time Grammy winner with powerhouse vocals. From Victorious to chart-topping albums and Wicked movie star. Cultural icon with 380M Instagram followers dominating pop music.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Brazil, Mexico, France, Germany, Italy, Japan, Australia, Philippines, Spain
+instagram_followers: 380000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4600
+price_standard: 9600
+price_premium: 20500
+rating: 4.97
+review_count: 687
+response_time: 96h
+
+---
+
+22. DWAYNE "THE ROCK" JOHNSON
+slug: dwayne-the-rock-johnson
+name: Dwayne "The Rock" Johnson
+profession: Actor, Producer, Entrepreneur
+category: Film & Television → Hollywood → Action Star
+tier: S
+bio: Highest-paid actor and most likable man in Hollywood. From WWE legend to blockbuster king. Entrepreneur with Teremana Tequila and 396M Instagram followers. People's champion forever.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Brazil, Mexico, France, Germany, Japan, Philippines, India, China
+instagram_followers: 396000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4700
+price_standard: 9800
+price_premium: 21000
+rating: 4.96
+review_count: 891
+response_time: 96h
+
+---
+
+23. KIM KARDASHIAN
+slug: kim-kardashian
+name: Kim Kardashian
+profession: Entrepreneur, Reality TV Star
+category: Business & Lifestyle → Reality TV → Entrepreneur
+tier: S
+bio: SKIMS billionaire founder and reality TV icon. Law student, criminal justice advocate, and mother of four. Cultural phenomenon with 361M Instagram followers redefining celebrity entrepreneurship.
+primary_country: United States
+market_countries: United States, United Kingdom, Australia, Canada, France, Italy, Germany, Brazil, Mexico, Japan, United Arab Emirates, Saudi Arabia
+instagram_followers: 361000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4400
+price_standard: 9200
+price_premium: 19500
+rating: 4.93
+review_count: 623
+response_time: 72h
+
+---
+
+24. KYLIE JENNER
+slug: kylie-jenner
+name: Kylie Jenner
+profession: Entrepreneur, Reality TV Star
+category: Business & Lifestyle → Reality TV → Entrepreneur
+tier: S
+bio: Youngest self-made billionaire with Kylie Cosmetics empire. Reality TV royalty turned beauty mogul. Mother of two with 399M Instagram followers reshaping influencer business models.
+primary_country: United States
+market_countries: United States, United Kingdom, Australia, Canada, France, Italy, Germany, Brazil, Mexico, United Arab Emirates, Japan, Philippines
+instagram_followers: 399000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4300
+price_standard: 9000
+price_premium: 19000
+rating: 4.92
+review_count: 578
+response_time: 72h
+
+---
+
+25. BILLIE EILISH
+slug: billie-eilish
+name: Billie Eilish
+profession: Singer-Songwriter
+category: Music → Pop → Alternative Pop
+tier: S
+bio: Nine-time Grammy winner and youngest artist to win all four major categories. Unique voice and style defining Gen Z music. Oscar winner with 119M Instagram followers at just 23.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Germany, France, Brazil, Mexico, Japan, Italy, Spain, Philippines
+instagram_followers: 119000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.95
+review_count: 521
+response_time: 72h
+
+---
+
+26. DRAKE
+slug: drake
+name: Drake (Aubrey Drake Graham)
+profession: Rapper, Singer, Producer
+category: Music → Hip-Hop/Rap → Rapper
+tier: S
+bio: Most-streamed artist on Spotify with countless hits. Five-time Grammy winner blending rap and R&B. OVO founder and cultural tastemaker with 146M Instagram followers dominating charts.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, France, Germany, Australia, Brazil, Mexico, Japan, Nigeria, South Africa, Netherlands
+instagram_followers: 146000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4500
+price_standard: 9500
+price_premium: 20000
+rating: 4.95
+review_count: 634
+response_time: 96h
+
+---
+
+27. THE WEEKND
+slug: the-weeknd
+name: The Weeknd (Abel Tesfaye)
+profession: Singer, Producer
+category: Music → R&B/Soul → Singer
+tier: S
+bio: Four-time Grammy winner with record-breaking hits like Blinding Lights. From Toronto underground to global superstar. Dark R&B pioneer with 77M Instagram followers redefining genre boundaries.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, France, Germany, Australia, Brazil, Mexico, Japan, Italy, Spain, Ethiopia
+instagram_followers: 77000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 8800
+price_premium: 19000
+rating: 4.96
+review_count: 543
+response_time: 96h
+
+---
+
+28. RIHANNA
+slug: rihanna
+name: Rihanna (Robyn Rihanna Fenty)
+profession: Singer, Entrepreneur
+category: Music → Pop/R&B → Singer
+tier: S
+bio: Billionaire Fenty Beauty founder and nine-time Grammy winner. Super Bowl halftime show legend. Barbadian icon with 152M Instagram followers proving music is just one chapter of greatness.
+primary_country: Barbados
+market_countries: Barbados, United States, United Kingdom, France, Canada, Brazil, Germany, Australia, Italy, Japan, South Africa, Nigeria
+instagram_followers: 152000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.98
+review_count: 712
+response_time: 96h
+
+---
+
+29. ED SHEERAN
+slug: ed-sheeran
+name: Ed Sheeran
+profession: Singer-Songwriter
+category: Music → Pop → Singer-Songwriter
+tier: S
+bio: Four-time Grammy winner and most-streamed artist on Spotify. From street busker to stadium filler with just a guitar. Prolific songwriter with 45M Instagram followers writing modern classics.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Germany, France, Ireland, Netherlands, Brazil, Japan, Philippines, Italy
+instagram_followers: 45000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4100
+price_standard: 8600
+price_premium: 18500
+rating: 4.94
+review_count: 487
+response_time: 96h
+
+---
+
+30. ADELE
+slug: adele
+name: Adele (Adele Laurie Blue Adkins)
+profession: Singer-Songwriter
+category: Music → Pop/Soul → Singer
+tier: S
+bio: 16-time Grammy winner with voice of a generation. From 21 to 30, each album breaks records. Las Vegas residency queen with 56M Instagram followers making heartbreak beautiful.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Germany, France, Italy, Brazil, Netherlands, Ireland, Japan, Spain
+instagram_followers: 56000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4800
+price_standard: 10000
+price_premium: 22000
+rating: 4.98
+review_count: 534
+response_time: 96h
+
+---
+
+31. HARRY STYLES
+slug: harry-styles
+name: Harry Styles
+profession: Singer, Actor
+category: Music → Pop/Rock → Singer
+tier: S
+bio: From One Direction to solo superstar. Grammy winner with Harry's House. Fashion icon challenging gender norms. Actor in Dunkirk and Don't Worry Darling with 48M Instagram followers.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Brazil, Mexico, Japan, Philippines, Spain
+instagram_followers: 48000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4300
+price_standard: 9000
+price_premium: 19500
+rating: 4.96
+review_count: 623
+response_time: 96h
+
+---
+
+32. NEYMAR JR.
+slug: neymar-jr
+name: Neymar Jr. (Neymar da Silva Santos Júnior)
+profession: Professional Footballer
+category: Sports → Football/Soccer → Forward
+tier: S
+bio: Brazilian football magician with incredible skills and flair. PSG and Barcelona legend now at Al-Hilal. Third most-followed footballer with 224M Instagram followers entertaining on and off pitch.
+primary_country: Brazil
+market_countries: Brazil, Saudi Arabia, France, Spain, United States, Argentina, Mexico, Portugal, Japan, China, United Kingdom, Germany
+instagram_followers: 224000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4600
+price_standard: 9600
+price_premium: 20500
+rating: 4.94
+review_count: 687
+response_time: 96h
+
+---
+
+33. KYLIAN MBAPPÉ
+slug: kylian-mbappe
+name: Kylian Mbappé
+profession: Professional Footballer
+category: Sports → Football/Soccer → Forward
+tier: S
+bio: World Cup winner at 19, now Real Madrid star. Fastest player in football with lethal finishing. Future Ballon d'Or winner with 119M Instagram followers dominating world football.
+primary_country: France
+market_countries: France, Spain, United States, United Kingdom, Brazil, Argentina, Germany, Japan, Saudi Arabia, Morocco, Algeria, Italy
+instagram_followers: 119000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4700
+price_standard: 9800
+price_premium: 21000
+rating: 4.96
+review_count: 734
+response_time: 96h
+
+---
+
+34. SERENA WILLIAMS
+slug: serena-williams
+name: Serena Williams
+profession: Professional Tennis Player (Retired)
+category: Sports → Tennis → Singles
+tier: S
+bio: 23-time Grand Slam champion and greatest female tennis player ever. Entrepreneur, investor, and mother. Retired legend with 17M Instagram followers inspiring generations beyond tennis.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Australia, Germany, Japan, Canada, Italy, Brazil, South Africa, Spain, China
+instagram_followers: 17000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 8800
+price_premium: 19000
+rating: 4.97
+review_count: 423
+response_time: 72h
+
+---
+
+35. RAFAEL NADAL
+slug: rafael-nadal
+name: Rafael Nadal
+profession: Professional Tennis Player
+category: Sports → Tennis → Singles
+tier: S
+bio: 22-time Grand Slam champion and King of Clay. Recently retired after legendary career. Spanish icon with 21M Instagram followers embodying sportsmanship, humility, and greatness.
+primary_country: Spain
+market_countries: Spain, France, United States, United Kingdom, Australia, Italy, Germany, Argentina, Brazil, Japan, Mexico, Portugal
+instagram_followers: 21000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.96
+review_count: 389
+response_time: 72h
+
+---
+
+36. LEWIS HAMILTON
+slug: lewis-hamilton
+name: Lewis Hamilton
+profession: Formula 1 Driver
+category: Sports → Motorsports → Formula 1
+tier: S
+bio: Seven-time F1 World Champion tied with Schumacher. First Black driver to win F1 championship. Fashion icon, activist, and vegan advocate with 37M Instagram followers transcending motorsport.
+primary_country: United Kingdom
+market_countries: United Kingdom, Monaco, United States, Germany, Italy, France, Brazil, Japan, Australia, Netherlands, Spain, Singapore
+instagram_followers: 37000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4100
+price_standard: 8600
+price_premium: 18500
+rating: 4.95
+review_count: 456
+response_time: 96h
+
+---
+
+37. VIRAT KOHLI
+slug: virat-kohli
+name: Virat Kohli
+profession: Professional Cricket Player
+category: Sports → Cricket → Batsman
+tier: S
+bio: Cricket legend and India's captain. Highest run-scorer in T20 internationals. Fitness icon and brand ambassador with 271M Instagram followers, most followed cricketer worldwide.
+primary_country: India
+market_countries: India, United Kingdom, Australia, Pakistan, Bangladesh, Sri Lanka, South Africa, United Arab Emirates, United States, Canada, New Zealand, Afghanistan
+instagram_followers: 271000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4500
+price_standard: 9500
+price_premium: 20000
+rating: 4.97
+review_count: 892
+response_time: 96h
+
+---
+
+38. CONOR MCGREGOR
+slug: conor-mcgregor
+name: Conor McGregor
+profession: MMA Fighter
+category: Sports → Combat Sports → MMA
+tier: S
+bio: UFC legend and biggest pay-per-view star in MMA history. First fighter to hold titles in two weight classes simultaneously. Proper Twelve whiskey founder with 47M Instagram followers.
+primary_country: Ireland
+market_countries: Ireland, United States, United Kingdom, Australia, Canada, Brazil, Russia, Japan, Mexico, United Arab Emirates, Philippines, Germany
+instagram_followers: 47000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8000
+price_premium: 17000
+rating: 4.91
+review_count: 534
+response_time: 96h
+
+---
+
+39. EMMA WATSON
+slug: emma-watson
+name: Emma Watson
+profession: Actress, Activist
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: Hermione Granger forever. From Harry Potter to Beauty and the Beast and UN Women Goodwill Ambassador. Feminist icon and Brown graduate with 74M Instagram followers championing equality.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, France, Canada, Australia, Germany, Italy, Brazil, Japan, Spain, Mexico, Philippines
+instagram_followers: 74000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3900
+price_standard: 8200
+price_premium: 17500
+rating: 4.94
+review_count: 487
+response_time: 72h
+
+---
+
+40. MARGOT ROBBIE
+slug: margot-robbie
+name: Margot Robbie
+profession: Actress, Producer
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: Barbie herself. Oscar-nominated for I, Tonya and Bombshell. Producer with LuckyChap Entertainment. Australian star with 29M Instagram followers making bold, smart career choices.
+primary_country: Australia
+market_countries: Australia, United States, United Kingdom, Canada, France, Germany, Italy, Brazil, Japan, Spain, Mexico, Netherlands
+instagram_followers: 29000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3700
+price_standard: 7800
+price_premium: 16500
+rating: 4.93
+review_count: 412
+response_time: 72h
+
+---
+
+41. LEONARDO DICAPRIO
+slug: leonardo-dicaprio
+name: Leonardo DiCaprio
+profession: Actor, Environmental Activist
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Oscar winner for The Revenant after six nominations. From Titanic to Inception and Killers of the Flower Moon. Environmental activist with 61M Instagram followers, Hollywood royalty.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Italy, Germany, Canada, Australia, Brazil, Japan, Spain, Mexico, Argentina
+instagram_followers: 61000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4400
+price_standard: 9200
+price_premium: 19500
+rating: 4.96
+review_count: 578
+response_time: 96h
+
+---
+
+42. TOM HOLLAND
+slug: tom-holland
+name: Tom Holland
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Spider-Man himself. From MCU to Uncharted and The Crowded Room. British charmer who does his own stunts with 65M Instagram followers swinging into every heart.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Brazil, Japan, Spain, Mexico, Philippines
+instagram_followers: 65000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8000
+price_premium: 17000
+rating: 4.94
+review_count: 521
+response_time: 72h
+
+---
+
+43. CHRIS HEMSWORTH
+slug: chris-hemsworth
+name: Chris Hemsworth
+profession: Actor
+category: Film & Television → Hollywood → Action Star
+tier: S
+bio: Thor in the MCU and Australian heartthrob. From Extraction to Furiosa, action star with leading man charm. Fitness entrepreneur with 58M Instagram followers embodying superhero lifestyle.
+primary_country: Australia
+market_countries: Australia, United States, United Kingdom, Canada, Germany, France, Brazil, Japan, Mexico, Italy, Spain, Philippines
+instagram_followers: 58000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3700
+price_standard: 7800
+price_premium: 16500
+rating: 4.92
+review_count: 467
+response_time: 72h
+
+---
+
+44. SCARLETT JOHANSSON
+slug: scarlett-johansson
+name: Scarlett Johansson
+profession: Actress
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: Black Widow and highest-grossing actress of all time. From Lost in Translation to Avengers. Two-time Oscar nominee with talent, beauty, and 2.1M Instagram followers keeping it private.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, France, Germany, Italy, Australia, Brazil, Japan, Spain, Mexico, China
+instagram_followers: 2100000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.95
+review_count: 445
+response_time: 96h
+
+---
+
+45. JENNIFER LAWRENCE
+slug: jennifer-lawrence
+name: Jennifer Lawrence
+profession: Actress
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: Oscar winner for Silver Linings Playbook. Katniss Everdeen and X-Men's Mystique. Kentucky native with relatable humor and 29M Instagram followers, America's favorite best friend.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Brazil, Japan, Spain, Mexico, Argentina
+instagram_followers: 29000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3900
+price_standard: 8200
+price_premium: 17500
+rating: 4.94
+review_count: 423
+response_time: 72h
+
+---
+
+46. RYAN REYNOLDS
+slug: ryan-reynolds
+name: Ryan Reynolds
+profession: Actor, Entrepreneur
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Deadpool and marketing genius. From Green Lantern flop to MCU king. Aviation Gin and Mint Mobile owner with 53M Instagram followers proving funny guys can have it all.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, Australia, France, Germany, Brazil, Mexico, Japan, Italy, Spain, Philippines
+instagram_followers: 53000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8000
+price_premium: 17000
+rating: 4.93
+review_count: 501
+response_time: 72h
+
+---
+
+47. ROBERT DOWNEY JR.
+slug: robert-downey-jr
+name: Robert Downey Jr.
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Iron Man and Hollywood comeback king. From rehab to highest-paid actor. Oscar winner for Oppenheimer with 58M Instagram followers proving second chances exist.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Brazil, Japan, China, Spain, Mexico
+instagram_followers: 58000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 8800
+price_premium: 19000
+rating: 4.96
+review_count: 567
+response_time: 96h
+
+---
+
+48. PRIYANKA CHOPRA
+slug: priyanka-chopra
+name: Priyanka Chopra Jonas
+profession: Actress, Singer, Producer
+category: Film & Television → Bollywood → Leading Actress
+tier: S
+bio: Miss World turned Bollywood and Hollywood star. From Quantico to Citadel. Global icon married to Nick Jonas with 91M Instagram followers bridging East and West seamlessly.
+primary_country: India
+market_countries: India, United States, United Kingdom, Canada, Australia, United Arab Emirates, Pakistan, Bangladesh, Sri Lanka, Nepal, Germany, France
+instagram_followers: 91000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.91
+review_count: 445
+response_time: 72h
+
+---
+
+49. SHAH RUKH KHAN
+slug: shah-rukh-khan
+name: Shah Rukh Khan
+profession: Actor, Producer
+category: Film & Television → Bollywood → Leading Actor
+tier: S
+bio: King of Bollywood for 30+ years. From DDLJ to Pathaan, global icon with 45M Instagram followers. Knight of France's Order of Arts and Letters, Bollywood's eternal romantic hero.
+primary_country: India
+market_countries: India, United Arab Emirates, United States, United Kingdom, Pakistan, Bangladesh, Sri Lanka, Nepal, Saudi Arabia, Canada, Australia, Malaysia
+instagram_followers: 45000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.96
+review_count: 723
+response_time: 96h
+
+---
+
+50. ALIA BHATT
+slug: alia-bhatt
+name: Alia Bhatt
+profession: Actress
+category: Film & Television → Bollywood → Leading Actress
+tier: S
+bio: Bollywood's brightest star with back-to-back hits. From Student of the Year to Gangubai and RRR. National Award winner with 84M Instagram followers dominating Indian cinema.
+primary_country: India
+market_countries: India, United Arab Emirates, United States, United Kingdom, Pakistan, Bangladesh, Sri Lanka, Nepal, Canada, Australia, Saudi Arabia, Malaysia
+instagram_followers: 84000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3500
+price_standard: 7400
+price_premium: 15500
+rating: 4.92
+review_count: 534
+response_time: 72h
+
+---
+
+51. JACKSON WANG
+slug: jackson-wang
+name: Jackson Wang (Wang Jiaer)
+profession: Singer, Rapper, Designer
+category: Music → C-Pop → Solo Artist
+tier: S
+bio: GOT7 member turned solo C-pop king. Team Wang founder blending Chinese and Western music. Fashion icon with 34M Instagram followers representing new generation of Asian artists.
+primary_country: China
+market_countries: China, Hong Kong, South Korea, Thailand, United States, United Kingdom, Japan, Singapore, Malaysia, Indonesia, Taiwan, Philippines
+instagram_followers: 34000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3400
+price_standard: 7200
+price_premium: 15000
+rating: 4.90
+review_count: 412
+response_time: 72h
+
+---
+
+52. XIAO ZHAN
+slug: xiao-zhan
+name: Xiao Zhan (Sean Xiao)
+profession: Actor, Singer
+category: Film & Television → C-Drama → Leading Actor
+tier: S
+bio: The Untamed breakout star dominating Chinese entertainment. Actor and X NINE member. Weibo king with massive fanbase, one of China's most bankable stars reshaping C-drama landscape.
+primary_country: China
+market_countries: China, Taiwan, Hong Kong, Thailand, Vietnam, Singapore, Malaysia, Indonesia, Philippines, South Korea, United States, Canada
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8000
+price_premium: 17000
+rating: 4.94
+review_count: 678
+response_time: 96h
+
+---
+
+53. WANG YIBO
+slug: wang-yibo
+name: Wang Yibo
+profession: Actor, Singer, Dancer
+category: Film & Television → C-Drama → Leading Actor
+tier: S
+bio: The Untamed co-star and UNIQ member. Professional motorcycle racer, dancer, and actor. Multi-talented phenomenon with devoted fanbase transforming Chinese entertainment industry.
+primary_country: China
+market_countries: China, Taiwan, Hong Kong, South Korea, Thailand, Vietnam, Singapore, Malaysia, Indonesia, Philippines, Japan, United States
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3700
+price_standard: 7800
+price_premium: 16500
+rating: 4.93
+review_count: 645
+response_time: 96h
+
+---
+
+54. DILRABA DILMURAT
+slug: dilraba-dilmurat
+name: Dilraba Dilmurat
+profession: Actress, Singer
+category: Film & Television → C-Drama → Leading Actress
+tier: S
+bio: Uyghur beauty and C-drama queen. From Eternal Love to You Are My Glory. Dior ambassador with stunning looks and acting chops dominating Chinese television and fashion.
+primary_country: China
+market_countries: China, Taiwan, Hong Kong, Singapore, Malaysia, Indonesia, Thailand, Vietnam, Philippines, South Korea, Japan, United States
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.92
+review_count: 589
+response_time: 96h
+
+---
+
+55. YANG YANG
+slug: yang-yang
+name: Yang Yang
+profession: Actor
+category: Film & Television → C-Drama → Leading Actor
+tier: S
+bio: Love O2O and You Are My Glory star. Military training background bringing discipline to acting. Burberry ambassador with chiseled features and 25M Weibo followers, C-drama heartthrob.
+primary_country: China
+market_countries: China, Taiwan, Hong Kong, Singapore, Malaysia, Thailand, Vietnam, Indonesia, Philippines, South Korea, Japan, United States
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3500
+price_standard: 7400
+price_premium: 15500
+rating: 4.91
+review_count: 523
+response_time: 96h
+
+---
+
+56. SONG JOONG-KI
+slug: song-joong-ki
+name: Song Joong-ki
+profession: Actor
+category: Film & Television → K-Drama → Leading Actor
+tier: S
+bio: Descendants of the Sun phenomenon. From Sungkyunkwan Scandal to Vincenzo and Reborn Rich. Korean Wave ambassador with 16M Instagram followers, Asia's most charming leading man.
+primary_country: South Korea
+market_countries: South Korea, China, Japan, Thailand, Philippines, Vietnam, Indonesia, Taiwan, Singapore, Malaysia, United States, United Kingdom
+instagram_followers: 16000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.92
+review_count: 478
+response_time: 72h
+
+---
+
+57. PARK SEO-JOON
+slug: park-seo-joon
+name: Park Seo-joon
+profession: Actor
+category: Film & Television → K-Drama → Leading Actor
+tier: S
+bio: What's Wrong with Secretary Kim and Itaewon Class star. Marvel's The Marvels debut. Choi Woo-shik's Wooga Squad member with 27M Instagram followers, K-drama's most reliable leading man.
+primary_country: South Korea
+market_countries: South Korea, Philippines, Thailand, Vietnam, Indonesia, China, Japan, Taiwan, Singapore, Malaysia, United States, United Kingdom
+instagram_followers: 27000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3500
+price_standard: 7400
+price_premium: 15500
+rating: 4.91
+review_count: 456
+response_time: 72h
+
+---
+
+58. IU (LEE JI-EUN)
+slug: iu-lee-ji-eun
+name: IU (Lee Ji-eun)
+profession: Singer, Actress
+category: Music → K-Pop → Solo Artist
+tier: S
+bio: Korea's sweetheart and nation's little sister. From Love Poem to Hotel Del Luna and My Mister. Singer-songwriter-actress triple threat with 30M Instagram followers owning Korean entertainment.
+primary_country: South Korea
+market_countries: South Korea, Japan, China, Taiwan, Thailand, Philippines, Vietnam, Indonesia, Singapore, Malaysia, United States, Hong Kong
+instagram_followers: 30000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3900
+price_standard: 8200
+price_premium: 17500
+rating: 4.95
+review_count: 612
+response_time: 96h
+
+---
+
+59. LEE MIN-HO
+slug: lee-min-ho
+name: Lee Min-ho
+profession: Actor
+category: Film & Television → K-Drama → Leading Actor
+tier: S
+bio: Boys Over Flowers launched Hallyu Wave 2.0. From City Hunter to The King: Eternal Monarch. First Korean actor with 33M Instagram followers, eternal Hallyu prince.
+primary_country: South Korea
+market_countries: South Korea, China, Japan, Philippines, Thailand, Indonesia, Vietnam, Taiwan, Singapore, Malaysia, United States, Hong Kong
+instagram_followers: 33000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3700
+price_standard: 7800
+price_premium: 16500
+rating: 4.93
+review_count: 534
+response_time: 72h
+
+---
+
+60. JUN JI-HYUN
+slug: jun-ji-hyun
+name: Jun Ji-hyun (Gianna Jun)
+profession: Actress
+category: Film & Television → K-Drama → Leading Actress
+tier: S
+bio: My Sassy Girl and You Who Came from the Stars icon. From rom-coms to action in Kingdom: Ashin. Timeless beauty with 15M Instagram followers, Korea's eternal goddess.
+primary_country: South Korea
+market_countries: South Korea, China, Japan, Taiwan, Hong Kong, Thailand, Philippines, Vietnam, Singapore, Malaysia, Indonesia, United States
+instagram_followers: 15000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.92
+review_count: 445
+response_time: 72h
+
+---
+
+61. HYUN BIN
+slug: hyun-bin
+name: Hyun Bin (Kim Tae-pyung)
+profession: Actor
+category: Film & Television → K-Drama → Leading Actor
+tier: S
+bio: Crash Landing on You global phenomenon. Married to Son Ye-jin in real-life fairytale. From Secret Garden to Confidential Assignment films with 12M Instagram followers, ultimate K-drama leading man.
+primary_country: South Korea
+market_countries: South Korea, China, Japan, Philippines, Thailand, Vietnam, Indonesia, Taiwan, Singapore, Malaysia, United States, United Kingdom
+instagram_followers: 12000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3700
+price_standard: 7800
+price_premium: 16500
+rating: 4.93
+review_count: 489
+response_time: 72h
+
+---
+
+62. SON YE-JIN
+slug: son-ye-jin
+name: Son Ye-jin
+profession: Actress
+category: Film & Television → K-Drama → Leading Actress
+tier: S
+bio: Crash Landing on You queen and Mrs. Hyun Bin. From A Moment to Remember to Thirty-Nine. Baeksang Award winner with 14M Instagram followers embodying elegance and talent.
+primary_country: South Korea
+market_countries: South Korea, China, Japan, Philippines, Thailand, Vietnam, Indonesia, Taiwan, Singapore, Malaysia, United States, Hong Kong
+instagram_followers: 14000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.92
+review_count: 467
+response_time: 72h
+
+---
+
+63. PEDRO PASCAL
+slug: pedro-pascal
+name: Pedro Pascal
+profession: Actor
+category: Film & Television → Hollywood → Character Actor
+tier: S
+bio: The Mandalorian and The Last of Us defining TV. From Game of Thrones to leading man status at 49. Chilean-American icon with 14M Instagram followers proving talent transcends age.
+primary_country: Chile
+market_countries: United States, Chile, Mexico, United Kingdom, Canada, Spain, Argentina, Brazil, France, Germany, Australia, Italy
+instagram_followers: 14000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.93
+review_count: 445
+response_time: 72h
+
+---
+
+64. ANYA TAYLOR-JOY
+slug: anya-taylor-joy
+name: Anya Taylor-Joy
+profession: Actress
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: The Queen's Gambit Emmy winner and Furiosa star. From Split to The Menu, ethereal presence commanding screen. Miami-born, Argentina-raised icon with 13M Instagram followers redefining beauty.
+primary_country: United States
+market_countries: United States, United Kingdom, Argentina, Spain, France, Germany, Italy, Canada, Australia, Mexico, Brazil, Japan
+instagram_followers: 13000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3400
+price_standard: 7200
+price_premium: 15000
+rating: 4.91
+review_count: 412
+response_time: 72h
+
+---
+
+65. FLORENCE PUGH
+slug: florence-pugh
+name: Florence Pugh
+profession: Actress
+category: Film & Television → Hollywood → Leading Actress
+tier: S
+bio: Oscar-nominated for Little Women. From Midsommar to Black Widow and Oppenheimer. British powerhouse with 9.8M Instagram followers bringing intensity and vulnerability to every role.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Brazil, Spain, Japan, Mexico, Netherlands
+instagram_followers: 9800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3300
+price_standard: 7000
+price_premium: 14500
+rating: 4.90
+review_count: 389
+response_time: 72h
+
+---
+
+66. AUSTIN BUTLER
+slug: austin-butler
+name: Austin Butler
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Oscar-nominated for Elvis transformation. From TV teen to Dune 2 and Masters of the Air. Method actor with 11M Instagram followers proving dedication pays off spectacularly.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Brazil, Japan, Spain, Mexico, Philippines
+instagram_followers: 11000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 6800
+price_premium: 14000
+rating: 4.89
+review_count: 356
+response_time: 72h
+
+---
+
+67. SYDNEY SWEENEY
+slug: sydney-sweeney
+name: Sydney Sweeney
+profession: Actress
+category: Film & Television → Hollywood → Rising Star
+tier: S
+bio: Euphoria and The White Lotus breakout. From Anyone But You to producing own projects. Idaho native with 22M Instagram followers balancing blockbusters and indie cred.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Brazil, Mexico, Spain, Philippines, Japan
+instagram_followers: 22000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3100
+price_standard: 6600
+price_premium: 13500
+rating: 4.88
+review_count: 423
+response_time: 48h
+
+---
+
+68. JACOB ELORDI
+slug: jacob-elordi
+name: Jacob Elordi
+profession: Actor
+category: Film & Television → Hollywood → Leading Actor
+tier: S
+bio: Euphoria's Nate Jacobs and The Kissing Booth star. From Priscilla to Saltburn, Australian heartthrob with 17M Instagram followers becoming Hollywood's next leading man.
+primary_country: Australia
+market_countries: Australia, United States, United Kingdom, Canada, France, Germany, Italy, Brazil, Mexico, Spain, Philippines, Japan
+instagram_followers: 17000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3000
+price_standard: 6400
+price_premium: 13000
+rating: 4.87
+review_count: 389
+response_time: 48h
+
+---
+
+69. MILLIE BOBBY BROWN
+slug: millie-bobby-brown
+name: Millie Bobby Brown
+profession: Actress, Producer
+category: Film & Television → Hollywood → Young Star
+tier: S
+bio: Eleven from Stranger Things and Enola Holmes star. Emmy-nominated at 13. Producer and Florence by Mills founder with 64M Instagram followers growing up in spotlight gracefully.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Brazil, Spain, Japan, Mexico, Philippines
+instagram_followers: 64000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3400
+price_standard: 7200
+price_premium: 15000
+rating: 4.91
+review_count: 534
+response_time: 72h
+
+---
+
+70. JENNA ORTEGA
+slug: jenna-ortega
+name: Jenna Ortega
+profession: Actress
+category: Film & Television → Hollywood → Young Star
+tier: S
+bio: Wednesday Addams reviving iconic role. From You to Scream and Beetlejuice 2. Mexican-American actress with 50M Instagram followers becoming Gen Z's scream queen and style icon.
+primary_country: United States
+market_countries: United States, Mexico, United Kingdom, Canada, Brazil, France, Germany, Italy, Spain, Australia, Philippines, Argentina
+instagram_followers: 50000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3300
+price_standard: 7000
+price_premium: 14500
+rating: 4.90
+review_count: 489
+response_time: 48h
+
+---
+
+71. OLIVIA RODRIGO
+slug: olivia-rodrigo
+name: Olivia Rodrigo
+profession: Singer-Songwriter, Actress
+category: Music → Pop → Singer-Songwriter
+tier: S
+bio: Three Grammy winner for SOUR debut album. From drivers license to vampire, Gen Z's voice with 38M Instagram followers writing heartbreak anthems defining teenage experience.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Philippines, France, Germany, Brazil, Mexico, Japan, Spain, Italy
+instagram_followers: 38000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3500
+price_standard: 7400
+price_premium: 15500
+rating: 4.92
+review_count: 534
+response_time: 72h
+
+---
+
+72. SABRINA CARPENTER
+slug: sabrina-carpenter
+name: Sabrina Carpenter
+profession: Singer-Songwriter, Actress
+category: Music → Pop → Singer-Songwriter
+tier: S
+bio: From Disney to pop sensation. Espresso and Please Please Please dominating charts. emails i can't send era with 42M Instagram followers proving she's pop's next big thing.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Italy, Brazil, Mexico, Philippines, Spain, Japan
+instagram_followers: 42000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 6800
+price_premium: 14000
+rating: 4.89
+review_count: 478
+response_time: 48h
+
+---
+
+73. CHARLI D'AMELIO
+slug: charli-damelio
+name: Charli D'Amelio
+profession: Content Creator, Dancer
+category: Digital Creators → TikTok → Dance/Lifestyle
+tier: S
+bio: First person to hit 100M TikTok followers. From Renegade dance to reality TV and entrepreneurship. Connecticut teen with 155M TikTok followers defining Gen Z fame.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Mexico, Brazil, France, Germany, Italy, Philippines, Spain, Japan
+instagram_followers: 48000000
+tiktok_followers: 155000000
+youtube_subscribers: 9800000
+price_quick: 3100
+price_standard: 6600
+price_premium: 13500
+rating: 4.86
+review_count: 623
+response_time: 48h
+
+---
+
+74. ADDISON RAE
+slug: addison-rae
+name: Addison Rae (Addison Rae Easterling)
+profession: Content Creator, Singer, Actress
+category: Digital Creators → TikTok → Dance/Lifestyle
+tier: S
+bio: TikTok royalty turned multi-hyphenate. From dances to He's All That and music career. Louisiana native with 88M TikTok followers proving influencers can transition to traditional entertainment.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Mexico, Brazil, France, Germany, Italy, Philippines, Spain, Japan
+instagram_followers: 40000000
+tiktok_followers: 88000000
+youtube_subscribers: 3200000
+price_quick: 2900
+price_standard: 6200
+price_premium: 12500
+rating: 4.83
+review_count: 534
+response_time: 48h
+
+---
+
+75. EMMA CHAMBERLAIN
+slug: emma-chamberlain
+name: Emma Chamberlain
+profession: Content Creator, Entrepreneur
+category: Digital Creators → YouTube → Lifestyle
+tier: S
+bio: Revolutionized YouTube with authentic vlogs. Chamberlain Coffee founder and Met Gala regular. Fashion week front row with 16M Instagram followers redefining influencer trajectory.
+primary_country: United States
+market_countries: United States, Canada, United Kingdom, Australia, Germany, France, Italy, Netherlands, Sweden, Mexico
+instagram_followers: 16000000
+tiktok_followers: 0
+youtube_subscribers: 12000000
+price_quick: 3000
+price_standard: 6400
+price_premium: 13000
+rating: 4.87
+review_count: 445
+response_time: 48h
+
+---
+
+76. MR BEAST
+slug: mrbeast
+name: MrBeast (Jimmy Donaldson)
+profession: Content Creator, Philanthropist
+category: Digital Creators → YouTube → Entertainment
+tier: S
+bio: YouTube's biggest star with 240M subscribers. From planting trees to opening food banks. Feastables founder with 54M Instagram followers revolutionizing content creation and philanthropy.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, India, Brazil, Mexico, Philippines, Germany, France, Japan, Indonesia
+instagram_followers: 54000000
+tiktok_followers: 0
+youtube_subscribers: 240000000
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.94
+review_count: 1023
+response_time: 96h
+
+---
+
+77. PEWDIEPIE
+slug: pewdiepie
+name: PewDiePie (Felix Kjellberg)
+profession: Content Creator
+category: Digital Creators → YouTube → Gaming/Commentary
+tier: S
+bio: YouTube legend with 111M subscribers. From gaming to commentary to Japan vlogs. Swedish icon married to Marzia with 22M Instagram followers, OG YouTube royalty.
+primary_country: Sweden
+market_countries: Sweden, United Kingdom, United States, Japan, Germany, France, Australia, Canada, Brazil, Italy, Spain, Philippines
+instagram_followers: 22000000
+tiktok_followers: 0
+youtube_subscribers: 111000000
+price_quick: 3500
+price_standard: 7400
+price_premium: 15500
+rating: 4.90
+review_count: 723
+response_time: 96h
+
+---
+
+78. KHABY LAME
+slug: khaby-lame
+name: Khaby Lame
+profession: Content Creator
+category: Digital Creators → TikTok → Comedy
+tier: S
+bio: Most-followed TikToker with 162M followers. Silent reactions to life hacks going viral worldwide. Senegalese-Italian creator with 81M Instagram followers proving humor is universal.
+primary_country: Italy
+market_countries: Italy, Senegal, United States, France, Brazil, Spain, Germany, United Kingdom, India, Mexico, Nigeria, Morocco
+instagram_followers: 81000000
+tiktok_followers: 162000000
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 6800
+price_premium: 14000
+rating: 4.85
+review_count: 567
+response_time: 72h
+
+---
+
+79. ELON MUSK
+slug: elon-musk
+name: Elon Musk
+profession: Entrepreneur, Engineer
+category: Business & Tech → Tech Leaders → CEO
+tier: S
+bio: Tesla and SpaceX CEO, X owner, richest person alive. From PayPal to Mars colonization plans. South African-born visionary with 210M X followers reshaping multiple industries simultaneously.
+primary_country: United States
+market_countries: United States, South Africa, Canada, United Kingdom, Germany, China, Japan, Australia, France, Netherlands, Singapore, United Arab Emirates
+instagram_followers: 0
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.78
+review_count: 234
+response_time: 96h
+
+---
+
+80. MARK ZUCKERBERG
+slug: mark-zuckerberg
+name: Mark Zuckerberg
+profession: Entrepreneur, CEO
+category: Business & Tech → Tech Leaders → CEO
+tier: S
+bio: Meta CEO and Facebook founder. From Harvard dorm to metaverse vision. Billionaire philanthropist with 13M Instagram followers transformed how humanity connects.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, India, Germany, France, Brazil, Japan, Australia, Singapore, Philippines, Indonesia
+instagram_followers: 13000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.72
+review_count: 189
+response_time: 96h
+
+---
+
+81. JEFF BEZOS
+slug: jeff-bezos
+name: Jeff Bezos
+profession: Entrepreneur, Founder
+category: Business & Tech → Entrepreneurs → Founder
+tier: S
+bio: Amazon founder and Blue Origin owner. From online bookstore to everything store. Second richest person with 4.8M Instagram followers revolutionizing e-commerce and space exploration.
+primary_country: United States
+market_countries: United States, United Kingdom, Germany, France, Canada, Japan, India, Australia, Italy, Spain, Brazil, Singapore
+instagram_followers: 4800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.69
+review_count: 156
+response_time: 96h
+
+---
+
+82. BILL GATES
+slug: bill-gates
+name: Bill Gates
+profession: Entrepreneur, Philanthropist
+category: Business & Tech → Entrepreneurs → Philanthropist
+tier: S
+bio: Microsoft co-founder and global health champion. From Windows to Gates Foundation saving millions of lives. Philanthropist with 37M Instagram followers using wealth for good.
+primary_country: United States
+market_countries: United States, United Kingdom, India, Germany, France, Canada, China, Japan, Australia, Kenya, Ethiopia, Nigeria
+instagram_followers: 37000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.85
+review_count: 203
+response_time: 96h
+
+---
+
+83. OPRAH WINFREY
+slug: oprah-winfrey
+name: Oprah Winfrey
+profession: Media Mogul, Actress, Producer
+category: Film & Television → Media → Talk Show Host
+tier: S
+bio: Media legend and first Black female billionaire. From talk show queen to OWN network and acting. Cultural icon with 23M Instagram followers inspiring generations for decades.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, South Africa, France, Germany, Brazil, Japan, Nigeria, Ghana, Kenya
+instagram_followers: 23000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.96
+review_count: 412
+response_time: 96h
+
+---
+
+84. ELLEN DEGENERES
+slug: ellen-degeneres
+name: Ellen DeGeneres
+profession: Comedian, Talk Show Host
+category: Comedy & Entertainment → Stand-up/TV → Talk Show Host
+tier: S
+bio: Emmy-winning talk show host for 19 seasons. Stand-up legend and LGBTQ+ icon. From Finding Nemo to Ellen Show with 139M Instagram followers making America dance.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, Germany, France, Brazil, Mexico, Italy, Spain, Philippines, Japan
+instagram_followers: 139000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4200
+price_standard: 8800
+price_premium: 19000
+rating: 4.88
+review_count: 489
+response_time: 96h
+
+---
+
+85. KEVIN HART
+slug: kevin-hart
+name: Kevin Hart
+profession: Comedian, Actor
+category: Comedy & Entertainment → Stand-up/Film → Comedian
+tier: S
+bio: Stand-up king and box office star. From Let Me Explain to Jumanji franchise. HartBeat Productions founder with 179M Instagram followers, hardest working man in comedy.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, Brazil, South Africa, Nigeria, Mexico, Japan, Philippines
+instagram_followers: 179000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8000
+price_premium: 17000
+rating: 4.91
+review_count: 534
+response_time: 72h
+
+---
+
+86. DAVE CHAPPELLE
+slug: dave-chappelle
+name: Dave Chappelle
+profession: Comedian, Actor
+category: Comedy & Entertainment → Stand-up → Comedian
+tier: S
+bio: Comedy legend with multiple Emmy wins. From Chappelle's Show to Netflix specials. Uncompromising voice with 6.8M Instagram followers speaking truth through laughter for decades.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Germany, South Africa, Nigeria, Brazil, Japan, Netherlands, Ireland
+instagram_followers: 6800000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4000
+price_standard: 8500
+price_premium: 18000
+rating: 4.93
+review_count: 378
+response_time: 96h
+
+---
+
+87. TREVOR NOAH
+slug: trevor-noah
+name: Trevor Noah
+profession: Comedian, TV Host
+category: Comedy & Entertainment → Stand-up/TV → Talk Show Host
+tier: S
+bio: Daily Show host for seven years. South African comedian with global perspective. From Born a Crime to stand-up specials with 11M Instagram followers bridging cultures through humor.
+primary_country: South Africa
+market_countries: South Africa, United States, United Kingdom, Canada, Australia, Germany, France, Kenya, Nigeria, Ghana, Netherlands, Ireland
+instagram_followers: 11000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3500
+price_standard: 7400
+price_premium: 15500
+rating: 4.89
+review_count: 423
+response_time: 72h
+
+---
+
+88. JOHN OLIVER
+slug: john-oliver
+name: John Oliver
+profession: Comedian, TV Host
+category: Comedy & Entertainment → Stand-up/TV → Talk Show Host
+tier: S
+bio: Last Week Tonight Emmy machine. British comedian skewering American politics brilliantly. From Daily Show to HBO empire with investigative comedy changing policies.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, Ireland, Germany, France, Netherlands, New Zealand, India, Japan, Brazil
+instagram_followers: 1200000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 6800
+price_premium: 14000
+rating: 4.87
+review_count: 334
+response_time: 72h
+
+---
+
+89. GIGI HADID
+slug: gigi-hadid
+name: Gigi Hadid (Jelena Noura Hadid)
+profession: Model
+category: Fashion & Beauty → Modeling → Supermodel
+tier: S
+bio: Supermodel walking every major runway. Victoria's Secret Angel and Tommy Hilfiger collaborator. Mother to Khai with 79M Instagram followers, fashion's golden girl.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Italy, Spain, Germany, Japan, Australia, Brazil, Canada, Netherlands, United Arab Emirates
+instagram_followers: 79000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3400
+price_standard: 7200
+price_premium: 15000
+rating: 4.90
+review_count: 445
+response_time: 72h
+
+---
+
+90. BELLA HADID
+slug: bella-hadid
+name: Bella Hadid (Isabella Khair Hadid)
+profession: Model
+category: Fashion & Beauty → Modeling → Supermodel
+tier: S
+bio: Model of the Year and runway queen. From Dior to Victoria's Secret. Palestinian-American beauty with 59M Instagram followers owning fashion week every season.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Italy, Spain, Germany, Japan, Australia, Brazil, Canada, United Arab Emirates, Saudi Arabia
+instagram_followers: 59000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3300
+price_standard: 7000
+price_premium: 14500
+rating: 4.89
+review_count: 412
+response_time: 72h
+
+---
+
+91. KENDALL JENNER
+slug: kendall-jenner
+name: Kendall Jenner
+profession: Model, Reality TV Star
+category: Fashion & Beauty → Modeling → Supermodel
+tier: S
+bio: Highest-paid model and Kardashian-Jenner sister. From reality TV to Victoria's Secret runway. 818 Tequila founder with 294M Instagram followers breaking modeling industry barriers.
+primary_country: United States
+market_countries: United States, United Kingdom, France, Italy, Spain, Germany, Japan, Australia, Brazil, Canada, Mexico, Philippines
+instagram_followers: 294000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.88
+review_count: 523
+response_time: 96h
+
+---
+
+92. NAOMI CAMPBELL
+slug: naomi-campbell
+name: Naomi Campbell
+profession: Model
+category: Fashion & Beauty → Modeling → Supermodel
+tier: S
+bio: Original supermodel and fashion icon for 38 years. From 80s runways to philanthropy. British legend with 16M Instagram followers, ageless beauty redefining longevity.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, France, Italy, Spain, Germany, Japan, Brazil, South Africa, Kenya, Nigeria, United Arab Emirates
+instagram_followers: 16000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3800
+price_standard: 8000
+price_premium: 17000
+rating: 4.92
+review_count: 334
+response_time: 96h
+
+---
+
+93. HAILEY BIEBER
+slug: hailey-bieber
+name: Hailey Bieber (Hailey Rhode Baldwin Bieber)
+profession: Model, Entrepreneur
+category: Fashion & Beauty → Modeling → Entrepreneur
+tier: S
+bio: Model and Rhode skincare founder. From runways to beauty empire. Mrs. Justin Bieber with 53M Instagram followers setting trends and building business simultaneously.
+primary_country: United States
+market_countries: United States, United Kingdom, Canada, Australia, France, Italy, Germany, Brazil, Japan, Spain, Mexico, Philippines
+instagram_followers: 53000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3200
+price_standard: 6800
+price_premium: 14000
+rating: 4.86
+review_count: 456
+response_time: 48h
+
+---
+
+94. ROSALÍA
+slug: rosalia
+name: Rosalía (Rosalía Vila Tobella)
+profession: Singer-Songwriter
+category: Music → Latin/Flamenco → Singer
+tier: S
+bio: Grammy winner reinventing flamenco for modern audiences. From El Mal Querer to Motomami. Spanish icon with 26M Instagram followers blending tradition and innovation fearlessly.
+primary_country: Spain
+market_countries: Spain, United States, Mexico, Argentina, Colombia, France, United Kingdom, Brazil, Chile, Italy, Germany, Puerto Rico
+instagram_followers: 26000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3400
+price_standard: 7200
+price_premium: 15000
+rating: 4.91
+review_count: 389
+response_time: 72h
+
+---
+
+95. DUA LIPA
+slug: dua-lipa
+name: Dua Lipa
+profession: Singer-Songwriter
+category: Music → Pop → Singer
+tier: S
+bio: Three Grammy winner with Future Nostalgia era dominating pop. From New Rules to Levitating. British-Albanian star with 88M Instagram followers defining modern disco-pop sound.
+primary_country: United Kingdom
+market_countries: United Kingdom, United States, Canada, Australia, France, Germany, Italy, Brazil, Spain, Mexico, Albania, Japan
+instagram_followers: 88000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3700
+price_standard: 7800
+price_premium: 16500
+rating: 4.93
+review_count: 534
+response_time: 72h
+
+---
+
+96. BLACKPINK
+slug: blackpink-group
+name: BLACKPINK
+profession: K-Pop Group
+category: Music → K-Pop → Girl Group
+tier: S
+bio: Highest-charting female K-pop group in US. Coachella headliners breaking records globally. Jisoo, Jennie, Rosé, and Lisa with combined 315M Instagram followers rewriting K-pop history.
+primary_country: South Korea
+market_countries: South Korea, Thailand, Japan, United States, Indonesia, Philippines, China, Vietnam, United Kingdom, France, India, Malaysia
+instagram_followers: 315000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.99
+review_count: 1456
+response_time: 96h
+
+---
+
+97. BTS
+slug: bts-group
+name: BTS
+profession: K-Pop Group
+category: Music → K-Pop → Boy Band
+tier: S
+bio: Global phenomenon transcending K-pop. From Billboard #1s to UN speeches. RM, Jin, SUGA, J-Hope, Jimin, V, and Jungkook with combined 350M+ Instagram followers changing music industry.
+primary_country: South Korea
+market_countries: South Korea, United States, Japan, Philippines, Indonesia, Thailand, Brazil, Mexico, United Kingdom, France, Germany, India
+instagram_followers: 350000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 5000
+price_standard: 11000
+price_premium: 25000
+rating: 4.99
+review_count: 2134
+response_time: 96h
+
+---
+
+98. JUSTIN BIEBER
+slug: justin-bieber
+name: Justin Bieber
+profession: Singer
+category: Music → Pop → Singer
+tier: S
+bio: From YouTube to global superstar. Two Grammy wins and Purpose era cultural reset. Canadian icon with 294M Instagram followers, pop's ultimate comeback story.
+primary_country: Canada
+market_countries: Canada, United States, United Kingdom, Australia, France, Germany, Brazil, Mexico, Japan, Philippines, Italy, Spain
+instagram_followers: 294000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4400
+price_standard: 9200
+price_premium: 19500
+rating: 4.94
+review_count: 734
+response_time: 96h
+
+---
+
+99. SHAKIRA
+slug: shakira
+name: Shakira (Shakira Isabel Mebarak Ripoll)
+profession: Singer-Songwriter
+category: Music → Latin/Pop → Singer
+tier: S
+bio: Colombian queen of Latin pop for 30+ years. From Hips Don't Lie to Waka Waka to Sessions. Three Grammy winner with 92M Instagram followers, timeless global icon.
+primary_country: Colombia
+market_countries: Colombia, Spain, United States, Mexico, Argentina, Brazil, Chile, Peru, France, Italy, Germany, United Kingdom
+instagram_followers: 92000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 4100
+price_standard: 8600
+price_premium: 18500
+rating: 4.95
+review_count: 612
+response_time: 96h
+
+---
+
+100. MALUMA
+slug: maluma
+name: Maluma (Juan Luis Londoño Arias)
+profession: Singer-Songwriter
+category: Music → Latin/Reggaeton → Singer
+tier: S
+bio: Colombian reggaeton prince dominating Latin charts. From Felices los 4 to Hawái. Actor in Marry Me with 63M Instagram followers, Latin music's global ambassador.
+primary_country: Colombia
+market_countries: Colombia, United States, Mexico, Spain, Argentina, Brazil, Chile, Peru, Dominican Republic, Venezuela, France, Italy
+instagram_followers: 63000000
+tiktok_followers: 0
+youtube_subscribers: 0
+price_quick: 3600
+price_standard: 7600
+price_premium: 16000
+rating: 4.91
+review_count: 523
+response_time: 72h
+
+==========================================
+S-TIER COMPLETE: 100 CELEBRITIES
+==========================================

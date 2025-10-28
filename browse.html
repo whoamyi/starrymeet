@@ -507,7 +507,7 @@
             // Get data
             const profession = celeb.category || 'Celebrity';
             const location = celeb.location || celeb.city || 'Virtual';
-            const availableTickets = celeb.availableSlots || celeb.tickets || 0;
+            const availableTickets = celeb.availabilityCount || 0;
             const tier = celeb.tier || '';
             const rating = parseFloat(celeb.rating) || 0;
             const isFollowing = watchlist.has(celeb.name);

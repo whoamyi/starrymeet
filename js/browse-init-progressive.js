@@ -355,7 +355,8 @@ function transformCelebrity(celeb) {
         featured: celeb.is_featured || false,
         virtualAvailable: celeb.virtual_available || false,
         physicalAvailable: celeb.physical_available || false,
-        responseTime: celeb.response_time_hours || 24
+        responseTime: celeb.response_time_hours || 24,
+        availabilityCount: parseInt(celeb.availability_count) || 0
     };
 }
 

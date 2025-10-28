@@ -88,7 +88,16 @@ export const getCelebrityCards = async (req: Request, res: Response) => {
         cs.allow_virtual as virtual_available,
         cs.allow_physical as physical_available,
         c.country,
-        cs.tier
+        cs.tier,
+        COALESCE(
+          (SELECT COUNT(*)
+           FROM availability a
+           WHERE a.celebrity_id = c.id
+             AND a.status = 'active'
+             AND a.date > CURRENT_DATE
+             AND a.slots_remaining > 0),
+          0
+        ) as availability_count
       FROM celebrities_new c
       LEFT JOIN categories cat ON c.category_id = cat.id
       LEFT JOIN celebrity_settings cs ON c.id = cs.celebrity_id
@@ -208,10 +217,36 @@ export const getCelebrityProfile = async (req: Request, res: Response) => {
     const virtualPricing = pricing.filter((p: any) => p.meeting_type === 'virtual');
     const physicalPricing = pricing.filter((p: any) => p.meeting_type === 'physical');
 
-    // Get availability (placeholder - will be populated by availability agent)
-    // For now, return empty arrays
-    const physicalAvailability: any[] = [];
-    const virtualAvailability: any[] = [];
+    // Get availability
+    const availabilityQuery = `
+      SELECT
+        id,
+        meeting_type,
+        duration,
+        city,
+        country,
+        date,
+        time,
+        timezone,
+        slots_remaining,
+        price_cents,
+        tier,
+        status
+      FROM availability
+      WHERE celebrity_id = :celebrity_id
+        AND status = 'active'
+        AND date > CURRENT_DATE
+      ORDER BY date ASC, time ASC
+      LIMIT 100
+    `;
+
+    const availability = await sequelize.query(availabilityQuery, {
+      replacements: { celebrity_id: profile.id },
+      type: QueryTypes.SELECT
+    });
+
+    const physicalAvailability = availability.filter((a: any) => a.meeting_type === 'physical');
+    const virtualAvailability = availability.filter((a: any) => a.meeting_type === 'virtual');
 
     res.json({
       success: true,
