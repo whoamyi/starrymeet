@@ -1252,6 +1252,215 @@
         // Alias for mobile overlay
         window.toggleMobileFilters = window.toggleFilters;
 
+        // ==========================================
+        // ENHANCEMENTS - Phase 2
+        // ==========================================
+
+        // Category Icons Mapping
+        const categoryIcons = {
+            'Entertainment': '🎭',
+            'Sports': '⚽',
+            'Business': '💼',
+            'Music': '🎵',
+            'Film & TV': '🎬',
+            'Comedy': '😄',
+            'Digital Creators': '📱',
+            'Fashion': '👗',
+            'Science': '🔬',
+            'Politics': '🏛️'
+        };
+
+        // Apply Quick Price Filter
+        window.applyQuickPrice = function(min, max) {
+            const priceSlider = document.getElementById('priceSlider');
+            const priceValue = document.getElementById('priceValue');
+
+            // Remove active class from all buttons
+            document.querySelectorAll('.price-quick-btn').forEach(btn => {
+                btn.classList.remove('active');
+            });
+
+            // Add active class to clicked button
+            event.target.classList.add('active');
+
+            // Update slider and display
+            if (max) {
+                priceSlider.value = max;
+                if (max >= 60000) {
+                    priceValue.textContent = 'Any';
+                } else {
+                    priceValue.textContent = '$' + (max / 1000).toFixed(0) + 'K';
+                }
+            } else if (min) {
+                // For "$30K+", set to max
+                priceSlider.value = 60000;
+                priceValue.textContent = 'Any';
+            }
+
+            // Apply filters
+            applyFilters();
+            updateActiveFilterChips();
+        };
+
+        // Update Active Filter Chips
+        window.updateActiveFilterChips = function() {
+            const chipsContainer = document.getElementById('activeFilterChips');
+            if (!chipsContainer) return;
+
+            const chips = [];
+
+            // Get active category filters
+            document.querySelectorAll('#categoryTree .filter-tree-child.active').forEach(el => {
+                const category = el.dataset.subcategory || el.dataset.category;
+                if (category) {
+                    chips.push({
+                        type: 'category',
+                        label: category,
+                        value: category
+                    });
+                }
+            });
+
+            // Get active location filters
+            document.querySelectorAll('#locationTree .filter-tree-child.active').forEach(el => {
+                const city = el.dataset.city;
+                const country = el.dataset.country;
+                if (city) {
+                    chips.push({
+                        type: 'location',
+                        label: city,
+                        value: city
+                    });
+                }
+            });
+
+            // Get price filter
+            const priceSlider = document.getElementById('priceSlider');
+            if (priceSlider && parseInt(priceSlider.value) < 60000) {
+                chips.push({
+                    type: 'price',
+                    label: `Under $${(parseInt(priceSlider.value) / 1000).toFixed(0)}K`,
+                    value: priceSlider.value
+                });
+            }
+
+            // Get checkbox filters
+            if (document.getElementById('trendingFilter')?.checked) {
+                chips.push({
+                    type: 'trending',
+                    label: 'Trending',
+                    value: 'trending'
+                });
+            }
+
+            if (document.getElementById('verifiedFilter')?.checked) {
+                chips.push({
+                    type: 'verified',
+                    label: 'Verified',
+                    value: 'verified'
+                });
+            }
+
+            // Render chips
+            if (chips.length > 0) {
+                chipsContainer.style.display = 'flex';
+                chipsContainer.innerHTML = chips.map(chip => `
+                    <div class="filter-chip">
+                        <span class="filter-chip__label">${chip.label}</span>
+                        <button class="filter-chip__remove" onclick="removeFilterChip('${chip.type}', '${chip.value}')" aria-label="Remove ${chip.label}">
+                            ×
+                        </button>
+                    </div>
+                `).join('') + `
+                    <button class="clear-all-chips-btn" onclick="clearAllFilters()">
+                        Clear All
+                    </button>
+                `;
+            } else {
+                chipsContainer.style.display = 'none';
+            }
+        };
+
+        // Remove Individual Filter Chip
+        window.removeFilterChip = function(type, value) {
+            switch(type) {
+                case 'category':
+                    const categoryEl = document.querySelector(`#categoryTree .filter-tree-child[data-subcategory="${value}"], #categoryTree .filter-tree-child[data-category="${value}"]`);
+                    if (categoryEl) categoryEl.classList.remove('active');
+                    break;
+
+                case 'location':
+                    const locationEl = document.querySelector(`#locationTree .filter-tree-child[data-city="${value}"]`);
+                    if (locationEl) locationEl.classList.remove('active');
+                    break;
+
+                case 'price':
+                    document.getElementById('priceSlider').value = 60000;
+                    document.getElementById('priceValue').textContent = 'Any';
+                    document.querySelectorAll('.price-quick-btn').forEach(btn => btn.classList.remove('active'));
+                    break;
+
+                case 'trending':
+                    document.getElementById('trendingFilter').checked = false;
+                    break;
+
+                case 'verified':
+                    document.getElementById('verifiedFilter').checked = false;
+                    break;
+            }
+
+            applyFilters();
+            updateActiveFilterChips();
+        };
+
+        // Generate Loading Skeletons
+        window.showLoadingSkeletons = function(count = 6) {
+            const skeletonsContainer = document.getElementById('loadingSkeletons');
+            const gridContainer = document.getElementById('celebritiesGrid');
+
+            if (!skeletonsContainer) return;
+
+            // Generate skeleton HTML
+            const skeletonHTML = Array(count).fill(0).map(() => `
+                <div class="skeleton-card">
+                    <div class="skeleton-avatar"></div>
+                    <div class="skeleton-content">
+                        <div class="skeleton-line skeleton-line--title"></div>
+                        <div class="skeleton-line skeleton-line--subtitle"></div>
+                        <div class="skeleton-line skeleton-line--short"></div>
+                    </div>
+                </div>
+            `).join('');
+
+            skeletonsContainer.innerHTML = skeletonHTML;
+            skeletonsContainer.style.display = 'flex';
+            if (gridContainer) gridContainer.style.display = 'none';
+        };
+
+        // Hide Loading Skeletons
+        window.hideLoadingSkeletons = function() {
+            const skeletonsContainer = document.getElementById('loadingSkeletons');
+            const gridContainer = document.getElementById('celebritiesGrid');
+
+            if (skeletonsContainer) skeletonsContainer.style.display = 'none';
+            if (gridContainer) gridContainer.style.display = 'flex';
+        };
+
+        // Override apply filters to update chips
+        const originalApplyFilters = applyFilters;
+        window.applyFilters = function() {
+            originalApplyFilters();
+            updateActiveFilterChips();
+        };
+
+        // Override clearAllFilters to update chips
+        const originalClearAll = clearAllFilters;
+        window.clearAllFilters = function() {
+            originalClearAll();
+            document.querySelectorAll('.price-quick-btn').forEach(btn => btn.classList.remove('active'));
+            updateActiveFilterChips();
+        };
+
     </script>
 
     <!-- Footer - Loaded from shared component -->
