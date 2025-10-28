@@ -1,0 +1,316 @@
+/* ===================================
+   Instagram-Style Celebrity Profile
+   Mobile-First, Social Media Layout
+   =================================== */
+
+/* ========================================
+   INSTAGRAM-STYLE PROFILE HEADER
+   ======================================== */
+
+.profile-header {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: calc(var(--space-unit) * 3);
+  padding: calc(var(--space-unit) * 4) calc(var(--space-unit) * 2);
+  margin-bottom: calc(var(--space-unit) * 4);
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+@media (min-width: 768px) {
+  .profile-header {
+    flex-direction: row;
+    align-items: flex-start;
+    gap: calc(var(--space-unit) * 5);
+    padding: calc(var(--space-unit) * 6) calc(var(--space-unit) * 4);
+    max-width: 800px;
+  }
+}
+
+/* Profile Photo Circle */
+.profile-photo-container {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.profile-photo {
+  width: 112px;
+  height: 112px;
+  border-radius: 50%;
+  object-fit: cover;
+  border: 2px solid rgba(255, 255, 255, 0.1);
+  background: linear-gradient(145deg, rgba(255,255,255,0.05), rgba(255,255,255,0.02));
+}
+
+@media (min-width: 768px) {
+  .profile-photo {
+    width: 150px;
+    height: 150px;
+  }
+}
+
+.tier-badge-circle {
+  position: absolute;
+  bottom: 4px;
+  right: 4px;
+  width: 28px;
+  height: 28px;
+  border-radius: 50%;
+  background: linear-gradient(135deg, #C5A873, #D7B972);
+  border: 2px solid var(--color-bg-primary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 11px;
+  font-weight: 700;
+  color: var(--color-bg-primary);
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+}
+
+/* Profile Info Section */
+.profile-info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: calc(var(--space-unit) * 2);
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .profile-info {
+    text-align: left;
+  }
+}
+
+/* Name Row */
+.profile-name-row {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  flex-wrap: wrap;
+}
+
+@media (min-width: 768px) {
+  .profile-name-row {
+    justify-content: flex-start;
+  }
+}
+
+.profile-name {
+  font-size: 20px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin: 0;
+  line-height: 1.2;
+}
+
+@media (min-width: 768px) {
+  .profile-name {
+    font-size: 28px;
+  }
+}
+
+.profile-profession {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 500;
+}
+
+/* Stats Row */
+.profile-stats {
+  display: flex;
+  justify-content: center;
+  gap: calc(var(--space-unit) * 4);
+  margin: calc(var(--space-unit) * 2) 0;
+}
+
+@media (min-width: 768px) {
+  .profile-stats {
+    justify-content: flex-start;
+  }
+}
+
+.profile-stat {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 4px;
+}
+
+@media (min-width: 768px) {
+  .profile-stat {
+    align-items: flex-start;
+  }
+}
+
+.profile-stat-value {
+  font-size: 18px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  line-height: 1;
+}
+
+.profile-stat-label {
+  font-size: 14px;
+  color: var(--color-text-secondary);
+  font-weight: 400;
+}
+
+/* Action Buttons */
+.profile-actions {
+  display: flex;
+  gap: 8px;
+  justify-content: center;
+}
+
+@media (min-width: 768px) {
+  .profile-actions {
+    justify-content: flex-start;
+  }
+}
+
+.btn-follow,
+.btn-message {
+  flex: 1;
+  max-width: 160px;
+  padding: 8px 24px;
+  border-radius: 8px;
+  font-size: 14px;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  border: none;
+}
+
+.btn-follow {
+  background: var(--color-primary);
+  color: var(--color-bg-primary);
+}
+
+.btn-follow:hover {
+  background: #D7B972;
+  transform: translateY(-1px);
+}
+
+.btn-follow.following {
+  background: transparent;
+  border: 1.5px solid rgba(255, 255, 255, 0.2);
+  color: var(--color-text-primary);
+}
+
+.btn-message {
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-primary);
+}
+
+.btn-message:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(198, 163, 79, 0.3);
+}
+
+.btn-share {
+  width: 40px;
+  height: 40px;
+  border-radius: 8px;
+  background: rgba(255, 255, 255, 0.05);
+  border: 1.5px solid rgba(255, 255, 255, 0.1);
+  color: var(--color-text-secondary);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  flex-shrink: 0;
+}
+
+.btn-share:hover {
+  background: rgba(255, 255, 255, 0.08);
+  border-color: rgba(198, 163, 79, 0.3);
+  color: var(--color-text-primary);
+}
+
+/* Bio Section */
+.profile-bio-section {
+  width: 100%;
+  text-align: center;
+}
+
+@media (min-width: 768px) {
+  .profile-bio-section {
+    text-align: left;
+  }
+}
+
+.profile-bio {
+  font-size: 14px;
+  line-height: 1.5;
+  color: var(--color-text-primary);
+  white-space: pre-wrap;
+}
+
+.profile-bio.collapsed {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+}
+
+.bio-expand-btn {
+  background: none;
+  border: none;
+  color: var(--color-text-secondary);
+  font-size: 14px;
+  cursor: pointer;
+  padding: 4px 0;
+  margin-top: 4px;
+  font-weight: 500;
+}
+
+.bio-expand-btn:hover {
+  color: var(--color-text-primary);
+}
+
+/* Meta Info */
+.profile-meta {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+  font-size: 14px;
+  color: var(--color-text-secondary);
+}
+
+@media (min-width: 768px) {
+  .profile-meta {
+    justify-content: flex-start;
+  }
+}
+
+.meta-icon {
+  font-size: 16px;
+}
+
+/* Availability Section */
+.availability-section {
+  max-width: 600px;
+  margin: 0 auto;
+  padding: 0 calc(var(--space-unit) * 2);
+}
+
+@media (min-width: 768px) {
+  .availability-section {
+    max-width: 800px;
+  }
+}
+
+.section-title {
+  font-size: 16px;
+  font-weight: 700;
+  color: var(--color-text-primary);
+  margin-bottom: calc(var(--space-unit) * 3);
+}
