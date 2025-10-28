@@ -16,48 +16,79 @@
 
     <main>
     <div class="container">
-        <!-- Static Section -->
-        <div class="profile-hero">
-            <div class="profile-image-container">
-                <img id="profile-image" class="profile-image" alt="Celebrity" />
-                <div id="tier-badge" class="tier-badge"></div>
-            </div>
-
-            <div class="profile-info">
-                <div class="profile-header">
-                    <h1 id="celebrity-name" class="celebrity-name"></h1>
-                    <span id="verified-badge" class="verified-badge" style="display:none">✓ Verified</span>
-                </div>
-
-                <div class="meta-row">
-                    <div class="meta-item">
-                        <span class="meta-icon">📍</span>
-                        <span id="location"></span>
-                    </div>
-                    <div class="meta-item">
-                        <span class="meta-icon">🎭</span>
-                        <span id="category"></span>
-                    </div>
-                </div>
-
-                <p id="bio" class="bio"></p>
-
-                <div class="social-proof">
-                    <div class="stat">
-                        <div id="rating-value" class="stat-value">-</div>
-                        <div class="stat-label">Rating</div>
-                    </div>
-                    <div class="stat">
-                        <div id="bookings-value" class="stat-value">-</div>
-                        <div class="stat-label">Meetings</div>
-                    </div>
-                    <div class="stat">
-                        <div id="reviews-value" class="stat-value">-</div>
-                        <div class="stat-label">Reviews</div>
-                    </div>
+        <!-- Instagram-Style Profile Header -->
+        <header class="profile-header-ig">
+            <!-- Avatar with Tier Badge -->
+            <div class="profile-avatar-wrapper">
+                <div id="tier-badge" class="profile-tier-badge" style="display:none"></div>
+                <div class="profile-avatar-ig" id="profile-avatar-container">
+                    <img id="profile-image" class="profile-avatar-img" alt="Celebrity" style="display:none" />
+                    <div class="profile-initials-ig" id="profile-initials" style="display:none"></div>
                 </div>
             </div>
-        </div>
+
+            <!-- Name + Verification -->
+            <div class="profile-identity">
+                <h1 id="celebrity-name" class="profile-name-ig"></h1>
+                <svg id="verified-badge" class="profile-verified" width="18" height="18" viewBox="0 0 24 24" fill="none" style="display:none">
+                    <circle cx="12" cy="12" r="11" fill="#3897f0"/>
+                    <path d="M9.5 12.5L11 14L14.5 10.5" stroke="white" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+                </svg>
+            </div>
+
+            <!-- Category -->
+            <p id="category" class="profile-category-ig"></p>
+
+            <!-- Stats Row (Instagram-style) -->
+            <div class="profile-stats-ig">
+                <div class="stat-ig">
+                    <span id="bookings-value" class="stat-value-ig">0</span>
+                    <span class="stat-label-ig">meetings</span>
+                </div>
+                <div class="stat-ig">
+                    <span id="reviews-value" class="stat-value-ig">0</span>
+                    <span class="stat-label-ig">reviews</span>
+                </div>
+                <div class="stat-ig">
+                    <span id="rating-value" class="stat-value-ig">-</span>
+                    <span class="stat-label-ig">rating</span>
+                </div>
+            </div>
+
+            <!-- Action Buttons -->
+            <div class="profile-actions-ig">
+                <button class="btn-action-ig btn-action-ig--follow" data-following="false">
+                    <span class="btn-action-ig__text">Follow</span>
+                </button>
+                <button class="btn-action-ig btn-action-ig--message">
+                    <span class="btn-action-ig__text">Message</span>
+                </button>
+                <button class="btn-action-ig btn-action-ig--share" aria-label="Share profile">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="18" cy="5" r="3"/><circle cx="6" cy="12" r="3"/><circle cx="18" cy="19" r="3"/>
+                        <line x1="8.59" y1="13.51" x2="15.42" y2="17.49"/>
+                        <line x1="15.41" y1="6.51" x2="8.59" y2="10.49"/>
+                    </svg>
+                </button>
+            </div>
+
+            <!-- Bio (Expandable) -->
+            <div class="profile-bio-section-ig">
+                <p id="bio" class="profile-bio-ig" data-expanded="false"></p>
+                <button class="profile-bio-toggle-ig" aria-expanded="false" style="display:none">
+                    <span class="toggle-text">more</span>
+                </button>
+            </div>
+
+            <!-- Location -->
+            <div class="profile-location-ig">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z"/>
+                    <circle cx="12" cy="10" r="3"/>
+                </svg>
+                <span id="location"></span>
+            </div>
+        </header>
 
         <!-- 3-Layer Collapsible Availability -->
         <div class="availability-section">

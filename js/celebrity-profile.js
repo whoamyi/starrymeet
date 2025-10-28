@@ -122,33 +122,27 @@ async function loadCelebrityProfile() {
  * Populate static profile section
  */
 function populateStaticSection(celebrity) {
-    // Profile image
+    // Profile image / initials
     const profileImage = document.getElementById('profile-image');
-    const profileImageContainer = document.querySelector('.profile-image-container');
+    const profileInitials = document.getElementById('profile-initials');
+    const avatarContainer = document.getElementById('profile-avatar-container');
 
-    if (profileImage && profileImageContainer) {
+    if (profileImage && profileInitials && avatarContainer) {
         if (celebrity.picture_url || celebrity.avatar_url) {
             // Has image - show img tag
             profileImage.src = celebrity.picture_url || celebrity.avatar_url;
             profileImage.alt = celebrity.name;
             profileImage.style.display = 'block';
+            profileInitials.style.display = 'none';
         } else {
             // No image - show initials with colored background
             profileImage.style.display = 'none';
             const initials = getInitials(celebrity.name);
             const color = getColorForCelebrity(celebrity.name);
 
-            // Create initials div if it doesn't exist
-            let initialsDiv = profileImageContainer.querySelector('.profile-initials');
-            if (!initialsDiv) {
-                initialsDiv = document.createElement('div');
-                initialsDiv.className = 'profile-initials';
-                profileImageContainer.insertBefore(initialsDiv, profileImageContainer.firstChild);
-            }
-
-            initialsDiv.style.background = color;
-            initialsDiv.textContent = initials;
-            initialsDiv.style.display = 'flex';
+            avatarContainer.style.background = color;
+            profileInitials.textContent = initials;
+            profileInitials.style.display = 'flex';
         }
     }
 
@@ -176,18 +170,26 @@ function populateStaticSection(celebrity) {
         categoryEl.textContent = celebrity.category || 'Celebrity';
     }
 
-    // Bio
+    // Bio with expandable toggle
     const bioEl = document.getElementById('bio');
+    const bioToggle = document.querySelector('.profile-bio-toggle-ig');
     if (bioEl) {
-        bioEl.textContent = celebrity.bio || `Book an exclusive meeting with ${celebrity.name}. Choose between in-person and virtual options at select locations worldwide.`;
+        const bioText = celebrity.bio || `Book an exclusive meeting with ${celebrity.name}. Choose between in-person and virtual options at select locations worldwide.`;
+        bioEl.textContent = bioText;
+
+        // Show "more" button only if bio is longer than 2 lines (approx 100 chars)
+        if (bioText.length > 100 && bioToggle) {
+            bioToggle.style.display = 'inline-block';
+        }
     }
 
-    // Stats
+    // Stats - Instagram style
     const ratingEl = document.getElementById('rating-value');
     if (ratingEl) {
-        ratingEl.textContent = celebrity.review_rate > 0
-            ? `${parseFloat(celebrity.review_rate).toFixed(1)} ⭐`
+        const rating = celebrity.review_rate > 0
+            ? parseFloat(celebrity.review_rate).toFixed(1)
             : 'New';
+        ratingEl.textContent = rating;
     }
 
     const reviewsEl = document.getElementById('reviews-value');
@@ -195,12 +197,21 @@ function populateStaticSection(celebrity) {
         reviewsEl.textContent = celebrity.review_count || 0;
     }
 
+    const bookingsEl = document.getElementById('bookings-value');
+    if (bookingsEl) {
+        bookingsEl.textContent = celebrity.bookings_count || 0;
+    }
+
     // Tier badge
     const tierBadge = document.getElementById('tier-badge');
     if (tierBadge && celebrity.tier) {
         tierBadge.textContent = `Tier ${celebrity.tier}`;
-        tierBadge.className = `tier-badge tier-${celebrity.tier.toLowerCase()}`;
+        tierBadge.className = 'profile-tier-badge';
+        tierBadge.style.display = 'block';
     }
+
+    // Initialize Instagram-style interactions
+    initializeInstagramFeatures();
 }
 
 /**
@@ -611,4 +622,115 @@ function formatPrice(cents) {
 
 function showError(message) {
     alert(message);
+}
+
+/**
+ * Initialize Instagram-style interactive features
+ */
+function initializeInstagramFeatures() {
+    // Bio expand/collapse
+    const bioToggle = document.querySelector('.profile-bio-toggle-ig');
+    if (bioToggle) {
+        bioToggle.addEventListener('click', function() {
+            const bio = document.querySelector('.profile-bio-ig');
+            const isExpanded = bio.dataset.expanded === 'true';
+            const toggleText = this.querySelector('.toggle-text');
+
+            bio.dataset.expanded = !isExpanded;
+            this.setAttribute('aria-expanded', !isExpanded);
+            toggleText.textContent = isExpanded ? 'more' : 'less';
+        });
+    }
+
+    // Follow button toggle
+    const followBtn = document.querySelector('.btn-action-ig--follow');
+    if (followBtn) {
+        followBtn.addEventListener('click', function() {
+            const isFollowing = this.dataset.following === 'true';
+            const btnText = this.querySelector('.btn-action-ig__text');
+
+            if (isFollowing) {
+                this.dataset.following = 'false';
+                btnText.textContent = 'Follow';
+                showToastIG('Unfollowed');
+            } else {
+                this.dataset.following = 'true';
+                btnText.textContent = 'Following';
+                showToastIG('Following');
+            }
+        });
+    }
+
+    // Message button
+    const messageBtn = document.querySelector('.btn-action-ig--message');
+    if (messageBtn) {
+        messageBtn.addEventListener('click', function() {
+            // TODO: Open message composer
+            showToastIG('Messaging feature coming soon');
+        });
+    }
+
+    // Share button
+    const shareBtn = document.querySelector('.btn-action-ig--share');
+    if (shareBtn) {
+        shareBtn.addEventListener('click', async function() {
+            const profileUrl = window.location.href;
+            const profileName = document.querySelector('.profile-name-ig')?.textContent || 'Celebrity';
+
+            if (navigator.share) {
+                try {
+                    await navigator.share({
+                        title: `${profileName} on StarryMeet`,
+                        url: profileUrl
+                    });
+                } catch (err) {
+                    if (err.name !== 'AbortError') {
+                        console.log('Share error:', err);
+                    }
+                }
+            } else {
+                // Fallback: Copy to clipboard
+                try {
+                    await navigator.clipboard.writeText(profileUrl);
+                    showToastIG('Link copied!');
+                } catch (err) {
+                    console.log('Copy error:', err);
+                }
+            }
+        });
+    }
+}
+
+/**
+ * Show toast notification (Instagram-style)
+ */
+function showToastIG(message, duration = 3000) {
+    let container = document.getElementById('toast-container');
+
+    // Create container if it doesn't exist
+    if (!container) {
+        container = document.createElement('div');
+        container.id = 'toast-container';
+        container.setAttribute('aria-live', 'polite');
+        container.setAttribute('aria-atomic', 'true');
+        document.body.appendChild(container);
+    }
+
+    // Create toast element
+    const toast = document.createElement('div');
+    toast.className = 'toast-ig success';
+    toast.textContent = message;
+
+    // Add to container
+    container.appendChild(toast);
+
+    // Trigger show animation
+    setTimeout(() => toast.classList.add('show'), 10);
+
+    // Remove after duration
+    setTimeout(() => {
+        toast.classList.remove('show');
+        toast.classList.add('hide');
+        setTimeout(() => toast.remove(), 300);
+    }, duration);
 }
