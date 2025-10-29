@@ -345,114 +345,225 @@ body {
 }
 
 /* ========================================
-   3-LAYER COLLAPSIBLE AVAILABILITY
+   MODERN AVAILABILITY SECTION - Two-Level Structure
    ======================================== */
 
-.availability {
+/* No availability message */
+.no-availability {
+    text-align: center;
+    padding: 32px;
+    color: var(--color-text-secondary);
+    font-size: 15px;
+}
+
+/* Meeting Type Groups (Physical/Virtual) */
+.meeting-type-group {
+    margin-bottom: 16px;
+    background: rgba(255,255,255,0.03);
+    border: 1px solid rgba(255,255,255,0.08);
+    border-radius: 12px;
+    overflow: hidden;
+}
+
+.meeting-type-header {
+    width: 100%;
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    padding: 16px 20px;
+    background: transparent;
+    border: none;
+    cursor: pointer;
+    transition: background 0.2s ease;
+}
+
+.meeting-type-header:hover {
+    background: rgba(255,255,255,0.05);
+}
+
+.meeting-type-title {
+    font-size: 16px;
+    font-weight: 600;
+    color: #ffffff;
+    text-align: left;
+}
+
+.chevron-icon {
+    stroke: rgba(255,255,255,0.5);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.chevron-icon.expanded {
+    transform: rotate(180deg);
+}
+
+.meeting-type-content {
+    padding: 0 12px 12px 12px;
+    animation: expandContent 0.3s ease;
+}
+
+/* Location/Date Package */
+.location-package {
+    width: 100%;
+    background: rgba(255,255,255,0.02);
+    border: 1px solid rgba(255,255,255,0.06);
+    border-radius: 10px;
+    padding: 14px 16px;
+    margin-bottom: 8px;
+    cursor: pointer;
+    transition: all 0.2s ease;
+}
+
+.location-package:hover {
+    background: rgba(255,255,255,0.04);
+    border-color: rgba(212,165,116,0.3);
+}
+
+.package-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+}
+
+.package-info {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.icon-location,
+.icon-calendar {
+    stroke: #D4A574;
+    flex-shrink: 0;
+}
+
+.location-name {
+    font-size: 15px;
+    font-weight: 500;
+    color: #ffffff;
+}
+
+.package-meta {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.ticket-count {
+    font-size: 13px;
+    font-weight: 500;
+    color: rgba(255,255,255,0.6);
+    background: rgba(255,255,255,0.08);
+    padding: 4px 12px;
+    border-radius: 20px;
+}
+
+.chevron-sm {
+    stroke: rgba(255,255,255,0.4);
+    transition: transform 0.3s ease;
+    flex-shrink: 0;
+}
+
+.location-package.expanded .chevron-sm,
+.chevron-sm.expanded {
+    transform: rotate(180deg);
+}
+
+/* Ticket Units Container */
+.ticket-units {
+    margin-top: 8px;
+    display: flex;
+    flex-direction: column;
+    gap: 8px;
+    animation: expandContent 0.3s ease;
+}
+
+/* Individual Ticket Unit */
+.ticket-unit {
+    background: rgba(0,0,0,0.3);
+    border: 1px solid rgba(255,255,255,0.04);
+    border-radius: 8px;
+    padding: 12px 14px;
+    transition: all 0.2s ease;
+}
+
+.ticket-unit:hover {
+    background: rgba(0,0,0,0.4);
+    border-color: rgba(212,165,116,0.2);
+}
+
+.ticket-details {
     display: flex;
     flex-direction: column;
     gap: 12px;
-    margin: calc(var(--space-unit) * 6) 0;
 }
 
-/* Level 1: Location/Day toggle */
-.availability__location-toggle {
-    width: 100%;
+/* Date/Time Row */
+.ticket-datetime {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+    flex-wrap: wrap;
+}
+
+.icon-clock {
+    stroke: rgba(255,255,255,0.5);
+    flex-shrink: 0;
+}
+
+.date-text,
+.time-text {
+    font-size: 14px;
+    color: rgba(255,255,255,0.8);
+    white-space: nowrap;
+}
+
+/* Duration Pill */
+.duration-pill {
+    font-size: 13px;
+    font-weight: 500;
+    color: #ffffff;
+    background: rgba(99,102,241,0.5);
+    padding: 4px 12px;
+    border-radius: 20px;
+    white-space: nowrap;
+}
+
+/* Actions Row */
+.ticket-actions {
     display: flex;
     justify-content: space-between;
     align-items: center;
-    padding: 14px;
-    font-size: 15px;
-    font-weight: 600;
-    color: var(--color-text-primary);
-    border-radius: 12px;
-    background: rgba(255, 255, 255, 0.02);
-    border: 1px solid rgba(255, 255, 255, 0.04);
-    cursor: pointer;
-    transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-    text-align: left;
+    gap: 12px;
 }
 
-.availability__location-toggle:hover {
-    background: rgba(255, 255, 255, 0.04);
-    border-color: rgba(198, 163, 79, 0.2);
+.ticket-price {
+    font-size: 18px;
+    font-weight: 700;
+    color: #D4A574;
 }
 
-.availability__location-toggle[aria-expanded="true"] {
-    border-color: rgba(198, 163, 79, 0.3);
-}
-
-.availability__count {
-    color: var(--color-text-secondary);
-    font-size: 14px;
-    font-weight: 500;
-}
-
-/* Level 2: Units container */
-.availability__units {
-    display: none;
-    flex-direction: column;
-    gap: 8px;
-    margin-top: 8px;
-    padding-left: 12px;
-}
-
-/* Level 2: Individual unit toggle */
-.unit__toggle {
-    width: 100%;
-    text-align: left;
-    padding: 12px;
-    font-size: 14px;
-    color: var(--color-text-primary);
-    background: var(--color-bg-secondary);
-    border: 1px solid rgba(255, 255, 255, 0.06);
-    border-radius: 10px;
-    cursor: pointer;
-    transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
-}
-
-.unit__toggle:hover {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(198, 163, 79, 0.15);
-}
-
-/* Level 3: Price + Request detail */
-.unit__detail {
-    display: none;
-    flex-direction: row;
-    justify-content: space-between;
-    align-items: center;
-    padding: 10px;
-    margin-top: 6px;
-    background: rgba(255, 255, 255, 0.01);
-    border-radius: 10px;
-}
-
-.unit__price {
-    color: #C5A873;
-    font-weight: 600;
-    font-size: 15px;
-}
-
-.unit__request.btn--outline {
-    border: 1.5px solid rgba(215, 185, 114, 0.12);
-    color: #D7B972;
+.btn-ticket-request {
+    padding: 8px 20px;
     background: transparent;
-    padding: 8px 16px;
-    border-radius: 10px;
+    border: 1.5px solid #D4A574;
+    border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
+    color: #D4A574;
     cursor: pointer;
-    transition: all 0.28s cubic-bezier(0.22, 1, 0.36, 1);
+    transition: all 0.2s ease;
+    white-space: nowrap;
 }
 
-.unit__request.btn--outline:hover {
-    background: rgba(215, 185, 114, 0.08);
-    border-color: rgba(215, 185, 114, 0.25);
+.btn-ticket-request:hover {
+    background: #D4A574;
+    color: #000000;
 }
 
 /* Toast notification */
-.toast {
+.toast-notification {
     position: fixed;
     bottom: 20px;
     left: 50%;
@@ -468,9 +579,90 @@ body {
     transition: all 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
-.toast.show {
+.toast-notification.show {
     transform: translateX(-50%) translateY(0);
     opacity: 1;
+}
+
+/* Animations */
+@keyframes expandContent {
+    from {
+        opacity: 0;
+        transform: translateY(-10px);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0);
+    }
+}
+
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 640px) {
+    .meeting-type-header {
+        padding: 14px 16px;
+    }
+
+    .meeting-type-title {
+        font-size: 15px;
+    }
+
+    .meeting-type-content {
+        padding: 0 8px 8px 8px;
+    }
+
+    .location-package {
+        padding: 12px 14px;
+    }
+
+    .location-name {
+        font-size: 14px;
+    }
+
+    .ticket-count {
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+
+    .ticket-unit {
+        padding: 10px 12px;
+    }
+
+    .ticket-datetime {
+        gap: 6px;
+    }
+
+    .date-text,
+    .time-text {
+        font-size: 13px;
+    }
+
+    .duration-pill {
+        font-size: 12px;
+        padding: 3px 10px;
+    }
+
+    .ticket-price {
+        font-size: 16px;
+    }
+
+    .btn-ticket-request {
+        padding: 7px 16px;
+        font-size: 13px;
+    }
+}
+
+/* Very Small Screens */
+@media (max-width: 360px) {
+    .date-text {
+        font-size: 12px;
+    }
+
+    .ticket-datetime {
+        gap: 4px;
+    }
 }
 
 /* ========================================

@@ -1,8 +1,9 @@
 /**
- * Celebrity Profile - 3-Layer Collapsible Availability System
- * Level 1: Location/Day (always visible with ticket count)
- * Level 2: Individual slots (date/time/duration)
- * Level 3: Price + Request button (revealed on tap)
+ * Celebrity Profile - Modern Availability System
+ * Two-Level Structure:
+ * Level 1: Physical/Virtual Meetings (collapsible sections)
+ * Level 2: Location/Date packages with ticket count
+ * Level 3: Individual ticket units with date/time/duration
  */
 
 /**
@@ -34,9 +35,24 @@ function groupAvailability(availabilityData) {
 /**
  * Format date for display
  */
-function formatDate(dateStr) {
+function formatDateDisplay(dateStr) {
     const date = new Date(dateStr);
-    return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+    const screenWidth = window.innerWidth;
+
+    if (screenWidth < 360) {
+        // Very small screens: 11/11/25
+        const month = date.getMonth() + 1;
+        const day = date.getDate();
+        const year = date.getFullYear().toString().slice(-2);
+        return `${month}/${day}/${year}`;
+    } else {
+        // Normal: Nov 11, 2025
+        return date.toLocaleDateString('en-US', {
+            month: 'short',
+            day: 'numeric',
+            year: 'numeric'
+        });
+    }
 }
 
 /**
@@ -51,7 +67,33 @@ function formatTime(timeStr) {
 }
 
 /**
- * Render availability section
+ * SVG Icons
+ */
+const SVG_ICONS = {
+    location: `<svg class="icon-location" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0 1 18 0z"/>
+        <circle cx="12" cy="10" r="3"/>
+    </svg>`,
+    calendar: `<svg class="icon-calendar" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+        <line x1="16" y1="2" x2="16" y2="6"/>
+        <line x1="8" y1="2" x2="8" y2="6"/>
+        <line x1="3" y1="10" x2="21" y2="10"/>
+    </svg>`,
+    clock: `<svg class="icon-clock" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <circle cx="12" cy="12" r="10"/>
+        <polyline points="12 6 12 12 16 14"/>
+    </svg>`,
+    chevronDown: `<svg class="chevron-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+    </svg>`,
+    chevronSm: `<svg class="chevron-sm" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+        <polyline points="6 9 12 15 18 9"/>
+    </svg>`
+};
+
+/**
+ * Render availability section - Main entry point
  */
 function renderAvailabilitySection(availabilityData) {
     const container = document.getElementById('availability-container');
@@ -60,117 +102,179 @@ function renderAvailabilitySection(availabilityData) {
         return;
     }
 
+    if (!availabilityData || availabilityData.length === 0) {
+        container.innerHTML = '<p class="no-availability">No availability at this time</p>';
+        return;
+    }
+
     const grouped = groupAvailability(availabilityData);
-    let html = '<section class="availability">';
+    let html = '';
 
-    // Physical meetings grouped by city
-    Object.keys(grouped.physical).forEach((city, index) => {
-        const citySlots = grouped.physical[city];
-        const totalTickets = citySlots.reduce((sum, slot) => sum + slot.slots_remaining, 0);
+    // Physical Meetings Section
+    if (Object.keys(grouped.physical).length > 0) {
+        html += renderMeetingTypeSection('physical', grouped.physical);
+    }
 
-        html += `
-            <div class="availability__location" data-location-id="physical-${index}">
-                <button class="availability__location-toggle" onclick="toggleLocation('physical-${index}')" aria-expanded="false">
-                    📍 ${city}
-                    <span class="availability__count">🎟️ ${totalTickets}</span>
-                </button>
-                <div class="availability__units" id="units-physical-${index}">
-                    ${citySlots.map((slot, slotIndex) => `
-                        <div class="availability__unit" data-unit-id="physical-${index}-${slotIndex}">
-                            <button class="unit__toggle" onclick="toggleUnit('physical-${index}-${slotIndex}')" aria-expanded="false">
-                                ${formatDate(slot.date)} • ${formatTime(slot.time)} • ${slot.duration} min
-                            </button>
-                            <div class="unit__detail" id="detail-physical-${index}-${slotIndex}">
-                                <div class="unit__price">$${(slot.price_cents / 100).toLocaleString()}</div>
-                                <button class="unit__request btn--outline" onclick="requestMeeting('${slot.id || ''}', 'physical', ${slot.duration}, ${slot.price_cents})">
-                                    Request
-                                </button>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    });
+    // Virtual Meetings Section
+    if (Object.keys(grouped.virtual).length > 0) {
+        html += renderMeetingTypeSection('virtual', grouped.virtual);
+    }
 
-    // Virtual meetings grouped by date
-    Object.keys(grouped.virtual).forEach((date, index) => {
-        const dateSlots = grouped.virtual[date];
-        const totalTickets = dateSlots.reduce((sum, slot) => sum + slot.slots_remaining, 0);
-
-        html += `
-            <div class="availability__location" data-location-id="virtual-${index}">
-                <button class="availability__location-toggle" onclick="toggleLocation('virtual-${index}')" aria-expanded="false">
-                    💻 ${formatDate(date)}
-                    <span class="availability__count">🎟️ ${totalTickets}</span>
-                </button>
-                <div class="availability__units" id="units-virtual-${index}">
-                    ${dateSlots.map((slot, slotIndex) => `
-                        <div class="availability__unit" data-unit-id="virtual-${index}-${slotIndex}">
-                            <button class="unit__toggle" onclick="toggleUnit('virtual-${index}-${slotIndex}')" aria-expanded="false">
-                                ${formatTime(slot.time)} • ${slot.duration} min
-                            </button>
-                            <div class="unit__detail" id="detail-virtual-${index}-${slotIndex}">
-                                <div class="unit__price">$${(slot.price_cents / 100).toLocaleString()}</div>
-                                <button class="unit__request btn--outline" onclick="requestMeeting('${slot.id || ''}', 'virtual', ${slot.duration}, ${slot.price_cents})">
-                                    Request
-                                </button>
-                            </div>
-                        </div>
-                    `).join('')}
-                </div>
-            </div>
-        `;
-    });
-
-    html += '</section>';
     container.innerHTML = html;
 }
 
 /**
- * Toggle location/day (Level 1)
+ * Render Physical or Virtual meeting type section
  */
-function toggleLocation(locationId) {
-    const unitsContainer = document.getElementById(`units-${locationId}`);
-    const toggle = document.querySelector(`[onclick="toggleLocation('${locationId}')"]`);
+function renderMeetingTypeSection(type, groupedSlots) {
+    const title = type === 'physical' ? 'Physical Meetings' : 'Virtual Meetings';
+    const locations = Object.keys(groupedSlots);
 
-    if (!unitsContainer) return;
+    let html = `
+        <div class="meeting-type-group">
+            <button class="meeting-type-header" onclick="toggleMeetingType('${type}')" aria-expanded="false">
+                <span class="meeting-type-title">${title}</span>
+                ${SVG_ICONS.chevronDown}
+            </button>
+            <div class="meeting-type-content" id="${type}-content" style="display: none;">
+    `;
 
-    const isExpanded = unitsContainer.style.display === 'flex';
+    // Render each location/date package
+    locations.forEach((locationKey, index) => {
+        const slots = groupedSlots[locationKey];
+        const locationId = `${type}-${locationKey.replace(/[^a-z0-9]/gi, '-').toLowerCase()}-${index}`;
 
-    // Close all other locations (single accordion)
-    document.querySelectorAll('.availability__units').forEach(units => {
-        units.style.display = 'none';
+        html += renderLocationPackage(type, locationKey, locationId, slots);
     });
-    document.querySelectorAll('.availability__location-toggle').forEach(btn => {
-        btn.setAttribute('aria-expanded', 'false');
+
+    html += `
+            </div>
+        </div>
+    `;
+
+    return html;
+}
+
+/**
+ * Render a location/date package with its tickets
+ */
+function renderLocationPackage(type, locationKey, locationId, slots) {
+    const totalTickets = slots.reduce((sum, slot) => sum + (slot.slots_remaining || 0), 0);
+    const icon = type === 'physical' ? SVG_ICONS.location : SVG_ICONS.calendar;
+    const ticketText = totalTickets === 1 ? 'ticket' : 'tickets';
+
+    let html = `
+        <button class="location-package" onclick="toggleLocation('${locationId}')" aria-expanded="false">
+            <div class="package-header">
+                <div class="package-info">
+                    ${icon}
+                    <span class="location-name">${locationKey}</span>
+                </div>
+                <div class="package-meta">
+                    <span class="ticket-count">🎟️ ${totalTickets} ${ticketText}</span>
+                    ${SVG_ICONS.chevronSm}
+                </div>
+            </div>
+        </button>
+        <div class="ticket-units" id="${locationId}-tickets" style="display: none;">
+    `;
+
+    // Render each ticket unit
+    slots.forEach((slot, index) => {
+        html += renderTicketUnit(type, slot, index);
     });
 
-    // Toggle this location
-    if (!isExpanded) {
-        unitsContainer.style.display = 'flex';
-        toggle.setAttribute('aria-expanded', 'true');
+    html += `</div>`;
+
+    return html;
+}
+
+/**
+ * Render an individual ticket unit
+ */
+function renderTicketUnit(type, slot, index) {
+    const price = slot.price_cents ? `$${(slot.price_cents / 100).toLocaleString()}` : 'Price TBD';
+    const slotId = slot.id || `${type}-${index}`;
+
+    let datetimeHtml = '';
+
+    if (type === 'physical') {
+        // Physical: Show date + time + duration
+        datetimeHtml = `
+            ${SVG_ICONS.calendar}
+            <span class="date-text">${formatDateDisplay(slot.date)}</span>
+            ${SVG_ICONS.clock}
+            <span class="time-text">${formatTime(slot.time)}</span>
+            <span class="duration-pill">${slot.duration} min</span>
+        `;
+    } else {
+        // Virtual: Show time + duration only (date is in package header)
+        datetimeHtml = `
+            ${SVG_ICONS.clock}
+            <span class="time-text">${formatTime(slot.time)}</span>
+            <span class="duration-pill">${slot.duration} min</span>
+        `;
+    }
+
+    return `
+        <div class="ticket-unit">
+            <div class="ticket-details">
+                <div class="ticket-datetime">
+                    ${datetimeHtml}
+                </div>
+                <div class="ticket-actions">
+                    <span class="ticket-price">${price}</span>
+                    <button class="btn-ticket-request" onclick="requestMeeting('${slotId}', '${type}', ${slot.duration}, ${slot.price_cents || 0})">
+                        Request
+                    </button>
+                </div>
+            </div>
+        </div>
+    `;
+}
+
+/**
+ * Toggle Meeting Type (Physical/Virtual)
+ */
+function toggleMeetingType(type) {
+    const content = document.getElementById(`${type}-content`);
+    const button = event.currentTarget;
+    const chevron = button.querySelector('.chevron-icon');
+
+    if (content.style.display === 'none') {
+        content.style.display = 'block';
+        button.setAttribute('aria-expanded', 'true');
+        chevron.classList.add('expanded');
+    } else {
+        content.style.display = 'none';
+        button.setAttribute('aria-expanded', 'false');
+        chevron.classList.remove('expanded');
     }
 }
 
 /**
- * Toggle unit detail (Level 2 → Level 3)
+ * Toggle Location/Date Package
  */
-function toggleUnit(unitId) {
-    const detailContainer = document.getElementById(`detail-${unitId}`);
-    const toggle = document.querySelector(`[onclick="toggleUnit('${unitId}')"]`);
+function toggleLocation(locationId) {
+    const tickets = document.getElementById(`${locationId}-tickets`);
+    const packageBtn = event.currentTarget;
+    const chevron = packageBtn.querySelector('.chevron-sm');
 
-    if (!detailContainer) return;
-
-    const isExpanded = detailContainer.style.display === 'flex';
-
-    // Toggle this unit
-    detailContainer.style.display = isExpanded ? 'none' : 'flex';
-    toggle.setAttribute('aria-expanded', isExpanded ? 'false' : 'true');
+    if (tickets.style.display === 'none') {
+        tickets.style.display = 'block';
+        packageBtn.setAttribute('aria-expanded', 'true');
+        packageBtn.classList.add('expanded');
+        if (chevron) chevron.classList.add('expanded');
+    } else {
+        tickets.style.display = 'none';
+        packageBtn.setAttribute('aria-expanded', 'false');
+        packageBtn.classList.remove('expanded');
+        if (chevron) chevron.classList.remove('expanded');
+    }
 }
 
 /**
- * Request meeting (trigger request flow)
+ * Request Meeting - Requires Authentication
  */
 function requestMeeting(slotId, meetingType, duration, priceCents) {
     // Require authentication before proceeding
@@ -207,7 +311,7 @@ function getCurrentCelebritySlug() {
  */
 function showToast(message) {
     const toast = document.createElement('div');
-    toast.className = 'toast';
+    toast.className = 'toast-notification';
     toast.textContent = message;
     document.body.appendChild(toast);
 
@@ -222,7 +326,7 @@ function showToast(message) {
 }
 
 // Make functions globally accessible
+window.toggleMeetingType = toggleMeetingType;
 window.toggleLocation = toggleLocation;
-window.toggleUnit = toggleUnit;
 window.requestMeeting = requestMeeting;
 window.renderAvailabilitySection = renderAvailabilitySection;
