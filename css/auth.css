@@ -761,26 +761,27 @@ body {
 
   .auth-page {
     padding: 0;
-    align-items: stretch;
+    align-items: flex-start;
+    min-height: 100vh;
+    height: auto;
   }
 
   .auth-wrapper {
     max-width: 100%;
+    width: 100%;
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: auto;
   }
 
   .auth-container {
     border-radius: 0;
     border-left: none;
     border-right: none;
+    border-top: none;
     padding: var(--space-xl) var(--space-lg);
     min-height: 100vh;
-    display: flex;
-    flex-direction: column;
-    justify-content: center;
+    height: auto;
+    display: block;
   }
 
   .input-row {
@@ -795,14 +796,28 @@ body {
 @media (max-width: 480px) {
   .auth-container {
     padding: var(--space-lg) var(--space-md);
+    padding-bottom: var(--space-2xl);
   }
 
   .form-title {
-    font-size: 28px;
+    font-size: 26px;
   }
 
   .form-subtitle {
     font-size: 14px;
+  }
+
+  .form-title-section {
+    margin-bottom: var(--space-lg);
+  }
+
+  .auth-header {
+    margin-bottom: var(--space-lg);
+  }
+
+  .auth-logo {
+    font-size: 24px;
+    margin-bottom: 0;
   }
 
   .toast {
@@ -815,10 +830,28 @@ body {
 @media (max-width: 360px) {
   .auth-container {
     padding: var(--space-md);
+    padding-bottom: var(--space-xl);
   }
 
   .form-title {
     font-size: 24px;
+  }
+
+  .form-title-section {
+    margin-bottom: var(--space-md);
+  }
+
+  .auth-header {
+    margin-bottom: var(--space-md);
+  }
+
+  .auth-logo {
+    font-size: 22px;
+    margin-bottom: 0;
+  }
+
+  .form-content {
+    gap: var(--space-md);
   }
 
   .input-field,
@@ -833,12 +866,25 @@ body {
 @media (max-width: 768px) and (orientation: landscape) {
   .auth-page {
     align-items: flex-start;
-    padding-top: var(--space-lg);
-    padding-bottom: var(--space-lg);
+    padding: var(--space-lg) 0;
+  }
+
+  .auth-wrapper {
+    min-height: auto;
   }
 
   .auth-container {
     min-height: auto;
+    padding-top: var(--space-lg);
+    padding-bottom: var(--space-xl);
+  }
+
+  .form-title-section {
+    margin-bottom: var(--space-md);
+  }
+
+  .form-content {
+    gap: var(--space-md);
   }
 }
 
