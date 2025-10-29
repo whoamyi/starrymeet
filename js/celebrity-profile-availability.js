@@ -173,7 +173,7 @@ function toggleUnit(unitId) {
  * Request meeting (trigger request flow)
  */
 function requestMeeting(slotId, meetingType, duration, priceCents) {
-    // Get celebrity slug from URL or stored data
+    // Require authentication before proceeding
     const celebSlug = window.currentCelebritySlug || getCurrentCelebritySlug();
 
     if (!celebSlug) {
@@ -182,8 +182,16 @@ function requestMeeting(slotId, meetingType, duration, priceCents) {
         return;
     }
 
-    // Redirect to request flow with celebrity and slot parameters
-    window.location.href = `request-flow.html?celebrity=${encodeURIComponent(celebSlug)}&slot=${encodeURIComponent(slotId)}`;
+    // Build the target URL
+    const targetUrl = `request-flow.html?celebrity=${encodeURIComponent(celebSlug)}&slot=${encodeURIComponent(slotId)}`;
+
+    // Check authentication - if not authenticated, redirect to auth with return URL
+    if (!requireAuth(targetUrl)) {
+        return;
+    }
+
+    // If authenticated, proceed to request flow
+    window.location.href = targetUrl;
 }
 
 /**

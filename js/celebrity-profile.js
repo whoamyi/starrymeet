@@ -656,6 +656,11 @@ function initializeInstagramFeatures() {
     const followBtn = document.querySelector('.btn-action-ig--follow');
     if (followBtn) {
         followBtn.addEventListener('click', function() {
+            // Require authentication
+            if (!requireAuth()) {
+                return;
+            }
+
             const isFollowing = this.dataset.following === 'true';
             const btnText = this.querySelector('.btn-action-ig__text');
 
@@ -675,6 +680,11 @@ function initializeInstagramFeatures() {
     const messageBtn = document.querySelector('.btn-action-ig--message');
     if (messageBtn) {
         messageBtn.addEventListener('click', function() {
+            // Require authentication
+            if (!requireAuth()) {
+                return;
+            }
+
             // TODO: Open message composer
             showToastIG('Messaging feature coming soon');
         });

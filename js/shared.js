@@ -21,6 +21,94 @@ const COLOR_PALETTES = [
 ];
 
 // ========================================
+// AUTHENTICATION UTILITIES
+// ========================================
+
+/**
+ * Check if user is authenticated
+ * @returns {boolean} True if user has valid session
+ */
+function isAuthenticated() {
+    try {
+        const sessionData = localStorage.getItem('starrymeet_session');
+        if (!sessionData) return false;
+
+        const session = JSON.parse(sessionData);
+        if (!session.token || !session.expiresAt) return false;
+
+        // Check if session has expired
+        const expiresAt = new Date(session.expiresAt);
+        if (expiresAt <= new Date()) {
+            // Session expired, clear it
+            localStorage.removeItem('starrymeet_session');
+            localStorage.removeItem('starrymeet_user');
+            return false;
+        }
+
+        return true;
+    } catch (error) {
+        console.error('Error checking authentication:', error);
+        return false;
+    }
+}
+
+/**
+ * Get current user data
+ * @returns {object|null} User object or null
+ */
+function getCurrentUser() {
+    try {
+        const userData = localStorage.getItem('starrymeet_user');
+        return userData ? JSON.parse(userData) : null;
+    } catch (error) {
+        console.error('Error getting user data:', error);
+        return null;
+    }
+}
+
+/**
+ * Require authentication before action
+ * Redirects to auth.html if not authenticated, preserving return URL
+ * @param {string} returnUrl - Optional return URL (defaults to current page)
+ * @returns {boolean} True if authenticated, false if redirecting
+ */
+function requireAuth(returnUrl = null) {
+    if (isAuthenticated()) {
+        return true;
+    }
+
+    // Save return URL
+    const redirectUrl = returnUrl || window.location.pathname + window.location.search;
+    window.location.href = `auth.html?redirect=${encodeURIComponent(redirectUrl)}`;
+    return false;
+}
+
+/**
+ * Update navigation to show logged-in state
+ * Should be called after navigation is injected
+ */
+function updateNavForAuth() {
+    if (!isAuthenticated()) return;
+
+    const user = getCurrentUser();
+    if (!user) return;
+
+    // Update desktop nav
+    const navAuthLink = document.getElementById('navAuthLink');
+    if (navAuthLink) {
+        navAuthLink.textContent = user.firstName || 'Dashboard';
+        navAuthLink.href = 'dashboard.html';
+    }
+
+    // Update mobile nav
+    const mobileNavAuthLink = document.getElementById('mobileNavAuthLink');
+    if (mobileNavAuthLink) {
+        mobileNavAuthLink.textContent = user.firstName || 'Dashboard';
+        mobileNavAuthLink.href = 'dashboard.html';
+    }
+}
+
+// ========================================
 // UTILITY FUNCTIONS
 // ========================================
 

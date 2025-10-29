@@ -284,7 +284,8 @@
 
       // Redirect
       setTimeout(() => {
-        window.location.href = 'dashboard.html';
+        const redirect = new URLSearchParams(window.location.search).get('redirect');
+        window.location.href = redirect || 'dashboard.html';
       }, 1000);
 
     } catch (error) {
@@ -422,10 +423,11 @@
       // Check if session is still valid
       verifySession(session.token).then(isValid => {
         if (isValid) {
-          // Redirect to dashboard if already logged in
+          // Redirect to intended destination if already logged in
           const currentPath = window.location.pathname;
           if (currentPath.includes('auth.html') || currentPath.includes('login.html')) {
-            window.location.href = 'dashboard.html';
+            const redirect = new URLSearchParams(window.location.search).get('redirect');
+            window.location.href = redirect || 'dashboard.html';
           }
         } else {
           clearSession();

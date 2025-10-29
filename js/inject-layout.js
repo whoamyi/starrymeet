@@ -94,6 +94,11 @@ document.addEventListener('DOMContentLoaded', async () => {
   // Initialize mobile menu after navbar is injected
   initializeMobileMenu();
 
+  // Update navigation for authenticated users
+  if (typeof updateNavForAuth === 'function') {
+    updateNavForAuth();
+  }
+
   // Re-initialize any interactive elements after injection
   if (typeof initializeNav === 'function') {
     initializeNav();
