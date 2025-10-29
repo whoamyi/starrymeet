@@ -3,809 +3,340 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dashboard - StarryMeet</title>
     <meta name="description" content="Manage your StarryMeet requests, view upcoming celebrity meetings, and track your favorites.">
-    <title>My Dashboard - StarryMeet</title>
-    <link rel="stylesheet" href="css/shared.css">
-    <script src="js/shared.js"></script>
-    <script src="js/dashboard-init.js"></script>
-    <style>
-        * {
-            box-sizing: border-box;
-        }
-
-        body {
-            background: #000000;
-            color: #ffffff;
-            margin: 0;
-            padding: 0;
-            overflow-x: hidden;
-            width: 100%;
-        }
-
-        /* Hide main site nav on dashboard */
-        nav#navbar {
-            display: none;
-        }
-
-        .mobile-menu, .mobile-menu-overlay {
-            display: none !important;
-        }
-
-        /* Desktop Sidebar - Fixed positioning */
-        .sidebar {
-            position: fixed;
-            left: 0;
-            top: 0;
-            width: 240px;
-            height: 100vh;
-            background: #000000;
-            border-right: 1px solid rgba(255, 255, 255, 0.08);
-            padding: 24px 16px;
-            overflow-y: auto;
-            z-index: 100;
-            box-sizing: border-box;
-        }
-
-        .sidebar-logo {
-            text-align: center;
-            padding: 0 8px 20px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            margin-bottom: 20px;
-        }
-
-        .sidebar-logo a {
-            font-size: 1.5rem;
-            font-weight: 700;
-            color: #ffffff;
-            text-decoration: none;
-            display: block;
-            transition: opacity 0.2s;
-        }
-
-        .sidebar-logo a:hover {
-            opacity: 0.7;
-        }
-
-        .back-to-home {
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            gap: 8px;
-            padding: 10px 16px;
-            margin: 16px 8px 20px;
-            background: rgba(255, 255, 255, 0.05);
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            color: #ffffff;
-            text-decoration: none;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            transition: all 0.2s;
-        }
-
-        .back-to-home:hover {
-            background: rgba(255, 255, 255, 0.08);
-            border-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .user-section {
-            padding: 0 8px 24px;
-            border-bottom: 1px solid rgba(255, 255, 255, 0.08);
-            text-align: center;
-        }
-
-        .user-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 50%;
-            background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #000000;
-            margin: 0 auto 16px;
-        }
-
-        .user-name {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 4px;
-        }
-
-        .user-email {
-            font-size: 0.875rem;
-            opacity: 0.5;
-        }
-
-        .nav-menu {
-            padding: 24px 0;
-        }
-
-        .nav-item {
-            padding: 12px 16px;
-            cursor: pointer;
-            transition: all 0.2s;
-            border-left: 3px solid transparent;
-            display: flex;
-            align-items: center;
-            gap: 12px;
-            border-radius: 8px;
-            margin-bottom: 4px;
-        }
-
-        .nav-item:hover {
-            background: rgba(255, 255, 255, 0.03);
-            border-left-color: rgba(255, 255, 255, 0.2);
-        }
-
-        .nav-item.active {
-            background: rgba(255, 255, 255, 0.05);
-            border-left-color: #ffffff;
-            font-weight: 600;
-        }
-
-        .nav-icon {
-            font-size: 1.25rem;
-            opacity: 0.7;
-        }
-
-        /* Main Content - Proper margin to avoid sidebar overlap */
-        .main-content {
-            margin-left: 240px;
-            margin-top: 0;
-            width: calc(100% - 240px);
-            padding: 32px 48px;
-            min-height: 100vh;
-            box-sizing: border-box;
-        }
-
-        .page-header {
-            margin-bottom: 40px;
-        }
-
-        .page-title {
-            font-size: 2rem;
-            font-weight: 700;
-            margin-bottom: 8px;
-        }
-
-        .page-subtitle {
-            opacity: 0.5;
-            font-size: 1rem;
-        }
-
-        /* Stats Grid */
-        .stats-grid {
-            display: grid;
-            grid-template-columns: repeat(4, 1fr);
-            gap: 20px;
-            margin-bottom: 48px;
-        }
-
-        .stat-card {
-            background: #0a0a0a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 24px;
-            transition: all 0.3s;
-        }
-
-        .stat-card:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-            transform: translateY(-2px);
-        }
-
-        .stat-label {
-            font-size: 0.875rem;
-            opacity: 0.5;
-            margin-bottom: 8px;
-        }
-
-        .stat-value {
-            font-size: 2.5rem;
-            font-weight: 700;
-            margin-bottom: 4px;
-        }
-
-        .stat-change {
-            font-size: 0.875rem;
-            opacity: 0.7;
-        }
-
-        /* Section */
-        .section {
-            margin-bottom: 48px;
-        }
-
-        .section-header {
-            display: flex;
-            justify-content: space-between;
-            align-items: center;
-            margin-bottom: 24px;
-        }
-
-        .section-title {
-            font-size: 1.5rem;
-            font-weight: 700;
-        }
-
-        .btn-text {
-            background: none;
-            border: none;
-            color: #ffffff;
-            opacity: 0.7;
-            cursor: pointer;
-            font-size: 0.9375rem;
-            font-weight: 500;
-            transition: opacity 0.2s;
-        }
-
-        .btn-text:hover {
-            opacity: 1;
-        }
-
-        /* Request Cards */
-        .requests-grid {
-            display: grid;
-            gap: 20px;
-        }
-
-        .request-card {
-            background: #0a0a0a;
-            border: 1px solid rgba(255, 255, 255, 0.08);
-            border-radius: 16px;
-            padding: 24px;
-            display: grid;
-            grid-template-columns: auto 1fr auto;
-            gap: 20px;
-            align-items: center;
-            transition: all 0.3s;
-        }
-
-        .request-card:hover {
-            border-color: rgba(255, 255, 255, 0.15);
-        }
-
-        .request-avatar {
-            width: 80px;
-            height: 80px;
-            border-radius: 12px;
-            background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 2rem;
-            font-weight: 700;
-            color: #000000;
-        }
-
-        .request-info h3 {
-            font-size: 1.125rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .request-meta {
-            display: flex;
-            gap: 20px;
-            font-size: 0.9375rem;
-            opacity: 0.7;
-            margin-bottom: 8px;
-            flex-wrap: wrap;
-        }
-
-        .request-status {
-            display: inline-block;
-            padding: 4px 12px;
-            border-radius: 20px;
-            font-size: 0.8125rem;
-            font-weight: 600;
-            background: rgba(255, 255, 255, 0.1);
-        }
-
-        .request-status.confirmed {
-            background: rgba(255, 255, 255, 0.15);
-            color: #ffffff;
-        }
-
-        .request-status.pending {
-            background: rgba(255, 255, 255, 0.08);
-            opacity: 0.7;
-        }
-
-        .request-actions {
-            display: flex;
-            gap: 12px;
-        }
-
-        .btn-small {
-            padding: 10px 20px;
-            border-radius: 8px;
-            font-size: 0.875rem;
-            font-weight: 600;
-            cursor: pointer;
-            transition: all 0.2s;
-            border: 1px solid rgba(255, 255, 255, 0.15);
-            background: transparent;
-            color: #ffffff;
-            min-height: 44px;
-        }
-
-        .btn-small:hover {
-            background: rgba(255, 255, 255, 0.05);
-            border-color: rgba(255, 255, 255, 0.3);
-        }
-
-        .btn-primary-small {
-            background: #ffffff;
-            color: #000000;
-            border: none;
-        }
-
-        .btn-primary-small:hover {
-            background: #e6e6e6;
-        }
-
-        /* Empty State */
-        .empty-state {
-            text-align: center;
-            padding: 80px 40px;
-            opacity: 0.5;
-        }
-
-        .empty-state-icon {
-            font-size: 4rem;
-            margin-bottom: 16px;
-        }
-
-        .empty-state h3 {
-            font-size: 1.25rem;
-            font-weight: 600;
-            margin-bottom: 8px;
-        }
-
-        .empty-state p {
-            font-size: 1rem;
-            margin-bottom: 24px;
-        }
-
-        /* Mobile Overlay */
-        .mobile-sidebar-overlay {
-            display: none;
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            background: rgba(0, 0, 0, 0.7);
-            z-index: 998;
-        }
-
-        .mobile-sidebar-overlay.show {
-            display: block;
-        }
-
-        /* Mobile Hamburger with User Profile Icon */
-        .mobile-hamburger {
-            display: none;
-            position: fixed;
-            top: 16px;
-            right: 16px;
-            width: 50px;
-            height: 50px;
-            background: #0a0a0a;
-            border: 2px solid rgba(255, 255, 255, 0.15);
-            border-radius: 50%;
-            cursor: pointer;
-            z-index: 1001;
-            overflow: hidden;
-        }
-
-        .mobile-hamburger .hamburger-avatar {
-            width: 100%;
-            height: 100%;
-            background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            font-size: 1.25rem;
-            font-weight: 700;
-            color: #000000;
-        }
-
-        /* MOBILE LAYOUT - App-style UI */
-        @media (max-width: 768px) {
-            /* Hide desktop sidebar */
-            .sidebar {
-                position: fixed;
-                left: -280px;
-                top: 0;
-                height: 100vh;
-                width: 280px;
-                transition: left 0.3s ease;
-                z-index: 999;
-                background: #000000;
-                padding: 20px 16px;
-            }
-
-            .sidebar.show {
-                left: 0;
-            }
-
-            /* Show mobile hamburger with profile */
-            .mobile-hamburger {
-                display: flex;
-                align-items: center;
-                justify-content: center;
-            }
-
-            /* Main content full width */
-            .main-content {
-                margin-left: 0;
-                width: 100%;
-                padding: 80px 16px 16px;
-                margin-top: 0;
-                box-sizing: border-box;
-            }
-
-            .page-header {
-                margin-bottom: 24px;
-            }
-
-            .page-title {
-                font-size: 1.5rem;
-            }
-
-            .page-subtitle {
-                font-size: 0.875rem;
-            }
-
-            /* Mobile user profile at top */
-            .mobile-user-profile {
-                display: block;
-                text-align: center;
-                padding: 24px 16px;
-                background: #0a0a0a;
-                border: 1px solid rgba(255, 255, 255, 0.08);
-                border-radius: 16px;
-                margin-bottom: 24px;
-            }
-
-            .mobile-user-profile .user-avatar {
-                width: 80px;
-                height: 80px;
-                margin: 0 auto 12px;
-                background: linear-gradient(135deg, #ffffff 0%, #666666 100%);
-                border-radius: 50%;
-                display: flex;
-                align-items: center;
-                justify-content: center;
-                font-size: 2rem;
-                font-weight: 700;
-                color: #000000;
-            }
-
-            .mobile-user-profile .user-name {
-                font-size: 1.125rem;
-                font-weight: 600;
-                margin-bottom: 4px;
-            }
-
-            .mobile-user-profile .user-email {
-                font-size: 0.875rem;
-                opacity: 0.5;
-            }
-
-            /* Stats grid - 2 columns */
-            .stats-grid {
-                grid-template-columns: 1fr 1fr;
-                gap: 12px;
-                margin-bottom: 32px;
-            }
-
-            .stat-card {
-                padding: 20px;
-                border-radius: 12px;
-            }
-
-            .stat-label {
-                font-size: 0.8125rem;
-                margin-bottom: 8px;
-            }
-
-            .stat-value {
-                font-size: 1.75rem;
-                margin-bottom: 4px;
-            }
-
-            .stat-change {
-                font-size: 0.75rem;
-            }
-
-            .section {
-                margin-bottom: 32px;
-            }
-
-            .section-header {
-                margin-bottom: 16px;
-            }
-
-            .section-title {
-                font-size: 1.25rem;
-            }
-
-            /* Booking cards - mobile optimized */
-            .booking-card {
-                grid-template-columns: auto 1fr;
-                grid-template-rows: auto auto;
-                text-align: left;
-                padding: 16px;
-                gap: 12px;
-            }
-
-            .booking-avatar {
-                width: 64px;
-                height: 64px;
-                font-size: 1.5rem;
-                grid-row: 1 / 3;
-            }
-
-            .request-info {
-                grid-column: 2;
-                grid-row: 1;
-            }
-
-            .request-info h3 {
-                font-size: 1rem;
-                margin-bottom: 8px;
-            }
-
-            .request-meta {
-                justify-content: flex-start;
-                gap: 12px;
-                font-size: 0.8125rem;
-                margin-bottom: 8px;
-            }
-
-            .request-status {
-                font-size: 0.75rem;
-                padding: 4px 10px;
-            }
-
-            .request-actions {
-                grid-column: 1 / 3;
-                grid-row: 3;
-                justify-content: stretch;
-                gap: 8px;
-                margin-top: 8px;
-            }
-
-            .btn-small {
-                flex: 1;
-                padding: 12px 16px;
-                font-size: 0.875rem;
-            }
-
-            .btn-text {
-                font-size: 0.875rem;
-            }
-
-            /* Empty state mobile */
-            .empty-state {
-                padding: 60px 24px;
-            }
-
-            .empty-state-icon {
-                font-size: 3rem;
-            }
-
-            .empty-state h3 {
-                font-size: 1.125rem;
-            }
-
-            .empty-state p {
-                font-size: 0.9375rem;
-            }
-        }
-
-        /* Desktop user profile hidden on mobile */
-        @media (min-width: 769px) {
-            .mobile-user-profile {
-                display: none;
-            }
-        }
-    </style>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/dashboard-elegant.css">
 </head>
 <body>
-    <!-- Navigation -->
-    <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
+    <!-- Top Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">StarryMeet</a>
 
-    <!-- Mobile Sidebar Overlay -->
-    <div class="mobile-sidebar-overlay" id="mobileSidebarOverlay" onclick="toggleSidebar()"></div>
+            <div class="nav-actions">
+                <!-- Notifications -->
+                <button class="nav-icon-btn" aria-label="Notifications" onclick="window.location.href='notifications.html'">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                    <span class="notification-badge" id="notifBadge" style="display: none;">0</span>
+                </button>
 
-    <!-- Mobile Hamburger Button with User Avatar -->
-    <button class="mobile-hamburger" onclick="toggleSidebar()">
-        <div class="hamburger-avatar" data-user-avatar></div>
-    </button>
+                <!-- Profile Menu -->
+                <button class="profile-trigger" onclick="toggleProfileMenu()">
+                    <div class="profile-avatar">
+                        <div class="profile-avatar-placeholder" id="userAvatarNav">JD</div>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
 
-    <!-- Desktop Sidebar -->
-    <aside class="sidebar" id="sidebar">
-        <div class="sidebar-logo">
-            <a href="index.html">StarryMeet</a>
-        </div>
+                <!-- Profile Dropdown -->
+                <div class="profile-menu" id="profileMenu">
+                    <div class="profile-menu-header">
+                        <div class="profile-avatar-lg">
+                            <div class="profile-avatar-placeholder-lg" id="userAvatarMenu">JD</div>
+                        </div>
+                        <div class="profile-info">
+                            <div class="profile-name" id="userName">Loading...</div>
+                            <div class="profile-email" id="userEmail">Loading...</div>
+                        </div>
+                    </div>
 
-        <a href="index.html" class="back-to-home">
-            <span>←</span>
-            <span>Back to Homepage</span>
-        </a>
+                    <div class="profile-menu-items">
+                        <a href="profile.html" class="menu-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                                <circle cx="12" cy="7" r="4"/>
+                            </svg>
+                            <span>Your Profile</span>
+                        </a>
 
-        <div class="user-section">
-            <div class="user-avatar" data-user-avatar></div>
-            <div class="user-name" data-user-name>Loading...</div>
-            <div class="user-email" data-user-email></div>
-        </div>
+                        <a href="account.html" class="menu-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="3"/>
+                                <path d="M12 1v6m0 6v6"/>
+                            </svg>
+                            <span>Account Settings</span>
+                        </a>
 
-        <nav class="nav-menu">
-            <div class="nav-item active" onclick="showSection('overview')">
-                <span class="nav-icon">📊</span>
-                <span>Overview</span>
-            </div>
-            <div class="nav-item" onclick="showSection('requests')">
-                <span class="nav-icon">📅</span>
-                <span>My Requests</span>
-            </div>
-            <div class="nav-item" onclick="showSection('favorites')">
-                <span class="nav-icon">⭐</span>
-                <span>Favorites</span>
-            </div>
-            <div class="nav-item" onclick="showSection('settings')">
-                <span class="nav-icon">⚙️</span>
-                <span>Settings</span>
-            </div>
-            <div class="nav-item" onclick="alert('Logging out...'); window.location.href='index.html'">
-                <span class="nav-icon">🚪</span>
-                <span>Log out</span>
-            </div>
-        </nav>
-    </aside>
+                        <a href="payment-methods.html" class="menu-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <rect x="1" y="4" width="22" height="16" rx="2" ry="2"/>
+                                <line x1="1" y1="10" x2="23" y2="10"/>
+                            </svg>
+                            <span>Payment Methods</span>
+                        </a>
 
-    <!-- Main Content -->
-    <main class="main-content">
-        <!-- Mobile User Profile (shown only on mobile) -->
-        <div class="mobile-user-profile">
-            <div class="user-avatar" data-user-avatar></div>
-            <div class="user-name" data-user-name>Loading...</div>
-            <div class="user-email" data-user-email></div>
-        </div>
+                        <a href="help.html" class="menu-item">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10"/>
+                                <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                                <line x1="12" y1="17" x2="12.01" y2="17"/>
+                            </svg>
+                            <span>Help & Support</span>
+                        </a>
 
-        <!-- Overview Section -->
-        <div id="overview-section">
-            <div class="page-header">
-                <h1 class="page-title">Overview</h1>
-                <p class="page-subtitle">Welcome back, <span data-user-name>there</span></p>
-            </div>
+                        <div class="menu-divider"></div>
 
-            <!-- Stats Grid -->
-            <div class="stats-grid">
-                <div class="stat-card">
-                    <div class="stat-label">Total Meetings</div>
-                    <div class="stat-value" id="stat-total-meetings">0</div>
-                    <div class="stat-change" id="stat-meetings-change">All time</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Upcoming</div>
-                    <div class="stat-value" id="stat-upcoming">0</div>
-                    <div class="stat-change" id="stat-upcoming-next">No upcoming meetings</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Total Spent</div>
-                    <div class="stat-value" id="stat-total-spent">$0</div>
-                    <div class="stat-change">Lifetime</div>
-                </div>
-                <div class="stat-card">
-                    <div class="stat-label">Favorites</div>
-                    <div class="stat-value" id="stat-favorites">0</div>
-                    <div class="stat-change">Celebrities saved</div>
-                </div>
-            </div>
-
-            <!-- Upcoming Meetings -->
-            <div class="section">
-                <div class="section-header">
-                    <h2 class="section-title">Upcoming Meetings</h2>
-                    <button class="btn-text" onclick="showSection('requests')">View all →</button>
-                </div>
-
-                <div class="requests-grid" id="upcoming-requests-container">
-                    <div class="empty-state">
-                        <div class="empty-state-icon">📅</div>
-                        <h3>No upcoming meetings</h3>
-                        <p>Request your first celebrity meeting to get started</p>
-                        <a href="browse.html" class="btn-primary-small">Browse Celebrities</a>
+                        <button class="menu-item menu-item--danger" onclick="logout()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <path d="M9 21H5a2 2 0 0 1-2-2V5a2 2 0 0 1 2-2h4"/>
+                                <polyline points="16 17 21 12 16 7"/>
+                                <line x1="21" y1="12" x2="9" y2="12"/>
+                            </svg>
+                            <span>Log Out</span>
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
+    </nav>
 
-        <!-- Requests Section (Hidden by default) -->
-        <div id="requests-section" style="display: none;">
-            <div class="page-header">
-                <h1 class="page-title">My Requests</h1>
-                <p class="page-subtitle">All your past and upcoming meeting requests</p>
-            </div>
+    <!-- Main Dashboard -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
 
-            <div class="requests-grid">
-                <div class="empty-state">
-                    <div class="empty-state-icon">📅</div>
-                    <h3>No requests yet</h3>
-                    <p>Start exploring celebrities and request your first meeting</p>
-                    <a href="browse.html" class="btn-primary-small">Browse Celebrities</a>
+            <!-- Welcome Section -->
+            <section class="welcome-section">
+                <div class="welcome-content">
+                    <h1 class="welcome-title">Welcome back, <span id="welcomeName">there</span> 👋</h1>
+                    <p class="welcome-subtitle">Ready to connect with your icons?</p>
                 </div>
-            </div>
-        </div>
-
-        <!-- Favorites Section (Hidden by default) -->
-        <div id="favorites-section" style="display: none;">
-            <div class="page-header">
-                <h1 class="page-title">Favorites</h1>
-                <p class="page-subtitle">Celebrities you want to meet</p>
-            </div>
-
-            <div class="empty-state">
-                <div class="empty-state-icon">⭐</div>
-                <h3>No favorites yet</h3>
-                <p>Save celebrities you're interested in meeting</p>
-                <a href="browse.html" class="btn-primary-small">Browse Celebrities</a>
-            </div>
-        </div>
-
-        <!-- Settings Section (Hidden by default) -->
-        <div id="settings-section" style="display: none;">
-            <div class="page-header">
-                <h1 class="page-title">Settings</h1>
-                <p class="page-subtitle">Manage your account preferences</p>
-            </div>
-
-            <div class="section">
-                <h2 class="section-title">Profile Information</h2>
-                <div style="background: #0a0a0a; border: 1px solid rgba(255, 255, 255, 0.08); border-radius: 16px; padding: 32px; margin-top: 24px;">
-                    <p style="opacity: 0.7;">Account settings coming soon. Contact support@starrymeet.com to update your information.</p>
+                <div class="welcome-time">
+                    <div class="time-display" id="currentTime">--:--</div>
+                    <div class="date-display" id="currentDate">Loading...</div>
                 </div>
-            </div>
+            </section>
+
+            <!-- Quick Actions -->
+            <section class="quick-actions">
+                <a href="browse.html" class="quick-action-card quick-action-primary">
+                    <div class="action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                    </div>
+                    <div class="action-content">
+                        <div class="action-title">Browse Celebrities</div>
+                        <div class="action-subtitle" id="totalCelebritiesCount">150 available</div>
+                    </div>
+                </a>
+
+                <a href="messages.html" class="quick-action-card">
+                    <div class="action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                        </svg>
+                        <span class="action-badge" id="messagesBadge" style="display: none;">0</span>
+                    </div>
+                    <div class="action-content">
+                        <div class="action-title">Messages</div>
+                        <div class="action-subtitle" id="messagesSubtitle">No new messages</div>
+                    </div>
+                </a>
+
+                <a href="favorites.html" class="quick-action-card">
+                    <div class="action-icon">
+                        <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                        </svg>
+                    </div>
+                    <div class="action-content">
+                        <div class="action-title">Favorites</div>
+                        <div class="action-subtitle" id="favoritesSubtitle">0 saved</div>
+                    </div>
+                </a>
+            </section>
+
+            <!-- Upcoming Meetings -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Upcoming Meetings</h2>
+                    <a href="meetings.html" class="section-link">View all →</a>
+                </div>
+
+                <div class="meetings-list" id="upcomingMeetings">
+                    <!-- Meeting cards will be rendered here by JavaScript -->
+
+                    <!-- Empty State (shown when no meetings) -->
+                    <div class="empty-state" id="emptyMeetings">
+                        <div class="empty-icon">
+                            <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5">
+                                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                <line x1="16" y1="2" x2="16" y2="6"/>
+                                <line x1="8" y1="2" x2="8" y2="6"/>
+                                <line x1="3" y1="10" x2="21" y2="10"/>
+                            </svg>
+                        </div>
+                        <h3 class="empty-title">No upcoming meetings</h3>
+                        <p class="empty-text">Request your first celebrity meeting to get started</p>
+                        <a href="browse.html" class="btn-empty">Browse Celebrities</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Overview Stats -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Overview</h2>
+                </div>
+
+                <div class="stats-grid">
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon stat-icon--meetings">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                                    <line x1="16" y1="2" x2="16" y2="6"/>
+                                    <line x1="8" y1="2" x2="8" y2="6"/>
+                                    <line x1="3" y1="10" x2="21" y2="10"/>
+                                </svg>
+                            </div>
+                            <span class="stat-label">Total Meetings</span>
+                        </div>
+                        <div class="stat-value" id="totalMeetings">0</div>
+                        <div class="stat-footer">
+                            <span class="stat-change stat-change--neutral">All time</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon stat-icon--upcoming">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <polyline points="12 6 12 12 16 14"/>
+                                </svg>
+                            </div>
+                            <span class="stat-label">Upcoming</span>
+                        </div>
+                        <div class="stat-value" id="upcomingCount">0</div>
+                        <div class="stat-footer">
+                            <span class="stat-change stat-change--positive">Next 30 days</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon stat-icon--spent">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <line x1="12" y1="1" x2="12" y2="23"/>
+                                    <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
+                                </svg>
+                            </div>
+                            <span class="stat-label">Total Spent</span>
+                        </div>
+                        <div class="stat-value" id="totalSpent">$0</div>
+                        <div class="stat-footer">
+                            <span class="stat-change stat-change--neutral">Lifetime</span>
+                        </div>
+                    </div>
+
+                    <div class="stat-card">
+                        <div class="stat-header">
+                            <div class="stat-icon stat-icon--favorites">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M20.84 4.61a5.5 5.5 0 0 0-7.78 0L12 5.67l-1.06-1.06a5.5 5.5 0 0 0-7.78 7.78l1.06 1.06L12 21.23l7.78-7.78 1.06-1.06a5.5 5.5 0 0 0 0-7.78z"/>
+                                </svg>
+                            </div>
+                            <span class="stat-label">Favorites</span>
+                        </div>
+                        <div class="stat-value" id="favoritesCount">0</div>
+                        <div class="stat-footer">
+                            <span class="stat-change stat-change--neutral">Saved celebrities</span>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Your Favorites -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Your Favorites</h2>
+                    <a href="favorites.html" class="section-link">View all →</a>
+                </div>
+
+                <div class="favorites-scroll" id="favoritesList">
+                    <!-- Favorite cards will be rendered here by JavaScript -->
+
+                    <!-- Empty State -->
+                    <div class="empty-favorites" id="emptyFavorites">
+                        <div class="empty-icon-sm">💫</div>
+                        <p class="empty-text-sm">No favorites yet</p>
+                        <a href="browse.html" class="btn-link">Browse celebrities</a>
+                    </div>
+                </div>
+            </section>
+
+            <!-- Recent Activity -->
+            <section class="dashboard-section">
+                <div class="section-header">
+                    <h2 class="section-title">Recent Activity</h2>
+                </div>
+
+                <div class="activity-timeline" id="activityTimeline">
+                    <!-- Activity items will be rendered here by JavaScript -->
+
+                    <!-- Empty State -->
+                    <div class="empty-activity" id="emptyActivity">
+                        <p class="empty-text-sm">No recent activity</p>
+                    </div>
+                </div>
+            </section>
+
         </div>
     </main>
 
-    <script>
-        function showSection(section) {
-            // Hide all sections
-            document.getElementById('overview-section').style.display = 'none';
-            document.getElementById('requests-section').style.display = 'none';
-            document.getElementById('favorites-section').style.display = 'none';
-            document.getElementById('settings-section').style.display = 'none';
+    <!-- Bottom Navigation (Mobile) -->
+    <nav class="bottom-nav">
+        <a href="dashboard.html" class="bottom-nav-item active">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="m3 9 9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
+                <polyline points="9 22 9 12 15 12 15 22"/>
+            </svg>
+            <span>Home</span>
+        </a>
 
-            // Show selected section
-            document.getElementById(section + '-section').style.display = 'block';
+        <a href="browse.html" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <circle cx="11" cy="11" r="8"/>
+                <path d="m21 21-4.35-4.35"/>
+            </svg>
+            <span>Browse</span>
+        </a>
 
-            // Update active nav item
-            document.querySelectorAll('.nav-item').forEach(item => {
-                item.classList.remove('active');
-            });
-            event.target.closest('.nav-item').classList.add('active');
+        <a href="meetings.html" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                <line x1="16" y1="2" x2="16" y2="6"/>
+                <line x1="8" y1="2" x2="8" y2="6"/>
+                <line x1="3" y1="10" x2="21" y2="10"/>
+            </svg>
+            <span>Meetings</span>
+        </a>
 
-            // Close sidebar on mobile
-            if (window.innerWidth <= 768) {
-                document.getElementById('sidebar').classList.remove('show');
-                document.getElementById('mobileSidebarOverlay').classList.remove('show');
-            }
-        }
+        <a href="messages.html" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+            </svg>
+            <span>Messages</span>
+            <span class="nav-badge" id="bottomNavMessagesBadge" style="display: none;">0</span>
+        </a>
 
-        function toggleSidebar() {
-            document.getElementById('sidebar').classList.toggle('show');
-            document.getElementById('mobileSidebarOverlay').classList.toggle('show');
-        }
-    </script>
-    <script src="js/inject-layout.js"></script>
+        <a href="profile.html" class="bottom-nav-item">
+            <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>
+                <circle cx="12" cy="7" r="4"/>
+            </svg>
+            <span>Profile</span>
+        </a>
+    </nav>
+
+    <script src="js/dashboard-elegant.js"></script>
 </body>
 </html>
