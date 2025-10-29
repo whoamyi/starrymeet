@@ -677,42 +677,48 @@
 
 @media (max-width: 968px) {
   .auth-wrapper {
-    padding: var(--pad);
+    padding: 0;
     align-items: flex-start;
+    min-height: 100vh;
   }
 
   .auth-container {
     grid-template-columns: 1fr;
-    max-width: 500px;
-    margin: 0 auto;
+    max-width: 100%;
+    width: 100%;
+    margin: 0;
+    border-radius: 0;
+    box-shadow: none;
+    min-height: 100vh;
   }
 
-  /* Compact branding on mobile */
+  /* Hide the full branding section on mobile */
   .auth-brand {
-    padding: var(--pad-xl);
-    min-height: auto;
-    background: linear-gradient(180deg, var(--surface-base) 0%, var(--surface-weak) 100%);
-    border-bottom: 1px solid var(--border-weak);
+    display: none;
   }
 
-  .brand-logo {
-    font-size: 24px;
-    margin-bottom: var(--pad-sm);
-  }
-
-  .brand-title {
-    font-size: 18px;
-    margin-bottom: var(--pad-sm);
-  }
-
-  .brand-subtitle {
-    font-size: 13px;
-    opacity: 0.7;
-  }
-
-  /* Make forms full width */
+  /* Make forms full width with minimal header */
   .auth-forms {
-    padding: var(--pad-xl);
+    padding: var(--pad-lg);
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+
+  /* Add minimal logo/branding above forms */
+  .auth-forms::before {
+    content: 'StarryMeet';
+    display: block;
+    font-size: 28px;
+    font-weight: 700;
+    color: var(--accent-base);
+    text-align: center;
+    margin-bottom: var(--pad-xl);
+    padding-top: var(--pad-lg);
+  }
+
+  .auth-title {
+    margin-top: 0;
   }
 
   .form-grid {
@@ -726,39 +732,27 @@
 
 @media (max-width: 640px) {
   .auth-wrapper {
-    padding: var(--pad-sm);
+    padding: 0;
   }
 
   .auth-container {
-    border-radius: var(--radius-lg);
+    border-radius: 0;
     box-shadow: none;
-    border: 1px solid var(--border-weak);
-  }
-
-  /* Even more compact branding on small screens */
-  .auth-brand {
-    padding: var(--pad-lg);
-    text-align: center;
-  }
-
-  .brand-logo {
-    font-size: 20px;
-  }
-
-  .brand-title {
-    font-size: 16px;
-  }
-
-  .brand-subtitle {
-    font-size: 12px;
+    border: none;
   }
 
   .auth-forms {
-    padding: var(--pad-lg);
+    padding: var(--pad);
+  }
+
+  .auth-forms::before {
+    font-size: 24px;
+    margin-bottom: var(--pad-lg);
+    padding-top: var(--pad);
   }
 
   .auth-title {
-    font-size: 24px;
+    font-size: 22px;
   }
 
   .auth-subtitle {
@@ -768,6 +762,7 @@
   .btn-primary,
   .btn-secondary {
     padding: 12px;
+    font-size: 15px;
   }
 
   .password-strength {
@@ -775,15 +770,21 @@
   }
 
   .toast {
-    left: 20px;
-    right: 20px;
+    left: 16px;
+    right: 16px;
+    top: 16px;
     max-width: none;
   }
 }
 
 @media (max-width: 380px) {
   .auth-forms {
-    padding: var(--pad);
+    padding: var(--pad-sm);
+  }
+
+  .auth-forms::before {
+    font-size: 22px;
+    margin-bottom: var(--pad);
   }
 
   .form-label {
@@ -791,11 +792,22 @@
   }
 
   .form-input {
-    padding: 10px var(--pad);
+    padding: 10px var(--pad-sm);
     font-size: 14px;
   }
 
   .auth-title {
     font-size: 20px;
+    margin-bottom: var(--pad-sm);
+  }
+
+  .auth-subtitle {
+    font-size: 13px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 11px;
+    font-size: 14px;
   }
 }
