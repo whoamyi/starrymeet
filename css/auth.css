@@ -671,10 +671,131 @@
   stroke: var(--text-secondary);
 }
 
+/* ===================================
+   RESPONSIVE - MOBILE
+   =================================== */
+
+@media (max-width: 968px) {
+  .auth-wrapper {
+    padding: var(--pad);
+    align-items: flex-start;
+  }
+
+  .auth-container {
+    grid-template-columns: 1fr;
+    max-width: 500px;
+    margin: 0 auto;
+  }
+
+  /* Compact branding on mobile */
+  .auth-brand {
+    padding: var(--pad-xl);
+    min-height: auto;
+    background: linear-gradient(180deg, var(--surface-base) 0%, var(--surface-weak) 100%);
+    border-bottom: 1px solid var(--border-weak);
+  }
+
+  .brand-logo {
+    font-size: 24px;
+    margin-bottom: var(--pad-sm);
+  }
+
+  .brand-title {
+    font-size: 18px;
+    margin-bottom: var(--pad-sm);
+  }
+
+  .brand-subtitle {
+    font-size: 13px;
+    opacity: 0.7;
+  }
+
+  /* Make forms full width */
+  .auth-forms {
+    padding: var(--pad-xl);
+  }
+
+  .form-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .social-auth {
+    grid-template-columns: 1fr;
+  }
+}
+
 @media (max-width: 640px) {
+  .auth-wrapper {
+    padding: var(--pad-sm);
+  }
+
+  .auth-container {
+    border-radius: var(--radius-lg);
+    box-shadow: none;
+    border: 1px solid var(--border-weak);
+  }
+
+  /* Even more compact branding on small screens */
+  .auth-brand {
+    padding: var(--pad-lg);
+    text-align: center;
+  }
+
+  .brand-logo {
+    font-size: 20px;
+  }
+
+  .brand-title {
+    font-size: 16px;
+  }
+
+  .brand-subtitle {
+    font-size: 12px;
+  }
+
+  .auth-forms {
+    padding: var(--pad-lg);
+  }
+
+  .auth-title {
+    font-size: 24px;
+  }
+
+  .auth-subtitle {
+    font-size: 14px;
+  }
+
+  .btn-primary,
+  .btn-secondary {
+    padding: 12px;
+  }
+
+  .password-strength {
+    padding: var(--pad-sm);
+  }
+
   .toast {
     left: 20px;
     right: 20px;
     max-width: none;
+  }
+}
+
+@media (max-width: 380px) {
+  .auth-forms {
+    padding: var(--pad);
+  }
+
+  .form-label {
+    font-size: 13px;
+  }
+
+  .form-input {
+    padding: 10px var(--pad);
+    font-size: 14px;
+  }
+
+  .auth-title {
+    font-size: 20px;
   }
 }
