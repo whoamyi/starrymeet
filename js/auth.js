@@ -1,363 +1,564 @@
-// Authentication System for StarryMeet
-// Handles login, signup, OAuth, and session management
+/**
+ * StarryMeet Authentication - Frontend
+ */
 
-// Auth Modal Management
-function openAuthModal(mode = 'login') {
-    const modal = document.getElementById('authModal');
-    const loginView = document.getElementById('loginView');
-    const signupView = document.getElementById('signupView');
+(function() {
+  'use strict';
 
-    if (mode === 'login') {
-        loginView.style.display = 'block';
-        signupView.style.display = 'none';
+  // ===================================
+  // CONFIGURATION
+  // ===================================
+
+  const API_BASE_URL = '/api';
+  const SESSION_STORAGE_KEY = 'starrymeet_session';
+  const USER_STORAGE_KEY = 'starrymeet_user';
+
+  // ===================================
+  // INITIALIZATION
+  // ===================================
+
+  function init() {
+    setupEventListeners();
+    checkExistingSession();
+  }
+
+  // ===================================
+  // FORM SWITCHING
+  // ===================================
+
+  window.showSignIn = function() {
+    hideAllForms();
+    document.getElementById('signinForm').classList.add('active');
+  };
+
+  window.showSignUp = function() {
+    hideAllForms();
+    document.getElementById('signupForm').classList.add('active');
+  };
+
+  window.showForgotPassword = function() {
+    hideAllForms();
+    document.getElementById('forgotPasswordForm').classList.add('active');
+  };
+
+  function hideAllForms() {
+    document.querySelectorAll('.auth-form').forEach(form => {
+      form.classList.remove('active');
+    });
+  }
+
+  // ===================================
+  // PASSWORD VISIBILITY TOGGLE
+  // ===================================
+
+  window.togglePasswordVisibility = function(inputId) {
+    const input = document.getElementById(inputId);
+    if (input.type === 'password') {
+      input.type = 'text';
     } else {
-        loginView.style.display = 'none';
-        signupView.style.display = 'block';
+      input.type = 'password';
     }
+  };
 
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-}
+  // ===================================
+  // PASSWORD STRENGTH
+  // ===================================
 
-function closeAuthModal() {
-    const modal = document.getElementById('authModal');
-    modal.style.display = 'none';
-    document.body.style.overflow = 'auto';
+  function setupPasswordStrength() {
+    const passwordInput = document.getElementById('signup-password');
+    const strengthIndicator = document.getElementById('password-strength');
+    const strengthBar = document.getElementById('strength-bar-fill');
+    const strengthText = document.getElementById('strength-text');
 
-    // Clear form inputs
-    document.querySelectorAll('.auth-modal input').forEach(input => input.value = '');
-    document.querySelectorAll('.auth-error').forEach(error => error.style.display = 'none');
-}
+    if (passwordInput) {
+      passwordInput.addEventListener('input', (e) => {
+        const password = e.target.value;
 
-function switchToSignup() {
-    document.getElementById('loginView').style.display = 'none';
-    document.getElementById('signupView').style.display = 'block';
-}
+        if (password.length === 0) {
+          strengthIndicator.classList.remove('active');
+          return;
+        }
 
-function switchToLogin() {
-    document.getElementById('signupView').style.display = 'none';
-    document.getElementById('loginView').style.display = 'block';
-}
+        strengthIndicator.classList.add('active');
 
-// Email/Password Login
-async function handleEmailLogin(event) {
+        // Calculate strength
+        const strength = calculatePasswordStrength(password);
+
+        // Update UI
+        strengthBar.className = 'strength-bar-fill';
+        strengthText.className = 'strength-text';
+
+        if (strength < 40) {
+          strengthBar.classList.add('weak');
+          strengthText.classList.add('weak');
+          strengthText.textContent = 'Weak password';
+        } else if (strength < 70) {
+          strengthBar.classList.add('medium');
+          strengthText.classList.add('medium');
+          strengthText.textContent = 'Medium strength';
+        } else {
+          strengthBar.classList.add('strong');
+          strengthText.classList.add('strong');
+          strengthText.textContent = 'Strong password';
+        }
+      });
+    }
+  }
+
+  function calculatePasswordStrength(password) {
+    let strength = 0;
+
+    // Length
+    if (password.length >= 8) strength += 25;
+    if (password.length >= 12) strength += 15;
+
+    // Lowercase
+    if (/[a-z]/.test(password)) strength += 15;
+
+    // Uppercase
+    if (/[A-Z]/.test(password)) strength += 15;
+
+    // Numbers
+    if (/[0-9]/.test(password)) strength += 15;
+
+    // Special characters
+    if (/[^a-zA-Z0-9]/.test(password)) strength += 15;
+
+    return Math.min(strength, 100);
+  }
+
+  // ===================================
+  // SIGN IN
+  // ===================================
+
+  window.handleSignIn = async function(event) {
     event.preventDefault();
 
-    const email = document.getElementById('loginEmail').value;
-    const password = document.getElementById('loginPassword').value;
-    const errorDiv = document.getElementById('loginError');
+    const email = document.getElementById('signin-email').value.trim();
+    const password = document.getElementById('signin-password').value;
+    const rememberMe = document.getElementById('remember-me').checked;
 
-    // Basic validation
+    // Clear errors
+    clearFormErrors('signin');
+
+    // Validate
     if (!email || !password) {
-        showError(errorDiv, 'Please enter both email and password');
-        return;
+      showToast('error', 'Error', 'Please fill in all fields');
+      return;
     }
 
-    if (!isValidEmail(email)) {
-        showError(errorDiv, 'Please enter a valid email address');
-        return;
-    }
-
-    // Authenticate user with backend API
-    showLoading('loginBtn');
+    // Show loading
+    const btn = document.getElementById('signin-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
 
     try {
-        const response = await window.api.login(email, password);
+      const response = await fetch(`${API_BASE_URL}/auth/signin`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email,
+          password,
+          rememberMe
+        })
+      });
 
-        if (response.success) {
-            closeAuthModal();
-            showSuccessMessage(`Welcome back, ${response.data.user.first_name}!`);
+      const data = await response.json();
 
-            const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
-            sessionStorage.removeItem('authReturnUrl');
-            setTimeout(() => {
-                window.location.href = returnUrl;
-            }, 1000);
-        } else {
-            document.getElementById('loginBtn').disabled = false;
-            document.getElementById('loginBtn').style.opacity = '1';
-            document.getElementById('loginBtn').innerHTML = 'Log in';
-            showError(errorDiv, response.error?.message || 'Login failed');
-        }
+      if (!response.ok) {
+        throw new Error(data.message || 'Sign in failed');
+      }
+
+      // Store session
+      storeSession(data.session, data.user);
+
+      // Show success
+      showToast('success', 'Welcome back!', 'Redirecting to dashboard...');
+
+      // Redirect
+      setTimeout(() => {
+        const redirect = new URLSearchParams(window.location.search).get('redirect');
+        window.location.href = redirect || 'dashboard.html';
+      }, 1000);
+
     } catch (error) {
-        document.getElementById('loginBtn').disabled = false;
-        document.getElementById('loginBtn').style.opacity = '1';
-        document.getElementById('loginBtn').innerHTML = 'Log in';
-        showError(errorDiv, error.message || 'Login failed. Please try again.');
-    }
-}
+      console.error('Sign in error:', error);
+      showToast('error', 'Sign in failed', error.message);
 
-// Email/Password Signup
-async function handleEmailSignup(event) {
+      // Show field errors if available
+      if (error.fields) {
+        Object.keys(error.fields).forEach(field => {
+          showFieldError('signin', field, error.fields[field]);
+        });
+      }
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  };
+
+  // ===================================
+  // SIGN UP
+  // ===================================
+
+  window.handleSignUp = async function(event) {
     event.preventDefault();
 
-    const name = document.getElementById('signupName').value;
-    const email = document.getElementById('signupEmail').value;
-    const password = document.getElementById('signupPassword').value;
-    const confirmPassword = document.getElementById('signupConfirmPassword').value;
-    const errorDiv = document.getElementById('signupError');
+    const firstName = document.getElementById('signup-firstname').value.trim();
+    const lastName = document.getElementById('signup-lastname').value.trim();
+    const email = document.getElementById('signup-email').value.trim();
+    const password = document.getElementById('signup-password').value;
+    const confirmPassword = document.getElementById('signup-confirm-password').value;
+    const termsAgree = document.getElementById('terms-agree').checked;
 
-    // Validation
-    if (!name || !email || !password || !confirmPassword) {
-        showError(errorDiv, 'Please fill in all fields');
-        return;
+    // Clear errors
+    clearFormErrors('signup');
+
+    // Validate
+    let hasError = false;
+
+    if (!firstName) {
+      showFieldError('signup', 'firstname', 'First name is required');
+      hasError = true;
     }
 
-    if (!isValidEmail(email)) {
-        showError(errorDiv, 'Please enter a valid email address');
-        return;
+    if (!lastName) {
+      showFieldError('signup', 'lastname', 'Last name is required');
+      hasError = true;
     }
 
-    if (password.length < 8) {
-        showError(errorDiv, 'Password must be at least 8 characters');
-        return;
+    if (!email || !isValidEmail(email)) {
+      showFieldError('signup', 'email', 'Valid email is required');
+      hasError = true;
+    }
+
+    if (!password || password.length < 8) {
+      showFieldError('signup', 'password', 'Password must be at least 8 characters');
+      hasError = true;
     }
 
     if (password !== confirmPassword) {
-        showError(errorDiv, 'Passwords do not match');
-        return;
+      showFieldError('signup', 'confirm-password', 'Passwords do not match');
+      hasError = true;
     }
 
-    // Create user account with backend API
-    showLoading('signupBtn');
+    if (!termsAgree) {
+      showToast('error', 'Error', 'You must agree to the terms and conditions');
+      hasError = true;
+    }
+
+    if (hasError) return;
+
+    // Show loading
+    const btn = document.getElementById('signup-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
 
     try {
-        // Split name into first_name and last_name
-        const nameParts = name.trim().split(' ');
-        const first_name = nameParts[0];
-        const last_name = nameParts.slice(1).join(' ') || nameParts[0];
+      const response = await fetch(`${API_BASE_URL}/auth/signup`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          firstName,
+          lastName,
+          email,
+          password
+        })
+      });
 
-        const response = await window.api.register({
-            email: email,
-            password: password,
-            first_name: first_name,
-            last_name: last_name
-        });
+      const data = await response.json();
 
-        if (response.success) {
-            closeAuthModal();
-            showSuccessMessage('Account created successfully!');
+      if (!response.ok) {
+        throw new Error(data.message || 'Sign up failed');
+      }
 
-            // Redirect based on context
-            const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
-            sessionStorage.removeItem('authReturnUrl');
-            setTimeout(() => {
-                window.location.href = returnUrl;
-            }, 1000);
-        } else {
-            document.getElementById('signupBtn').disabled = false;
-            document.getElementById('signupBtn').style.opacity = '1';
-            document.getElementById('signupBtn').innerHTML = 'Create account';
-            showError(errorDiv, response.error?.message || 'Registration failed');
-        }
+      // Store session
+      storeSession(data.session, data.user);
+
+      // Show success
+      showToast('success', 'Account created!', 'Welcome to StarryMeet');
+
+      // Redirect
+      setTimeout(() => {
+        window.location.href = 'dashboard.html';
+      }, 1000);
+
     } catch (error) {
-        document.getElementById('signupBtn').disabled = false;
-        document.getElementById('signupBtn').style.opacity = '1';
-        document.getElementById('signupBtn').innerHTML = 'Create account';
-        showError(errorDiv, error.message || 'Registration failed. Please try again.');
-    }
-}
+      console.error('Sign up error:', error);
+      showToast('error', 'Sign up failed', error.message);
 
-// OAuth Handlers (Google, Apple, Facebook)
-function handleGoogleLogin() {
-    showLoading('googleLoginBtn');
-
-    // In production: Initialize Google OAuth
-    // window.google.accounts.id.initialize({...})
-
-    setTimeout(() => {
-        try {
-            // For demo: create unique Google account
-            const email = 'google_' + Date.now() + '@gmail.com';
-            const user = createUser({
-                name: 'Google User',
-                email: email,
-                password: 'google_oauth_' + Date.now(),
-                avatar: 'https://ui-avatars.com/api/?name=Google+User&background=EA1279&color=fff'
-            });
-
-            closeAuthModal();
-            showSuccessMessage(`Welcome, ${user.name}!`);
-
-            const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
-            sessionStorage.removeItem('authReturnUrl');
-            setTimeout(() => {
-                window.location.href = returnUrl;
-            }, 1000);
-        } catch (error) {
-            console.error('Google login failed:', error);
-            alert('Login failed. Please try again.');
-        }
-    }, 1500);
-}
-
-function handleAppleLogin() {
-    showLoading('appleLoginBtn');
-
-    // In production: Initialize Apple Sign In
-    // AppleID.auth.init({...})
-
-    setTimeout(() => {
-        try {
-            const email = 'apple_' + Date.now() + '@icloud.com';
-            const user = createUser({
-                name: 'Apple User',
-                email: email,
-                password: 'apple_oauth_' + Date.now(),
-                avatar: 'https://ui-avatars.com/api/?name=Apple+User&background=000&color=fff'
-            });
-
-            closeAuthModal();
-            showSuccessMessage(`Welcome, ${user.name}!`);
-
-            const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
-            sessionStorage.removeItem('authReturnUrl');
-            setTimeout(() => {
-                window.location.href = returnUrl;
-            }, 1000);
-        } catch (error) {
-            console.error('Apple login failed:', error);
-            alert('Login failed. Please try again.');
-        }
-    }, 1500);
-}
-
-function handleFacebookLogin() {
-    showLoading('facebookLoginBtn');
-
-    // In production: Initialize Facebook Login
-    // FB.login(...)
-
-    setTimeout(() => {
-        try {
-            const email = 'facebook_' + Date.now() + '@facebook.com';
-            const user = createUser({
-                name: 'Facebook User',
-                email: email,
-                password: 'facebook_oauth_' + Date.now(),
-                avatar: 'https://ui-avatars.com/api/?name=Facebook+User&background=1877F2&color=fff'
-            });
-
-            closeAuthModal();
-            showSuccessMessage(`Welcome, ${user.name}!`);
-
-            const returnUrl = sessionStorage.getItem('authReturnUrl') || 'dashboard.html';
-            sessionStorage.removeItem('authReturnUrl');
-            setTimeout(() => {
-                window.location.href = returnUrl;
-            }, 1000);
-        } catch (error) {
-            console.error('Facebook login failed:', error);
-            alert('Login failed. Please try again.');
-        }
-    }, 1500);
-}
-
-// Login Success Handler
-function loginSuccess(userData) {
-    // Store user data in localStorage
-    localStorage.setItem('user', JSON.stringify(userData));
-    localStorage.setItem('isAuthenticated', 'true');
-
-    // Close modal
-    closeAuthModal();
-
-    // Redirect to dashboard
-    window.location.href = 'dashboard.html';
-}
-
-// Logout Handler
-function handleLogout() {
-    logoutUser(); // Uses new shared.js function
-    showSuccessMessage('Logged out successfully');
-    setTimeout(() => {
-        window.location.href = 'index.html';
-    }, 1000);
-}
-
-// Check Auth State
-function checkAuthState() {
-    const user = getCurrentUser();
-    const currentPage = window.location.pathname.split('/').pop();
-
-    // Redirect to dashboard if already logged in and on homepage
-    if (user && currentPage === 'index.html') {
-        const loginButtons = document.querySelectorAll('[onclick*="openAuthModal"]');
-        loginButtons.forEach(btn => {
-            btn.setAttribute('onclick', "window.location.href='dashboard.html'");
-            btn.textContent = 'Dashboard';
+      // Show field errors if available
+      if (error.fields) {
+        Object.keys(error.fields).forEach(field => {
+          showFieldError('signup', field, error.fields[field]);
         });
+      }
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  };
+
+  // ===================================
+  // FORGOT PASSWORD
+  // ===================================
+
+  window.handleForgotPassword = async function(event) {
+    event.preventDefault();
+
+    const email = document.getElementById('forgot-email').value.trim();
+
+    // Clear errors
+    clearFormErrors('forgot');
+
+    // Validate
+    if (!email || !isValidEmail(email)) {
+      showFieldError('forgot', 'email', 'Valid email is required');
+      return;
     }
 
-    // Protect dashboard page
-    if (currentPage === 'dashboard.html' && !user) {
-        sessionStorage.setItem('authReturnUrl', 'dashboard.html');
-        window.location.href = 'index.html';
-        // Show auth modal after redirect
-        setTimeout(() => {
-            if (typeof openAuthModal === 'function') {
-                openAuthModal('login');
-            }
-        }, 500);
-    }
+    // Show loading
+    const btn = document.getElementById('forgot-btn');
+    btn.classList.add('loading');
+    btn.disabled = true;
 
-    // Update user display if logged in
-    if (user) {
-        updateUserDisplay(user);
-    }
-}
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/forgot-password`, {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({ email })
+      });
 
-function updateUserDisplay(userData) {
-    // Update nav to show user info instead of login
-    const loginBtns = document.querySelectorAll('.nav-links li:last-child');
-    loginBtns.forEach(btn => {
-        btn.innerHTML = `<a href="dashboard.html">${userData.name}</a>`;
+      const data = await response.json();
+
+      if (!response.ok) {
+        throw new Error(data.message || 'Request failed');
+      }
+
+      // Show success
+      showToast('success', 'Email sent!', 'Check your inbox for the reset link');
+
+      // Switch back to sign in
+      setTimeout(() => {
+        showSignIn();
+      }, 2000);
+
+    } catch (error) {
+      console.error('Forgot password error:', error);
+      showToast('error', 'Request failed', error.message);
+    } finally {
+      btn.classList.remove('loading');
+      btn.disabled = false;
+    }
+  };
+
+  // ===================================
+  // SOCIAL AUTH
+  // ===================================
+
+  window.signInWithGoogle = function() {
+    showToast('info', 'Coming soon', 'Google sign in will be available soon');
+  };
+
+  window.signUpWithGoogle = function() {
+    showToast('info', 'Coming soon', 'Google sign up will be available soon');
+  };
+
+  window.signInWithApple = function() {
+    showToast('info', 'Coming soon', 'Apple sign in will be available soon');
+  };
+
+  window.signUpWithApple = function() {
+    showToast('info', 'Coming soon', 'Apple sign up will be available soon');
+  };
+
+  // ===================================
+  // SESSION MANAGEMENT
+  // ===================================
+
+  function storeSession(session, user) {
+    // Store session token
+    localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
+
+    // Store user data
+    localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+  }
+
+  function getSession() {
+    try {
+      const sessionData = localStorage.getItem(SESSION_STORAGE_KEY);
+      return sessionData ? JSON.parse(sessionData) : null;
+    } catch (error) {
+      console.error('Error getting session:', error);
+      return null;
+    }
+  }
+
+  function getUser() {
+    try {
+      const userData = localStorage.getItem(USER_STORAGE_KEY);
+      return userData ? JSON.parse(userData) : null;
+    } catch (error) {
+      console.error('Error getting user:', error);
+      return null;
+    }
+  }
+
+  function clearSession() {
+    localStorage.removeItem(SESSION_STORAGE_KEY);
+    localStorage.removeItem(USER_STORAGE_KEY);
+  }
+
+  function checkExistingSession() {
+    const session = getSession();
+
+    if (session && session.token) {
+      // Check if session is still valid
+      verifySession(session.token).then(isValid => {
+        if (isValid) {
+          // Redirect to dashboard if already logged in
+          const currentPath = window.location.pathname;
+          if (currentPath.includes('auth.html') || currentPath.includes('login.html')) {
+            window.location.href = 'dashboard.html';
+          }
+        } else {
+          clearSession();
+        }
+      });
+    }
+  }
+
+  async function verifySession(token) {
+    try {
+      const response = await fetch(`${API_BASE_URL}/auth/verify`, {
+        method: 'GET',
+        headers: {
+          'Authorization': `Bearer ${token}`
+        }
+      });
+
+      return response.ok;
+    } catch (error) {
+      console.error('Session verification error:', error);
+      return false;
+    }
+  }
+
+  // ===================================
+  // HELPERS
+  // ===================================
+
+  function isValidEmail(email) {
+    return /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email);
+  }
+
+  function clearFormErrors(formType) {
+    document.querySelectorAll(`#${formType}Form .form-group`).forEach(group => {
+      group.classList.remove('error');
     });
-}
 
-// Utility Functions
-function isValidEmail(email) {
-    const re = /^[^\s@]+@[^\s@]+\.[^\s@]+$/;
-    return re.test(email);
-}
+    document.querySelectorAll(`#${formType}Form .form-error`).forEach(error => {
+      error.textContent = '';
+    });
+  }
 
-function showError(errorDiv, message) {
-    errorDiv.textContent = message;
-    errorDiv.style.display = 'block';
+  function showFieldError(formType, field, message) {
+    const input = document.getElementById(`${formType}-${field}`);
+    const errorSpan = document.getElementById(`${formType}-${field}-error`);
+
+    if (input && errorSpan) {
+      input.closest('.form-group').classList.add('error');
+      errorSpan.textContent = message;
+    }
+  }
+
+  // ===================================
+  // TOAST NOTIFICATIONS
+  // ===================================
+
+  function showToast(type, title, message) {
+    const toast = document.getElementById('toast');
+    const icon = document.getElementById('toast-icon');
+    const titleEl = document.getElementById('toast-title');
+    const messageEl = document.getElementById('toast-message');
+
+    // Set content
+    titleEl.textContent = title;
+    messageEl.textContent = message;
+
+    // Set type
+    toast.className = 'toast active ' + type;
+
+    // Set icon
+    if (type === 'success') {
+      icon.textContent = '✓';
+    } else if (type === 'error') {
+      icon.textContent = '✕';
+    } else {
+      icon.textContent = 'ℹ';
+    }
+
+    // Auto hide after 5 seconds
     setTimeout(() => {
-        errorDiv.style.display = 'none';
+      closeToast();
     }, 5000);
-}
+  }
 
-function showLoading(btnId) {
-    const btn = document.getElementById(btnId);
-    if (btn) {
-        btn.disabled = true;
-        btn.style.opacity = '0.6';
-        btn.innerHTML = '<span style="display:inline-block;width:16px;height:16px;border:2px solid #fff;border-top-color:transparent;border-radius:50%;animation:spin 0.6s linear infinite;"></span>';
+  window.closeToast = function() {
+    document.getElementById('toast').classList.remove('active');
+  };
+
+  // ===================================
+  // EVENT LISTENERS
+  // ===================================
+
+  function setupEventListeners() {
+    setupPasswordStrength();
+  }
+
+  // ===================================
+  // EXPORT FOR OTHER PAGES
+  // ===================================
+
+  window.StarryAuth = {
+    getSession,
+    getUser,
+    clearSession,
+    verifySession,
+    requireAuth: async function(redirectUrl = 'auth.html') {
+      const session = getSession();
+
+      if (!session || !session.token) {
+        window.location.href = redirectUrl + '?redirect=' + encodeURIComponent(window.location.pathname);
+        return false;
+      }
+
+      const isValid = await verifySession(session.token);
+
+      if (!isValid) {
+        clearSession();
+        window.location.href = redirectUrl + '?redirect=' + encodeURIComponent(window.location.pathname);
+        return false;
+      }
+
+      return true;
     }
-}
+  };
 
-// Initialize on page load
-document.addEventListener('DOMContentLoaded', () => {
-    checkAuthState();
+  // ===================================
+  // INIT
+  // ===================================
 
-    // Close modal on outside click
-    const modal = document.getElementById('authModal');
-    if (modal) {
-        modal.addEventListener('click', (e) => {
-            if (e.target === modal) {
-                closeAuthModal();
-            }
-        });
-    }
-});
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', init);
+  } else {
+    init();
+  }
 
-// Add spinner animation
-const style = document.createElement('style');
-style.textContent = `
-    @keyframes spin {
-        to { transform: rotate(360deg); }
-    }
-`;
-document.head.appendChild(style);
+})();

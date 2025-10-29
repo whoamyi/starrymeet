@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Sign In - StarryMeet</title>
+    <meta name="description" content="Sign in or create an account to connect with celebrities and influencers on StarryMeet">
+    <link rel="stylesheet" href="css/auth.css">
+</head>
+<body class="auth-page">
+    <!-- Background -->
+    <div class="auth-background"></div>
+
+    <!-- Auth Container -->
+    <div class="auth-container">
+        <!-- Left Side - Branding -->
+        <div class="auth-brand">
+            <a href="index.html" class="brand-logo">StarryMeet</a>
+            <h1 class="brand-title">Connect with Your Icons</h1>
+            <p class="brand-subtitle">
+                Request one-on-one meetings with celebrities, influencers, and industry leaders.
+            </p>
+
+            <div class="brand-features">
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Verified celebrities only</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Secure payment processing</div>
+                </div>
+                <div class="feature-item">
+                    <div class="feature-icon">✓</div>
+                    <div class="feature-text">Personalized meeting requests</div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Right Side - Auth Forms -->
+        <div class="auth-forms">
+            <!-- Sign In Form -->
+            <div class="auth-form active" id="signinForm">
+                <div class="form-header">
+                    <h2 class="form-title">Welcome back</h2>
+                    <p class="form-subtitle">Sign in to your StarryMeet account</p>
+                </div>
+
+                <form class="auth-form-content" onsubmit="handleSignIn(event)">
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label" for="signin-email">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            class="form-input"
+                            id="signin-email"
+                            placeholder="you@example.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <span class="form-error" id="signin-email-error"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <div class="form-label-row">
+                            <label class="form-label" for="signin-password">
+                                Password
+                            </label>
+                            <a href="#" class="form-link" onclick="showForgotPassword(); return false;">
+                                Forgot password?
+                            </a>
+                        </div>
+                        <div class="password-input-wrapper">
+                            <input
+                                type="password"
+                                class="form-input"
+                                id="signin-password"
+                                placeholder="Enter your password"
+                                required
+                                autocomplete="current-password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePasswordVisibility('signin-password')"
+                                aria-label="Toggle password visibility"
+                            >
+                                <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="form-error" id="signin-password-error"></span>
+                    </div>
+
+                    <!-- Remember Me -->
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="remember-me" class="checkbox-input">
+                        <label for="remember-me" class="checkbox-label">
+                            Remember me for 30 days
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-auth btn-auth--primary" id="signin-btn">
+                        <span class="btn-text">Sign In</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" opacity="0.25"/>
+                                <path d="M12 2a10 10 0 0 1 10 10" opacity="0.75"/>
+                            </svg>
+                            Signing in...
+                        </span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="auth-divider">
+                        <span>or continue with</span>
+                    </div>
+
+                    <!-- Social Login -->
+                    <div class="social-auth">
+                        <button type="button" class="btn-social" onclick="signInWithGoogle()">
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                            <span>Google</span>
+                        </button>
+
+                        <button type="button" class="btn-social" onclick="signInWithApple()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                            </svg>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Footer -->
+                <div class="form-footer">
+                    <p class="footer-text">
+                        Don't have an account?
+                        <a href="#" class="footer-link" onclick="showSignUp(); return false;">
+                            Sign up for free
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Sign Up Form -->
+            <div class="auth-form" id="signupForm">
+                <div class="form-header">
+                    <h2 class="form-title">Create your account</h2>
+                    <p class="form-subtitle">Start connecting with your icons today</p>
+                </div>
+
+                <form class="auth-form-content" onsubmit="handleSignUp(event)">
+                    <!-- Name Fields -->
+                    <div class="form-row">
+                        <div class="form-group">
+                            <label class="form-label" for="signup-firstname">
+                                First name
+                            </label>
+                            <input
+                                type="text"
+                                class="form-input"
+                                id="signup-firstname"
+                                placeholder="John"
+                                required
+                                autocomplete="given-name"
+                            >
+                            <span class="form-error" id="signup-firstname-error"></span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="signup-lastname">
+                                Last name
+                            </label>
+                            <input
+                                type="text"
+                                class="form-input"
+                                id="signup-lastname"
+                                placeholder="Doe"
+                                required
+                                autocomplete="family-name"
+                            >
+                            <span class="form-error" id="signup-lastname-error"></span>
+                        </div>
+                    </div>
+
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-email">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            class="form-input"
+                            id="signup-email"
+                            placeholder="you@example.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <span class="form-error" id="signup-email-error"></span>
+                    </div>
+
+                    <!-- Password -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-password">
+                            Password
+                        </label>
+                        <div class="password-input-wrapper">
+                            <input
+                                type="password"
+                                class="form-input"
+                                id="signup-password"
+                                placeholder="Create a strong password"
+                                required
+                                autocomplete="new-password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePasswordVisibility('signup-password')"
+                                aria-label="Toggle password visibility"
+                            >
+                                <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <div class="password-strength" id="password-strength">
+                            <div class="strength-bar">
+                                <div class="strength-bar-fill" id="strength-bar-fill"></div>
+                            </div>
+                            <span class="strength-text" id="strength-text">Password strength</span>
+                        </div>
+                        <span class="form-error" id="signup-password-error"></span>
+                    </div>
+
+                    <!-- Confirm Password -->
+                    <div class="form-group">
+                        <label class="form-label" for="signup-confirm-password">
+                            Confirm password
+                        </label>
+                        <div class="password-input-wrapper">
+                            <input
+                                type="password"
+                                class="form-input"
+                                id="signup-confirm-password"
+                                placeholder="Confirm your password"
+                                required
+                                autocomplete="new-password"
+                            >
+                            <button
+                                type="button"
+                                class="password-toggle"
+                                onclick="togglePasswordVisibility('signup-confirm-password')"
+                                aria-label="Toggle password visibility"
+                            >
+                                <svg class="eye-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"/>
+                                    <circle cx="12" cy="12" r="3"/>
+                                </svg>
+                            </button>
+                        </div>
+                        <span class="form-error" id="signup-confirm-password-error"></span>
+                    </div>
+
+                    <!-- Terms Checkbox -->
+                    <div class="form-checkbox">
+                        <input type="checkbox" id="terms-agree" class="checkbox-input" required>
+                        <label for="terms-agree" class="checkbox-label">
+                            I agree to the
+                            <a href="terms.html" target="_blank" class="inline-link">Terms of Service</a>
+                            and
+                            <a href="privacy.html" target="_blank" class="inline-link">Privacy Policy</a>
+                        </label>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-auth btn-auth--primary" id="signup-btn">
+                        <span class="btn-text">Create Account</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" opacity="0.25"/>
+                                <path d="M12 2a10 10 0 0 1 10 10" opacity="0.75"/>
+                            </svg>
+                            Creating account...
+                        </span>
+                    </button>
+
+                    <!-- Divider -->
+                    <div class="auth-divider">
+                        <span>or sign up with</span>
+                    </div>
+
+                    <!-- Social Signup -->
+                    <div class="social-auth">
+                        <button type="button" class="btn-social" onclick="signUpWithGoogle()">
+                            <svg width="20" height="20" viewBox="0 0 24 24">
+                                <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+                                <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+                                <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l2.85-2.22.81-.62z"/>
+                                <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+                            </svg>
+                            <span>Google</span>
+                        </button>
+
+                        <button type="button" class="btn-social" onclick="signUpWithApple()">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
+                            </svg>
+                            <span>Apple</span>
+                        </button>
+                    </div>
+                </form>
+
+                <!-- Footer -->
+                <div class="form-footer">
+                    <p class="footer-text">
+                        Already have an account?
+                        <a href="#" class="footer-link" onclick="showSignIn(); return false;">
+                            Sign in
+                        </a>
+                    </p>
+                </div>
+            </div>
+
+            <!-- Forgot Password Form -->
+            <div class="auth-form" id="forgotPasswordForm">
+                <div class="form-header">
+                    <h2 class="form-title">Reset your password</h2>
+                    <p class="form-subtitle">Enter your email and we'll send you a reset link</p>
+                </div>
+
+                <form class="auth-form-content" onsubmit="handleForgotPassword(event)">
+                    <!-- Email -->
+                    <div class="form-group">
+                        <label class="form-label" for="forgot-email">
+                            Email address
+                        </label>
+                        <input
+                            type="email"
+                            class="form-input"
+                            id="forgot-email"
+                            placeholder="you@example.com"
+                            required
+                            autocomplete="email"
+                        >
+                        <span class="form-error" id="forgot-email-error"></span>
+                    </div>
+
+                    <!-- Submit Button -->
+                    <button type="submit" class="btn-auth btn-auth--primary" id="forgot-btn">
+                        <span class="btn-text">Send Reset Link</span>
+                        <span class="btn-loader" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" opacity="0.25"/>
+                                <path d="M12 2a10 10 0 0 1 10 10" opacity="0.75"/>
+                            </svg>
+                            Sending...
+                        </span>
+                    </button>
+                </form>
+
+                <!-- Footer -->
+                <div class="form-footer">
+                    <p class="footer-text">
+                        Remember your password?
+                        <a href="#" class="footer-link" onclick="showSignIn(); return false;">
+                            Sign in
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Success/Error Toast -->
+    <div class="toast" id="toast">
+        <div class="toast-icon" id="toast-icon"></div>
+        <div class="toast-content">
+            <div class="toast-title" id="toast-title"></div>
+            <div class="toast-message" id="toast-message"></div>
+        </div>
+        <button class="toast-close" onclick="closeToast()">
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                <line x1="18" y1="6" x2="6" y2="18"/>
+                <line x1="6" y1="6" x2="18" y2="18"/>
+            </svg>
+        </button>
+    </div>
+
+    <script src="js/auth.js"></script>
+</body>
+</html>
