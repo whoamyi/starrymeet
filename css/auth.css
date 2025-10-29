@@ -66,12 +66,24 @@
   margin: 0;
   padding: 0;
   box-sizing: border-box;
+  -webkit-tap-highlight-color: transparent;
+}
+
+html {
+  /* Allow natural scrolling on ALL browsers */
+  overflow-y: auto;
+  overflow-x: hidden;
+  -webkit-overflow-scrolling: touch;
 }
 
 body {
   font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
+  /* CRITICAL: Don't lock body height */
+  min-height: 100vh;
+  overflow-y: auto !important; /* Force scrolling */
+  overflow-x: hidden;
 }
 
 /* ===================================
@@ -79,14 +91,29 @@ body {
    =================================== */
 
 .auth-page {
+  /* FIXED: Use min-height, not height */
   min-height: 100vh;
+  /* Don't use 100vh on mobile - causes issues with browser chrome */
+  min-height: -webkit-fill-available;
+
   background: var(--black);
   display: flex;
   align-items: center;
   justify-content: center;
   padding: var(--space-lg);
   position: relative;
-  overflow: hidden;
+
+  /* CRITICAL: Allow scrolling */
+  overflow-y: auto;
+  overflow-x: hidden;
+}
+
+/* Mobile specific - ensure scrollability */
+@supports (-webkit-touch-callout: none) {
+  .auth-page {
+    /* iOS Safari fix */
+    min-height: -webkit-fill-available;
+  }
 }
 
 /* Animated Background */
@@ -153,6 +180,12 @@ body {
   width: 100%;
   max-width: 440px;
   z-index: 1;
+
+  /* CRITICAL: Allow natural flow, don't force height */
+  margin: auto;
+
+  /* Add padding for mobile to prevent edge clipping */
+  padding: var(--space-md) 0;
 }
 
 .auth-container {
@@ -162,6 +195,10 @@ body {
   padding: var(--space-2xl) var(--space-xl);
   box-shadow: var(--shadow-xl);
   backdrop-filter: blur(20px);
+
+  /* CRITICAL: Don't set min-height */
+  /* Let content determine height naturally */
+  width: 100%;
 }
 
 /* ===================================
@@ -760,17 +797,18 @@ body {
   }
 
   .auth-page {
+    /* Mobile: Allow scrolling, don't force fit */
+    min-height: 100vh;
+    min-height: -webkit-fill-available;
     padding: 0;
     align-items: flex-start;
-    min-height: 100vh;
-    height: auto;
   }
 
   .auth-wrapper {
     max-width: 100%;
     width: 100%;
-    min-height: 100vh;
-    height: auto;
+    /* Add padding to allow scrolling past keyboard */
+    padding: var(--space-lg) 0 var(--space-2xl) 0;
   }
 
   .auth-container {
@@ -779,8 +817,9 @@ body {
     border-right: none;
     border-top: none;
     padding: var(--space-xl) var(--space-lg);
-    min-height: 100vh;
-    height: auto;
+
+    /* CRITICAL: Don't force viewport height */
+    /* Let content flow naturally */
     display: block;
   }
 
@@ -794,9 +833,12 @@ body {
 }
 
 @media (max-width: 480px) {
+  .auth-wrapper {
+    padding: var(--space-md) 0 var(--space-xl) 0;
+  }
+
   .auth-container {
     padding: var(--space-lg) var(--space-md);
-    padding-bottom: var(--space-2xl);
   }
 
   .form-title {

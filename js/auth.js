@@ -20,6 +20,22 @@
   function init() {
     setupEventListeners();
     checkExistingSession();
+    preventZoomOnFocus();
+  }
+
+  // ===================================
+  // PREVENT ZOOM ON INPUT FOCUS (Mobile)
+  // ===================================
+
+  function preventZoomOnFocus() {
+    // Ensure inputs are at least 16px to prevent iOS zoom
+    const inputs = document.querySelectorAll('input, select, textarea');
+    inputs.forEach(input => {
+      const fontSize = window.getComputedStyle(input).fontSize;
+      if (parseInt(fontSize) < 16) {
+        input.style.fontSize = '16px';
+      }
+    });
   }
 
   // ===================================
@@ -525,6 +541,19 @@
 
   function setupEventListeners() {
     setupPasswordStrength();
+
+    // Handle keyboard on mobile
+    if ('visualViewport' in window) {
+      window.visualViewport.addEventListener('resize', handleViewportResize);
+    }
+  }
+
+  function handleViewportResize() {
+    // Adjust page when keyboard shows/hides
+    const viewport = window.visualViewport;
+    if (viewport) {
+      document.documentElement.style.height = `${viewport.height}px`;
+    }
   }
 
   // ===================================
@@ -536,11 +565,17 @@
     getUser,
     clearSession,
     verifySession,
+
+    isAuthenticated: function() {
+      return !!getSession();
+    },
+
     requireAuth: async function(redirectUrl = 'auth.html') {
       const session = getSession();
 
       if (!session || !session.token) {
-        window.location.href = redirectUrl + '?redirect=' + encodeURIComponent(window.location.pathname);
+        const currentUrl = window.location.pathname + window.location.search;
+        window.location.href = redirectUrl + '?redirect=' + encodeURIComponent(currentUrl);
         return false;
       }
 
@@ -548,11 +583,32 @@
 
       if (!isValid) {
         clearSession();
-        window.location.href = redirectUrl + '?redirect=' + encodeURIComponent(window.location.pathname);
+        const currentUrl = window.location.pathname + window.location.search;
+        window.location.href = redirectUrl + '?redirect=' + encodeURIComponent(currentUrl);
         return false;
       }
 
       return true;
+    },
+
+    logout: async function() {
+      const session = getSession();
+
+      if (session && session.token) {
+        try {
+          await fetch(`${API_BASE_URL}/auth/signout`, {
+            method: 'POST',
+            headers: {
+              'Authorization': `Bearer ${session.token}`
+            }
+          });
+        } catch (error) {
+          console.error('Logout error:', error);
+        }
+      }
+
+      clearSession();
+      window.location.href = 'index.html';
     }
   };
 
