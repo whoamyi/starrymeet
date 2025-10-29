@@ -9,7 +9,18 @@
   // CONFIGURATION
   // ===================================
 
-  const API_BASE_URL = '/api';
+  // Environment-aware API URL configuration
+  const getAPIBaseURL = () => {
+    // Check if we're in development (localhost)
+    if (window.location.hostname === 'localhost' || window.location.hostname === '127.0.0.1') {
+      return 'http://localhost:3000/api';
+    }
+
+    // Production - Render backend URL
+    return 'https://starrymeet-backend.onrender.com/api';
+  };
+
+  const API_BASE_URL = getAPIBaseURL();
   const SESSION_STORAGE_KEY = 'starrymeet_session';
   const USER_STORAGE_KEY = 'starrymeet_user';
 
@@ -494,7 +505,10 @@
     const errorSpan = document.getElementById(`${formType}-${field}-error`);
 
     if (input && errorSpan) {
-      input.closest('.form-group').classList.add('error');
+      const formGroup = input.closest('.form-group');
+      if (formGroup) {
+        formGroup.classList.add('error');
+      }
       errorSpan.textContent = message;
     }
   }
