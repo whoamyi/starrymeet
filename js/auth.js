@@ -60,6 +60,9 @@
     }
   };
 
+  // Alias for new HTML structure
+  window.togglePassword = window.togglePasswordVisibility;
+
   // ===================================
   // PASSWORD STRENGTH
   // ===================================
