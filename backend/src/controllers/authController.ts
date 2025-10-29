@@ -5,6 +5,7 @@ import { AppError } from '../middleware/errorHandler';
 import { AuthRequest } from '../middleware/auth';
 import { sendWelcomeEmail } from '../services/email.service';
 import sequelize from '../config/database';
+import { QueryTypes } from 'sequelize';
 import { v4 as uuidv4 } from 'uuid';
 import bcrypt from 'bcrypt';
 
@@ -35,7 +36,7 @@ export const signup = async (req: AuthRequest, res: Response) => {
       'SELECT id FROM users WHERE email = ?',
       {
         replacements: [email.toLowerCase()],
-        type: sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
 
@@ -134,7 +135,7 @@ export const signin = async (req: AuthRequest, res: Response) => {
        FROM users WHERE email = ?`,
       {
         replacements: [email.toLowerCase()],
-        type: sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
 
@@ -270,7 +271,7 @@ export const forgotPassword = async (req: AuthRequest, res: Response) => {
       'SELECT id, email, first_name FROM users WHERE email = ?',
       {
         replacements: [email.toLowerCase()],
-        type: sequelize.QueryTypes.SELECT
+        type: QueryTypes.SELECT
       }
     );
 
