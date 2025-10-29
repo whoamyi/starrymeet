@@ -59,11 +59,25 @@ app.use(express.urlencoded({ extended: true }));
 // Logging - use combined format in production
 app.use(morgan(process.env.NODE_ENV === 'production' ? 'combined' : 'dev'));
 
-// Health check
-app.get('/health', (req: Request, res: Response) => {
+// Health check - independent of database connection
+app.get('/health', async (req: Request, res: Response) => {
+  let dbStatus = 'unknown';
+
+  try {
+    // Test database connection with 5 second timeout
+    await Promise.race([
+      sequelize.authenticate(),
+      new Promise((_, reject) => setTimeout(() => reject(new Error('timeout')), 5000))
+    ]);
+    dbStatus = 'connected';
+  } catch (error) {
+    dbStatus = error instanceof Error && error.message === 'timeout' ? 'timeout' : 'disconnected';
+  }
+
   res.json({
     success: true,
     message: 'StarryMeet API is running',
+    database: dbStatus,
     timestamp: new Date().toISOString()
   });
 });
@@ -88,22 +102,28 @@ app.use(errorHandler);
 // Start server
 const startServer = async () => {
   try {
-    // Test database connection
-    await sequelize.authenticate();
-    console.log('✅ Database connection established');
-
-    // Sync models in development (use migrations in production)
-    if (process.env.NODE_ENV === 'development') {
-      await sequelize.sync({ alter: true });
-      console.log('✅ Database models synchronized');
-    }
-
+    // Start server first (non-blocking)
     app.listen(PORT, () => {
       console.log(`🚀 Server running on port ${PORT}`);
       console.log(`📍 Environment: ${process.env.NODE_ENV || 'development'}`);
       console.log(`🔗 API: http://localhost:${PORT}`);
       console.log(`🔗 Health: http://localhost:${PORT}/health`);
     });
+
+    // Test database connection (non-blocking)
+    try {
+      await sequelize.authenticate();
+      console.log('✅ Database connection established');
+
+      // Sync models in development (use migrations in production)
+      if (process.env.NODE_ENV === 'development') {
+        await sequelize.sync({ alter: true });
+        console.log('✅ Database models synchronized');
+      }
+    } catch (dbError) {
+      console.error('⚠️  Database connection failed:', dbError);
+      console.log('⚠️  Server running but database unavailable');
+    }
   } catch (error) {
     console.error('❌ Unable to start server:', error);
     process.exit(1);
