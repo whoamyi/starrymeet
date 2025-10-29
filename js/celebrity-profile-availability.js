@@ -170,30 +170,28 @@ function toggleUnit(unitId) {
 }
 
 /**
- * Request meeting (trigger booking flow)
+ * Request meeting (trigger request flow)
  */
 function requestMeeting(slotId, meetingType, duration, priceCents) {
-    // Store booking data
-    const bookingData = {
-        slot_id: slotId,
-        celebrity_id: window.currentCelebrityId,
-        celebrity_name: window.currentCelebrityName,
-        celebrity_slug: window.currentCelebritySlug,
-        meeting_type: meetingType,
-        duration: duration,
-        price_cents: priceCents,
-        price: priceCents / 100
-    };
+    // Get celebrity slug from URL or stored data
+    const celebSlug = window.currentCelebritySlug || getCurrentCelebritySlug();
 
-    sessionStorage.setItem('bookingData', JSON.stringify(bookingData));
+    if (!celebSlug) {
+        console.error('Celebrity slug not found');
+        showToast('Error: Unable to process request');
+        return;
+    }
 
-    // Show toast notification
-    showToast('Request sent! Redirecting to booking...');
+    // Redirect to request flow with celebrity and slot parameters
+    window.location.href = `request-flow.html?celebrity=${encodeURIComponent(celebSlug)}&slot=${encodeURIComponent(slotId)}`;
+}
 
-    // Redirect after short delay
-    setTimeout(() => {
-        window.location.href = 'booking.html';
-    }, 800);
+/**
+ * Get celebrity slug from current URL
+ */
+function getCurrentCelebritySlug() {
+    const urlParams = new URLSearchParams(window.location.search);
+    return urlParams.get('slug') || urlParams.get('celebrity');
 }
 
 /**

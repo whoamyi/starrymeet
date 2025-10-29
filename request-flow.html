@@ -1,0 +1,752 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Request Meeting - StarryMeet</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/request-flow.css">
+</head>
+<body>
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
+
+    <!-- Main Container -->
+    <div class="request-flow-container">
+        <!-- Progress Bar -->
+        <div class="request-progress">
+            <div class="progress-track">
+                <div class="progress-fill" id="progressFill" data-progress="33"></div>
+            </div>
+            <div class="progress-steps">
+                <div class="progress-step active" data-step="1">
+                    <div class="step-circle">1</div>
+                    <span class="step-label">Details</span>
+                </div>
+                <div class="progress-step" data-step="2">
+                    <div class="step-circle">2</div>
+                    <span class="step-label">Your Case</span>
+                </div>
+                <div class="progress-step" data-step="3">
+                    <div class="step-circle">3</div>
+                    <span class="step-label">Payment</span>
+                </div>
+            </div>
+        </div>
+
+        <!-- Celebrity Header (Sticky) -->
+        <div class="celebrity-request-header" id="celebHeader">
+            <div class="celeb-avatar">
+                <div class="avatar-circle" id="celebAvatar">AB</div>
+            </div>
+            <div class="celeb-info">
+                <h1 class="celeb-name" id="celebName">Loading...</h1>
+                <p class="celeb-category" id="celebCategory">Celebrity</p>
+            </div>
+        </div>
+
+        <!-- Step Container -->
+        <div class="request-steps">
+
+            <!-- ========================================
+                 STEP 1: CONFIRM DETAILS (Dynamic Data)
+                 ======================================== -->
+            <div class="request-step active" id="step1">
+                <div class="step-header">
+                    <h2 class="step-title">Confirm Request Details</h2>
+                    <p class="step-subtitle">Review the meeting details for your request</p>
+                </div>
+
+                <div class="step-content">
+                    <!-- Meeting Details Card (Pulled from Celebrity API) -->
+                    <div class="details-card">
+                        <div class="card-section">
+                            <div class="section-icon">📅</div>
+                            <div class="section-content">
+                                <div class="section-label">Date & Time</div>
+                                <div class="section-value" id="selectedDateTime">
+                                    Loading...
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-section">
+                            <div class="section-icon">📍</div>
+                            <div class="section-content">
+                                <div class="section-label">Location</div>
+                                <div class="section-value" id="selectedLocation">
+                                    Loading...
+                                </div>
+                                <div class="section-note" id="venueDetails">
+                                    Venue details will be provided upon approval
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-section">
+                            <div class="section-icon">⏱️</div>
+                            <div class="section-content">
+                                <div class="section-label">Duration</div>
+                                <div class="section-value" id="selectedDuration">
+                                    Loading...
+                                </div>
+                            </div>
+                        </div>
+
+                        <div class="card-section">
+                            <div class="section-icon">💰</div>
+                            <div class="section-content">
+                                <div class="section-label">Meeting Fee</div>
+                                <div class="section-value section-value--price" id="meetingPrice">
+                                    Loading...
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <!-- What to Expect -->
+                    <div class="info-card">
+                        <h3 class="info-title">What to Expect</h3>
+                        <ul class="info-list">
+                            <li class="info-item">
+                                <span class="info-icon">✓</span>
+                                <span class="info-text">Your request will be reviewed within 24-48 hours</span>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-icon">✓</span>
+                                <span class="info-text">Upon approval, you'll receive venue details and access to message the team</span>
+                            </li>
+                            <li class="info-item">
+                                <span class="info-icon">✓</span>
+                                <span class="info-text">Full refund if your request is not approved</span>
+                            </li>
+                        </ul>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="step-navigation">
+                    <button class="btn-nav btn-nav--back" onclick="window.history.back()">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        <span>Back to Profile</span>
+                    </button>
+                    <button class="btn-nav btn-nav--next" onclick="goToStep(2)">
+                        <span>Continue</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ========================================
+                 STEP 2: MAKE YOUR CASE (Selectivity)
+                 ======================================== -->
+            <div class="request-step" id="step2">
+                <div class="step-header">
+                    <h2 class="step-title">Make Your Case</h2>
+                    <p class="step-subtitle">Help us understand why this meeting is important to you</p>
+                </div>
+
+                <div class="step-content">
+                    <!-- Personal Information -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Personal Information</h3>
+
+                        <div class="form-row">
+                            <div class="form-group">
+                                <label class="form-label" for="firstName">
+                                    First Name <span class="required">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    id="firstName"
+                                    placeholder="John"
+                                    required
+                                >
+                                <span class="form-error" id="firstNameError">Please enter your first name</span>
+                            </div>
+
+                            <div class="form-group">
+                                <label class="form-label" for="lastName">
+                                    Last Name <span class="required">*</span>
+                                </label>
+                                <input
+                                    type="text"
+                                    class="form-input"
+                                    id="lastName"
+                                    placeholder="Doe"
+                                    required
+                                >
+                                <span class="form-error" id="lastNameError">Please enter your last name</span>
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="email">
+                                Email Address <span class="required">*</span>
+                            </label>
+                            <input
+                                type="email"
+                                class="form-input"
+                                id="email"
+                                placeholder="john@example.com"
+                                required
+                            >
+                            <span class="form-help">We'll send your confirmation here</span>
+                            <span class="form-error" id="emailError">Please enter a valid email</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="phone">
+                                Phone Number <span class="required">*</span>
+                            </label>
+                            <input
+                                type="tel"
+                                class="form-input"
+                                id="phone"
+                                placeholder="+1 (555) 123-4567"
+                                required
+                            >
+                            <span class="form-help">For meeting coordination and updates</span>
+                            <span class="form-error" id="phoneError">Please enter a valid phone number</span>
+                        </div>
+                    </div>
+
+                    <!-- Your Request (Selectivity Narrative) -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">Why This Meeting Matters</h3>
+                        <p class="form-section-note">
+                            <span class="celeb-name-inline" id="celebNameInline2">This celebrity</span> personally reviews each request.
+                            Be genuine and specific about why this meeting is meaningful to you.
+                        </p>
+
+                        <div class="form-group">
+                            <label class="form-label" for="purpose">
+                                Why do you want to meet <span class="celeb-name-inline" id="celebNameInline3">them</span>?
+                                <span class="required">*</span>
+                            </label>
+                            <textarea
+                                class="form-textarea"
+                                id="purpose"
+                                rows="5"
+                                placeholder="Share your story... What draws you to this person? How have they inspired you? What would this meeting mean to you?"
+                                maxlength="500"
+                                required
+                            ></textarea>
+                            <div class="form-meta">
+                                <span class="char-count">
+                                    <span id="purposeCount">0</span>/500 characters
+                                </span>
+                                <span class="form-help">Minimum 50 characters</span>
+                            </div>
+                            <span class="form-error" id="purposeError">Please tell us why this meeting is important (minimum 50 characters)</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="topics">
+                                What would you like to discuss? <span class="required">*</span>
+                            </label>
+                            <textarea
+                                class="form-textarea"
+                                id="topics"
+                                rows="4"
+                                placeholder="Topics you'd like to cover, questions you have, advice you're seeking..."
+                                maxlength="300"
+                                required
+                            ></textarea>
+                            <div class="form-meta">
+                                <span class="char-count">
+                                    <span id="topicsCount">0</span>/300 characters
+                                </span>
+                            </div>
+                            <span class="form-error" id="topicsError">Please share what you'd like to discuss (minimum 30 characters)</span>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="background">
+                                Your Background <span class="required">*</span>
+                            </label>
+                            <select class="form-select" id="background" required>
+                                <option value="">Select your profession/background</option>
+                                <option value="student">Student</option>
+                                <option value="creative">Creative Professional (Artist, Writer, Musician)</option>
+                                <option value="business">Business Professional</option>
+                                <option value="entrepreneur">Entrepreneur</option>
+                                <option value="tech">Technology/Engineering</option>
+                                <option value="healthcare">Healthcare Professional</option>
+                                <option value="educator">Educator</option>
+                                <option value="athlete">Athlete/Sports</option>
+                                <option value="media">Media/Journalism</option>
+                                <option value="nonprofit">Nonprofit/Social Impact</option>
+                                <option value="fan">Dedicated Fan</option>
+                                <option value="other">Other</option>
+                            </select>
+                            <span class="form-error" id="backgroundError">Please select your background</span>
+                        </div>
+                    </div>
+
+                    <!-- Social Media (Optional) -->
+                    <div class="form-section">
+                        <h3 class="form-section-title">
+                            Social Media
+                            <span class="optional-badge">Optional</span>
+                        </h3>
+                        <p class="form-section-note">
+                            Help the team learn more about you (optional but recommended)
+                        </p>
+
+                        <div class="form-group">
+                            <label class="form-label" for="instagram">
+                                <span class="social-icon">📷</span>
+                                Instagram
+                            </label>
+                            <input
+                                type="text"
+                                class="form-input"
+                                id="instagram"
+                                placeholder="@yourusername"
+                            >
+                        </div>
+
+                        <div class="form-group">
+                            <label class="form-label" for="linkedin">
+                                <span class="social-icon">💼</span>
+                                LinkedIn
+                            </label>
+                            <input
+                                type="url"
+                                class="form-input"
+                                id="linkedin"
+                                placeholder="linkedin.com/in/yourprofile"
+                            >
+                        </div>
+                    </div>
+
+                    <!-- Agreement Checkboxes -->
+                    <div class="form-section">
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox-input" id="termsAgree" required>
+                            <label class="checkbox-label" for="termsAgree">
+                                I agree to StarryMeet's
+                                <a href="terms.html" target="_blank" class="link-inline">Terms of Service</a>
+                                and understand that all meeting requests are subject to approval
+                                <span class="required">*</span>
+                            </label>
+                        </div>
+                        <span class="form-error" id="termsError">You must agree to continue</span>
+
+                        <div class="checkbox-group">
+                            <input type="checkbox" class="checkbox-input" id="cancellationAgree" required>
+                            <label class="checkbox-label" for="cancellationAgree">
+                                I understand the
+                                <a href="#" class="link-inline" onclick="showCancellationPolicy(); return false;">cancellation policy</a>:
+                                Full refund if request not approved or cancelled 7+ days before meeting
+                                <span class="required">*</span>
+                            </label>
+                        </div>
+                        <span class="form-error" id="cancellationError">You must agree to continue</span>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="step-navigation">
+                    <button class="btn-nav btn-nav--back" onclick="goToStep(1)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        <span>Back</span>
+                    </button>
+                    <button class="btn-nav btn-nav--next" onclick="validateAndGoToStep(3)">
+                        <span>Continue to Payment</span>
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="9 18 15 12 9 6"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ========================================
+                 STEP 3: PAYMENT
+                 ======================================== -->
+            <div class="request-step" id="step3">
+                <div class="step-header">
+                    <h2 class="step-title">Secure Your Request</h2>
+                    <p class="step-subtitle">Complete payment to submit your meeting request</p>
+                </div>
+
+                <div class="step-content">
+                    <div class="payment-layout">
+                        <!-- Payment Form -->
+                        <div class="payment-form">
+                            <div class="form-section">
+                                <h3 class="form-section-title">Payment Method</h3>
+
+                                <!-- Card Payment -->
+                                <div class="payment-method active" data-method="card">
+                                    <div class="payment-method-header">
+                                        <input
+                                            type="radio"
+                                            name="paymentMethod"
+                                            id="cardPayment"
+                                            class="radio-input"
+                                            checked
+                                        >
+                                        <label for="cardPayment" class="payment-label">
+                                            <span class="payment-icon">💳</span>
+                                            <span class="payment-name">Credit or Debit Card</span>
+                                        </label>
+                                    </div>
+
+                                    <div class="payment-fields">
+                                        <div class="form-group">
+                                            <label class="form-label" for="cardNumber">
+                                                Card Number <span class="required">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-input"
+                                                id="cardNumber"
+                                                placeholder="1234 5678 9012 3456"
+                                                maxlength="19"
+                                                required
+                                            >
+                                            <span class="form-error" id="cardNumberError">Invalid card number</span>
+                                        </div>
+
+                                        <div class="form-row">
+                                            <div class="form-group">
+                                                <label class="form-label" for="cardExpiry">
+                                                    Expiry Date <span class="required">*</span>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    class="form-input"
+                                                    id="cardExpiry"
+                                                    placeholder="MM/YY"
+                                                    maxlength="5"
+                                                    required
+                                                >
+                                                <span class="form-error" id="cardExpiryError">Invalid date</span>
+                                            </div>
+
+                                            <div class="form-group">
+                                                <label class="form-label" for="cardCVC">
+                                                    CVC <span class="required">*</span>
+                                                </label>
+                                                <input
+                                                    type="text"
+                                                    class="form-input"
+                                                    id="cardCVC"
+                                                    placeholder="123"
+                                                    maxlength="4"
+                                                    required
+                                                >
+                                                <span class="form-error" id="cardCVCError">Invalid CVC</span>
+                                            </div>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="form-label" for="cardName">
+                                                Cardholder Name <span class="required">*</span>
+                                            </label>
+                                            <input
+                                                type="text"
+                                                class="form-input"
+                                                id="cardName"
+                                                placeholder="Name on card"
+                                                required
+                                            >
+                                            <span class="form-error" id="cardNameError">Please enter cardholder name</span>
+                                        </div>
+                                    </div>
+                                </div>
+
+                                <!-- Promo Code -->
+                                <div class="promo-section">
+                                    <button class="promo-toggle" onclick="togglePromo()">
+                                        <span>Have a promo code?</span>
+                                        <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                            <polyline points="6 9 12 15 18 9"/>
+                                        </svg>
+                                    </button>
+                                    <div class="promo-input-group" id="promoGroup">
+                                        <input
+                                            type="text"
+                                            class="form-input promo-input"
+                                            id="promoCode"
+                                            placeholder="Enter code"
+                                        >
+                                        <button class="btn-promo" onclick="applyPromo()">Apply</button>
+                                    </div>
+                                    <span class="promo-success" id="promoSuccess">Code applied! -$50</span>
+                                    <span class="form-error" id="promoError">Invalid promo code</span>
+                                </div>
+                            </div>
+
+                            <!-- Security Badge -->
+                            <div class="security-badge">
+                                <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <rect x="3" y="11" width="18" height="11" rx="2" ry="2"/>
+                                    <path d="M7 11V7a5 5 0 0 1 10 0v4"/>
+                                </svg>
+                                <div class="security-text">
+                                    <div class="security-title">Secure Payment</div>
+                                    <div class="security-note">All transactions are encrypted and secure</div>
+                                </div>
+                            </div>
+                        </div>
+
+                        <!-- Order Summary (Sticky Sidebar) -->
+                        <div class="order-summary">
+                            <h3 class="summary-title">Request Summary</h3>
+
+                            <div class="summary-celeb">
+                                <div class="summary-avatar" id="summaryAvatar">AB</div>
+                                <div class="summary-celeb-info">
+                                    <div class="summary-celeb-name" id="summaryCelebName">Loading...</div>
+                                    <div class="summary-celeb-category" id="summaryCelebCategory">Celebrity</div>
+                                </div>
+                            </div>
+
+                            <div class="summary-details">
+                                <div class="summary-row">
+                                    <span class="summary-label">Date & Time</span>
+                                    <span class="summary-value" id="summaryDateTime">Loading...</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Location</span>
+                                    <span class="summary-value" id="summaryLocation">Loading...</span>
+                                </div>
+                                <div class="summary-row">
+                                    <span class="summary-label">Duration</span>
+                                    <span class="summary-value" id="summaryDuration">Loading...</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-pricing">
+                                <div class="pricing-row">
+                                    <span class="pricing-label">Meeting fee</span>
+                                    <span class="pricing-value" id="pricingMeeting">$0</span>
+                                </div>
+                                <div class="pricing-row">
+                                    <span class="pricing-label">Service fee</span>
+                                    <span class="pricing-value" id="pricingService">$0</span>
+                                </div>
+                                <div class="pricing-row promo-applied" id="promoRow" style="display: none;">
+                                    <span class="pricing-label">Promo discount</span>
+                                    <span class="pricing-value pricing-discount" id="pricingPromo">-$50</span>
+                                </div>
+                                <div class="pricing-total">
+                                    <span class="pricing-label">Total</span>
+                                    <span class="pricing-value" id="pricingTotal">$0</span>
+                                </div>
+                            </div>
+
+                            <div class="summary-note">
+                                <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <circle cx="12" cy="12" r="10"/>
+                                    <line x1="12" y1="16" x2="12" y2="12"/>
+                                    <line x1="12" y1="8" x2="12.01" y2="8"/>
+                                </svg>
+                                <span>You'll only be charged if your request is approved</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Navigation -->
+                <div class="step-navigation">
+                    <button class="btn-nav btn-nav--back" onclick="goToStep(2)">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="15 18 9 12 15 6"/>
+                        </svg>
+                        <span>Back</span>
+                    </button>
+                    <button class="btn-nav btn-nav--primary" onclick="submitRequest()">
+                        <span class="btn-text">Submit Request</span>
+                        <span class="btn-loading" style="display: none;">
+                            <svg class="spinner" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                <circle cx="12" cy="12" r="10" opacity="0.25"/>
+                                <path d="M12 2a10 10 0 0 1 10 10" opacity="0.75"/>
+                            </svg>
+                            Processing...
+                        </span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- ========================================
+                 SUCCESS PAGE (After Submission)
+                 ======================================== -->
+            <div class="request-step" id="stepSuccess" style="display: none;">
+                <div class="success-container">
+                    <div class="success-icon">
+                        <svg width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9 12l2 2 4-4"/>
+                        </svg>
+                    </div>
+
+                    <h1 class="success-title">Request Submitted!</h1>
+                    <p class="success-message">
+                        Your meeting request has been sent to
+                        <strong class="success-celeb-name" id="successCelebName">the celebrity</strong>'s team for review.
+                    </p>
+
+                    <div class="success-reference">
+                        <span class="reference-label">Reference Number</span>
+                        <span class="reference-number" id="referenceNumber">SM-2025-000000</span>
+                    </div>
+
+                    <div class="success-details">
+                        <div class="success-detail-card">
+                            <div class="detail-header">
+                                <div class="detail-avatar" id="successAvatar">AB</div>
+                                <div class="detail-info">
+                                    <div class="detail-name" id="successCelebNameFull">Loading...</div>
+                                    <div class="detail-category" id="successCategory">Celebrity</div>
+                                </div>
+                            </div>
+
+                            <div class="detail-rows">
+                                <div class="detail-row">
+                                    <span class="detail-icon">📅</span>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Date & Time</span>
+                                        <span class="detail-value" id="successDateTime">Loading...</span>
+                                    </div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <span class="detail-icon">📍</span>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Location</span>
+                                        <span class="detail-value" id="successLocation">Loading...</span>
+                                    </div>
+                                </div>
+
+                                <div class="detail-row">
+                                    <span class="detail-icon">💰</span>
+                                    <div class="detail-content">
+                                        <span class="detail-label">Amount</span>
+                                        <span class="detail-value" id="successAmount">$0</span>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-next-steps">
+                        <h3 class="next-steps-title">What Happens Next?</h3>
+                        <div class="next-steps-list">
+                            <div class="next-step-item">
+                                <div class="next-step-number">1</div>
+                                <div class="next-step-content">
+                                    <div class="next-step-title">Review Period</div>
+                                    <div class="next-step-text">
+                                        The celebrity's team will review your request within 24-48 hours
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="next-step-item">
+                                <div class="next-step-number">2</div>
+                                <div class="next-step-content">
+                                    <div class="next-step-title">Approval Notification</div>
+                                    <div class="next-step-text">
+                                        You'll receive an email if your request is approved with meeting details
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="next-step-item">
+                                <div class="next-step-number">3</div>
+                                <div class="next-step-content">
+                                    <div class="next-step-title">Meeting Preparation</div>
+                                    <div class="next-step-text">
+                                        Access venue information, add to calendar, and message the team
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="success-actions">
+                        <a href="dashboard.html" class="btn-nav btn-nav--primary">
+                            <span>View Dashboard</span>
+                        </a>
+                        <a href="browse.html" class="btn-nav btn-nav--secondary">
+                            <span>Browse More Celebrities</span>
+                        </a>
+                    </div>
+
+                    <div class="success-support">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="12" cy="12" r="10"/>
+                            <path d="M9.09 9a3 3 0 0 1 5.83 1c0 2-3 3-3 3"/>
+                            <line x1="12" y1="17" x2="12.01" y2="17"/>
+                        </svg>
+                        <span>Questions? <a href="contact.html" class="link-inline">Contact Support</a></span>
+                    </div>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Cancellation Policy Modal -->
+    <div class="modal" id="cancellationModal">
+        <div class="modal-backdrop" onclick="closeCancellationModal()"></div>
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Cancellation Policy</h3>
+                <button class="modal-close" onclick="closeCancellationModal()">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
+                    </svg>
+                </button>
+            </div>
+            <div class="modal-body">
+                <div class="policy-item">
+                    <div class="policy-icon">✓</div>
+                    <div class="policy-text">
+                        <strong>Full Refund:</strong> If your request is not approved by the celebrity
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <div class="policy-icon">✓</div>
+                    <div class="policy-text">
+                        <strong>Full Refund:</strong> Cancellation 7+ days before meeting
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <div class="policy-icon">⚠</div>
+                    <div class="policy-text">
+                        <strong>50% Refund:</strong> Cancellation 3-6 days before meeting
+                    </div>
+                </div>
+                <div class="policy-item">
+                    <div class="policy-icon">✗</div>
+                    <div class="policy-text">
+                        <strong>No Refund:</strong> Cancellation less than 3 days before meeting
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-nav btn-nav--primary" onclick="closeCancellationModal()">
+                    I Understand
+                </button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Inject shared components -->
+    <script src="js/inject-layout.js"></script>
+    <script src="js/request-flow.js"></script>
+</body>
+</html>
