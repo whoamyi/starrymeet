@@ -112,8 +112,14 @@ export const signup = async (req: AuthRequest, res: Response) => {
         avatar: null
       }
     });
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error('Signup error:', error);
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Failed to create account';
+    res.status(statusCode).json({
+      success: false,
+      error: { message }
+    });
   }
 };
 
@@ -206,8 +212,14 @@ export const signin = async (req: AuthRequest, res: Response) => {
         avatar: user.avatar_url
       }
     });
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error('Signin error:', error);
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Failed to sign in';
+    res.status(statusCode).json({
+      success: false,
+      error: { message }
+    });
   }
 };
 
@@ -225,8 +237,14 @@ export const verify = async (req: AuthRequest, res: Response) => {
       success: true,
       user: req.user
     });
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error('Verify error:', error);
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Failed to verify session';
+    res.status(statusCode).json({
+      success: false,
+      error: { message }
+    });
   }
 };
 
@@ -250,8 +268,14 @@ export const signout = async (req: AuthRequest, res: Response) => {
       success: true,
       message: 'Signed out successfully'
     });
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error('Signout error:', error);
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Failed to sign out';
+    res.status(statusCode).json({
+      success: false,
+      error: { message }
+    });
   }
 };
 
@@ -305,8 +329,14 @@ export const forgotPassword = async (req: AuthRequest, res: Response) => {
       success: true,
       message: 'If the email exists, a reset link will be sent'
     });
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error('Forgot password error:', error);
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Failed to process password reset';
+    res.status(statusCode).json({
+      success: false,
+      error: { message }
+    });
   }
 };
 
@@ -327,8 +357,14 @@ export const getMe = async (req: AuthRequest, res: Response) => {
       success: true,
       data: { user }
     });
-  } catch (error) {
-    throw error;
+  } catch (error: any) {
+    console.error('Get me error:', error);
+    const statusCode = error.statusCode || 500;
+    const message = error.message || 'Failed to get user data';
+    res.status(statusCode).json({
+      success: false,
+      error: { message }
+    });
   }
 };
 
