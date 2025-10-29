@@ -89,9 +89,42 @@ Server will start on `http://localhost:3000`
 ### Authentication
 
 ```
-POST   /api/auth/register      # Register new user
-POST   /api/auth/login         # Login
-GET    /api/auth/me            # Get current user (requires auth)
+POST   /api/auth/signup           # Create new account (firstName, lastName, email, password)
+POST   /api/auth/signin           # Sign in (email, password, rememberMe)
+GET    /api/auth/verify           # Verify session token (requires auth header)
+POST   /api/auth/signout          # Sign out and delete session (requires auth)
+POST   /api/auth/forgot-password  # Request password reset (email)
+
+# Legacy endpoints (backward compatibility)
+POST   /api/auth/register         # Alias for signup
+POST   /api/auth/login            # Alias for signin
+GET    /api/auth/me               # Get current user (requires auth)
+```
+
+**Authentication Flow**:
+1. User signs up with email/password → Returns session token + user data
+2. Frontend stores token in localStorage as `starrymeet_session`
+3. Subsequent requests include `Authorization: Bearer <token>` header
+4. Backend verifies token via middleware before accessing protected routes
+5. Sessions stored in database with expiration (7 or 30 days)
+
+**Session Response Format**:
+```json
+{
+  "success": true,
+  "message": "Sign in successful",
+  "session": {
+    "token": "jwt_token_here",
+    "expiresAt": "2025-11-28T12:00:00.000Z"
+  },
+  "user": {
+    "id": "uuid",
+    "email": "user@example.com",
+    "firstName": "John",
+    "lastName": "Doe",
+    "avatar": null
+  }
+}
 ```
 
 ### Celebrities
@@ -148,11 +181,41 @@ POST   /api/payments/webhook              # Stripe webhook handler
 ### Users
 - `id` (UUID, PK)
 - `email` (unique)
-- `password_hash`
+- `password_hash` (bcrypt)
 - `first_name`, `last_name`
 - `phone`, `avatar_url`
 - `role` (user | celebrity | admin)
-- `email_verified`
+- `email_verified` (boolean)
+- `verification_token` (for email verification)
+- `reset_token` (for password reset)
+- `reset_token_expires` (timestamp)
+- `last_login` (timestamp)
+- `is_active` (boolean, default: true)
+- `created_at`, `updated_at`
+
+### Sessions ⭐ NEW
+- `id` (UUID, PK)
+- `user_id` (FK to users)
+- `token` (JWT token, unique)
+- `expires_at` (timestamp)
+- `ip_address` (VARCHAR(45), tracking)
+- `user_agent` (TEXT, tracking)
+- `created_at` (timestamp)
+
+### User Profiles ⭐ NEW
+- `user_id` (UUID, PK, FK to users)
+- `bio` (TEXT)
+- `location`, `profession`, `company`
+- `website`, `instagram`, `linkedin`, `twitter`
+- `preferences` (JSONB, for user settings)
+- `created_at`, `updated_at`
+
+### Favorites ⭐ NEW
+- `id` (UUID, PK)
+- `user_id` (FK to users)
+- `celebrity_id` (UUID, references celebrities)
+- `created_at` (timestamp)
+- Unique constraint on (user_id, celebrity_id)
 
 ### Celebrities
 - `id` (UUID, PK)

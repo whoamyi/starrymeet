@@ -2,9 +2,9 @@
 
 > Connect fans with their icons through authentic, unforgettable experiences
 
-**Version**: 2.0.0
-**Design System**: Cameo-Inspired Luxury Minimal
-**Status**: Full-Stack Platform ✅
+**Version**: 3.0.0
+**Design System**: Black-White-Gold Luxury
+**Status**: Full-Stack Platform with Authentication ✅
 
 ## 🌟 Overview
 
@@ -64,19 +64,25 @@ starrymeet/
 ├── index.html              # 🏠 Homepage (GitHub Pages entry)
 ├── browse.html             # Browse celebrities
 ├── celebrity-profile.html  # Celebrity details
-├── booking.html            # 5-step booking flow
-├── dashboard.html          # User dashboard
-├── *.html                  # Other pages (13 total)
+├── request-flow.html       # 3-step request flow ⭐ NEW
+├── auth.html               # Authentication (sign in/sign up) ⭐ NEW
+├── dashboard.html          # Elegant user dashboard ⭐ REDESIGNED
+├── *.html                  # Other pages (16 total)
 │
 ├── css/
-│   ├── shared.css          # Global styles & design system
-│   └── pages/              # Page-specific styles
-│       ├── index.css
-│       ├── browse.css
+│   ├── main.css            # Main stylesheet with imports
+│   ├── auth.css            # Authentication styling ⭐ NEW
+│   ├── dashboard-elegant.css  # Dashboard redesign ⭐ NEW
+│   ├── request-flow.css    # Request flow styling ⭐ NEW
+│   └── base/               # Design tokens & utilities
+│       ├── _variables.css  # Black-white-gold color system
 │       └── ...
 │
 ├── js/
 │   ├── shared.js           # Global JavaScript & utilities
+│   ├── auth.js             # Authentication logic ⭐ NEW
+│   ├── dashboard-elegant.js # Dashboard functionality ⭐ NEW
+│   ├── request-flow.js     # Request flow logic ⭐ NEW
 │   └── api.js              # Backend API client
 │
 ├── assets/                 # Images, icons, media
@@ -116,10 +122,10 @@ starrymeet/
 ### For Fans
 - **Browse & Discover**: Filter celebrities by category, location, and price
 - **Celebrity Profiles**: Detailed profiles with availability, pricing, and reviews
-- **Multi-Step Booking**: Secure 5-step booking process with Stripe integration
-- **User Dashboard**: Manage bookings, saved celebrities, messages, and settings
+- **3-Step Request Flow**: Streamlined request process (Confirm → Apply → Secure)
+- **User Dashboard**: Elegant dashboard to manage requests and favorites
 - **Secure Payments**: Real payment processing via Stripe
-- **JWT Authentication**: Secure user accounts with token-based auth
+- **Authentication System**: Complete sign up/sign in with session management
 
 ### For Celebrities
 - **Profile Management**: Control availability and pricing
@@ -135,30 +141,41 @@ starrymeet/
 - **Stripe Integration**: Production-ready payments
 - **API Client**: Frontend JavaScript client for easy integration
 
-## 🎨 Design System (v2.0)
+## 🎨 Design System (v3.0 - Black-White-Gold)
 
 ### Design Philosophy
-Inspired by Cameo's sophisticated aesthetics:
-- **Pure Black Theme** (#000000) with luxury purple and gold accents
-- **Minimal Elegance** - Restrained typography, clean lines, breathing room
-- **Vibrant Gradients** - 8 Cameo-style gradient card variants
-- **Gold Verified Badges** - Luxury gold gradient accents
-- **Subtle Interactions** - Gentle hover effects, smooth transitions
+Professional luxury platform with sophisticated aesthetics:
+- **Black-White-Gold Theme** - Pure black (#000000), white (#FFFFFF), and gold accent (#D4A574)
+- **Minimal Elegance** - Clean lines, generous spacing, clear typography hierarchy
+- **Subtle Sophistication** - No gradients, focus on content with gold highlights
+- **Verified Badge System** - Luxury gold accents for premium features
+- **Smooth Interactions** - Gentle hover effects, polished transitions
 
 ### Key Features
-- **Typography**: Inter sans-serif, restrained sizing (h1: 48px, h2: 36px)
-- **Buttons**: Fully rounded with gradient backgrounds, subtle hover glows
-- **Cards**: 8 vibrant gradient variants for emphasis
-- **Colors**: Pure black backgrounds with purple (#8B5CF6) and gold (#F59E0B) accents
-- **Responsive**: Mobile-first design with breakpoints at 768px and 1024px
+- **Colors**:
+  - Primary: #000000 (Black), #FFFFFF (White)
+  - Accent: #D4A574 (Gold)
+  - Surfaces: #1a1a1a (Weak), #2a2a2a (Base)
+  - Text: #ffffff (Primary), #a0a0a0 (Secondary)
+- **Typography**: System fonts, clear hierarchy
+- **Buttons**: Solid gold primary buttons with hover states
+- **Cards**: Clean elevated cards with subtle borders
+- **Responsive**: Mobile-first design with breakpoints at 640px, 768px, 1024px
 
 ## 🔌 API Endpoints
 
 ### Authentication
 ```
-POST   /api/auth/register      # Register new user
-POST   /api/auth/login         # Login
-GET    /api/auth/me            # Get current user
+POST   /api/auth/signup           # Create new account
+POST   /api/auth/signin           # Sign in with email/password
+GET    /api/auth/verify           # Verify session token (requires auth)
+POST   /api/auth/signout          # Sign out and delete session (requires auth)
+POST   /api/auth/forgot-password  # Request password reset
+
+# Legacy endpoints (backward compatibility)
+POST   /api/auth/register         # Alias for signup
+POST   /api/auth/login            # Alias for signin
+GET    /api/auth/me               # Get current user (requires auth)
 ```
 
 ### Celebrities
@@ -185,7 +202,10 @@ POST   /api/payments/webhook          # Stripe webhook handler
 ## 💾 Database Schema
 
 ### Core Tables
-- **users** - User accounts with JWT authentication
+- **users** - User accounts with authentication fields (email, password_hash, verification tokens)
+- **sessions** - Active user sessions with JWT tokens and expiration
+- **user_profiles** - Extended user information (bio, location, social links, preferences)
+- **favorites** - User's favorite celebrities
 - **celebrities** - Celebrity profiles with pricing (35 seeded)
 - **bookings** - Booking records with status lifecycle
 - **payments** - Stripe payment records
@@ -286,7 +306,7 @@ See [backend/README.md](backend/README.md) for detailed deployment instructions.
 
 ## 📈 Roadmap
 
-### Phase 1: MVP ✅
+### Phase 1: MVP ✅ COMPLETE
 - [x] Frontend design and pages
 - [x] Backend API with authentication
 - [x] Database schema and models
@@ -295,10 +315,14 @@ See [backend/README.md](backend/README.md) for detailed deployment instructions.
 - [x] Booking system
 - [x] Frontend-Backend integration
 
-### Phase 2: Production (In Progress)
+### Phase 2: Production (In Progress) ⏳
 - [x] API client for frontend
+- [x] Complete authentication system (sign up, sign in, sessions)
+- [x] Black-white-gold design system migration
+- [x] Elegant dashboard redesign
+- [x] Streamlined 3-step request flow
 - [ ] Real-time messaging
-- [ ] Email notifications (SendGrid)
+- [ ] Email notifications
 - [ ] Production deployment
 - [ ] SSL/HTTPS setup
 
@@ -319,13 +343,14 @@ Private project - All rights reserved.
 
 ---
 
-**Built with Claude Code** - Version 2.0.0
+**Built with Claude Code** - Version 3.0.0
 **Tech Stack**: HTML/CSS/JS + Node.js/Express/TypeScript + PostgreSQL
-**Design System**: v2.0 - Cameo-Inspired Luxury Minimal
+**Design System**: v3.0 - Black-White-Gold Luxury
 
 **Frontend**: ✅ Complete - Live on GitHub Pages
-**Backend**: ✅ Complete - Ready for deployment
-**Status**: Full-Stack Platform Ready for Production
+**Backend**: ✅ Complete - Authentication & API ready
+**Authentication**: ✅ Complete - Session-based with JWT
+**Status**: Full-Stack Platform with Modern Auth Ready for Production
 
 💻 **Quick Start**: See [SETUP.md](SETUP.md)
 🔌 **API Docs**: See [backend/README.md](backend/README.md)
