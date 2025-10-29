@@ -4,52 +4,111 @@ import { generateToken } from '../utils/jwt';
 import { AppError } from '../middleware/errorHandler';
 import { AuthRequest } from '../middleware/auth';
 import { sendWelcomeEmail } from '../services/email.service';
+import sequelize from '../config/database';
+import { v4 as uuidv4 } from 'uuid';
+import bcrypt from 'bcrypt';
 
-export const register = async (req: AuthRequest, res: Response) => {
+// ===================================
+// SIGN UP
+// ===================================
+export const signup = async (req: AuthRequest, res: Response) => {
   try {
-    const { email, password, first_name, last_name, phone } = req.body;
+    const { firstName, lastName, email, password } = req.body;
 
-    // Check if user exists
-    const existingUser = await User.findOne({ where: { email } });
-    if (existingUser) {
+    // Validate input
+    if (!firstName || !lastName || !email || !password) {
+      throw new AppError('All fields are required', 400);
+    }
+
+    // Validate email format
+    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) {
+      throw new AppError('Invalid email format', 400);
+    }
+
+    // Validate password strength
+    if (password.length < 8) {
+      throw new AppError('Password must be at least 8 characters', 400);
+    }
+
+    // Check if email already exists
+    const existingUser = await sequelize.query(
+      'SELECT id FROM users WHERE email = ?',
+      {
+        replacements: [email.toLowerCase()],
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+
+    if (existingUser.length > 0) {
       throw new AppError('Email already registered', 400);
     }
 
-    // Hash password and create user
-    const password_hash = await User.hashPassword(password);
-    const user = await User.create({
-      email,
-      password_hash,
-      first_name,
-      last_name,
-      phone,
+    // Hash password
+    const passwordHash = await bcrypt.hash(password, 10);
+
+    // Generate user ID
+    const userId = uuidv4();
+
+    // Insert user
+    await sequelize.query(
+      `INSERT INTO users (id, email, password_hash, first_name, last_name, created_at, updated_at)
+       VALUES (?, ?, ?, ?, ?, NOW(), NOW())`,
+      {
+        replacements: [userId, email.toLowerCase(), passwordHash, firstName, lastName]
+      }
+    );
+
+    // Create user profile
+    await sequelize.query(
+      'INSERT INTO user_profiles (user_id, created_at, updated_at) VALUES (?, NOW(), NOW())',
+      { replacements: [userId] }
+    );
+
+    // Generate session token
+    const token = generateToken({
+      userId,
+      email: email.toLowerCase(),
       role: 'user'
     });
 
-    // Generate token
-    const token = generateToken({
-      userId: user.id,
-      email: user.email,
-      role: user.role
-    });
+    // Create session record
+    const sessionId = uuidv4();
+    const expiresAt = new Date(Date.now() + 30 * 24 * 60 * 60 * 1000); // 30 days
+
+    await sequelize.query(
+      `INSERT INTO sessions (id, user_id, token, expires_at, ip_address, user_agent, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, NOW())`,
+      {
+        replacements: [
+          sessionId,
+          userId,
+          token,
+          expiresAt,
+          req.ip,
+          req.headers['user-agent'] || null
+        ]
+      }
+    );
 
     // Send welcome email (async, don't wait for it)
-    sendWelcomeEmail(user.email, user.first_name).catch(err => {
+    sendWelcomeEmail(email, firstName).catch(err => {
       console.error('Failed to send welcome email:', err);
-      // Don't fail registration if email fails
     });
 
+    // Return user data and session
     res.status(201).json({
       success: true,
-      data: {
+      message: 'Account created successfully',
+      session: {
         token,
-        user: {
-          id: user.id,
-          email: user.email,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          role: user.role
-        }
+        expiresAt
+      },
+      user: {
+        id: userId,
+        email: email.toLowerCase(),
+        firstName,
+        lastName,
+        avatar: null
       }
     });
   } catch (error) {
@@ -57,47 +116,202 @@ export const register = async (req: AuthRequest, res: Response) => {
   }
 };
 
-export const login = async (req: AuthRequest, res: Response) => {
+// ===================================
+// SIGN IN
+// ===================================
+export const signin = async (req: AuthRequest, res: Response) => {
   try {
-    const { email, password } = req.body;
+    const { email, password, rememberMe } = req.body;
+
+    // Validate input
+    if (!email || !password) {
+      throw new AppError('Email and password are required', 400);
+    }
 
     // Find user
-    const user = await User.findOne({ where: { email } });
-    if (!user) {
+    const users: any[] = await sequelize.query(
+      `SELECT id, email, password_hash, first_name, last_name, avatar_url, is_active
+       FROM users WHERE email = ?`,
+      {
+        replacements: [email.toLowerCase()],
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+
+    if (users.length === 0) {
       throw new AppError('Invalid email or password', 401);
     }
 
-    // Check password
-    const isMatch = await user.comparePassword(password);
-    if (!isMatch) {
+    const user = users[0];
+
+    // Check if account is active
+    if (!user.is_active) {
+      throw new AppError('Account has been deactivated', 401);
+    }
+
+    // Verify password
+    const isValidPassword = await bcrypt.compare(password, user.password_hash);
+
+    if (!isValidPassword) {
       throw new AppError('Invalid email or password', 401);
     }
 
-    // Generate token
+    // Generate session token
+    const expiresIn = rememberMe ? 30 : 7; // days
     const token = generateToken({
       userId: user.id,
       email: user.email,
-      role: user.role
+      role: 'user'
     });
+
+    // Create session record
+    const sessionId = uuidv4();
+    const expiresAt = new Date(Date.now() + expiresIn * 24 * 60 * 60 * 1000);
+
+    await sequelize.query(
+      `INSERT INTO sessions (id, user_id, token, expires_at, ip_address, user_agent, created_at)
+       VALUES (?, ?, ?, ?, ?, ?, NOW())`,
+      {
+        replacements: [
+          sessionId,
+          user.id,
+          token,
+          expiresAt,
+          req.ip,
+          req.headers['user-agent'] || null
+        ]
+      }
+    );
+
+    // Update last login
+    await sequelize.query(
+      'UPDATE users SET last_login = NOW() WHERE id = ?',
+      { replacements: [user.id] }
+    );
+
+    // Return user data and session
+    res.json({
+      success: true,
+      message: 'Sign in successful',
+      session: {
+        token,
+        expiresAt
+      },
+      user: {
+        id: user.id,
+        email: user.email,
+        firstName: user.first_name,
+        lastName: user.last_name,
+        avatar: user.avatar_url
+      }
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+// ===================================
+// VERIFY SESSION
+// ===================================
+export const verify = async (req: AuthRequest, res: Response) => {
+  try {
+    if (!req.user) {
+      throw new AppError('Authentication required', 401);
+    }
+
+    // Session is valid if we got here (middleware verified token)
+    res.json({
+      success: true,
+      user: req.user
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+// ===================================
+// SIGN OUT
+// ===================================
+export const signout = async (req: AuthRequest, res: Response) => {
+  try {
+    const authHeader = req.headers.authorization;
+    const token = authHeader?.split(' ')[1];
+
+    if (token) {
+      // Delete session
+      await sequelize.query(
+        'DELETE FROM sessions WHERE token = ?',
+        { replacements: [token] }
+      );
+    }
 
     res.json({
       success: true,
-      data: {
-        token,
-        user: {
-          id: user.id,
-          email: user.email,
-          first_name: user.first_name,
-          last_name: user.last_name,
-          role: user.role
-        }
-      }
+      message: 'Signed out successfully'
     });
   } catch (error) {
     throw error;
   }
 };
 
+// ===================================
+// FORGOT PASSWORD
+// ===================================
+export const forgotPassword = async (req: AuthRequest, res: Response) => {
+  try {
+    const { email } = req.body;
+
+    if (!email) {
+      throw new AppError('Email is required', 400);
+    }
+
+    // Find user
+    const users: any[] = await sequelize.query(
+      'SELECT id, email, first_name FROM users WHERE email = ?',
+      {
+        replacements: [email.toLowerCase()],
+        type: sequelize.QueryTypes.SELECT
+      }
+    );
+
+    // Always return success (don't reveal if email exists)
+    if (users.length === 0) {
+      return res.json({
+        success: true,
+        message: 'If the email exists, a reset link will be sent'
+      });
+    }
+
+    const user = users[0];
+
+    // Generate reset token
+    const resetToken = uuidv4();
+    const resetTokenExpires = new Date(Date.now() + 60 * 60 * 1000); // 1 hour
+
+    // Store reset token
+    await sequelize.query(
+      `UPDATE users
+       SET reset_token = ?, reset_token_expires = ?
+       WHERE id = ?`,
+      { replacements: [resetToken, resetTokenExpires, user.id] }
+    );
+
+    // TODO: Send email with reset link
+    // await sendPasswordResetEmail(user.email, user.first_name, resetToken);
+    console.log(`Password reset link: ${process.env.APP_URL}/reset-password.html?token=${resetToken}`);
+
+    res.json({
+      success: true,
+      message: 'If the email exists, a reset link will be sent'
+    });
+  } catch (error) {
+    throw error;
+  }
+};
+
+// ===================================
+// GET ME (for compatibility)
+// ===================================
 export const getMe = async (req: AuthRequest, res: Response) => {
   try {
     const user = await User.findByPk(req.user!.userId, {
@@ -116,3 +330,7 @@ export const getMe = async (req: AuthRequest, res: Response) => {
     throw error;
   }
 };
+
+// Aliases for backward compatibility
+export const register = signup;
+export const login = signin;
