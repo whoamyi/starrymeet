@@ -754,3 +754,28 @@ function showToastIG(message, duration = 3000) {
         setTimeout(() => toast.remove(), 300);
     }, duration);
 }
+
+/**
+ * PHASE 4: Policies Accordion Functionality
+ */
+document.addEventListener('DOMContentLoaded', () => {
+    // Initialize policy accordions
+    const policyHeaders = document.querySelectorAll('.policy-header-new');
+
+    policyHeaders.forEach(header => {
+        header.addEventListener('click', () => {
+            const policyItem = header.closest('.policy-item-new');
+            const isActive = policyItem.classList.contains('active');
+
+            // Close all other policy items
+            document.querySelectorAll('.policy-item-new').forEach(item => {
+                if (item !== policyItem) {
+                    item.classList.remove('active');
+                }
+            });
+
+            // Toggle current policy item
+            policyItem.classList.toggle('active');
+        });
+    });
+});
