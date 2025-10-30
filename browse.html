@@ -10,13 +10,13 @@
     <link rel="alternate icon" type="image/svg+xml" href="assets/images/black-favicon.svg">
 
     <!-- SEO -->
-    <meta name="description" content="Browse and discover 147 verified celebrities available for exclusive private meetings.">
+    <meta name="description" content="Browse and discover verified celebrities available for exclusive private meetings.">
 
     <!-- Open Graph -->
     <meta property="og:type" content="website">
     <meta property="og:url" content="https://starrymeet.com/browse.html">
     <meta property="og:title" content="Browse Icons - StarryMeet">
-    <meta property="og:description" content="147 verified celebrities available for private meetings.">
+    <meta property="og:description" content="Verified celebrities available for private meetings.">
 
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -37,46 +37,31 @@
     <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
 
     <main class="browse-page">
-        <!-- Hero/Search Section -->
-        <section class="browse-hero">
-            <div class="browse-hero-container">
-                <h1 class="browse-title">Meet Your Icon</h1>
-                <p class="browse-subtitle"><span id="totalCount">147</span> verified celebrities available for private meetings</p>
 
-                <!-- Search Bar -->
-                <div class="search-bar">
-                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <circle cx="11" cy="11" r="8"/>
-                        <path d="m21 21-4.35-4.35"/>
-                    </svg>
-                    <input
-                        type="text"
-                        class="search-input"
-                        placeholder="Search by name, category, or keyword..."
-                        id="searchInput"
-                    />
-                </div>
-            </div>
-        </section>
+        <!-- STICKY TOOLBAR - Compact, everything visible -->
+        <section class="browse-toolbar" id="browseToolbar">
+            <div class="toolbar-container">
 
-        <!-- Filters Section -->
-        <section class="filters-section">
-            <div class="filters-container">
-                <!-- Left: Category filters -->
-                <div class="filters-left">
-                    <button class="filter-btn active" data-category="all">All</button>
-                    <button class="filter-btn" data-category="Film & Television">Film & TV</button>
-                    <button class="filter-btn" data-category="Sports">Sports</button>
-                    <button class="filter-btn" data-category="Music">Music</button>
-                    <button class="filter-btn" data-category="Business">Business</button>
-                    <button class="filter-btn" data-category="Social Media">Social Media</button>
-                </div>
+                <!-- Row 1: Search + Icons -->
+                <div class="toolbar-main">
+                    <div class="search-bar-inline">
+                        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"/>
+                            <path d="m21 21-4.35-4.35"/>
+                        </svg>
+                        <input type="text" class="search-input-inline" placeholder="Search..." id="searchInput" />
+                    </div>
 
-                <!-- Right: View switcher + More filters -->
-                <div class="filters-right">
-                    <!-- View Switcher -->
+                    <button class="toolbar-btn" id="filterBtn" aria-label="Filters">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="4" y1="6" x2="20" y2="6"/>
+                            <line x1="4" y1="12" x2="20" y2="12"/>
+                            <line x1="4" y1="18" x2="20" y2="18"/>
+                        </svg>
+                    </button>
+
                     <div class="view-switcher">
-                        <button class="view-btn active" data-view="grid" title="Grid View">
+                        <button class="view-btn" data-view="grid">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
                                 <rect x="3" y="3" width="7" height="7" rx="1"/>
                                 <rect x="14" y="3" width="7" height="7" rx="1"/>
@@ -84,96 +69,109 @@
                                 <rect x="14" y="14" width="7" height="7" rx="1"/>
                             </svg>
                         </button>
-                        <button class="view-btn view-btn-swipe" data-view="swipe" title="Swipe View">
+                        <button class="view-btn active" data-view="swipe">
                             <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
-                                <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/>
-                                <path d="M12 8v8m-4-4h8" stroke="white" stroke-width="2"/>
+                                <rect x="5" y="5" width="14" height="14" rx="2"/>
                             </svg>
                         </button>
                     </div>
+                </div>
 
-                    <!-- More Filters -->
-                    <button class="more-filters-btn" id="moreFiltersBtn">
-                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="4" y1="6" x2="20" y2="6"/>
-                            <line x1="4" y1="12" x2="20" y2="12"/>
-                            <line x1="4" y1="18" x2="20" y2="18"/>
-                            <circle cx="8" cy="6" r="2" fill="currentColor"/>
-                            <circle cx="16" cy="12" r="2" fill="currentColor"/>
-                            <circle cx="12" cy="18" r="2" fill="currentColor"/>
+                <!-- Row 2: Categories (horizontal scroll) -->
+                <div class="toolbar-categories">
+                    <button class="category-pill active" data-category="all">All</button>
+                    <button class="category-pill" data-category="Film & Television">Film & TV</button>
+                    <button class="category-pill" data-category="Sports">Sports</button>
+                    <button class="category-pill" data-category="Music">Music</button>
+                    <button class="category-pill" data-category="Business">Business</button>
+                    <button class="category-pill" data-category="Social Media">Social Media</button>
+                </div>
+
+                <!-- Row 3: Count + Sort -->
+                <div class="toolbar-stats">
+                    <span class="results-count" id="resultsCount">Showing 147</span>
+                    <button class="sort-btn" id="sortBtn">
+                        <span id="sortLabel">Popular</span>
+                        <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <polyline points="6 9 12 15 18 9"/>
                         </svg>
-                        <span>Filters</span>
                     </button>
                 </div>
             </div>
-
-            <!-- Active Filters Display -->
-            <div class="active-filters" id="activeFilters"></div>
         </section>
 
-        <!-- Results Count -->
-        <section class="results-section">
-            <div class="results-container">
-                <p class="results-count" id="resultsCount">Showing 147 icons</p>
-                <button class="sort-btn" id="sortBtn">
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                        <path d="M3 6h18M7 12h10M11 18h6"/>
+        <!-- SWIPE VIEW (Default on mobile) -->
+        <section class="swipe-view" id="swipeView">
+            <!-- Initial guide message -->
+            <div class="swipe-guide" id="swipeGuide">
+                <div class="guide-arrows">
+                    <span class="guide-arrow left">← Pass</span>
+                    <span class="guide-arrow right">View →</span>
+                </div>
+            </div>
+
+            <div class="swipe-container">
+                <div class="swipe-stack" id="swipeStack">
+                    <!-- Single card visible at a time - loaded dynamically -->
+                </div>
+            </div>
+
+            <!-- Swipe Controls -->
+            <div class="swipe-controls">
+                <button class="swipe-btn swipe-pass" id="swipePassBtn" aria-label="Pass">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <line x1="18" y1="6" x2="6" y2="18"/>
+                        <line x1="6" y1="6" x2="18" y2="18"/>
                     </svg>
-                    <span>Sort: Recommended</span>
+                </button>
+                <button class="swipe-btn swipe-back" id="swipeBackBtn" aria-label="Go back">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+                <button class="swipe-btn swipe-view" id="swipeViewBtn" aria-label="View profile">
+                    <svg width="28" height="28" viewBox="0 0 24 24" fill="currentColor">
+                        <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z"/>
+                    </svg>
                 </button>
             </div>
         </section>
 
-        <!-- GRID VIEW (Default) -->
-        <section class="celebrities-grid" id="gridView">
+        <!-- GRID VIEW (Desktop default) -->
+        <section class="grid-view" id="gridView" style="display: none;">
             <div class="grid-container" id="gridContainer">
-                <!-- Cards dynamically loaded by JavaScript -->
+                <!-- Grid cards here -->
             </div>
-        </section>
 
-        <!-- SWIPE VIEW (Mobile) -->
-        <section class="celebrities-swipe" id="swipeView" style="display: none;">
-            <div class="swipe-container">
-                <!-- Swipe Instructions (First Time) -->
-                <div class="swipe-instructions" id="swipeInstructions">
-                    <div class="instruction">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#D4A574">
-                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
-                        </svg>
-                        <p>Swipe left to pass</p>
-                    </div>
-                    <div class="instruction">
-                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#D4A574">
-                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
-                        </svg>
-                        <p>Swipe right to view</p>
-                    </div>
+            <!-- Pagination -->
+            <div class="pagination" id="pagination">
+                <button class="page-btn page-prev" id="prevPage" disabled>
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M15 18l-6-6 6-6"/>
+                    </svg>
+                </button>
+
+                <div class="page-numbers" id="pageNumbers">
+                    <!-- Page numbers render here -->
                 </div>
 
-                <!-- Swipe Cards Stack -->
-                <div class="swipe-stack" id="swipeStack">
-                    <!-- Cards loaded by JavaScript -->
-                </div>
+                <button class="page-btn page-next" id="nextPage">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M9 18l6-6-6-6"/>
+                    </svg>
+                </button>
+            </div>
 
-                <!-- Swipe Controls -->
-                <div class="swipe-controls">
-                    <button class="swipe-control-btn swipe-pass" id="swipePassBtn" title="Pass">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <line x1="18" y1="6" x2="6" y2="18"/>
-                            <line x1="6" y1="6" x2="18" y2="18"/>
-                        </svg>
-                    </button>
-                    <button class="swipe-control-btn swipe-back" id="swipeBackBtn" title="Go Back">
-                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-                            <path d="M15 18l-6-6 6-6"/>
-                        </svg>
-                    </button>
-                    <button class="swipe-control-btn swipe-view" id="swipeViewBtn" title="View Profile">
-                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
-                            <path d="M9 11.5l3 3 8-8"/>
-                        </svg>
-                    </button>
-                </div>
+            <!-- Results per page selector -->
+            <div class="results-per-page">
+                <span>Show:</span>
+                <select id="perPageSelect" class="per-page-select">
+                    <option value="12" selected>12</option>
+                    <option value="24">24</option>
+                    <option value="48">48</option>
+                    <option value="96">96</option>
+                </select>
+                <span>per page</span>
             </div>
         </section>
 
@@ -182,12 +180,13 @@
     <!-- Footer -->
     <footer id="footer"></footer>
 
-    <!-- More Filters Modal -->
-    <div class="modal-overlay" id="filtersModal">
+    <!-- Filter Modal -->
+    <div class="filter-modal" id="filterModal">
+        <div class="modal-backdrop"></div>
         <div class="modal-content">
             <div class="modal-header">
-                <h3 class="modal-title">Filters</h3>
-                <button class="modal-close" id="closeFiltersModal">×</button>
+                <h3>Filters</h3>
+                <button class="modal-close" id="closeModal">×</button>
             </div>
             <div class="modal-body">
                 <!-- Tier -->

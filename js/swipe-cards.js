@@ -1,9 +1,9 @@
 /**
- * swipe-cards.js - Tinder-style swipe interaction
- * Premium browse experience for mobile users
+ * swipe-cards.js - Single-card swipe interaction (FIXED)
+ * Prevents horizontal scroll and smooth swipe experience
  */
 
-class SwipeCards {
+class SwipeView {
     constructor() {
         this.currentIndex = 0;
         this.celebrities = [];
@@ -12,27 +12,22 @@ class SwipeCards {
         this.startX = 0;
         this.startY = 0;
         this.currentX = 0;
-        this.currentY = 0;
+        this.offsetX = 0;
 
         this.init();
     }
 
     async init() {
-        // Load celebrity data
         await this.loadCelebrities();
+        this.renderCard();
+        this.setupListeners();
 
-        // Render initial cards
-        this.renderCards();
-
-        // Set up event listeners
-        this.setupEventListeners();
-
-        // Hide instructions after 3 seconds
+        // Hide guide after 3 seconds
         setTimeout(() => {
-            const instructions = document.getElementById('swipeInstructions');
-            if (instructions) {
-                instructions.style.opacity = '0';
-                setTimeout(() => instructions.style.display = 'none', 300);
+            const guide = document.getElementById('swipeGuide');
+            if (guide) {
+                guide.style.opacity = '0';
+                setTimeout(() => guide.style.display = 'none', 300);
             }
         }, 3000);
     }
@@ -43,7 +38,6 @@ class SwipeCards {
             const response = await api.getFeaturedCelebrities(100);
 
             if (response.success && response.data) {
-                // Handle both response formats
                 const celebrityData = response.data.celebrities || response.data.profiles || [];
                 this.celebrities = celebrityData;
                 console.log('✅ Loaded', this.celebrities.length, 'celebrities for swipe');
@@ -56,145 +50,153 @@ class SwipeCards {
         }
     }
 
-    renderCards() {
+    renderCard() {
         const stack = document.getElementById('swipeStack');
         if (!stack) return;
 
-        stack.innerHTML = '';
-
-        // Render next 3 cards for stack effect
-        for (let i = 0; i < 3 && (this.currentIndex + i) < this.celebrities.length; i++) {
-            const celebrity = this.celebrities[this.currentIndex + i];
-            const card = this.createCard(celebrity, i);
-            stack.appendChild(card);
+        if (this.currentIndex >= this.celebrities.length) {
+            this.showEndMessage();
+            return;
         }
+
+        const celeb = this.celebrities[this.currentIndex];
+        const card = this.createCard(celeb);
+
+        // Clear and add only ONE card
+        stack.innerHTML = '';
+        stack.appendChild(card);
+
+        this.attachCardListeners(card);
     }
 
-    createCard(celebrity, position) {
+    createCard(celeb) {
         const card = document.createElement('div');
         card.className = 'swipe-card';
-        card.dataset.slug = celebrity.slug;
-        card.dataset.position = position;
+        card.dataset.slug = celeb.slug;
 
-        const imageUrl = celebrity.picture_url || celebrity.avatar_url || 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=600&fit=crop&q=80';
-        const tier = celebrity.tier || 'A';
-        const minPrice = celebrity.min_price || 5000;
-        const rating = celebrity.review_rate > 0 ? parseFloat(celebrity.review_rate).toFixed(1) : '4.8';
-        const slotsLeft = celebrity.availability_count || 3;
+        // Truncate name if needed
+        const displayName = celeb.name.length > 20 ?
+            celeb.name.substring(0, 20) + '...' : celeb.name;
+
+        const imageUrl = celeb.picture_url || celeb.avatar_url || 'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=600&fit=crop&q=80';
+        const tier = celeb.tier || 'A';
+        const minPrice = celeb.min_price || 5000;
+        const rating = celeb.review_rate > 0 ? parseFloat(celeb.review_rate).toFixed(1) : '4.8';
+        const availability = celeb.availability_count || 3;
 
         card.innerHTML = `
-            <div class="swipe-card-inner">
-                <img src="${imageUrl}" alt="${celebrity.name}" class="swipe-card-image" />
-                <div class="swipe-card-info">
-                    ${celebrity.verified ? '<div class="verified-badge-swipe">✓</div>' : ''}
-                    <h3 class="swipe-card-name">${celebrity.name}</h3>
-                    <p class="swipe-card-category">${celebrity.category || 'Celebrity'}</p>
-                    <div class="swipe-card-meta">
-                        <span class="swipe-tier">Tier ${tier}</span>
-                        <span class="swipe-price">$${parseFloat(minPrice).toLocaleString()}</span>
-                    </div>
-                    <div class="swipe-card-stats">
-                        <span>⭐ ${rating}</span>
-                        <span>•</span>
-                        <span>${slotsLeft} slots left</span>
-                    </div>
+            <div class="card-image">
+                <img src="${imageUrl}" alt="${celeb.name}" />
+                <div class="verified-badge-ig">
+                    <svg width="20" height="20" viewBox="0 0 24 24" fill="#0095F6">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
                 </div>
-                <div class="swipe-overlay swipe-overlay-left">
-                    <span class="swipe-label">PASS</span>
+            </div>
+            <div class="card-info">
+                <div class="card-header">
+                    <h3 class="card-name">${displayName}</h3>
+                    <svg class="verified-inline" width="16" height="16" viewBox="0 0 24 24" fill="#0095F6">
+                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                    </svg>
                 </div>
-                <div class="swipe-overlay swipe-overlay-right">
-                    <span class="swipe-label">VIEW</span>
+                <p class="card-category">${celeb.category || 'Celebrity'}</p>
+                <div class="card-meta">
+                    <span class="card-tier">TIER ${tier}</span>
+                    <span class="card-price">$${parseFloat(minPrice).toLocaleString()}+</span>
+                </div>
+                <div class="card-stats">
+                    <span class="stat-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="#D4A574">
+                            <path d="M12 2l3.09 6.26L22 9.27l-5 4.87 1.18 6.88L12 17.77l-6.18 3.25L7 14.14 2 9.27l6.91-1.01L12 2z"/>
+                        </svg>
+                        ${rating}
+                    </span>
+                    <span class="stat-divider">•</span>
+                    <span class="stat-item">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
+                            <line x1="16" y1="2" x2="16" y2="6"/>
+                            <line x1="8" y1="2" x2="8" y2="6"/>
+                            <line x1="3" y1="10" x2="21" y2="10"/>
+                        </svg>
+                        ${availability}
+                    </span>
                 </div>
             </div>
         `;
 
-        // Only add drag listeners to the top card
-        if (position === 0) {
-            this.addDragListeners(card);
-        }
-
         return card;
     }
 
-    addDragListeners(card) {
-        // Mouse events
-        card.addEventListener('mousedown', this.onDragStart.bind(this));
-        document.addEventListener('mousemove', this.onDragMove.bind(this));
-        document.addEventListener('mouseup', this.onDragEnd.bind(this));
-
+    attachCardListeners(card) {
         // Touch events
-        card.addEventListener('touchstart', this.onDragStart.bind(this));
-        document.addEventListener('touchmove', this.onDragMove.bind(this));
-        document.addEventListener('touchend', this.onDragEnd.bind(this));
+        card.addEventListener('touchstart', this.onStart.bind(this), { passive: true });
+        document.addEventListener('touchmove', this.onMove.bind(this), { passive: false });
+        document.addEventListener('touchend', this.onEnd.bind(this));
+
+        // Mouse events
+        card.addEventListener('mousedown', this.onStart.bind(this));
+        document.addEventListener('mousemove', this.onMove.bind(this));
+        document.addEventListener('mouseup', this.onEnd.bind(this));
     }
 
-    onDragStart(e) {
-        const card = e.currentTarget;
-        if (card.dataset.position !== '0') return;
-
+    onStart(e) {
         this.isDragging = true;
-        card.style.transition = 'none';
+        this.startX = e.type === 'touchstart' ? e.touches[0].clientX : e.clientX;
+        this.startY = e.type === 'touchstart' ? e.touches[0].clientY : e.clientY;
+        this.offsetX = 0;
 
-        if (e.type === 'mousedown') {
-            this.startX = e.clientX;
-            this.startY = e.clientY;
-        } else {
-            this.startX = e.touches[0].clientX;
-            this.startY = e.touches[0].clientY;
+        const card = document.querySelector('.swipe-card');
+        if (card) {
+            card.style.transition = 'none';
         }
     }
 
-    onDragMove(e) {
+    onMove(e) {
         if (!this.isDragging) return;
 
-        if (e.type === 'mousemove') {
-            this.currentX = e.clientX;
-            this.currentY = e.clientY;
-        } else {
-            this.currentX = e.touches[0].clientX;
-            this.currentY = e.touches[0].clientY;
+        // Prevent default to stop scrolling during horizontal swipe
+        if (e.type === 'touchmove') {
+            const touch = e.touches[0];
+            const deltaX = Math.abs(touch.clientX - this.startX);
+            const deltaY = Math.abs(touch.clientY - this.startY);
+
+            // If horizontal swipe is dominant, prevent default
+            if (deltaX > deltaY) {
+                e.preventDefault();
+            }
         }
 
-        const deltaX = this.currentX - this.startX;
-        const deltaY = this.currentY - this.startY;
+        this.currentX = e.type === 'touchmove' ? e.touches[0].clientX : e.clientX;
+        this.offsetX = this.currentX - this.startX;
 
-        const card = document.querySelector('.swipe-card[data-position="0"]');
+        const card = document.querySelector('.swipe-card');
         if (!card) return;
 
-        // Apply transform
-        const rotation = deltaX * 0.05; // Subtle rotation
-        card.style.transform = `translate(${deltaX}px, ${deltaY}px) rotate(${rotation}deg)`;
+        // Apply transform (limited range to prevent screen widening)
+        const maxOffset = window.innerWidth * 0.6;
+        const clampedOffset = Math.max(-maxOffset, Math.min(maxOffset, this.offsetX));
+        const rotation = clampedOffset * 0.05;
 
-        // Show appropriate overlay
-        if (Math.abs(deltaX) > 50) {
-            if (deltaX > 0) {
-                card.classList.add('swiping-right');
-                card.classList.remove('swiping-left');
-            } else {
-                card.classList.add('swiping-left');
-                card.classList.remove('swiping-right');
-            }
-        } else {
-            card.classList.remove('swiping-left', 'swiping-right');
-        }
+        card.style.transform = `translateX(${clampedOffset}px) rotate(${rotation}deg)`;
+        card.style.transition = 'none';
     }
 
-    onDragEnd(e) {
+    onEnd() {
         if (!this.isDragging) return;
 
         this.isDragging = false;
-
-        const card = document.querySelector('.swipe-card[data-position="0"]');
+        const card = document.querySelector('.swipe-card');
         if (!card) return;
 
-        const deltaX = this.currentX - this.startX;
-        const threshold = 100; // Swipe threshold
+        const threshold = 100;
 
         card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
-        if (Math.abs(deltaX) > threshold) {
-            // Swipe complete
-            if (deltaX > 0) {
+        if (Math.abs(this.offsetX) > threshold) {
+            // Complete swipe
+            if (this.offsetX > 0) {
                 this.swipeRight(card);
             } else {
                 this.swipeLeft(card);
@@ -202,16 +204,16 @@ class SwipeCards {
         } else {
             // Return to center
             card.style.transform = '';
-            card.classList.remove('swiping-left', 'swiping-right');
         }
+
+        this.offsetX = 0;
     }
 
     swipeLeft(card) {
         // PASS - Move to next
         const celebrity = this.celebrities[this.currentIndex];
 
-        // Animate out
-        card.style.transform = 'translateX(-150%) rotate(-30deg)';
+        card.style.transform = 'translateX(-120%) rotate(-20deg)';
         card.style.opacity = '0';
 
         // Add to history
@@ -223,8 +225,7 @@ class SwipeCards {
 
         setTimeout(() => {
             this.currentIndex++;
-            this.renderCards();
-            this.checkIfEmpty();
+            this.renderCard();
         }, 300);
     }
 
@@ -232,8 +233,7 @@ class SwipeCards {
         // VIEW - Navigate to profile
         const celebrity = this.celebrities[this.currentIndex];
 
-        // Animate out
-        card.style.transform = 'translateX(150%) rotate(30deg)';
+        card.style.transform = 'translateX(120%) rotate(20deg)';
         card.style.opacity = '0';
 
         // Add to history
@@ -243,14 +243,12 @@ class SwipeCards {
             celebrity: celebrity
         });
 
-        // Navigate to profile after animation
         setTimeout(() => {
             window.location.href = `celebrity-profile.html?slug=${celebrity.slug}`;
         }, 300);
     }
 
     swipeBack() {
-        // Go back to previous card
         if (this.swipeHistory.length === 0) {
             console.log('No cards to go back to');
             return;
@@ -258,10 +256,10 @@ class SwipeCards {
 
         const lastSwipe = this.swipeHistory.pop();
         this.currentIndex = lastSwipe.index;
-        this.renderCards();
+        this.renderCard();
     }
 
-    setupEventListeners() {
+    setupListeners() {
         // Button controls
         const passBtn = document.getElementById('swipePassBtn');
         const backBtn = document.getElementById('swipeBackBtn');
@@ -269,7 +267,7 @@ class SwipeCards {
 
         if (passBtn) {
             passBtn.addEventListener('click', () => {
-                const card = document.querySelector('.swipe-card[data-position="0"]');
+                const card = document.querySelector('.swipe-card');
                 if (card) this.swipeLeft(card);
             });
         }
@@ -282,7 +280,7 @@ class SwipeCards {
 
         if (viewBtn) {
             viewBtn.addEventListener('click', () => {
-                const card = document.querySelector('.swipe-card[data-position="0"]');
+                const card = document.querySelector('.swipe-card');
                 if (card) this.swipeRight(card);
             });
         }
@@ -291,10 +289,10 @@ class SwipeCards {
         document.addEventListener('keydown', (e) => {
             if (document.getElementById('swipeView').style.display === 'none') return;
 
-            const card = document.querySelector('.swipe-card[data-position="0"]');
+            const card = document.querySelector('.swipe-card');
             if (!card) return;
 
-            switch(e.key) {
+            switch (e.key) {
                 case 'ArrowLeft':
                     this.swipeLeft(card);
                     break;
@@ -308,38 +306,25 @@ class SwipeCards {
         });
     }
 
-    checkIfEmpty() {
-        if (this.currentIndex >= this.celebrities.length) {
-            // All cards swiped
-            const stack = document.getElementById('swipeStack');
-            if (stack) {
-                stack.innerHTML = `
-                    <div style="text-align: center; padding: 80px 20px;">
-                        <h3 style="color: #FFFFFF; font-size: 24px; margin-bottom: 16px;">
-                            You've seen all icons!
-                        </h3>
-                        <p style="color: rgba(255,255,255,0.6); margin-bottom: 30px;">
-                            Adjust your filters to see more celebrities
-                        </p>
-                        <a href="browse-swipe.html" class="btn-primary-large" style="text-decoration: none; display: inline-block; padding: 16px 32px; background: linear-gradient(135deg, #D4A574, #E5B685); color: #000; border-radius: 10px; font-weight: 600;">
-                            Reset & Browse
-                        </a>
-                    </div>
-                `;
-            }
+    showEndMessage() {
+        const stack = document.getElementById('swipeStack');
+        if (stack) {
+            stack.innerHTML = `
+                <div style="text-align: center; padding: 60px 20px;">
+                    <h3 style="color: #FFFFFF; font-size: 24px; margin-bottom: 16px;">
+                        You've seen all icons!
+                    </h3>
+                    <p style="color: rgba(255,255,255,0.6); margin-bottom: 24px;">
+                        Adjust your filters to see more
+                    </p>
+                    <button onclick="location.reload()" style="padding: 12px 32px; background: #D4A574; border: none; border-radius: 10px; color: #000; font-weight: 600; cursor: pointer;">
+                        Reload
+                    </button>
+                </div>
+            `;
         }
     }
 }
 
-// Initialize swipe cards when view is active
-let swipeInstance = null;
-
-function initSwipeView() {
-    if (swipeInstance === null) {
-        swipeInstance = new SwipeCards();
-    }
-}
-
 // Export for use in browse.js
-window.SwipeCards = SwipeCards;
-window.initSwipeView = initSwipeView;
+window.SwipeView = SwipeView;
