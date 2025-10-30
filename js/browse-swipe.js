@@ -44,20 +44,26 @@ class BrowsePage {
     async loadCelebrities() {
         try {
             const api = new APIClient();
-            const response = await api.getCelebrityCards({ limit: 100 });
+            const response = await api.getFeaturedCelebrities(100);
 
-            if (response.success && response.data && response.data.profiles) {
-                this.celebrities = response.data.profiles;
+            console.log('📡 API Response:', response);
+
+            if (response.success && response.data) {
+                // Handle both response formats
+                const celebrityData = response.data.celebrities || response.data.profiles || [];
+                this.celebrities = celebrityData;
                 this.filteredCelebrities = [...this.celebrities];
 
                 // Update total count
                 const totalCountEl = document.getElementById('totalCount');
-                if (totalCountEl && response.data.pagination) {
-                    totalCountEl.textContent = response.data.pagination.total || this.celebrities.length;
+                if (totalCountEl) {
+                    const total = response.data.pagination?.total || this.celebrities.length;
+                    totalCountEl.textContent = total;
                 }
 
                 console.log('✅ Loaded', this.celebrities.length, 'celebrities');
             } else {
+                console.warn('⚠️ Unexpected response structure:', response);
                 throw new Error('Invalid API response');
             }
         } catch (error) {
