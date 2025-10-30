@@ -156,14 +156,11 @@ class SwipeView {
     onMove(e) {
         if (!this.isDragging) return;
 
-        // Prevent default to stop scrolling during horizontal swipe
+        // Prevent page scroll during horizontal swipe
         if (e.type === 'touchmove') {
             const touch = e.touches[0];
             const deltaX = Math.abs(touch.clientX - this.startX);
-            const deltaY = Math.abs(touch.clientY - this.startY);
-
-            // If horizontal swipe is dominant, prevent default
-            if (deltaX > deltaY) {
+            if (deltaX > 10) {
                 e.preventDefault();
             }
         }
@@ -174,11 +171,12 @@ class SwipeView {
         const card = document.querySelector('.swipe-card');
         if (!card) return;
 
-        // Apply transform (limited range to prevent screen widening)
-        const maxOffset = window.innerWidth * 0.6;
+        // Clamp to prevent overflow
+        const maxOffset = 150;
         const clampedOffset = Math.max(-maxOffset, Math.min(maxOffset, this.offsetX));
-        const rotation = clampedOffset * 0.05;
+        const rotation = clampedOffset * 0.1;
 
+        // ONLY transform card, nothing else
         card.style.transform = `translateX(${clampedOffset}px) rotate(${rotation}deg)`;
         card.style.transition = 'none';
     }
@@ -190,17 +188,23 @@ class SwipeView {
         const card = document.querySelector('.swipe-card');
         if (!card) return;
 
-        const threshold = 100;
+        const threshold = 80;
 
         card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
 
         if (Math.abs(this.offsetX) > threshold) {
             // Complete swipe
-            if (this.offsetX > 0) {
-                this.swipeRight(card);
-            } else {
-                this.swipeLeft(card);
-            }
+            const direction = this.offsetX > 0 ? 1 : -1;
+            card.style.transform = `translateX(${direction * 400}px) rotate(${direction * 20}deg)`;
+            card.style.opacity = '0';
+
+            setTimeout(() => {
+                if (direction > 0) {
+                    this.swipeRight(card);
+                } else {
+                    this.swipeLeft(card);
+                }
+            }, 300);
         } else {
             // Return to center
             card.style.transform = '';
@@ -213,9 +217,6 @@ class SwipeView {
         // PASS - Move to next
         const celebrity = this.celebrities[this.currentIndex];
 
-        card.style.transform = 'translateX(-120%) rotate(-20deg)';
-        card.style.opacity = '0';
-
         // Add to history
         this.swipeHistory.push({
             index: this.currentIndex,
@@ -223,18 +224,13 @@ class SwipeView {
             celebrity: celebrity
         });
 
-        setTimeout(() => {
-            this.currentIndex++;
-            this.renderCard();
-        }, 300);
+        this.currentIndex++;
+        this.renderCard();
     }
 
     swipeRight(card) {
         // VIEW - Navigate to profile
         const celebrity = this.celebrities[this.currentIndex];
-
-        card.style.transform = 'translateX(120%) rotate(20deg)';
-        card.style.opacity = '0';
 
         // Add to history
         this.swipeHistory.push({
@@ -243,9 +239,7 @@ class SwipeView {
             celebrity: celebrity
         });
 
-        setTimeout(() => {
-            window.location.href = `celebrity-profile.html?slug=${celebrity.slug}`;
-        }, 300);
+        window.location.href = `celebrity-profile.html?slug=${celebrity.slug}`;
     }
 
     swipeBack() {
@@ -268,7 +262,12 @@ class SwipeView {
         if (passBtn) {
             passBtn.addEventListener('click', () => {
                 const card = document.querySelector('.swipe-card');
-                if (card) this.swipeLeft(card);
+                if (card) {
+                    card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    card.style.transform = 'translateX(-400px) rotate(-20deg)';
+                    card.style.opacity = '0';
+                    setTimeout(() => this.swipeLeft(card), 300);
+                }
             });
         }
 
@@ -281,7 +280,12 @@ class SwipeView {
         if (viewBtn) {
             viewBtn.addEventListener('click', () => {
                 const card = document.querySelector('.swipe-card');
-                if (card) this.swipeRight(card);
+                if (card) {
+                    card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    card.style.transform = 'translateX(400px) rotate(20deg)';
+                    card.style.opacity = '0';
+                    setTimeout(() => this.swipeRight(card), 300);
+                }
             });
         }
 
@@ -294,10 +298,16 @@ class SwipeView {
 
             switch (e.key) {
                 case 'ArrowLeft':
-                    this.swipeLeft(card);
+                    card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    card.style.transform = 'translateX(-400px) rotate(-20deg)';
+                    card.style.opacity = '0';
+                    setTimeout(() => this.swipeLeft(card), 300);
                     break;
                 case 'ArrowRight':
-                    this.swipeRight(card);
+                    card.style.transition = 'transform 0.3s ease, opacity 0.3s ease';
+                    card.style.transform = 'translateX(400px) rotate(20deg)';
+                    card.style.opacity = '0';
+                    setTimeout(() => this.swipeRight(card), 300);
                     break;
                 case 'ArrowDown':
                     this.swipeBack();
