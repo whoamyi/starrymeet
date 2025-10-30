@@ -1,0 +1,237 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=5.0">
+    <title>Browse Icons - StarryMeet</title>
+
+    <!-- Favicons -->
+    <link rel="icon" type="image/svg+xml" href="assets/images/white-favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="assets/images/black-favicon.svg">
+
+    <!-- SEO -->
+    <meta name="description" content="Browse and discover 147 verified celebrities available for exclusive private meetings.">
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/browse.html">
+    <meta property="og:title" content="Browse Icons - StarryMeet">
+    <meta property="og:description" content="147 verified celebrities available for private meetings.">
+
+    <!-- Fonts -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap" rel="stylesheet">
+
+    <!-- CSS -->
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages/browse-swipe.css">
+
+    <!-- Scripts -->
+    <script src="js/shared.js"></script>
+    <script src="js/api.js"></script>
+</head>
+<body>
+
+    <!-- Navigation -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
+
+    <main class="browse-page">
+        <!-- Hero/Search Section -->
+        <section class="browse-hero">
+            <div class="browse-hero-container">
+                <h1 class="browse-title">Meet Your Icon</h1>
+                <p class="browse-subtitle"><span id="totalCount">147</span> verified celebrities available for private meetings</p>
+
+                <!-- Search Bar -->
+                <div class="search-bar">
+                    <svg class="search-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <circle cx="11" cy="11" r="8"/>
+                        <path d="m21 21-4.35-4.35"/>
+                    </svg>
+                    <input
+                        type="text"
+                        class="search-input"
+                        placeholder="Search by name, category, or keyword..."
+                        id="searchInput"
+                    />
+                </div>
+            </div>
+        </section>
+
+        <!-- Filters Section -->
+        <section class="filters-section">
+            <div class="filters-container">
+                <!-- Left: Category filters -->
+                <div class="filters-left">
+                    <button class="filter-btn active" data-category="all">All</button>
+                    <button class="filter-btn" data-category="Film & Television">Film & TV</button>
+                    <button class="filter-btn" data-category="Sports">Sports</button>
+                    <button class="filter-btn" data-category="Music">Music</button>
+                    <button class="filter-btn" data-category="Business">Business</button>
+                    <button class="filter-btn" data-category="Social Media">Social Media</button>
+                </div>
+
+                <!-- Right: View switcher + More filters -->
+                <div class="filters-right">
+                    <!-- View Switcher -->
+                    <div class="view-switcher">
+                        <button class="view-btn active" data-view="grid" title="Grid View">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <rect x="3" y="3" width="7" height="7" rx="1"/>
+                                <rect x="14" y="3" width="7" height="7" rx="1"/>
+                                <rect x="3" y="14" width="7" height="7" rx="1"/>
+                                <rect x="14" y="14" width="7" height="7" rx="1"/>
+                            </svg>
+                        </button>
+                        <button class="view-btn view-btn-swipe" data-view="swipe" title="Swipe View">
+                            <svg width="20" height="20" viewBox="0 0 24 24" fill="currentColor">
+                                <path d="M7 3h10a4 4 0 0 1 4 4v10a4 4 0 0 1-4 4H7a4 4 0 0 1-4-4V7a4 4 0 0 1 4-4z"/>
+                                <path d="M12 8v8m-4-4h8" stroke="white" stroke-width="2"/>
+                            </svg>
+                        </button>
+                    </div>
+
+                    <!-- More Filters -->
+                    <button class="more-filters-btn" id="moreFiltersBtn">
+                        <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="4" y1="6" x2="20" y2="6"/>
+                            <line x1="4" y1="12" x2="20" y2="12"/>
+                            <line x1="4" y1="18" x2="20" y2="18"/>
+                            <circle cx="8" cy="6" r="2" fill="currentColor"/>
+                            <circle cx="16" cy="12" r="2" fill="currentColor"/>
+                            <circle cx="12" cy="18" r="2" fill="currentColor"/>
+                        </svg>
+                        <span>Filters</span>
+                    </button>
+                </div>
+            </div>
+
+            <!-- Active Filters Display -->
+            <div class="active-filters" id="activeFilters"></div>
+        </section>
+
+        <!-- Results Count -->
+        <section class="results-section">
+            <div class="results-container">
+                <p class="results-count" id="resultsCount">Showing 147 icons</p>
+                <button class="sort-btn" id="sortBtn">
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M3 6h18M7 12h10M11 18h6"/>
+                    </svg>
+                    <span>Sort: Recommended</span>
+                </button>
+            </div>
+        </section>
+
+        <!-- GRID VIEW (Default) -->
+        <section class="celebrities-grid" id="gridView">
+            <div class="grid-container" id="gridContainer">
+                <!-- Cards dynamically loaded by JavaScript -->
+            </div>
+        </section>
+
+        <!-- SWIPE VIEW (Mobile) -->
+        <section class="celebrities-swipe" id="swipeView" style="display: none;">
+            <div class="swipe-container">
+                <!-- Swipe Instructions (First Time) -->
+                <div class="swipe-instructions" id="swipeInstructions">
+                    <div class="instruction">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#D4A574">
+                            <path d="M15.41 16.59L10.83 12l4.58-4.59L14 6l-6 6 6 6 1.41-1.41z"/>
+                        </svg>
+                        <p>Swipe left to pass</p>
+                    </div>
+                    <div class="instruction">
+                        <svg width="40" height="40" viewBox="0 0 24 24" fill="#D4A574">
+                            <path d="M8.59 16.59L13.17 12 8.59 7.41 10 6l6 6-6 6-1.41-1.41z"/>
+                        </svg>
+                        <p>Swipe right to view</p>
+                    </div>
+                </div>
+
+                <!-- Swipe Cards Stack -->
+                <div class="swipe-stack" id="swipeStack">
+                    <!-- Cards loaded by JavaScript -->
+                </div>
+
+                <!-- Swipe Controls -->
+                <div class="swipe-controls">
+                    <button class="swipe-control-btn swipe-pass" id="swipePassBtn" title="Pass">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <line x1="18" y1="6" x2="6" y2="18"/>
+                            <line x1="6" y1="6" x2="18" y2="18"/>
+                        </svg>
+                    </button>
+                    <button class="swipe-control-btn swipe-back" id="swipeBackBtn" title="Go Back">
+                        <svg width="28" height="28" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M15 18l-6-6 6-6"/>
+                        </svg>
+                    </button>
+                    <button class="swipe-control-btn swipe-view" id="swipeViewBtn" title="View Profile">
+                        <svg width="32" height="32" viewBox="0 0 24 24" fill="currentColor">
+                            <path d="M9 11.5l3 3 8-8"/>
+                        </svg>
+                    </button>
+                </div>
+            </div>
+        </section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer id="footer"></footer>
+
+    <!-- More Filters Modal -->
+    <div class="modal-overlay" id="filtersModal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3 class="modal-title">Filters</h3>
+                <button class="modal-close" id="closeFiltersModal">×</button>
+            </div>
+            <div class="modal-body">
+                <!-- Tier -->
+                <div class="filter-group">
+                    <label class="filter-label">Tier</label>
+                    <div class="filter-options">
+                        <button class="filter-option active" data-tier="all">All</button>
+                        <button class="filter-option" data-tier="S">S Tier</button>
+                        <button class="filter-option" data-tier="A">A Tier</button>
+                        <button class="filter-option" data-tier="B">B Tier</button>
+                    </div>
+                </div>
+
+                <!-- Price Range -->
+                <div class="filter-group">
+                    <label class="filter-label">Price Range</label>
+                    <div class="filter-options">
+                        <button class="filter-option active" data-price="all">All</button>
+                        <button class="filter-option" data-price="5000-25000">$5K - $25K</button>
+                        <button class="filter-option" data-price="25000-50000">$25K - $50K</button>
+                        <button class="filter-option" data-price="50000+">$50K+</button>
+                    </div>
+                </div>
+
+                <!-- Availability -->
+                <div class="filter-group">
+                    <label class="filter-label">Availability</label>
+                    <div class="filter-options">
+                        <button class="filter-option active" data-availability="all">All</button>
+                        <button class="filter-option" data-availability="available">Available Now</button>
+                        <button class="filter-option" data-availability="soon">Coming Soon</button>
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button class="btn-secondary" id="clearFilters">Clear All</button>
+                <button class="btn-primary" id="applyFilters">Apply Filters</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Scripts -->
+    <script src="js/inject-layout.js"></script>
+    <script src="js/browse-swipe.js"></script>
+    <script src="js/swipe-cards.js"></script>
+</body>
+</html>
