@@ -2137,6 +2137,7 @@ body {
 .btn-action-ig {
     flex: 1;
     height: 36px;
+    min-height: 44px; /* Touch target accessibility */
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
