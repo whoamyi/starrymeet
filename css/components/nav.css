@@ -31,6 +31,48 @@ nav.scrolled {
    LOGO
    ======================================== */
 
+.nav-logo {
+  display: flex;
+  align-items: center;
+  text-decoration: none;
+  height: 40px;
+  padding: 0;
+  margin: 0;
+  flex-shrink: 0;
+  transition: opacity var(--transition-fast);
+}
+
+.nav-logo:hover {
+  opacity: 0.9;
+}
+
+.logo-svg {
+  width: 160px;
+  height: 40px;
+  display: block;
+}
+
+.logo-svg text {
+  fill: #FFFFFF;
+  transition: fill 0.3s ease;
+}
+
+.nav-logo:hover .logo-svg text {
+  fill: #E5B685;
+}
+
+@media (max-width: 768px) {
+  .logo-svg {
+    width: 120px;
+    height: 30px;
+  }
+
+  .nav-logo {
+    height: 30px;
+  }
+}
+
+/* Legacy support */
 .logo {
   font-size: 1.5rem;
   font-weight: var(--font-weight-bold);
@@ -44,20 +86,6 @@ nav.scrolled {
 
 .logo:hover {
   opacity: 0.8;
-}
-
-.logo-image {
-  height: 48px;
-  width: auto;
-  display: block;
-  max-width: 240px;
-}
-
-@media (max-width: 768px) {
-  .logo-image {
-    height: 40px;
-    max-width: 200px;
-  }
 }
 
 /* ========================================
