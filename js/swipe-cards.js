@@ -40,10 +40,10 @@ class SwipeCards {
     async loadCelebrities() {
         try {
             const api = new APIClient();
-            const response = await api.getCelebrities({ limit: 100 });
+            const response = await api.getCelebrityCards({ limit: 100 });
 
-            if (response.success && response.data && response.data.celebrities) {
-                this.celebrities = response.data.celebrities;
+            if (response.success && response.data && response.data.profiles) {
+                this.celebrities = response.data.profiles;
                 console.log('✅ Loaded', this.celebrities.length, 'celebrities for swipe');
             } else {
                 throw new Error('Invalid API response');

@@ -44,10 +44,10 @@ class BrowsePage {
     async loadCelebrities() {
         try {
             const api = new APIClient();
-            const response = await api.getCelebrities({ limit: 100 });
+            const response = await api.getCelebrityCards({ limit: 100 });
 
-            if (response.success && response.data && response.data.celebrities) {
-                this.celebrities = response.data.celebrities;
+            if (response.success && response.data && response.data.profiles) {
+                this.celebrities = response.data.profiles;
                 this.filteredCelebrities = [...this.celebrities];
 
                 // Update total count
