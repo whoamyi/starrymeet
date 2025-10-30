@@ -1,0 +1,444 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/images/white-favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="assets/images/black-favicon.svg">
+    <meta name="description" content="Meet face-to-face with the stars who inspire you. StarryMeet creates exclusive in-person experiences with celebrities, athletes, musicians, and icons.">
+    <!-- Cache buster: v2 -->
+
+    <!-- PERFORMANCE: Font preconnect -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Open Graph Meta Tags -->
+    <meta property="og:type" content="website">
+    <meta property="og:url" content="https://starrymeet.com/">
+    <meta property="og:title" content="StarryMeet - Your hero. Your moment. Your memory.">
+    <meta property="og:description" content="Meet face-to-face with the stars who inspire you—exclusive in-person experiences you'll treasure forever.">
+    <meta property="og:site_name" content="StarryMeet">
+
+    <!-- Twitter Card Meta Tags -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="StarryMeet - Your hero. Your moment. Your memory.">
+    <meta name="twitter:description" content="Meet face-to-face with the stars who inspire you—exclusive in-person experiences you'll treasure forever.">
+
+    <title>StarryMeet - Meet face-to-face with your favorite stars</title>
+    <link rel="stylesheet" href="css/main.css">
+    <link rel="stylesheet" href="css/pages/home.css">
+    <script src="js/shared.js"></script>
+    <script src="js/api.js"></script>
+    <script src="js/homepage-init.js"></script>
+</head>
+<body>
+    <!-- Navigation - Loaded from shared component -->
+    <nav role="navigation" aria-label="Main navigation" id="navbar"></nav>
+
+    <!-- Main Content -->
+    <main>
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="hero-content">
+            <h1>Meet face-to-face with your favorite stars</h1>
+            <div class="search-container">
+                <input type="text" class="search-input" placeholder="Search for Breaking Bad..." id="searchInput" aria-label="Search for stars">
+            </div>
+        </div>
+    </section>
+
+    <!-- Categories Section -->
+    <section class="categories-section">
+        <h2 class="sr-only">Browse by category</h2>
+        <div class="categories-nav">
+            <button class="categories-arrow categories-arrow-left">‹</button>
+            <button class="categories-arrow categories-arrow-right">›</button>
+            <div class="categories-container">
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Music'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Music</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Sports'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Sports</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Film & Television'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Film & TV</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Digital Creators'">
+                    <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="category-initials">DC</div>
+                    </div>
+                    <p class="category-label">Creators</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Business & Tech'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Business</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Comedy & Entertainment'">
+                    <div class="category-image" style="background: linear-gradient(135deg, #fbbf24 0%, #f59e0b 100%);">
+                        <div class="category-initials">CE</div>
+                    </div>
+                    <p class="category-label">Comedy</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html'">
+                    <div class="category-image view-all">
+                        <span class="view-all-text">View all</span>
+                    </div>
+                    <p class="category-label">&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Occasions Section -->
+    <section class="occasions-section">
+        <h2>Meet face-to-face for every occasion</h2>
+        <div class="occasions-nav">
+            <button class="occasions-arrow occasions-arrow-left">‹</button>
+            <button class="occasions-arrow occasions-arrow-right">›</button>
+            <div class="occasions-grid">
+                <div class="occasion-card" style="background: linear-gradient(135deg, #F9A8D4 0%, #EC4899 100%);" onclick="window.location.href='browse.html?occasion=birthday'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Face-to-face for</p>
+                        <h3>Birthdays</h3>
+                        <span class="occasion-emoji">🎂</span>
+                    </div>
+                </div>
+                <div class="occasion-card" style="background: linear-gradient(135deg, #FDBA74 0%, #F97316 100%);" onclick="window.location.href='browse.html?occasion=celebration'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Celebrate with your hero</p>
+                        <h3>Life Milestones</h3>
+                        <span class="occasion-emoji">🏆</span>
+                    </div>
+                </div>
+                <div class="occasion-card" style="background: linear-gradient(135deg, #FCA5A5 0%, #DC2626 100%);" onclick="window.location.href='browse.html?occasion=fans'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Meet your favorites</p>
+                        <h3>Fan Experiences</h3>
+                        <span class="occasion-emoji">🍂</span>
+                    </div>
+                </div>
+                <div class="occasion-card" style="background: linear-gradient(135deg, #93C5FD 0%, #3B82F6 100%);" onclick="window.location.href='browse.html?occasion=idol'">
+                    <div class="occasion-content">
+                        <p class="occasion-subtitle">Make it happen</p>
+                        <h3>Meet Your Idol</h3>
+                        <span class="occasion-emoji">🚀</span>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Top 10 Section -->
+    <section class="top-ten-section">
+        <div class="section-header">
+            <h2>Top 10 on StarryMeet</h2>
+            <a href="browse.html" class="view-all-link">View all</a>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('topTenCarousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('topTenCarousel', 1)">›</button>
+            <div class="top-ten-carousel" id="topTenCarousel">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Quick Meets Section -->
+    <section class="quick-meets-section">
+        <div class="section-header">
+            <h2>Stars near you</h2>
+            <a href="browse.html?filter=today" class="view-all-link">View all</a>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('quickMeetsCarousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('quickMeetsCarousel', 1)">›</button>
+            <div class="quick-meets-carousel" id="quickMeetsCarousel">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- How It Works Section -->
+    <section class="how-it-works-section">
+        <h2>How StarryMeet works</h2>
+        <p class="section-subtitle">Meet your hero in just four steps <a href="how-it-works.html" class="learn-more-link">Learn more</a></p>
+        <div class="steps-nav">
+            <button class="steps-arrow steps-arrow-left">‹</button>
+            <button class="steps-arrow steps-arrow-right">›</button>
+            <div class="steps-grid">
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <circle cx="11" cy="11" r="8"></circle>
+                            <path d="m21 21-4.35-4.35"></path>
+                        </svg>
+                    </div>
+                    <h3>Find your star</h3>
+                    <p>Browse thousands of celebrities offering personalized face-to-face meetings</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M14.5 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V7.5L14.5 2z"></path>
+                            <polyline points="14 2 14 8 20 8"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Book your meeting</h3>
+                    <p>Choose your preferred date, time, and location. Share what you'd like to discuss or celebrate</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <rect x="2" y="7" width="20" height="15" rx="2" ry="2"></rect>
+                            <polyline points="17 2 12 7 7 2"></polyline>
+                        </svg>
+                    </div>
+                    <h3>Meet in person</h3>
+                    <p>Connect face-to-face with your celebrity at the scheduled time and place. Create unforgettable memories</p>
+                </div>
+                <div class="step-card">
+                    <div class="step-icon">
+                        <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                            <path d="M10 13a5 5 0 0 0 7.54.54l3-3a5 5 0 0 0-7.07-7.07l-1.72 1.71"></path>
+                            <path d="M14 11a5 5 0 0 0-7.54-.54l-3 3a5 5 0 0 0 7.07 7.07l1.71-1.71"></path>
+                        </svg>
+                    </div>
+                    <h3>Share your experience</h3>
+                    <p>Capture and share photos from your meeting. Leave a review to help others discover amazing experiences</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reviews Section (Cameo has "Recent reviews") -->
+    <section class="reviews-section">
+        <div class="section-header">
+            <h2>Recent reviews</h2>
+        </div>
+        <div class="carousel-nav">
+            <button class="carousel-arrow carousel-arrow-left" onclick="scrollCarousel('reviewsCarousel', -1)">‹</button>
+            <button class="carousel-arrow carousel-arrow-right" onclick="scrollCarousel('reviewsCarousel', 1)">›</button>
+            <div class="reviews-carousel" id="reviewsCarousel">
+                <!-- Will be populated by JavaScript -->
+            </div>
+        </div>
+    </section>
+
+    <!-- Bottom Categories -->
+    <section class="bottom-categories-section">
+        <h2>Categories</h2>
+        <div class="categories-nav">
+            <button class="categories-arrow categories-arrow-left">‹</button>
+            <button class="categories-arrow categories-arrow-right">›</button>
+            <div class="categories-container">
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Actors'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1478720568477-152d9b164e26?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Actors</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1511379938547-c1f69419868d?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Musicians</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Athletes'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1461896836934-ffe607ba8211?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Athletes</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Musicians&subcategory=K-Pop'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1555400038-63f5ba517a47?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">K-Pop</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Business'">
+                    <div class="category-image" style="background-image: url('https://images.unsplash.com/photo-1507679799987-c73779587ccf?w=400&h=400&fit=crop'); background-size: cover; background-position: center;">
+                        <div class="category-overlay"></div>
+                    </div>
+                    <p class="category-label">Business</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html?category=Creators'">
+                    <div class="category-image" style="background: linear-gradient(135deg, #fa709a 0%, #fee140 100%);">
+                        <div class="category-initials">CR</div>
+                    </div>
+                    <p class="category-label">Creators</p>
+                </div>
+                <div class="category-bubble" onclick="window.location.href='browse.html'">
+                    <div class="category-image view-all">
+                        <span class="view-all-text">View all</span>
+                    </div>
+                    <p class="category-label">&nbsp;</p>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- This is StarryMeet Section -->
+    <section class="this-is-section">
+        <h2>This is StarryMeet</h2>
+        <div class="features-grid">
+            <div class="feature-card">
+                <h3>Moments as unique as the people you're meeting</h3>
+                <p>Every experience is personalized for the person receiving it, creating one-of-a-kind connections between celebrities and the people they inspire</p>
+            </div>
+            <div class="feature-card">
+                <h3>Perfect for every occasion (or just because)</h3>
+                <p>From birthdays to holidays and friendly toasts, StarryMeet is here to help you bring magic into everyday moments both big and small</p>
+            </div>
+            <div class="feature-card">
+                <h3>Someone for every fan</h3>
+                <p>Everyone is welcome here. With over forty-thousand celebrities, there's a star for every kind of fan on StarryMeet</p>
+            </div>
+        </div>
+    </section>
+    </main>
+
+    <!-- Footer - Loaded from shared component -->
+    <footer class="footer"></footer>
+
+    <!-- Inject shared components -->
+    <script src="js/inject-layout.js"></script>
+    <script src="js/carousel.js"></script>
+
+    <script>
+        // Celebrity data
+        const celebrities = [
+            { name: "Emma Stone", category: "Actor", location: "Los Angeles, CA", price: 850, rating: 4.98, reviews: 127, rank: 1 },
+            { name: "LeBron James", category: "Athlete", location: "Los Angeles, CA", price: 1200, rating: 4.96, reviews: 89, rank: 2 },
+            { name: "Taylor Swift", category: "Musician", location: "New York, NY", price: 2000, rating: 5.00, reviews: 234, rank: 3 },
+            { name: "Kevin Hart", category: "Comedian", location: "Los Angeles, CA", price: 950, rating: 4.99, reviews: 178, rank: 4 },
+            { name: "Dwayne Johnson", category: "Actor", location: "Los Angeles, CA", price: 1500, rating: 4.97, reviews: 156, rank: 5 },
+            { name: "Serena Williams", category: "Athlete", location: "Miami, FL", price: 1100, rating: 4.95, reviews: 92, rank: 6 },
+            { name: "Ariana Grande", category: "Musician", location: "Los Angeles, CA", price: 1800, rating: 4.99, reviews: 201, rank: 7 },
+            { name: "Ryan Reynolds", category: "Actor", location: "New York, NY", price: 900, rating: 4.98, reviews: 143, rank: 8 }
+        ];
+
+        // Reviews data
+        const reviews = [
+            { celebrity: "Emma Stone", reviewer: "Sophie", title: "Birthday meeting", text: "We cannot thank you enough! Sophie was beyond thrilled to meet Emma and it really helped her get through a little bit of missing home!", rating: 5 },
+            { celebrity: "Kevin Hart", reviewer: "Jean", title: "Pep talk from Kevin", text: "I surprised my best friend with a pep talk when she was feeling down. Mr Macqueen's message was beyond what either of us expected!", rating: 5 },
+            { celebrity: "Taylor Swift", reviewer: "Eileen", title: "Fan experience from Taylor", text: "She's watched it multiple times, shared it with friends and family, and continues to tell everyone about it. Thank you so much for making her day/month/year!", rating: 5 },
+            { celebrity: "Dwayne Johnson", reviewer: "Maddy", title: "Motivation from The Rock", text: "She absolutely loved the meeting you made for her! Thank you for talking to her about making it from the heart! She bawled her eyes out and lifted her spirits up so much!", rating: 5 }
+        ];
+
+        // Populate Top 10 Carousel
+        function loadTopTen() {
+            const carousel = document.getElementById('topTenCarousel');
+            carousel.innerHTML = celebrities.slice(0, 6).map(celeb => `
+                <div class="top-ten-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                    <div class="rank-badge">
+                        <span class="rank-number">${celeb.rank}</span>
+                        ${celeb.rank <= 3 ? '<span class="rank-icon">⚡</span>' : ''}
+                    </div>
+                    <div class="top-ten-image" style="background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);">
+                        <div class="celebrity-initials">${getInitials(celeb.name)}</div>
+                    </div>
+                    <div class="top-ten-info">
+                        <h3 class="top-ten-name">${celeb.name}</h3>
+                        <p class="top-ten-category">${celeb.subCategory || celeb.mainCategory || celeb.category || ''}</p>
+                        <div class="top-ten-meta">
+                            <span class="top-ten-price">from $${celeb.price.toLocaleString()}</span>
+                            <span class="top-ten-rating">
+                                <span class="star">★</span> ${celeb.rating}
+                            </span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Populate Quick Meets Carousel
+        function loadQuickMeets() {
+            const carousel = document.getElementById('quickMeetsCarousel');
+            const quickMeets = [
+                { name: "David Anders", details: "Act, Sing & Hug-TVD, iZombie, Alias", rating: 4.94, reviews: 48, price: 77 },
+                { name: "Emma Stone", details: "Oscar Winner, La La Land, The Favourite", rating: 4.98, reviews: 127, price: 850 },
+                { name: "Kevin Hart", details: "Comedian, Actor, Central Intelligence", rating: 4.99, reviews: 178, price: 950 },
+                { name: "Serena Williams", details: "Tennis Champion, 23 Grand Slams", rating: 4.95, reviews: 92, price: 1100 },
+                { name: "Ryan Reynolds", details: "Actor, Deadpool, Free Guy", rating: 4.98, reviews: 143, price: 900 }
+            ];
+            carousel.innerHTML = quickMeets.map(celeb => `
+                <div class="quick-meet-card" onclick="window.location.href='celebrity-profile.html?name=${encodeURIComponent(celeb.name)}'">
+                    <div class="quick-meet-image" style="background: linear-gradient(135deg, #4facfe 0%, #00f2fe 100%);">
+                        <div class="celebrity-initials">${getInitials(celeb.name)}</div>
+                    </div>
+                    <div class="quick-meet-info">
+                        <h3 class="quick-meet-name">${celeb.name}</h3>
+                        <p class="quick-meet-details">${celeb.details}</p>
+                        <div class="quick-meet-meta">
+                            <span class="quick-meet-rating">${celeb.rating} (${celeb.reviews})</span>
+                            <span class="quick-meet-price">$${celeb.price}+</span>
+                        </div>
+                    </div>
+                </div>
+            `).join('');
+        }
+
+        // Populate Reviews Carousel
+        function loadReviews() {
+            const carousel = document.getElementById('reviewsCarousel');
+            carousel.innerHTML = reviews.map(review => `
+                <div class="review-card">
+                    <div class="review-header">
+                        <div class="review-avatar">${review.reviewer.charAt(0)}</div>
+                        <div class="review-header-info">
+                            <span class="review-reviewer">${review.reviewer}</span>
+                            <div class="review-stars">${'★'.repeat(review.rating)}</div>
+                        </div>
+                    </div>
+                    <h4 class="review-title">${review.title}</h4>
+                    <p class="review-text">${review.text}</p>
+                    <div class="review-celebrity">Meeting with ${review.celebrity}</div>
+                </div>
+            `).join('');
+        }
+
+        // Helper function
+        function getInitials(name) {
+            return name.split(' ').map(n => n[0]).join('');
+        }
+
+        // Scroll carousel function
+        function scrollCarousel(carouselId, direction) {
+            const carousel = document.getElementById(carouselId);
+            if (!carousel) return;
+
+            const scrollAmount = carousel.clientWidth * 0.8;
+            carousel.scrollBy({
+                left: direction * scrollAmount,
+                behavior: 'smooth'
+            });
+        }
+
+        // Initialize
+        loadTopTen();
+        loadQuickMeets();
+        loadReviews();
+
+        // Navbar scroll effect
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            if (window.scrollY > 50) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+        });
+    </script>
+</body>
+</html>
