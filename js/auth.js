@@ -414,11 +414,15 @@
   // ===================================
 
   function storeSession(session, user) {
-    // Store session token
+    // Store session token (for auth.js compatibility)
     localStorage.setItem(SESSION_STORAGE_KEY, JSON.stringify(session));
 
-    // Store user data
+    // Store user data (for auth.js compatibility)
     localStorage.setItem(USER_STORAGE_KEY, JSON.stringify(user));
+
+    // ALSO store in format expected by dashboard/api-client
+    localStorage.setItem('starryMeetToken', session.token);
+    localStorage.setItem('starryMeetUser', JSON.stringify(user));
   }
 
   function getSession() {
@@ -444,6 +448,9 @@
   function clearSession() {
     localStorage.removeItem(SESSION_STORAGE_KEY);
     localStorage.removeItem(USER_STORAGE_KEY);
+    // Also clear dashboard/api-client tokens
+    localStorage.removeItem('starryMeetToken');
+    localStorage.removeItem('starryMeetUser');
   }
 
   function checkExistingSession() {
