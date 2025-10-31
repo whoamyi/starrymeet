@@ -150,9 +150,10 @@
     if (confirm('Are you sure you want to log out?')) {
       // Clear user data
       localStorage.removeItem('starryMeetUser');
-      
-      // Redirect to login
-      window.location.href = 'login.html';
+      localStorage.removeItem('starryMeetToken');
+
+      // Redirect to auth page
+      window.location.href = 'auth.html';
     }
   };
   

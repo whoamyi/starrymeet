@@ -39,14 +39,9 @@ async function checkAuth() {
     }
 }
 
-// Auto-check auth on protected pages
-if (window.location.pathname.includes('dashboard') ||
-    window.location.pathname.includes('profile') ||
-    window.location.pathname.includes('settings') ||
-    window.location.pathname.includes('payment-methods') ||
-    window.location.pathname.includes('messages')) {
-    checkAuth();
-}
+// Note: Auto-check disabled to prevent redirect loops
+// Pages should call checkAuth() explicitly if needed
+// Dashboard.js already handles auth checking in its init() method
 
 // Export for use in other scripts
 window.authHelpers = {
