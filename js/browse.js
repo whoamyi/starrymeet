@@ -198,14 +198,27 @@ class BrowsePage {
         const minPrice = c.min_price || 5000;
         const rating = c.review_rate > 0 ? parseFloat(c.review_rate).toFixed(1) : c.rating || '4.8';
         const available = c.availability_count || c.total_available || 3;
-        const location = c.location || c.city || (c.availability_location ? c.availability_location : null);
+
+        // Extract location from availability pool
+        let location = null;
+        if (c.availabilities && Array.isArray(c.availabilities) && c.availabilities.length > 0) {
+            location = c.availabilities[0].location || c.availabilities[0].city;
+        } else if (c.availability && c.availability.location) {
+            location = c.availability.location;
+        } else if (c.location) {
+            location = c.location;
+        } else if (c.city) {
+            location = c.city;
+        }
+
         const category = c.category_name || c.category || 'Celebrity';
 
-        // Build stats HTML with location only if available
-        let statsHTML = `<span>⭐ ${rating}</span>`;
-        if (location) {
-            statsHTML += `<span>•</span><span>📍 ${location}</span>`;
-        }
+        // Always show location section for consistent card height
+        const statsHTML = `
+            <span>⭐ ${rating}</span>
+            <span>•</span>
+            <span>📍 ${location || 'Virtual'}</span>
+        `;
 
         card.innerHTML = `
             <a href="celebrity-profile.html?slug=${c.slug}" style="text-decoration:none;color:inherit;display:block;">
