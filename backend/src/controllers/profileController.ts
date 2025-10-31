@@ -79,8 +79,10 @@ export const uploadProfileImage = async (req: Request, res: Response) => {
       });
     }
 
-    // Get the file path/URL (assuming multer is configured)
-    const imageUrl = `/uploads/${req.file.filename}`;
+    // TODO: Upload to Cloudinary or another cloud storage service
+    // For now, store the filename temporarily
+    // In production, you should upload req.file.buffer to cloud storage
+    const imageUrl = `data:${req.file.mimetype};base64,${req.file.buffer.toString('base64')}`;
 
     await User.update(
       { avatar_url: imageUrl },
