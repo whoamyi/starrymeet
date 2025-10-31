@@ -185,8 +185,14 @@ class BrowsePage {
         const minPrice = c.min_price || 5000;
         const rating = c.review_rate > 0 ? parseFloat(c.review_rate).toFixed(1) : c.rating || '4.8';
         const available = c.availability_count || c.total_available || 3;
-        const location = c.location || 'Los Angeles';
+        const location = c.location || c.city || (c.availability_location ? c.availability_location : null);
         const category = c.category_name || c.category || 'Celebrity';
+
+        // Build stats HTML with location only if available
+        let statsHTML = `<span>⭐ ${rating}</span>`;
+        if (location) {
+            statsHTML += `<span>•</span><span>📍 ${location}</span>`;
+        }
 
         card.innerHTML = `
             <a href="celebrity-profile.html?slug=${c.slug}" style="text-decoration:none;color:inherit;display:block;">
@@ -206,9 +212,7 @@ class BrowsePage {
                         <span class="card-price">$${parseFloat(minPrice).toLocaleString()}+</span>
                     </div>
                     <div class="card-stats">
-                        <span>⭐ ${rating}</span>
-                        <span>•</span>
-                        <span>📍 ${location}</span>
+                        ${statsHTML}
                     </div>
                 </div>
             </a>
