@@ -12,6 +12,7 @@ class BrowsePage {
         this.currentView = 'swipe';
         this.currentPage = 1;
         this.perPage = 12;
+        this.currentSort = 'popular'; // popular, price-low, price-high, rating
         this.filters = {
             category: 'all',
             search: '',
@@ -45,11 +46,18 @@ class BrowsePage {
 
     renderCategories() {
         const container = document.getElementById('categoriesContainer');
+
+        // Get unique categories from loaded celebrities as fallback
+        const uniqueCategories = [...new Set(this.celebrities.map(c => c.category).filter(Boolean))];
+        const categoriesToRender = this.categories.length > 0 ? this.categories : uniqueCategories;
+
         container.innerHTML = `
             <button class="cat-pill active" data-cat="all">All</button>
-            ${this.categories.map(cat => `
-                <button class="cat-pill" data-cat="${cat.slug || cat}">${cat.name || cat}</button>
-            `).join('')}
+            ${categoriesToRender.map(cat => {
+                const categoryName = typeof cat === 'string' ? cat : (cat.name || cat);
+                const categorySlug = typeof cat === 'string' ? cat : (cat.slug || cat.name || cat);
+                return `<button class="cat-pill" data-cat="${categorySlug}">${categoryName}</button>`;
+            }).join('')}
         `;
 
         container.querySelectorAll('.cat-pill').forEach(btn => {
@@ -95,9 +103,47 @@ class BrowsePage {
             return true;
         });
 
+        // Apply sorting
+        this.applySorting();
+
         this.currentIndex = 0;
         this.currentPage = 1;
         this.render();
+    }
+
+    applySorting() {
+        switch (this.currentSort) {
+            case 'price-low':
+                this.filteredData.sort((a, b) => {
+                    const priceA = a.min_price || 5000;
+                    const priceB = b.min_price || 5000;
+                    return priceA - priceB;
+                });
+                break;
+            case 'price-high':
+                this.filteredData.sort((a, b) => {
+                    const priceA = a.min_price || 5000;
+                    const priceB = b.min_price || 5000;
+                    return priceB - priceA;
+                });
+                break;
+            case 'rating':
+                this.filteredData.sort((a, b) => {
+                    const ratingA = a.review_rate || a.rating || 0;
+                    const ratingB = b.review_rate || b.rating || 0;
+                    return ratingB - ratingA;
+                });
+                break;
+            case 'popular':
+            default:
+                // Popular - keep original order or sort by review count/rating
+                this.filteredData.sort((a, b) => {
+                    const popularityA = (a.review_rate || a.rating || 0) * (a.review_count || 1);
+                    const popularityB = (b.review_rate || b.rating || 0) * (b.review_count || 1);
+                    return popularityB - popularityA;
+                });
+                break;
+        }
     }
 
     render() {
@@ -143,27 +189,29 @@ class BrowsePage {
         const category = c.category_name || c.category || 'Celebrity';
 
         card.innerHTML = `
-            <div class="card-img">
-                <img src="${imageUrl}" alt="${c.name}">
-            </div>
-            <div class="card-content">
-                <div class="card-name-row">
-                    <h3>${truncName}</h3>
-                    <svg width="16" height="16" viewBox="0 0 24 24" fill="#0095F6">
-                        <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
-                    </svg>
+            <a href="celebrity-profile.html?slug=${c.slug}" style="text-decoration:none;color:inherit;display:block;">
+                <div class="card-img">
+                    <img src="${imageUrl}" alt="${c.name}">
                 </div>
-                <p class="card-cat">${category}</p>
-                <div class="card-bottom">
-                    <span class="card-tickets">🎫 ${available} left</span>
-                    <span class="card-price">$${parseFloat(minPrice).toLocaleString()}+</span>
+                <div class="card-content">
+                    <div class="card-name-row">
+                        <h3>${truncName}</h3>
+                        <svg width="16" height="16" viewBox="0 0 24 24" fill="#0095F6">
+                            <path d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-2 15l-5-5 1.41-1.41L10 14.17l7.59-7.59L19 8l-9 9z"/>
+                        </svg>
+                    </div>
+                    <p class="card-cat">${category}</p>
+                    <div class="card-bottom">
+                        <span class="card-tickets">🎫 ${available} left</span>
+                        <span class="card-price">$${parseFloat(minPrice).toLocaleString()}+</span>
+                    </div>
+                    <div class="card-stats">
+                        <span>⭐ ${rating}</span>
+                        <span>•</span>
+                        <span>📍 ${location}</span>
+                    </div>
                 </div>
-                <div class="card-stats">
-                    <span>⭐ ${rating}</span>
-                    <span>•</span>
-                    <span>📍 ${location}</span>
-                </div>
-            </div>
+            </a>
         `;
     }
 
@@ -276,6 +324,26 @@ class BrowsePage {
         document.getElementById('searchInput').addEventListener('input', (e) => {
             this.filters.search = e.target.value;
             setTimeout(() => this.applyFilters(), 300);
+        });
+
+        // Sort button - cycle through options
+        document.getElementById('sortBtn').addEventListener('click', () => {
+            const sortOptions = ['popular', 'price-low', 'price-high', 'rating'];
+            const currentIndex = sortOptions.indexOf(this.currentSort);
+            const nextIndex = (currentIndex + 1) % sortOptions.length;
+            this.currentSort = sortOptions[nextIndex];
+
+            // Update button label
+            const labels = {
+                'popular': 'Popular',
+                'price-low': 'Price: Low to High',
+                'price-high': 'Price: High to Low',
+                'rating': 'Rating'
+            };
+            document.getElementById('sortLabel').textContent = labels[this.currentSort];
+
+            // Reapply filters with new sorting
+            this.applyFilters();
         });
 
         // View toggle

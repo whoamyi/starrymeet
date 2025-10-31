@@ -163,6 +163,17 @@ body {
     border: 1px solid rgba(255, 255, 255, 0.05);
     border-radius: 20px;
     overflow: hidden;
+    transition: all 0.3s ease;
+}
+
+.card a {
+    cursor: pointer;
+}
+
+.card:hover {
+    transform: translateY(-4px);
+    border-color: rgba(212, 165, 116, 0.2);
+    box-shadow: 0 12px 40px rgba(0, 0, 0, 0.3);
 }
 
 .card-img {
