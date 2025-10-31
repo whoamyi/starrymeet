@@ -303,7 +303,34 @@ export const getFeaturedCelebrities = async (req: Request, res: Response) => {
         c.review_count,
         cs.allow_virtual as virtual_available,
         cs.allow_physical as physical_available,
-        cs.tier
+        cs.tier,
+        c.country,
+        COALESCE(
+          (SELECT COUNT(*)
+           FROM availability a
+           WHERE a.celebrity_id = c.id
+             AND a.status = 'active'
+             AND a.date > CURRENT_DATE
+             AND a.slots_remaining > 0),
+          0
+        ) as availability_count,
+        (SELECT json_agg(
+           json_build_object(
+             'location', COALESCE(a.city, a.country),
+             'city', a.city,
+             'country', a.country
+           )
+         )
+         FROM (
+           SELECT DISTINCT city, country
+           FROM availability
+           WHERE celebrity_id = c.id
+             AND status = 'active'
+             AND date > CURRENT_DATE
+             AND slots_remaining > 0
+           LIMIT 3
+         ) a
+        ) as availabilities
       FROM celebrities_new c
       LEFT JOIN categories cat ON c.category_id = cat.id
       LEFT JOIN celebrity_settings cs ON c.id = cs.celebrity_id

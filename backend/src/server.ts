@@ -11,6 +11,7 @@ import authRoutes from './routes/auth';
 import celebrityProfileRoutes from './routes/celebrityProfiles';
 import bookingRoutes from './routes/bookings';
 import paymentRoutes from './routes/payments';
+import categoryRoutes from './routes/categories';
 
 // Import models to ensure they're loaded
 import './models';
@@ -85,6 +86,7 @@ app.get('/health', async (req: Request, res: Response) => {
 // API Routes
 app.use('/api/auth', authRoutes);
 app.use('/api/celebrity-profiles', celebrityProfileRoutes);
+app.use('/api/categories', categoryRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/payments', paymentRoutes);
 
