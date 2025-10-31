@@ -46,10 +46,17 @@ class BrowsePage {
 
     renderCategories() {
         const container = document.getElementById('categoriesContainer');
+        if (!container) return;
 
         // Get unique categories from loaded celebrities as fallback
         const uniqueCategories = [...new Set(this.celebrities.map(c => c.category).filter(Boolean))];
         const categoriesToRender = this.categories.length > 0 ? this.categories : uniqueCategories;
+
+        if (categoriesToRender.length === 0) {
+            // Show just "All" if no categories available yet
+            container.innerHTML = '<button class="cat-pill active" data-cat="all">All</button>';
+            return;
+        }
 
         container.innerHTML = `
             <button class="cat-pill active" data-cat="all">All</button>
@@ -77,6 +84,12 @@ class BrowsePage {
 
             if (response.success && response.data) {
                 this.celebrities = response.data.celebrities || response.data.profiles || [];
+
+                // Re-render categories if they're empty (API failed but we have celebrity data)
+                if (this.categories.length === 0) {
+                    this.renderCategories();
+                }
+
                 this.applyFilters();
             }
         } catch (error) {
