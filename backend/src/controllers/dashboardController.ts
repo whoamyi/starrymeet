@@ -28,23 +28,22 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         b.id,
         b.booking_number,
         b.status,
-        b.meeting_date,
-        b.duration_minutes,
-        b.total_amount,
-        c.name as celebrity_name,
+        b.booking_date as meeting_date,
+        30 as duration_minutes,
+        (b.total_cents / 100.0) as total_amount,
+        c.display_name as celebrity_name,
         c.slug as celebrity_slug,
         c.avatar_url as celebrity_image,
         cat.name as category,
-        ms.type as meeting_type,
-        ms.location
+        b.meeting_type,
+        '' as location
       FROM bookings b
       JOIN celebrities_new c ON b.celebrity_id = c.id
       LEFT JOIN categories cat ON c.category_id = cat.id
-      JOIN meeting_slots ms ON b.meeting_slot_id = ms.id
       WHERE b.user_id = :user_id
         AND b.status IN ('confirmed', 'payment_complete')
-        AND b.meeting_date > NOW()
-      ORDER BY b.meeting_date ASC
+        AND b.booking_date > NOW()::date
+      ORDER BY b.booking_date ASC
       LIMIT 10
     `;
 
@@ -54,15 +53,15 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         b.id,
         b.booking_number,
         b.status,
-        b.meeting_date,
-        b.duration_minutes,
-        b.total_amount,
+        b.booking_date as meeting_date,
+        30 as duration_minutes,
+        (b.total_cents / 100.0) as total_amount,
         b.completed_at,
-        c.name as celebrity_name,
+        c.display_name as celebrity_name,
         c.slug as celebrity_slug,
         c.avatar_url as celebrity_image,
         cat.name as category,
-        ms.type as meeting_type,
+        b.meeting_type,
         CASE
           WHEN r.id IS NOT NULL THEN TRUE
           ELSE FALSE
@@ -70,7 +69,6 @@ export const getUserDashboard = async (req: Request, res: Response) => {
       FROM bookings b
       JOIN celebrities_new c ON b.celebrity_id = c.id
       LEFT JOIN categories cat ON c.category_id = cat.id
-      JOIN meeting_slots ms ON b.meeting_slot_id = ms.id
       LEFT JOIN reviews r ON b.id = r.booking_id
       WHERE b.user_id = :user_id
         AND b.status = 'completed'
@@ -84,20 +82,19 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         b.id,
         b.booking_number,
         b.status,
-        b.meeting_date,
-        b.duration_minutes,
-        b.total_amount,
+        b.booking_date as meeting_date,
+        30 as duration_minutes,
+        (b.total_cents / 100.0) as total_amount,
         b.created_at,
-        c.name as celebrity_name,
+        c.display_name as celebrity_name,
         c.slug as celebrity_slug,
         c.avatar_url as celebrity_image,
         cat.name as category,
-        ms.type as meeting_type,
-        ms.location
+        b.meeting_type,
+        '' as location
       FROM bookings b
       JOIN celebrities_new c ON b.celebrity_id = c.id
       LEFT JOIN categories cat ON c.category_id = cat.id
-      JOIN meeting_slots ms ON b.meeting_slot_id = ms.id
       WHERE b.user_id = :user_id
         AND b.status IN ('pending_approval', 'approved', 'payment_pending')
       ORDER BY b.created_at DESC
@@ -110,10 +107,10 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         sc.id as saved_id,
         sc.created_at as saved_at,
         c.id as celebrity_id,
-        c.name,
+        c.display_name as name,
         c.slug,
         c.avatar_url,
-        c.min_price,
+        c.base_price_cents / 100.0 as min_price,
         cat.name as category,
         cs.tier
       FROM saved_celebrities sc
@@ -121,7 +118,7 @@ export const getUserDashboard = async (req: Request, res: Response) => {
       LEFT JOIN categories cat ON c.category_id = cat.id
       LEFT JOIN celebrity_settings cs ON c.id = cs.celebrity_id
       WHERE sc.user_id = :user_id
-        AND c.status = 'active'
+        AND c.is_active = true
       ORDER BY sc.created_at DESC
       LIMIT 20
     `;
