@@ -10,7 +10,7 @@ export const getSavedCelebrities = async (req: Request, res: Response) => {
         {
           model: Celebrity,
           as: 'Celebrity',
-          attributes: ['id', 'name', 'slug', 'avatar_url', 'category', 'bio', 'status']
+          attributes: ['id', 'display_name', 'username', 'avatar_url', 'category', 'bio', 'is_active']
         }
       ],
       order: [['created_at', 'DESC']]

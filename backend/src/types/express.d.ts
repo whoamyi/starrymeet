@@ -1,4 +1,5 @@
 import { Request } from 'express';
+import { Multer } from 'multer';
 
 declare global {
   namespace Express {
@@ -9,6 +10,7 @@ declare global {
         email: string;
         role: string;
       };
+      file?: Multer.File;
     }
   }
 }

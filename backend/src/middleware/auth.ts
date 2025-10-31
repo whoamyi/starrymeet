@@ -3,6 +3,7 @@ import { verifyToken } from '../utils/jwt';
 
 export interface AuthRequest extends Request {
   user?: {
+    id: string;
     userId: string;
     email: string;
     role: string;
@@ -44,7 +45,10 @@ export const optionalAuth = (req: AuthRequest, res: Response, next: NextFunction
     if (authHeader && authHeader.startsWith('Bearer ')) {
       const token = authHeader.substring(7);
       const payload = verifyToken(token);
-      req.user = payload;
+      req.user = {
+        ...payload,
+        id: payload.userId
+      };
     }
 
     next();

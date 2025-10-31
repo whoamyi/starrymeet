@@ -172,7 +172,7 @@ Celebrity.init(
   },
   {
     sequelize,
-    tableName: 'celebrities',
+    tableName: 'celebrities_new',
     timestamps: true,
     underscored: true,
     createdAt: 'created_at',
