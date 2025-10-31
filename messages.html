@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/images/white-favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="assets/images/black-favicon.svg">
+    <title>Messages - StarryMeet</title>
+    <meta name="description" content="View and send messages on StarryMeet.">
+    <link rel="stylesheet" href="css/dashboard-elegant.css">
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">StarryMeet</a>
+
+            <div class="nav-actions">
+                <button class="nav-icon-btn" aria-label="Notifications">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </button>
+
+                <button class="profile-trigger" onclick="toggleProfileMenu()">
+                    <div class="profile-avatar">
+                        <div class="profile-avatar-placeholder">JD</div>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+
+                <div class="profile-menu" id="profileMenu">
+                    <div class="profile-menu-items">
+                        <a href="profile.html" class="menu-item">Your Profile</a>
+                        <a href="settings.html" class="menu-item">Account Settings</a>
+                        <a href="payment-methods.html" class="menu-item">Payment Methods</a>
+                        <div class="menu-divider"></div>
+                        <button class="menu-item menu-item--danger" onclick="logout()">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <div class="page-header">
+                <h1>Messages</h1>
+                <p>Communicate with celebrities and support</p>
+            </div>
+
+            <div class="card">
+                <div class="card-body">
+                    <div class="messages-layout">
+                        <!-- Conversations List -->
+                        <div class="conversations-sidebar">
+                            <h3>Conversations</h3>
+                            <div id="conversationsContainer">
+                                <div class="loading">Loading conversations...</div>
+                            </div>
+                        </div>
+
+                        <!-- Message Thread -->
+                        <div class="messages-main">
+                            <div class="messages-placeholder">
+                                <svg width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                                    <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
+                                </svg>
+                                <p>Select a conversation to view messages</p>
+                            </div>
+
+                            <div id="messagesContainer" style="display: none;"></div>
+
+                            <div id="messageSendBox" style="display: none;">
+                                <form id="sendMessageForm">
+                                    <input type="text" id="messageInput" placeholder="Type a message..." required>
+                                    <button type="submit" class="btn btn-primary">Send</button>
+                                </form>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="js/messages.js"></script>
+    <script>
+        function toggleProfileMenu() {
+            document.getElementById('profileMenu').classList.toggle('show');
+        }
+
+        function logout() {
+            localStorage.removeItem('starryMeetToken');
+            window.location.href = '/auth.html';
+        }
+    </script>
+</body>
+</html>

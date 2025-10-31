@@ -1,0 +1,113 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="icon" type="image/svg+xml" href="assets/images/white-favicon.svg">
+    <link rel="alternate icon" type="image/svg+xml" href="assets/images/black-favicon.svg">
+    <title>Payment Methods - StarryMeet</title>
+    <meta name="description" content="Manage your payment methods for StarryMeet bookings.">
+    <meta name="stripe-key" content="pk_test_51234">
+    <link rel="stylesheet" href="css/dashboard-elegant.css">
+    <script src="https://js.stripe.com/v3/"></script>
+</head>
+<body>
+    <!-- Top Navigation -->
+    <nav class="dashboard-nav">
+        <div class="nav-container">
+            <a href="index.html" class="nav-brand">StarryMeet</a>
+
+            <div class="nav-actions">
+                <button class="nav-icon-btn" aria-label="Notifications">
+                    <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <path d="M18 8A6 6 0 0 0 6 8c0 7-3 9-3 9h18s-3-2-3-9"/>
+                        <path d="M13.73 21a2 2 0 0 1-3.46 0"/>
+                    </svg>
+                </button>
+
+                <button class="profile-trigger" onclick="toggleProfileMenu()">
+                    <div class="profile-avatar">
+                        <div class="profile-avatar-placeholder">JD</div>
+                    </div>
+                    <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                        <polyline points="6 9 12 15 18 9"/>
+                    </svg>
+                </button>
+
+                <div class="profile-menu" id="profileMenu">
+                    <div class="profile-menu-items">
+                        <a href="profile.html" class="menu-item">Your Profile</a>
+                        <a href="settings.html" class="menu-item">Account Settings</a>
+                        <a href="payment-methods.html" class="menu-item">Payment Methods</a>
+                        <div class="menu-divider"></div>
+                        <button class="menu-item menu-item--danger" onclick="logout()">Log Out</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <!-- Main Content -->
+    <main class="dashboard-main">
+        <div class="dashboard-container">
+            <div class="page-header">
+                <h1>Payment Methods</h1>
+                <p>Manage your payment methods for bookings</p>
+            </div>
+
+            <div class="card">
+                <div class="card-header">
+                    <h2>Your Cards</h2>
+                    <button class="btn btn-primary" id="addPaymentMethodBtn">Add New Card</button>
+                </div>
+                <div class="card-body">
+                    <div id="paymentMethodsContainer">
+                        <div class="loading">Loading payment methods...</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Add Card Modal -->
+    <div id="addCardModal" class="modal" style="display: none;">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h3>Add Payment Method</h3>
+                <button class="modal-close" id="closeCardModal">&times;</button>
+            </div>
+            <div class="modal-body">
+                <form id="addCardForm">
+                    <div class="form-group">
+                        <label>Card Information</label>
+                        <div id="card-element" style="padding: 12px; border: 1px solid #333; border-radius: 8px;"></div>
+                    </div>
+
+                    <div class="form-group">
+                        <label class="checkbox-label">
+                            <input type="checkbox" id="setAsDefault" name="setAsDefault">
+                            <span>Set as default payment method</span>
+                        </label>
+                    </div>
+
+                    <button type="submit" class="btn btn-primary">Add Card</button>
+                </form>
+            </div>
+        </div>
+    </div>
+
+    <script src="js/api-client.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="js/payment-methods.js"></script>
+    <script>
+        function toggleProfileMenu() {
+            document.getElementById('profileMenu').classList.toggle('show');
+        }
+
+        function logout() {
+            localStorage.removeItem('starryMeetToken');
+            window.location.href = '/auth.html';
+        }
+    </script>
+</body>
+</html>
