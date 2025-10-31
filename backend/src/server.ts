@@ -13,6 +13,11 @@ import bookingRoutes from './routes/bookings';
 import paymentRoutes from './routes/payments';
 import categoryRoutes from './routes/categories';
 import dashboardRoutes from './routes/dashboard';
+import profileRoutes from './routes/profile';
+import settingsRoutes from './routes/settings';
+import paymentMethodsRoutes from './routes/paymentMethods';
+import messagesRoutes from './routes/messages';
+import savedRoutes from './routes/saved';
 
 // Import models to ensure they're loaded
 import './models';
@@ -91,6 +96,11 @@ app.use('/api/categories', categoryRoutes);
 app.use('/api/bookings', bookingRoutes);
 app.use('/api/dashboard', dashboardRoutes);
 app.use('/api/payments', paymentRoutes);
+app.use('/api/profile', profileRoutes);
+app.use('/api/settings', settingsRoutes);
+app.use('/api/payment-methods', paymentMethodsRoutes);
+app.use('/api/messages', messagesRoutes);
+app.use('/api/saved', savedRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {

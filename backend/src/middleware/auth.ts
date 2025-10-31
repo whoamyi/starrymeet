@@ -23,7 +23,11 @@ export const authenticate = (req: AuthRequest, res: Response, next: NextFunction
     const token = authHeader.substring(7);
     const payload = verifyToken(token);
 
-    req.user = payload;
+    // Set both id and userId for backward compatibility
+    req.user = {
+      ...payload,
+      id: payload.userId
+    };
     next();
   } catch (error) {
     return res.status(401).json({
