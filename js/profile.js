@@ -98,7 +98,7 @@ class ProfileManager {
 
         try {
             const token = localStorage.getItem('starryMeetToken');
-            const response = await fetch(`${window.API_BASE_URL || ''}/api/profile/upload-image`, {
+            const response = await fetch(`${window.API_BASE_URL || 'https://starrymeet-backend.onrender.com'}/api/profile/upload-image`, {
                 method: 'POST',
                 headers: {
                     'Authorization': `Bearer ${token}`

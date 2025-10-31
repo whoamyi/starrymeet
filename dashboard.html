@@ -338,6 +338,30 @@
         </a>
     </nav>
 
+    <script src="js/api-client.js"></script>
+    <script src="js/auth-check.js"></script>
+    <script src="js/celebrity-interactions.js"></script>
+    <script src="js/dashboard.js"></script>
     <script src="js/dashboard-elegant.js"></script>
+    <script>
+        function toggleProfileMenu() {
+            const menu = document.getElementById('profileMenu');
+            menu.classList.toggle('show');
+        }
+
+        // Close menu when clicking outside
+        document.addEventListener('click', (e) => {
+            const menu = document.getElementById('profileMenu');
+            const trigger = document.querySelector('.profile-trigger');
+            if (trigger && menu && !trigger.contains(e.target) && !menu.contains(e.target)) {
+                menu.classList.remove('show');
+            }
+        });
+
+        function logout() {
+            localStorage.removeItem('starryMeetToken');
+            window.location.href = 'auth.html';
+        }
+    </script>
 </body>
 </html>

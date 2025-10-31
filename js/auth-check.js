@@ -16,25 +16,25 @@ function getCookie(name) {
 async function checkAuth() {
     const token = getToken();
     if (!token) {
-        window.location.href = '/auth.html';
+        window.location.href = 'auth.html';
         return false;
     }
 
     try {
-        const response = await fetch(`${window.API_BASE_URL || ''}/api/profile`, {
+        const response = await fetch(`${window.API_BASE_URL || 'https://starrymeet-backend.onrender.com'}/api/profile`, {
             headers: { 'Authorization': `Bearer ${token}` }
         });
 
         if (!response.ok) {
             localStorage.removeItem('starryMeetToken');
-            window.location.href = '/auth.html';
+            window.location.href = 'auth.html';
             return false;
         }
 
         return true;
     } catch (error) {
         console.error('Auth check failed:', error);
-        window.location.href = '/auth.html';
+        window.location.href = 'auth.html';
         return false;
     }
 }

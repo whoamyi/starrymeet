@@ -29,7 +29,7 @@ class CelebrityInteractions {
             const token = this.getToken();
             if (!token) return;
 
-            const response = await fetch(`${window.API_BASE_URL || ''}/api/saved`, {
+            const response = await fetch(`${window.API_BASE_URL || 'https://starrymeet-backend.onrender.com'}/api/saved`, {
                 headers: {
                     'Authorization': `Bearer ${token}`
                 }
@@ -84,7 +84,7 @@ class CelebrityInteractions {
     }
 
     async saveCelebrity(celebrityId) {
-        const response = await fetch(`${window.API_BASE_URL || ''}/api/saved`, {
+        const response = await fetch(`${window.API_BASE_URL || 'https://starrymeet-backend.onrender.com'}/api/saved`, {
             method: 'POST',
             headers: {
                 'Authorization': `Bearer ${this.getToken()}`,
@@ -97,7 +97,7 @@ class CelebrityInteractions {
     }
 
     async unsaveCelebrity(celebrityId) {
-        const response = await fetch(`${window.API_BASE_URL || ''}/api/saved/${celebrityId}`, {
+        const response = await fetch(`${window.API_BASE_URL || 'https://starrymeet-backend.onrender.com'}/api/saved/${celebrityId}`, {
             method: 'DELETE',
             headers: {
                 'Authorization': `Bearer ${this.getToken()}`
