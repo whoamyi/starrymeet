@@ -11,10 +11,10 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: process.env.VERCEL ? 'dist' : '../public/react',
+    outDir: 'dist',
     emptyOutDir: true,
   },
-  base: process.env.VERCEL ? '/' : '/react/',
+  base: '/',
   server: {
     proxy: {
       '/api': {
