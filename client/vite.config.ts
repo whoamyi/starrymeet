@@ -11,10 +11,10 @@ export default defineConfig({
     },
   },
   build: {
-    outDir: '../public/react',
+    outDir: 'dist',
     emptyOutDir: true,
   },
-  base: '/react/',
+  base: '/',
   server: {
     proxy: {
       '/api': {
