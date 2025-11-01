@@ -96,8 +96,8 @@
         </div>
     </div>
 
+    <script src="js/auth-helper.js"></script>
     <script src="js/api-client.js"></script>
-    <script src="js/auth-check.js"></script>
     <script src="js/payment-methods.js"></script>
     <script>
         function toggleProfileMenu() {
@@ -105,8 +105,8 @@
         }
 
         function logout() {
-            localStorage.removeItem('starryMeetToken');
-            window.location.href = '/auth.html';
+            AuthHelper.clearAuth();
+            window.location.href = 'auth.html';
         }
     </script>
 </body>

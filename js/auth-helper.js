@@ -131,3 +131,6 @@ if (!document.getElementById('auth-helper-styles')) {
     `;
     document.head.appendChild(style);
 }
+
+// Export for global use
+window.AuthHelper = AuthHelper;
