@@ -23,7 +23,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
   }
 
   if (!isAuthenticated) {
-    window.location.href = '/auth.html';
+    window.location.href = '/auth';
     return null;
   }
 

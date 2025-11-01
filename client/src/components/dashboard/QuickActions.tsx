@@ -34,7 +34,7 @@ export const QuickActions = ({ stats }: QuickActionsProps) => (
       icon="🔍"
       title="Browse Celebrities"
       description={`${stats?.total_celebrities || 150}+ available`}
-      to="/browse.html"
+      to="/browse"
     />
     <ActionCard
       icon="💬"

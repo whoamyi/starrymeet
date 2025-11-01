@@ -68,7 +68,7 @@ export const Bookings = () => {
                 : `No ${selectedStatus} bookings`}
             </p>
             <a
-              href="/browse.html"
+              href="/browse"
               className="inline-block bg-[#D4A574] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#C49563] transition"
             >
               Browse Celebrities

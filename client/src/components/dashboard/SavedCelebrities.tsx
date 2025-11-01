@@ -12,7 +12,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Your Favorites</h2>
-          <Link to="/browse.html" className="text-[#D4A574] text-sm font-semibold">
+          <Link to="/browse" className="text-[#D4A574] text-sm font-semibold">
             Start Exploring
           </Link>
         </div>
@@ -39,7 +39,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
           return (
             <Link
               key={celeb.id}
-              to={`/celebrity-profile.html?slug=${celeb.slug}`}
+              to={`/celebrity/celeb.slug}`}
               className="group"
             >
               <div className="relative overflow-hidden rounded-2xl mb-2">

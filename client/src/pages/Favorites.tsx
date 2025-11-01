@@ -67,7 +67,7 @@ export const Favorites = () => {
             </svg>
             <p className="text-gray-400 mb-4">No favorites yet</p>
             <a
-              href="/browse.html"
+              href="/browse"
               className="inline-block bg-[#D4A574] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#C49563] transition"
             >
               Browse Celebrities
@@ -81,7 +81,7 @@ export const Favorites = () => {
 
               return (
                 <div key={item.id} className="group relative">
-                  <Link to={`/celebrity-profile.html?slug=${celeb.slug}`}>
+                  <Link to={`/celebrity/celeb.slug}`}>
                     <div className="relative overflow-hidden rounded-2xl mb-2">
                       <img
                         src={celeb.profile_image}

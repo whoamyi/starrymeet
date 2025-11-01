@@ -8,7 +8,7 @@ export const handleAPIError = (error: any) => {
 
     if (error.response.status === 401) {
       localStorage.removeItem('auth-storage');
-      window.location.href = '/auth.html';
+      window.location.href = '/auth';
     }
   } else if (error.request) {
     // Request made but no response

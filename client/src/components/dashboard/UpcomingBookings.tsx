@@ -12,7 +12,7 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Upcoming Meetings</h2>
-          <Link to="/browse.html" className="text-[#D4A574] text-sm font-semibold">
+          <Link to="/browse" className="text-[#D4A574] text-sm font-semibold">
             Book a Meeting
           </Link>
         </div>
@@ -35,7 +35,7 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
         {bookings.slice(0, 3).map((booking) => (
           <Link
             key={booking.id}
-            to={`/booking-details.html?id=${booking.id}`}
+            to={`/bookings`}
             className="bg-gray-900/50 border border-gray-800 rounded-2xl p-4 flex items-center gap-4 hover:bg-gray-800 hover:border-[#D4A574] transition-all"
           >
             {booking.celebrity?.profile_image && (

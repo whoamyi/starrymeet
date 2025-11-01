@@ -8,7 +8,7 @@ export const useAuth = (requireAuth: boolean = true) => {
     const verify = async () => {
       const isValid = checkAuth();
       if (requireAuth && !isValid) {
-        window.location.href = '/auth.html';
+        window.location.href = '/auth';
       }
     };
     verify();

@@ -57,8 +57,8 @@ api.interceptors.response.use(
     if (error.response?.status === 401) {
       // Unauthorized - clear auth and redirect to login
       localStorage.removeItem('auth-storage');
-      if (window.location.pathname !== '/react/auth') {
-        window.location.href = '/react/auth';
+      if (window.location.pathname !== '/auth') {
+        window.location.href = '/auth';
       }
     }
     return Promise.reject(error);

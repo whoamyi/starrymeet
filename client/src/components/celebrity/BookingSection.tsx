@@ -2,6 +2,7 @@ import { useState } from 'react';
 import { useAuthStore } from '@/store/authStore';
 import { formatCurrency } from '@/utils';
 import type { Celebrity } from '@/types';
+import { toastConfig } from '@/hooks/useToast';
 
 interface BookingSectionProps {
   celebrity: Celebrity;
@@ -13,11 +14,12 @@ export const BookingSection = ({ celebrity }: BookingSectionProps) => {
 
   const handleBookNow = () => {
     if (!isAuthenticated) {
-      window.location.href = '/auth.html';
+      window.location.href = '/auth';
       return;
     }
     // Redirect to booking page with celebrity info
-    window.location.href = `/book-celebrity.html?slug=${celebrity.slug}&hours=${selectedHours}`;
+    // TODO: Implement booking flow
+    toastConfig.info('Booking flow coming soon!');
   };
 
   const totalPrice = celebrity.price_per_hour * selectedHours;

@@ -14,7 +14,7 @@ export const Header = () => {
       console.error('Logout error:', error);
     } finally {
       logout();
-      window.location.href = '/auth.html';
+      window.location.href = '/auth';
     }
   };
 
@@ -74,7 +74,7 @@ export const Header = () => {
                   </Link>
 
                   <Link
-                    to="/settings.html"
+                    to="/settings"
                     className="flex items-center gap-3 px-4 py-2 hover:bg-gray-800 transition"
                     onClick={() => setDropdownOpen(false)}
                   >

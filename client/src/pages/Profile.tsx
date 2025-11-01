@@ -18,7 +18,7 @@ export const Profile = () => {
         <div className="bg-gray-900/50 rounded-2xl p-6 mb-6">
           <h2 className="text-xl font-bold mb-4">Account Settings</h2>
           <a
-            href="/settings.html"
+            href="/settings"
             className="flex items-center justify-between py-3 hover:text-[#D4A574] transition"
           >
             <div className="flex items-center gap-3">

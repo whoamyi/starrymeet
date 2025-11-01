@@ -154,7 +154,7 @@ export const FAQ = () => {
           ) : (
             <div className="text-center py-12">
               <p className="text-gray-400 text-lg">
-                No results found for "{searchQuery}"
+                No results found for "{searchQuery}
               </p>
             </div>
           )}

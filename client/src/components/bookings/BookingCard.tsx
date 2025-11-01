@@ -24,7 +24,7 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
 
   return (
     <Link
-      to={`/booking-details.html?id=${booking.id}`}
+      to={`/bookings`}
       className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:bg-gray-800 hover:border-[#D4A574] transition-all block"
     >
       <div className="flex items-start gap-4">

@@ -40,7 +40,7 @@ export const CelebrityHeader = ({ celebrity, isSaved }: CelebrityHeaderProps) =>
 
   const handleToggleSave = () => {
     if (!isAuthenticated) {
-      window.location.href = '/auth.html';
+      window.location.href = '/auth';
       return;
     }
 
