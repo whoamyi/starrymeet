@@ -1,0 +1,26 @@
+import { defineConfig } from 'vite'
+import react from '@vitejs/plugin-react'
+import path from 'path'
+
+// https://vite.dev/config/
+export default defineConfig({
+  plugins: [react()],
+  resolve: {
+    alias: {
+      '@': path.resolve(__dirname, './src'),
+    },
+  },
+  build: {
+    outDir: '../public/react',
+    emptyOutDir: true,
+  },
+  base: '/react/',
+  server: {
+    proxy: {
+      '/api': {
+        target: 'https://starrymeet-backend.onrender.com',
+        changeOrigin: true,
+      }
+    }
+  }
+})
