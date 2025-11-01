@@ -20,7 +20,9 @@ import type {
 
 // Create axios instance
 const api: AxiosInstance = axios.create({
-  baseURL: '/api',
+  baseURL: import.meta.env.PROD
+    ? 'https://starrymeet-backend.onrender.com/api'
+    : '/api',
   timeout: 30000,
   headers: {
     'Content-Type': 'application/json',
