@@ -44,8 +44,10 @@ app.use(helmet({
 const allowedOrigins = [
   'http://localhost:5500',
   'http://localhost:3001',
+  'http://localhost:5173',  // Vite dev server
   'http://127.0.0.1:5500',
   'https://whoamyi.github.io',
+  'https://starrymeet.vercel.app',
   process.env.FRONTEND_URL || ''
 ].filter(origin => origin !== '');
 
