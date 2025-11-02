@@ -1,3 +1,4 @@
+export { default as Homepage } from './Homepage';
 export * from './Landing';
 export * from './Auth';
 export * from './Dashboard';
