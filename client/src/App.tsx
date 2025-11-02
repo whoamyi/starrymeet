@@ -18,7 +18,7 @@ function App() {
   return (
     <ErrorBoundary>
       <QueryClientProvider client={queryClient}>
-        <BrowserRouter basename="/react">
+        <BrowserRouter>
           <Routes>
             {/* Protected Routes */}
             <Route
