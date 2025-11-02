@@ -1,0 +1,84 @@
+/* ============================================
+   STARRYMEET SPACING SYSTEM
+   Consistent margins/padding across all pages
+   ============================================ */
+
+:root {
+  /* Base spacing unit */
+  --space-unit: 0.25rem; /* 4px */
+
+  /* Spacing scale */
+  --space-1: calc(var(--space-unit) * 1);   /* 4px */
+  --space-2: calc(var(--space-unit) * 2);   /* 8px */
+  --space-3: calc(var(--space-unit) * 3);   /* 12px */
+  --space-4: calc(var(--space-unit) * 4);   /* 16px */
+  --space-5: calc(var(--space-unit) * 5);   /* 20px */
+  --space-6: calc(var(--space-unit) * 6);   /* 24px */
+  --space-8: calc(var(--space-unit) * 8);   /* 32px */
+  --space-10: calc(var(--space-unit) * 10); /* 40px */
+  --space-12: calc(var(--space-unit) * 12); /* 48px */
+  --space-16: calc(var(--space-unit) * 16); /* 64px */
+  --space-20: calc(var(--space-unit) * 20); /* 80px */
+
+  /* Layout spacing */
+  --page-padding-mobile: var(--space-4);    /* 16px */
+  --page-padding-desktop: var(--space-6);   /* 24px */
+  --section-gap: var(--space-16);           /* 64px between sections */
+  --section-gap-mobile: var(--space-12);    /* 48px on mobile */
+  --card-padding: var(--space-6);           /* 24px inside cards */
+  --element-gap: var(--space-4);            /* 16px between related elements */
+
+  /* Container widths */
+  --container-max: 1280px;
+  --container-narrow: 768px;
+}
+
+/* Base page structure */
+.page-container {
+  padding-left: var(--page-padding-mobile);
+  padding-right: var(--page-padding-mobile);
+  padding-top: var(--space-16);
+  padding-bottom: var(--space-20);
+}
+
+@media (min-width: 768px) {
+  .page-container {
+    padding-left: var(--page-padding-desktop);
+    padding-right: var(--page-padding-desktop);
+  }
+}
+
+/* Section spacing */
+.section {
+  margin-bottom: var(--section-gap-mobile);
+}
+
+@media (min-width: 768px) {
+  .section {
+    margin-bottom: var(--section-gap);
+  }
+}
+
+/* Card spacing */
+.card {
+  padding: var(--card-padding);
+  margin-bottom: var(--element-gap);
+}
+
+/* Element groups */
+.element-group > * + * {
+  margin-top: var(--element-gap);
+}
+
+/* Consistent max-width containers */
+.container {
+  max-width: var(--container-max);
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.container-narrow {
+  max-width: var(--container-narrow);
+  margin-left: auto;
+  margin-right: auto;
+}
