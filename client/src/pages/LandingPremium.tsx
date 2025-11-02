@@ -2,7 +2,7 @@ import { useState } from 'react';
 import { Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
 import { celebrityApi } from '@/services/api';
-import { Header, Footer } from '@/components';
+import { HeaderVanilla, FooterVanilla } from '@/components';
 
 export const LandingPremium = () => {
   const [totalCount] = useState(147);
@@ -15,7 +15,7 @@ export const LandingPremium = () => {
 
   return (
     <>
-      <Header />
+      <HeaderVanilla />
 
       {/* Hero Section */}
       <section className="hero-section">
@@ -368,7 +368,7 @@ export const LandingPremium = () => {
         </div>
       </section>
 
-      <Footer />
+      <FooterVanilla />
     </>
   );
 };
