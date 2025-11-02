@@ -1,5 +1,6 @@
 export { default as Homepage } from './Homepage';
 export * from './Landing';
+export * from './LandingPremium';
 export * from './Auth';
 export * from './Dashboard';
 export * from './Profile';
