@@ -117,22 +117,22 @@ export const dashboardApi = {
 // Celebrity API
 export const celebrityApi = {
   getAll: async (filters?: CelebrityFilters): Promise<Celebrity[]> => {
-    const response = await api.get<ApiResponse<Celebrity[]>>('/celebrity-profiles', {
+    const response = await api.get<ApiResponse<{ celebrities: Celebrity[] }>>('/celebrity-profiles', {
       params: filters,
     });
-    return response.data.data;
+    return response.data.data.celebrities;
   },
 
   getFeatured: async (limit: number = 6): Promise<Celebrity[]> => {
-    const response = await api.get<ApiResponse<Celebrity[]>>('/celebrity-profiles/featured', {
+    const response = await api.get<ApiResponse<{ celebrities: Celebrity[] }>>('/celebrity-profiles/featured', {
       params: { limit },
     });
-    return response.data.data;
+    return response.data.data.celebrities;
   },
 
   getBySlug: async (slug: string): Promise<Celebrity> => {
-    const response = await api.get<ApiResponse<Celebrity>>(`/celebrity-profiles/${slug}`);
-    return response.data.data;
+    const response = await api.get<ApiResponse<{ profile: Celebrity }>>(`/celebrity-profiles/${slug}`);
+    return response.data.data.profile;
   },
 
   search: async (query: string): Promise<Celebrity[]> => {
