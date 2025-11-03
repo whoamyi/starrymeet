@@ -1,10 +1,15 @@
 import { useParams, Link } from 'react-router-dom';
 import { useQuery } from '@tanstack/react-query';
-import { Header, BottomNav, Loading } from '@/components';
-import { CelebrityHeader } from '@/components/celebrity/CelebrityHeader';
-import { CelebrityInfo } from '@/components/celebrity/CelebrityInfo';
-import { BookingSection } from '@/components/celebrity/BookingSection';
+import { HeaderVanilla, FooterVanilla, Loading } from '@/components';
+import {
+  InstagramProfileHeader,
+  AvailabilitySection,
+  ReviewsSection,
+  WhatsIncludedSection,
+  MeetingRequirementsSection,
+} from '@/components/celebrity-profile';
 import { celebrityApi, savedApi } from '@/services/api';
+import '@/styles/celebrity-profile.css';
 
 export const CelebrityProfile = () => {
   const { slug } = useParams<{ slug: string }>();
@@ -23,49 +28,109 @@ export const CelebrityProfile = () => {
 
   if (isLoading) return <Loading />;
 
+  const handleFollowToggle = () => {
+    // TODO: Implement follow/unfollow functionality
+    console.log('Toggle follow');
+  };
+
+  const handleMessage = () => {
+    // TODO: Implement messaging
+    console.log('Open message dialog');
+  };
+
+  const handleShare = () => {
+    // TODO: Implement share functionality
+    if (navigator.share) {
+      navigator.share({
+        title: celebrity?.name,
+        text: `Check out ${celebrity?.name} on StarryMeet!`,
+        url: window.location.href,
+      });
+    }
+  };
+
+  const handleRequestMeeting = (
+    slotId: string,
+    type: string,
+    duration: number,
+    price: number
+  ) => {
+    // TODO: Implement booking modal
+    console.log('Request meeting:', { slotId, type, duration, price });
+  };
+
   if (error || !celebrity) {
     return (
-      <div className="min-h-screen bg-black text-white">
-        <Header />
-        <main className="max-w-7xl mx-auto px-4 py-6 pb-24">
-          <div className="bg-red-500/10 border border-red-500/50 rounded-xl p-6 text-center">
-            <h2 className="text-xl font-bold text-red-400 mb-2">Celebrity Not Found</h2>
-            <p className="text-gray-400 mb-4">
-              The celebrity you're looking for doesn't exist or has been removed.
-            </p>
-            <Link
-              to="/react/browse"
-              className="inline-block bg-[#D4A574] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#C49563] transition"
+      <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
+        <HeaderVanilla />
+        <main>
+          <div className="container">
+            <div
+              style={{
+                background: 'rgba(220, 38, 38, 0.1)',
+                border: '1px solid rgba(220, 38, 38, 0.5)',
+                borderRadius: '12px',
+                padding: '24px',
+                textAlign: 'center',
+              }}
             >
-              Browse Celebrities
-            </Link>
+              <h2 style={{ fontSize: '1.25rem', fontWeight: 'bold', color: '#f87171', marginBottom: '8px' }}>
+                Celebrity Not Found
+              </h2>
+              <p style={{ color: 'rgba(255,255,255,0.6)', marginBottom: '16px' }}>
+                The celebrity you're looking for doesn't exist or has been removed.
+              </p>
+              <Link
+                to="/browse"
+                className="btn-large"
+                style={{
+                  display: 'inline-block',
+                  background: '#C6A34F',
+                  color: '#000',
+                  padding: '12px 24px',
+                  borderRadius: '8px',
+                  fontWeight: '600',
+                }}
+              >
+                Browse Celebrities
+              </Link>
+            </div>
           </div>
         </main>
-        <BottomNav />
+        <FooterVanilla />
       </div>
     );
   }
 
   return (
-    <div className="min-h-screen bg-black text-white">
-      <Header />
-      <main className="max-w-7xl mx-auto px-4 py-6 pb-24">
-        {/* Back Button */}
-        <Link
-          to="/react/browse"
-          className="inline-flex items-center gap-2 text-gray-400 hover:text-white mb-6 transition"
-        >
-          <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
-            <polyline points="15 18 9 12 15 6"/>
-          </svg>
-          Back to Browse
-        </Link>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
+      <HeaderVanilla />
+      <main>
+        <div className="container">
+          <InstagramProfileHeader
+            celebrity={celebrity}
+            isSaved={isSaved || false}
+            onFollowToggle={handleFollowToggle}
+            onMessage={handleMessage}
+            onShare={handleShare}
+          />
 
-        <CelebrityHeader celebrity={celebrity} isSaved={isSaved || false} />
-        <BookingSection celebrity={celebrity} />
-        <CelebrityInfo celebrity={celebrity} />
+          <AvailabilitySection
+            availability={celebrity.availability || []}
+            onRequestMeeting={handleRequestMeeting}
+          />
+
+          <ReviewsSection
+            reviews={celebrity.reviews || []}
+            averageRating={celebrity.average_rating || 0}
+          />
+
+          <WhatsIncludedSection />
+
+          <MeetingRequirementsSection />
+        </div>
       </main>
-      <BottomNav />
+      <FooterVanilla />
     </div>
   );
 };

@@ -24,8 +24,36 @@ export interface Celebrity {
   rating?: number;
   response_time?: string;
   status: 'active' | 'inactive';
+  location?: string;
+  verified?: boolean;
+  tier?: string;
+  total_bookings?: number;
+  review_count?: number;
+  average_rating?: number;
+  availability?: AvailabilitySlot[];
+  reviews?: Review[];
   created_at: string;
   updated_at: string;
+}
+
+export interface AvailabilitySlot {
+  id: string;
+  meeting_type: 'physical' | 'virtual';
+  city?: string;
+  date: string;
+  time: string;
+  duration: number;
+  price_cents: number;
+  slots_remaining: number;
+}
+
+export interface Review {
+  id: string;
+  user_name: string;
+  rating: number;
+  comment: string;
+  created_at: string;
+  meeting_type?: string;
 }
 
 export interface CelebritySettings {
