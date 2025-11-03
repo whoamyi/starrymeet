@@ -19,7 +19,7 @@ export const CelebrityCard = ({ celebrity, viewMode }: CelebrityCardProps) => {
   const minPrice = celebrity.min_price || celebrity.price_per_hour || 0;
   const available = celebrity.availability_count ?? celebrity.total_bookings ?? 0;
   const category = celebrity.category || 'Celebrity';
-  const rating = celebrity.review_rate || celebrity.rating || celebrity.average_rating || 0;
+  const rating = Number(celebrity.review_rate ?? celebrity.rating ?? celebrity.average_rating ?? 0);
   const location = celebrity.country || celebrity.location || 'N/A';
 
   if (viewMode === 'swipe') {

@@ -107,7 +107,10 @@ export const InstagramProfileHeader = ({
         </div>
         <div className="stat-ig">
           <span className="stat-value-ig">
-            {(celebrity.review_rate || celebrity.average_rating) ? (celebrity.review_rate || celebrity.average_rating)!.toFixed(1) : '-'}
+            {(() => {
+              const ratingValue = celebrity.review_rate ?? celebrity.average_rating;
+              return ratingValue ? Number(ratingValue).toFixed(1) : '-';
+            })()}
           </span>
           <span className="stat-label-ig">rating</span>
         </div>
