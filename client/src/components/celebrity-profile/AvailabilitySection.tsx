@@ -238,7 +238,7 @@ const LocationPackage = ({
   formatDateDisplay,
   formatTime,
 }: LocationPackageProps) => {
-  const totalTickets = slots.reduce((sum, slot) => sum + (slot.slots_remaining || 0), 0);
+  const totalTickets = slots.reduce((sum, slot) => sum + (Number(slot.slots_remaining) || 0), 0);
   const ticketText = totalTickets === 1 ? 'ticket' : 'tickets';
 
   return (

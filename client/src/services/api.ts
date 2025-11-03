@@ -143,7 +143,14 @@ export const celebrityApi = {
     if (profile.availability && typeof profile.availability === 'object') {
       const physical = profile.availability.physical || [];
       const virtual = profile.availability.virtual || [];
-      profile.availability = [...physical, ...virtual];
+
+      // Combine and normalize the data
+      profile.availability = [...physical, ...virtual].map((slot: any) => ({
+        ...slot,
+        slots_remaining: Number(slot.slots_remaining) || 0,
+        price_cents: Number(slot.price_cents) || 0,
+        duration: Number(slot.duration) || 0,
+      }));
     }
 
     return profile;
