@@ -12,14 +12,15 @@ export const CelebrityCard = ({ celebrity, viewMode }: CelebrityCardProps) => {
   };
 
   const imageUrl =
+    celebrity.picture_url ||
     celebrity.profile_image ||
     'https://images.unsplash.com/photo-1511367461989-f85a21fda167?w=400&h=600&fit=crop&q=80';
 
-  const minPrice = celebrity.price_per_hour || 5000;
-  const available = celebrity.total_bookings || 3; // Using total_bookings as proxy for availability
+  const minPrice = celebrity.min_price || celebrity.price_per_hour || 0;
+  const available = celebrity.availability_count ?? celebrity.total_bookings ?? 0;
   const category = celebrity.category || 'Celebrity';
-  const rating = celebrity.rating || celebrity.average_rating || 4.9;
-  const location = celebrity.location || 'Virtual';
+  const rating = celebrity.review_rate || celebrity.rating || celebrity.average_rating || 0;
+  const location = celebrity.country || celebrity.location || 'N/A';
 
   if (viewMode === 'swipe') {
     return (

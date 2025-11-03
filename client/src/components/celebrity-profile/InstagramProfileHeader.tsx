@@ -5,13 +5,17 @@ interface Celebrity {
   name: string;
   category: string;
   profile_image: string | null;
+  picture_url?: string;
   bio?: string;
   location?: string;
+  country?: string;
   verified?: boolean;
   tier?: string;
   total_bookings?: number;
   review_count?: number;
   average_rating?: number;
+  review_rate?: number;
+  availability_count?: number;
 }
 
 interface InstagramProfileHeaderProps {
@@ -53,9 +57,9 @@ export const InstagramProfileHeader = ({
           <div className="profile-tier-badge">{celebrity.tier}</div>
         )}
         <div className="profile-avatar-ig">
-          {celebrity.profile_image ? (
+          {(celebrity.picture_url || celebrity.profile_image) ? (
             <img
-              src={celebrity.profile_image}
+              src={celebrity.picture_url || celebrity.profile_image!}
               alt={celebrity.name}
               className="profile-avatar-img"
             />
@@ -94,8 +98,8 @@ export const InstagramProfileHeader = ({
       {/* Stats Row (Instagram-style) */}
       <div className="profile-stats-ig">
         <div className="stat-ig">
-          <span className="stat-value-ig">{celebrity.total_bookings || 0}</span>
-          <span className="stat-label-ig">meetings</span>
+          <span className="stat-value-ig">{celebrity.availability_count ?? celebrity.total_bookings ?? 0}</span>
+          <span className="stat-label-ig">availability</span>
         </div>
         <div className="stat-ig">
           <span className="stat-value-ig">{celebrity.review_count || 0}</span>
@@ -103,7 +107,7 @@ export const InstagramProfileHeader = ({
         </div>
         <div className="stat-ig">
           <span className="stat-value-ig">
-            {celebrity.average_rating ? celebrity.average_rating.toFixed(1) : '-'}
+            {(celebrity.review_rate || celebrity.average_rating) ? (celebrity.review_rate || celebrity.average_rating)!.toFixed(1) : '-'}
           </span>
           <span className="stat-label-ig">rating</span>
         </div>
@@ -162,7 +166,7 @@ export const InstagramProfileHeader = ({
       )}
 
       {/* Location */}
-      {celebrity.location && (
+      {(celebrity.country || celebrity.location) && (
         <div className="profile-location-ig">
           <svg
             width="14"
@@ -175,7 +179,7 @@ export const InstagramProfileHeader = ({
             <path d="M21 10c0 7-9 13-9 13s-9-6-9-13a9 9 0 0118 0z" />
             <circle cx="12" cy="10" r="3" />
           </svg>
-          <span>{celebrity.location}</span>
+          <span>{celebrity.country || celebrity.location}</span>
         </div>
       )}
     </header>

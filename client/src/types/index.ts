@@ -34,6 +34,14 @@ export interface Celebrity {
   reviews?: Review[];
   created_at: string;
   updated_at: string;
+  // Backend fields (from database)
+  min_price?: number;
+  availability_count?: number;
+  country?: string;
+  review_rate?: number;
+  picture_url?: string;
+  virtual_available?: boolean;
+  physical_available?: boolean;
 }
 
 export interface AvailabilitySlot {
