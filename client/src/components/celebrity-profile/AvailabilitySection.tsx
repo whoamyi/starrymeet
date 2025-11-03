@@ -32,6 +32,11 @@ export const AvailabilitySection = ({
     const physical: Record<string, AvailabilitySlot[]> = {};
     const virtual: Record<string, AvailabilitySlot[]> = {};
 
+    // Ensure data is an array before iterating
+    if (!Array.isArray(data)) {
+      return { physical, virtual };
+    }
+
     data.forEach((slot) => {
       if (slot.meeting_type === 'physical') {
         const city = slot.city || 'Unknown';
@@ -78,7 +83,10 @@ export const AvailabilitySection = ({
     setExpandedLocations(newExpanded);
   };
 
-  if (!availability || availability.length === 0) {
+  // Ensure availability is an array
+  const availabilityArray = Array.isArray(availability) ? availability : [];
+
+  if (availabilityArray.length === 0) {
     return (
       <div className="availability-section">
         <h2 className="section-title">Availability</h2>
@@ -89,7 +97,7 @@ export const AvailabilitySection = ({
     );
   }
 
-  const grouped = groupAvailability(availability);
+  const grouped = groupAvailability(availabilityArray);
 
   return (
     <div className="availability-section">
