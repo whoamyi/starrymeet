@@ -136,8 +136,17 @@ export const celebrityApi = {
   },
 
   getBySlug: async (slug: string): Promise<Celebrity> => {
-    const response = await api.get<ApiResponse<{ profile: Celebrity }>>(`/celebrity-profiles/${slug}`);
-    return response.data.data.profile;
+    const response = await api.get<ApiResponse<{ profile: any }>>(`/celebrity-profiles/${slug}`);
+    const profile = response.data.data.profile;
+
+    // Flatten availability from {physical: [], virtual: []} to single array
+    if (profile.availability && typeof profile.availability === 'object') {
+      const physical = profile.availability.physical || [];
+      const virtual = profile.availability.virtual || [];
+      profile.availability = [...physical, ...virtual];
+    }
+
+    return profile;
   },
 
   search: async (query: string): Promise<Celebrity[]> => {
