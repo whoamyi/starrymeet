@@ -9,10 +9,12 @@ import {
   MeetingRequirementsSection,
 } from '@/components/celebrity-profile';
 import { celebrityApi, savedApi } from '@/services/api';
+import { useAuthStore } from '@/store/auth';
 import '@/styles/celebrity-profile.css';
 
 export const CelebrityProfile = () => {
   const { slug } = useParams<{ slug: string }>();
+  const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
 
   const { data: celebrity, isLoading, error } = useQuery({
     queryKey: ['celebrity', slug],
@@ -20,10 +22,11 @@ export const CelebrityProfile = () => {
     enabled: !!slug,
   });
 
+  // Only check if saved when user is authenticated
   const { data: isSaved } = useQuery({
     queryKey: ['celebrity-saved', celebrity?.id],
     queryFn: () => savedApi.check(celebrity!.id),
-    enabled: !!celebrity?.id,
+    enabled: !!celebrity?.id && isAuthenticated,
   });
 
   if (isLoading) return <Loading />;

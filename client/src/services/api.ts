@@ -55,11 +55,16 @@ api.interceptors.response.use(
   (response) => response,
   (error: AxiosError<ApiError>) => {
     if (error.response?.status === 401) {
-      // Unauthorized - clear auth and redirect to login
-      localStorage.removeItem('auth-storage');
-      if (window.location.pathname !== '/auth') {
+      // Only redirect if we're on a protected route (dashboard, profile, messages, bookings, favorites, settings)
+      const protectedRoutes = ['/dashboard', '/profile', '/messages', '/bookings', '/favorites', '/settings'];
+      const isProtectedRoute = protectedRoutes.some(route => window.location.pathname.startsWith(route));
+
+      if (isProtectedRoute) {
+        // Unauthorized on protected route - clear auth and redirect to login
+        localStorage.removeItem('auth-storage');
         window.location.href = '/auth';
       }
+      // For public routes, just reject the error without redirecting
     }
     return Promise.reject(error);
   }
