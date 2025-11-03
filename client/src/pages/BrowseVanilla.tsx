@@ -58,7 +58,7 @@ export const BrowseVanilla = () => {
   };
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: '#000' }}>
       <HeaderVanilla />
 
       {/* Toolbar */}
@@ -277,6 +277,6 @@ export const BrowseVanilla = () => {
       )}
 
       <FooterVanilla />
-    </>
+    </div>
   );
 };

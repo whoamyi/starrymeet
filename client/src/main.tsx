@@ -1,5 +1,6 @@
 import { StrictMode } from 'react'
 import { createRoot } from 'react-dom/client'
+import './styles/variables.css'
 import './index.css'
 import './styles/spacing.css'
 import './styles/nav.css'

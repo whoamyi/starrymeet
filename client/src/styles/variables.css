@@ -1,0 +1,53 @@
+/* ===================================
+   StarryMeet Design System Variables
+   Black-White-Gold Minimalist System
+   =================================== */
+
+:root {
+  /* === Core Brand === */
+  --color-primary: #C6A34F; /* Gold */
+  --color-primary-dark: #8B6F2C;
+  --color-primary-light: #E8C45B;
+
+  /* === Base Backgrounds === */
+  --color-bg-primary: #0A0A0A; /* Near-black main background */
+  --color-bg-secondary: #121212; /* Sections, cards */
+  --color-bg-tertiary: #181818; /* Panels, modals */
+  --bg-panel: #1b1b1d; /* Alternative panel background */
+
+  /* === Text Colors === */
+  --color-text-primary: #FFFFFF; /* Primary text */
+  --color-text-secondary: #C0C0C0; /* Muted text */
+  --color-text-muted: #808080; /* Secondary hints */
+  --text-muted: #9a9a9a; /* Alternative muted */
+
+  /* === State Colors === */
+  --color-success: #3FBF77; /* Confirmations */
+  --color-error: #E04F5F; /* Failures */
+  --color-info: #4FA7E0; /* Info states */
+
+  /* === Accent Aliases === */
+  --accent-gold: #C6A34F;
+  --accent-gold-dark: #8B6F2C;
+
+  /* === Layout === */
+  --radius: 14px;
+  --space-unit: 8px;
+  --gap: 16px;
+  --max-width: 1280px;
+
+  /* === Typography === */
+  --font-primary: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  --font-weight-normal: 400;
+  --font-weight-semibold: 600;
+  --font-weight-bold: 700;
+
+  /* === Shadows === */
+  --shadow-card: 0 6px 18px rgba(0, 0, 0, 0.5);
+  --shadow-elevated: 0 12px 32px rgba(0, 0, 0, 0.6);
+
+  /* === Transitions === */
+  --transition-fast: 0.15s ease;
+  --transition-normal: 0.3s ease;
+  --transition-slow: 0.5s ease;
+}

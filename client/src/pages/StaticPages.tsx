@@ -11,7 +11,7 @@ export const FAQVanilla = () => {
   ];
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
       <section className="hero">
         <h1>Frequently Asked Questions</h1>
@@ -28,14 +28,14 @@ export const FAQVanilla = () => {
         </div>
       </div>
       <FooterVanilla />
-    </>
+    </div>
   );
 };
 
 // Contact Page
 export const ContactVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
       <section className="hero">
         <h1>Contact Us</h1>
@@ -61,14 +61,14 @@ export const ContactVanilla = () => {
         </div>
       </div>
       <FooterVanilla />
-    </>
+    </div>
   );
 };
 
 // Team Page
 export const TeamVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
       <section className="hero">
         <h1>Our Team</h1>
@@ -78,14 +78,14 @@ export const TeamVanilla = () => {
         <p className="section">We're a small team of dreamers building something special. Coming soon.</p>
       </div>
       <FooterVanilla />
-    </>
+    </div>
   );
 };
 
 // Jobs Page
 export const JobsVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
       <section className="hero">
         <h1>Join Our Team</h1>
@@ -99,14 +99,14 @@ export const JobsVanilla = () => {
         </div>
       </div>
       <FooterVanilla />
-    </>
+    </div>
   );
 };
 
 // Terms Page
 export const TermsVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
       <section className="hero">
         <h1>Terms of Service</h1>
@@ -135,14 +135,14 @@ export const TermsVanilla = () => {
         </div>
       </div>
       <FooterVanilla />
-    </>
+    </div>
   );
 };
 
 // Privacy Page
 export const PrivacyVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
       <section className="hero">
         <h1>Privacy Policy</h1>
@@ -171,6 +171,6 @@ export const PrivacyVanilla = () => {
         </div>
       </div>
       <FooterVanilla />
-    </>
+    </div>
   );
 };

@@ -2,7 +2,7 @@ import { HeaderVanilla, FooterVanilla } from '@/components';
 
 export const AboutVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
 
       <section className="hero">
@@ -46,6 +46,6 @@ export const AboutVanilla = () => {
       </div>
 
       <FooterVanilla />
-    </>
+    </div>
   );
 };

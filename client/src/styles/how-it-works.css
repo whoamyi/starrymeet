@@ -212,8 +212,8 @@
 }
 
 .btn-large {
-  background: white;
-  color: var(--color-primary);
+  background: var(--color-primary);
+  color: rgba(10, 10, 10, 0.9);
   padding: calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
   border-radius: 50px;
   font-size: 1.125rem;
@@ -225,6 +225,7 @@
 }
 
 .btn-large:hover {
+  background: var(--color-primary-dark);
   transform: translateY(-2px);
   box-shadow: 0 6px 24px rgba(0, 0, 0, 0.3);
 }

@@ -9,7 +9,7 @@ export const ForCelebritiesVanilla = () => {
   const annualEarnings = monthlyEarnings * 12;
 
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
 
       {/* Hero Section */}
@@ -148,6 +148,6 @@ export const ForCelebritiesVanilla = () => {
       </div>
 
       <FooterVanilla />
-    </>
+    </div>
   );
 };

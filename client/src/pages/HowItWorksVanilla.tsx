@@ -3,7 +3,7 @@ import { HeaderVanilla, FooterVanilla } from '@/components';
 
 export const HowItWorksVanilla = () => {
   return (
-    <>
+    <div style={{ minHeight: '100vh', background: 'var(--color-bg-primary, #0A0A0A)' }}>
       <HeaderVanilla />
 
       {/* Hero Section */}
@@ -99,6 +99,6 @@ export const HowItWorksVanilla = () => {
       </div>
 
       <FooterVanilla />
-    </>
+    </div>
   );
 };
