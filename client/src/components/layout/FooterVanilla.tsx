@@ -1,18 +1,6 @@
-import { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 export const FooterVanilla = () => {
-  const [allExpanded, setAllExpanded] = useState(true);
-
-  useEffect(() => {
-    // Synchronized collapse behavior for footer menu
-    // All menu items expand/collapse together
-  }, []);
-
-  const handleToggle = () => {
-    setAllExpanded(!allExpanded);
-  };
-
   return (
     <footer>
       <div className="footer__social">
@@ -24,7 +12,7 @@ export const FooterVanilla = () => {
       </div>
 
       <div className="footer__menu">
-        <details className="footer__menu-item" open={allExpanded} onToggle={handleToggle}>
+        <details className="footer__menu-item" open>
           <summary>Company</summary>
           <Link to="/about">About</Link>
           <Link to="/team">Team</Link>
@@ -32,12 +20,12 @@ export const FooterVanilla = () => {
           <Link to="/blog">Blog</Link>
           <Link to="/contact">Press</Link>
         </details>
-        <details className="footer__menu-item" open={allExpanded} onToggle={handleToggle}>
+        <details className="footer__menu-item" open>
           <summary>Support</summary>
           <Link to="/faq">Help Center</Link>
           <Link to="/contact">Contact</Link>
         </details>
-        <details className="footer__menu-item" open={allExpanded} onToggle={handleToggle}>
+        <details className="footer__menu-item" open>
           <summary>Shop</summary>
           <Link to="/browse">Gift Cards</Link>
           <Link to="/for-celebrities">For Business</Link>
