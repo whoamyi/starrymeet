@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary, ProtectedRoute, ToasterConfig } from '@/components';
-import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Favorites, BrowseVanilla, CelebrityProfile, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorksVanilla, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
+import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Favorites, BrowseVanilla, CelebrityProfile, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorks, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -76,7 +76,7 @@ function App() {
             <Route path="/browse" element={<BrowseVanilla />} />
             <Route path="/celebrity/:slug" element={<CelebrityProfile />} />
             <Route path="/about" element={<AboutVanilla />} />
-            <Route path="/how-it-works" element={<HowItWorksVanilla />} />
+            <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/for-celebrities" element={<ForCelebritiesVanilla />} />
             <Route path="/team" element={<TeamVanilla />} />
             <Route path="/jobs" element={<JobsVanilla />} />

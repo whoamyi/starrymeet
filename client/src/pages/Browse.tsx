@@ -15,11 +15,15 @@ export const Browse = () => {
     queryFn: () => celebrityApi.getAll(),
   });
 
-  // Get unique categories
+  // Get unique categories with counts
   const categories = useMemo(() => {
     if (!celebrities) return [];
     const uniqueCategories = [...new Set(celebrities.map((c) => c.category))];
-    return uniqueCategories.sort();
+    return uniqueCategories.sort().map((cat) => ({
+      id: cat,
+      name: cat,
+      count: celebrities.filter((c) => c.category === cat).length,
+    }));
   }, [celebrities]);
 
   // Filter celebrities
@@ -73,7 +77,7 @@ export const Browse = () => {
         <CategoryFilter
           categories={categories}
           selectedCategory={selectedCategory}
-          onCategoryChange={setSelectedCategory}
+          setSelectedCategory={setSelectedCategory}
         />
 
         <div className="flex justify-between items-center mb-4">

@@ -17,6 +17,7 @@ export * from './FAQ';
 export * from './Contact';
 export * from './HowItWorksPage';
 export * from './HowItWorksVanilla';
+export * from './HowItWorks';
 export * from './ForCelebrities';
 export * from './ForCelebritiesVanilla';
 export * from './Team';
