@@ -1,10 +1,13 @@
 import { useState } from 'react';
-import { Link } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
+import { useAuthStore } from '@/store/auth';
 
 export const HeaderVanilla = () => {
   const [categoriesOpen, setCategoriesOpen] = useState(false);
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [mobileSubmenuOpen, setMobileSubmenuOpen] = useState(false);
+  const { isAuthenticated, user, clearAuth } = useAuthStore();
+  const navigate = useNavigate();
 
   const toggleCategoriesDropdown = () => {
     setCategoriesOpen(!categoriesOpen);
@@ -17,6 +20,12 @@ export const HeaderVanilla = () => {
   const closeMobileMenu = () => {
     setMobileMenuOpen(false);
     setMobileSubmenuOpen(false);
+  };
+
+  const handleLogout = () => {
+    clearAuth();
+    closeMobileMenu();
+    navigate('/');
   };
 
   return (
@@ -85,7 +94,14 @@ export const HeaderVanilla = () => {
             </li>
             <li><Link to="/how-it-works">How it works</Link></li>
             <li><Link to="/for-celebrities">Join as star</Link></li>
-            <li><Link to="/auth">Log in</Link></li>
+            {isAuthenticated ? (
+              <>
+                <li><Link to="/dashboard">Dashboard</Link></li>
+                <li><button onClick={handleLogout} className="logout-btn">Log out</button></li>
+              </>
+            ) : (
+              <li><Link to="/auth">Log in</Link></li>
+            )}
           </ul>
         </div>
       </nav>
@@ -115,7 +131,14 @@ export const HeaderVanilla = () => {
           <li><Link to="/how-it-works" onClick={closeMobileMenu}>How it works</Link></li>
           <li><Link to="/for-celebrities" onClick={closeMobileMenu}>Join as star</Link></li>
           <li><button className="locale-btn">🌐 <span>EN | United States | $ USD</span></button></li>
-          <li className="mobile-menu-login-item"><Link to="/auth" className="mobile-menu-login" onClick={closeMobileMenu}>Log in</Link></li>
+          {isAuthenticated ? (
+            <>
+              <li className="mobile-menu-login-item"><Link to="/dashboard" className="mobile-menu-login" onClick={closeMobileMenu}>Dashboard</Link></li>
+              <li className="mobile-menu-login-item"><button onClick={handleLogout} className="mobile-menu-login">Log out</button></li>
+            </>
+          ) : (
+            <li className="mobile-menu-login-item"><Link to="/auth" className="mobile-menu-login" onClick={closeMobileMenu}>Log in</Link></li>
+          )}
         </ul>
       </div>
     </>
