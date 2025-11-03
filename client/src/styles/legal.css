@@ -1,0 +1,133 @@
+/* ===================================
+   Legal Pages (Privacy, Terms)
+   Black-White-Gold Design System
+   Mobile-First Responsive
+   =================================== */
+
+/* ========================================
+   HERO SECTION
+   ======================================== */
+
+.hero {
+  background: var(--color-bg-primary);
+  text-align: center;
+  padding: calc(var(--space-unit) * 15) calc(var(--space-unit) * 3) calc(var(--space-unit) * 7.5);
+  margin-top: var(--nav-height);
+}
+
+.hero h1 {
+  font-size: clamp(2rem, 5vw, 3.5rem);
+  font-weight: var(--font-weight-bold);
+  margin-bottom: calc(var(--space-unit) * 2);
+  color: var(--color-text-primary);
+}
+
+.hero p {
+  font-size: clamp(1rem, 2.5vw, 1.125rem);
+  color: var(--color-text-muted);
+}
+
+/* ========================================
+   CONTAINER
+   ======================================== */
+
+.container {
+  max-width: 900px;
+  margin: 0 auto;
+  padding: 0 calc(var(--space-unit) * 3) calc(var(--space-unit) * 12.5);
+}
+
+/* ========================================
+   SECTION CARDS
+   ======================================== */
+
+.section {
+  background: rgba(198, 163, 79, 0.05);
+  border: 1px solid rgba(198, 163, 79, 0.15);
+  border-radius: var(--radius);
+  padding: calc(var(--space-unit) * 4);
+  margin-bottom: calc(var(--space-unit) * 3);
+  transition: all var(--transition-fast);
+}
+
+.section:hover {
+  background: rgba(198, 163, 79, 0.08);
+  border-color: rgba(198, 163, 79, 0.25);
+  box-shadow: 0 2px 12px rgba(198, 163, 79, 0.1);
+}
+
+.section h2 {
+  font-size: clamp(1.25rem, 3vw, 1.5rem);
+  font-weight: var(--font-weight-semibold);
+  margin-bottom: calc(var(--space-unit) * 2);
+  color: var(--color-primary);
+}
+
+.section p,
+.section ul {
+  color: var(--color-text-secondary);
+  line-height: 1.6;
+  margin-bottom: calc(var(--space-unit) * 1.5);
+  font-size: clamp(0.9375rem, 2vw, 1rem);
+}
+
+.section p:last-child,
+.section ul:last-child {
+  margin-bottom: 0;
+}
+
+.section ul {
+  padding-left: calc(var(--space-unit) * 3);
+}
+
+.section li {
+  margin-bottom: calc(var(--space-unit) * 1);
+}
+
+.section a {
+  color: var(--color-primary);
+  text-decoration: none;
+  font-weight: var(--font-weight-semibold);
+  transition: color var(--transition-fast);
+}
+
+.section a:hover {
+  color: var(--color-primary-light);
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE
+   ======================================== */
+
+@media (max-width: 768px) {
+  .hero {
+    padding: calc(var(--space-unit) * 10) calc(var(--space-unit) * 3) calc(var(--space-unit) * 7.5);
+  }
+
+  .container {
+    padding: 0 calc(var(--space-unit) * 2) calc(var(--space-unit) * 10);
+  }
+
+  .section {
+    padding: calc(var(--space-unit) * 3);
+  }
+}
+
+/* ========================================
+   RESPONSIVE - MOBILE SMALL
+   ======================================== */
+
+@media (max-width: 480px) {
+  .hero {
+    padding: calc(var(--space-unit) * 8) calc(var(--space-unit) * 2) calc(var(--space-unit) * 6);
+  }
+
+  .container {
+    padding: 0 calc(var(--space-unit) * 2) calc(var(--space-unit) * 8);
+  }
+
+  .section {
+    padding: calc(var(--space-unit) * 2.5);
+    margin-bottom: calc(var(--space-unit) * 2);
+  }
+}

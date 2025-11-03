@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary, ProtectedRoute, ToasterConfig } from '@/components';
-import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Favorites, Browse, CelebrityProfile, About, FAQ, Contact, HowItWorksPage, ForCelebrities, Team, Jobs, Terms, Privacy } from '@/pages';
+import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Favorites, BrowseVanilla, CelebrityProfile, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorksVanilla, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -73,17 +73,17 @@ function App() {
             {/* Public Routes */}
             <Route path="/" element={<LandingPremium />} />
             <Route path="/auth" element={<Auth />} />
-            <Route path="/browse" element={<Browse />} />
+            <Route path="/browse" element={<BrowseVanilla />} />
             <Route path="/celebrity/:slug" element={<CelebrityProfile />} />
-            <Route path="/about" element={<About />} />
-            <Route path="/how-it-works" element={<HowItWorksPage />} />
-            <Route path="/for-celebrities" element={<ForCelebrities />} />
-            <Route path="/team" element={<Team />} />
-            <Route path="/jobs" element={<Jobs />} />
-            <Route path="/faq" element={<FAQ />} />
-            <Route path="/contact" element={<Contact />} />
-            <Route path="/terms" element={<Terms />} />
-            <Route path="/privacy" element={<Privacy />} />
+            <Route path="/about" element={<AboutVanilla />} />
+            <Route path="/how-it-works" element={<HowItWorksVanilla />} />
+            <Route path="/for-celebrities" element={<ForCelebritiesVanilla />} />
+            <Route path="/team" element={<TeamVanilla />} />
+            <Route path="/jobs" element={<JobsVanilla />} />
+            <Route path="/faq" element={<FAQVanilla />} />
+            <Route path="/contact" element={<ContactVanilla />} />
+            <Route path="/terms" element={<TermsVanilla />} />
+            <Route path="/privacy" element={<PrivacyVanilla />} />
 
             {/* 404 */}
             <Route path="*" element={<Navigate to="/dashboard" replace />} />
