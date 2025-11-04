@@ -69,31 +69,34 @@ export const InstagramProfileHeader = ({
         </div>
       </div>
 
-      {/* Name + Verification */}
-      <div className="profile-identity">
-        <h1 className="profile-name-ig">{celebrity.name}</h1>
-        {celebrity.verified && (
-          <svg
-            className="profile-verified"
-            width="18"
-            height="18"
-            viewBox="0 0 24 24"
-            fill="none"
-          >
-            <circle cx="12" cy="12" r="11" fill="#3897f0" />
-            <path
-              d="M9.5 12.5L11 14L14.5 10.5"
-              stroke="white"
-              strokeWidth="2.5"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            />
-          </svg>
-        )}
-      </div>
+      {/* Header Info Section */}
+      <div className="profile-header-info">
+        {/* Name + Verification */}
+        <div className="profile-identity">
+          <h1 className="profile-name-ig">{celebrity.name}</h1>
+          {celebrity.verified && (
+            <svg
+              className="profile-verified"
+              width="18"
+              height="18"
+              viewBox="0 0 24 24"
+              fill="none"
+            >
+              <circle cx="12" cy="12" r="11" fill="#3897f0" />
+              <path
+                d="M9.5 12.5L11 14L14.5 10.5"
+                stroke="white"
+                strokeWidth="2.5"
+                strokeLinecap="round"
+                strokeLinejoin="round"
+              />
+            </svg>
+          )}
+        </div>
 
-      {/* Category */}
-      <p className="profile-category-ig">{celebrity.category}</p>
+        {/* Category */}
+        <p className="profile-category-ig">{celebrity.category}</p>
+      </div>
 
       {/* Stats Row (Instagram-style) */}
       <div className="profile-stats-ig">
