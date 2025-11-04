@@ -1995,6 +1995,7 @@ body {
         padding: calc(var(--space-unit) * 1) calc(var(--space-unit) * 2);
         font-size: 0.8125rem;
     }
+    }
 }
 
 /* ========================================
@@ -3226,4 +3227,26 @@ body {
         font-size: 13px;
     }
 }
+
+/* ===================================
+   TOAST NOTIFICATION
+   =================================== */
+.toast-ig {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    color: #ffffff;
+    padding: 14px 24px;
+    border-radius: 12px;
+    font-size: 15px;
+    font-weight: 600;
+    box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+    opacity: 0;
+    transform: translateX(-50%) translateY(-20px);
+    transition: all 0.3s ease;
+    pointer-events: none;
+}
+
+.toast-ig.show {
+    opacity: 1;
+    transform: translateX(-50%) translateY(0);
+    pointer-events: auto;
 }

@@ -1,5 +1,6 @@
-import { useParams, Link } from 'react-router-dom';
-import { useQuery } from '@tanstack/react-query';
+import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
+import { useState } from 'react';
 import { HeaderVanilla, FooterVanilla, Loading } from '@/components';
 import {
   InstagramProfileHeader,
@@ -14,7 +15,10 @@ import '@/styles/celebrity-profile.css';
 
 export const CelebrityProfile = () => {
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const queryClient = useQueryClient();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
+  const [toastMessage, setToastMessage] = useState<string | null>(null);
 
   const { data: celebrity, isLoading, error } = useQuery({
     queryKey: ['celebrity', slug],
@@ -29,27 +33,79 @@ export const CelebrityProfile = () => {
     enabled: !!celebrity?.id && isAuthenticated,
   });
 
+  // Follow/Unfollow mutation
+  const followMutation = useMutation({
+    mutationFn: async () => {
+      if (!celebrity?.id) throw new Error('No celebrity ID');
+      if (isSaved) {
+        await savedApi.remove(celebrity.id);
+        return false;
+      } else {
+        await savedApi.add(celebrity.id);
+        return true;
+      }
+    },
+    onSuccess: (newSavedState) => {
+      queryClient.invalidateQueries({ queryKey: ['celebrity-saved', celebrity?.id] });
+      showToast(newSavedState ? 'Following!' : 'Unfollowed');
+    },
+    onError: () => {
+      showToast('Failed to update. Please try again.');
+    },
+  });
+
+  const showToast = (message: string) => {
+    setToastMessage(message);
+    setTimeout(() => setToastMessage(null), 2000);
+  };
+
   if (isLoading) return <Loading />;
 
   const handleFollowToggle = () => {
-    // TODO: Implement follow/unfollow functionality
-    console.log('Toggle follow');
+    if (!isAuthenticated) {
+      navigate('/auth');
+      return;
+    }
+    followMutation.mutate();
   };
 
   const handleMessage = () => {
-    // TODO: Implement messaging
-    console.log('Open message dialog');
+    if (!isAuthenticated) {
+      navigate('/auth');
+      return;
+    }
+    navigate('/messages', { state: { celebrityId: celebrity?.id, celebrityName: celebrity?.name } });
   };
 
-  const handleShare = () => {
-    // TODO: Implement share functionality
-    if (navigator.share) {
-      navigator.share({
-        title: celebrity?.name,
-        text: `Check out ${celebrity?.name} on StarryMeet!`,
-        url: window.location.href,
-      });
+  const handleShare = async () => {
+    const shareData = {
+      title: celebrity?.name || 'Celebrity Profile',
+      text: `Check out ${celebrity?.name} on StarryMeet!`,
+      url: window.location.href,
+    };
+
+    // Try native share first
+    if (navigator.share && navigator.canShare?.(shareData)) {
+      try {
+        await navigator.share(shareData);
+      } catch (err) {
+        // User cancelled or error occurred
+        if ((err as Error).name !== 'AbortError') {
+          copyToClipboard();
+        }
+      }
+    } else {
+      // Fallback to clipboard
+      copyToClipboard();
     }
+  };
+
+  const copyToClipboard = () => {
+    navigator.clipboard.writeText(window.location.href).then(() => {
+      showToast('Link copied to clipboard!');
+    }).catch(() => {
+      showToast('Failed to copy link');
+    });
   };
 
   const handleRequestMeeting = (
@@ -58,8 +114,23 @@ export const CelebrityProfile = () => {
     duration: number,
     price: number
   ) => {
-    // TODO: Implement booking modal
-    console.log('Request meeting:', { slotId, type, duration, price });
+    if (!isAuthenticated) {
+      navigate('/auth', { state: { returnTo: window.location.pathname } });
+      return;
+    }
+
+    // Navigate to booking page with slot details
+    navigate('/book', {
+      state: {
+        celebrityId: celebrity?.id,
+        celebrityName: celebrity?.name,
+        celebrityImage: celebrity?.picture_url || celebrity?.profile_image,
+        slotId,
+        meetingType: type,
+        duration,
+        price,
+      },
+    });
   };
 
   if (error || !celebrity) {
@@ -134,6 +205,19 @@ export const CelebrityProfile = () => {
         </div>
       </main>
       <FooterVanilla />
+
+      {/* Toast Notification */}
+      {toastMessage && (
+        <div className="toast-ig show" style={{
+          position: 'fixed',
+          top: '20px',
+          left: '50%',
+          transform: 'translateX(-50%)',
+          zIndex: 9999,
+        }}>
+          {toastMessage}
+        </div>
+      )}
     </div>
   );
 };

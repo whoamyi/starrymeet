@@ -7,6 +7,7 @@ export * from './Profile';
 export * from './Settings';
 export * from './Messages';
 export * from './Bookings';
+export * from './Booking';
 export * from './Favorites';
 export * from './Browse';
 export * from './BrowseVanilla';
