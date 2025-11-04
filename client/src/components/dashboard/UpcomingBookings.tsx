@@ -1,9 +1,9 @@
 import { Link } from 'react-router-dom';
 import { formatDate, formatTime } from '@/utils';
-import type { Booking } from '@/types';
+import type { DashboardBooking } from '@/types';
 
 interface UpcomingBookingsProps {
-  bookings: Booking[];
+  bookings: DashboardBooking[];
 }
 
 export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
@@ -12,7 +12,7 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Upcoming Meetings</h2>
-          <Link to="/browse" className="text-[#D4A574] text-sm font-semibold">
+          <Link to="/react/browse" className="text-[#D4A574] text-sm font-semibold">
             Book a Meeting
           </Link>
         </div>
@@ -35,28 +35,28 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
         {bookings.slice(0, 3).map((booking) => (
           <Link
             key={booking.id}
-            to={`/bookings`}
+            to={`/react/bookings`}
             className="bg-gray-900/50 border border-gray-800 rounded-2xl p-4 flex items-center gap-4 hover:bg-gray-800 hover:border-[#D4A574] transition-all"
           >
-            {booking.celebrity?.profile_image && (
+            {booking.celebrity_image && (
               <img
-                src={booking.celebrity.profile_image}
-                alt={booking.celebrity.name}
+                src={booking.celebrity_image}
+                alt={booking.celebrity_name}
                 className="w-16 h-16 rounded-xl object-cover"
               />
             )}
             <div className="flex-1">
               <h3 className="font-semibold text-white mb-1">
-                {booking.celebrity?.name || 'Unknown'}
+                {booking.celebrity_name || 'Unknown'}
               </h3>
               <p className="text-sm text-gray-400">
-                📅 {formatDate(booking.booking_date, 'MMM d')} at {formatTime(booking.booking_time)}
+                📅 {formatDate(booking.meeting_date || booking.booking_date || '', 'MMM d')} {booking.booking_time ? `at ${formatTime(booking.booking_time)}` : ''}
               </p>
             </div>
             <span className={`px-3 py-1 rounded-full text-xs font-semibold ${
-              booking.status === 'confirmed'
+              booking.status === 'confirmed' || booking.status === 'payment_complete'
                 ? 'bg-green-500/20 text-green-400'
-                : booking.status === 'pending'
+                : booking.status === 'pending' || booking.status.includes('pending')
                 ? 'bg-yellow-500/20 text-yellow-400'
                 : 'bg-gray-500/20 text-gray-400'
             }`}>

@@ -156,12 +156,45 @@ export interface AuthResponse {
   user: User;
 }
 
+// Dashboard-specific types (flattened from backend)
+export interface DashboardBooking {
+  id: string;
+  booking_number: string;
+  status: string;
+  meeting_date: string;
+  duration_minutes: number;
+  total_amount: number;
+  celebrity_name: string;
+  celebrity_slug: string;
+  celebrity_image: string;
+  category: string;
+  meeting_type: string;
+  location: string;
+  completed_at?: string;
+  has_review?: boolean;
+  created_at?: string;
+  booking_date?: string;
+  booking_time?: string;
+}
+
+export interface DashboardSavedCelebrity {
+  saved_id: string;
+  saved_at: string;
+  celebrity_id: string;
+  name: string;
+  slug: string;
+  avatar_url: string;
+  min_price: number;
+  category: string;
+  tier?: string;
+}
+
 // Dashboard Types
 export interface DashboardData {
-  upcoming_meetings: Booking[];
-  past_meetings: Booking[];
-  pending_requests: Booking[];
-  saved_celebrities: SavedCelebrity[];
+  upcoming_meetings: DashboardBooking[];
+  past_meetings: DashboardBooking[];
+  pending_requests: DashboardBooking[];
+  saved_celebrities: DashboardSavedCelebrity[];
   notifications: any[];
   stats: {
     upcoming_count: number;
