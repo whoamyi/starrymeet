@@ -11,7 +11,7 @@ body {
 .container {
     max-width: 1200px;
     margin: 0 auto;
-    padding: calc(var(--space-unit) * 5) calc(var(--space-unit) * 3) calc(var(--space-unit) * 10);
+    padding: 0;
 }
 
 .profile-page {
@@ -2003,7 +2003,7 @@ body {
    ======================================== */
 
 .profile-header-ig {
-    padding: 20px 16px 16px;
+    padding: 16px 16px 12px;
     background: var(--color-bg-primary);
     /* NO separation between profile and availability */
 }
@@ -2268,7 +2268,7 @@ body {
 
 /* Availability Section - Seamless Integration */
 .availability-section {
-    padding: 0 16px 24px;
+    padding: 0 16px 80px;
     background: var(--color-bg-primary); /* SAME as profile header */
     /* NO border-top, NO visual separation */
 }
@@ -2342,21 +2342,22 @@ body {
 /* Mobile (360px-480px) - Extra compact */
 @media (max-width: 480px) {
     .profile-header-ig {
-        padding: 16px 12px 12px;
+        padding: 16px 16px 12px;
     }
 
     .profile-avatar-wrapper {
-        width: 96px;
-        height: 96px;
+        width: 100px;
+        height: 100px;
+        margin-bottom: 12px;
     }
 
     .profile-avatar-ig {
-        width: 96px;
-        height: 96px;
+        width: 100px;
+        height: 100px;
     }
 
     .profile-initials-ig {
-        font-size: 36px;
+        font-size: 38px;
     }
 
     .profile-name-ig {
@@ -2366,6 +2367,49 @@ body {
     .profile-verified {
         width: 16px;
         height: 16px;
+    }
+
+    .profile-category-ig {
+        font-size: 13px;
+        margin-bottom: 12px;
+    }
+
+    .profile-stats-ig {
+        padding: 10px 0;
+        margin-bottom: 12px;
+    }
+
+    .stat-value-ig {
+        font-size: 16px;
+    }
+
+    .stat-label-ig {
+        font-size: 11px;
+    }
+
+    .btn-action-ig {
+        height: 38px;
+        font-size: 13px;
+        border-radius: 6px;
+    }
+
+    .profile-bio-ig {
+        font-size: 13px;
+        line-height: 1.5;
+    }
+
+    .profile-location-ig {
+        font-size: 12px;
+        padding-bottom: 16px;
+    }
+
+    .availability-section {
+        padding: 0 16px 60px;
+    }
+
+    .section-title {
+        font-size: 16px;
+        margin-bottom: 12px;
     }
 }
 
@@ -2880,13 +2924,115 @@ body {
     .included-section-new,
     .requirements-section-new,
     .policies-section-new {
-        padding: 60px 20px;
+        padding: 40px 16px;
     }
 
     .section-header-row {
         flex-direction: column;
         align-items: start;
         gap: 16px;
+    }
+
+    .section-title {
+        font-size: 20px;
+        margin-bottom: 20px;
+    }
+
+    .review-card-new,
+    .included-item-new,
+    .requirement-item-new {
+        padding: 20px;
+    }
+
+    .review-text-new {
+        font-size: 14px;
+    }
+
+    .included-title-new,
+    .requirement-title-new {
+        font-size: 16px;
+    }
+
+    .policy-header-new {
+        padding: 18px 20px;
+    }
+
+    .policy-title-new {
+        font-size: 16px;
+    }
+}
+
+@media (max-width: 480px) {
+    .reviews-section-new,
+    .included-section-new,
+    .requirements-section-new,
+    .policies-section-new {
+        padding: 32px 16px;
+    }
+
+    .section-title {
+        font-size: 18px;
+        margin-bottom: 16px;
+    }
+
+    .summary-rating {
+        font-size: 20px;
+    }
+
+    .summary-count {
+        font-size: 14px;
+    }
+
+    .review-card-new,
+    .included-item-new,
+    .requirement-item-new {
+        padding: 16px;
+    }
+
+    .author-avatar-new {
+        width: 40px;
+        height: 40px;
+    }
+
+    .author-name-new {
+        font-size: 14px;
+    }
+
+    .review-text-new {
+        font-size: 13px;
+        line-height: 1.6;
+    }
+
+    .included-icon-new {
+        width: 40px;
+        height: 40px;
+    }
+
+    .included-title-new,
+    .requirement-title-new {
+        font-size: 15px;
+    }
+
+    .included-description-new,
+    .requirement-description-new {
+        font-size: 13px;
+    }
+
+    .requirement-icon-new {
+        font-size: 28px;
+    }
+
+    .policy-header-new {
+        padding: 16px 18px;
+    }
+
+    .policy-title-new {
+        font-size: 15px;
+    }
+
+    .policy-content-new p {
+        padding: 0 18px 18px;
+        font-size: 13px;
     }
 }
 }
