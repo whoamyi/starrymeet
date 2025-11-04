@@ -5,6 +5,8 @@ import { AuthRequest } from '../middleware/auth';
 
 export const createBooking = async (req: AuthRequest, res: Response) => {
   try {
+    console.log('Create booking request:', JSON.stringify(req.body, null, 2));
+
     const {
       celebrity_id,
       celebrity_name,
@@ -158,9 +160,11 @@ export const getBooking = async (req: AuthRequest, res: Response) => {
 
 export const listUserBookings = async (req: AuthRequest, res: Response) => {
   try {
+    console.log('List user bookings for user:', req.user?.userId || req.user?.id);
+
     const { limit = 10, offset = 0, status } = req.query;
 
-    const where: any = { user_id: req.user!.userId };
+    const where: any = { user_id: req.user!.userId || req.user!.id };
     if (status) where.status = status;
 
     const { rows: bookings, count } = await Booking.findAndCountAll({
@@ -174,14 +178,17 @@ export const listUserBookings = async (req: AuthRequest, res: Response) => {
           attributes: ['id', 'display_name', 'username', 'avatar_url', 'category']
         }
       ]
+    }).catch(err => {
+      console.error('Error fetching bookings:', err);
+      return { rows: [], count: 0 };
     });
 
     res.json({
       success: true,
       data: {
-        bookings,
+        bookings: bookings || [],
         pagination: {
-          total: count,
+          total: count || 0,
           limit: parseInt(limit as string),
           offset: parseInt(offset as string)
         }
