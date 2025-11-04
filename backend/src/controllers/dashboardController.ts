@@ -154,7 +154,7 @@ export const getUserDashboard = async (req: Request, res: Response) => {
       WHERE u.id = :user_id
     `;
 
-    // Execute all queries in parallel
+    // Execute all queries in parallel with error handling
     const [
       upcomingMeetings,
       pastMeetings,
@@ -163,31 +163,54 @@ export const getUserDashboard = async (req: Request, res: Response) => {
       notifications,
       stats
     ] = await Promise.all([
-      sequelize.query(upcomingQuery, { replacements: { user_id }, type: QueryTypes.SELECT }),
-      sequelize.query(pastQuery, { replacements: { user_id }, type: QueryTypes.SELECT }),
-      sequelize.query(pendingQuery, { replacements: { user_id }, type: QueryTypes.SELECT }),
-      sequelize.query(savedQuery, { replacements: { user_id }, type: QueryTypes.SELECT }),
-      sequelize.query(notificationsQuery, { replacements: { user_id }, type: QueryTypes.SELECT }),
-      sequelize.query(statsQuery, { replacements: { user_id }, type: QueryTypes.SELECT })
+      sequelize.query(upcomingQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching upcoming meetings:', err);
+        return [];
+      }),
+      sequelize.query(pastQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching past meetings:', err);
+        return [];
+      }),
+      sequelize.query(pendingQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching pending requests:', err);
+        return [];
+      }),
+      sequelize.query(savedQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching saved celebrities:', err);
+        return [];
+      }),
+      sequelize.query(notificationsQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching notifications:', err);
+        return [];
+      }),
+      sequelize.query(statsQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching stats:', err);
+        return [{ upcoming_count: 0, completed_count: 0, pending_count: 0, saved_count: 0, unread_notifications_count: 0 }];
+      })
     ]);
 
     res.json({
       success: true,
       data: {
-        upcoming_meetings: upcomingMeetings,
-        past_meetings: pastMeetings,
-        pending_requests: pendingRequests,
-        saved_celebrities: savedCelebrities,
-        notifications: notifications,
-        stats: stats[0]
+        upcoming_meetings: upcomingMeetings || [],
+        past_meetings: pastMeetings || [],
+        pending_requests: pendingRequests || [],
+        saved_celebrities: savedCelebrities || [],
+        notifications: notifications || [],
+        stats: stats[0] || { upcoming_count: 0, completed_count: 0, pending_count: 0, saved_count: 0, unread_notifications_count: 0 }
       }
     });
 
   } catch (error: any) {
     console.error('Error fetching dashboard data:', error);
+    console.error('Error stack:', error.stack);
+    console.error('User ID:', (req as any).user?.id);
     res.status(500).json({
       success: false,
-      error: error.message
+      error: {
+        message: error.message || 'Failed to fetch dashboard data',
+        details: process.env.NODE_ENV === 'development' ? error.stack : undefined
+      }
     });
   }
 };
