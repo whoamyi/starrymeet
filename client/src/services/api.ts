@@ -73,17 +73,23 @@ api.interceptors.response.use(
 // Auth API
 export const authApi = {
   login: async (data: LoginRequest): Promise<AuthResponse> => {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/signin', data);
-    return response.data.data;
+    const response = await api.post<{ success: boolean; session: { token: string }; user: User }>('/auth/signin', data);
+    return {
+      token: response.data.session.token,
+      user: response.data.user
+    };
   },
 
   signup: async (data: SignupRequest): Promise<AuthResponse> => {
-    const response = await api.post<ApiResponse<AuthResponse>>('/auth/signup', data);
-    return response.data.data;
+    const response = await api.post<{ success: boolean; session: { token: string }; user: User }>('/auth/signup', data);
+    return {
+      token: response.data.session.token,
+      user: response.data.user
+    };
   },
 
   logout: async (): Promise<void> => {
-    await api.post('/auth/logout');
+    await api.post('/auth/signout');
   },
 };
 

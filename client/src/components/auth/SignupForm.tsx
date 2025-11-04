@@ -62,7 +62,8 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
 
   const signupMutation = useMutation({
     mutationFn: () => authApi.signup({
-      username: `${formData.firstName} ${formData.lastName}`.trim(),
+      firstName: formData.firstName,
+      lastName: formData.lastName,
       email: formData.email,
       password: formData.password
     }),
