@@ -1,10 +1,10 @@
 import { useState } from 'react';
 import { Link } from 'react-router-dom';
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/auth';
 import { authApi } from '@/services/api';
 
 export const Header = () => {
-  const { user, logout } = useAuthStore();
+  const { user, clearAuth } = useAuthStore();
   const [dropdownOpen, setDropdownOpen] = useState(false);
 
   const handleLogout = async () => {
@@ -13,18 +13,26 @@ export const Header = () => {
     } catch (error) {
       console.error('Logout error:', error);
     } finally {
-      logout();
+      clearAuth();
       window.location.href = '/auth';
     }
   };
 
   const getInitials = () => {
     if (!user) return 'U';
-    const names = user.username.split(' ');
-    if (names.length >= 2) {
-      return `${names[0][0]}${names[1][0]}`.toUpperCase();
+    const firstName = (user as any)?.firstName || '';
+    const lastName = (user as any)?.lastName || '';
+
+    if (firstName && lastName) {
+      return `${firstName[0]}${lastName[0]}`.toUpperCase();
     }
-    return user.username.substring(0, 2).toUpperCase();
+    if (firstName) {
+      return firstName.substring(0, 2).toUpperCase();
+    }
+    if (user.email) {
+      return user.email.substring(0, 2).toUpperCase();
+    }
+    return 'U';
   };
 
   return (

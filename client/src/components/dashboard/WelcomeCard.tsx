@@ -1,4 +1,4 @@
-import { useAuthStore } from '@/store/authStore';
+import { useAuthStore } from '@/store/auth';
 
 export const WelcomeCard = () => {
   const { user } = useAuthStore();
@@ -6,8 +6,8 @@ export const WelcomeCard = () => {
   const timeStr = now.toLocaleTimeString('en-US', { hour: 'numeric', minute: '2-digit', hour12: true });
   const dateStr = now.toLocaleDateString('en-US', { weekday: 'long', month: 'short', day: 'numeric' });
 
-  // Extract first name from username
-  const firstName = user?.username.split(' ')[0] || user?.username || 'there';
+  // Get first name from user
+  const firstName = (user as any)?.firstName || user?.email?.split('@')[0] || 'there';
 
   return (
     <div className="bg-gradient-to-r from-[#D4A574] to-[#C49563] rounded-2xl p-6 mb-6 flex justify-between items-center">

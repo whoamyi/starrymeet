@@ -62,6 +62,7 @@ export const AvailabilitySection = ({
   };
 
   const formatTime = (timeStr: string) => {
+    if (!timeStr) return 'Time TBD';
     const [hours, minutes] = timeStr.split(':');
     const hour = parseInt(hours);
     const ampm = hour >= 12 ? 'PM' : 'AM';
