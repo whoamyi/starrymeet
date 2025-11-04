@@ -158,14 +158,17 @@ export interface AuthResponse {
 
 // Dashboard Types
 export interface DashboardData {
-  user: User;
-  upcoming_bookings: Booking[];
-  recent_messages: Message[];
+  upcoming_meetings: Booking[];
+  past_meetings: Booking[];
+  pending_requests: Booking[];
   saved_celebrities: SavedCelebrity[];
-  stats?: {
-    total_bookings: number;
+  notifications: any[];
+  stats: {
     upcoming_count: number;
+    completed_count: number;
+    pending_count: number;
     saved_count: number;
+    unread_notifications_count: number;
   };
 }
 

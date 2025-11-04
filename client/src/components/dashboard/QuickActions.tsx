@@ -22,9 +22,11 @@ const ActionCard = ({ icon, title, description, to }: ActionCardProps) => (
 
 interface QuickActionsProps {
   stats?: {
-    total_celebrities?: number;
-    unread_messages?: number;
+    upcoming_count?: number;
+    completed_count?: number;
+    pending_count?: number;
     saved_count?: number;
+    unread_notifications_count?: number;
   };
 }
 
@@ -33,20 +35,20 @@ export const QuickActions = ({ stats }: QuickActionsProps) => (
     <ActionCard
       icon="🔍"
       title="Browse Celebrities"
-      description={`${stats?.total_celebrities || 150}+ available`}
+      description="Discover your favorites"
       to="/browse"
     />
     <ActionCard
       icon="💬"
       title="Messages"
-      description={stats?.unread_messages ? `${stats.unread_messages} new` : 'No new messages'}
-      to="/react/messages"
+      description={stats?.unread_notifications_count ? `${stats.unread_notifications_count} new notifications` : 'No new notifications'}
+      to="/messages"
     />
     <ActionCard
       icon="⭐"
       title="Favorites"
       description={`${stats?.saved_count || 0} saved`}
-      to="/react/favorites"
+      to="/favorites"
     />
   </div>
 );

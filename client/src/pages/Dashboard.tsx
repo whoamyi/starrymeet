@@ -35,7 +35,7 @@ export const Dashboard = () => {
       <main className="max-w-7xl mx-auto px-4 py-6 pb-24">
         <WelcomeCard />
         <QuickActions stats={data?.stats} />
-        <UpcomingBookings bookings={data?.upcoming_bookings || []} />
+        <UpcomingBookings bookings={data?.upcoming_meetings || []} />
         <SavedCelebrities saved={data?.saved_celebrities || []} />
       </main>
       <BottomNav />
