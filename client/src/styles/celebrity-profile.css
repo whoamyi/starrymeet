@@ -2417,7 +2417,7 @@ body {
 @media (min-width: 721px) {
     .profile-header-ig {
         display: grid;
-        grid-template-columns: 200px 1fr;
+        grid-template-columns: 180px 1fr;
         grid-template-areas:
             "avatar identity"
             "avatar category"
@@ -2425,11 +2425,11 @@ body {
             "avatar actions"
             "avatar bio"
             "avatar location";
-        gap: 0 32px;
+        gap: 0 40px;
         align-items: start;
         max-width: 1000px;
         margin: 0 auto;
-        padding: 40px 32px 32px;
+        padding: 48px 32px 32px;
     }
 
     /* Avatar section - left column */
@@ -2449,6 +2449,13 @@ body {
         font-size: 64px;
     }
 
+    .profile-tier-badge {
+        top: 8px;
+        right: 8px;
+        font-size: 12px;
+        padding: 6px 12px;
+    }
+
     /* Identity - right column, left aligned */
     .profile-identity {
         grid-area: identity;
@@ -2461,8 +2468,8 @@ body {
     }
 
     .profile-verified {
-        width: 20px;
-        height: 20px;
+        width: 22px;
+        height: 22px;
     }
 
     /* Category - right column, left aligned */
@@ -2473,11 +2480,11 @@ body {
         margin-bottom: 20px;
     }
 
-    /* Stats - right column, left aligned */
+    /* Stats - right column, horizontal layout */
     .profile-stats-ig {
         grid-area: stats;
         justify-content: flex-start;
-        gap: 40px;
+        gap: 48px;
         border: none;
         padding: 0;
         margin-bottom: 20px;
@@ -2491,22 +2498,29 @@ body {
 
     .stat-value-ig {
         font-size: 20px;
+        font-weight: 700;
     }
 
     .stat-label-ig {
         font-size: 14px;
     }
 
-    /* Actions - right column */
+    /* Actions - right column, horizontal */
     .profile-actions-ig {
         grid-area: actions;
-        max-width: 400px;
+        max-width: 450px;
         margin-bottom: 20px;
+        gap: 10px;
     }
 
     .btn-action-ig {
         height: 40px;
         font-size: 15px;
+    }
+
+    .btn-action-ig--share {
+        flex: 0 0 40px;
+        width: 40px;
     }
 
     /* Bio - right column, left aligned */
@@ -2537,22 +2551,81 @@ body {
     .availability-section {
         max-width: 1000px;
         margin: 0 auto;
-        padding: 0 32px 40px;
+        padding: 8px 32px 48px;
     }
 
     .section-title {
-        font-size: 20px;
+        font-size: 22px;
+        margin-bottom: 24px;
+    }
+
+    /* Meeting type groups - better desktop spacing */
+    .meeting-type-group {
         margin-bottom: 20px;
+    }
+
+    .meeting-type-header {
+        padding: 18px 24px;
+    }
+
+    .meeting-type-title {
+        font-size: 18px;
+    }
+
+    .meeting-type-content {
+        padding: 0 16px 16px 16px;
+    }
+
+    .location-package {
+        padding: 16px 20px;
+    }
+
+    /* Reviews, Included, Requirements - Desktop Grid Layouts */
+    .reviews-section-new,
+    .included-section-new,
+    .requirements-section-new,
+    .policies-section-new {
+        padding: 60px 32px;
+    }
+
+    .reviews-container-new,
+    .included-container-new,
+    .requirements-container-new,
+    .policies-container-new {
+        max-width: 1000px;
+        margin: 0 auto;
+    }
+
+    .reviews-grid-new {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .included-grid-new {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        gap: 24px;
+    }
+
+    .requirements-list-new {
+        display: grid;
+        gap: 20px;
+    }
+
+    .policies-accordion-new {
+        display: grid;
+        gap: 16px;
     }
 }
 
 /* Large Desktop (1200px+) - Wider layout */
 @media (min-width: 1200px) {
     .profile-header-ig {
-        grid-template-columns: 220px 1fr;
-        gap: 0 48px;
+        grid-template-columns: 200px 1fr;
+        gap: 0 56px;
         max-width: 1200px;
-        padding: 48px 48px 40px;
+        padding: 56px 48px 40px;
     }
 
     .profile-avatar-wrapper {
@@ -2573,9 +2646,56 @@ body {
         font-size: 32px;
     }
 
+    .profile-stats-ig {
+        gap: 56px;
+    }
+
+    .stat-value-ig {
+        font-size: 22px;
+    }
+
+    .stat-label-ig {
+        font-size: 15px;
+    }
+
+    .profile-actions-ig {
+        max-width: 500px;
+        gap: 12px;
+    }
+
+    .btn-action-ig {
+        height: 44px;
+        font-size: 16px;
+    }
+
     .availability-section {
         max-width: 1200px;
-        padding: 0 48px 48px;
+        padding: 12px 48px 56px;
+    }
+
+    .section-title {
+        font-size: 24px;
+        margin-bottom: 28px;
+    }
+
+    /* Reviews, Included - 3 columns on large screens */
+    .reviews-grid-new {
+        grid-template-columns: repeat(3, 1fr);
+        gap: 28px;
+    }
+
+    .reviews-section-new,
+    .included-section-new,
+    .requirements-section-new,
+    .policies-section-new {
+        padding: 80px 48px;
+    }
+
+    .reviews-container-new,
+    .included-container-new,
+    .requirements-container-new,
+    .policies-container-new {
+        max-width: 1200px;
     }
 }
 /* ===================================
