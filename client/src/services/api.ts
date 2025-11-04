@@ -173,15 +173,15 @@ export const celebrityApi = {
 // Bookings API
 export const bookingsApi = {
   getAll: async (filters?: BookingFilters): Promise<Booking[]> => {
-    const response = await api.get<ApiResponse<Booking[]>>('/bookings', {
+    const response = await api.get<ApiResponse<{ bookings: Booking[]; pagination: any }>>('/bookings', {
       params: filters,
     });
-    return response.data.data;
+    return response.data.data.bookings;
   },
 
   getById: async (id: string): Promise<Booking> => {
-    const response = await api.get<ApiResponse<Booking>>(`/bookings/${id}`);
-    return response.data.data;
+    const response = await api.get<ApiResponse<{ booking: Booking }>>(`/bookings/${id}`);
+    return response.data.data.booking;
   },
 
   create: async (data: {
@@ -190,8 +190,8 @@ export const bookingsApi = {
     booking_time: string;
     duration_hours: number;
   }): Promise<Booking> => {
-    const response = await api.post<ApiResponse<Booking>>('/bookings', data);
-    return response.data.data;
+    const response = await api.post<ApiResponse<{ booking: Booking }>>('/bookings', data);
+    return response.data.data.booking;
   },
 
   cancel: async (id: string): Promise<void> => {
