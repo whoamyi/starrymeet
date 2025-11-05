@@ -81,7 +81,7 @@ export const Favorites = () => {
 
               return (
                 <div key={item.id} className="group relative">
-                  <Link to={`/celebrity/celeb.slug}`}>
+                  <Link to={`/react/celebrity/${celeb.slug}`}>
                     <div className="relative overflow-hidden rounded-2xl mb-2">
                       <img
                         src={celeb.profile_image}

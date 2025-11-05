@@ -31,6 +31,7 @@ export const CelebrityProfile = () => {
     queryKey: ['celebrity-saved', celebrity?.id],
     queryFn: () => savedApi.check(celebrity!.id),
     enabled: !!celebrity?.id && isAuthenticated,
+    placeholderData: false, // Start with false to prevent flicker
   });
 
   // Follow/Unfollow mutation
@@ -47,6 +48,8 @@ export const CelebrityProfile = () => {
     },
     onSuccess: (newSavedState) => {
       queryClient.invalidateQueries({ queryKey: ['celebrity-saved', celebrity?.id] });
+      queryClient.invalidateQueries({ queryKey: ['saved'] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       showToast(newSavedState ? 'Following!' : 'Unfollowed');
     },
     onError: () => {

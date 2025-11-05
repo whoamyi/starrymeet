@@ -19,6 +19,7 @@ export const CelebrityHeader = ({ celebrity, isSaved }: CelebrityHeaderProps) =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['saved'] });
       queryClient.invalidateQueries({ queryKey: ['celebrity-saved', celebrity.id] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       toastConfig.success('Added to favorites');
     },
     onError: () => {
@@ -31,6 +32,7 @@ export const CelebrityHeader = ({ celebrity, isSaved }: CelebrityHeaderProps) =>
     onSuccess: () => {
       queryClient.invalidateQueries({ queryKey: ['saved'] });
       queryClient.invalidateQueries({ queryKey: ['celebrity-saved', celebrity.id] });
+      queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       toastConfig.success('Removed from favorites');
     },
     onError: () => {
