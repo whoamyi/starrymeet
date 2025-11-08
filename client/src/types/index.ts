@@ -195,6 +195,7 @@ export interface DashboardData {
   past_meetings: DashboardBooking[];
   pending_requests: DashboardBooking[];
   saved_celebrities: DashboardSavedCelebrity[];
+  applications: DashboardApplication[];
   notifications: any[];
   stats: {
     upcoming_count: number;
@@ -202,6 +203,7 @@ export interface DashboardData {
     pending_count: number;
     saved_count: number;
     unread_notifications_count: number;
+    applications_count: number;
   };
 }
 
@@ -240,4 +242,99 @@ export interface BookingFilters {
   status?: Booking['status'];
   date_from?: string;
   date_to?: string;
+}
+
+// Application Types
+export interface MeetingApplication {
+  id: string;
+  application_number: string;
+  user_id: string;
+  celebrity_id: string;
+  application_type: 'professional' | 'personal';
+  status: 'pending' | 'under_review' | 'approved' | 'rejected' | 'cancelled';
+
+  // Common fields
+  first_name: string;
+  last_name: string;
+  email: string;
+  phone?: string;
+
+  // Professional fields
+  professional_summary?: string;
+  why_celebrity?: string;
+  meeting_goals?: string;
+  what_you_bring?: string;
+  next_steps?: string;
+  linkedin_url?: string;
+  company_website?: string;
+  portfolio_url?: string;
+  social_media?: string;
+
+  // Personal fields
+  your_story?: string;
+  what_they_mean?: string;
+  why_now?: string;
+  meeting_vision?: string;
+  your_case?: string;
+  additional_context?: string;
+  instagram_url?: string;
+  personal_links?: string;
+
+  // Review fields
+  review_notes?: string;
+  reviewed_at?: string;
+  reviewed_by?: string;
+
+  created_at: string;
+  updated_at: string;
+}
+
+export interface ProfessionalApplicationRequest {
+  celebritySlug: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  professionalSummary: string;
+  whyCelebrity: string;
+  meetingGoals: string;
+  whatYouBring: string;
+  nextSteps: string;
+  linkedinUrl: string;
+  companyWebsite?: string;
+  portfolioUrl?: string;
+  socialMedia?: string;
+}
+
+export interface PersonalApplicationRequest {
+  celebritySlug: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  phone?: string;
+  yourStory: string;
+  whatTheyMean: string;
+  whyNow: string;
+  meetingVision: string;
+  yourCase: string;
+  additionalContext?: string;
+  instagramUrl?: string;
+  personalLinks?: string;
+}
+
+export interface ApplicationResponse {
+  application_number: string;
+  message: string;
+}
+
+export interface DashboardApplication {
+  id: string;
+  application_number: string;
+  application_type: 'professional' | 'personal';
+  status: string;
+  created_at: string;
+  celebrity_name: string;
+  celebrity_slug: string;
+  celebrity_image: string;
+  category: string;
 }

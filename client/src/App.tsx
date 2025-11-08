@@ -1,7 +1,7 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary, ProtectedRoute, ToasterConfig } from '@/components';
-import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Booking, Favorites, BrowseVanilla, CelebrityProfile, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorks, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
+import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Booking, Favorites, BrowseVanilla, CelebrityProfile, MeetingTypeSelection, ApplicationProfessional, ApplicationPersonal, ApplicationConfirmation, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorks, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -83,6 +83,13 @@ function App() {
             <Route path="/auth" element={<Auth />} />
             <Route path="/browse" element={<BrowseVanilla />} />
             <Route path="/celebrity/:slug" element={<CelebrityProfile />} />
+
+            {/* Application Flow Routes */}
+            <Route path="/apply/:slug" element={<MeetingTypeSelection />} />
+            <Route path="/apply/:slug/professional" element={<ApplicationProfessional />} />
+            <Route path="/apply/:slug/personal" element={<ApplicationPersonal />} />
+            <Route path="/apply/:slug/confirmation" element={<ApplicationConfirmation />} />
+
             <Route path="/about" element={<AboutVanilla />} />
             <Route path="/how-it-works" element={<HowItWorks />} />
             <Route path="/for-celebrities" element={<ForCelebritiesVanilla />} />

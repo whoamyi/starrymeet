@@ -16,6 +16,11 @@ import type {
   CelebrityFilters,
   BookingFilters,
   Conversation,
+  MeetingApplication,
+  ProfessionalApplicationRequest,
+  PersonalApplicationRequest,
+  ApplicationResponse,
+  DashboardApplication,
 } from '../types';
 
 // Create axios instance
@@ -273,6 +278,33 @@ export const paymentApi = {
 
   remove: async (id: string): Promise<void> => {
     await api.delete(`/payment-methods/${id}`);
+  },
+};
+
+// Applications API
+export const applicationApi = {
+  submitProfessional: async (data: ProfessionalApplicationRequest): Promise<ApplicationResponse> => {
+    const response = await api.post<ApiResponse<ApplicationResponse>>('/applications/professional', data);
+    return response.data.data;
+  },
+
+  submitPersonal: async (data: PersonalApplicationRequest): Promise<ApplicationResponse> => {
+    const response = await api.post<ApiResponse<ApplicationResponse>>('/applications/personal', data);
+    return response.data.data;
+  },
+
+  getAll: async (): Promise<DashboardApplication[]> => {
+    const response = await api.get<ApiResponse<DashboardApplication[]>>('/applications');
+    return response.data.data;
+  },
+
+  getById: async (id: string): Promise<MeetingApplication> => {
+    const response = await api.get<ApiResponse<MeetingApplication>>(`/applications/${id}`);
+    return response.data.data;
+  },
+
+  updateStatus: async (id: string, status: string, notes?: string): Promise<void> => {
+    await api.patch(`/applications/${id}/status`, { status, notes });
   },
 };
 

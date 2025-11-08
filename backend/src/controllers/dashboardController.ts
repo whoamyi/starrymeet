@@ -139,6 +139,26 @@ export const getUserDashboard = async (req: Request, res: Response) => {
       LIMIT 10
     `;
 
+    // Get applications
+    const applicationsQuery = `
+      SELECT
+        a.id,
+        a.application_number,
+        a.application_type,
+        a.status,
+        a.created_at,
+        c.display_name as celebrity_name,
+        c.slug as celebrity_slug,
+        c.avatar_url as celebrity_image,
+        cat.name as category
+      FROM meeting_applications a
+      JOIN celebrities_new c ON a.celebrity_id = c.id
+      LEFT JOIN categories cat ON c.category_id = cat.id
+      WHERE a.user_id = :user_id
+      ORDER BY a.created_at DESC
+      LIMIT 20
+    `;
+
     // Get summary stats
     const statsQuery = `
       SELECT
@@ -146,11 +166,13 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         COUNT(DISTINCT CASE WHEN b.status = 'completed' THEN b.id END) as completed_count,
         COUNT(DISTINCT CASE WHEN b.status IN ('pending_approval', 'approved', 'payment_pending') THEN b.id END) as pending_count,
         COUNT(DISTINCT sc.celebrity_id) as saved_count,
-        COUNT(DISTINCT CASE WHEN n.read_status = FALSE THEN n.id END) as unread_notifications_count
+        COUNT(DISTINCT CASE WHEN n.read_status = FALSE THEN n.id END) as unread_notifications_count,
+        COUNT(DISTINCT a.id) as applications_count
       FROM users u
       LEFT JOIN bookings b ON u.id = b.user_id
       LEFT JOIN saved_celebrities sc ON u.id = sc.user_id
       LEFT JOIN notifications n ON u.id = n.user_id
+      LEFT JOIN meeting_applications a ON u.id = a.user_id
       WHERE u.id = :user_id
     `;
 
@@ -160,6 +182,7 @@ export const getUserDashboard = async (req: Request, res: Response) => {
       pastMeetings,
       pendingRequests,
       savedCelebrities,
+      applications,
       notifications,
       stats
     ] = await Promise.all([
@@ -179,13 +202,17 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         console.error('Error fetching saved celebrities:', err);
         return [];
       }),
+      sequelize.query(applicationsQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
+        console.error('Error fetching applications:', err);
+        return [];
+      }),
       sequelize.query(notificationsQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
         console.error('Error fetching notifications:', err);
         return [];
       }),
       sequelize.query(statsQuery, { replacements: { user_id }, type: QueryTypes.SELECT }).catch(err => {
         console.error('Error fetching stats:', err);
-        return [{ upcoming_count: 0, completed_count: 0, pending_count: 0, saved_count: 0, unread_notifications_count: 0 }];
+        return [{ upcoming_count: 0, completed_count: 0, pending_count: 0, saved_count: 0, unread_notifications_count: 0, applications_count: 0 }];
       })
     ]);
 
@@ -196,8 +223,9 @@ export const getUserDashboard = async (req: Request, res: Response) => {
         past_meetings: pastMeetings || [],
         pending_requests: pendingRequests || [],
         saved_celebrities: savedCelebrities || [],
+        applications: applications || [],
         notifications: notifications || [],
-        stats: stats[0] || { upcoming_count: 0, completed_count: 0, pending_count: 0, saved_count: 0, unread_notifications_count: 0 }
+        stats: stats[0] || { upcoming_count: 0, completed_count: 0, pending_count: 0, saved_count: 0, unread_notifications_count: 0, applications_count: 0 }
       }
     });
 

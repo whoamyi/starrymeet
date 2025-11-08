@@ -3,6 +3,7 @@ import { Header, BottomNav, Loading } from '@/components';
 import { WelcomeCard } from '@/components/dashboard/WelcomeCard';
 import { QuickActions } from '@/components/dashboard/QuickActions';
 import { UpcomingBookings } from '@/components/dashboard/UpcomingBookings';
+import { ApplicationsList } from '@/components/dashboard/ApplicationsList';
 import { SavedCelebrities } from '@/components/dashboard/SavedCelebrities';
 import { dashboardApi } from '@/services/api';
 
@@ -36,6 +37,7 @@ export const Dashboard = () => {
         <WelcomeCard />
         <QuickActions stats={data?.stats} />
         <UpcomingBookings bookings={data?.upcoming_meetings || []} />
+        <ApplicationsList applications={data?.applications || []} />
         <SavedCelebrities saved={data?.saved_celebrities || []} />
       </main>
       <BottomNav />

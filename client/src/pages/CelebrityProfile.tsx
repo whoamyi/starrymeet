@@ -122,18 +122,8 @@ export const CelebrityProfile = () => {
       return;
     }
 
-    // Navigate to booking page with slot details
-    navigate('/book', {
-      state: {
-        celebrityId: celebrity?.id,
-        celebrityName: celebrity?.name,
-        celebrityImage: celebrity?.picture_url || celebrity?.profile_image,
-        slotId,
-        meetingType: type,
-        duration,
-        price,
-      },
-    });
+    // Navigate to application flow
+    navigate(`/apply/${slug}`);
   };
 
   if (error || !celebrity) {
