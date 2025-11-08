@@ -383,7 +383,7 @@ const TicketUnit = ({
               onRequestMeeting(slot.id, type, slot.duration, slot.price_cents || 0)
             }
           >
-            Request
+            Apply
           </button>
         </div>
       </div>
