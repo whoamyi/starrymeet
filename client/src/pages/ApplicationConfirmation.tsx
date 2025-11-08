@@ -1,145 +1,146 @@
-import { useLocation, useNavigate, Link } from 'react-router-dom';
-import { HeaderVanilla, FooterVanilla } from '@/components';
+import { useLocation, Link } from 'react-router-dom';
+import { Header, BottomNav } from '@/components';
 import { ProgressBar } from '@/components/application';
 
 export const ApplicationConfirmation = () => {
   const location = useLocation();
-  const navigate = useNavigate();
   const state = location.state as { applicationType?: 'professional' | 'personal' };
-
   const applicationType = state?.applicationType || 'professional';
   const isProfessional = applicationType === 'professional';
 
   return (
-    <div className="min-h-screen bg-white">
-      <HeaderVanilla />
-      <ProgressBar currentStep={3} totalSteps={3} />
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <main className="max-w-4xl mx-auto px-4 py-8 pb-24">
+        <ProgressBar currentStep={3} totalSteps={3} />
 
-      <div className="max-w-3xl mx-auto py-16 px-8">
-        {/* Success Icon */}
-        <div className="text-center mb-8">
-          <div className="inline-flex items-center justify-center w-24 h-24 bg-green-100 rounded-full mb-6">
-            <svg
-              width="48"
-              height="48"
-              viewBox="0 0 24 24"
-              fill="none"
-              stroke="#10b981"
-              strokeWidth="3"
-              strokeLinecap="round"
-              strokeLinejoin="round"
-            >
-              <polyline points="20 6 9 17 4 12" />
-            </svg>
-          </div>
+        {/* Success Card */}
+        <div className="relative group mb-8">
+          {/* Glow effect */}
+          <div className="absolute -inset-px bg-gradient-to-r from-[#C6A34F]/30 to-[#D4A574]/30 rounded-3xl blur-xl"></div>
 
-          <h1 className="text-4xl font-bold text-black mb-4">
-            Application Submitted!
-          </h1>
+          {/* Main Card */}
+          <div className="relative bg-gradient-to-b from-gray-900/90 to-black/90 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl text-center">
+            {/* Inner glow */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C6A34F]/50 to-transparent"></div>
 
-          <p className="text-xl text-gray-600">
-            Your {isProfessional ? 'professional' : 'personal'} meeting request has been received.
-          </p>
-        </div>
+            {/* Success Icon */}
+            <div className="mb-6 flex justify-center">
+              <div className="relative">
+                <div className="absolute inset-0 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] rounded-full opacity-20 blur-2xl scale-150"></div>
+                <div className="relative w-20 h-20 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center shadow-lg shadow-[#C6A34F]/50">
+                  <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
+                    <polyline points="20 6 9 17 4 12" />
+                  </svg>
+                </div>
+              </div>
+            </div>
 
-        {/* What Happens Next */}
-        <div className="bg-gray-50 rounded-xl p-8 mb-8">
-          <h2 className="text-2xl font-bold text-black mb-6">What Happens Next?</h2>
-
-          <div className="space-y-6">
-            <Step
-              number={1}
-              title="Review Process"
-              description={
-                isProfessional
-                  ? "Your application will be reviewed based on professional alignment, mutual value, and the clarity of your goals. The celebrity's team will carefully evaluate how your background and objectives align with their expertise and interests."
-                  : "Your story will be read with care and consideration. The celebrity's team will evaluate the authenticity of your connection, the uniqueness of your story, and the meaningfulness of this moment in your life."
-              }
-            />
-
-            <Step
-              number={2}
-              title="Response Timeline"
-              description="You'll receive a response within 5-7 business days. Due to the selective nature of this process, we review each application thoroughly."
-            />
-
-            <Step
-              number={3}
-              title="If Approved"
-              description="If your application is approved, you'll receive an email with payment instructions and meeting coordination details. Payment is only required after approval."
-            />
-
-            <Step
-              number={4}
-              title="If Not Selected"
-              description="Not every application can be approved, but that doesn't diminish the value of your request. You'll receive a thoughtful response explaining the decision."
-            />
-          </div>
-        </div>
-
-        {/* Info Box */}
-        <div className="bg-[#D4A574]/10 border-2 border-[#D4A574]/30 rounded-xl p-6 mb-8">
-          <div className="flex gap-3">
-            <span className="text-2xl">💌</span>
-            <div>
-              <p className="font-semibold text-black mb-2">
-                Check Your Email
+            {/* Success Message */}
+            <div className="mb-8">
+              <h1 className="text-3xl md:text-4xl font-bold text-white mb-4">
+                Application Submitted! {isProfessional ? '💼' : '💫'}
+              </h1>
+              <p className="text-lg text-gray-300 max-w-2xl mx-auto">
+                Your {isProfessional ? 'professional' : 'personal'} meeting application has been successfully submitted. Thank you for sharing {isProfessional ? 'your proposal' : 'your story'}.
               </p>
-              <p className="text-gray-700 text-sm leading-relaxed">
-                We've sent a confirmation email with your application reference number.
-                Please check your spam folder if you don't see it in your inbox.
+            </div>
+
+            {/* What Happens Next */}
+            <div className="bg-black/30 border border-gray-700/30 rounded-2xl p-6 md:p-8 mb-8 text-left">
+              <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
+                <span className="text-[#D4A574]">✨</span>
+                What Happens Next
+              </h2>
+
+              <div className="space-y-6">
+                {/* Step 1 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                    1
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">Review Process</h3>
+                    <p className="text-sm text-gray-400">
+                      {isProfessional
+                        ? 'Your application will be reviewed based on professional alignment, mutual value, and the strength of your proposal.'
+                        : 'Your story will be read with care and consideration. We evaluate based on authenticity, emotional resonance, and genuine connection.'}
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 2 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                    2
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">Response Timeline</h3>
+                    <p className="text-sm text-gray-400">
+                      You'll receive an update within <span className="text-white font-medium">7-14 business days</span>. Check your email and dashboard regularly.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 3 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                    3
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">If Approved</h3>
+                    <p className="text-sm text-gray-400">
+                      We'll send you booking details, payment instructions, and next steps to schedule your meeting.
+                    </p>
+                  </div>
+                </div>
+
+                {/* Step 4 */}
+                <div className="flex gap-4">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                    4
+                  </div>
+                  <div>
+                    <h3 className="font-semibold text-white mb-1">If Not Selected</h3>
+                    <p className="text-sm text-gray-400">
+                      {isProfessional
+                        ? "We'll provide feedback when possible. Don't be discouraged—timing and fit matter, and you're welcome to apply again in the future."
+                        : "Remember that many factors go into these decisions. Your story matters, and we encourage you to keep pursuing meaningful connections."}
+                    </p>
+                  </div>
+                </div>
+              </div>
+            </div>
+
+            {/* Action Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 justify-center">
+              <Link
+                to="/dashboard"
+                className="px-6 py-3 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25"
+              >
+                Go to Dashboard
+              </Link>
+              <Link
+                to="/react/browse"
+                className="px-6 py-3 bg-black/40 border border-gray-700/50 text-white font-semibold rounded-xl hover:bg-black/60 hover:border-[#C6A34F]/50 transition-all duration-300"
+              >
+                Browse More Celebrities
+              </Link>
+            </div>
+
+            {/* Bottom Note */}
+            <div className="mt-8 pt-6 border-t border-gray-700/30">
+              <p className="text-sm text-gray-400">
+                Track your application status anytime from your{' '}
+                <Link to="/dashboard" className="text-[#D4A574] hover:text-[#C6A34F] font-medium transition-colors">
+                  dashboard
+                </Link>
               </p>
             </div>
           </div>
         </div>
-
-        {/* Actions */}
-        <div className="space-y-4">
-          <Link
-            to="/dashboard"
-            className="block w-full bg-[#D4A574] text-black text-center px-8 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity"
-          >
-            View My Applications
-          </Link>
-
-          <Link
-            to="/browse"
-            className="block w-full text-center px-8 py-4 rounded-lg font-semibold border-2 border-gray-300 text-black hover:border-black transition-colors"
-          >
-            Browse Other Celebrities
-          </Link>
-        </div>
-
-        {/* Additional Note */}
-        <div className="mt-12 pt-8 border-t-2 border-gray-200 text-center">
-          <p className="text-gray-600">
-            <strong className="text-black">Remember:</strong> Approval is selective and based on alignment, not just payment ability.
-            We appreciate the time you took to share your {isProfessional ? 'professional background' : 'personal story'}.
-          </p>
-        </div>
-      </div>
-
-      <FooterVanilla />
+      </main>
+      <BottomNav />
     </div>
   );
 };
-
-interface StepProps {
-  number: number;
-  title: string;
-  description: string;
-}
-
-const Step = ({ number, title, description }: StepProps) => (
-  <div className="flex gap-4">
-    <div className="flex-shrink-0">
-      <div className="w-10 h-10 bg-black text-white rounded-full flex items-center justify-center font-bold">
-        {number}
-      </div>
-    </div>
-    <div>
-      <h3 className="font-bold text-black mb-2">{title}</h3>
-      <p className="text-gray-700 text-sm leading-relaxed">{description}</p>
-    </div>
-  </div>
-);

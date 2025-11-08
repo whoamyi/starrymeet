@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { HeaderVanilla, FooterVanilla } from '@/components';
+import { Header, BottomNav } from '@/components';
 import {
   ProgressBar,
   FormSection,
@@ -64,10 +64,10 @@ export const ApplicationPersonal = () => {
     if (!formData.lastName) newErrors.lastName = 'Last name is required';
     if (!formData.email) newErrors.email = 'Email is required';
     if (!formData.yourStory || formData.yourStory.length < 300) {
-      newErrors.yourStory = 'Please share at least 300 characters about yourself';
+      newErrors.yourStory = 'Please share at least 300 characters';
     }
-    if (!formData.whatTheyMean || formData.whatTheyMean.length < 250) {
-      newErrors.whatTheyMean = 'Please share at least 250 characters';
+    if (!formData.whatTheyMean || formData.whatTheyMean.length < 200) {
+      newErrors.whatTheyMean = 'Please share at least 200 characters';
     }
     if (!formData.whyNow || formData.whyNow.length < 150) {
       newErrors.whyNow = 'Please share at least 150 characters';
@@ -117,214 +117,221 @@ export const ApplicationPersonal = () => {
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <HeaderVanilla />
-      <ProgressBar currentStep={2} totalSteps={3} />
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <main className="max-w-4xl mx-auto px-4 py-8 pb-24">
+        <ProgressBar currentStep={2} totalSteps={3} />
 
-      <div className="max-w-4xl mx-auto py-16 px-8">
         {/* Header */}
-        <div className="mb-12 pb-8 border-b-2 border-gray-200">
-          <div className="inline-block bg-black text-white px-4 py-2 rounded-full text-sm font-semibold mb-4">
-            💫 Personal Meeting
+        <div className="text-center mb-10">
+          <div className="inline-flex items-center gap-2 mb-3">
+            <span className="text-4xl">💫</span>
+            <h1 className="text-3xl md:text-4xl font-bold text-white">
+              Personal Application
+            </h1>
           </div>
-          <h1 className="text-4xl font-bold text-black mb-4">
-            Share Your Story
-          </h1>
-          <p className="text-lg text-gray-600">
-            Tell us about yourself, what this celebrity means to you, and why this meeting would be meaningful.
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Share your story from the heart. This is your chance to express why this meeting matters to you personally. Be authentic, genuine, and speak from your truth.
           </p>
         </div>
 
-        <form onSubmit={handleSubmit} className="space-y-12">
-          {/* Section A: About You */}
-          <FormSection
-            title="About You"
-            subtitle="Tell us who you are as a person"
-          >
-            <div className="grid md:grid-cols-2 gap-6">
-              <TextInput
-                label="First Name"
-                required
-                value={formData.firstName}
-                onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-                error={errors.firstName}
-              />
-              <TextInput
-                label="Last Name"
-                required
-                value={formData.lastName}
-                onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-                error={errors.lastName}
-              />
-            </div>
+        {/* Form Container */}
+        <div className="relative group mb-8">
+          {/* Subtle glow effect */}
+          <div className="absolute -inset-px bg-gradient-to-r from-[#C6A34F]/20 to-[#D4A574]/20 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
 
-            <div className="grid md:grid-cols-2 gap-6">
-              <TextInput
-                label="Email"
-                type="email"
-                required
-                value={formData.email}
-                onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-                error={errors.email}
-              />
-              <TextInput
-                label="Phone (Optional)"
-                type="tel"
-                value={formData.phone}
-                onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
-              />
-            </div>
+          {/* Main Form Card */}
+          <div className="relative bg-gradient-to-b from-gray-900/90 to-black/90 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-6 md:p-10 shadow-2xl">
+            {/* Inner glow */}
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C6A34F]/30 to-transparent"></div>
 
-            <TextareaWithCounter
-              label="Your Story"
-              required
-              value={formData.yourStory}
-              onChange={(e) => setFormData({ ...formData, yourStory: e.target.value })}
-              maxLength={2500}
-              helpText="Tell us about yourself as a person. Who are you? Where are you from? What matters to you in life? Share what makes you, you. There's no need for impressive credentials here—just be authentic."
-              error={errors.yourStory}
-            />
-          </FormSection>
+            <form onSubmit={handleSubmit} className="space-y-10">
+              {/* About You */}
+              <FormSection
+                title="About You"
+                subtitle="Help us get to know you"
+              >
+                <div className="grid md:grid-cols-2 gap-5">
+                  <TextInput
+                    label="First Name"
+                    required
+                    value={formData.firstName}
+                    onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
+                    error={errors.firstName}
+                  />
+                  <TextInput
+                    label="Last Name"
+                    required
+                    value={formData.lastName}
+                    onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
+                    error={errors.lastName}
+                  />
+                </div>
 
-          {/* Section B: Why This Meeting Matters */}
-          <FormSection
-            title="Why This Meeting Matters"
-            subtitle="Share from your heart"
-          >
-            <TextareaWithCounter
-              label="What This Celebrity Means to You"
-              required
-              value={formData.whatTheyMean}
-              onChange={(e) => setFormData({ ...formData, whatTheyMean: e.target.value })}
-              maxLength={2000}
-              helpText="Why does this celebrity matter to you personally? How have they impacted your life? This is your chance to be honest about what they mean to you."
-              error={errors.whatTheyMean}
-            />
+                <div className="grid md:grid-cols-2 gap-5">
+                  <TextInput
+                    label="Email"
+                    type="email"
+                    required
+                    value={formData.email}
+                    onChange={(e) => setFormData({ ...formData, email: e.target.value })}
+                    error={errors.email}
+                  />
+                  <TextInput
+                    label="Phone"
+                    type="tel"
+                    value={formData.phone}
+                    onChange={(e) => setFormData({ ...formData, phone: e.target.value })}
+                  />
+                </div>
 
-            <TextareaWithCounter
-              label="Why Now?"
-              required
-              value={formData.whyNow}
-              onChange={(e) => setFormData({ ...formData, whyNow: e.target.value })}
-              maxLength={1250}
-              helpText="Why is this meeting important to you at this moment in your life? Is there a personal milestone, challenge, or dream that makes this timing meaningful?"
-              error={errors.whyNow}
-            />
-          </FormSection>
+                <TextareaWithCounter
+                  label="Your Story"
+                  required
+                  value={formData.yourStory}
+                  onChange={(e) => setFormData({ ...formData, yourStory: e.target.value })}
+                  maxLength={2500}
+                  helpText="Tell us about yourself as a person. Who are you? Where are you from? What matters to you in life? Share what makes you, you. There's no need for impressive credentials here—just be authentic."
+                  error={errors.yourStory}
+                />
+              </FormSection>
 
-          {/* Section C: What You'd Hope to Talk About */}
-          <FormSection
-            title="What You'd Hope to Talk About"
-            subtitle="Imagine the conversation"
-          >
-            <TextareaWithCounter
-              label="Your Meeting Vision"
-              required
-              value={formData.meetingVision}
-              onChange={(e) => setFormData({ ...formData, meetingVision: e.target.value })}
-              maxLength={1500}
-              helpText="If this celebrity chose to meet you, what would you hope to talk about? What would make this meeting meaningful for you? There's no wrong answer—just be genuine."
-              error={errors.meetingVision}
-            />
-          </FormSection>
+              {/* Why This Meeting Matters */}
+              <FormSection
+                title="Why This Meeting Matters"
+                subtitle="Share what's in your heart"
+              >
+                <TextareaWithCounter
+                  label="What This Person Means to You"
+                  required
+                  value={formData.whatTheyMean}
+                  onChange={(e) => setFormData({ ...formData, whatTheyMean: e.target.value })}
+                  maxLength={2000}
+                  helpText="How has this person influenced your life? What impact have they had on you? This is your chance to share how they've inspired you, helped you through tough times, or shaped who you are today."
+                  error={errors.whatTheyMean}
+                />
 
-          {/* Section D: Why You Should Be Chosen */}
-          <FormSection
-            title="Why You Should Be Chosen"
-            subtitle="What makes your story unique"
-          >
-            <TextareaWithCounter
-              label="Your Case"
-              required
-              value={formData.yourCase}
-              onChange={(e) => setFormData({ ...formData, yourCase: e.target.value })}
-              maxLength={1500}
-              helpText="This celebrity receives many meeting requests from wonderful people. Tell us what makes your story or situation unique. Why should you be selected? Don't worry about sounding 'impressive'—sincerity and authenticity matter most."
-              error={errors.yourCase}
-            />
+                <TextareaWithCounter
+                  label="Why This Meeting Matters Now"
+                  required
+                  value={formData.whyNow}
+                  onChange={(e) => setFormData({ ...formData, whyNow: e.target.value })}
+                  maxLength={1250}
+                  helpText="Why is this moment important? Is there something specific happening in your life? A milestone, challenge, or dream that makes this meeting meaningful right now?"
+                  error={errors.whyNow}
+                />
+              </FormSection>
 
-            <TextareaWithCounter
-              label="Additional Context (Optional)"
-              value={formData.additionalContext}
-              onChange={(e) => setFormData({ ...formData, additionalContext: e.target.value })}
-              maxLength={1000}
-              helpText="Is there anything else about your situation, story, or motivation that would help understand why this meeting matters?"
-            />
-          </FormSection>
+              {/* Meeting Vision */}
+              <FormSection
+                title="Meeting Vision"
+                subtitle="What would this mean to you"
+              >
+                <TextareaWithCounter
+                  label="How You Imagine This Meeting"
+                  required
+                  value={formData.meetingVision}
+                  onChange={(e) => setFormData({ ...formData, meetingVision: e.target.value })}
+                  maxLength={1500}
+                  helpText="Paint us a picture. What would you want to talk about? What questions would you ask? What would it mean to you to have this conversation? Be as specific or as dreamlike as you'd like."
+                  error={errors.meetingVision}
+                />
+              </FormSection>
 
-          {/* Section E: Social Proof */}
-          <FormSection title="Personal Links (Optional, But Helpful)">
-            <p className="text-gray-600 mb-4 italic">
-              These are optional, but sharing a bit about your online presence helps see you as a real person with a genuine story.
-            </p>
+              {/* Why You Should Be Chosen */}
+              <FormSection
+                title="Why You Should Be Chosen"
+                subtitle="Make your case"
+              >
+                <TextareaWithCounter
+                  label="Why Your Story Stands Out"
+                  required
+                  value={formData.yourCase}
+                  onChange={(e) => setFormData({ ...formData, yourCase: e.target.value })}
+                  maxLength={1500}
+                  helpText="Among many people who admire this person, why should you get this opportunity? What makes your connection unique? What would this meeting mean to your life? Be honest and compelling."
+                  error={errors.yourCase}
+                />
 
-            <TextInput
-              label="Instagram or Social Media Profile"
-              type="url"
-              value={formData.instagramUrl}
-              onChange={(e) => setFormData({ ...formData, instagramUrl: e.target.value })}
-              placeholder="https://instagram.com/yourprofile"
-            />
+                <TextareaWithCounter
+                  label="Anything Else We Should Know?"
+                  value={formData.additionalContext}
+                  onChange={(e) => setFormData({ ...formData, additionalContext: e.target.value })}
+                  maxLength={1000}
+                  helpText="Is there anything else you'd like to share? Any context, background, or details that would help us understand your story better?"
+                />
+              </FormSection>
 
-            <TextInput
-              label="Blog, YouTube, or Personal Website"
-              type="url"
-              value={formData.personalLinks}
-              onChange={(e) => setFormData({ ...formData, personalLinks: e.target.value })}
-              placeholder="https://yourwebsite.com"
-            />
-          </FormSection>
+              {/* Personal Links (Optional) */}
+              <FormSection
+                title="Personal Links"
+                subtitle="Optional - help us see your world"
+              >
+                <TextInput
+                  label="Instagram Profile"
+                  type="url"
+                  value={formData.instagramUrl}
+                  onChange={(e) => setFormData({ ...formData, instagramUrl: e.target.value })}
+                  placeholder="https://instagram.com/yourprofile"
+                  helpText="Share a glimpse into your life (completely optional)"
+                />
 
-          {/* Section F: Declaration */}
-          <FormSection title="Declaration">
-            <div className="space-y-4 bg-gray-50 p-6 rounded-lg">
-              <CheckboxField
-                checked={formData.agreeToReview}
-                onChange={(e) => setFormData({ ...formData, agreeToReview: e.target.checked })}
-                label="I understand my application will be reviewed based on personal story and genuine connection, and approval is not guaranteed."
-                required
-              />
-              <CheckboxField
-                checked={formData.agreeToPayment}
-                onChange={(e) => setFormData({ ...formData, agreeToPayment: e.target.checked })}
-                label="I understand payment is only required if my application is approved."
-                required
-              />
-              <CheckboxField
-                checked={formData.agreeToTruthfulness}
-                onChange={(e) => setFormData({ ...formData, agreeToTruthfulness: e.target.checked })}
-                label="I promise that everything I've shared is true and from the heart."
-                required
-              />
-              <CheckboxField
-                checked={formData.agreeToTerms}
-                onChange={(e) => setFormData({ ...formData, agreeToTerms: e.target.checked })}
-                label="I agree to StarryMeet's Terms of Service and Privacy Policy."
-                required
-              />
-            </div>
-          </FormSection>
+                <TextInput
+                  label="Other Links"
+                  value={formData.personalLinks}
+                  onChange={(e) => setFormData({ ...formData, personalLinks: e.target.value })}
+                  placeholder="Blog, YouTube, TikTok, or anything that shows who you are"
+                  helpText="Any other links that would help tell your story (optional)"
+                />
+              </FormSection>
 
-          {/* Buttons */}
-          <div className="flex justify-between pt-8 border-t-2 border-gray-200">
-            <button
-              type="button"
-              onClick={() => navigate(-1)}
-              className="px-8 py-3 rounded-lg border-2 border-black text-black font-semibold hover:bg-black hover:text-white transition-all"
-            >
-              ← Back
-            </button>
-            <button
-              type="submit"
-              className="bg-[#D4A574] text-black px-12 py-3 rounded-lg font-semibold hover:opacity-90 transition-opacity"
-            >
-              Submit Application
-            </button>
+              {/* Declaration */}
+              <FormSection
+                title="Declaration"
+                subtitle="Please confirm the following"
+              >
+                <div className="space-y-4 bg-black/30 border border-gray-700/30 rounded-xl p-5">
+                  <CheckboxField
+                    label="I understand this application will be reviewed and is not a guaranteed booking"
+                    required
+                    checked={formData.agreeToReview}
+                    onChange={(e) => setFormData({ ...formData, agreeToReview: e.target.checked })}
+                  />
+                  <CheckboxField
+                    label="If approved, I understand payment will be required to confirm the meeting"
+                    required
+                    checked={formData.agreeToPayment}
+                    onChange={(e) => setFormData({ ...formData, agreeToPayment: e.target.checked })}
+                  />
+                  <CheckboxField
+                    label="I promise that everything I've shared is true and from the heart"
+                    required
+                    checked={formData.agreeToTruthfulness}
+                    onChange={(e) => setFormData({ ...formData, agreeToTruthfulness: e.target.checked })}
+                  />
+                  <CheckboxField
+                    label="I agree to StarryMeet's Terms of Service and Privacy Policy"
+                    required
+                    checked={formData.agreeToTerms}
+                    onChange={(e) => setFormData({ ...formData, agreeToTerms: e.target.checked })}
+                  />
+                </div>
+              </FormSection>
+
+              {/* Submit Button */}
+              <div className="flex justify-center pt-6">
+                <button
+                  type="submit"
+                  className="px-8 py-4 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25"
+                >
+                  Submit Personal Application →
+                </button>
+              </div>
+            </form>
           </div>
-        </form>
-      </div>
-
-      <FooterVanilla />
+        </div>
+      </main>
+      <BottomNav />
     </div>
   );
 };

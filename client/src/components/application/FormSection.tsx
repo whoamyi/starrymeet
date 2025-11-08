@@ -8,10 +8,12 @@ interface FormSectionProps {
 
 export const FormSection = ({ title, subtitle, children }: FormSectionProps) => (
   <div className="space-y-6">
-    <div>
-      <h2 className="text-2xl font-bold text-black mb-2">{title}</h2>
-      {subtitle && <p className="text-gray-600">{subtitle}</p>}
+    <div className="border-l-2 border-[#D4A574] pl-4">
+      <h2 className="text-xl font-bold text-white mb-1">{title}</h2>
+      {subtitle && <p className="text-sm text-gray-400">{subtitle}</p>}
     </div>
-    {children}
+    <div className="space-y-5">
+      {children}
+    </div>
   </div>
 );

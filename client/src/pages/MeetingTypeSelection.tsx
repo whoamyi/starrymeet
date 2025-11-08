@@ -1,152 +1,188 @@
 import { useState } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
-import { HeaderVanilla, FooterVanilla } from '@/components';
+import { Header, BottomNav } from '@/components';
 import { ProgressBar } from '@/components/application';
 
-interface PathCardProps {
-  icon: string;
-  label: string;
-  title: string;
-  description: string;
-  examples: string[];
-  emphasis: string;
-  isSelected: boolean;
-  onSelect: () => void;
-}
-
-const PathCard = ({
-  icon,
-  label,
-  title,
-  description,
-  examples,
-  emphasis,
-  isSelected,
-  onSelect,
-}: PathCardProps) => (
-  <div
-    onClick={onSelect}
-    className={`p-8 rounded-xl cursor-pointer transition-all border-3 ${
-      isSelected
-        ? 'border-black bg-gray-50 shadow-lg scale-[1.02]'
-        : 'border-gray-200 hover:border-gray-400'
-    }`}
-  >
-    <div className="text-5xl mb-4">{icon}</div>
-    <div className="inline-block bg-black text-white px-3 py-1 rounded-full text-sm font-semibold mb-4">
-      {label}
-    </div>
-    <h2 className="text-2xl font-bold text-black mb-4">{title}</h2>
-    <p className="text-gray-700 mb-6 leading-relaxed">{description}</p>
-
-    <div className="bg-white p-4 rounded-lg mb-4">
-      <p className="text-sm font-semibold text-black mb-3">Perfect for requests like:</p>
-      <ul className="space-y-2">
-        {examples.map((example, idx) => (
-          <li key={idx} className="flex gap-2 text-sm text-gray-700">
-            <span className="text-black">•</span>
-            <span>{example}</span>
-          </li>
-        ))}
-      </ul>
-    </div>
-
-    <div className="bg-gray-50 p-4 rounded-lg border-l-4 border-black">
-      <p className="text-sm text-gray-700">
-        <strong className="text-black">This path emphasizes:</strong> {emphasis}
-      </p>
-    </div>
-  </div>
-);
-
 export const MeetingTypeSelection = () => {
-  const [selectedPath, setSelectedPath] = useState<'professional' | 'personal' | null>(null);
-  const navigate = useNavigate();
   const { slug } = useParams<{ slug: string }>();
+  const navigate = useNavigate();
+  const [selectedPath, setSelectedPath] = useState<'professional' | 'personal' | null>(null);
 
   const handleContinue = () => {
     if (!selectedPath) {
       alert('Please select a meeting type to continue.');
       return;
     }
-
     navigate(`/apply/${slug}/${selectedPath}`);
   };
 
   return (
-    <div className="min-h-screen bg-white">
-      <HeaderVanilla />
-      <ProgressBar currentStep={1} totalSteps={3} />
+    <div className="min-h-screen bg-black text-white">
+      <Header />
+      <main className="max-w-5xl mx-auto px-4 py-8 pb-24">
+        <ProgressBar currentStep={1} totalSteps={3} />
 
-      {/* Main Content */}
-      <div className="max-w-6xl mx-auto py-16 px-8">
-        <div className="text-center mb-12">
-          <h1 className="text-4xl font-bold text-black mb-4">
-            What brings you to meet this celebrity?
+        {/* Header */}
+        <div className="text-center mb-10">
+          <h1 className="text-3xl md:text-4xl font-bold text-white mb-3">
+            Choose Your Meeting Path
           </h1>
-          <p className="text-lg text-gray-600 max-w-3xl mx-auto">
-            Help us understand the nature of your request so we can guide you through
-            the right application process.
+          <p className="text-gray-400 max-w-2xl mx-auto">
+            Select the type of meeting that best describes your purpose. Each path has tailored questions to help you make the strongest case.
           </p>
         </div>
 
-        {/* Path Selection Cards */}
-        <div className="grid md:grid-cols-2 gap-8 max-w-5xl mx-auto">
-          <PathCard
-            icon="💼"
-            label="FOR WORK & CAREER"
-            title="Professional Connection"
-            description="You're seeking to meet for professional reasons that advance your work, career, or shared causes."
-            examples={[
-              'Career mentorship or professional advice',
-              'Business collaboration or partnership',
-              'Advocacy or cause-related work',
-              'Creative or industry guidance',
-            ]}
-            emphasis="Your professional background, credentials, current projects, and what you're working toward."
-            isSelected={selectedPath === 'professional'}
-            onSelect={() => setSelectedPath('professional')}
-          />
+        {/* Path Cards */}
+        <div className="grid md:grid-cols-2 gap-6 mb-8">
+          {/* Professional Path */}
+          <button
+            onClick={() => setSelectedPath('professional')}
+            className={`group relative text-left p-6 rounded-2xl border-2 transition-all duration-300 ${
+              selectedPath === 'professional'
+                ? 'border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-transparent'
+                : 'border-gray-800 hover:border-gray-700 bg-gray-900/30'
+            }`}
+          >
+            {/* Glow effect when selected */}
+            {selectedPath === 'professional' && (
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] rounded-2xl opacity-20 blur-xl"></div>
+            )}
 
-          <PathCard
-            icon="💫"
-            label="FOR PERSONAL REASONS"
-            title="Personal Connection"
-            description="You're seeking to meet for personal reasons that reflect their impact on your life and journey."
-            examples={[
-              'Lifelong admiration and fan connection',
-              'Personal inspiration or life impact',
-              'Celebrating a milestone',
-              'Sharing how they have influenced your journey',
-            ]}
-            emphasis="Your personal story, what they mean to you, and why this moment in your life is meaningful."
-            isSelected={selectedPath === 'personal'}
-            onSelect={() => setSelectedPath('personal')}
-          />
-        </div>
+            <div className="relative">
+              {/* Icon and Title */}
+              <div className="flex items-start gap-4 mb-4">
+                <div className={`text-5xl transition-transform duration-300 ${
+                  selectedPath === 'professional' ? 'scale-110' : 'group-hover:scale-105'
+                }`}>
+                  💼
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
+                    Professional Meeting
+                    {selectedPath === 'professional' && (
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D4A574] text-black">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
+                    )}
+                  </h3>
+                  <p className="text-sm text-gray-400">
+                    Business, collaboration, or career opportunities
+                  </p>
+                </div>
+              </div>
 
-        {/* Equal Respect Note */}
-        <div className="text-center mt-12 p-6 bg-gray-50 rounded-lg max-w-3xl mx-auto">
-          <p className="text-gray-700">
-            <strong className="text-black">Both paths are treated with equal respect and consideration.</strong>
-            <br />
-            Choose the one that best reflects your true motivation for this meeting.
-          </p>
+              {/* Description */}
+              <div className="space-y-3 mb-4">
+                <p className="text-sm text-gray-300">
+                  Perfect if you're looking to discuss:
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    'Business partnerships or collaborations',
+                    'Industry insights and expertise',
+                    'Career mentorship or guidance',
+                    'Professional project opportunities'
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm text-gray-400">
+                      <span className="text-[#D4A574] mt-0.5">→</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Emphasis */}
+              <div className="bg-black/40 border border-gray-700/30 rounded-lg p-3">
+                <p className="text-xs text-gray-400 italic">
+                  <span className="text-[#D4A574] font-semibold">Evaluated on:</span> Professional alignment, mutual value, and clear objectives
+                </p>
+              </div>
+            </div>
+          </button>
+
+          {/* Personal Path */}
+          <button
+            onClick={() => setSelectedPath('personal')}
+            className={`group relative text-left p-6 rounded-2xl border-2 transition-all duration-300 ${
+              selectedPath === 'personal'
+                ? 'border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-transparent'
+                : 'border-gray-800 hover:border-gray-700 bg-gray-900/30'
+            }`}
+          >
+            {/* Glow effect when selected */}
+            {selectedPath === 'personal' && (
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] rounded-2xl opacity-20 blur-xl"></div>
+            )}
+
+            <div className="relative">
+              {/* Icon and Title */}
+              <div className="flex items-start gap-4 mb-4">
+                <div className={`text-5xl transition-transform duration-300 ${
+                  selectedPath === 'personal' ? 'scale-110' : 'group-hover:scale-105'
+                }`}>
+                  💫
+                </div>
+                <div className="flex-1">
+                  <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
+                    Personal Meeting
+                    {selectedPath === 'personal' && (
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D4A574] text-black">
+                        <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
+                          <polyline points="20 6 9 17 4 12" />
+                        </svg>
+                      </span>
+                    )}
+                  </h3>
+                  <p className="text-sm text-gray-400">
+                    Personal inspiration, gratitude, or life moments
+                  </p>
+                </div>
+              </div>
+
+              {/* Description */}
+              <div className="space-y-3 mb-4">
+                <p className="text-sm text-gray-300">
+                  Perfect if you want to share:
+                </p>
+                <ul className="space-y-2">
+                  {[
+                    'How they have inspired your life journey',
+                    'A meaningful personal story or connection',
+                    'Gratitude for their impact on you',
+                    'A dream meeting for personal reasons'
+                  ].map((item, idx) => (
+                    <li key={idx} className="flex items-start gap-2 text-sm text-gray-400">
+                      <span className="text-[#D4A574] mt-0.5">→</span>
+                      <span>{item}</span>
+                    </li>
+                  ))}
+                </ul>
+              </div>
+
+              {/* Emphasis */}
+              <div className="bg-black/40 border border-gray-700/30 rounded-lg p-3">
+                <p className="text-xs text-gray-400 italic">
+                  <span className="text-[#D4A574] font-semibold">Evaluated on:</span> Authenticity, emotional resonance, and genuine connection
+                </p>
+              </div>
+            </div>
+          </button>
         </div>
 
         {/* Continue Button */}
-        <div className="text-center mt-12">
+        <div className="flex justify-center">
           <button
             onClick={handleContinue}
             disabled={!selectedPath}
-            className="bg-[#D4A574] text-black px-12 py-4 rounded-lg font-semibold text-lg hover:opacity-90 transition-opacity disabled:opacity-50 disabled:cursor-not-allowed"
+            className="px-8 py-3 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             Continue to Application →
           </button>
         </div>
-      </div>
-
-      <FooterVanilla />
+      </main>
+      <BottomNav />
     </div>
   );
 };
