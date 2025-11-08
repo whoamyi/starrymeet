@@ -5,31 +5,38 @@ const stepsData = [
   {
     number: 1,
     icon: '🔍',
-    title: 'Find your star',
-    description: 'Browse thousands of verified celebrities. Filter by category, price, or location. See their availability, read reviews, and pick your perfect match.',
-    features: ['✓ Verified profiles', '10,000+ celebrities', 'Real reviews'],
+    title: 'Discover',
+    description: 'Browse celebrity profiles and available time slots. See their values, interests, and what they look for in applicants. Understand their selection criteria.',
+    features: ['✓ 147 exclusive celebrities', 'Selection criteria visible', 'Real availability'],
   },
   {
     number: 2,
-    icon: '📅',
-    title: 'Book your moment',
-    description: "Choose your meeting type—15, 30, or 60 minutes. Pick a date and time. Share what you'd like to talk about. Get approved within 48 hours.",
-    features: ['Flexible scheduling', 'Secure payment', 'Quick approval'],
+    icon: '📝',
+    title: 'Apply',
+    description: 'Submit your detailed application explaining your background, motivation, and what you bring to the conversation. Be authentic, specific, and thoughtful.',
+    features: ['Detailed application form', 'Share your story', 'Demonstrate alignment'],
   },
   {
     number: 3,
     icon: '⭐',
-    title: 'Create your memory',
-    description: 'Meet face-to-face at a premium venue. Ask questions, get advice, take photos. Walk away with memories that last forever.',
-    features: ['Premium venues', 'Photos included', 'Unforgettable'],
+    title: 'Selection',
+    description: 'Celebrity teams review applications within 48-72 hours based on merit, alignment, and scheduling fit. Selection is based on purpose, not payment.',
+    features: ['48-72hr review', 'Merit-based evaluation', 'Respectful feedback'],
+  },
+  {
+    number: 4,
+    icon: '✓',
+    title: 'Secure',
+    description: 'If approved, complete payment to confirm your earned slot. Receive meeting details, preparation materials, and connect with the celebrity team.',
+    features: ['Approved applicants only', 'Secure payment', 'Pre-meeting prep'],
   },
 ];
 
 const statsData = [
-  { number: '50K+', label: 'Meetings completed' },
-  { number: '10K+', label: 'Verified celebrities' },
-  { number: '4.9★', label: 'Average rating' },
-  { number: '98%', label: 'Would recommend' },
+  { number: '2,500+', label: 'Applications reviewed' },
+  { number: '147', label: 'Exclusive celebrities' },
+  { number: '78%', label: 'Lead to collaboration' },
+  { number: '48-72hr', label: 'Response time' },
 ];
 
 export const HowItWorks = () => {
@@ -40,29 +47,60 @@ export const HowItWorks = () => {
       <Hero
         title={
           <>
-            Meet your icons.
+            Earn your access.
             <br />
-            Three simple steps.
+            Four selective steps.
           </>
         }
-        subtitle="From browsing to booking to meeting face-to-face—your dream experience is just moments away"
+        subtitle="From application to confirmed meeting—your opportunity to connect with exclusive celebrities through merit-based selection"
       />
 
       <Section>
         <StepsGrid steps={stepsData} />
 
+        <div style={{
+          maxWidth: '900px',
+          margin: '60px auto',
+          background: 'rgba(255,255,255,0.03)',
+          border: '1px solid rgba(255,255,255,0.1)',
+          borderRadius: '16px',
+          padding: '32px'
+        }}>
+          <h3 style={{
+            fontSize: '24px',
+            fontWeight: 700,
+            color: 'white',
+            marginBottom: '16px',
+            textAlign: 'center'
+          }}>
+            Payment Only After Approval
+          </h3>
+          <p style={{
+            fontSize: '16px',
+            lineHeight: '1.8',
+            color: 'rgba(255,255,255,0.8)',
+            textAlign: 'center',
+            maxWidth: '700px',
+            margin: '0 auto'
+          }}>
+            You won't be charged unless your application is approved. If not selected, you can reapply
+            for future dates. When approved, payment confirms your earned opportunity—you're not buying
+            access, you're securing a slot you've already earned through merit.
+          </p>
+        </div>
+
         <StatsSection
-          title="Trusted by fans worldwide"
-          subtitle="Join thousands who've already met their heroes"
+          title="Selective by design"
+          subtitle="Join those who've earned meaningful connections"
           stats={statsData}
         />
       </Section>
 
       <Section>
         <CTASection
-          title="Ready to meet your icon?"
-          description="Browse thousands of celebrities and book your moment today"
-          buttonText="Start browsing"
+          title="Ready to make your case?"
+          description="Explore exclusive celebrities and begin your application today"
+          buttonText="Begin your application"
           buttonLink="/browse"
         />
       </Section>
