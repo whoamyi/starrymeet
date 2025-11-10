@@ -36,19 +36,19 @@ export const QuickActions = ({ stats }: QuickActionsProps) => (
       icon="🔍"
       title="Browse Celebrities"
       description="Discover your favorites"
-      to="/react/browse"
+      to="/browse"
     />
     <ActionCard
       icon="💬"
       title="Messages"
       description={stats?.unread_notifications_count ? `${stats.unread_notifications_count} new notifications` : 'No new notifications'}
-      to="/react/messages"
+      to="/messages"
     />
     <ActionCard
       icon="⭐"
       title="Favorites"
       description={`${stats?.saved_count || 0} saved`}
-      to="/react/favorites"
+      to="/favorites"
     />
   </div>
 );

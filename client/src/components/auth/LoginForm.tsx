@@ -1,6 +1,6 @@
 import { useState } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { authApi } from '@/services/api';
 import { useAuthStore } from '@/store/auth';
 import { toastConfig } from '@/hooks/useToast';
@@ -11,6 +11,7 @@ interface LoginFormProps {
 
 export const LoginForm = ({ onSwitchToSignup }: LoginFormProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const setAuth = useAuthStore((state) => state.setAuth);
   const [showPassword, setShowPassword] = useState(false);
   const [formData, setFormData] = useState({
@@ -19,12 +20,16 @@ export const LoginForm = ({ onSwitchToSignup }: LoginFormProps) => {
     rememberMe: false,
   });
 
+  // Get the redirect location from state, default to dashboard
+  const from = (location.state as any)?.from || '/dashboard';
+
   const loginMutation = useMutation({
     mutationFn: () => authApi.login({ email: formData.email, password: formData.password }),
     onSuccess: (data) => {
       setAuth(data.token, data.user);
       toastConfig.success('Welcome back!');
-      navigate('/dashboard');
+      // Navigate to the page they were trying to access, or dashboard
+      navigate(from, { replace: true });
     },
     onError: (error: any) => {
       toastConfig.error(error.response?.data?.message || 'Login failed');

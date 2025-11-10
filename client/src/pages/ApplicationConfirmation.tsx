@@ -121,7 +121,7 @@ export const ApplicationConfirmation = () => {
                 Go to Dashboard
               </Link>
               <Link
-                to="/react/browse"
+                to="/browse"
                 className="px-6 py-3 bg-black/40 border border-gray-700/50 text-white font-semibold rounded-xl hover:bg-black/60 hover:border-[rgba(255, 255, 255, 0.8)]/50 transition-all duration-300"
               >
                 Browse More Celebrities

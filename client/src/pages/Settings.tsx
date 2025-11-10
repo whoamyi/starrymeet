@@ -46,7 +46,7 @@ export const Settings = () => {
     onSuccess: () => {
       toastConfig.success('Account deleted');
       // Redirect to auth or home
-      window.location.href = '/react/auth';
+      window.location.href = '/auth';
     },
     onError: () => {
       toastConfig.error('Failed to delete account');

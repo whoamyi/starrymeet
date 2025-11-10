@@ -1,6 +1,6 @@
 import { useState, useEffect } from 'react';
 import { useMutation } from '@tanstack/react-query';
-import { useNavigate } from 'react-router-dom';
+import { useNavigate, useLocation } from 'react-router-dom';
 import { authApi } from '@/services/api';
 import { useAuthStore } from '@/store/auth';
 import { toastConfig } from '@/hooks/useToast';
@@ -11,6 +11,7 @@ interface SignupFormProps {
 
 export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
   const navigate = useNavigate();
+  const location = useLocation();
   const setAuth = useAuthStore((state) => state.setAuth);
   const [showPassword, setShowPassword] = useState(false);
   const [showConfirmPassword, setShowConfirmPassword] = useState(false);
@@ -60,6 +61,9 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
     setPasswordStrength({ strength, text });
   }, [formData.password]);
 
+  // Get the redirect location from state, default to dashboard
+  const from = (location.state as any)?.from || '/dashboard';
+
   const signupMutation = useMutation({
     mutationFn: () => authApi.signup({
       firstName: formData.firstName,
@@ -70,7 +74,8 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
     onSuccess: (data) => {
       setAuth(data.token, data.user);
       toastConfig.success('Account created successfully!');
-      navigate('/dashboard');
+      // Navigate to the page they were trying to access, or dashboard
+      navigate(from, { replace: true });
     },
     onError: (error: any) => {
       toastConfig.error(error.response?.data?.message || 'Signup failed');

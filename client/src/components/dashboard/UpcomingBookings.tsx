@@ -12,7 +12,7 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Upcoming Meetings</h2>
-          <Link to="/react/browse" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
+          <Link to="/browse" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
             Book a Meeting
           </Link>
         </div>
@@ -27,7 +27,7 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
     <section className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Upcoming Meetings</h2>
-        <Link to="/react/bookings" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
+        <Link to="/bookings" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
           View All
         </Link>
       </div>
@@ -35,7 +35,7 @@ export const UpcomingBookings = ({ bookings }: UpcomingBookingsProps) => {
         {bookings.slice(0, 3).map((booking) => (
           <Link
             key={booking.id}
-            to={`/react/bookings`}
+            to={`/bookings`}
             className="bg-gray-900/50 border border-gray-800 rounded-2xl p-4 flex items-center gap-4 hover:bg-gray-800 hover:border-[rgba(255, 255, 255, 0.8)] transition-all"
           >
             {booking.celebrity_image && (

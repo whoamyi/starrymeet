@@ -7,7 +7,7 @@ export const BottomNav = () => {
 
   const navItems = [
     {
-      path: '/react/dashboard',
+      path: '/dashboard',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="currentColor">
           <path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"/>
@@ -16,7 +16,7 @@ export const BottomNav = () => {
       label: 'Home'
     },
     {
-      path: '/react/browse',
+      path: '/browse',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <circle cx="11" cy="11" r="8"/>
@@ -26,7 +26,7 @@ export const BottomNav = () => {
       label: 'Browse'
     },
     {
-      path: '/react/bookings',
+      path: '/bookings',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <rect x="3" y="4" width="18" height="18" rx="2" ry="2"/>
@@ -38,7 +38,7 @@ export const BottomNav = () => {
       label: 'Meetings'
     },
     {
-      path: '/react/messages',
+      path: '/messages',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"/>
@@ -48,7 +48,7 @@ export const BottomNav = () => {
       badge: 0
     },
     {
-      path: '/react/profile',
+      path: '/profile',
       icon: (
         <svg width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">
           <path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"/>

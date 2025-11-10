@@ -12,7 +12,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Your Favorites</h2>
-          <Link to="/react/browse" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
+          <Link to="/browse" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
             Start Exploring
           </Link>
         </div>
@@ -27,7 +27,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
     <section className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Your Favorites</h2>
-        <Link to="/react/favorites" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
+        <Link to="/favorites" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
           View All
         </Link>
       </div>
@@ -38,7 +38,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
           return (
             <Link
               key={celeb.celebrity_id}
-              to={`/react/celebrity/${celeb.slug}`}
+              to={`/celebrity/${celeb.slug}`}
               className="group"
             >
               <div className="relative overflow-hidden rounded-2xl mb-2">
