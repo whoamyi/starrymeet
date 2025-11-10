@@ -118,7 +118,7 @@ export const CelebrityProfile = () => {
     price: number
   ) => {
     if (!isAuthenticated) {
-      navigate('/auth', { state: { returnTo: window.location.pathname } });
+      navigate('/auth', { state: { from: window.location.pathname } });
       return;
     }
 

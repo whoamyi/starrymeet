@@ -20,8 +20,8 @@ export const LoginForm = ({ onSwitchToSignup }: LoginFormProps) => {
     rememberMe: false,
   });
 
-  // Get the redirect location from state, default to dashboard
-  const from = (location.state as any)?.from || '/dashboard';
+  // Get the redirect location from state (supports both 'from' and 'returnTo'), default to dashboard
+  const from = (location.state as any)?.from || (location.state as any)?.returnTo || '/dashboard';
 
   // Debug: Log the redirect location
   console.log('[LoginForm] Redirect location from state:', from);

@@ -61,8 +61,8 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
     setPasswordStrength({ strength, text });
   }, [formData.password]);
 
-  // Get the redirect location from state, default to dashboard
-  const from = (location.state as any)?.from || '/dashboard';
+  // Get the redirect location from state (supports both 'from' and 'returnTo'), default to dashboard
+  const from = (location.state as any)?.from || (location.state as any)?.returnTo || '/dashboard';
 
   const signupMutation = useMutation({
     mutationFn: () => authApi.signup({
