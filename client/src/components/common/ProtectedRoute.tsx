@@ -11,6 +11,7 @@ export const ProtectedRoute = ({ children }: ProtectedRouteProps) => {
 
   if (!isAuthenticated) {
     // Save the current location to redirect back after login
+    console.log('[ProtectedRoute] Redirecting to auth, saving location:', location.pathname);
     return <Navigate to="/auth" state={{ from: location.pathname }} replace />;
   }
 

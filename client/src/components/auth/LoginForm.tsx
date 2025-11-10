@@ -23,10 +23,15 @@ export const LoginForm = ({ onSwitchToSignup }: LoginFormProps) => {
   // Get the redirect location from state, default to dashboard
   const from = (location.state as any)?.from || '/dashboard';
 
+  // Debug: Log the redirect location
+  console.log('[LoginForm] Redirect location from state:', from);
+  console.log('[LoginForm] Full location state:', location.state);
+
   const loginMutation = useMutation({
     mutationFn: () => authApi.login({ email: formData.email, password: formData.password }),
     onSuccess: (data) => {
       setAuth(data.token, data.user);
+      console.log('[LoginForm] Login successful, navigating to:', from);
       toastConfig.success('Welcome back!');
       // Navigate to the page they were trying to access, or dashboard
       navigate(from, { replace: true });
