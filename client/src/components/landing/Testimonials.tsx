@@ -50,10 +50,10 @@ export const Testimonials = () => {
           {testimonials.map((testimonial, index) => (
             <div
               key={index}
-              className="bg-black/50 border border-gray-800 rounded-2xl p-8 hover:border-[#D4A574] transition"
+              className="bg-black/50 border border-gray-800 rounded-2xl p-8 hover:border-[rgba(255, 255, 255, 0.8)] transition"
             >
               {/* Stars */}
-              <div className="text-2xl text-[#D4A574] mb-4">
+              <div className="text-2xl text-[rgba(255, 255, 255, 0.8)] mb-4">
                 {'★'.repeat(testimonial.stars)}
               </div>
 
@@ -91,7 +91,7 @@ export const Testimonials = () => {
           </p>
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#C49563] transition text-lg"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition text-lg"
           >
             <span>Start Your Journey</span>
             <span>→</span>

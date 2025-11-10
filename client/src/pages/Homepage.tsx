@@ -49,7 +49,7 @@ export default function Homepage() {
             {/* Logo */}
             <Link to="/" className="flex items-center gap-2 text-2xl font-bold">
               <span className="text-white">Starry</span>
-              <span className="text-[#D4A574]">Meet</span>
+              <span className="text-[rgba(255, 255, 255, 0.8)]">Meet</span>
             </Link>
 
             {/* Desktop Nav */}
@@ -60,7 +60,7 @@ export default function Homepage() {
               <a href="#how-it-works" className="text-gray-400 hover:text-white transition-colors text-[15px]">
                 How It Works
               </a>
-              <Link to="/auth" className="px-6 py-2.5 bg-[#D4A574] text-black rounded-full font-medium hover:bg-[#C49563] transition-all text-[15px]">
+              <Link to="/auth" className="px-6 py-2.5 bg-[rgba(255, 255, 255, 0.8)] text-black rounded-full font-medium hover:bg-[rgba(255, 255, 255, 0.7)] transition-all text-[15px]">
                 Sign In
               </Link>
             </div>
@@ -104,7 +104,7 @@ export default function Homepage() {
                 </a>
                 <Link
                   to="/auth"
-                  className="mt-4 px-6 py-3 bg-[#D4A574] text-black text-center rounded-full font-medium"
+                  className="mt-4 px-6 py-3 bg-[rgba(255, 255, 255, 0.8)] text-black text-center rounded-full font-medium"
                   onClick={() => setMobileMenuOpen(false)}
                 >
                   Sign In
@@ -132,7 +132,7 @@ export default function Homepage() {
               <select
                 value={cityFilter}
                 onChange={(e) => setCityFilter(e.target.value)}
-                className="px-4 py-3 bg-black border border-[#404040] rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition-colors"
+                className="px-4 py-3 bg-black border border-[#404040] rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition-colors"
               >
                 <option value="">Select Your City</option>
                 <option value="New York">New York</option>
@@ -152,13 +152,13 @@ export default function Homepage() {
                 type="date"
                 value={dateFilter}
                 onChange={(e) => setDateFilter(e.target.value)}
-                className="px-4 py-3 bg-black border border-[#404040] rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition-colors"
+                className="px-4 py-3 bg-black border border-[#404040] rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition-colors"
               />
 
               {/* Explore Button */}
               <Link
                 to="/browse"
-                className="px-6 py-3 bg-[#D4A574] text-black rounded-xl font-semibold hover:bg-[#C49563] transition-all text-center"
+                className="px-6 py-3 bg-[rgba(255, 255, 255, 0.8)] text-black rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition-all text-center"
               >
                 Explore Celebrities
               </Link>
@@ -177,7 +177,7 @@ export default function Homepage() {
                     setCityFilter('');
                     setDateFilter('');
                   }}
-                  className="text-[#D4A574] hover:text-[#C49563] transition-colors"
+                  className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.7)] transition-colors"
                 >
                   Clear Filters
                 </button>
@@ -208,7 +208,7 @@ export default function Homepage() {
                 onClick={() => setSelectedCategory(category)}
                 className={`px-6 py-2.5 rounded-full font-medium transition-all text-[15px] ${
                   selectedCategory === category
-                    ? 'bg-[#D4A574] text-black'
+                    ? 'bg-[rgba(255, 255, 255, 0.8)] text-black'
                     : 'bg-[#1a1a1a] text-gray-400 hover:text-white border border-[#404040] hover:border-[#606060]'
                 }`}
               >
@@ -232,7 +232,7 @@ export default function Homepage() {
 
                   {/* Verified Badge */}
                   {celeb.verified && (
-                    <div className="absolute top-4 left-4 bg-[#D4A574] text-black px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1">
+                    <div className="absolute top-4 left-4 bg-[rgba(255, 255, 255, 0.8)] text-black px-3 py-1.5 rounded-full text-xs font-bold flex items-center gap-1">
                       <svg width="12" height="12" viewBox="0 0 12 12" fill="currentColor">
                         <path d="M10.5 3L4.5 9L1.5 6" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" fill="none"/>
                       </svg>
@@ -251,7 +251,7 @@ export default function Homepage() {
                   <h3 className="text-xl font-bold text-white mb-1">
                     {celeb.name}
                   </h3>
-                  <p className="text-[#D4A574] text-sm font-medium mb-3">
+                  <p className="text-[rgba(255, 255, 255, 0.8)] text-sm font-medium mb-3">
                     {celeb.category}
                   </p>
                   <div className="flex items-center gap-2 text-gray-400 text-sm mb-4">
@@ -266,7 +266,7 @@ export default function Homepage() {
                       <span className="text-gray-500 text-sm ml-1">from</span>
                     </div>
                     <div className="flex items-center gap-1">
-                      <span className="text-[#D4A574]">⭐</span>
+                      <span className="text-[rgba(255, 255, 255, 0.8)]">⭐</span>
                       <span className="text-white font-medium">{celeb.rating}</span>
                     </div>
                   </div>
@@ -279,7 +279,7 @@ export default function Homepage() {
           <div className="text-center mt-12">
             <Link
               to="/browse"
-              className="inline-block px-8 py-4 bg-transparent border-2 border-[#D4A574] text-[#D4A574] rounded-full font-semibold hover:bg-[#D4A574] hover:text-black transition-all"
+              className="inline-block px-8 py-4 bg-transparent border-2 border-[rgba(255, 255, 255, 0.8)] text-[rgba(255, 255, 255, 0.8)] rounded-full font-semibold hover:bg-[rgba(255, 255, 255, 0.8)] hover:text-black transition-all"
             >
               View All Celebrities
             </Link>
@@ -302,7 +302,7 @@ export default function Homepage() {
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {/* Step 1 */}
             <div className="text-center">
-              <div className="w-16 h-16 bg-[#D4A574] rounded-2xl flex items-center justify-center text-black text-2xl font-bold mx-auto mb-6">
+              <div className="w-16 h-16 bg-[rgba(255, 255, 255, 0.8)] rounded-2xl flex items-center justify-center text-black text-2xl font-bold mx-auto mb-6">
                 1
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
@@ -315,7 +315,7 @@ export default function Homepage() {
 
             {/* Step 2 */}
             <div className="text-center">
-              <div className="w-16 h-16 bg-[#D4A574] rounded-2xl flex items-center justify-center text-black text-2xl font-bold mx-auto mb-6">
+              <div className="w-16 h-16 bg-[rgba(255, 255, 255, 0.8)] rounded-2xl flex items-center justify-center text-black text-2xl font-bold mx-auto mb-6">
                 2
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
@@ -328,7 +328,7 @@ export default function Homepage() {
 
             {/* Step 3 */}
             <div className="text-center">
-              <div className="w-16 h-16 bg-[#D4A574] rounded-2xl flex items-center justify-center text-black text-2xl font-bold mx-auto mb-6">
+              <div className="w-16 h-16 bg-[rgba(255, 255, 255, 0.8)] rounded-2xl flex items-center justify-center text-black text-2xl font-bold mx-auto mb-6">
                 3
               </div>
               <h3 className="text-2xl font-bold text-white mb-3">
@@ -353,7 +353,7 @@ export default function Homepage() {
           </p>
           <Link
             to="/browse"
-            className="inline-block px-10 py-4 bg-[#D4A574] text-black rounded-full font-bold text-lg hover:bg-[#C49563] transition-all hover:-translate-y-1"
+            className="inline-block px-10 py-4 bg-[rgba(255, 255, 255, 0.8)] text-black rounded-full font-bold text-lg hover:bg-[rgba(255, 255, 255, 0.7)] transition-all hover:-translate-y-1"
           >
             Start Exploring
           </Link>
@@ -368,7 +368,7 @@ export default function Homepage() {
             <div>
               <div className="text-2xl font-bold mb-4">
                 <span className="text-white">Starry</span>
-                <span className="text-[#D4A574]">Meet</span>
+                <span className="text-[rgba(255, 255, 255, 0.8)]">Meet</span>
               </div>
               <p className="text-gray-500 text-sm">
                 Connect with your icons through authentic, unforgettable experiences.
@@ -399,9 +399,9 @@ export default function Homepage() {
             <div>
               <h4 className="font-semibold text-white mb-4">Connect</h4>
               <div className="flex gap-4">
-                <a href="#" className="text-gray-400 hover:text-[#D4A574] transition-colors">IG</a>
-                <a href="#" className="text-gray-400 hover:text-[#D4A574] transition-colors">X</a>
-                <a href="#" className="text-gray-400 hover:text-[#D4A574] transition-colors">TT</a>
+                <a href="#" className="text-gray-400 hover:text-[rgba(255, 255, 255, 0.8)] transition-colors">IG</a>
+                <a href="#" className="text-gray-400 hover:text-[rgba(255, 255, 255, 0.8)] transition-colors">X</a>
+                <a href="#" className="text-gray-400 hover:text-[rgba(255, 255, 255, 0.8)] transition-colors">TT</a>
               </div>
             </div>
           </div>

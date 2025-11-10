@@ -117,7 +117,7 @@ export const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => 
               type="text"
               value={formData.username}
               onChange={(e) => setFormData({ ...formData, username: e.target.value })}
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[#D4A574]"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)]"
               required
             />
           </div>
@@ -129,7 +129,7 @@ export const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => 
               value={formData.bio}
               onChange={(e) => setFormData({ ...formData, bio: e.target.value })}
               rows={4}
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[#D4A574] resize-none"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] resize-none"
               placeholder="Tell us about yourself..."
             />
           </div>
@@ -141,7 +141,7 @@ export const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => 
               type="text"
               value={formData.location}
               onChange={(e) => setFormData({ ...formData, location: e.target.value })}
-              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[#D4A574]"
+              className="w-full bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)]"
               placeholder="e.g., New York, USA"
             />
           </div>
@@ -158,7 +158,7 @@ export const EditProfileModal = ({ isOpen, onClose }: EditProfileModalProps) => 
             <button
               type="submit"
               disabled={updateProfileMutation.isPending}
-              className="flex-1 bg-[#D4A574] text-black px-4 py-2 rounded-lg font-semibold hover:bg-[#C49563] transition disabled:opacity-50"
+              className="flex-1 bg-[rgba(255, 255, 255, 0.8)] text-black px-4 py-2 rounded-lg font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition disabled:opacity-50"
             >
               {updateProfileMutation.isPending ? 'Saving...' : 'Save Changes'}
             </button>

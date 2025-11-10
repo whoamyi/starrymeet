@@ -12,7 +12,7 @@ export const ApplicationsList = ({ applications }: ApplicationsListProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Meeting Applications</h2>
-          <Link to="/react/browse" className="text-[#D4A574] text-sm font-semibold">
+          <Link to="/react/browse" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
             Browse Celebrities
           </Link>
         </div>

@@ -21,8 +21,8 @@ export const Button = ({
   const baseClass = 'inline-flex items-center justify-center gap-2 font-semibold transition-all rounded-full';
 
   const variantClasses = {
-    primary: 'bg-[#C6A34F] text-black hover:bg-[#8B6F2C]',
-    secondary: 'border-2 border-[#C6A34F] text-[#C6A34F] hover:bg-[#C6A34F] hover:text-black',
+    primary: 'bg-[rgba(255, 255, 255, 0.8)] text-black hover:bg-[#8B6F2C]',
+    secondary: 'border-2 border-[rgba(255, 255, 255, 0.8)] text-[rgba(255, 255, 255, 0.8)] hover:bg-[rgba(255, 255, 255, 0.8)] hover:text-black',
     ghost: 'text-white hover:bg-white/10',
   };
 

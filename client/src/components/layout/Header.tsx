@@ -38,7 +38,7 @@ export const Header = () => {
   return (
     <header className="sticky top-0 z-50 bg-black/95 backdrop-blur-sm border-b border-gray-800">
       <div className="max-w-7xl mx-auto px-4 py-4 flex items-center justify-between">
-        <Link to="/react/dashboard" className="text-2xl font-bold text-[#D4A574]">
+        <Link to="/react/dashboard" className="text-2xl font-bold text-[rgba(255, 255, 255, 0.8)]">
           StarryMeet
         </Link>
 
@@ -56,7 +56,7 @@ export const Header = () => {
           <div className="relative">
             <button
               onClick={() => setDropdownOpen(!dropdownOpen)}
-              className="w-10 h-10 rounded-full bg-[#D4A574] flex items-center justify-center text-black font-bold hover:bg-[#C49563] transition"
+              className="w-10 h-10 rounded-full bg-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold hover:bg-[rgba(255, 255, 255, 0.7)] transition"
             >
               {getInitials()}
             </button>

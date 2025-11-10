@@ -37,7 +37,7 @@ export const ConversationList = ({
               className="w-12 h-12 rounded-full object-cover"
             />
           ) : (
-            <div className="w-12 h-12 rounded-full bg-[#D4A574] flex items-center justify-center text-black font-bold">
+            <div className="w-12 h-12 rounded-full bg-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold">
               {conversation.user.username.substring(0, 2).toUpperCase()}
             </div>
           )}
@@ -51,7 +51,7 @@ export const ConversationList = ({
             <p className="text-sm text-gray-400 truncate">{conversation.last_message}</p>
           </div>
           {conversation.unread_count > 0 && (
-            <div className="w-5 h-5 rounded-full bg-[#D4A574] flex items-center justify-center text-xs font-bold text-black">
+            <div className="w-5 h-5 rounded-full bg-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-xs font-bold text-black">
               {conversation.unread_count}
             </div>
           )}

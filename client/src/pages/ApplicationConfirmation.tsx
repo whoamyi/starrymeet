@@ -17,18 +17,18 @@ export const ApplicationConfirmation = () => {
         {/* Success Card */}
         <div className="relative group mb-8">
           {/* Glow effect */}
-          <div className="absolute -inset-px bg-gradient-to-r from-[#C6A34F]/30 to-[#D4A574]/30 rounded-3xl blur-xl"></div>
+          <div className="absolute -inset-px bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)]/30 to-[rgba(255, 255, 255, 0.8)]/30 rounded-3xl blur-xl"></div>
 
           {/* Main Card */}
           <div className="relative bg-gradient-to-b from-gray-900/90 to-black/90 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-8 md:p-12 shadow-2xl text-center">
             {/* Inner glow */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C6A34F]/50 to-transparent"></div>
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(255, 255, 255, 0.8)]/50 to-transparent"></div>
 
             {/* Success Icon */}
             <div className="mb-6 flex justify-center">
               <div className="relative">
-                <div className="absolute inset-0 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] rounded-full opacity-20 blur-2xl scale-150"></div>
-                <div className="relative w-20 h-20 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center shadow-lg shadow-[#C6A34F]/50">
+                <div className="absolute inset-0 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] rounded-full opacity-20 blur-2xl scale-150"></div>
+                <div className="relative w-20 h-20 rounded-full bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] flex items-center justify-center shadow-lg shadow-[rgba(255, 255, 255, 0.8)]/50">
                   <svg width="40" height="40" viewBox="0 0 24 24" fill="none" stroke="black" strokeWidth="3" strokeLinecap="round" strokeLinejoin="round">
                     <polyline points="20 6 9 17 4 12" />
                   </svg>
@@ -49,14 +49,14 @@ export const ApplicationConfirmation = () => {
             {/* What Happens Next */}
             <div className="bg-black/30 border border-gray-700/30 rounded-2xl p-6 md:p-8 mb-8 text-left">
               <h2 className="text-xl font-bold text-white mb-6 flex items-center gap-2">
-                <span className="text-[#D4A574]">✨</span>
+                <span className="text-[rgba(255, 255, 255, 0.8)]">✨</span>
                 What Happens Next
               </h2>
 
               <div className="space-y-6">
                 {/* Step 1 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold text-sm">
                     1
                   </div>
                   <div>
@@ -71,7 +71,7 @@ export const ApplicationConfirmation = () => {
 
                 {/* Step 2 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold text-sm">
                     2
                   </div>
                   <div>
@@ -84,7 +84,7 @@ export const ApplicationConfirmation = () => {
 
                 {/* Step 3 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold text-sm">
                     3
                   </div>
                   <div>
@@ -97,7 +97,7 @@ export const ApplicationConfirmation = () => {
 
                 {/* Step 4 */}
                 <div className="flex gap-4">
-                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] flex items-center justify-center text-black font-bold text-sm">
+                  <div className="flex-shrink-0 w-8 h-8 rounded-full bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold text-sm">
                     4
                   </div>
                   <div>
@@ -116,13 +116,13 @@ export const ApplicationConfirmation = () => {
             <div className="flex flex-col sm:flex-row gap-4 justify-center">
               <Link
                 to="/dashboard"
-                className="px-6 py-3 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25"
+                className="px-6 py-3 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] text-black font-semibold rounded-xl hover:from-[rgba(255, 255, 255, 0.8)] hover:to-[rgba(255, 255, 255, 0.8)] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[rgba(255, 255, 255, 0.8)]/25"
               >
                 Go to Dashboard
               </Link>
               <Link
                 to="/react/browse"
-                className="px-6 py-3 bg-black/40 border border-gray-700/50 text-white font-semibold rounded-xl hover:bg-black/60 hover:border-[#C6A34F]/50 transition-all duration-300"
+                className="px-6 py-3 bg-black/40 border border-gray-700/50 text-white font-semibold rounded-xl hover:bg-black/60 hover:border-[rgba(255, 255, 255, 0.8)]/50 transition-all duration-300"
               >
                 Browse More Celebrities
               </Link>
@@ -132,7 +132,7 @@ export const ApplicationConfirmation = () => {
             <div className="mt-8 pt-6 border-t border-gray-700/30">
               <p className="text-sm text-gray-400">
                 Track your application status anytime from your{' '}
-                <Link to="/dashboard" className="text-[#D4A574] hover:text-[#C6A34F] font-medium transition-colors">
+                <Link to="/dashboard" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.8)] font-medium transition-colors">
                   dashboard
                 </Link>
               </p>

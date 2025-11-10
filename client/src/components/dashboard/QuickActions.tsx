@@ -10,7 +10,7 @@ interface ActionCardProps {
 const ActionCard = ({ icon, title, description, to }: ActionCardProps) => (
   <Link
     to={to}
-    className="bg-gray-900/50 border border-gray-800 rounded-2xl p-5 flex items-center gap-4 hover:bg-gray-800 hover:border-[#D4A574] transition-all"
+    className="bg-gray-900/50 border border-gray-800 rounded-2xl p-5 flex items-center gap-4 hover:bg-gray-800 hover:border-[rgba(255, 255, 255, 0.8)] transition-all"
   >
     <div className="text-4xl">{icon}</div>
     <div>

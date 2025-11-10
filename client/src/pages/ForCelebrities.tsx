@@ -70,7 +70,7 @@ export const ForCelebrities = () => {
                 onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                 required
                 placeholder="Your name"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
               />
             </div>
 
@@ -84,7 +84,7 @@ export const ForCelebrities = () => {
                 onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                 required
                 placeholder="you@example.com"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
               />
             </div>
 
@@ -96,7 +96,7 @@ export const ForCelebrities = () => {
                 value={formData.category}
                 onChange={(e) => setFormData({ ...formData, category: e.target.value })}
                 required
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
               >
                 <option value="">Select category...</option>
                 <option value="music">Music</option>
@@ -118,13 +118,13 @@ export const ForCelebrities = () => {
                 onChange={(e) => setFormData({ ...formData, followers: e.target.value })}
                 required
                 placeholder="e.g. 100K on Instagram"
-                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+                className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
               />
             </div>
 
             <button
               type="submit"
-              className="w-full bg-[#D4A574] text-black font-semibold py-3 rounded-xl hover:bg-[#C49563] transition"
+              className="w-full bg-[rgba(255, 255, 255, 0.8)] text-black font-semibold py-3 rounded-xl hover:bg-[rgba(255, 255, 255, 0.7)] transition"
             >
               Submit Application
             </button>

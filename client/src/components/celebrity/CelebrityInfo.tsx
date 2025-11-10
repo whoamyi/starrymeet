@@ -23,7 +23,7 @@ export const CelebrityInfo = ({ celebrity }: CelebrityInfoProps) => {
           <h3 className="font-semibold mb-4">Quick Info</h3>
           <div className="space-y-3">
             <div className="flex items-center gap-3 text-sm">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#D4A574]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[rgba(255, 255, 255, 0.8)]">
                 <circle cx="12" cy="12" r="10"/>
                 <polyline points="12 6 12 12 16 14"/>
               </svg>
@@ -34,7 +34,7 @@ export const CelebrityInfo = ({ celebrity }: CelebrityInfoProps) => {
             </div>
 
             <div className="flex items-center gap-3 text-sm">
-              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[#D4A574]">
+              <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="text-[rgba(255, 255, 255, 0.8)]">
                 <circle cx="12" cy="12" r="3"/>
                 <path d="M12 1v6m0 6v6M5.64 5.64l4.24 4.24m4.24 4.24l4.24 4.24M1 12h6m6 0h6M5.64 18.36l4.24-4.24m4.24-4.24l4.24-4.24"/>
               </svg>

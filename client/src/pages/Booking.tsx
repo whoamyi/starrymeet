@@ -41,7 +41,7 @@ export const Booking = () => {
             <button
               onClick={() => navigate('/browse')}
               style={{
-                background: '#D4A574',
+                background: 'rgba(255, 255, 255, 0.8)',
                 color: '#000',
                 padding: '12px 32px',
                 borderRadius: '8px',
@@ -163,7 +163,7 @@ export const Booking = () => {
               borderTop: '1px solid rgba(255,255,255,0.1)',
             }}>
               <span style={{ color: 'rgba(255,255,255,0.8)', fontSize: '18px', fontWeight: '600' }}>Total:</span>
-              <span style={{ color: '#D4A574', fontSize: '24px', fontWeight: '700' }}>
+              <span style={{ color: 'rgba(255, 255, 255, 0.8)', fontSize: '24px', fontWeight: '700' }}>
                 ${(bookingData.price / 100).toFixed(2)}
               </span>
             </div>
@@ -172,8 +172,8 @@ export const Booking = () => {
 
         {/* Info Box */}
         <div style={{
-          background: 'rgba(212,165,116,0.1)',
-          border: '1px solid rgba(212,165,116,0.3)',
+          background: 'rgba(255, 255, 255, 0.05)',
+          border: '1px solid rgba(255, 255, 255, 0.15)',
           borderRadius: '12px',
           padding: '16px',
           marginBottom: '32px',
@@ -207,7 +207,7 @@ export const Booking = () => {
             disabled={isProcessing}
             style={{
               padding: '14px 48px',
-              background: isProcessing ? 'rgba(212,165,116,0.5)' : '#D4A574',
+              background: isProcessing ? 'rgba(255, 255, 255, 0.15)' : 'rgba(255, 255, 255, 0.8)',
               border: 'none',
               borderRadius: '8px',
               color: '#000',

@@ -56,7 +56,7 @@ export const About = () => {
         <div className="grid grid-cols-2 md:grid-cols-4 gap-8 mb-16">
           {stats.map((stat, index) => (
             <div key={index} className="text-center">
-              <div className="text-4xl md:text-5xl font-bold text-[#D4A574] mb-2">
+              <div className="text-4xl md:text-5xl font-bold text-[rgba(255, 255, 255, 0.8)] mb-2">
                 {stat.number}
               </div>
               <div className="text-sm text-gray-400">{stat.label}</div>
@@ -71,7 +71,7 @@ export const About = () => {
             {values.map((value, index) => (
               <div
                 key={index}
-                className="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center hover:border-[#D4A574] transition"
+                className="bg-gray-900 border border-gray-800 rounded-2xl p-8 text-center hover:border-[rgba(255, 255, 255, 0.8)] transition"
               >
                 <div className="text-5xl mb-4">{value.icon}</div>
                 <h3 className="text-xl font-bold text-white mb-3">{value.title}</h3>

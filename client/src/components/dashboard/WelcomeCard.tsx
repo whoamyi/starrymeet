@@ -10,7 +10,7 @@ export const WelcomeCard = () => {
   const firstName = (user as any)?.firstName || user?.email?.split('@')[0] || 'there';
 
   return (
-    <div className="bg-gradient-to-r from-[#D4A574] to-[#C49563] rounded-2xl p-6 mb-6 flex justify-between items-center">
+    <div className="bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.7)] rounded-2xl p-6 mb-6 flex justify-between items-center">
       <div>
         <h1 className="text-2xl md:text-3xl font-bold text-black mb-2">
           Welcome back, {firstName} 👋

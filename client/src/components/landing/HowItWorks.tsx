@@ -48,7 +48,7 @@ export const HowItWorks = () => {
           {steps.map((step) => (
             <div
               key={step.number}
-              className="bg-black/50 border border-gray-800 rounded-2xl p-8 hover:border-[#D4A574] transition"
+              className="bg-black/50 border border-gray-800 rounded-2xl p-8 hover:border-[rgba(255, 255, 255, 0.8)] transition"
             >
               <div className="text-6xl font-bold text-gray-800 mb-4">
                 {step.number}

@@ -93,7 +93,7 @@ export const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, emailNotifications: e.target.checked })
                     }
-                    className="w-5 h-5 bg-gray-800 border-gray-700 rounded focus:ring-[#D4A574] focus:ring-2"
+                    className="w-5 h-5 bg-gray-800 border-gray-700 rounded focus:ring-[rgba(255, 255, 255, 0.8)] focus:ring-2"
                   />
                   <div>
                     <div className="text-white font-medium">Email Notifications</div>
@@ -112,7 +112,7 @@ export const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, smsNotifications: e.target.checked })
                     }
-                    className="w-5 h-5 bg-gray-800 border-gray-700 rounded focus:ring-[#D4A574] focus:ring-2"
+                    className="w-5 h-5 bg-gray-800 border-gray-700 rounded focus:ring-[rgba(255, 255, 255, 0.8)] focus:ring-2"
                   />
                   <div>
                     <div className="text-white font-medium">SMS Notifications</div>
@@ -131,7 +131,7 @@ export const Settings = () => {
                     onChange={(e) =>
                       setFormData({ ...formData, marketingEmails: e.target.checked })
                     }
-                    className="w-5 h-5 bg-gray-800 border-gray-700 rounded focus:ring-[#D4A574] focus:ring-2"
+                    className="w-5 h-5 bg-gray-800 border-gray-700 rounded focus:ring-[rgba(255, 255, 255, 0.8)] focus:ring-2"
                   />
                   <div>
                     <div className="text-white font-medium">Marketing Emails</div>
@@ -157,7 +157,7 @@ export const Settings = () => {
                   id="currency"
                   value={formData.currency}
                   onChange={(e) => setFormData({ ...formData, currency: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
                 >
                   <option value="USD">USD - US Dollar</option>
                   <option value="EUR">EUR - Euro</option>
@@ -175,7 +175,7 @@ export const Settings = () => {
                   id="timezone"
                   value={formData.timezone}
                   onChange={(e) => setFormData({ ...formData, timezone: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
                 >
                   <option value="UTC">UTC</option>
                   <option value="America/New_York">Eastern Time</option>
@@ -196,7 +196,7 @@ export const Settings = () => {
                   id="language"
                   value={formData.language}
                   onChange={(e) => setFormData({ ...formData, language: e.target.value })}
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
                 >
                   <option value="en">English</option>
                   <option value="es">Español</option>
@@ -211,7 +211,7 @@ export const Settings = () => {
             <button
               type="submit"
               disabled={saveSettingsMutation.isPending}
-              className="w-full bg-[#D4A574] text-black font-semibold py-3 rounded-xl hover:bg-[#C49563] transition disabled:opacity-50 disabled:cursor-not-allowed"
+              className="w-full bg-[rgba(255, 255, 255, 0.8)] text-black font-semibold py-3 rounded-xl hover:bg-[rgba(255, 255, 255, 0.7)] transition disabled:opacity-50 disabled:cursor-not-allowed"
             >
               {saveSettingsMutation.isPending ? 'Saving...' : 'Save Settings'}
             </button>

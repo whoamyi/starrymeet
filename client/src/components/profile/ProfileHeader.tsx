@@ -9,7 +9,7 @@ export const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
   const { user } = useAuthStore();
 
   return (
-    <div className="bg-gradient-to-r from-[#D4A574] to-[#C49563] rounded-2xl p-6 mb-6">
+    <div className="bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.7)] rounded-2xl p-6 mb-6">
       <div className="flex items-center gap-4 mb-4">
         <div className="relative">
           {user?.profile_picture ? (
@@ -19,7 +19,7 @@ export const ProfileHeader = ({ onEditClick }: ProfileHeaderProps) => {
               className="w-24 h-24 rounded-full object-cover border-4 border-black"
             />
           ) : (
-            <div className="w-24 h-24 rounded-full bg-black border-4 border-black flex items-center justify-center text-3xl font-bold text-[#D4A574]">
+            <div className="w-24 h-24 rounded-full bg-black border-4 border-black flex items-center justify-center text-3xl font-bold text-[rgba(255, 255, 255, 0.8)]">
               {getInitials(user?.username || 'U')}
             </div>
           )}

@@ -39,13 +39,13 @@ export const MeetingTypeSelection = () => {
             onClick={() => setSelectedPath('professional')}
             className={`group relative text-left p-6 rounded-2xl border-2 transition-all duration-300 ${
               selectedPath === 'professional'
-                ? 'border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-transparent'
+                ? 'border-[rgba(255, 255, 255, 0.8)] bg-gradient-to-br from-[rgba(255, 255, 255, 0.8)]/10 to-transparent'
                 : 'border-gray-800 hover:border-gray-700 bg-gray-900/30'
             }`}
           >
             {/* Glow effect when selected */}
             {selectedPath === 'professional' && (
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] rounded-2xl opacity-20 blur-xl"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] rounded-2xl opacity-20 blur-xl"></div>
             )}
 
             <div className="relative">
@@ -60,7 +60,7 @@ export const MeetingTypeSelection = () => {
                   <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
                     Professional Meeting
                     {selectedPath === 'professional' && (
-                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D4A574] text-black">
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[rgba(255, 255, 255, 0.8)] text-black">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -86,7 +86,7 @@ export const MeetingTypeSelection = () => {
                     'Professional project opportunities'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-400">
-                      <span className="text-[#D4A574] mt-0.5">→</span>
+                      <span className="text-[rgba(255, 255, 255, 0.8)] mt-0.5">→</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -96,7 +96,7 @@ export const MeetingTypeSelection = () => {
               {/* Emphasis */}
               <div className="bg-black/40 border border-gray-700/30 rounded-lg p-3">
                 <p className="text-xs text-gray-400 italic">
-                  <span className="text-[#D4A574] font-semibold">Evaluated on:</span> Professional alignment, mutual value, and clear objectives
+                  <span className="text-[rgba(255, 255, 255, 0.8)] font-semibold">Evaluated on:</span> Professional alignment, mutual value, and clear objectives
                 </p>
               </div>
             </div>
@@ -107,13 +107,13 @@ export const MeetingTypeSelection = () => {
             onClick={() => setSelectedPath('personal')}
             className={`group relative text-left p-6 rounded-2xl border-2 transition-all duration-300 ${
               selectedPath === 'personal'
-                ? 'border-[#D4A574] bg-gradient-to-br from-[#D4A574]/10 to-transparent'
+                ? 'border-[rgba(255, 255, 255, 0.8)] bg-gradient-to-br from-[rgba(255, 255, 255, 0.8)]/10 to-transparent'
                 : 'border-gray-800 hover:border-gray-700 bg-gray-900/30'
             }`}
           >
             {/* Glow effect when selected */}
             {selectedPath === 'personal' && (
-              <div className="absolute -inset-0.5 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] rounded-2xl opacity-20 blur-xl"></div>
+              <div className="absolute -inset-0.5 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] rounded-2xl opacity-20 blur-xl"></div>
             )}
 
             <div className="relative">
@@ -128,7 +128,7 @@ export const MeetingTypeSelection = () => {
                   <h3 className="text-xl font-bold text-white mb-1 flex items-center gap-2">
                     Personal Meeting
                     {selectedPath === 'personal' && (
-                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[#D4A574] text-black">
+                      <span className="inline-flex items-center justify-center w-6 h-6 rounded-full bg-[rgba(255, 255, 255, 0.8)] text-black">
                         <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="3">
                           <polyline points="20 6 9 17 4 12" />
                         </svg>
@@ -154,7 +154,7 @@ export const MeetingTypeSelection = () => {
                     'A dream meeting for personal reasons'
                   ].map((item, idx) => (
                     <li key={idx} className="flex items-start gap-2 text-sm text-gray-400">
-                      <span className="text-[#D4A574] mt-0.5">→</span>
+                      <span className="text-[rgba(255, 255, 255, 0.8)] mt-0.5">→</span>
                       <span>{item}</span>
                     </li>
                   ))}
@@ -164,7 +164,7 @@ export const MeetingTypeSelection = () => {
               {/* Emphasis */}
               <div className="bg-black/40 border border-gray-700/30 rounded-lg p-3">
                 <p className="text-xs text-gray-400 italic">
-                  <span className="text-[#D4A574] font-semibold">Evaluated on:</span> Authenticity, emotional resonance, and genuine connection
+                  <span className="text-[rgba(255, 255, 255, 0.8)] font-semibold">Evaluated on:</span> Authenticity, emotional resonance, and genuine connection
                 </p>
               </div>
             </div>
@@ -176,7 +176,7 @@ export const MeetingTypeSelection = () => {
           <button
             onClick={handleContinue}
             disabled={!selectedPath}
-            className="px-8 py-3 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+            className="px-8 py-3 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] text-black font-semibold rounded-xl hover:from-[rgba(255, 255, 255, 0.8)] hover:to-[rgba(255, 255, 255, 0.8)] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[rgba(255, 255, 255, 0.8)]/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
           >
             Continue to Application →
           </button>

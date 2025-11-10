@@ -148,7 +148,7 @@ export const Terms = () => {
               <h2 className="text-2xl font-bold text-white mb-4">8. Contact</h2>
               <p>
                 For questions about these Terms, please contact us at{' '}
-                <a href="mailto:legal@starrymeet.com" className="text-[#D4A574] hover:text-[#C49563]">
+                <a href="mailto:legal@starrymeet.com" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.7)]">
                   legal@starrymeet.com
                 </a>
               </p>

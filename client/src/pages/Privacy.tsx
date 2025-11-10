@@ -154,7 +154,7 @@ export const Privacy = () => {
               <h2 className="text-2xl font-bold text-white mb-4">9. Contact Us</h2>
               <p>
                 For privacy-related questions, contact us at{' '}
-                <a href="mailto:privacy@starrymeet.com" className="text-[#D4A574] hover:text-[#C49563]">
+                <a href="mailto:privacy@starrymeet.com" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.7)]">
                   privacy@starrymeet.com
                 </a>
               </p>

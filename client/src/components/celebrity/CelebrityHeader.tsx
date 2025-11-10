@@ -73,7 +73,7 @@ export const CelebrityHeader = ({ celebrity, isSaved }: CelebrityHeaderProps) =>
               </h1>
               <p className="text-xl text-gray-300 mb-3">{celebrity.category}</p>
               <div className="flex items-center gap-4 flex-wrap">
-                <span className="text-2xl font-bold text-[#D4A574]">
+                <span className="text-2xl font-bold text-[rgba(255, 255, 255, 0.8)]">
                   {formatPrice(celebrity.price_per_hour)}/hr
                 </span>
                 {celebrity.follower_count > 0 && (

@@ -5,9 +5,9 @@
 
 :root {
   /* === Core Brand === */
-  --color-primary: #C6A34F; /* Gold */
-  --color-primary-dark: #8B6F2C;
-  --color-primary-light: #E8C45B;
+  --color-primary: #FFFFFF; /* White accent */
+  --color-primary-dark: #C0C0C0;
+  --color-primary-light: #FFFFFF;
 
   /* === Base Backgrounds === */
   --color-bg-primary: #0A0A0A; /* Near-black main background */
@@ -27,8 +27,8 @@
   --color-info: #4FA7E0; /* Info states */
 
   /* === Accent Aliases === */
-  --accent-gold: #C6A34F;
-  --accent-gold-dark: #8B6F2C;
+  --accent-primary: #FFFFFF;
+  --accent-secondary: #C0C0C0;
 
   /* === Layout === */
   --radius: 14px;

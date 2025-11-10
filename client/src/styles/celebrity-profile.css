@@ -417,7 +417,7 @@ body {
 
 .location-package:hover {
     background: rgba(255,255,255,0.04);
-    border-color: rgba(212,165,116,0.3);
+    border-color: rgba(255, 255, 255, 0.15);
 }
 
 .package-header {
@@ -434,7 +434,7 @@ body {
 
 .icon-location,
 .icon-calendar {
-    stroke: #D4A574;
+    stroke: rgba(255, 255, 255, 0.8);
     flex-shrink: 0;
 }
 
@@ -490,7 +490,7 @@ body {
 
 .ticket-unit:hover {
     background: rgba(0,0,0,0.4);
-    border-color: rgba(212,165,116,0.2);
+    border-color: rgba(255, 255, 255, 0.1);
 }
 
 .ticket-details {
@@ -541,24 +541,24 @@ body {
 .ticket-price {
     font-size: 18px;
     font-weight: 700;
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .btn-ticket-request {
     padding: 8px 20px;
     background: transparent;
-    border: 1.5px solid #D4A574;
+    border: 1.5px solid rgba(255, 255, 255, 0.8);
     border-radius: 8px;
     font-size: 14px;
     font-weight: 600;
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
     cursor: pointer;
     transition: all 0.2s ease;
     white-space: nowrap;
 }
 
 .btn-ticket-request:hover {
-    background: #D4A574;
+    background: rgba(255, 255, 255, 0.8);
     color: #000000;
 }
 
@@ -2022,7 +2022,7 @@ body {
     position: absolute;
     top: 8px;
     right: 8px;
-    background: #D4A574;
+    background: rgba(255, 255, 255, 0.8);
     color: #000;
     font-size: 11px;
     font-weight: 700;
@@ -2153,12 +2153,12 @@ body {
 
 /* Follow Button */
 .btn-action-ig--follow {
-    background: #D4A574;
+    background: rgba(255, 255, 255, 0.8);
     color: #000000;
 }
 
 .btn-action-ig--follow:hover {
-    background: #E5B685;
+    background: rgba(255, 255, 255, 0.6);
     transform: translateY(-1px);
 }
 
@@ -2168,7 +2168,7 @@ body {
 
 .btn-action-ig--follow[data-following="true"] {
     background: rgba(197, 168, 115, 0.1);
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
     border: 1px solid rgba(197, 168, 115, 0.3);
 }
 
@@ -2331,7 +2331,7 @@ body {
 
 .toast-ig.success::before {
     content: '✓ ';
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* ========================================
@@ -2805,7 +2805,7 @@ body {
 .summary-rating {
     font-size: 24px;
     font-weight: 700;
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 .summary-count {
@@ -2870,7 +2870,7 @@ body {
 
 .review-rating-new {
     font-size: 14px;
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
     letter-spacing: 2px;
 }
 
@@ -2931,7 +2931,7 @@ body {
 .included-icon-new {
     width: 48px;
     height: 48px;
-    background: linear-gradient(135deg, #D4A574 0%, #E5B685 100%);
+    background: linear-gradient(135deg, rgba(255, 255, 255, 0.8) 0%, rgba(255, 255, 255, 0.6) 100%);
     border-radius: 12px;
     display: flex;
     align-items: center;
@@ -3094,7 +3094,7 @@ body {
 }
 
 .policy-content-new strong {
-    color: #D4A574;
+    color: rgba(255, 255, 255, 0.8);
 }
 
 /* ===================================

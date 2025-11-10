@@ -44,11 +44,11 @@ export const Team = () => {
           {team.map((member, index) => (
             <div
               key={index}
-              className="bg-gray-900 border border-gray-800 rounded-2xl p-6 text-center hover:border-[#D4A574] transition"
+              className="bg-gray-900 border border-gray-800 rounded-2xl p-6 text-center hover:border-[rgba(255, 255, 255, 0.8)] transition"
             >
               <div className="w-24 h-24 bg-gray-800 rounded-full mx-auto mb-4"></div>
               <h3 className="text-xl font-bold text-white mb-2">{member.name}</h3>
-              <p className="text-sm text-[#D4A574] mb-3">{member.role}</p>
+              <p className="text-sm text-[rgba(255, 255, 255, 0.8)] mb-3">{member.role}</p>
               <p className="text-gray-400 text-sm">{member.bio}</p>
             </div>
           ))}
@@ -62,7 +62,7 @@ export const Team = () => {
           </p>
           <a
             href="/jobs"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#C49563] transition text-lg"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition text-lg"
           >
             View Open Positions
           </a>

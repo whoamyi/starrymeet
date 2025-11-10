@@ -25,7 +25,7 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
   return (
     <Link
       to={`/bookings`}
-      className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:bg-gray-800 hover:border-[#D4A574] transition-all block"
+      className="bg-gray-900/50 border border-gray-800 rounded-2xl p-6 hover:bg-gray-800 hover:border-[rgba(255, 255, 255, 0.8)] transition-all block"
     >
       <div className="flex items-start gap-4">
         {booking.celebrity?.profile_image && (
@@ -78,7 +78,7 @@ export const BookingCard = ({ booking }: BookingCardProps) => {
                 <line x1="12" y1="1" x2="12" y2="23"/>
                 <path d="M17 5H9.5a3.5 3.5 0 0 0 0 7h5a3.5 3.5 0 0 1 0 7H6"/>
               </svg>
-              <span className="text-[#D4A574] font-semibold">
+              <span className="text-[rgba(255, 255, 255, 0.8)] font-semibold">
                 {formatCurrency(booking.total_price)}
               </span>
             </div>

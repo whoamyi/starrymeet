@@ -68,7 +68,7 @@ export const BottomNav = () => {
             to={item.path}
             className={`flex flex-col items-center gap-1 px-4 py-2 rounded-lg transition ${
               isActive(item.path)
-                ? 'text-[#D4A574]'
+                ? 'text-[rgba(255, 255, 255, 0.8)]'
                 : 'text-gray-400 hover:text-white'
             }`}
           >

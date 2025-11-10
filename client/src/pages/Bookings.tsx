@@ -69,7 +69,7 @@ export const Bookings = () => {
             </p>
             <a
               href="/browse"
-              className="inline-block bg-[#D4A574] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#C49563] transition"
+              className="inline-block bg-[rgba(255, 255, 255, 0.8)] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition"
             >
               Browse Celebrities
             </a>

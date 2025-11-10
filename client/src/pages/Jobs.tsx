@@ -75,7 +75,7 @@ export const Jobs = () => {
           {openings.map((job, index) => (
             <div
               key={index}
-              className="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-[#D4A574] transition"
+              className="bg-gray-900 border border-gray-800 rounded-xl p-6 hover:border-[rgba(255, 255, 255, 0.8)] transition"
             >
               <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
                 <div>
@@ -90,7 +90,7 @@ export const Jobs = () => {
                 </div>
                 <a
                   href={`mailto:jobs@starrymeet.com?subject=Application: ${job.title}`}
-                  className="bg-[#D4A574] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[#C49563] transition whitespace-nowrap text-center"
+                  className="bg-[rgba(255, 255, 255, 0.8)] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition whitespace-nowrap text-center"
                 >
                   Apply Now
                 </a>
@@ -107,7 +107,7 @@ export const Jobs = () => {
           </p>
           <a
             href="mailto:jobs@starrymeet.com"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[#C49563] transition"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition"
           >
             Send Resume
           </a>

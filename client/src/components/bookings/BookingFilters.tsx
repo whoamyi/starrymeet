@@ -22,7 +22,7 @@ export const BookingFilters = ({ selectedStatus, onStatusChange }: BookingFilter
           onClick={() => onStatusChange(filter.value)}
           className={`px-4 py-2 rounded-lg whitespace-nowrap transition ${
             selectedStatus === filter.value
-              ? 'bg-[#D4A574] text-black font-semibold'
+              ? 'bg-[rgba(255, 255, 255, 0.8)] text-black font-semibold'
               : 'bg-gray-800 text-gray-400 hover:bg-gray-700'
           }`}
         >

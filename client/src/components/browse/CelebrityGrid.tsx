@@ -48,7 +48,7 @@ export const CelebrityGrid = ({ celebrities }: CelebrityGridProps) => {
           <h3 className="font-semibold text-white mb-1 truncate">{celebrity.name}</h3>
           <p className="text-sm text-gray-400 mb-1">{celebrity.category}</p>
           <div className="flex items-center justify-between">
-            <span className="text-sm text-[#D4A574] font-semibold">
+            <span className="text-sm text-[rgba(255, 255, 255, 0.8)] font-semibold">
               {formatPrice(celebrity.price_per_hour)}/hr
             </span>
             {celebrity.rating && (

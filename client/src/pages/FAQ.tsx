@@ -102,7 +102,7 @@ export const FAQ = () => {
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
               placeholder="Search for answers..."
-              className="w-full px-6 py-4 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+              className="w-full px-6 py-4 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
             />
           </div>
         </div>
@@ -118,7 +118,7 @@ export const FAQ = () => {
               onClick={() => setSelectedCategory(category.id)}
               className={`px-6 py-3 rounded-xl font-medium whitespace-nowrap transition ${
                 selectedCategory === category.id
-                  ? 'bg-[#D4A574] text-black'
+                  ? 'bg-[rgba(255, 255, 255, 0.8)] text-black'
                   : 'bg-gray-900 text-gray-300 hover:bg-gray-800 border border-gray-800'
               }`}
             >
@@ -140,7 +140,7 @@ export const FAQ = () => {
                   className="w-full px-6 py-5 flex items-center justify-between text-left"
                 >
                   <span className="text-white font-medium pr-4">{item.question}</span>
-                  <span className="text-[#D4A574] text-2xl flex-shrink-0">
+                  <span className="text-[rgba(255, 255, 255, 0.8)] text-2xl flex-shrink-0">
                     {openIndex === index ? '−' : '+'}
                   </span>
                 </button>
@@ -168,7 +168,7 @@ export const FAQ = () => {
           </p>
           <a
             href="/contact"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[#C49563] transition"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-6 py-3 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition"
           >
             Contact Support
           </a>

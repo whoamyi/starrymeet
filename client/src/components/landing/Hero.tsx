@@ -5,7 +5,7 @@ export const Hero = () => {
     <section className="relative min-h-screen flex items-center justify-center overflow-hidden bg-black">
       {/* Particle effect background */}
       <div className="absolute inset-0 opacity-30">
-        <div className="absolute inset-0 bg-gradient-to-br from-[#D4A574]/20 via-transparent to-transparent"></div>
+        <div className="absolute inset-0 bg-gradient-to-br from-[rgba(255, 255, 255, 0.8)]/20 via-transparent to-transparent"></div>
       </div>
 
       <div className="relative max-w-7xl mx-auto px-4 py-20 grid md:grid-cols-2 gap-12 items-center">
@@ -34,7 +34,7 @@ export const Hero = () => {
         <div>
           <h1 className="text-5xl md:text-6xl font-bold text-white mb-6 leading-tight">
             Private Access to{' '}
-            <span className="bg-gradient-to-r from-[#D4A574] to-[#C49563] bg-clip-text text-transparent">
+            <span className="bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.7)] bg-clip-text text-transparent">
               The World's Icons
             </span>
           </h1>
@@ -65,7 +65,7 @@ export const Hero = () => {
           <div className="flex gap-4 flex-wrap mb-6">
             <Link
               to="/browse"
-              className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#C49563] transition text-lg"
+              className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition text-lg"
             >
               <span>Browse Icons</span>
               <span>→</span>

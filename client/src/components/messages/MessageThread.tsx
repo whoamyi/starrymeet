@@ -58,7 +58,7 @@ export const MessageThread = ({
             className="w-10 h-10 rounded-full object-cover"
           />
         ) : (
-          <div className="w-10 h-10 rounded-full bg-[#D4A574] flex items-center justify-center text-black font-bold">
+          <div className="w-10 h-10 rounded-full bg-[rgba(255, 255, 255, 0.8)] flex items-center justify-center text-black font-bold">
             {recipientName.substring(0, 2).toUpperCase()}
           </div>
         )}
@@ -77,7 +77,7 @@ export const MessageThread = ({
               <div
                 className={`max-w-[70%] rounded-2xl px-4 py-2 ${
                   isMine
-                    ? 'bg-[#D4A574] text-black'
+                    ? 'bg-[rgba(255, 255, 255, 0.8)] text-black'
                     : 'bg-gray-800 text-white'
                 }`}
               >
@@ -104,13 +104,13 @@ export const MessageThread = ({
             value={newMessage}
             onChange={(e) => setNewMessage(e.target.value)}
             placeholder="Type a message..."
-            className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[#D4A574]"
+            className="flex-1 bg-gray-800 border border-gray-700 rounded-lg px-4 py-2 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)]"
             disabled={sendMessageMutation.isPending}
           />
           <button
             type="submit"
             disabled={!newMessage.trim() || sendMessageMutation.isPending}
-            className="bg-[#D4A574] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[#C49563] transition disabled:opacity-50"
+            className="bg-[rgba(255, 255, 255, 0.8)] text-black px-6 py-2 rounded-lg font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition disabled:opacity-50"
           >
             {sendMessageMutation.isPending ? 'Sending...' : 'Send'}
           </button>

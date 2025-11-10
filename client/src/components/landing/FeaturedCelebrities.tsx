@@ -31,7 +31,7 @@ export const FeaturedCelebrities = () => {
             Meet The Icons
           </h2>
           <p className="text-xl text-gray-400">
-            <span className="text-[#D4A574] font-semibold">{celebrities?.length || 147}</span> verified celebrities available for private meetings
+            <span className="text-[rgba(255, 255, 255, 0.8)] font-semibold">{celebrities?.length || 147}</span> verified celebrities available for private meetings
           </p>
         </div>
 
@@ -57,7 +57,7 @@ export const FeaturedCelebrities = () => {
                 {celebrity.name}
               </h3>
               <p className="text-sm text-gray-400 mb-1">{celebrity.category}</p>
-              <p className="text-sm text-[#D4A574] font-semibold">
+              <p className="text-sm text-[rgba(255, 255, 255, 0.8)] font-semibold">
                 {formatPrice(celebrity.price_per_hour)}/hr
               </p>
             </Link>
@@ -68,7 +68,7 @@ export const FeaturedCelebrities = () => {
         <div className="text-center">
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 bg-gray-900 text-white border border-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 hover:border-[#D4A574] transition"
+            className="inline-flex items-center gap-2 bg-gray-900 text-white border border-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 hover:border-[rgba(255, 255, 255, 0.8)] transition"
           >
             <span>View All Icons</span>
             <span>→</span>

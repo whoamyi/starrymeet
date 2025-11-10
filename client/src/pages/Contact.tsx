@@ -40,13 +40,13 @@ export const Contact = () => {
               <h3 className="text-xl font-semibold text-white mb-3">📧 Email support</h3>
               <p className="text-gray-400">
                 General inquiries:<br />
-                <a href="mailto:hello@starrymeet.com" className="text-[#D4A574] hover:text-[#C49563] transition">
+                <a href="mailto:hello@starrymeet.com" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.7)] transition">
                   hello@starrymeet.com
                 </a>
               </p>
               <p className="text-gray-400 mt-3">
                 Celebrity applications:<br />
-                <a href="mailto:apply@starrymeet.com" className="text-[#D4A574] hover:text-[#C49563] transition">
+                <a href="mailto:apply@starrymeet.com" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.7)] transition">
                   apply@starrymeet.com
                 </a>
               </p>
@@ -93,7 +93,7 @@ export const Contact = () => {
                   onChange={(e) => setFormData({ ...formData, name: e.target.value })}
                   required
                   placeholder="John Doe"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
                 />
               </div>
 
@@ -108,7 +108,7 @@ export const Contact = () => {
                   onChange={(e) => setFormData({ ...formData, email: e.target.value })}
                   required
                   placeholder="you@example.com"
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
                 />
               </div>
 
@@ -121,7 +121,7 @@ export const Contact = () => {
                   value={formData.subject}
                   onChange={(e) => setFormData({ ...formData, subject: e.target.value })}
                   required
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[#D4A574] transition"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
                 >
                   <option value="">Choose a topic...</option>
                   <option value="booking">Booking question</option>
@@ -144,13 +144,13 @@ export const Contact = () => {
                   required
                   rows={5}
                   placeholder="Tell us how we can help..."
-                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition resize-none"
+                  className="w-full px-4 py-3 bg-gray-800 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition resize-none"
                 />
               </div>
 
               <button
                 type="submit"
-                className="w-full bg-[#D4A574] text-black font-semibold py-3 rounded-xl hover:bg-[#C49563] transition"
+                className="w-full bg-[rgba(255, 255, 255, 0.8)] text-black font-semibold py-3 rounded-xl hover:bg-[rgba(255, 255, 255, 0.7)] transition"
               >
                 Send message
               </button>

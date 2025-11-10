@@ -14,14 +14,14 @@ export const FinalCTA = () => {
         <div className="flex gap-4 justify-center flex-wrap">
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#C49563] transition text-lg"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition text-lg"
           >
             <span>Browse Icons</span>
             <span>→</span>
           </Link>
           <Link
             to="/how-it-works"
-            className="inline-flex items-center gap-2 bg-gray-900 text-white border border-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 hover:border-[#D4A574] transition text-lg"
+            className="inline-flex items-center gap-2 bg-gray-900 text-white border border-gray-700 px-8 py-4 rounded-xl font-semibold hover:bg-gray-800 hover:border-[rgba(255, 255, 255, 0.8)] transition text-lg"
           >
             <span>Learn More</span>
           </Link>

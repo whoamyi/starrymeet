@@ -19,7 +19,7 @@ export const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
               <div
                 className={`w-10 h-10 rounded-full flex items-center justify-center font-semibold text-sm transition-all duration-300 ${
                   step.number <= currentStep
-                    ? 'bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black shadow-lg shadow-[#C6A34F]/25'
+                    ? 'bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] text-black shadow-lg shadow-[rgba(255, 255, 255, 0.8)]/25'
                     : 'bg-gray-900 border border-gray-700/50 text-gray-500'
                 }`}
               >
@@ -42,7 +42,7 @@ export const ProgressBar = ({ currentStep, totalSteps }: ProgressBarProps) => {
                 <div
                   className={`h-full transition-all duration-500 ${
                     step.number < currentStep
-                      ? 'bg-gradient-to-r from-[#C6A34F] to-[#D4A574] w-full'
+                      ? 'bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] w-full'
                       : 'w-0'
                   }`}
                 />

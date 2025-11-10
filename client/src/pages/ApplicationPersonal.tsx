@@ -138,12 +138,12 @@ export const ApplicationPersonal = () => {
         {/* Form Container */}
         <div className="relative group mb-8">
           {/* Subtle glow effect */}
-          <div className="absolute -inset-px bg-gradient-to-r from-[#C6A34F]/20 to-[#D4A574]/20 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
+          <div className="absolute -inset-px bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)]/20 to-[rgba(255, 255, 255, 0.8)]/20 rounded-3xl opacity-0 group-hover:opacity-100 blur-xl transition duration-500"></div>
 
           {/* Main Form Card */}
           <div className="relative bg-gradient-to-b from-gray-900/90 to-black/90 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-6 md:p-10 shadow-2xl">
             {/* Inner glow */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C6A34F]/30 to-transparent"></div>
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(255, 255, 255, 0.8)]/30 to-transparent"></div>
 
             <form onSubmit={handleSubmit} className="space-y-10">
               {/* About You */}
@@ -322,7 +322,7 @@ export const ApplicationPersonal = () => {
               <div className="flex justify-center pt-6">
                 <button
                   type="submit"
-                  className="px-8 py-4 bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25"
+                  className="px-8 py-4 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] text-black font-semibold rounded-xl hover:from-[rgba(255, 255, 255, 0.8)] hover:to-[rgba(255, 255, 255, 0.8)] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[rgba(255, 255, 255, 0.8)]/25"
                 >
                   Submit Personal Application →
                 </button>

@@ -25,7 +25,7 @@ export const BookingSection = ({ celebrity }: BookingSectionProps) => {
   const totalPrice = celebrity.price_per_hour * selectedHours;
 
   return (
-    <div className="bg-gradient-to-r from-[#D4A574] to-[#C49563] rounded-2xl p-6 mb-8">
+    <div className="bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.7)] rounded-2xl p-6 mb-8">
       <div className="flex flex-col md:flex-row items-start md:items-center justify-between gap-6">
         <div className="flex-1">
           <h2 className="text-2xl font-bold text-black mb-2">Book a Meeting</h2>
@@ -42,7 +42,7 @@ export const BookingSection = ({ celebrity }: BookingSectionProps) => {
                   onClick={() => setSelectedHours(hours)}
                   className={`px-4 py-2 rounded-lg font-semibold transition ${
                     selectedHours === hours
-                      ? 'bg-black text-[#D4A574]'
+                      ? 'bg-black text-[rgba(255, 255, 255, 0.8)]'
                       : 'bg-black/20 text-black hover:bg-black/30'
                   }`}
                 >

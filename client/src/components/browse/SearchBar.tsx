@@ -21,7 +21,7 @@ export const SearchBar = ({ onSearch }: SearchBarProps) => {
         value={searchQuery}
         onChange={(e) => setSearchQuery(e.target.value)}
         placeholder="Search celebrities by name..."
-        className="w-full bg-gray-900 border border-gray-800 rounded-xl px-12 py-3 focus:outline-none focus:border-[#D4A574] transition"
+        className="w-full bg-gray-900 border border-gray-800 rounded-xl px-12 py-3 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
       />
       <svg
         width="20"

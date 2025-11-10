@@ -115,7 +115,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
               id="firstName"
               value={formData.firstName}
               onChange={(e) => setFormData({ ...formData, firstName: e.target.value })}
-              className="w-full px-4 py-3 bg-black/40 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#C6A34F] focus:bg-black/60 transition-all duration-300"
+              className="w-full px-4 py-3 bg-black/40 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] focus:bg-black/60 transition-all duration-300"
               placeholder="John"
               required
               autoComplete="given-name"
@@ -131,7 +131,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
               id="lastName"
               value={formData.lastName}
               onChange={(e) => setFormData({ ...formData, lastName: e.target.value })}
-              className="w-full px-4 py-3 bg-black/40 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#C6A34F] focus:bg-black/60 transition-all duration-300"
+              className="w-full px-4 py-3 bg-black/40 border border-gray-700/50 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] focus:bg-black/60 transition-all duration-300"
               placeholder="Doe"
               required
               autoComplete="family-name"
@@ -149,7 +149,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
             id="email"
             value={formData.email}
             onChange={(e) => setFormData({ ...formData, email: e.target.value })}
-            className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition"
+            className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition"
             placeholder="you@example.com"
             required
             autoComplete="email"
@@ -167,7 +167,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
               id="password"
               value={formData.password}
               onChange={(e) => setFormData({ ...formData, password: e.target.value })}
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition pr-12"
+              className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition pr-12"
               placeholder="Create a strong password"
               required
               autoComplete="new-password"
@@ -239,7 +239,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
               id="confirmPassword"
               value={formData.confirmPassword}
               onChange={(e) => setFormData({ ...formData, confirmPassword: e.target.value })}
-              className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[#D4A574] transition pr-12"
+              className="w-full px-4 py-3 bg-gray-900 border border-gray-700 rounded-xl text-white placeholder-gray-500 focus:outline-none focus:border-[rgba(255, 255, 255, 0.8)] transition pr-12"
               placeholder="Confirm your password"
               required
               autoComplete="new-password"
@@ -274,16 +274,16 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
             id="agreeToTerms"
             checked={formData.agreeToTerms}
             onChange={(e) => setFormData({ ...formData, agreeToTerms: e.target.checked })}
-            className="w-4 h-4 mt-1 bg-gray-900 border-gray-700 rounded focus:ring-[#D4A574] focus:ring-2"
+            className="w-4 h-4 mt-1 bg-gray-900 border-gray-700 rounded focus:ring-[rgba(255, 255, 255, 0.8)] focus:ring-2"
             required
           />
           <label htmlFor="agreeToTerms" className="ml-2 text-sm text-gray-300">
             I agree to the{' '}
-            <a href="/terms" target="_blank" className="text-[#C6A34F] hover:text-[#D4A574] transition-colors">
+            <a href="/terms" target="_blank" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.8)] transition-colors">
               Terms of Service
             </a>{' '}
             and{' '}
-            <a href="/privacy" target="_blank" className="text-[#C6A34F] hover:text-[#D4A574] transition-colors">
+            <a href="/privacy" target="_blank" className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.8)] transition-colors">
               Privacy Policy
             </a>
           </label>
@@ -293,7 +293,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
         <button
           type="submit"
           disabled={signupMutation.isPending}
-          className="w-full bg-gradient-to-r from-[#C6A34F] to-[#D4A574] text-black font-semibold py-3 rounded-xl hover:from-[#D4A574] hover:to-[#C6A34F] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[#C6A34F]/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
+          className="w-full bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.8)] text-black font-semibold py-3 rounded-xl hover:from-[rgba(255, 255, 255, 0.8)] hover:to-[rgba(255, 255, 255, 0.8)] transform hover:scale-[1.02] transition-all duration-300 shadow-lg shadow-[rgba(255, 255, 255, 0.8)]/25 disabled:opacity-50 disabled:cursor-not-allowed disabled:hover:scale-100"
         >
           {signupMutation.isPending ? (
             <span className="flex items-center justify-center gap-2">
@@ -323,7 +323,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
           <button
             type="button"
             onClick={() => toastConfig.error('Google sign-up coming soon')}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-black/40 border border-gray-700/50 rounded-xl text-white hover:bg-black/60 hover:border-[#C6A34F]/50 transition-all duration-300"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-black/40 border border-gray-700/50 rounded-xl text-white hover:bg-black/60 hover:border-[rgba(255, 255, 255, 0.8)]/50 transition-all duration-300"
           >
             <svg width="18" height="18" viewBox="0 0 24 24">
               <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
@@ -337,7 +337,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
           <button
             type="button"
             onClick={() => toastConfig.error('Apple sign-up coming soon')}
-            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-black/40 border border-gray-700/50 rounded-xl text-white hover:bg-black/60 hover:border-[#C6A34F]/50 transition-all duration-300"
+            className="flex items-center justify-center gap-2 px-4 py-2.5 bg-black/40 border border-gray-700/50 rounded-xl text-white hover:bg-black/60 hover:border-[rgba(255, 255, 255, 0.8)]/50 transition-all duration-300"
           >
             <svg width="18" height="18" viewBox="0 0 24 24" fill="currentColor">
               <path d="M17.05 20.28c-.98.95-2.05.88-3.08.4-1.09-.5-2.08-.48-3.24 0-1.44.62-2.2.44-3.06-.4C2.79 15.25 3.51 7.59 9.05 7.31c1.35.07 2.29.74 3.08.8 1.18-.24 2.31-.93 3.57-.84 1.51.12 2.65.72 3.4 1.8-3.12 1.87-2.38 5.98.48 7.13-.57 1.5-1.31 2.99-2.54 4.09l.01-.01zM12.03 7.25c-.15-2.23 1.66-4.07 3.74-4.25.29 2.58-2.34 4.5-3.74 4.25z"/>
@@ -353,7 +353,7 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
           Already have an account?{' '}
           <button
             onClick={onSwitchToLogin}
-            className="text-[#C6A34F] hover:text-[#D4A574] font-semibold transition-colors"
+            className="text-[rgba(255, 255, 255, 0.8)] hover:text-[rgba(255, 255, 255, 0.8)] font-semibold transition-colors"
           >
             Sign in
           </button>

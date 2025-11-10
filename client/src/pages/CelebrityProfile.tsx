@@ -152,7 +152,7 @@ export const CelebrityProfile = () => {
                 className="btn-large"
                 style={{
                   display: 'inline-block',
-                  background: '#C6A34F',
+                  background: 'rgba(255, 255, 255, 0.8)',
                   color: '#000',
                   padding: '12px 24px',
                   borderRadius: '8px',

@@ -19,7 +19,7 @@ export const Profile = () => {
           <h2 className="text-xl font-bold mb-4">Account Settings</h2>
           <a
             href="/settings"
-            className="flex items-center justify-between py-3 hover:text-[#D4A574] transition"
+            className="flex items-center justify-between py-3 hover:text-[rgba(255, 255, 255, 0.8)] transition"
           >
             <div className="flex items-center gap-3">
               <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2">

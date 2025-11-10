@@ -58,7 +58,7 @@ export const HowItWorksPage = () => {
           </p>
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#C49563] transition text-lg"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition text-lg"
           >
             <span>Start Browsing</span>
             <span>→</span>
@@ -85,7 +85,7 @@ export const HowItWorksPage = () => {
                 <ul className="space-y-2">
                   {step.details.map((detail, i) => (
                     <li key={i} className="flex items-start gap-3 text-gray-400">
-                      <span className="text-[#D4A574] mt-1">✓</span>
+                      <span className="text-[rgba(255, 255, 255, 0.8)] mt-1">✓</span>
                       <span>{detail}</span>
                     </li>
                   ))}
@@ -103,7 +103,7 @@ export const HowItWorksPage = () => {
           </p>
           <Link
             to="/browse"
-            className="inline-flex items-center gap-2 bg-[#D4A574] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[#C49563] transition text-lg"
+            className="inline-flex items-center gap-2 bg-[rgba(255, 255, 255, 0.8)] text-black px-8 py-4 rounded-xl font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition text-lg"
           >
             Browse Celebrities
           </Link>

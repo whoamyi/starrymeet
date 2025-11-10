@@ -12,7 +12,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
       <section className="mb-8">
         <div className="flex justify-between items-center mb-4">
           <h2 className="text-2xl font-bold">Your Favorites</h2>
-          <Link to="/react/browse" className="text-[#D4A574] text-sm font-semibold">
+          <Link to="/react/browse" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
             Start Exploring
           </Link>
         </div>
@@ -27,7 +27,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
     <section className="mb-8">
       <div className="flex justify-between items-center mb-4">
         <h2 className="text-2xl font-bold">Your Favorites</h2>
-        <Link to="/react/favorites" className="text-[#D4A574] text-sm font-semibold">
+        <Link to="/react/favorites" className="text-[rgba(255, 255, 255, 0.8)] text-sm font-semibold">
           View All
         </Link>
       </div>
@@ -50,7 +50,7 @@ export const SavedCelebrities = ({ saved }: SavedCelebritiesProps) => {
               </div>
               <h4 className="font-semibold text-sm text-white mb-1">{celeb.name}</h4>
               <p className="text-xs text-gray-400">{celeb.category}</p>
-              <p className="text-xs text-[#D4A574] font-semibold mt-1">
+              <p className="text-xs text-[rgba(255, 255, 255, 0.8)] font-semibold mt-1">
                 {formatPrice(celeb.min_price)}+
               </p>
             </Link>

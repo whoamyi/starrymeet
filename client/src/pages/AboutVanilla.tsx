@@ -99,7 +99,7 @@ export const AboutVanilla = () => {
             <p style={{
               fontSize: '18px',
               lineHeight: '1.8',
-              color: 'rgba(212,165,116,1)',
+              color: 'rgba(255, 255, 255, 0.9)',
               marginTop: '24px',
               fontWeight: 600
             }}>

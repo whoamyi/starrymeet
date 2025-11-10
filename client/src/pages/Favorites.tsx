@@ -68,7 +68,7 @@ export const Favorites = () => {
             <p className="text-gray-400 mb-4">No favorites yet</p>
             <a
               href="/browse"
-              className="inline-block bg-[#D4A574] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[#C49563] transition"
+              className="inline-block bg-[rgba(255, 255, 255, 0.8)] text-black px-6 py-3 rounded-lg font-semibold hover:bg-[rgba(255, 255, 255, 0.7)] transition"
             >
               Browse Celebrities
             </a>
@@ -113,7 +113,7 @@ export const Favorites = () => {
                   </Link>
                   <h4 className="font-semibold text-sm text-white mb-1">{celeb.name}</h4>
                   <p className="text-xs text-gray-400 mb-1">{celeb.category}</p>
-                  <p className="text-xs text-[#D4A574] font-semibold">
+                  <p className="text-xs text-[rgba(255, 255, 255, 0.8)] font-semibold">
                     {formatPrice(celeb.price_per_hour)}/hr
                   </p>
                 </div>

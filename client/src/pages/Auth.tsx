@@ -10,9 +10,9 @@ export const Auth = () => {
       {/* Premium Gradient Background */}
       <div className="absolute inset-0 overflow-hidden">
         {/* Main gradient orbs */}
-        <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-gradient-to-br from-[#C6A34F]/30 via-[#D4A574]/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
-        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-gradient-to-tl from-[#C49563]/25 via-[#D4A574]/15 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
-        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-br from-[#C6A34F]/10 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
+        <div className="absolute top-1/4 -left-20 w-[500px] h-[500px] bg-gradient-to-br from-[rgba(255, 255, 255, 0.8)]/30 via-[rgba(255, 255, 255, 0.8)]/20 to-transparent rounded-full blur-3xl animate-pulse"></div>
+        <div className="absolute bottom-1/4 -right-20 w-[500px] h-[500px] bg-gradient-to-tl from-[rgba(255, 255, 255, 0.7)]/25 via-[rgba(255, 255, 255, 0.8)]/15 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '1s' }}></div>
+        <div className="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-[400px] h-[400px] bg-gradient-to-br from-[rgba(255, 255, 255, 0.8)]/10 to-transparent rounded-full blur-3xl animate-pulse" style={{ animationDelay: '2s' }}></div>
 
         {/* Grid overlay */}
         <div className="absolute inset-0 bg-[linear-gradient(rgba(198,163,79,0.03)_1px,transparent_1px),linear-gradient(90deg,rgba(198,163,79,0.03)_1px,transparent_1px)] bg-[size:100px_100px]"></div>
@@ -21,7 +21,7 @@ export const Auth = () => {
       {/* Back Button */}
       <Link
         to="/"
-        className="absolute top-8 left-8 z-20 flex items-center gap-2 text-gray-400 hover:text-[#C6A34F] transition-all duration-300 group"
+        className="absolute top-8 left-8 z-20 flex items-center gap-2 text-gray-400 hover:text-[rgba(255, 255, 255, 0.8)] transition-all duration-300 group"
       >
         <svg width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" className="group-hover:-translate-x-1 transition-transform">
           <line x1="19" y1="12" x2="5" y2="12" />
@@ -36,22 +36,22 @@ export const Auth = () => {
         <div className="text-center mb-10">
           <Link
             to="/"
-            className="inline-block text-4xl font-bold bg-gradient-to-r from-white via-[#C6A34F] to-white bg-clip-text text-transparent hover:from-[#C6A34F] hover:via-white hover:to-[#C6A34F] transition-all duration-500"
+            className="inline-block text-4xl font-bold bg-gradient-to-r from-white via-[rgba(255, 255, 255, 0.8)] to-white bg-clip-text text-transparent hover:from-[rgba(255, 255, 255, 0.8)] hover:via-white hover:to-[rgba(255, 255, 255, 0.8)] transition-all duration-500"
           >
             StarryMeet
           </Link>
-          <div className="mt-2 h-0.5 w-20 mx-auto bg-gradient-to-r from-transparent via-[#C6A34F] to-transparent"></div>
+          <div className="mt-2 h-0.5 w-20 mx-auto bg-gradient-to-r from-transparent via-[rgba(255, 255, 255, 0.8)] to-transparent"></div>
         </div>
 
         {/* Premium Glass Card */}
         <div className="relative group">
           {/* Glow effect on hover */}
-          <div className="absolute -inset-0.5 bg-gradient-to-r from-[#C6A34F] via-[#D4A574] to-[#C49563] rounded-3xl opacity-20 group-hover:opacity-40 blur-xl transition duration-500"></div>
+          <div className="absolute -inset-0.5 bg-gradient-to-r from-[rgba(255, 255, 255, 0.8)] via-[rgba(255, 255, 255, 0.8)] to-[rgba(255, 255, 255, 0.7)] rounded-3xl opacity-20 group-hover:opacity-40 blur-xl transition duration-500"></div>
 
           {/* Main Card */}
           <div className="relative bg-gradient-to-b from-gray-900/90 to-black/90 backdrop-blur-xl border border-gray-800/50 rounded-3xl p-8 shadow-2xl">
             {/* Inner glow */}
-            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[#C6A34F]/50 to-transparent"></div>
+            <div className="absolute inset-x-0 top-0 h-px bg-gradient-to-r from-transparent via-[rgba(255, 255, 255, 0.8)]/50 to-transparent"></div>
 
             {isSignup ? (
               <SignupForm onSwitchToLogin={() => setIsSignup(false)} />
