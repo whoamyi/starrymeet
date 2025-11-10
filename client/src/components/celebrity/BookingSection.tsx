@@ -1,4 +1,5 @@
 import { useState } from 'react';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 import { formatCurrency } from '@/utils';
 import type { Celebrity } from '@/types';
@@ -10,16 +11,21 @@ interface BookingSectionProps {
 
 export const BookingSection = ({ celebrity }: BookingSectionProps) => {
   const { isAuthenticated } = useAuthStore();
+  const navigate = useNavigate();
   const [selectedHours, setSelectedHours] = useState(1);
 
   const handleBookNow = () => {
+    // The intended destination after login
+    const intendedDestination = `/apply/${celebrity.slug}`;
+
     if (!isAuthenticated) {
-      window.location.href = '/auth';
+      // Redirect to auth, then take user to application flow
+      navigate('/auth', { state: { from: intendedDestination } });
       return;
     }
-    // Redirect to booking page with celebrity info
-    // TODO: Implement booking flow
-    toastConfig.info('Booking flow coming soon!');
+
+    // Navigate to application flow
+    navigate(intendedDestination);
   };
 
   const totalPrice = celebrity.price_per_hour * selectedHours;

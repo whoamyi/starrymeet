@@ -1,4 +1,5 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
+import { useNavigate } from 'react-router-dom';
 import { useAuthStore } from '@/store/authStore';
 import { savedApi } from '@/services/api';
 import { toastConfig } from '@/utils';
@@ -13,6 +14,7 @@ interface CelebrityHeaderProps {
 export const CelebrityHeader = ({ celebrity, isSaved }: CelebrityHeaderProps) => {
   const { isAuthenticated } = useAuthStore();
   const queryClient = useQueryClient();
+  const navigate = useNavigate();
 
   const saveMutation = useMutation({
     mutationFn: () => savedApi.add(celebrity.id),
@@ -42,7 +44,8 @@ export const CelebrityHeader = ({ celebrity, isSaved }: CelebrityHeaderProps) =>
 
   const handleToggleSave = () => {
     if (!isAuthenticated) {
-      window.location.href = '/auth';
+      // Redirect to auth, then come back to this page to perform the save action
+      navigate('/auth', { state: { from: `/celebrity/${celebrity.slug}`, action: 'save' } });
       return;
     }
 

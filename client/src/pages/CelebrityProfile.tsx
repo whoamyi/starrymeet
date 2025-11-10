@@ -1,6 +1,6 @@
-import { useParams, Link, useNavigate } from 'react-router-dom';
+import { useParams, Link, useNavigate, useLocation } from 'react-router-dom';
 import { useQuery, useMutation, useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
 import { HeaderVanilla, FooterVanilla, Loading } from '@/components';
 import {
   InstagramProfileHeader,
@@ -16,6 +16,7 @@ import '@/styles/celebrity-profile.css';
 export const CelebrityProfile = () => {
   const { slug } = useParams<{ slug: string }>();
   const navigate = useNavigate();
+  const location = useLocation();
   const queryClient = useQueryClient();
   const isAuthenticated = useAuthStore((state) => state.isAuthenticated);
   const [toastMessage, setToastMessage] = useState<string | null>(null);
@@ -61,6 +62,18 @@ export const CelebrityProfile = () => {
     setToastMessage(message);
     setTimeout(() => setToastMessage(null), 2000);
   };
+
+  // Handle automatic action after login (e.g., auto-save when returning from auth)
+  useEffect(() => {
+    const action = (location.state as any)?.action;
+
+    if (isAuthenticated && action === 'save' && celebrity && !isSaved) {
+      console.log('[CelebrityProfile] Auto-performing save action after login');
+      followMutation.mutate();
+      // Clear the action from state to prevent re-triggering
+      navigate(location.pathname, { replace: true, state: {} });
+    }
+  }, [isAuthenticated, celebrity, isSaved, location.state]);
 
   if (isLoading) return <Loading />;
 
@@ -117,13 +130,17 @@ export const CelebrityProfile = () => {
     duration: number,
     price: number
   ) => {
+    // The intended destination after login
+    const intendedDestination = `/apply/${slug}`;
+
     if (!isAuthenticated) {
-      navigate('/auth', { state: { from: window.location.pathname } });
+      // Pass the intended destination (not current page) so user continues their action after login
+      navigate('/auth', { state: { from: intendedDestination } });
       return;
     }
 
     // Navigate to application flow
-    navigate(`/apply/${slug}`);
+    navigate(intendedDestination);
   };
 
   if (error || !celebrity) {
