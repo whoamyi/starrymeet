@@ -79,7 +79,8 @@ export const CelebrityProfile = () => {
 
   const handleFollowToggle = () => {
     if (!isAuthenticated) {
-      navigate('/auth');
+      // Redirect to auth with action to auto-save after login
+      navigate('/auth', { state: { from: `/celebrity/${slug}`, action: 'save' } });
       return;
     }
     followMutation.mutate();
@@ -87,7 +88,8 @@ export const CelebrityProfile = () => {
 
   const handleMessage = () => {
     if (!isAuthenticated) {
-      navigate('/auth');
+      // Redirect to auth, then to messages
+      navigate('/auth', { state: { from: '/messages' } });
       return;
     }
     navigate('/messages', { state: { celebrityId: celebrity?.id, celebrityName: celebrity?.name } });
