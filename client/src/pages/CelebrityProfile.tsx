@@ -67,9 +67,24 @@ export const CelebrityProfile = () => {
   useEffect(() => {
     const action = (location.state as any)?.action;
 
-    if (isAuthenticated && action === 'save' && celebrity && !isSaved) {
+    console.log('[CelebrityProfile] useEffect check:', {
+      isAuthenticated,
+      action,
+      hasCelebrity: !!celebrity,
+      isSaved,
+      locationState: location.state
+    });
+
+    // Auto-save after login: only check if user is authenticated and action is 'save'
+    // Don't check isSaved because it might not be loaded yet or user wants to toggle
+    if (isAuthenticated && action === 'save' && celebrity) {
       console.log('[CelebrityProfile] Auto-performing save action after login');
-      followMutation.mutate();
+
+      // Only save if not already saved (after data loads)
+      if (isSaved !== true) {
+        followMutation.mutate();
+      }
+
       // Clear the action from state to prevent re-triggering
       navigate(location.pathname, { replace: true, state: {} });
     }
