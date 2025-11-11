@@ -338,3 +338,200 @@ export interface DashboardApplication {
   celebrity_image: string;
   category: string;
 }
+
+// ============================================
+// ADMIN PANEL TYPES
+// ============================================
+
+// Admin Conversation Types
+export interface AdminConversation {
+  id: string;
+  user_id: string;
+  celebrity_id: string;
+  last_message_at: string;
+  last_message_preview: string;
+  unread_count_admin: number;
+  unread_count_user: number;
+  status: 'active' | 'archived' | 'spam';
+  created_at: string;
+  updated_at: string;
+  User: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    email: string;
+    avatar_url?: string;
+  };
+}
+
+export interface AdminConversationByCelebrity {
+  celebrity_id: string;
+  celebrity_name: string;
+  celebrity_avatar?: string;
+  category: string;
+  total_conversations: number;
+  total_unread: number;
+}
+
+export interface AdminMessage {
+  id: string;
+  message: string;
+  created_at: string;
+  read_status: boolean;
+  from_user_id: string;
+  is_from_user: boolean;
+  sender?: {
+    id: string;
+    first_name: string;
+    last_name: string;
+    avatar_url?: string;
+  };
+}
+
+// Admin Application Types
+export interface AdminApplicationOverview {
+  celebrity_id: string;
+  celebrity_name: string;
+  celebrity_avatar?: string;
+  category: string;
+  total_applications: number;
+  pending_count: number;
+  under_review_count: number;
+  approved_count: number;
+  rejected_count: number;
+  latest_application_at: string;
+}
+
+export interface AdminApplicationDetail {
+  id: string;
+  application_number: string;
+  application_type: 'professional' | 'personal';
+  status: 'pending' | 'under_review' | 'approved' | 'rejected' | 'cancelled';
+  created_at: string;
+  user_first_name: string;
+  user_last_name: string;
+  user_email: string;
+  user_phone?: string;
+  user_avatar?: string;
+  celebrity_name: string;
+  celebrity_avatar?: string;
+  
+  // Professional fields
+  professional_summary?: string;
+  why_celebrity?: string;
+  meeting_goals?: string;
+  what_you_bring?: string;
+  next_steps?: string;
+  linkedin_url?: string;
+  company_website?: string;
+  portfolio_url?: string;
+  social_media?: string;
+  
+  // Personal fields
+  your_story?: string;
+  what_they_mean?: string;
+  why_now?: string;
+  meeting_vision?: string;
+  your_case?: string;
+  additional_context?: string;
+  instagram_url?: string;
+  personal_links?: string;
+  
+  // Review fields
+  review_notes?: string;
+  reviewed_at?: string;
+  reviewed_by?: string;
+  reviewer_first_name?: string;
+  reviewer_last_name?: string;
+}
+
+// Admin Dashboard Types
+export interface AdminDashboardStats {
+  messaging: {
+    total_conversations: number;
+    total_unread_messages: number;
+    conversations_today: number;
+  };
+  applications: {
+    total_applications: number;
+    pending_applications: number;
+    under_review_applications: number;
+    applications_today: number;
+  };
+  bookings: {
+    total_bookings: number;
+    confirmed_bookings: number;
+    upcoming_bookings: number;
+  };
+  celebrities: {
+    total_celebrities: number;
+    active_celebrities: number;
+    featured_celebrities: number;
+  };
+  users: {
+    total_users: number;
+    users_this_week: number;
+    users_this_month: number;
+  };
+}
+
+export interface AdminCelebrityOverview {
+  id: string;
+  display_name: string;
+  avatar_url?: string;
+  username: string;
+  category: string;
+  is_verified: boolean;
+  is_featured: boolean;
+  conversation_count: number;
+  unread_messages: number;
+  pending_applications: number;
+  total_bookings: number;
+}
+
+export interface AdminRecentActivity {
+  type: 'message' | 'application' | 'booking';
+  id: string;
+  created_at: string;
+  user_name: string;
+  celebrity_name: string;
+  celebrity_id: string;
+  preview: string;
+}
+
+// Admin Messaging Stats
+export interface AdminMessagingStats {
+  total_conversations: number;
+  total_unread: number;
+  active_today: number;
+  celebrities_with_messages: number;
+}
+
+// Admin Application Stats
+export interface AdminApplicationStats {
+  total_applications: number;
+  pending_count: number;
+  under_review_count: number;
+  approved_count: number;
+  rejected_count: number;
+  professional_count: number;
+  personal_count: number;
+  applications_today: number;
+  applications_this_week: number;
+  celebrities_with_applications: number;
+}
+
+// Request/Response Types for Admin APIs
+export interface AdminSendMessageRequest {
+  user_id: string;
+  message: string;
+}
+
+export interface AdminUpdateApplicationStatusRequest {
+  status: 'pending' | 'under_review' | 'approved' | 'rejected' | 'cancelled';
+  review_notes?: string;
+}
+
+export interface AdminUpdateConversationStatusRequest {
+  status: 'active' | 'archived' | 'spam';
+}

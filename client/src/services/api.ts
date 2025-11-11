@@ -309,3 +309,106 @@ export const applicationApi = {
 };
 
 export default api;
+
+// ============================================
+// ADMIN PANEL APIs
+// ============================================
+
+// Admin Dashboard API
+export const adminDashboardApi = {
+  getStats: async (): Promise<AdminDashboardStats> => {
+    const response = await api.get<ApiResponse<AdminDashboardStats>>('/admin/dashboard/stats');
+    return response.data.data;
+  },
+
+  getCelebrityOverview: async (category?: string): Promise<AdminCelebrityOverview[]> => {
+    const response = await api.get<ApiResponse<AdminCelebrityOverview[]>>('/admin/dashboard/celebrity-overview', {
+      params: { category }
+    });
+    return response.data.data;
+  },
+
+  getRecentActivity: async (limit: number = 20): Promise<AdminRecentActivity[]> => {
+    const response = await api.get<ApiResponse<AdminRecentActivity[]>>('/admin/dashboard/recent-activity', {
+      params: { limit }
+    });
+    return response.data.data;
+  },
+};
+
+// Admin Messages API
+export const adminMessagesApi = {
+  getConversationsByCelebrity: async (): Promise<AdminConversationByCelebrity[]> => {
+    const response = await api.get<ApiResponse<AdminConversationByCelebrity[]>>('/admin/messages/by-celebrity');
+    return response.data.data;
+  },
+
+  getCelebrityConversations: async (celebrityId: string, status?: string): Promise<AdminConversation[]> => {
+    const response = await api.get<ApiResponse<AdminConversation[]>>(`/admin/messages/celebrity/${celebrityId}`, {
+      params: { status }
+    });
+    return response.data.data;
+  },
+
+  getCelebrityUserMessages: async (celebrityId: string, userId: string): Promise<AdminMessage[]> => {
+    const response = await api.get<ApiResponse<AdminMessage[]>>(`/admin/messages/celebrity/${celebrityId}/user/${userId}`);
+    return response.data.data;
+  },
+
+  sendMessageAsCelebrity: async (celebrityId: string, data: AdminSendMessageRequest): Promise<Message> => {
+    const response = await api.post<ApiResponse<Message>>(`/admin/messages/celebrity/${celebrityId}/send`, data);
+    return response.data.data;
+  },
+
+  updateConversationStatus: async (conversationId: string, data: AdminUpdateConversationStatusRequest): Promise<void> => {
+    await api.patch(`/admin/messages/conversation/${conversationId}/status`, data);
+  },
+
+  getMessagingStats: async (): Promise<AdminMessagingStats> => {
+    const response = await api.get<ApiResponse<AdminMessagingStats>>('/admin/messages/stats');
+    return response.data.data;
+  },
+};
+
+// Admin Applications API
+export const adminApplicationsApi = {
+  getOverview: async (): Promise<AdminApplicationOverview[]> => {
+    const response = await api.get<ApiResponse<AdminApplicationOverview[]>>('/admin/applications/overview');
+    return response.data.data;
+  },
+
+  getCelebrityApplications: async (
+    celebrityId: string,
+    filters?: { status?: string; type?: string; limit?: number; offset?: number }
+  ): Promise<{ data: AdminApplicationDetail[]; pagination: { total: number; limit: number; offset: number } }> => {
+    const response = await api.get<ApiResponse<AdminApplicationDetail[]>>(`/admin/applications/celebrity/${celebrityId}`, {
+      params: filters
+    });
+    return response.data as any;
+  },
+
+  getApplicationDetail: async (applicationId: string): Promise<AdminApplicationDetail> => {
+    const response = await api.get<ApiResponse<AdminApplicationDetail>>(`/admin/applications/${applicationId}`);
+    return response.data.data;
+  },
+
+  updateApplicationStatus: async (applicationId: string, data: AdminUpdateApplicationStatusRequest): Promise<void> => {
+    await api.patch(`/admin/applications/${applicationId}/status`, data);
+  },
+
+  addApplicationNotes: async (applicationId: string, notes: string): Promise<void> => {
+    await api.post(`/admin/applications/${applicationId}/notes`, { notes });
+  },
+
+  getApplicationStats: async (): Promise<AdminApplicationStats> => {
+    const response = await api.get<ApiResponse<AdminApplicationStats>>('/admin/applications/stats');
+    return response.data.data;
+  },
+
+  getRecentApplications: async (limit: number = 10): Promise<AdminApplicationDetail[]> => {
+    const response = await api.get<ApiResponse<AdminApplicationDetail[]>>('/admin/applications/recent', {
+      params: { limit }
+    });
+    return response.data.data;
+  },
+};
