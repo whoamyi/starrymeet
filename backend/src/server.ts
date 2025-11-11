@@ -158,7 +158,8 @@ const startServer = async () => {
       console.log('✅ Database connection established');
 
       // Sync models in development (use migrations in production)
-      if (process.env.NODE_ENV === 'development') {
+      // TEMPORARY: Allow force sync in production with FORCE_DB_SYNC=true
+      if (process.env.NODE_ENV === 'development' || process.env.FORCE_DB_SYNC === 'true') {
         await sequelize.sync({ alter: true });
         console.log('✅ Database models synchronized');
       }
