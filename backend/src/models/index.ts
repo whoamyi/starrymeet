@@ -8,6 +8,7 @@ import PaymentMethod from './PaymentMethod';
 import Message from './Message';
 import UserPreference from './UserPreference';
 import SavedCelebrity from './SavedCelebrity';
+import Conversation from './Conversation';
 
 // Existing associations
 User.hasMany(Booking, { foreignKey: 'user_id' });
@@ -52,6 +53,16 @@ SavedCelebrity.belongsTo(User, { foreignKey: 'user_id' });
 Celebrity.hasMany(SavedCelebrity, { foreignKey: 'celebrity_id' });
 SavedCelebrity.belongsTo(Celebrity, { foreignKey: 'celebrity_id' });
 
+// Conversation associations
+User.hasMany(Conversation, { foreignKey: 'user_id' });
+Conversation.belongsTo(User, { foreignKey: 'user_id' });
+
+Celebrity.hasMany(Conversation, { foreignKey: 'celebrity_id' });
+Conversation.belongsTo(Celebrity, { foreignKey: 'celebrity_id' });
+
+Celebrity.hasMany(Message, { foreignKey: 'celebrity_id' });
+Message.belongsTo(Celebrity, { foreignKey: 'celebrity_id' });
+
 export {
   User,
   Celebrity,
@@ -62,5 +73,6 @@ export {
   PaymentMethod,
   Message,
   UserPreference,
-  SavedCelebrity
+  SavedCelebrity,
+  Conversation
 };

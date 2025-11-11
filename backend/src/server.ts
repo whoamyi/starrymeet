@@ -19,6 +19,7 @@ import settingsRoutes from './routes/settings';
 import paymentMethodsRoutes from './routes/paymentMethods';
 import messagesRoutes from './routes/messages';
 import savedRoutes from './routes/saved';
+import adminMessagesRoutes from './routes/adminMessages';
 
 // Import models to ensure they're loaded
 import './models';
@@ -121,6 +122,9 @@ app.use('/api/settings', settingsRoutes);
 app.use('/api/payment-methods', paymentMethodsRoutes);
 app.use('/api/messages', messagesRoutes);
 app.use('/api/saved', savedRoutes);
+
+// Admin Routes
+app.use('/api/admin/messages', adminMessagesRoutes);
 
 // 404 handler
 app.use((req: Request, res: Response) => {
