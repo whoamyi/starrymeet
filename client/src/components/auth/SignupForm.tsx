@@ -74,8 +74,8 @@ export const SignupForm = ({ onSwitchToLogin }: SignupFormProps) => {
     onSuccess: (data) => {
       setAuth(data.token, data.user);
       toastConfig.success('Account created successfully!');
-      // Navigate to the page they were trying to access, or dashboard
-      navigate(from, { replace: true });
+      // Navigate to the page they were trying to access, passing along any additional state (like 'action')
+      navigate(from, { replace: true, state: location.state });
     },
     onError: (error: any) => {
       toastConfig.error(error.response?.data?.message || 'Signup failed');

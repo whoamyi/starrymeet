@@ -32,9 +32,10 @@ export const LoginForm = ({ onSwitchToSignup }: LoginFormProps) => {
     onSuccess: (data) => {
       setAuth(data.token, data.user);
       console.log('[LoginForm] Login successful, navigating to:', from);
+      console.log('[LoginForm] Passing state to destination:', location.state);
       toastConfig.success('Welcome back!');
-      // Navigate to the page they were trying to access, or dashboard
-      navigate(from, { replace: true });
+      // Navigate to the page they were trying to access, passing along any additional state (like 'action')
+      navigate(from, { replace: true, state: location.state });
     },
     onError: (error: any) => {
       toastConfig.error(error.response?.data?.message || 'Login failed');
