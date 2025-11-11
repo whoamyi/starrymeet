@@ -3,7 +3,9 @@ import { authenticate } from '../middleware/auth';
 import {
   getMessages,
   sendMessage,
-  markMessageAsRead
+  markMessageAsRead,
+  getUserConversations,
+  getCelebrityMessages
 } from '../controllers/messagesController';
 
 const router = express.Router();
@@ -11,10 +13,16 @@ const router = express.Router();
 // All routes require authentication
 router.use(authenticate);
 
-// GET /api/messages - Get all messages
+// GET /api/messages/conversations - Get user's conversations grouped by celebrity
+router.get('/conversations', getUserConversations);
+
+// GET /api/messages/celebrity/:celebrityId - Get messages with specific celebrity
+router.get('/celebrity/:celebrityId', getCelebrityMessages);
+
+// GET /api/messages - Get all messages (legacy)
 router.get('/', getMessages);
 
-// POST /api/messages - Send a new message
+// POST /api/messages - Send a new message (now requires celebrity_id)
 router.post('/', sendMessage);
 
 // PUT /api/messages/:id/read - Mark message as read
