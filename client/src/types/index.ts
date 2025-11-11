@@ -1,11 +1,14 @@
 // User Types
 export interface User {
   id: string;
-  username: string;
+  username?: string;
+  first_name?: string;
+  last_name?: string;
   email: string;
   profile_picture?: string;
   bio?: string;
   location?: string;
+  role?: 'user' | 'celebrity' | 'admin';
   created_at: string;
   updated_at: string;
 }

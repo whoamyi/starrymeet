@@ -2,6 +2,9 @@ import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { ErrorBoundary, ProtectedRoute, ToasterConfig } from '@/components';
 import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Booking, Favorites, BrowseVanilla, CelebrityProfile, MeetingTypeSelection, ApplicationProfessional, ApplicationPersonal, ApplicationConfirmation, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorks, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
+import { AdminLayout } from '@/components/admin/AdminLayout';
+import { AdminDashboard } from '@/pages/admin/AdminDashboard';
+import { AdminCelebrityDetail } from '@/pages/admin/AdminCelebrityDetail';
 
 // Create query client
 const queryClient = new QueryClient({
@@ -20,6 +23,21 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
+            {/* Admin Routes */}
+            <Route
+              path="/admin"
+              element={
+                <ProtectedRoute>
+                  <AdminLayout />
+                </ProtectedRoute>
+              }
+            >
+              <Route path="dashboard" element={<AdminDashboard />} />
+              <Route path="celebrity/:celebrityId" element={<AdminCelebrityDetail />} />
+              <Route path="messages" element={<div className="p-8 text-white">Messages coming soon</div>} />
+              <Route path="applications" element={<div className="p-8 text-white">Applications coming soon</div>} />
+            </Route>
+
             {/* Protected Routes */}
             <Route
               path="/dashboard"

@@ -19,8 +19,8 @@ export const useAuth = (requireAuth: boolean = true) => {
     user,
     logout,
     isLoggedIn: isAuthenticated,
-    userName: user?.username || 'Guest',
+    userName: user?.username || user?.first_name || 'Guest',
     userEmail: user?.email || '',
-    userInitials: user ? user.username.substring(0, 2).toUpperCase() : 'U'
+    userInitials: user ? (user.username || user.first_name || user.email).substring(0, 2).toUpperCase() : 'U'
   };
 };

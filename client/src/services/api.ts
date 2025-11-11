@@ -21,6 +21,19 @@ import type {
   PersonalApplicationRequest,
   ApplicationResponse,
   DashboardApplication,
+  AdminDashboardStats,
+  AdminCelebrityOverview,
+  AdminRecentActivity,
+  AdminConversationByCelebrity,
+  AdminConversation,
+  AdminMessage,
+  AdminSendMessageRequest,
+  AdminUpdateConversationStatusRequest,
+  AdminMessagingStats,
+  AdminApplicationOverview,
+  AdminApplicationDetail,
+  AdminUpdateApplicationStatusRequest,
+  AdminApplicationStats,
 } from '../types';
 
 // Create axios instance
@@ -144,6 +157,11 @@ export const celebrityApi = {
       params: { limit },
     });
     return response.data.data.celebrities;
+  },
+
+  getById: async (id: string): Promise<Celebrity> => {
+    const response = await api.get<ApiResponse<{ profile: any }>>(`/celebrity-profiles/id/${id}`);
+    return response.data.data.profile;
   },
 
   getBySlug: async (slug: string): Promise<Celebrity> => {
