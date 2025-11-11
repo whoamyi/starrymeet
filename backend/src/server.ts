@@ -21,6 +21,7 @@ import messagesRoutes from './routes/messages';
 import savedRoutes from './routes/saved';
 import adminMessagesRoutes from './routes/adminMessages';
 import adminApplicationsRoutes from './routes/adminApplications';
+import adminDashboardRoutes from './routes/adminDashboard';
 
 // Import models to ensure they're loaded
 import './models';
@@ -125,6 +126,7 @@ app.use('/api/messages', messagesRoutes);
 app.use('/api/saved', savedRoutes);
 
 // Admin Routes
+app.use('/api/admin/dashboard', adminDashboardRoutes);
 app.use('/api/admin/messages', adminMessagesRoutes);
 app.use('/api/admin/applications', adminApplicationsRoutes);
 
