@@ -28,11 +28,12 @@ export const CelebrityProfile = () => {
   });
 
   // Only check if saved when user is authenticated
-  const { data: isSaved } = useQuery({
+  const { data: isSaved, isLoading: isSavedLoading } = useQuery({
     queryKey: ['celebrity-saved', celebrity?.id],
     queryFn: () => savedApi.check(celebrity!.id),
     enabled: !!celebrity?.id && isAuthenticated,
-    placeholderData: false, // Start with false to prevent flicker
+    staleTime: 5 * 60 * 1000, // Consider data fresh for 5 minutes
+    gcTime: 10 * 60 * 1000, // Keep in cache for 10 minutes (formerly cacheTime)
   });
 
   // Follow/Unfollow mutation
@@ -47,13 +48,30 @@ export const CelebrityProfile = () => {
         return true;
       }
     },
+    onMutate: async () => {
+      // Cancel any outgoing refetches to prevent them from overwriting our optimistic update
+      await queryClient.cancelQueries({ queryKey: ['celebrity-saved', celebrity?.id] });
+
+      // Snapshot the previous value
+      const previousValue = queryClient.getQueryData(['celebrity-saved', celebrity?.id]);
+
+      // Optimistically update to the new value
+      queryClient.setQueryData(['celebrity-saved', celebrity?.id], !isSaved);
+
+      // Return context with the previous value
+      return { previousValue };
+    },
     onSuccess: (newSavedState) => {
       queryClient.invalidateQueries({ queryKey: ['celebrity-saved', celebrity?.id] });
       queryClient.invalidateQueries({ queryKey: ['saved'] });
       queryClient.invalidateQueries({ queryKey: ['dashboard'] });
       showToast(newSavedState ? 'Following!' : 'Unfollowed');
     },
-    onError: () => {
+    onError: (error, variables, context) => {
+      // Rollback to the previous value on error
+      if (context?.previousValue !== undefined) {
+        queryClient.setQueryData(['celebrity-saved', celebrity?.id], context.previousValue);
+      }
       showToast('Failed to update. Please try again.');
     },
   });
@@ -211,6 +229,7 @@ export const CelebrityProfile = () => {
           <InstagramProfileHeader
             celebrity={celebrity}
             isSaved={isSaved || false}
+            isSavedLoading={isSavedLoading && isAuthenticated}
             onFollowToggle={handleFollowToggle}
             onMessage={handleMessage}
             onShare={handleShare}

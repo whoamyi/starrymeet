@@ -21,6 +21,7 @@ interface Celebrity {
 interface InstagramProfileHeaderProps {
   celebrity: Celebrity;
   isSaved: boolean;
+  isSavedLoading?: boolean;
   onFollowToggle?: () => void;
   onMessage?: () => void;
   onShare?: () => void;
@@ -29,6 +30,7 @@ interface InstagramProfileHeaderProps {
 export const InstagramProfileHeader = ({
   celebrity,
   isSaved,
+  isSavedLoading = false,
   onFollowToggle,
   onMessage,
   onShare,
@@ -125,8 +127,14 @@ export const InstagramProfileHeader = ({
           className={`btn-action-ig btn-action-ig--follow ${isSaved ? 'following' : ''}`}
           onClick={onFollowToggle}
           data-following={isSaved}
+          disabled={isSavedLoading}
+          style={{ opacity: isSavedLoading ? 0.6 : 1 }}
         >
-          <span className="btn-action-ig__text">{isSaved ? 'Following' : 'Follow'}</span>
+          {isSavedLoading ? (
+            <span className="btn-action-ig__text">Loading...</span>
+          ) : (
+            <span className="btn-action-ig__text">{isSaved ? 'Following' : 'Follow'}</span>
+          )}
         </button>
         <button className="btn-action-ig btn-action-ig--message" onClick={onMessage}>
           <span className="btn-action-ig__text">Message</span>
