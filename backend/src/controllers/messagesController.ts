@@ -97,6 +97,8 @@ export const sendMessage = async (req: Request, res: Response) => {
         celebrity_id
       },
       defaults: {
+        user_id: userId,
+        celebrity_id,
         last_message_at: new Date(),
         last_message_preview: message.substring(0, 150),
         unread_count_admin: 1,

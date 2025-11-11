@@ -52,11 +52,15 @@ export const getCelebrityConversations = async (req: AuthRequest, res: Response)
     const { celebrityId } = req.params;
     const { status = 'active' } = req.query;
 
+    const whereClause: any = {
+      celebrity_id: celebrityId
+    };
+    if (status && typeof status === 'string') {
+      whereClause.status = status;
+    }
+
     const conversations = await Conversation.findAll({
-      where: {
-        celebrity_id: celebrityId,
-        ...(status && { status })
-      },
+      where: whereClause,
       include: [
         {
           model: User,
@@ -194,6 +198,8 @@ export const sendMessageAsCelebrity = async (req: AuthRequest, res: Response) =>
         celebrity_id: celebrityId
       },
       defaults: {
+        user_id,
+        celebrity_id: celebrityId,
         last_message_at: new Date(),
         last_message_preview: messageText.substring(0, 150),
         unread_count_admin: 0,
