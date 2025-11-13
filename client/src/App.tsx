@@ -1,6 +1,6 @@
 import { BrowserRouter, Routes, Route, Navigate } from 'react-router-dom';
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { ErrorBoundary, ProtectedRoute, ToasterConfig } from '@/components';
+import { ErrorBoundary, ProtectedRoute, AdminRoute, ToasterConfig } from '@/components';
 import { LandingPremium, Auth, Dashboard, Profile, Settings, Messages, Bookings, Booking, Favorites, BrowseVanilla, CelebrityProfile, MeetingTypeSelection, ApplicationProfessional, ApplicationPersonal, ApplicationConfirmation, AboutVanilla, FAQVanilla, ContactVanilla, HowItWorks, ForCelebritiesVanilla, TeamVanilla, JobsVanilla, TermsVanilla, PrivacyVanilla } from '@/pages';
 import { AdminLayout } from '@/components/admin/AdminLayout';
 import { AdminDashboard } from '@/pages/admin/AdminDashboard';
@@ -23,13 +23,13 @@ function App() {
       <QueryClientProvider client={queryClient}>
         <BrowserRouter>
           <Routes>
-            {/* Admin Routes */}
+            {/* Admin Routes - Only accessible by admin users */}
             <Route
               path="/admin"
               element={
-                <ProtectedRoute>
+                <AdminRoute>
                   <AdminLayout />
-                </ProtectedRoute>
+                </AdminRoute>
               }
             >
               <Route path="dashboard" element={<AdminDashboard />} />
